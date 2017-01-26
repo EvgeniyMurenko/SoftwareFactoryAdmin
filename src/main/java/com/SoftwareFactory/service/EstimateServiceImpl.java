@@ -1,0 +1,53 @@
+package com.SoftwareFactory.service;
+
+import com.SoftwareFactory.dao.EstimateDao;
+import com.SoftwareFactory.model.Estimate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+/**
+ * Created by Alex on 1/18/2017.
+ */
+
+@Service("estimateService")
+public class EstimateServiceImpl implements EstimateService{
+
+        private EstimateDao estimateDao;
+
+        @Autowired(required=true)
+        public void setEstimateDao(EstimateDao estimateDao) {
+            if (estimateDao == null) {
+                System.out.print("estimate dao null");
+            }
+            this.estimateDao = estimateDao;
+        }
+
+        @Override
+        @Transactional
+        public void addNewEstimate(Estimate estimate) {
+            estimateDao.create(estimate);
+        }
+
+        @Override
+        @Transactional(readOnly=true)
+        public List<Estimate> getAllEstimates() {
+            return estimateDao.findAll();
+        }
+
+        @Override
+        @Transactional
+        public void updateEstimate(Estimate estimate) {
+            estimateDao.update(estimate);
+
+        }
+
+        @Override
+        @Transactional
+        public void deleteEstimate(Estimate estimate) {
+            estimateDao.delete(estimate);
+        }
+
+}
