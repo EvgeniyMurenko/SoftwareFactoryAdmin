@@ -19,7 +19,7 @@ import java.util.Locale;
 public class UserCabinetController {
 
 
-/*shdfjshdfgtsdgjk*/
+/*shdfjshd5fgtsdgjk*/
 
     @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
     public ModelAndView cabinet(Locale locale , HttpSession httpSession) {
