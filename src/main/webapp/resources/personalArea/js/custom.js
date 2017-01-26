@@ -31,6 +31,7 @@ $(function() {
 
     // file uploader
     $("#file-upload").fileinput();
+    $("#chat-upload").fileinput({showCaption: false});
 });
 
 

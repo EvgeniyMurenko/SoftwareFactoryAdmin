@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.SoftwareFactory.component.UserSession;
 import com.SoftwareFactory.model.User;
 import com.SoftwareFactory.model.UserProfile;
 import com.SoftwareFactory.service.UserProfileService;

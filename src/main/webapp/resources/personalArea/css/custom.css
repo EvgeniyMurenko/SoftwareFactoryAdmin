@@ -120,3 +120,79 @@
     }
 }
 
+
+
+
+
+
+.chat-message { padding: 10px 30px; }
+.chat { list-style: none; margin: 0 0 30px 0; padding: 0; }
+.chat-message { background: #fff; }
+.chat li img { width: 45px; height: 45px; border-radius: 50em; -moz-border-radius: 50em; -webkit-border-radius: 50em;  }
+.chat-body { padding-bottom: 20px; }
+.chat li.left .chat-body { margin-left: 70px; background-color: #f6f6f6; }
+.chat li.left span img { float: left; }
+.chat li.right span img { float: right; }
+.chat li .chat-body { position: relative; font-size: 10pt; padding: 10px; border: 1px solid #f1f5fc; box-shadow: 0 1px 1px rgba(0,0,0,.05); -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05); -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05); }
+.chat li .chat-body .header { padding-bottom: 5px; border-bottom: 1px solid #eee; }
+.chat li .chat-body p { margin: 0; padding: 10px 0; }
+.chat li.left .chat-body:before {
+    position: absolute;
+    top: 10px;
+    left: -8px;
+    display: inline-block;
+    background: #f6f6f6;
+    width: 16px;
+    height: 16px;
+    border-top: 1px solid #f1f5fc;
+    border-left: 1px solid #f1f5fc;
+    content: '';
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+}
+
+.chat li.right .chat-body:before {
+    position: absolute;
+    top: 10px;
+    right: -8px;
+    display: inline-block;
+    background: #f6f6f6;
+    width: 16px;
+    height: 16px;
+    border-top: 1px solid #f1f5fc;
+    border-right: 1px solid #f1f5fc;
+    content: '';
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}
+
+.chat li { margin: 15px 0; }
+.chat li.right .chat-body { margin-right: 70px; background-color: #f6f6f6; }
+.chat-message-section { margin: 20px 0 10px 0; padding: 10px 0; border-top: 1px solid #eee; }
+
+.fileupload {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fileupload input {
+    position: absolute;
+    top: 0;
+    right: 0; /* not left, because only the right part of the input seems to
+                 be clickable in some browser I can't remember */
+    cursor: pointer;
+    opacity: 0.0;
+    filter: alpha(opacity=0); /* and all the other old opacity stuff you
+                                 want to support */
+    font-size: 300px; /* wtf, but apparently the most reliable way to make
+                         a large part of the input clickable in most browsers */
+    height: 200px;
+}
