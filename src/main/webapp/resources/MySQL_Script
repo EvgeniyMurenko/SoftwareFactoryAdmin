@@ -31,7 +31,6 @@ CREATE TABLE `app_user` (
 	`sso_id` VARCHAR(40) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`password` VARCHAR(255) NOT NULL,
-	`type` VARCHAR(255) NOT NULL default '0',
 	PRIMARY KEY (`id`)
 );
 
@@ -74,6 +73,14 @@ CREATE TABLE `status` (
 	`id` INT NOT NULL,
 	`type` INT NOT NULL,
 	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE persistent_logins (
+    username VARCHAR(64) NOT NULL,
+    series VARCHAR(64) NOT NULL,
+    token VARCHAR(64) NOT NULL,
+    last_used TIMESTAMP NOT NULL,
+    PRIMARY KEY (series)
 );
 
 INSERT INTO USER_PROFILE(type)
