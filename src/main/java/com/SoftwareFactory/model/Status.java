@@ -28,5 +28,31 @@ public class Status {
     @Column(name="type")
     private String statusType;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(String statusType) {
+        this.statusType = statusType;
+    }
+
+    public Status(String statusType) {
+        this.statusType = statusType;
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "id=" + id +
+                ", statusType='" + statusType + '\'' +
+                '}';
+    }
 }

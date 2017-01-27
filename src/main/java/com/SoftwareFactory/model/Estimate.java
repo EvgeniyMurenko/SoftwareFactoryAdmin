@@ -85,6 +85,8 @@ public class Estimate {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", estimateRequest='" + estimateRequest + '\'' +
+                ", state=" + state +
                 '}';
     }
 }
