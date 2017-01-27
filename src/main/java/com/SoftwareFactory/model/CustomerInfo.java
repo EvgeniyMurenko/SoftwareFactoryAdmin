@@ -3,17 +3,16 @@ package com.SoftwareFactory.model;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
-
+@Entity
 @Table(name="s_customer_info")
 public class CustomerInfo {
 
     public CustomerInfo(){}
 
+    @Id
     @Column(name="user_id")
     private Long userId;
 
@@ -81,7 +80,7 @@ public class CustomerInfo {
         this.projects = projects;
     }
 
-    public CustomerInfo(Long userId, String firstName, String lastName, String company, String avatar, Set<Project> projects) {
+    public CustomerInfo(Long userId, String firstName, String lastName, String company, String avatar ,Set<Project> projects) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;

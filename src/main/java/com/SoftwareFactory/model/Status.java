@@ -3,17 +3,14 @@ package com.SoftwareFactory.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
  * Created by Oleksandr on 1/26/2017.
  */
 
-
+@Entity
 @Table(name="s_status")
 public class Status {
 

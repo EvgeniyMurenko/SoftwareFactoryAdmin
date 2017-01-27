@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
-
+@Entity
 @Table(name ="s_projects")
 public class Project {
 
@@ -29,17 +29,19 @@ public class Project {
     @Column(name="date_create")
     private LocalDate createDate;
 
+/*
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="status_id")
     private Status status;
+*/
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private CustomerInfo customerInfo;
 
-    @OneToMany
+ /*   @OneToMany
     @JoinColumn(name="project")
-    private Set<Case> cases;
+    private Set<Case> cases;*/
 
     public Long getId() {
         return id;
@@ -65,13 +67,13 @@ public class Project {
         this.createDate = createDate;
     }
 
-    public Status getStatus() {
+/*    public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
-    }
+    }*/
 
     public CustomerInfo getCustomerInfo() {
         return customerInfo;
@@ -81,20 +83,20 @@ public class Project {
         this.customerInfo = customerInfo;
     }
 
-    public Set<Case> getCases() {
+  /*  public Set<Case> getCases() {
         return cases;
     }
 
     public void setCases(Set<Case> cases) {
         this.cases = cases;
-    }
+    }*/
 
-    public Project(String projectName, LocalDate createDate, Status status, CustomerInfo customerInfo, Set<Case> cases) {
+    public Project(String projectName, LocalDate createDate, /*Status status,*/ CustomerInfo customerInfo/*, Set<Case> cases*/) {
         this.projectName = projectName;
         this.createDate = createDate;
-        this.status = status;
+  /*      this.status = status;*/
         this.customerInfo = customerInfo;
-        this.cases = cases;
+     /*   this.cases = cases;*/
     }
 
     @Override
@@ -103,9 +105,9 @@ public class Project {
                 "id=" + id +
                 ", projectName='" + projectName + '\'' +
                 ", createDate=" + createDate +
-                ", status=" + status +
+               /* ", status=" + status +*/
                 ", customerInfo=" + customerInfo +
-                ", cases=" + cases +
+        /*        ", cases=" + cases +*/
                 '}';
     }
 }

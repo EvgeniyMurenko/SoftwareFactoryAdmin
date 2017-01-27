@@ -61,7 +61,7 @@ public class StatusDaoImpl implements AbstractDomainDao {
     @Override
     public List<Status> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from status");
+        Query query = session.createQuery("from Status");
         return query.list();
     }
 }

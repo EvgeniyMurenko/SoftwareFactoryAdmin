@@ -62,7 +62,7 @@ public class MessageDaoImpl implements AbstractDomainDao {
     @Override
     public List<Message> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from s_messages");
+        Query query = session.createQuery("from Message");
         return query.list();
     }
 }
