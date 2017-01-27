@@ -61,7 +61,7 @@ public class CaseDaoImpl implements AbstractDomainDao {
     @Override
     public List<Case> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from s_cases");
+        Query query = session.createQuery("from Case");
         return query.list();
     }
 

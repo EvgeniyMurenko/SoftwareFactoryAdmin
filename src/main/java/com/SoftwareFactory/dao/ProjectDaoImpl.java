@@ -62,7 +62,7 @@ public class ProjectDaoImpl implements AbstractDomainDao {
     @Override
     public List<Project> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from s_projects");
+        Query query = session.createQuery("from Project");
         return query.list();
     }
 

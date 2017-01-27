@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
-
+@Entity
 @Table(name ="s_projects")
 public class Project {
 
@@ -29,16 +29,85 @@ public class Project {
     @Column(name="date_create")
     private LocalDate createDate;
 
+/*
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="status_id")
     private Status status;
+*/
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private CustomerInfo customerInfo;
 
-    @OneToMany
+ /*   @OneToMany
     @JoinColumn(name="project")
-    private Set<Case> cases;
+    private Set<Case> cases;*/
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+/*    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }*/
+
+    public CustomerInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(CustomerInfo customerInfo) {
+        this.customerInfo = customerInfo;
+    }
+
+  /*  public Set<Case> getCases() {
+        return cases;
+    }
+
+    public void setCases(Set<Case> cases) {
+        this.cases = cases;
+    }*/
+
+    public Project(String projectName, LocalDate createDate, /*Status status,*/ CustomerInfo customerInfo/*, Set<Case> cases*/) {
+        this.projectName = projectName;
+        this.createDate = createDate;
+  /*      this.status = status;*/
+        this.customerInfo = customerInfo;
+     /*   this.cases = cases;*/
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", createDate=" + createDate +
+               /* ", status=" + status +*/
+                ", customerInfo=" + customerInfo +
+        /*        ", cases=" + cases +*/
+                '}';
+    }
 }

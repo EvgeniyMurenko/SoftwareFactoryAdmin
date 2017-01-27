@@ -3,17 +3,14 @@ package com.SoftwareFactory.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
  * Created by Oleksandr on 1/26/2017.
  */
 
-
+@Entity
 @Table(name="s_status")
 public class Status {
 
@@ -28,5 +25,31 @@ public class Status {
     @Column(name="type")
     private String statusType;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(String statusType) {
+        this.statusType = statusType;
+    }
+
+    public Status(String statusType) {
+        this.statusType = statusType;
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "id=" + id +
+                ", statusType='" + statusType + '\'' +
+                '}';
+    }
 }

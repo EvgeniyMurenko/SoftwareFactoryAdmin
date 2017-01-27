@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 
 @Entity
-@Table(name="estimate")
+@Table(name="s_estimates")
 public class Estimate {
 
     @Id
@@ -85,6 +85,8 @@ public class Estimate {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", estimateRequest='" + estimateRequest + '\'' +
+                ", state=" + state +
                 '}';
     }
 }

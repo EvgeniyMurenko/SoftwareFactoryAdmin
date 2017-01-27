@@ -61,7 +61,7 @@ public class CustomerInfoDaoImpl implements AbstractDomainDao {
     @Override
     public List<CustomerInfo> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from s_customer_info");
+        Query query = session.createQuery("from CustomerInfo");
         return query.list();
     }
 
