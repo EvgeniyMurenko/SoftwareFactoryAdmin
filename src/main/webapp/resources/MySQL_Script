@@ -1,50 +1,44 @@
 CREATE TABLE `s_messages` (
-	`id` INT NOT NULL,
+	`id` INT NOT NULL auto_increment,
+	`case_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
-	`manager_id` INT NOT NULL,
 	`message_time` DATETIME NOT NULL,
 	`message_text` TEXT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `s_projects` (
-	`id` INT NOT NULL,
-	`name` INT NOT NULL AUTO_INCREMENT,
-	`case_list` INT NOT NULL,
+	`id` INT NOT NULL auto_increment,
+	`name` VARCHAR(255),
+	`user_customer_id` INT NOT NULL,
+	`date_create` DATETIME NOT NULL,
+	`status_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `s_users_projects_list` (
-	`user_id` INT NOT NULL,
-	`project_id` INT NOT NULL
 );
 
 CREATE TABLE `s_cases` (
-	`id` BINARY NOT NULL,
-	`project_id` INT NOT NULL,
-	`manager_id` BINARY NOT NULL,
+	`id` INT NOT NULL auto_increment,
+    `project_id` INT NOT NULL,
+	`user_manager_id` BINARY NOT NULL,
 	`title` TEXT NOT NULL,
-	`status` INT NOT NULL,
-	`progress` INT NOT NULL,
+	`status_id` INT NOT NULL,
 	`date_create` DATETIME NOT NULL,
-	`case_list_message` TEXT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `app_users` (
-	`id` BINARY NOT NULL,
-	`sso_id` INT NOT NULL,
+CREATE TABLE `app_user` (
+	`id` INT NOT NULL auto_increment,
+	`sso_id` VARCHAR(40) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`password` VARCHAR(255) NOT NULL,
+	`type` VARCHAR(255) NOT NULL default '0',
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `s_manager_info` (
 	`user_id` INT NOT NULL,
 	`first_name` VARCHAR(255) NOT NULL,
-	`last_name` VARCHAR(255) NOT NULL,
-	`estimate_list` VARCHAR(255) NOT NULL,
-	`project_list` VARCHAR(255) NOT NULL
+	`last_name` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `s_customer_info` (
@@ -52,37 +46,21 @@ CREATE TABLE `s_customer_info` (
 	`first_name` VARCHAR(255) NOT NULL,
 	`last_name` VARCHAR(255) NOT NULL,
 	`company` VARCHAR(255) NOT NULL,
-	`avatar` VARCHAR(255) NOT NULL,
-	`user_projects_list` VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE `s_case_message_list` (
-	`cases_id` INT NOT NULL,
-	`message_id` INT NOT NULL
+	`avatar` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `s_estimates` (
-	`id` BINARY NOT NULL,
+	`id` INT NOT NULL auto_increment,
 	`name` VARCHAR(255) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`estimate_request` TEXT NOT NULL,
-	`status` INT NOT NULL,
+	`status_id` INT NOT NULL,
 	`date_request` DATETIME NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `s_manager_estimate_list` (
-	`manager_id` BINARY NOT NULL,
-	`estimate_id` BINARY NOT NULL
-);
-
-CREATE TABLE `s_manager_project` (
-	`manager_id` BINARY NOT NULL,
-	`project_id` BINARY NOT NULL
-);
-
 CREATE TABLE `user_profile` (
-	`id` INT NOT NULL,
+	`id` INT NOT NULL auto_increment,
 	`type` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
@@ -91,3 +69,25 @@ CREATE TABLE `app_user_user_profile` (
 	`user_id` INT NOT NULL,
 	`user_profile_id` INT NOT NULL
 );
+
+CREATE TABLE `status` (
+	`id` INT NOT NULL,
+	`type` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+INSERT INTO USER_PROFILE(type)
+VALUES ('USER');
+
+INSERT INTO USER_PROFILE(type)
+VALUES ('ADMIN');
+
+INSERT INTO USER_PROFILE(type)
+VALUES ('DBA');
+
+INSERT INTO APP_USER(sso_id, password, email)
+VALUES ('test@mail.com','123', 'samy@xyz.com');
+
+INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  where user.sso_id='test@mail.com' and profile.type='ADMIN';
