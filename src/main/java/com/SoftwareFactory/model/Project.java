@@ -5,8 +5,9 @@ package com.SoftwareFactory.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 
+import java.time.LocalDate;
+import java.util.Set;
 
 
 @Table(name ="s_projects")
@@ -26,7 +27,7 @@ public class Project {
 
 
     @Column(name="date_create")
-    private Date createDate;
+    private LocalDate createDate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="status_id")
@@ -37,6 +38,7 @@ public class Project {
     private CustomerInfo customerInfo;
 
     @OneToMany
-    @JoinColumn(name="")
+    @JoinColumn(name="project")
+    private Set<Case> cases;
 
 }

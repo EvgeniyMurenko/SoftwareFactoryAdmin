@@ -3,7 +3,7 @@ package com.SoftwareFactory.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 
 /**
@@ -26,13 +26,12 @@ public class Message {
     @JoinColumn(name="id", nullable=false)
     private Case aCase;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
     @Column(name="message_time")
-    private LocalTime messageTime;
+    private LocalDate messageTime;
 
     @Column(name="message_text")
     private String messageText;
