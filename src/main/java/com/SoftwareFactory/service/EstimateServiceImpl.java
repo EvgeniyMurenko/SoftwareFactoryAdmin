@@ -19,9 +19,6 @@ public class EstimateServiceImpl implements EstimateService{
 
         @Autowired(required=true)
         public void setEstimateDao(EstimateDao estimateDao) {
-            if (estimateDao == null) {
-                System.out.print("estimate dao null");
-            }
             this.estimateDao = estimateDao;
         }
 
@@ -41,7 +38,6 @@ public class EstimateServiceImpl implements EstimateService{
         @Transactional
         public void updateEstimate(Estimate estimate) {
             estimateDao.update(estimate);
-
         }
 
         @Override

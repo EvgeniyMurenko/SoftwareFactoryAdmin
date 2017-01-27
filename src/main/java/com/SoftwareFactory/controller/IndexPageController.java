@@ -60,9 +60,11 @@ public class IndexPageController {
             return new ModelAndView("index");
         } else {
             ModelAndView modelAndView = new ModelAndView("redirect:/list");
-           return modelAndView;
+            return modelAndView;
         }
     }
+
+
 
 
 
