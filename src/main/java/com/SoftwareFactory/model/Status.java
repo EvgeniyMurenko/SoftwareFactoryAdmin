@@ -6,12 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 
-/**
- * Created by Oleksandr on 1/26/2017.
- */
 
 @Entity
-@Table(name="s_status")
+@Table(name="status")
 public class Status {
 
     public Status(){}
@@ -19,7 +16,7 @@ public class Status {
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
-    @Column(name="id")
+    @Column(name="status_id")
     private Long id;
 
     @Column(name="type")

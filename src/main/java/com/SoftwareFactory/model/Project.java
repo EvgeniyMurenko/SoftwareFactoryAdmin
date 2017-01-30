@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class Project {
 
 
     @Column(name="date_create")
-    private LocalDate createDate;
+    private Date createDate;
 
 /*
     @OneToOne(fetch = FetchType.LAZY)
@@ -35,13 +36,13 @@ public class Project {
     private Status status;
 */
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
-    private CustomerInfo customerInfo;
+    private CustomerInfo customerInfo;*/
 
- /*   @OneToMany
+    @OneToMany
     @JoinColumn(name="project")
-    private Set<Case> cases;*/
+    private Set<Case> cases;
 
     public Long getId() {
         return id;
@@ -59,11 +60,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public LocalDate getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -75,28 +76,28 @@ public class Project {
         this.status = status;
     }*/
 
-    public CustomerInfo getCustomerInfo() {
+/*    public CustomerInfo getCustomerInfo() {
         return customerInfo;
     }
 
     public void setCustomerInfo(CustomerInfo customerInfo) {
         this.customerInfo = customerInfo;
-    }
+    }*/
 
-  /*  public Set<Case> getCases() {
+     public Set<Case> getCases() {
         return cases;
     }
 
     public void setCases(Set<Case> cases) {
         this.cases = cases;
-    }*/
+    }
 
-    public Project(String projectName, LocalDate createDate, /*Status status,*/ CustomerInfo customerInfo/*, Set<Case> cases*/) {
+    public Project(String projectName, Date createDate, /*Status status,*//* CustomerInfo customerInfo,*/ Set<Case> cases) {
         this.projectName = projectName;
         this.createDate = createDate;
   /*      this.status = status;*/
-        this.customerInfo = customerInfo;
-     /*   this.cases = cases;*/
+       /* this.customerInfo = customerInfo;*/
+        this.cases = cases;
     }
 
     @Override
@@ -106,8 +107,8 @@ public class Project {
                 ", projectName='" + projectName + '\'' +
                 ", createDate=" + createDate +
                /* ", status=" + status +*/
-                ", customerInfo=" + customerInfo +
-        /*        ", cases=" + cases +*/
+          /*      ", customerInfo=" + customerInfo +*/
+                ", cases=" + cases +
                 '}';
     }
 }

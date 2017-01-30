@@ -37,7 +37,8 @@ CaseService caseService;
 MessageService messageService;*/
 
 
-
+@Autowired
+Project
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test() {
@@ -49,7 +50,10 @@ MessageService messageService;*/
         System.out.println("test1");
         List<Case> cases= caseService.getAllCases();
         System.out.println("test2");
-        Set <Message> messages = cases.get(0).getMessages();
+        Case aCase = cases.get(0);
+        Set <Message> messages = aCase.getMessages();
+        Status status = aCase.getStatus();
+        System.out.println(status.getStatusType());
         System.out.println("test3");
 
         if (messages ==null){
@@ -102,5 +106,8 @@ MessageService messageService;*/
             return modelAndView;
 
     }
+
+
+
 }
 

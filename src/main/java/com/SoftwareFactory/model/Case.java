@@ -2,10 +2,9 @@ package com.SoftwareFactory.model;
 
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Set;
 
 @Entity
@@ -15,11 +14,11 @@ public class Case {
     public Case() {
     }
 
-/*
+
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name = "id", nullable = false)
     private Project project;
-*/
+
 
     @Id
     @GeneratedValue(generator = "increment2")
@@ -33,23 +32,23 @@ public class Case {
     @Column(name = "title")
     private String projectTitle;
 
-/*    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="status_id")
-    private Status status;*/
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id")
+    private Status status;
 
-   /* @Column(name = "date_create")
-    private LocalDate creationDate;*/
+    @Column(name = "date_create")
+    private Date creationDate;
 
-    @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL ,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Message> messages;
 
-/*    public Project getProject() {
+    public Project getProject() {
         return project;
     }
 
     public void setProject(Project project) {
         this.project = project;
-    }*/
+    }
 
     public Long getId() {
         return id;
@@ -75,21 +74,21 @@ public class Case {
         this.projectTitle = projectTitle;
     }
 
-  /*  public Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
-    }*/
+    }
 
-/*    public LocalDate getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
-    }*/
+    }
 
     public Set<Message> getMessages() {
         return messages;
@@ -99,24 +98,24 @@ public class Case {
         this.messages = messages;
     }
 
-    public Case(/*Project project,*/ Long userManagerId, String projectTitle,/* Status status,*/ /*LocalDate creationDate,*/ Set<Message> messages) {
-      /*  this.project = project;*/
+    public Case(Project project, Long userManagerId, String projectTitle, Status status, Date creationDate, Set<Message> messages) {
+        this.project = project;
         this.userManagerId = userManagerId;
         this.projectTitle = projectTitle;
-/*        this.status = status;*/
-       /* this.creationDate = creationDate;*/
+        this.status = status;
+        this.creationDate = creationDate;
         this.messages = messages;
     }
 
     @Override
     public String toString() {
         return "Case{" +
-            /*    "project=" + project +*/
+                "project=" + project +
                 ", id=" + id +
                 ", userManagerId=" + userManagerId +
                 ", projectTitle='" + projectTitle + '\'' +
-         /*       ", status=" + status +*/
-               /* ", creationDate=" + creationDate +*/
+                ", status=" + status +
+                ", creationDate=" + creationDate +
                 ", messages=" + messages +
                 '}';
     }
