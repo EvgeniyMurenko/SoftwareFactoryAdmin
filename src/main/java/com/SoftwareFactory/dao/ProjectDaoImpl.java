@@ -2,6 +2,7 @@ package com.SoftwareFactory.dao;
 
 
 import com.SoftwareFactory.model.Project;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,56 +15,96 @@ import java.util.List;
 
 
 @Repository("projectDao")
-public class ProjectDaoImpl implements AbstractDomainDao {
+public class ProjectDaoImpl implements ProjectDao {
 
     private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public void setSessionFactory(SessionFactory sf){
+    public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
     }
 
 
     @Override
-    public Long create(Object domain) {
-        Project project = (Project) domain;
+    public Long create(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        Long id = (Long) session.save(project);
-        logger.error("Project saved successfully, Project="+project);
+        Long id = null;
+        try {
+            session.beginTransaction();
+            id = (Long) session.save(project);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            logger.error("Transaction failed");
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
         return id;
     }
 
     @Override
     public Project read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Project project = (Project) session.get(Project.class, id);
-        logger.error("Project read successfully, Project="+project);
+        Project project = null;
+        try {
+            project = (Project) session.get(Project.class, id);
+            logger.error("Case read successfully, Case=" + project);
+        } catch (HibernateException e) {
+            logger.error("Transaction failed");
+        } finally {
+            session.close();
+        }
         return project;
     }
 
     @Override
-    public void update(Object domain) {
-        Project project = (Project) domain;
+    public void update(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(project);
-        logger.error("Project update successfully, Project="+project);
+        try {
+            session.beginTransaction();
+            session.update(project);
+            session.getTransaction().commit();
+            logger.error("Case update successfully, Case=" + project);
+        } catch (HibernateException e) {
+            logger.error("Transaction failed");
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
     }
 
     @Override
-    public void delete(Object domain) {
-        Project project = (Project) domain;
+    public void delete(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(project);
-        logger.info("Project deleted successfully, Project details="+project);
+        try {
+            session.getTransaction().begin();
+            session.delete(project);
+            session.getTransaction().commit();
+            logger.info("Case deleted successfully, Case details=" + project);
+        } catch (HibernateException ex) {
+            session.getTransaction().rollback();
+            logger.error("Transaction failed");
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public List<Project> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Project");
-        return query.list();
+        Query query = null;
+        List<Project> listP = null;
+        try {
+            query = session.createQuery("from Project");
+            listP = query.list();
+            logger.info("Case find successfully, Case details=" + listP);
+        } finally {
+            session.close();
+        }
+        return listP;
     }
-
 }

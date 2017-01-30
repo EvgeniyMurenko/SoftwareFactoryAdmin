@@ -12,7 +12,7 @@ import java.util.List;
  * Created by adm on 1/27/2017.
  */
 @Service("projectService")
-public class ProjectServiceImpl implements AbstractService<Project> {
+public class ProjectServiceImpl implements ProjectService {
 
     private ProjectDaoImpl projectDao;
 
@@ -23,25 +23,25 @@ public class ProjectServiceImpl implements AbstractService<Project> {
 
     @Override
     @Transactional
-    public void addNew(Project object) {
-        projectDao.create(object);
+    public void addNewProject(Project project) {
+        projectDao.create(project);
     }
 
     @Override
     @Transactional
-    public void update(Project object) {
-        projectDao.update(object);
+    public void updateProject(Project project) {
+        projectDao.update(project);
     }
 
     @Override
     @Transactional
-    public void delete(Project object) {
-        projectDao.delete(object);
+    public void deleteProject(Project project) {
+        projectDao.delete(project);
     }
 
     @Override
     @Transactional(readOnly=true)
-    public List<Project> getAll() {
+    public List<Project> getAllProjects() {
         return projectDao.findAll();
     }
 }

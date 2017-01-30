@@ -5,11 +5,8 @@ import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
 import com.SoftwareFactory.dao.EstimateDao;
 import com.SoftwareFactory.dao.StatusDaoImpl;
 import com.SoftwareFactory.dao.UserProfileDao;
-import com.SoftwareFactory.model.CustomerInfo;
-import com.SoftwareFactory.model.Project;
-import com.SoftwareFactory.model.Status;
-import com.SoftwareFactory.model.UserProfile;
-import com.SoftwareFactory.service.CustomerInfoServiceImpl;
+import com.SoftwareFactory.model.*;
+import com.SoftwareFactory.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,9 +26,18 @@ import java.util.Set;
 @SessionAttributes("roles")
 public class TestController {
 
+/*
+@Autowired
+CustomerInfoServiceImpl customerInfoService;*/
 
 @Autowired
-CustomerInfoServiceImpl customerInfoService;
+CaseService caseService;
+
+/*@Autowired
+MessageService messageService;*/
+
+
+
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test() {
@@ -40,9 +46,29 @@ CustomerInfoServiceImpl customerInfoService;
 /*        customerInfoService.addNewCustomerInfo(new CustomerInfo(new Long(2) , "test" , "test" , "test" ,"test"));*/
 
 
-
-
         System.out.println("test1");
+        List<Case> cases= caseService.getAllCases();
+        System.out.println("test2");
+        Set <Message> messages = cases.get(0).getMessages();
+        System.out.println("test3");
+
+        if (messages ==null){
+            System.out.println("messages null");
+        }
+
+        Iterator<Message> iterator = messages.iterator();
+
+        System.out.println("test4");
+
+        while(iterator.hasNext()) {
+            Message message = iterator.next();
+            System.out.println(message.getMessageText());
+        }
+
+
+
+
+        /*System.out.println("test1");
         List<CustomerInfo> customerInfos = customerInfoService.getAllCustomersInfo();
         System.out.println("test2");
         Set <Project> projects = customerInfos.get(0).getProjects();
@@ -59,13 +85,13 @@ CustomerInfoServiceImpl customerInfoService;
 
         while(iterator.hasNext()) {
             Project project = iterator.next();
-         /*   if(setElement==2) {
+         *//*   if(setElement==2) {
                 iterator.remove();
-            }*/
+            }*//*
         }
 
 
-      /*  for (int i =0; i < customerInfos.size();i++){
+      *//*  for (int i =0; i < customerInfos.size();i++){
             CustomerInfo customerInfo = customerInfos.get(i);
             System.out.println(customerInfo);
         }*/

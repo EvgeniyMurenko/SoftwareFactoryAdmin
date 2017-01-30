@@ -12,7 +12,7 @@ import java.util.List;
  * Created by adm on 1/27/2017.
  */
 @Service("statusService")
-public class StatusServiceImpl implements AbstractService<Status> {
+public class StatusServiceImpl implements StatusService {
 
     private StatusDaoImpl statusDao;
 
@@ -23,25 +23,25 @@ public class StatusServiceImpl implements AbstractService<Status> {
 
     @Override
     @Transactional
-    public void addNew(Status object) {
-        statusDao.create(object);
+    public void addNewStatus(Status status) {
+        statusDao.create(status);
     }
 
     @Override
     @Transactional
-    public void update(Status object) {
-        statusDao.update(object);
+    public void updateStatus(Status status) {
+        statusDao.update(status);
     }
 
     @Override
     @Transactional
-    public void delete(Status object) {
-        statusDao.delete(object);
+    public void deleteStatus(Status status) {
+        statusDao.delete(status);
     }
 
     @Override
     @Transactional(readOnly=true)
-    public List<Status> getAll() {
+    public List<Status> getAllStatuses() {
         return statusDao.findAll();
     }
 }

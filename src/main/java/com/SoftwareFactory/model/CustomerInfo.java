@@ -28,8 +28,8 @@ public class CustomerInfo {
     @Column(name = "avatar")
     private String avatar;
 
-    @OneToMany
-    @Column(name = "customerInfo")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "customerInfo" )
     private Set<Project> projects;
 
     public Long getUserId() {

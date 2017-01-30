@@ -1,7 +1,13 @@
 package com.SoftwareFactory.service;
 
-/**
- * Created by adm on 1/30/2017.
- */
+
+import com.SoftwareFactory.model.Case;
+
+import java.util.List;
+
 public interface CaseService {
+    void addNewCase(Case aCase);
+    void updateCase(Case aCase);
+    void deleteCase(Case aCase);
+    List<Case> getAllCases();
 }

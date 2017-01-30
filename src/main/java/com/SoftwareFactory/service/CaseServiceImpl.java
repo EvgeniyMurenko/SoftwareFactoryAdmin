@@ -8,40 +8,39 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by adm on 1/27/2017.
- */
-@Service("caseService")
-public class CaseServiceImpl implements AbstractService<Case> {
 
-    private CaseDaoImpl caseDaoIml;
+@Service("caseService")
+public class CaseServiceImpl implements CaseService {
+
+    private CaseDaoImpl caseDao;
 
     @Autowired(required=true)
-    public CaseServiceImpl(CaseDaoImpl caseDaoImpl){
-        this.caseDaoIml = caseDaoImpl;
+    public void setCaseDao(CaseDaoImpl caseDao) {
+        this.caseDao = caseDao;
     }
 
     @Override
     @Transactional
-    public void addNew(Case object) {
-        caseDaoIml.create(object);
-    }
-
-    @Override
-    @Transactional
-    public void update(Case object) {
-        caseDaoIml.update(object);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Case object) {
-        caseDaoIml.delete(object);
+    public void addNewCase(Case aCase) {
+        caseDao.create(aCase);
     }
 
     @Override
     @Transactional(readOnly=true)
-    public List<Case> getAll() {
-        return caseDaoIml.findAll();
+    public List<Case> getAllCases() {
+        return caseDao.findAll();
     }
+
+    @Override
+    @Transactional
+    public void updateCase(Case aCase) {
+        caseDao.update(aCase);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCase(Case aCase) {
+        caseDao.delete(aCase);
+    }
+
 }

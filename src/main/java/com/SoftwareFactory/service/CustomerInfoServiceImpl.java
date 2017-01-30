@@ -1,5 +1,6 @@
 package com.SoftwareFactory.service;
 
+import com.SoftwareFactory.dao.CustomerInfoDao;
 import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
 import com.SoftwareFactory.model.CustomerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,41 +11,35 @@ import java.util.List;
 
 
 @Service("customerInfoService")
-public class CustomerInfoServiceImpl {
-    private CustomerInfoDaoImpl customerInfoDao;
+public class CustomerInfoServiceImpl implements CustomerInfoService {
 
-    @Autowired(required=true)
-    public void setCustomerInfoDao(CustomerInfoDaoImpl customerInfoDao) {
-        if (customerInfoDao == null) {
-            System.out.print("customer info");
-        }
+    private CustomerInfoDao customerInfoDao;
+
+    @Autowired(required = true)
+    public void setCaseDao(CustomerInfoDao customerInfoDao) {
         this.customerInfoDao = customerInfoDao;
     }
 
 
-    @Transactional
-    public void addNewCustomerInfo(CustomerInfo customerInfo) {
+    @Override
+    public void addNewCase(CustomerInfo customerInfo) {
         customerInfoDao.create(customerInfo);
     }
 
-
-    @Transactional(readOnly=true)
-    public List<CustomerInfo> getAllCustomersInfo() {
-        return customerInfoDao.findAll();
-    }
-
-
-    @Transactional
-    public void updateCustomerInfo(CustomerInfo customerInfo) {
+    @Override
+    public void updateCase(CustomerInfo customerInfo) {
         customerInfoDao.update(customerInfo);
     }
 
-
-    @Transactional
-    public void deleteCustomerInfo(CustomerInfo customerInfo) {
+    @Override
+    public void deleteCase(CustomerInfo customerInfo) {
         customerInfoDao.delete(customerInfo);
     }
 
+    @Override
+    public List<CustomerInfo> getAllcustomerInfos() {
+        return customerInfoDao.findAll();
+    }
 }
 
 

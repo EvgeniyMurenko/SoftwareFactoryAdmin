@@ -75,9 +75,10 @@ public class IndexPageController {
 
         System.out.print("name " + recipientName + " email " + recipientMail + " text " + recipientRequestText);
 
+
         JSONObject myJsonObj = new JSONObject();
 
-        if (estimateService == null) {
+/*        if (estimateService == null) {
             System.out.print("estimate service null");
         }
 
@@ -85,6 +86,7 @@ public class IndexPageController {
         System.out.print("domain created ");
 
         estimateService.addNewEstimate(estimate);
+*/
 
 
         mailService.sendEmail(recipientMail, recipientName);
