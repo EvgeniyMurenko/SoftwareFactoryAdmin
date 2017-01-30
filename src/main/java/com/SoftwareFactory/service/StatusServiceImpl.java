@@ -1,5 +1,6 @@
 package com.SoftwareFactory.service;
 
+import com.SoftwareFactory.dao.StatusDao;
 import com.SoftwareFactory.dao.StatusDaoImpl;
 import com.SoftwareFactory.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ import java.util.List;
 @Service("statusService")
 public class StatusServiceImpl implements StatusService {
 
-    private StatusDaoImpl statusDao;
+    private StatusDao statusDao;
 
     @Autowired(required=true)
-    public StatusServiceImpl(StatusDaoImpl statusDao) {
+    public StatusServiceImpl(StatusDao statusDao) {
         this.statusDao = statusDao;
     }
 

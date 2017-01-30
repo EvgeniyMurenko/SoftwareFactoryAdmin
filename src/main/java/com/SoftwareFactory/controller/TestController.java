@@ -44,12 +44,10 @@ MessageService messageService;*/
 
         System.out.println("test");
 /*        customerInfoService.addNewCustomerInfo(new CustomerInfo(new Long(2) , "test" , "test" , "test" ,"test"));*/
-
-
         System.out.println("test1");
         List<Case> cases= caseService.getAllCases();
         System.out.println("test2");
-        Set <Message> messages = cases.get(0).getMessages();
+        Set <Message> messages = cases.get(1).getMessages();
         System.out.println("test3");
 
         if (messages ==null){
@@ -101,6 +99,17 @@ MessageService messageService;*/
             ModelAndView modelAndView = new ModelAndView("redirect:/");
             return modelAndView;
 
+    }
+
+    @Autowired
+    CaseService estimateService;
+
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    public ModelAndView test1() {
+        List<Case> estimate = estimateService.getAllCases();
+        System.out.println(estimate.get(1));
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        return modelAndView;
     }
 }
 

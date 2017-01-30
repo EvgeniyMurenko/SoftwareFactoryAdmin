@@ -1,6 +1,6 @@
 package com.SoftwareFactory.model;
 
-import com.SoftwareFactory.util.LocalDatePersistenceConverter;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

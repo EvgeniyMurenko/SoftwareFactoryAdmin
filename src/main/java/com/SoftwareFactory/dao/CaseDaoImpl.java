@@ -1,7 +1,6 @@
 package com.SoftwareFactory.dao;
 
 import com.SoftwareFactory.model.Case;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,83 +28,38 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public Long create(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
-        Long id = null;
-        try {
-            session.beginTransaction();
-            id = (Long) session.save(aCase);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            logger.error("Transaction failed");
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null)
-                session.close();
-        }
+        Long id = (Long) session.save(aCase);
+        session.getTransaction().commit();
         return id;
     }
 
     @Override
     public Case read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Case aCase = null;
-        try {
-            aCase = (Case) session.get(Case.class, id);
-            logger.error("Case read successfully, Case=" + aCase);
-        } catch (HibernateException e) {
-            logger.error("Transaction failed");
-        } finally {
-            session.close();
-        }
+        Case aCase = (Case) session.get(Case.class, id);
         return aCase;
     }
 
     @Override
     public void update(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
-        try {
-            session.beginTransaction();
-            session.update(aCase);
-            session.getTransaction().commit();
-            logger.error("Case update successfully, Case=" + aCase);
-        } catch (HibernateException e) {
-            logger.error("Transaction failed");
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null)
-                session.close();
-        }
+        session.update(aCase);
+        session.getTransaction().commit();
+        logger.error("Case update successfully, Case=" + aCase);
     }
 
     @Override
     public void delete(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
-        try {
-            session.getTransaction().begin();
-            session.delete(aCase);
-            session.getTransaction().commit();
-            logger.info("Case deleted successfully, Case details=" + aCase);
-        } catch (HibernateException ex) {
-            session.getTransaction().rollback();
-            logger.error("Transaction failed");
-        } finally {
-            session.close();
-        }
+        session.delete(aCase);
+        logger.info("Case deleted successfully, Case details=" + aCase);
     }
 
     @Override
     public List<Case> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = null;
-        List<Case> listP = null;
-        try {
-            query = session.createQuery("from Case");
-            listP = query.list();
-            logger.info("Case find successfully, Case details=" + listP);
-        } finally {
-            session.close();
-        }
-
-        return listP;
+        Query query = session.createQuery("from Case");
+        return query.list();
     }
 
 }

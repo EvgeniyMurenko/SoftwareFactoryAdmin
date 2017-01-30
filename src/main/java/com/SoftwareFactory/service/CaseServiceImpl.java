@@ -1,5 +1,6 @@
 package com.SoftwareFactory.service;
 
+import com.SoftwareFactory.dao.CaseDao;
 import com.SoftwareFactory.dao.CaseDaoImpl;
 import com.SoftwareFactory.model.Case;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.List;
 @Service("caseService")
 public class CaseServiceImpl implements CaseService {
 
-    private CaseDaoImpl caseDao;
+    private CaseDao caseDao;
 
     @Autowired(required=true)
-    public void setCaseDao(CaseDaoImpl caseDao) {
+    public void setCaseDao(CaseDao caseDao) {
         this.caseDao = caseDao;
     }
 

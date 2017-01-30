@@ -1,5 +1,6 @@
 package com.SoftwareFactory.service;
 
+import com.SoftwareFactory.dao.ProjectDao;
 import com.SoftwareFactory.dao.ProjectDaoImpl;
 import com.SoftwareFactory.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ import java.util.List;
 @Service("projectService")
 public class ProjectServiceImpl implements ProjectService {
 
-    private ProjectDaoImpl projectDao;
+    private ProjectDao projectDao;
 
     @Autowired(required=true)
-    public ProjectServiceImpl(ProjectDaoImpl projectDao) {
+    public ProjectServiceImpl(ProjectDao projectDao) {
         this.projectDao = projectDao;
     }
 
