@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service("customerInfoService")
 public class CustomerInfoServiceImpl {
+
     private CustomerInfoDaoImpl customerInfoDao;
 
     @Autowired(required=true)

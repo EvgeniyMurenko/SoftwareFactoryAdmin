@@ -1,3 +1,4 @@
+/*
 package com.SoftwareFactory.service;
 
 import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
@@ -8,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+*/
 /**
  * Created by adm on 1/27/2017.
- */
+ *//*
+
 @Service("customerInfoService")
 public class CustomerInfoService implements AbstractService <CustomerInfo> {
 
@@ -45,3 +48,4 @@ public class CustomerInfoService implements AbstractService <CustomerInfo> {
         return customerInfoDao.findAll();
     }
 }
+*/

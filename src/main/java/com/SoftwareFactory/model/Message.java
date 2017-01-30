@@ -1,39 +1,38 @@
 package com.SoftwareFactory.model;
 
+import com.SoftwareFactory.util.LocalDatePersistenceConverter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 
 
-/**
- * Created by Oleksandr on 1/26/2017.
- */
-
-@Table(name="s_messages")
+@Entity
+@Table(name = "s_messages")
 public class Message {
 
-    public Message(){}
+    public Message() {
+    }
 
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
-    @Column(name="id")
+    @Column(name = "message_id")
     private Long id;
 
-
     @ManyToOne
-    @JoinColumn(name="id", nullable=false)
+    @JoinColumn(name = "case_id")
     private Case aCase;
 
-    @OneToOne(fetch = FetchType.LAZY)
+   /* @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
-    private User user;
+    private User user;*/
 
-    @Column(name="message_time")
-    private LocalDate messageTime;
+    @Column(name = "message_time")
+    private Date messageTime;
 
-    @Column(name="message_text")
+    @Column(name = "message_text")
     private String messageText;
 
     public Long getId() {
@@ -52,19 +51,19 @@ public class Message {
         this.aCase = aCase;
     }
 
-    public User getUser() {
+/*    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
-    public LocalDate getMessageTime() {
+    public Date getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(LocalDate messageTime) {
+    public void setMessageTime(Date messageTime) {
         this.messageTime = messageTime;
     }
 
@@ -76,9 +75,9 @@ public class Message {
         this.messageText = messageText;
     }
 
-    public Message(Case aCase, User user, LocalDate messageTime, String messageText) {
+    public Message(Case aCase, /*User user,*/Date messageTime, String messageText) {
         this.aCase = aCase;
-        this.user = user;
+      /*  this.user = user;*/
         this.messageTime = messageTime;
         this.messageText = messageText;
     }
@@ -88,8 +87,8 @@ public class Message {
         return "Message{" +
                 "id=" + id +
                 ", aCase=" + aCase +
-                ", user=" + user +
-                ", messageTime=" + messageTime +
+           /*     ", user=" + user +*/
+             ", messageTime=" + messageTime +
                 ", messageText='" + messageText + '\'' +
                 '}';
     }
