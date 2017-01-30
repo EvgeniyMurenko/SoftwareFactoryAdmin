@@ -1,5 +1,6 @@
 package com.SoftwareFactory.service;
 
+import com.SoftwareFactory.dao.MessageDao;
 import com.SoftwareFactory.dao.MessageDaoImpl;
 import com.SoftwareFactory.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.List;
 @Service("messageService")
 public class MessageServiceImpl implements MessageService {
 
-    private MessageDaoImpl messageDao;
+    private MessageDao messageDao;
 
     @Autowired(required=true)
-    public void setMessageDao(MessageDaoImpl messageDao) {
+    public void setMessageDao(MessageDao messageDao) {
         this.messageDao = messageDao;
     }
 

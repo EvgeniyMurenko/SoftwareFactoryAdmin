@@ -2,7 +2,6 @@ package com.SoftwareFactory.dao;
 
 
 import com.SoftwareFactory.model.Project;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,81 +29,35 @@ public class ProjectDaoImpl implements ProjectDao {
     @Override
     public Long create(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        Long id = null;
-        try {
-            session.beginTransaction();
-            id = (Long) session.save(project);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            logger.error("Transaction failed");
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null)
-                session.close();
-        }
+        Long id = (Long) session.save(project);
         return id;
     }
 
     @Override
     public Project read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Project project = null;
-        try {
-            project = (Project) session.get(Project.class, id);
-            logger.error("Case read successfully, Case=" + project);
-        } catch (HibernateException e) {
-            logger.error("Transaction failed");
-        } finally {
-            session.close();
-        }
+        Project project = (Project) session.get(Project.class, id);
         return project;
     }
 
     @Override
     public void update(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        try {
-            session.beginTransaction();
-            session.update(project);
-            session.getTransaction().commit();
-            logger.error("Case update successfully, Case=" + project);
-        } catch (HibernateException e) {
-            logger.error("Transaction failed");
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null)
-                session.close();
-        }
+        session.update(project);
+        logger.error("Case update successfully, Case=" + project);
     }
 
     @Override
     public void delete(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        try {
-            session.getTransaction().begin();
-            session.delete(project);
-            session.getTransaction().commit();
-            logger.info("Case deleted successfully, Case details=" + project);
-        } catch (HibernateException ex) {
-            session.getTransaction().rollback();
-            logger.error("Transaction failed");
-        } finally {
-            session.close();
-        }
+        session.delete(project);
+        logger.info("Case deleted successfully, Case details=" + project);
     }
 
     @Override
     public List<Project> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = null;
-        List<Project> listP = null;
-        try {
-            query = session.createQuery("from Project");
-            listP = query.list();
-            logger.info("Case find successfully, Case details=" + listP);
-        } finally {
-            session.close();
-        }
-        return listP;
+        Query query = session.createQuery("from Project");
+        return query.list();
     }
 }
