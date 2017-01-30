@@ -4,16 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -42,6 +33,10 @@ public class User implements Serializable{
 			joinColumns = { @JoinColumn(name = "USER_ID") },
 			inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Message> messages;
 
 	public Integer getId() {
 		return id;
@@ -81,6 +76,14 @@ public class User implements Serializable{
 
 	public void setUserProfiles(Set<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
+	}
+
+	public Set<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Set<Message> messages) {
+		this.messages = messages;
 	}
 
 	@Override

@@ -1,43 +1,41 @@
 package com.SoftwareFactory.model;
 
-
-
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="s_customer_info")
+@Table(name = "s_customer_info")
 public class CustomerInfo {
 
-    public CustomerInfo(){}
+    public CustomerInfo() {
+    }
 
     @Id
-    @Column(name="user_id")
-    private Long userId;
+    @Column(name = "user_id")
+    private Long Id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="company")
+    @Column(name = "company")
     private String company;
 
     @Column(name = "avatar")
     private String avatar;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Column(name = "customerInfo" )
+    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Project> projects;
 
+
     public Long getUserId() {
-        return userId;
+        return Id;
     }
 
     public void setUserId(Long userId) {
-        this.userId = userId;
+        this.Id = Id;
     }
 
     public String getFirstName() {
@@ -80,8 +78,8 @@ public class CustomerInfo {
         this.projects = projects;
     }
 
-    public CustomerInfo(Long userId, String firstName, String lastName, String company, String avatar ,Set<Project> projects) {
-        this.userId = userId;
+    public CustomerInfo(Long Id, String firstName, String lastName, String company, String avatar, Set<Project> projects) {
+        this.Id = Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.company = company;
@@ -92,7 +90,7 @@ public class CustomerInfo {
     @Override
     public String toString() {
         return "CustomerInfo{" +
-                "userId=" + userId +
+                "userId=" + Id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", company='" + company + '\'' +

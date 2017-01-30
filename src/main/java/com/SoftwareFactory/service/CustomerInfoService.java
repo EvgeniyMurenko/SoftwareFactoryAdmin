@@ -14,9 +14,8 @@ import java.util.List;
 @Service("customerInfoService")
 public interface CustomerInfoService {
 
-    void addNewCase(CustomerInfo customerInfo);
-    void updateCase(CustomerInfo customerInfo);
-    void deleteCase(CustomerInfo customerInfo);
-    List<CustomerInfo> getAllcustomerInfos();
+    void addNewCustomerInfo(CustomerInfo customerInfo);
+    void updateCustomerInfo(CustomerInfo customerInfo);
+    void deleteCustomerInfo(CustomerInfo customerInfo);
+    List<CustomerInfo> getAllCustomerInfos();
 }
-

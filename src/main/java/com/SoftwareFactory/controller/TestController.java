@@ -26,9 +26,9 @@ import java.util.Set;
 @SessionAttributes("roles")
 public class TestController {
 
-/*
+
 @Autowired
-CustomerInfoServiceImpl customerInfoService;*/
+CustomerInfoService customerInfoService;
 
 @Autowired
 CaseService caseService;
@@ -38,13 +38,13 @@ MessageService messageService;*/
 
 
 @Autowired
-Project
+ProjectService projectService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test() {
 
         System.out.println("test");
-/*        customerInfoService.addNewCustomerInfo(new CustomerInfo(new Long(2) , "test" , "test" , "test" ,"test"));*/
+
 
 
         System.out.println("test1");
@@ -72,15 +72,27 @@ Project
 
 
 
-        /*System.out.println("test1");
-        List<CustomerInfo> customerInfos = customerInfoService.getAllCustomersInfo();
+            ModelAndView modelAndView = new ModelAndView("redirect:/");
+            return modelAndView;
+
+    }
+
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    public ModelAndView test1() {
+
+
+       System.out.println("test1");
+        List<CustomerInfo> customerInfos = customerInfoService.getAllCustomerInfos();
         System.out.println("test2");
-        Set <Project> projects = customerInfos.get(0).getProjects();
+        CustomerInfo customerInfo = customerInfos.get(0);
         System.out.println("test2");
+
+        Set<Project> projects = customerInfo.getProjects();
 
         if (projects ==null){
             System.out.println("projects null");
         }
+
 
 
         Iterator<Project> iterator = projects.iterator();
@@ -89,25 +101,15 @@ Project
 
         while(iterator.hasNext()) {
             Project project = iterator.next();
-         *//*   if(setElement==2) {
-                iterator.remove();
-            }*//*
+            System.out.println(project.getProjectName());
+            System.out.println(project.getCustomerInfo().getUserId());
         }
 
 
-      *//*  for (int i =0; i < customerInfos.size();i++){
-            CustomerInfo customerInfo = customerInfos.get(i);
-            System.out.println(customerInfo);
-        }*/
 
-
-
-            ModelAndView modelAndView = new ModelAndView("redirect:/");
-            return modelAndView;
-
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        return modelAndView;
     }
-
-
 
 }
 

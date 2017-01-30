@@ -25,9 +25,9 @@ public class Message {
     @JoinColumn(name = "case_id")
     private Case aCase;
 
-   /* @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;*/
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "message_time")
     private Date messageTime;
@@ -51,13 +51,13 @@ public class Message {
         this.aCase = aCase;
     }
 
-/*    public User getUser() {
+   public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 
     public Date getMessageTime() {
         return messageTime;
@@ -75,9 +75,9 @@ public class Message {
         this.messageText = messageText;
     }
 
-    public Message(Case aCase, /*User user,*/Date messageTime, String messageText) {
+    public Message(Case aCase, User user,Date messageTime, String messageText) {
         this.aCase = aCase;
-      /*  this.user = user;*/
+        this.user = user;
         this.messageTime = messageTime;
         this.messageText = messageText;
     }
@@ -87,7 +87,7 @@ public class Message {
         return "Message{" +
                 "id=" + id +
                 ", aCase=" + aCase +
-           /*     ", user=" + user +*/
+               ", user=" + user +
              ", messageTime=" + messageTime +
                 ", messageText='" + messageText + '\'' +
                 '}';

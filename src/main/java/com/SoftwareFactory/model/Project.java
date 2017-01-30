@@ -1,47 +1,44 @@
 package com.SoftwareFactory.model;
 
 
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Table(name ="s_projects")
+@Table(name = "s_projects")
 public class Project {
 
-    public Project(){}
-
+    public Project() {
+    }
 
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
-    @Column(name="id")
+    @Column(name = "project_id")
     private Long id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String projectName;
 
 
-    @Column(name="date_create")
+    @Column(name = "date_create")
     private Date createDate;
 
-/*
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="status_id")
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id")
     private Status status;
-*/
 
-/*    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private CustomerInfo customerInfo;*/
 
-    @OneToMany
-    @JoinColumn(name="project")
+    @ManyToOne
+    @JoinColumn(name = "user_customer_id")
+    private CustomerInfo customerInfo;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Case> cases;
 
     public Long getId() {
@@ -68,23 +65,23 @@ public class Project {
         this.createDate = createDate;
     }
 
-/*    public Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
-    }*/
+    }
 
-/*    public CustomerInfo getCustomerInfo() {
+    public CustomerInfo getCustomerInfo() {
         return customerInfo;
     }
 
     public void setCustomerInfo(CustomerInfo customerInfo) {
         this.customerInfo = customerInfo;
-    }*/
+    }
 
-     public Set<Case> getCases() {
+    public Set<Case> getCases() {
         return cases;
     }
 
@@ -92,11 +89,11 @@ public class Project {
         this.cases = cases;
     }
 
-    public Project(String projectName, Date createDate, /*Status status,*//* CustomerInfo customerInfo,*/ Set<Case> cases) {
+    public Project(String projectName, Date createDate, Status status, CustomerInfo customerInfo, Set<Case> cases) {
         this.projectName = projectName;
         this.createDate = createDate;
-  /*      this.status = status;*/
-       /* this.customerInfo = customerInfo;*/
+        this.status = status;
+        this.customerInfo = customerInfo;
         this.cases = cases;
     }
 
@@ -106,8 +103,8 @@ public class Project {
                 "id=" + id +
                 ", projectName='" + projectName + '\'' +
                 ", createDate=" + createDate +
-               /* ", status=" + status +*/
-          /*      ", customerInfo=" + customerInfo +*/
+                ", status=" + status +
+                ", customerInfo=" + customerInfo +
                 ", cases=" + cases +
                 '}';
     }

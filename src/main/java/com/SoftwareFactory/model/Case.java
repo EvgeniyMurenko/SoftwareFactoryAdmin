@@ -14,9 +14,8 @@ public class Case {
     public Case() {
     }
 
-
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "project_id")
     private Project project;
 
 

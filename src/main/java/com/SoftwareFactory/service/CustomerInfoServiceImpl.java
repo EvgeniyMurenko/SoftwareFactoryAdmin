@@ -1,11 +1,12 @@
 package com.SoftwareFactory.service;
 
 import com.SoftwareFactory.dao.CustomerInfoDao;
-import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
+
 import com.SoftwareFactory.model.CustomerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -16,30 +17,33 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     private CustomerInfoDao customerInfoDao;
 
     @Autowired(required = true)
-    public void setCaseDao(CustomerInfoDao customerInfoDao) {
+    public void setCustomerInfoDao(CustomerInfoDao customerInfoDao) {
         this.customerInfoDao = customerInfoDao;
     }
 
 
     @Override
-    public void addNewCase(CustomerInfo customerInfo) {
+    @Transactional
+    public void addNewCustomerInfo(CustomerInfo customerInfo) {
         customerInfoDao.create(customerInfo);
     }
 
     @Override
-    public void updateCase(CustomerInfo customerInfo) {
+    @Transactional
+    public void updateCustomerInfo(CustomerInfo customerInfo) {
         customerInfoDao.update(customerInfo);
     }
 
     @Override
-    public void deleteCase(CustomerInfo customerInfo) {
+    @Transactional
+    public void deleteCustomerInfo(CustomerInfo customerInfo) {
         customerInfoDao.delete(customerInfo);
     }
 
     @Override
-    public List<CustomerInfo> getAllcustomerInfos() {
+    @Transactional
+    public List<CustomerInfo> getAllCustomerInfos() {
         return customerInfoDao.findAll();
     }
 }
-
 
