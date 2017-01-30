@@ -40,7 +40,7 @@ public class CaseServiceImpl implements CaseService {
     @Override
     @Transactional
     public void deleteCase(Case aCase) {
-        caseDao.delete(caseDao);
+        caseDao.delete(aCase);
     }
 
 }

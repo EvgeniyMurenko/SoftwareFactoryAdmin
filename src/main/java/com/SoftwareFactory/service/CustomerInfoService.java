@@ -1,4 +1,4 @@
-/*
+
 package com.SoftwareFactory.service;
 
 import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
@@ -9,43 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-*/
-/**
- * Created by adm on 1/27/2017.
- *//*
+
 
 @Service("customerInfoService")
-public class CustomerInfoService implements AbstractService <CustomerInfo> {
+public interface CustomerInfoService {
 
-    private CustomerInfoDaoImpl customerInfoDao;
-
-    @Autowired(required=true)
-    public CustomerInfoService(CustomerInfoDaoImpl customerInfoDao) {
-        this.customerInfoDao = customerInfoDao;
-    }
-
-    @Override
-    @Transactional
-    public void addNew(CustomerInfo object) {
-        customerInfoDao.create(object);
-    }
-
-    @Override
-    @Transactional
-    public void update(CustomerInfo object) {
-        customerInfoDao.update(object);
-    }
-
-    @Override
-    @Transactional
-    public void delete(CustomerInfo object) {
-        customerInfoDao.delete(object);
-    }
-
-    @Override
-    @Transactional(readOnly=true)
-    public List<CustomerInfo> getAll() {
-        return customerInfoDao.findAll();
-    }
+    void addNewCase(CustomerInfo customerInfo);
+    void updateCase(CustomerInfo customerInfo);
+    void deleteCase(CustomerInfo customerInfo);
+    List<CustomerInfo> getAllcustomerInfos();
 }
-*/
+
