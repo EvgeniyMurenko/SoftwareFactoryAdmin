@@ -27,14 +27,6 @@ CREATE TABLE `s_cases` (
 	PRIMARY KEY (`case_id`)
 );
 
-CREATE TABLE `app_users` (
-	`user_id` INT NOT NULL AUTO_INCREMENT,
-	`sso_id` INT NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`password` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`user_id`)
-);
-
 CREATE TABLE `s_manager_info` (
 	`user_id` INT NOT NULL,
 	`first_name` VARCHAR(255) NOT NULL,
@@ -59,15 +51,27 @@ CREATE TABLE `s_estimates` (
 	PRIMARY KEY (`estimate_id`)
 );
 
-CREATE TABLE `user_profile` (
-	`user_profile_id` INT NOT NULL AUTO_INCREMENT,
-	`type` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`user_profile_id`)
+CREATE TABLE `app_user` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+	`sso_id` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `app_user_user_profile` (
-	`user_id` INT NOT NULL,
-	`user_profile_id` INT NOT NULL
+CREATE TABLE `user_profile` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+	`type` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`),
+    UNIQUE (type)
+);
+
+CREATE TABLE APP_USER_USER_PROFILE (
+    user_id BIGINT NOT NULL,
+    user_profile_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, user_profile_id),
+	CONSTRAINT FK_APP_USER FOREIGN KEY (user_id) REFERENCES APP_USER (id),
+    CONSTRAINT FK_USER_PROFILE FOREIGN KEY (user_profile_id) REFERENCES USER_PROFILE (id)
 );
 
 CREATE TABLE `status` (
@@ -94,30 +98,29 @@ INSERT INTO USER_PROFILE(type)
 VALUES ('MANAGER');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('admin@mail.com','123', 'admin@mail.com');
+VALUES ('admin@mail.com',123, 'admin@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('manager@mail.com','123', 'manager1@mail.com');
+VALUES ('manager@mail.com',123, 'manager1@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('manager@mail.com','123', 'manager2@mail.com');
+VALUES ('manager@mail.com',123, 'manager2@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('customer@mail.com','123', 'customer1@mail.com');
+VALUES ('customer@mail.com',123, 'customer1@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('customer@mail.com','123', 'customer2@mail.com');
-
+VALUES ('customer@mail.com',123, 'customer2@mail.com');
 
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
   where user.sso_id='admin@mail.com' and profile.type='ADMIN';
 
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
   where user.sso_id='manager@mail.com' and profile.type='MANAGER';
 
-  INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+    INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
   where user.sso_id='customer@mail.com' and profile.type='CUSTOMER';
 
@@ -145,17 +148,17 @@ VALUES ('ComonBaby', 1,'2017-01-25 13:00:00', 1);
 INSERT INTO s_projects(name, user_customer_id, date_create, status_id)
 VALUES ('DRONE', 2,'2017-01-27 13:00:00', 1);
 
-INSERT INTO s_cases(project_id, user_manager_id, title, status_id, date_create)
-VALUES (1, 2, 'database1', 2, '2017-01-25 13:00:00');
+INSERT INTO s_cases(project_id, user_manager_id, title, status_id, progress, date_create)
+VALUES (1, 2, 'database1', 2, 10, '2017-01-25 13:00:00');
 
-INSERT INTO s_cases(project_id, user_manager_id, title, status_id, date_create)
-VALUES (1, 2, 'database2', 1, '2017-01-25 13:00:00');
+INSERT INTO s_cases(project_id, user_manager_id, title, status_id, progress, date_create)
+VALUES (1, 2, 'database2', 1, 20, '2017-01-25 13:00:00');
 
-INSERT INTO s_cases(project_id, user_manager_id, title, status_id, date_create)
-VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00');
+INSERT INTO s_cases(project_id, user_manager_id, title, status_id, progress, date_create)
+VALUES (1, 2, 'database3', 1, 30, '2017-01-25 13:00:00');
 
-INSERT INTO s_cases(project_id, user_manager_id, title, status_id, date_create)
-VALUES (2, 3, 'database1', 1, '2017-01-25 13:00:00');
+INSERT INTO s_cases(project_id, user_manager_id, title, status_id, progress, date_create)
+VALUES (2, 3, 'database1', 1, 40, '2017-01-25 13:00:00');
 
 INSERT INTO s_messages(case_id, user_id, message_time, message_text)
 VALUES (1, 4, '2017-01-25 13:00:00','hello, i need.....');
