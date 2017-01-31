@@ -1,14 +1,14 @@
 
 package com.SoftwareFactory.service;
 
-import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
+
+import com.SoftwareFactory.model.Case;
 import com.SoftwareFactory.model.CustomerInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.SoftwareFactory.model.Project;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+import java.util.Set;
 
 
 @Service("customerInfoService")
@@ -18,4 +18,6 @@ public interface CustomerInfoService {
     void updateCustomerInfo(CustomerInfo customerInfo);
     void deleteCustomerInfo(CustomerInfo customerInfo);
     List<CustomerInfo> getAllCustomerInfos();
+    Set<Project> getCustomerProjects(Long id);
+
 }
