@@ -27,86 +27,77 @@ import java.util.Set;
 public class TestController {
 
 
-@Autowired
-CustomerInfoService customerInfoService;
+    @Autowired
+    CustomerInfoService customerInfoService;
 
-@Autowired
-CaseService caseService;
+    @Autowired
+    CaseService caseService;
 
 /*@Autowired
 MessageService messageService;*/
 
 
-@Autowired
-ProjectService projectService;
+    @Autowired
+    ProjectService projectService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test() {
-
         System.out.println("test");
-
-
-
-        System.out.println("test1");
-        List<Case> cases= caseService.getAllCases();
-        System.out.println("test2");
+        List<Case> cases = caseService.getAllCases();
         Case aCase = cases.get(0);
-        Set <Message> messages = aCase.getMessages();
+        Set<Message> messages = aCase.getMessages();
+        System.out.println("messages" + messages);
         Status status = aCase.getStatus();
         System.out.println(status.getStatusType());
-        System.out.println("test3");
-
-        if (messages ==null){
+        if (messages == null) {
             System.out.println("messages null");
         }
-
         Iterator<Message> iterator = messages.iterator();
 
-        System.out.println("test4");
-
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Message message = iterator.next();
             System.out.println(message.getMessageText());
         }
-
-
-
-
-            ModelAndView modelAndView = new ModelAndView("redirect:/");
-            return modelAndView;
-
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public ModelAndView test1() {
-
-
-       System.out.println("test1");
+        System.out.println("test1");
         List<CustomerInfo> customerInfos = customerInfoService.getAllCustomerInfos();
-        System.out.println("test2");
         CustomerInfo customerInfo = customerInfos.get(0);
-        System.out.println("test2");
-
         Set<Project> projects = customerInfo.getProjects();
-
-        if (projects ==null){
+        if (projects == null) {
             System.out.println("projects null");
         }
-
-
-
         Iterator<Project> iterator = projects.iterator();
-
-        System.out.println("test3");
-
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Project project = iterator.next();
             System.out.println(project.getProjectName());
             System.out.println(project.getCustomerInfo().getUserId());
         }
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        return modelAndView;
+    }
 
-
-
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public ModelAndView test2() {
+        System.out.println("============test2");
+        List<CustomerInfo> customerInfos = customerInfoService.getAllCustomerInfos();
+        CustomerInfo customerInfo = customerInfos.get(1);
+        System.out.println("======customerInfo name: "+customerInfo.getFirstName());
+        System.out.println("====== cu");
+        Set<Project> projects = customerInfo.getProjects();
+        if (projects == null) {
+            System.out.println("projects null");
+        }
+        Iterator<Project> iterator = projects.iterator();
+        while (iterator.hasNext()) {
+            Project project = iterator.next();
+            System.out.println(project.getProjectName());
+            System.out.println(project.getCustomerInfo().getUserId());
+        }
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         return modelAndView;
     }
