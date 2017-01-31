@@ -256,7 +256,7 @@
             </div>
             <div class="col-md-4 feature-box">
                 <i class="pe-7s-share pe-feature"></i>
-                <h5><spring:message code="locale.bussinesThema5"/>Popular of the year</h5>
+                <h5><spring:message code="locale.bussinesThema5"/></h5>
                 <p>
                     <spring:message code="locale.bussinesThema5text"/>
                 </p>

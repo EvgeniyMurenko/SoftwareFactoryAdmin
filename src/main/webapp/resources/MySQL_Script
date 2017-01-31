@@ -176,10 +176,16 @@ INSERT INTO s_messages(case_id, user_id, message_time, message_text)
 VALUES (3, 5, '2017-01-25 13:00:00','hello, i need.....');
 
 INSERT INTO status(type)
-VALUES ('CUSTOMER');
+VALUES ('considered');
 
 INSERT INTO status(type)
-VALUES ('ADMIN');
+VALUES ('open');
 
 INSERT INTO status(type)
-VALUES ('MANAGER');
+VALUES ('close');
+
+INSERT INTO s_estimates(name, email, estimate_request, status_id, date_request)
+VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', 1, '2017-01-25 13:00:00');
+
+INSERT INTO s_estimates(name, email, estimate_request, status_id, date_request)
+VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', 2, '2017-01-25 13:00:00');
