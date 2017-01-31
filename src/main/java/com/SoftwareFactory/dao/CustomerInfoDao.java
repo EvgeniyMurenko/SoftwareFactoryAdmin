@@ -11,4 +11,8 @@ public interface CustomerInfoDao {
     void update(CustomerInfo customerInfo);
     void delete(CustomerInfo customerInfo);
     List<CustomerInfo> findAll();
+
+
+
+
 }
