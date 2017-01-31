@@ -96,7 +96,7 @@ MessageService messageService;*/
         while (iterator.hasNext()) {
             Project project = iterator.next();
             System.out.println(project.getProjectName());
-            System.out.println(project.getCustomerInfo().getUserId());
+           // System.out.println(project.getCases().get);
         }
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         return modelAndView;

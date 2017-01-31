@@ -56,7 +56,8 @@ CREATE TABLE `app_user` (
 	`sso_id` VARCHAR(255) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`password` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`id`)
+	PRIMARY KEY (`id`),
+    UNIQUE (sso_id)
 );
 
 CREATE TABLE `user_profile` (
@@ -101,16 +102,16 @@ INSERT INTO APP_USER(sso_id, password, email)
 VALUES ('admin@mail.com',123, 'admin@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('manager@mail.com',123, 'manager1@mail.com');
+VALUES ('manager1@mail.com',123, 'manager1@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('manager@mail.com',123, 'manager2@mail.com');
+VALUES ('manager2@mail.com',123, 'manager2@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('customer@mail.com',123, 'customer1@mail.com');
+VALUES ('customer1@mail.com',123, 'customer1@mail.com');
 
 INSERT INTO APP_USER(sso_id, password, email)
-VALUES ('customer@mail.com',123, 'customer2@mail.com');
+VALUES ('customer2@mail.com',123, 'customer2@mail.com');
 
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
@@ -118,26 +119,34 @@ INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
 
   INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
-  where user.sso_id='manager@mail.com' and profile.type='MANAGER';
+  where user.sso_id='manager1@mail.com' and profile.type='MANAGER';
+
+   INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  where user.sso_id='manager2@mail.com' and profile.type='MANAGER';
 
     INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
-  where user.sso_id='customer@mail.com' and profile.type='CUSTOMER';
+  where user.sso_id='customer1@mail.com' and profile.type='CUSTOMER';
+
+  INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM app_user user, user_profile profile
+  where user.sso_id='customer2@mail.com' and profile.type='CUSTOMER';
 
   INSERT INTO s_customer_info(user_id, first_name, last_name, company, avatar)
 VALUES (1, 'evgeniy','customer1','tb','avatar1');
 
 INSERT INTO s_customer_info(user_id, first_name, last_name, company, avatar)
-VALUES (2, 'sasha','customer2','skoda','avatar2');
+VALUES (4, 'sasha','customer2','skoda','avatar2');
 
 INSERT INTO s_customer_info(user_id, first_name, last_name, company, avatar)
-VALUES (3, 'maxim','customer3','google','avatar3');
+VALUES (5, 'maxim','customer3','google','avatar3');
 
 INSERT INTO s_manager_info(user_id, first_name, last_name)
-VALUES (4, 'petya','manager1');
+VALUES (2, 'petya','manager1');
 
 INSERT INTO s_manager_info(user_id, first_name, last_name)
-VALUES (5, 'masha','manager2');
+VALUES (3, 'masha','manager2');
 
 INSERT INTO s_projects(name, user_customer_id, date_create, status_id)
 VALUES ('AMMATA', 1,'2017-01-20 13:00:00', 1);
