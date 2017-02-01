@@ -1,5 +1,8 @@
 <%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.SoftwareFactory.model.Project" %>
+<%@ page import="java.util.Set" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -34,6 +37,16 @@
     <link href="resources/personalArea/css/custom.css" rel="stylesheet">
 </head>
 <body>
+
+<%
+    Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
+    Iterator<Project> itr = projectSet.iterator();
+    while (itr.hasNext()) {
+        String element = itr.next().getProjectName();
+        out.println(element);
+    }
+%>
+
 <div id="wrapper">
     <!-- Navigation -->
     <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -77,7 +90,7 @@
     <div id="page-wrapper">
         <div class="graphs">
             <div class="xs">
-                <h3>Estimations</h3>
+                <h3>Projects</h3>
                 <div class="col-md-3 email-list1">
                     <ul class="collection">
                         <li class="collection-item avatar email-unread">
@@ -97,6 +110,18 @@
                                 <p class="truncate grey-text ultra-small">Android/iOS App project</p>
                             </div>
                             <a href="#!" class="secondary-content"><span class="new badge blue">4</span></a>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                    <h4>General discussions</h4>
+                    <ul class="collection">
+                        <li class="collection-item avatar email-unread email_last">
+                            <i class="icon_4">D</i>
+                            <div class="avatar_left">
+                                <a href="javascript:void(0);"><span class="email-title">Discussion room</span></a>
+                                <p class="truncate grey-text ultra-small">Other discussions</p>
+                            </div>
+                            <a href="#!" class="secondary-content"><span class="new badge blue">6</span></a>
                             <div class="clearfix"></div>
                         </li>
                     </ul>
