@@ -53,7 +53,7 @@ public class AppController {
 
 
 	/**
-	 * This method will list all existing users.
+	 * This method will list all existing users .
 	 */
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView listUsers(HttpSession session) {
