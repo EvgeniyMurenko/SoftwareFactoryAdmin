@@ -41,6 +41,9 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Case> cases;
 
+    @Column(name = "technology_type")
+    private String technologyType;
+
     public Long getId() {
         return id;
     }
@@ -89,15 +92,24 @@ public class Project {
         this.cases = cases;
     }
 
-    public Project(String projectName, Date createDate, Status status, CustomerInfo customerInfo, Set<Case> cases) {
+    public String getTechnologyType() {
+        return technologyType;
+    }
+
+    public void setTechnologyType(String technologyType) {
+        this.technologyType = technologyType;
+    }
+
+    public Project(String projectName, Date createDate, Status status, CustomerInfo customerInfo, Set<Case> cases, String technologyType) {
         this.projectName = projectName;
         this.createDate = createDate;
         this.status = status;
         this.customerInfo = customerInfo;
         this.cases = cases;
+        this.technologyType = technologyType;
     }
 
-   /* @Override
+/*    @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
@@ -106,6 +118,9 @@ public class Project {
                 ", status=" + status +
                 ", customerInfo=" + customerInfo +
                 ", cases=" + cases +
+                ", technologyType='" + technologyType + '\'' +
                 '}';
     }*/
+
+
 }
