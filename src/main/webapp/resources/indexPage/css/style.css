@@ -1345,3 +1345,11 @@ Ui to top
 
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default { background-color: #000; border-color: #1a1a1a; }
 .thanks {display: none; }
+
+@font-face {
+	font-family: NanumGothic;
+	src: local(NanumGothic), url(../fonts/korea/NanumGothic.ttf);
+}
+html {
+	font-family: NanumGothic, cursive;
+}
