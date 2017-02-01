@@ -1284,7 +1284,7 @@ div[id^=uniform-] input {
   padding: 0; 
 }
 ul.collection {
-  margin: 0;
+  margin: 0 0 20px 0;
   list-style: none;
   background:#fff;
   padding:1em;

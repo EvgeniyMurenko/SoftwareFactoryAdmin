@@ -39,7 +39,6 @@
 <body>
 
 <%
-    out.println("JSP READY SIR");
     Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
     Iterator<Project> itr = projectSet.iterator();
     while (itr.hasNext()) {
@@ -91,7 +90,7 @@
     <div id="page-wrapper">
         <div class="graphs">
             <div class="xs">
-                <h3>Estimations</h3>
+                <h3>Projects</h3>
                 <div class="col-md-3 email-list1">
                     <ul class="collection">
                         <li class="collection-item avatar email-unread">
@@ -111,6 +110,18 @@
                                 <p class="truncate grey-text ultra-small">Android/iOS App project</p>
                             </div>
                             <a href="#!" class="secondary-content"><span class="new badge blue">4</span></a>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                    <h4>General discussions</h4>
+                    <ul class="collection">
+                        <li class="collection-item avatar email-unread email_last">
+                            <i class="icon_4">D</i>
+                            <div class="avatar_left">
+                                <a href="javascript:void(0);"><span class="email-title">Discussion room</span></a>
+                                <p class="truncate grey-text ultra-small">Other discussions</p>
+                            </div>
+                            <a href="#!" class="secondary-content"><span class="new badge blue">6</span></a>
                             <div class="clearfix"></div>
                         </li>
                     </ul>
