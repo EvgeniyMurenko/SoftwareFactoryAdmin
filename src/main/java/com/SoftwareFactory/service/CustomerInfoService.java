@@ -18,6 +18,7 @@ public interface CustomerInfoService {
     void updateCustomerInfo(CustomerInfo customerInfo);
     void deleteCustomerInfo(CustomerInfo customerInfo);
     List<CustomerInfo> getAllCustomerInfos();
-    Set<Project> getCustomerProjects(Long id);
+    CustomerInfo getCustomerInfoById(Long id);
+
 
 }

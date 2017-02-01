@@ -12,7 +12,4 @@ public interface CustomerInfoDao {
     void delete(CustomerInfo customerInfo);
     List<CustomerInfo> findAll();
 
-
-
-
 }

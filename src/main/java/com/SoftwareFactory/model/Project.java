@@ -97,7 +97,7 @@ public class Project {
         this.cases = cases;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
@@ -107,5 +107,5 @@ public class Project {
                 ", customerInfo=" + customerInfo +
                 ", cases=" + cases +
                 '}';
-    }
+    }*/
 }

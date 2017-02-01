@@ -1,5 +1,8 @@
 <%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.SoftwareFactory.model.Project" %>
+<%@ page import="java.util.Set" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -34,6 +37,17 @@
     <link href="resources/personalArea/css/custom.css" rel="stylesheet">
 </head>
 <body>
+
+<%
+    out.println("JSP READY SIR");
+    Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
+    Iterator<Project> itr = projectSet.iterator();
+    while (itr.hasNext()) {
+        String element = itr.next().getProjectName();
+        out.println(element);
+    }
+%>
+
 <div id="wrapper">
     <!-- Navigation -->
     <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
