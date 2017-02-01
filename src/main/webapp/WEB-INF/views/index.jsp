@@ -178,8 +178,8 @@
         <div class="container">
             <div class="row text-center wow fadeInUp" data-wow-delay="0.4s">
                 <div class="col-md-10 col-md-offset-1">
-                    <h3><spring:message code="locale.AboutText1"/> <span><spring:message
-                            code="locale.AboutText2"/></span></h3>
+                    <h3><span><spring:message code="locale.AboutText1"/></span>
+                        <spring:message code="locale.AboutText2"/></h3>
                     <p class="btn-inline">
                         <a href="https://www.youtube.com/watch?v=9bZkp7q19f0" data-pretty="prettyPhoto"
                            class="btn btn-bordered btn-lg zoom"><spring:message code="locale.videoBtn"/></a>
