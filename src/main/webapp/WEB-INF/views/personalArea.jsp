@@ -38,14 +38,7 @@
 </head>
 <body>
 
-<%
-    Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
-    Iterator<Project> itr = projectSet.iterator();
-    while (itr.hasNext()) {
-        String element = itr.next().getProjectName();
-        out.println(element);
-    }
-%>
+
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -93,25 +86,33 @@
                 <h3>Projects</h3>
                 <div class="col-md-3 email-list1">
                     <ul class="collection">
-                        <li class="collection-item avatar email-unread">
-                            <i class="icon_4">A</i>
-                            <div class="avatar_left">
-                                <a href="javascript:void(0);"><span class="email-title">AMMATA</span></a>
-                                <p class="truncate grey-text ultra-small">Android/iOS App project</p>
-                            </div>
-                            <a href="#!" class="secondary-content"><span class="new badge blue">8</span></a>
-                            <div class="clearfix"></div>
-                        </li>
 
-                        <li class="collection-item avatar email-unread email_last">
-                            <i class="icon_4">C</i>
-                            <div class="avatar_left">
-                                <a href="javascript:void(0);"><span class="email-title">ComeOnBaby App</span></a>
-                                <p class="truncate grey-text ultra-small">Android/iOS App project</p>
-                            </div>
-                            <a href="#!" class="secondary-content"><span class="new badge blue">4</span></a>
-                            <div class="clearfix"></div>
-                        </li>
+
+
+                        <%
+                            Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
+                            Iterator<Project> itr = projectSet.iterator();
+                            while (itr.hasNext()) {
+                                Project project = itr.next();
+                        %>
+
+                                <li class="collection-item avatar email-unread">
+                                    <i class="icon_4">A</i>
+                                    <div class="avatar_left">
+                                        <a href="javascript:void(0);"><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
+                                        <p class="truncate grey-text ultra-small">Android/iOS App project</p>
+                                    </div>
+                                    <a href="#!" class="secondary-content"><span class="new badge blue"> <% out.println(project.getCases().size()); %> </span></a>
+                                    <div class="clearfix"></div>
+                                </li>
+
+
+                        <% }%>
+
+
+
+
+
                     </ul>
                     <h4>General discussions</h4>
                     <ul class="collection">
