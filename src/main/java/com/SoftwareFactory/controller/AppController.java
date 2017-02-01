@@ -75,6 +75,7 @@ public class AppController {
 
 		if (userProfile.getType().equals("ADMIN")){
 			System.out.println("LOGIN AS ADMIN");
+
 			modelAndView.setViewName("userslist");
 
 		} else if (userProfile.getType().equals("CUSTOMER")){
@@ -82,10 +83,10 @@ public class AppController {
 			modelAndView.setViewName("redirect:/cabinet");
 		}
 
-		System.out.print(userProfile.getId());
-		System.out.print(userProfile.getType());
+		System.out.println(currentUser.getId());
+		System.out.println(userProfile.getType());
 
-		session.setAttribute("UserId" , userProfile.getId());
+		session.setAttribute("UserId" , currentUser.getId());
 		session.setAttribute("UserRole" , userProfile.getType());
 
 		return modelAndView;
