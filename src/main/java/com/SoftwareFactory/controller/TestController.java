@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -86,7 +83,7 @@ MessageService messageService;*/
         System.out.println("============test2");
         List<CustomerInfo> customerInfos = customerInfoService.getAllCustomerInfos();
         CustomerInfo customerInfo = customerInfos.get(1);
-        System.out.println("======customerInfo name: "+customerInfo.getFirstName());
+        System.out.println("======customerInfo name: " + customerInfo.getFirstName());
         System.out.println("====== cu");
         Set<Project> projects = customerInfo.getProjects();
         if (projects == null) {
@@ -96,10 +93,66 @@ MessageService messageService;*/
         while (iterator.hasNext()) {
             Project project = iterator.next();
             System.out.println(project.getProjectName());
-           // System.out.println(project.getCases().get);
+            // System.out.println(project.getCases().get);
         }
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         return modelAndView;
+    }
+
+
+    @Autowired
+    UserService userService;
+
+    @RequestMapping(value = "/createCustomer", method = RequestMethod.GET)
+    public ModelAndView createCustomer() {
+
+        // CREATE USER WITH ROLE CUSTOMER
+
+        String emailSSO = "111@mail.com";
+        String password = "1111";
+
+        User user = new User();
+
+        user.setPassword(password);
+        user.setEmail(emailSSO);
+        user.setSsoId(emailSSO);
+
+
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId(1);
+        userProfile.setType("CUSTOMER");
+
+        Set<UserProfile> userProfiles = new HashSet<>();
+        userProfiles.add(userProfile);
+
+        user.setUserProfiles(userProfiles);
+
+        userService.saveUser(user);
+
+
+        // CREATE CUSTOMER PROFILE
+
+        User userAfterSave = userService.findBySSO(emailSSO);
+
+        Long userId = new Long(userAfterSave.getId());
+        String firstName = "test";
+        String lastName = "test";
+        String company = "test";
+        String avatar = "test";
+
+
+        //CREATE #$GENERAL PROJECT FOR CUSTOMER
+     /*   Project project = new Project()*/
+
+
+
+        Set<Project> projects = new HashSet<>();
+
+
+        CustomerInfo customerInfo = new CustomerInfo(userId, firstName, lastName, company, avatar, projects);
+
+
+        return new ModelAndView("index");
     }
 
 }

@@ -35,8 +35,6 @@ public class User implements Serializable{
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Message> messages;
 
 	public Integer getId() {
 		return id;
@@ -78,13 +76,6 @@ public class User implements Serializable{
 		this.userProfiles = userProfiles;
 	}
 
-	public Set<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(Set<Message> messages) {
-		this.messages = messages;
-	}
 
 	@Override
 	public int hashCode() {

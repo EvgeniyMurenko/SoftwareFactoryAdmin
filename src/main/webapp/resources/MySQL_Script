@@ -166,7 +166,7 @@ INSERT INTO s_projects(name, user_customer_id, date_create, status_id, technolog
 VALUES ('DRONE', 5,'2017-01-27 13:00:00', 1, 'JS');
 
 INSERT INTO s_projects(name, user_customer_id, date_create, status_id, technology_type)
-VALUES ('#GENERAL', 6,'2017-01-27 13:00:00', 1, 'IOS');
+VALUES ('#$GENERAL', 6,'2017-01-27 13:00:00', 1, 'IOS');
 
 INSERT INTO s_cases(project_id, user_manager_id, title, status_id, progress, date_create)
 VALUES (1, 2, 'database1', 2, 10, '2017-01-25 13:00:00');
