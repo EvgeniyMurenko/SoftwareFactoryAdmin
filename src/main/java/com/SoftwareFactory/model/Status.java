@@ -13,6 +13,8 @@ public class Status {
 
     public Status(){}
 
+
+
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
@@ -39,6 +41,11 @@ public class Status {
     }
 
     public Status(String statusType) {
+        this.statusType = statusType;
+    }
+
+    public Status(Long id,String statusType ){
+        this.id = id;
         this.statusType = statusType;
     }
 

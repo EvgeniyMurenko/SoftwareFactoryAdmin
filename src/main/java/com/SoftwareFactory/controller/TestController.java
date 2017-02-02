@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -59,7 +63,7 @@ MessageService messageService;*/
         return modelAndView;
     }
 
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public ModelAndView test1() {
         System.out.println("test1");
         List<CustomerInfo> customerInfos = customerInfoService.getAllCustomerInfos();
@@ -98,7 +102,7 @@ MessageService messageService;*/
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         return modelAndView;
     }
-
+*/
 
     @Autowired
     UserService userService;
@@ -108,7 +112,7 @@ MessageService messageService;*/
 
         // CREATE USER WITH ROLE CUSTOMER
 
-        String emailSSO = "111@mail.com";
+            String emailSSO = "test22@mail.com";
         String password = "1111";
 
         User user = new User();
@@ -141,16 +145,30 @@ MessageService messageService;*/
         String avatar = "test";
 
 
-        //CREATE #$GENERAL PROJECT FOR CUSTOMER
-     /*   Project project = new Project()*/
-
-
-
+        //CREATE FINAL NEW CUSTOMER
         Set<Project> projects = new HashSet<>();
 
-
         CustomerInfo customerInfo = new CustomerInfo(userId, firstName, lastName, company, avatar, projects);
+        customerInfoService.addNewCustomerInfo(customerInfo);
 
+
+        CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(userId);
+
+
+        //CREATE #$GENERAL PROJECT FOR CUSTOMER
+        Date projectCreationDate = new Date(1990, 12, 13);
+        Status projectStatus = new Status(1L , "open");
+        Set<Case> cases = new HashSet<>();
+
+
+        Project project = new Project("#$GENERAL" , projectCreationDate  , projectStatus ,customerInfo,  cases ,"test" );
+
+        Set<Project> projectsToAdd = new HashSet<>();
+        projectsToAdd.add(project);
+        customerInfoCreated.setProjects(projectsToAdd);
+
+
+        customerInfoService.updateCustomerInfo(customerInfoCreated);
 
         return new ModelAndView("index");
     }
