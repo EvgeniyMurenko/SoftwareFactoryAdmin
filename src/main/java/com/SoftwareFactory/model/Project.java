@@ -1,6 +1,7 @@
 package com.SoftwareFactory.model;
 
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -108,6 +109,7 @@ public class Project {
         this.cases = cases;
         this.technologyType = technologyType;
     }
+
 
 /*    @Override
     public String toString() {
