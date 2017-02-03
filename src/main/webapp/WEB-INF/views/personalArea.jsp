@@ -140,12 +140,11 @@
                     <div class="mailbox-content">
                         <div class="mail-toolbar clearfix">
                             <div class="text-right"><a href="<c:url value="/newCase"/>" class="btn btn-success">Create new case</a> </div> <%--======>>>>>link to newcase--%>
-                            <div class="dropdown">
-                                <div class="btn-group">
-                                    <a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-                                    <a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
+
+                            <!-- pagination -->
+                            <div class="holder"></div>
+                            <!-- pagination -->
+
                             <div class="clearfix"></div>
                         </div>
                         <table class="table table-striped">
@@ -159,7 +158,7 @@
                                 <th class="hidden-xs text-center">Messages</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="itemContainer">
 
                                 <tr class="unread checked">
                                     <td><a href="javascript:void(0);">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
@@ -169,8 +168,6 @@
                                     <td class="hidden-xs text-center">10 hours ago</td>
                                     <td class="hidden-xs text-center">1</td>
                                 </tr>
-
-
 
                             </tbody>
                         </table>
@@ -192,6 +189,7 @@
 <script src="resources/personalArea/js/fileinput.min.js"></script>
 <script src="resources/personalArea/js/metisMenu.min.js"></script>
 <script src="resources/personalArea/js/ckeditor/ckeditor.js"></script>
+<script src="resources/personalArea/js/pagination.min.js"></script>
 <script src="resources/personalArea/js/custom.js"></script>
 </body>
 </html>

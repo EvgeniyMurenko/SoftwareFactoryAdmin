@@ -196,3 +196,14 @@
                          a large part of the input clickable in most browsers */
     height: 200px;
 }
+
+.holder { margin: 15px 0; }
+.holder a { font-size: 12px; cursor: pointer; color: #333; display: inline-block; padding: 8px 14px; text-decoration: none; border: 1px solid #ddd; border-left: 0; transition: background-color .1s; }
+.holder a:hover { background-color: #ccc; color: #666; border-color: #ddd; }
+.holder a.jp-previous { border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-left: 1px solid #ddd; }
+.holder a.jp-next { border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
+.holder a.jp-current, a.jp-current:hover { background-color: #ccc !important; color: #666; border-color: #ddd; }
+.holder a.jp-disabled, a.jp-disabled:hover { color: #bbb; }
+.holder a.jp-current, a.jp-current:hover,
+.holder a.jp-disabled, a.jp-disabled:hover { cursor: default; background: none; }
+.holder span { font-size: 12px; color: #333; display: inline-block; padding: 8px 12px; text-decoration: none;  border: 1px solid #ddd; border-left: 0; }
