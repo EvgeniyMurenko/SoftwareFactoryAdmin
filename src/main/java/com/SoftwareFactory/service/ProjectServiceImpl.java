@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by adm on 1/27/2017.
- */
+
 @Service("projectService")
 public class ProjectServiceImpl implements ProjectService {
 
@@ -44,5 +42,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly=true)
     public List<Project> getAllProjects() {
         return projectDao.findAll();
+    }
+
+    @Override
+    public Project getProjectById(Long id) {
+        return projectDao.read(id);
     }
 }
