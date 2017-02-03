@@ -93,6 +93,7 @@
 
 
                         <%
+                            
                             Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
                             Project generalDiscussionProject;
                             Iterator<Project> itr = projectSet.iterator();
@@ -108,7 +109,7 @@
                                         <%  String projectLink = "/project" + project.getId();
                                             URL url = new URL(projectLink);  %>
                                         <c:url value="${url}" var="url" />
-                                        
+
                                         <a href="${url}" ><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
                                         <p class="truncate grey-text ultra-small"> <%   out.println(project.getTechnologyType());  %></p>
                                     </div>
