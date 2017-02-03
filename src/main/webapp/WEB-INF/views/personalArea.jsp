@@ -11,6 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ page session="false" %>
 
 <!DOCTYPE HTML>
@@ -93,7 +94,7 @@
 
 
                         <%
-                            
+
                             Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
                             Project generalDiscussionProject;
                             Iterator<Project> itr = projectSet.iterator();
@@ -106,11 +107,11 @@
                                     <i class="icon_4">A</i>
                                     <div class="avatar_left">
 
-                                        <%  String projectLink = "/project" + project.getId();
-                                            URL url = new URL(projectLink);  %>
-                                        <c:url value="${url}" var="url" />
+                                        <%  String projectId= Long.toString(project.getId()); %>
+                                     <%--/*       URL url = new URL(projectLink);  %>
+                                        <c:url value="${url}" var="url" />*/--%>
 
-                                        <a href="${url}" ><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
+                                        <a href="/project<%out.print(projectId); %>" ><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
                                         <p class="truncate grey-text ultra-small"> <%   out.println(project.getTechnologyType());  %></p>
                                     </div>
                                     <a href="#!" class="secondary-content"><span class="new badge blue"> <% out.println(project.getCases().size()); %> </span></a>
