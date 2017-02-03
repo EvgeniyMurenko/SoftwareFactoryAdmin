@@ -56,10 +56,12 @@ public class UserCabinetController {
 
 
 
+
         if (projects != null){
             System.out.println("add projects");
             customerCabinet.addObject("projects" , projects);
         }
+
 
         System.out.print(httpSession.getAttribute("UserRole"));
 

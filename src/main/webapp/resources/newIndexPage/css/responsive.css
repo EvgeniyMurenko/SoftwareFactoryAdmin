@@ -1,0 +1,21 @@
+@media screen and (max-width:1189px) {
+}
+@media screen and (max-width:1000px) {
+    .header { margin-top: 15px; margin-bottom: 15px; }
+}
+@media screen and (max-width:768px) {
+}
+@media screen and (max-width:640px) {
+    .logo { text-align: center; margin: 10px 0; }
+    .login { text-align: center !important; padding-top: 5px; }
+    .es-btn a { width: 100%; margin-top: 10px; }
+    .information .btn { width: 100%; }
+
+    .bl-quote { float: none; width: 100%; text-align: center; }
+    .ft-icon, ft-content { float: none; }
+    .ft-icon { float: none; width: 100%; text-align: center; }
+    .ft-title { text-align: center; }
+    .ft-body { text-align: justify; }
+}
+@media screen and (max-width:480px) {
+}

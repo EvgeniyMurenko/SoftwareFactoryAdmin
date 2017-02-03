@@ -91,27 +91,27 @@
 
                         <%
                             Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
+                            Project generalDiscussionProject;
                             Iterator<Project> itr = projectSet.iterator();
                             while (itr.hasNext()) {
                                 Project project = itr.next();
+                                if (!project.getProjectName().equals("#$GENERAL")){
                         %>
 
                                 <li class="collection-item avatar email-unread">
                                     <i class="icon_4">A</i>
                                     <div class="avatar_left">
                                         <a href="javascript:void(0);"><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
-                                        <p class="truncate grey-text ultra-small">Android/iOS App project</p>
+                                        <p class="truncate grey-text ultra-small"> <%   out.println(project.getTechnologyType());  %></p>
                                     </div>
                                     <a href="#!" class="secondary-content"><span class="new badge blue"> <% out.println(project.getCases().size()); %> </span></a>
                                     <div class="clearfix"></div>
                                 </li>
 
-
-                        <% }%>
-
-
-
-
+                            <%} else {
+                                generalDiscussionProject = project;
+                            }
+                       }%>
 
                     </ul>
                     <h4>General discussions</h4>
