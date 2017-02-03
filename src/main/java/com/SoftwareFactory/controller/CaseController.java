@@ -21,35 +21,34 @@ import java.util.Set;
 
 @Controller
 @SessionAttributes("roles")
-public class UserCabinetController {
+public class CaseController {
 
     @Autowired
     CustomerInfoService customerInfoService;
 
-    @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
-    public ModelAndView cabinet(Locale locale , HttpSession httpSession) {
+    @RequestMapping(value = "/newCase", method = RequestMethod.GET)
+    public ModelAndView newCase( HttpSession httpSession) {
 
-         System.out.println("cabinet");
-        ModelAndView customerCabinet = new ModelAndView("personalArea");
+        System.out.println("=========new Case=========");
+        ModelAndView customerCabinet = new ModelAndView("newCase");
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
         Set<Project> projects = customerInfo.getProjects();
-   /*     if (projects != null){
-            ArrayList<String> projectNames = new ArrayList<>();
-            Iterator iterator = projects.iterator();
-            while (iterator.hasNext()){
-                Project project =(Project) iterator.next();
-                projectNames.add(project.ge);
-            }
-        }
-*/
         if (projects != null){
-            System.out.println("add projects");
+            System.out.println("add projects to casepage");
             customerCabinet.addObject("projects" , projects);
         }
         System.out.print(httpSession.getAttribute("UserRole"));
         return customerCabinet;
     }
 
+    @RequestMapping(value = "/addNewCase", method = RequestMethod.GET)
+    public ModelAndView addNewCase( HttpSession httpSession) {
+        ModelAndView customerCabinet = new ModelAndView("newCase");
 
+
+
+        return customerCabinet;
+    }
 }
+

@@ -58,9 +58,6 @@ public class AppController {
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView listUsers(HttpSession session) {
 
-
-
-
 		User currentUser = userService.findBySSO(getPrincipal());
 
 		Set profiles = currentUser.getUserProfiles();
@@ -92,19 +89,7 @@ public class AppController {
 		return modelAndView;
 	}
 
-	/*@ModelAttribute("UserSession")
-	public UserSession createUser() {
-		return new UserSession();
-	}*/
 
-
-
-	@RequestMapping(value = {"/newCase" }, method = RequestMethod.GET)
-	public String list(ModelMap model) {
-
-
-		return "newCase";
-	}
 
 
 	/**
