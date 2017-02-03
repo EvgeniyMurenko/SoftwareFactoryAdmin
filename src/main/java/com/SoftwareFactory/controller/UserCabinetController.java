@@ -3,6 +3,7 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.model.Case;
 import com.SoftwareFactory.model.CustomerInfo;
+import com.SoftwareFactory.model.Message;
 import com.SoftwareFactory.model.Project;
 import com.SoftwareFactory.service.CustomerInfoService;
 import com.SoftwareFactory.service.ProjectService;
@@ -72,20 +73,36 @@ public class UserCabinetController {
     ProjectService projectService;
 
     @RequestMapping(value = "/project{id}", method = RequestMethod.GET)
-    public String getProjectCases(@PathVariable String id) {
-        System.out.print(id);
+    public ModelAndView getProjectCases(@PathVariable String id , HttpSession httpSession) {
 
+        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
         Long projectId = Long.getLong(id);
 
+        System.out.print("Project id " + projectId + "userId " + userId);
 
-        ModelAndView modelAndView = new ModelAndView("personalArea");
+
+        ModelAndView customerCabinetShowOneProject = new ModelAndView("personalArea");
+
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
+        Set<Project> projectsToShow = customerInfo.getProjects();
+        ArrayList<Case>  casesToShow = new ArrayList<>();
 
 
         Project project = projectService.getProjectById(projectId);
 
+        getCasesFromProject(project, casesToShow);
 
-        return null;
+
+
+        //PUT OBJECTS TO MODEL
+        customerCabinetShowOneProject.addObject("projects", projectsToShow);
+        customerCabinetShowOneProject.addObject("cases", casesToShow);
+
+
+
+        return customerCabinetShowOneProject;
     }
+
 
 
 

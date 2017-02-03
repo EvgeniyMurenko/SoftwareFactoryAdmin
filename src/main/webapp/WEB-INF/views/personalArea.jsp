@@ -2,7 +2,10 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.Project" %>
-<%@ page import="java.util.Set" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.SoftwareFactory.model.Case" %>
+<%@ page import="java.net.URL" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -101,7 +104,12 @@
                                 <li class="collection-item avatar email-unread">
                                     <i class="icon_4">A</i>
                                     <div class="avatar_left">
-                                        <a href="javascript:void(0);"><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
+
+                                        <%  String projectLink = "/project" + project.getId();
+                                            URL url = new URL(projectLink);  %>
+                                        <c:url value="${url}" var="url" />
+                                        
+                                        <a href="${url}" ><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
                                         <p class="truncate grey-text ultra-small"> <%   out.println(project.getTechnologyType());  %></p>
                                     </div>
                                     <a href="#!" class="secondary-content"><span class="new badge blue"> <% out.println(project.getCases().size()); %> </span></a>
@@ -160,15 +168,23 @@
                             </thead>
                             <tbody id="itemContainer">
 
-                                <tr class="unread checked">
-                                    <td><a href="javascript:void(0);">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                                    <td class="text-center"><a href="javascript:void(0);">Ammata</a></td>
-                                    <td class="text-center">Proceeding</td>
-                                    <td class="hidden-xs text-center">10/01/2017</td>
+                            <%
+                                ArrayList<Case> cases =  (ArrayList<Case>)request.getAttribute("cases");
+                                Iterator<Case> caseIterator = cases.iterator();
+                                while (caseIterator.hasNext()) {
+                                    Case aCase = caseIterator.next();
+                            %>
+
+                            <tr class="unread checked">
+                                    <td><a href="javascript:void(0);"><%  out.print(aCase.getProjectTitle().toString());  %></a></td>
+                                    <td class="text-center"><a href="javascript:void(0);"> <% out.print(aCase.getProject().getProjectName()); %> </a></td>
+                                    <td class="text-center"><%  out.print(aCase.getStatus().getStatusType()); %></td>
+                                    <td class="hidden-xs text-center"> <%  out.print(aCase.getCreationDate().toString());  %></td>
                                     <td class="hidden-xs text-center">10 hours ago</td>
-                                    <td class="hidden-xs text-center">1</td>
+                                    <td class="hidden-xs text-center"><%  out.print(aCase.getMessages().size());   %></td>
                                 </tr>
 
+                            <%}%>
                             </tbody>
                         </table>
                     </div>
