@@ -1,6 +1,8 @@
 
 package com.SoftwareFactory.controller;
 
+import com.SoftwareFactory.constant.RoleEnum;
+import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
 import com.SoftwareFactory.dao.EstimateDao;
 import com.SoftwareFactory.dao.StatusDaoImpl;
@@ -17,10 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -112,7 +111,7 @@ MessageService messageService;*/
 
         // CREATE USER WITH ROLE CUSTOMER
 
-            String emailSSO = "test22@mail.com";
+        String emailSSO = "test22@mail.com";
         String password = "1111";
 
         User user = new User();
@@ -120,7 +119,6 @@ MessageService messageService;*/
         user.setPassword(password);
         user.setEmail(emailSSO);
         user.setSsoId(emailSSO);
-
 
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
@@ -132,7 +130,6 @@ MessageService messageService;*/
         user.setUserProfiles(userProfiles);
 
         userService.saveUser(user);
-
 
         // CREATE CUSTOMER PROFILE
 
@@ -173,5 +170,97 @@ MessageService messageService;*/
         return new ModelAndView("index");
     }
 
+
+    @RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
+    public void createAdmin(){
+        String emailSSO = randomeSSO();
+        String password = "123";
+
+        if (checkSSo(emailSSO)){
+            User user = new User();
+            user.setPassword(password);
+            user.setEmail(emailSSO);
+            user.setSsoId(emailSSO);
+
+            UserProfile userProfile = new UserProfile();
+            userProfile.setType(RoleEnum.ADMIN.toString());
+            userProfile.setId(getTypeID(userProfile.getType()));
+
+            Set<UserProfile> userProfiles = new HashSet<>();
+            userProfiles.add(userProfile);
+
+            user.setUserProfiles(userProfiles);
+
+            userService.saveUser(user);
+        } else {
+            createAdmin();
+        }
+    }
+
+    public void createManager(){
+        String emailSSO = randomeSSO();
+        String password = "123";
+
+        if (checkSSo(emailSSO)){
+            User user = new User();
+            user.setPassword(password);
+            user.setEmail(emailSSO);
+            user.setSsoId(emailSSO);
+
+            UserProfile userProfile = new UserProfile();
+            userProfile.setType(RoleEnum.MANAGER.toString());
+            userProfile.setId(getTypeID(userProfile.getType()));
+
+            Set<UserProfile> userProfiles = new HashSet<>();
+            userProfiles.add(userProfile);
+            user.setUserProfiles(userProfiles);
+
+            userService.saveUser(user);
+
+            User userAfterSave = userService.findBySSO(emailSSO);
+
+            Long userId = new Long(userAfterSave.getId());
+            String firstName = randomeSSO();
+            String lastName = randomeSSO();
+
+            //code to create manager must be here
+
+
+            CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(userId);
+
+
+        } else {
+            createManager();
+        }
+    }
+
+    private String randomeSSO(){
+        System.out.println("==========random SSO");
+        String str = "qwertyuiopasdfghjklzxcvbnm";
+        String strSso = "";
+        for(int i = 0; i < 4; i++){
+            int value = (int) (Math.random()*str.length()-1);
+            strSso+= str.charAt(value);
+        }
+        return strSso+"@mail.com";
+    }
+
+    private boolean checkSSo(String nameSSO){
+        System.out.println("==========check SSO");
+            if(userService.findBySSO(nameSSO)== null){
+                return true;
+            }
+        return false;
+    }
+
+    private int getTypeID(String str){
+        System.out.println("==========find TypeID");
+        switch (str){
+            case "ADMIN": return 2;
+            case "CUSTOMER": return 1;
+            case "MANAGER": return 3;
+        }
+        return -1;
+    }
 }
 

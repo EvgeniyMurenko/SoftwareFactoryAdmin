@@ -139,7 +139,7 @@
                     </form>
                     <div class="mailbox-content">
                         <div class="mail-toolbar clearfix">
-                            <div class="text-right"><a href="<c:url value="/newCase" />" class="btn btn-success">Create new case</a> </div> <%--======>>>>>link to newcase--%>
+                            <div class="text-right"><a href="<c:url value="/newCase"/>" class="btn btn-success">Create new case</a> </div> <%--======>>>>>link to newcase--%>
                             <div class="dropdown">
                                 <div class="btn-group">
                                     <a class="btn btn-default"><i class="fa fa-angle-left"></i></a>

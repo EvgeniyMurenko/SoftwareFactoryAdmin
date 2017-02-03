@@ -1,5 +1,8 @@
 <%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.SoftwareFactory.model.Project" %>
+<%@ page import="java.util.Set" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -81,14 +84,26 @@
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="horizontal-form">
+
+                        <%--this form--%>
+
                         <form class="form-horizontal" method="post">
 
                             <div class="form-group">
                                 <label for="selector" class="col-sm-2 control-label">Project code</label>
                                 <div class="col-sm-8">
                                     <select name="selector1" id="selector" class="form-control1">
-                                        <option>Ammata</option>
-                                        <option>ComeOnBaby</option>
+
+                                        <%
+                                            Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
+                                            Iterator<Project> itr = projectSet.iterator();
+                                            while (itr.hasNext()) {
+                                                Project project = itr.next();%>
+                                                <option>
+                                                    <%out.print(project.getProjectName());%>
+                                                </option>
+
+                                            <%}%>
                                     </select>
                                 </div>
                             </div>
