@@ -73,32 +73,37 @@ public class UserCabinetController {
     ProjectService projectService;
 
     @RequestMapping(value = "/project{id}", method = RequestMethod.GET)
-    public ModelAndView getProjectCases(@PathVariable String id , HttpSession httpSession) {
+    public ModelAndView getProjectCases(@PathVariable Long id , HttpSession httpSession) {
+
+        System.out.print("ID" + id);
+
 
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-        Long projectId = Long.getLong(id);
+        /*Long projectId = */
 
-        System.out.print("Project id " + projectId + "userId " + userId);
+        System.out.print("Project id " + id+ "userId " + userId);
 
 
         ModelAndView customerCabinetShowOneProject = new ModelAndView("personalArea");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
+        System.out.println("STEP1");
         Set<Project> projectsToShow = customerInfo.getProjects();
+        System.out.println("STEP2");
         ArrayList<Case>  casesToShow = new ArrayList<>();
+        System.out.println("STEP3");
 
-
-        Project project = projectService.getProjectById(projectId);
-
+        Project project = projectService.getProjectById(id);
+        System.out.println("STEP4");
         getCasesFromProject(project, casesToShow);
-
+        System.out.println("STEP6");
 
 
         //PUT OBJECTS TO MODEL
         customerCabinetShowOneProject.addObject("projects", projectsToShow);
         customerCabinetShowOneProject.addObject("cases", casesToShow);
 
-
+        System.out.print("READY");
 
         return customerCabinetShowOneProject;
     }
@@ -120,5 +125,6 @@ public class UserCabinetController {
                 casesToShow.add(aCase);
             }
         }
+        System.out.println("STEP5");
     }
 }
