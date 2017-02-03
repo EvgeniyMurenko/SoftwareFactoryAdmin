@@ -16,6 +16,9 @@
     .ft-icon { float: none; width: 100%; text-align: center; }
     .ft-title { text-align: center; }
     .ft-body { text-align: justify; }
+    .bottom-informer { text-align: center !important; }
+    .bottom-menu { margin-top: 10px; text-align: center !important; }
+    .orange-button { display: none; }
 }
 @media screen and (max-width:480px) {
 }

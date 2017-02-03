@@ -86,13 +86,13 @@
                     <div class="tab-pane active" id="horizontal-form">
 
                         <%--this form--%>
-
-                        <form class="form-horizontal" method="post">
+                            <c:url var="createCase" value="/createCase"/>
+                        <form class="form-horizontal" method="post" action="${createCase}" >
 
                             <div class="form-group">
                                 <label for="selector" class="col-sm-2 control-label">Project code</label>
                                 <div class="col-sm-8">
-                                    <select name="selector1" id="selector" class="form-control1">
+                                    <select name="projectName" id="selector" class="form-control1">
 
                                         <%
                                             Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
@@ -111,7 +111,7 @@
                             <div class="form-group">
                                 <label for="issue" class="col-sm-2 control-label">Issue title</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control1" id="issue" placeholder="Issue title">
+                                    <input type="text" class="form-control1" id="issue" name="caseName"  placeholder="Issue title">
                                 </div>
                             </div>
 
@@ -129,10 +129,12 @@
                                 </div>
                             </div>
 
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                             <div>
                                 <div class="row">
                                     <div class="col-sm-8 col-sm-offset-2 text-right">
-                                        <button class="btn-success1 btn">Send case</button>
+                                        <button type="submit" class="btn-success1 btn"> Send case </button>
                                     </div>
                                 </div>
                             </div>

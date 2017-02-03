@@ -106,7 +106,7 @@ public class Case {
         this.messages = messages;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Case{" +
                 "project=" + project +
@@ -117,5 +117,5 @@ public class Case {
                 ", creationDate=" + creationDate +
                 ", messages=" + messages +
                 '}';
-    }
+    }*/
 }
