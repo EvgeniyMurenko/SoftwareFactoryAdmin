@@ -31,9 +31,8 @@ public class Case {
     @Column(name = "title")
     private String projectTitle;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "date_create")
     private Date creationDate;
@@ -73,11 +72,11 @@ public class Case {
         this.projectTitle = projectTitle;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -97,7 +96,7 @@ public class Case {
         this.messages = messages;
     }
 
-    public Case(Project project, Long userManagerId, String projectTitle, Status status, Date creationDate, Set<Message> messages) {
+    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages) {
         this.project = project;
         this.userManagerId = userManagerId;
         this.projectTitle = projectTitle;
@@ -106,7 +105,7 @@ public class Case {
         this.messages = messages;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Case{" +
                 "project=" + project +
@@ -117,5 +116,5 @@ public class Case {
                 ", creationDate=" + creationDate +
                 ", messages=" + messages +
                 '}';
-    }
+    }*/
 }

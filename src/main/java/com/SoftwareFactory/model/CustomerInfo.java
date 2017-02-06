@@ -87,7 +87,7 @@ public class CustomerInfo {
         this.projects = projects;
     }
 
-    @Override
+/*    @Override
     public String toString() {
         return "CustomerInfo{" +
                 "userId=" + Id +
@@ -97,6 +97,6 @@ public class CustomerInfo {
                 ", avatar='" + avatar + '\'' +
                 ", projects=" + projects +
                 '}';
-    }
+    }*/
 }
 

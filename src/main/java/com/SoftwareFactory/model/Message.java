@@ -35,6 +35,9 @@ public class Message {
     @Column(name = "message_text")
     private String messageText;
 
+    @Column(name = "is_read")
+    private String isRead;
+
     public Long getId() {
         return id;
     }
@@ -75,13 +78,23 @@ public class Message {
         this.messageText = messageText;
     }
 
-    public Message(Case aCase, User user,Date messageTime, String messageText) {
+    public String getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(String isRead) {
+        this.isRead = isRead;
+    }
+
+    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead) {
         this.aCase = aCase;
         this.user = user;
         this.messageTime = messageTime;
         this.messageText = messageText;
+        this.isRead = isRead;
     }
 
+/*
     @Override
     public String toString() {
         return "Message{" +
@@ -91,5 +104,5 @@ public class Message {
              ", messageTime=" + messageTime +
                 ", messageText='" + messageText + '\'' +
                 '}';
-    }
+    }*/
 }

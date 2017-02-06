@@ -29,10 +29,8 @@ public class Project {
     @Column(name = "date_create")
     private Date createDate;
 
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @Column(name = "status")
+    private String status;
 
 
     @ManyToOne
@@ -69,11 +67,11 @@ public class Project {
         this.createDate = createDate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -101,7 +99,7 @@ public class Project {
         this.technologyType = technologyType;
     }
 
-    public Project(String projectName, Date createDate, Status status, CustomerInfo customerInfo, Set<Case> cases, String technologyType) {
+    public Project(String projectName, Date createDate, String status, CustomerInfo customerInfo, Set<Case> cases, String technologyType) {
         this.projectName = projectName;
         this.createDate = createDate;
         this.status = status;

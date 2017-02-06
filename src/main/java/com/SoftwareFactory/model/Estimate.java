@@ -27,8 +27,8 @@ public class Estimate {
     private String estimateRequest;
 
 
-    @Column(name="state" , nullable=false)
-    private int state;
+    @Column(name="status" , nullable=false)
+    private String status;
 
     public Long getId() {
         return id;
@@ -62,21 +62,21 @@ public class Estimate {
         this.estimateRequest = estimateRequest;
     }
 
-    public int getState() {
-        return state;
+    public String getState() {
+        return status;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setState(String state) {
+        this.status = state;
     }
 
     public  Estimate(){}
 
-    public Estimate(String name, String email, String estimateRequest, int state) {
+    public Estimate(String name, String email, String estimateRequest, String status) {
         this.name = name;
         this.email = email;
         this.estimateRequest = estimateRequest;
-        this.state = state;
+        this.status = status;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Estimate {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", estimateRequest='" + estimateRequest + '\'' +
-                ", state=" + state +
+                ", state=" + status +
                 '}';
     }
 }

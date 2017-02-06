@@ -3,7 +3,8 @@ CREATE TABLE `s_messages` (
 	`case_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
 	`message_time` DATETIME NOT NULL,
-	`message_text` TEXT NOT NULL,
+	`message_text` VARCHAR(255) NOT NULL,
+    `is_read` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`message_id`)
 );
 
@@ -12,7 +13,7 @@ CREATE TABLE `s_projects` (
 	`name` VARCHAR(255) NOT NULL,
 	`user_customer_id` INT NOT NULL,
 	`date_create` DATETIME NOT NULL,
-	`status_id` VARCHAR(255) NOT NULL,
+	`status` VARCHAR(255) NOT NULL,
 	`technology_type` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`project_id`)
 );
@@ -22,8 +23,7 @@ CREATE TABLE `s_cases` (
 	`case_id` INT NOT NULL AUTO_INCREMENT,
 	`user_manager_id` INT NOT NULL,
 	`title` TEXT NOT NULL,
-	`status_id` VARCHAR(255) NOT NULL,
-	`progress` INT NOT NULL,
+	`status` VARCHAR(255) NOT NULL,
 	`date_create` DATETIME NOT NULL,
 	PRIMARY KEY (`case_id`)
 );
@@ -47,7 +47,7 @@ CREATE TABLE `s_estimates` (
 	`name` VARCHAR(255) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`estimate_request` TEXT NOT NULL,
-	`status_id` VARCHAR(255) NOT NULL,
+	`status` VARCHAR(255) NOT NULL,
 	`date_request` DATETIME NOT NULL,
 	PRIMARY KEY (`estimate_id`)
 );
@@ -68,19 +68,13 @@ CREATE TABLE `user_profile` (
     UNIQUE (type)
 );
 
-CREATE TABLE APP_USER_USER_PROFILE (
+CREATE TABLE `app_user_user_profile` (
     user_id BIGINT NOT NULL,
     user_profile_id BIGINT NOT NULL,
     PRIMARY KEY (user_id, user_profile_id)
 );
 
-CREATE TABLE `status` (
-	`status_id` INT NOT NULL AUTO_INCREMENT,
-	`type` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`status_id`)
-);
-
-CREATE TABLE persistent_logins (
+CREATE TABLE `persistent_logins` (
     username VARCHAR(64) NOT NULL,
     series VARCHAR(64) NOT NULL,
     token VARCHAR(64) NOT NULL,
@@ -148,59 +142,50 @@ VALUES (2, 'petya','manager1');
 INSERT INTO `s_manager_info`(user_id, first_name, last_name)
 VALUES (3, 'masha','manager2');
 
-INSERT INTO `s_projects`(name, user_customer_id, date_create, status_id, technology_type)
+INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
 VALUES ('AMMATA', 4,'2017-01-20 13:00:00', 1, 'JAVA');
 
-INSERT INTO `s_projects`(name, user_customer_id, date_create, status_id, technology_type)
+INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
 VALUES ('ComonBaby', 4,'2017-01-25 13:00:00', 1, 'C++');
 
-INSERT INTO `s_projects`(name, user_customer_id, date_create, status_id, technology_type)
+INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
 VALUES ('DRONE', 5,'2017-01-27 13:00:00', 1, 'JS');
 
-INSERT INTO s_projects(name, user_customer_id, date_create, status_id, technology_type)
+INSERT INTO s_projects(name, user_customer_id, date_create, status, technology_type)
 VALUES ('#$GENERAL', 6,'2017-01-27 13:00:00', 1, 'IOS');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status_id, progress, date_create)
-VALUES (1, 2, 'database1', 2, 10, '2017-01-25 13:00:00');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create)
+VALUES (1, 2, 'database1', 2, '2017-01-25 13:00:00');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status_id, progress, date_create)
-VALUES (1, 2, 'database2', 1, 20, '2017-01-25 13:00:00');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create)
+VALUES (1, 2, 'database2', 1, '2017-01-25 13:00:00');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status_id, progress, date_create)
-VALUES (1, 2, 'database3', 1, 30, '2017-01-25 13:00:00');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create)
+VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status_id, progress, date_create)
-VALUES (2, 3, 'database1', 1, 40, '2017-01-25 13:00:00');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create)
+VALUES (2, 3, 'database1', 1, '2017-01-25 13:00:00');
 
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text)
-VALUES (1, 4, '2017-01-25 13:00:00','hello, i need.....');
+INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
+VALUES (1, 4, '2017-01-25 13:00:00','hello, i need.....', 'READ');
 
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text)
-VALUES (1, 2, '2017-01-25 13:00:00','hello. ok, we try do it.');
+INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
+VALUES (1, 2, '2017-01-25 13:00:00','hello. ok, we try do it.','READ');
 
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text)
-VALUES (1, 4, '2017-01-25 13:00:00','thanks');
+INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
+VALUES (1, 4, '2017-01-25 13:00:00','thanks','READ');
 
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text)
-VALUES (2, 4, '2017-01-25 13:00:00','text.....');
+INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
+VALUES (2, 4, '2017-01-25 13:00:00','text.....','NOTREAD');
 
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text)
-VALUES (2, 3, '2017-01-25 13:00:00','yayayaya');
+INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
+VALUES (2, 3, '2017-01-25 13:00:00','yayayaya','READ');
 
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text)
-VALUES (3, 5, '2017-01-25 13:00:00','hello, i need.....');
+INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
+VALUES (3, 5, '2017-01-25 13:00:00','hello, i need.....','NOTREAD');
 
-INSERT INTO `status`(type)
-VALUES ('considered');
-
-INSERT INTO `status`(type)
-VALUES ('open');
-
-INSERT INTO `status`(type)
-VALUES ('close');
-
-INSERT INTO `s_estimates`(name, email, estimate_request, status_id, date_request)
+INSERT INTO `s_estimates`(name, email, estimate_request, status, date_request)
 VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', 1, '2017-01-25 13:00:00');
 
-INSERT INTO `s_estimates`(name, email, estimate_request, status_id, date_request)
+INSERT INTO `s_estimates`(name, email, estimate_request, status, date_request)
 VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', 2, '2017-01-25 13:00:00');

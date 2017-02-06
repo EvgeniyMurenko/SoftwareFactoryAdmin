@@ -39,7 +39,10 @@
 <!-- Header -->
 <header class="container header">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 logo"><a href="./">소프트웨어<span>팩토리</span></a></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 logo">
+            <a href="./">소프트웨어<span>팩토리</span></a>
+            <div class="small-logo">SoFAC : <i>Software Factory</i></div>
+        </div>
         <div class="col-lg-6 col-md-6 col-sm-6 text-right login"><a href="javascript:void(0);">이미 회원입니까? 로그인하십시오!</a></div>
     </div>
 </header>
@@ -52,66 +55,48 @@
             <div class="col-md-6">
 
                 <!-- Estimation -->
-                <section class="estimation">
+                <section class="estimation mt40 mb20">
                     <div class="row">
                         <div class="col-md-9 col-sm-9 es-title">처음 오신 고객은 견적, 작업등 모든 문의를 하실 수 있습니다</div>
                         <div class="col-md-3 col-sm-3 es-btn"><a href="javascript:void(0);" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i>문의하기</a></div>
                     </div>
-                    <span class="delimiter"></span>
-
-                    <!-- Estimation list case -->
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox1" checked="" disabled="" type="checkbox">
-                        <label for="checkbox1">
-                            <span class="cb-title">청산유수</span> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox2" checked="" disabled="" type="checkbox">
-                        <label for="checkbox2">
-                            <span class="cb-title">박도혁</span> : 견적 문의 드립니다 <span class="cb-time">16.01.25 15:28:00</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox3" disabled="" type="checkbox">
-                        <label for="checkbox3">
-                            <span class="cb-title">청산유수</span> : 견적 문의 드립니다 <span class="cb-time">15.01.25 12:28:00</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox4" disabled="" type="checkbox">
-                        <label for="checkbox4">
-                            <span class="cb-title">박도혁</span> : 견적 문의 드립니다 <span class="cb-time">13.01.25 15:28:00</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox5" checked="" disabled="" type="checkbox">
-                        <label for="checkbox5">
-                            <span class="cb-title">청산유수</span> : 견적 문의 드립니다 <span class="cb-time">12.01.25 18:28:00</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox6" checked="" disabled="" type="checkbox">
-                        <label for="checkbox6">
-                            <span class="cb-title">박도혁</span> : 견적 문의 드립니다 <span class="cb-time">11.01.25 15:28:00</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <input class="styled" id="checkbox7" disabled="" type="checkbox">
-                        <label for="checkbox7">
-                            <span class="cb-title">청산유수</span> : 견적 문의 드립니다 <span class="cb-time">10.01.25 15:28:00</span>
-                        </label>
-                    </div>
-                    <!-- #End Estimation list case -->
-
                 </section>
                 <!-- #End Estimation -->
+
+
+                <!-- Estimation list case -->
+                <section class="estimation-list">
+                    <div class="clearfix estimate">
+                        <span class="check-on"></span>
+                        <a href="javascript:void(0);"><span class="cb-title">청산유수</span></a> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
+                    </div>
+
+                    <div class="clearfix estimate">
+                        <span class="check-off"></span>
+                        <a href="javascript:void(0);"><span class="cb-title">박도혁</span></a> : 작업 방법에 대해서 <span class="cb-time">17.01.27 12:26:04</span>
+                    </div>
+
+                    <div class="clearfix estimate">
+                        <span class="check-on"></span>
+                        <a href="javascript:void(0);"><span class="cb-title">청산유수</span></a> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
+                    </div>
+
+                    <div class="clearfix estimate">
+                        <span class="check-off"></span>
+                        <a href="javascript:void(0);"><span class="cb-title">박도혁</span></a> : 작업 방법에 대해서 <span class="cb-time">17.01.27 12:26:04</span>
+                    </div>
+
+                    <div class="clearfix estimate">
+                        <span class="check-on"></span>
+                        <a href="javascript:void(0);"><span class="cb-title">청산유수</span></a> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
+                    </div>
+
+                    <div class="clearfix estimate">
+                        <span class="check-off"></span>
+                        <a href="javascript:void(0);"><span class="cb-title">박도혁</span></a> : 작업 방법에 대해서 <span class="cb-time">17.01.27 12:26:04</span>
+                    </div>
+                </section>
+                <!-- #End Estimation list case -->
 
             </div>
             <div class="col-md-6">
@@ -123,20 +108,12 @@
                         <span class="if-title2">온라인 소프트웨어 개발 서비스</span>
                     </div>
                     <div class="mt20 mb20">
-                        SoFAC stays out of your way but it’s there when you need it. Get organized with ease and no nonsense.<br>
-                        <b>Join our beta and be more productive than ever!</b>
+                        SoFAC은 전문적인 소프트웨어 개발 지원이 가능한 규모를 갖춘 소프트웨어 개발, 및 유지 운영을 대행하는 전문 개발 기업 입니다.<br>
+                        SoFAC의 모든 작업은 CASE 라는 개념을 통하여 소통과 작업이 이루어지며 지속적이고 정확한 서비스를 제공 받으실 수 있습니다. <br>
                     </div>
-
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <label class="sr-only" for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email">
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Request free beta access</button>
-                    </form>
-
-                    <div class="mt20">Do you already have an invitation? <a href="javascript:void(0);">Click here</a>.</div>
-
+                    <div class="text-right">
+                        <a href="<c:url value='/aboutSofac/' />" class="btn btn-primary"><i class="fa fa-link"></i>SoFAC 알아보기</a>
+                    </div>
                 </section>
                 <!-- #End Information -->
 
@@ -157,27 +134,25 @@
         <div class="col-md-4 mb20">
             <div class="ad-icon"><i class="fa fa-clock-o"></i></div>
             <div>
-                <h3 class="text-center">Keep track of your time</h3>
-                <div class="text-justify">Take advantage of our Pomodoro-style time intervals or use regular time tracking.
-                    Get clear reports on how you spend your time and export all data as you need it.</div>
-                <div class="mt10 text-justify"><b>Straightforward time tracking, useful reporting and simple data export.</b></div>
+                <h3 class="text-center">CASE 란 무엇인가요 ?</h3>
+                <div class="text-justify">스마트 시대가 되면 대부분의 개발은 국제 표준에 대한 개념을 지속적으로 적용하여야 합니다.</div>
+                <div class="mt10 text-justify"><b>CASE개념은 24시간 지속적인 고객 지원이 가능한 고객과의 소통 방법이며 정확한 시간 약속과 지원에 대한 결과를 확인할 수 있는 체계 입니다.</b> <a href="javascript:void(0);">자세히  알아보기...</a></div>
             </div>
         </div>
         <div class="col-md-4 mb20">
             <div class="ad-icon"><i class="fa fa-envira"></i></div>
             <div>
-                <h3 class="text-center">Conveniently keyboardy</h3>
-                <div class="text-justify">SoFAC is being developed with keyboard affictionados in mind. Use our convenient syntax
-                    to efficiently schedule to-dos, create recurring tasks or use the time tracking.</div>
-                <div class="mt10 text-justify"><b>Waste less time with our keyboard-based interface. Intelligent auto-complete included.</b></div>
+                <h3 class="text-center">SoFAC의 가격 정책</h3>
+                <div class="text-justify">현대 사회의 모든 사업은 소프트웨어 지원이 필수적입니다. 따라서 기존의 개발비용 개념과.</div>
+                <div class="mt10 text-justify"><b>달리 다양한 방법으로 비용을 절감하거나 고객이 원하는 형태로 비용 지불 방법을 정할 수 있는 유연한 가격 정책과 기술료를 받지 않는 정책을 운영합니다.</b> <a href="javascript:void(0);">자세히  알아보기...</a></div>
             </div>
         </div>
         <div class="col-md-4 mb20">
             <div class="ad-icon"><i class="fa fa-laptop"></i></div>
             <div>
-                <h3 class="text-center">Powerful desktop application</h3>
-                <div class="text-justify">Add new tasks and track your time directly from your desktop (think Spotlight for your organizational needs).</div>
-                <div class="mt10 text-justify"><b>Our desktop client is available for Mac, Windows and Linux.</b></div>
+                <h3 class="text-center">SoFAC의 다국적 작업 방법</h3>
+                <div class="text-justify">SoFAC은 기존의 소규모 개발 회사와 달리 저비용을 실현하면서 개발 및 지속적인 관리가 가능하게 하기 위하여.</div>
+                <div class="mt10 text-justify"><b>다국적 개발 및 관리 시스템인 GXM플랫폼을 통하여 공장형 개발 기법을 실현하였습니다.</b> <a href="<c:url value='/guide/' />" >자세히  알아보기...</a></div>
             </div>
         </div>
     </div>
@@ -188,12 +163,12 @@
 <!-- Tag line -->
 <div class="container-fluid tag-line mt20 mb20">
     <div class="container">
-        <h4>Fresh from the blog</h4>
+        <img src="resources/newIndexPage/images/old-logo.png" alt="" class="img-responsive" />
         <div class="last-blog clearfix">
             <div class="bl-quote"><i class="fa fa-quote-right"></i></div>
-            <div class="bl-article-title"><a href="javascript:void(0);">Outside the Zone: What I Do When I Don’t Feel like Working</a></div>
+            <div class="bl-article-title">10여년 전부터 소프트웨어 지원은 자금 지원과 함께 이루어져야 한다는 생각을 가진<br>㈜굿앤굿재무법인이  미국적 표준화와 다국적 개발 능력을 확보한 전문 개발 대행 기업 입니다.</div>
         </div>
-        <div class="bl-body">A really simple method that has helped me so many times. <a href="javascript:void(0);">Read the full story...</a></div>
+        <div class="bl-body">소프트웨어팩토리는 수준높은 개발과 저비용을 실현한 최초의 소프트웨어 서비스 기업입니다. <a href="javascript:void(0);">자세히  알아보기...</a></div>
     </div>
 </div>
 <div class="clearfix"></div>
@@ -278,17 +253,13 @@
 <!-- Footer -->
 <footer class="container footer mb20">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 bottom-informer">
             Do you have any questions or suggestions?<br />
             Let us know at <a href="javascript:void(0);">info@sofac.com</a>!
         </div>
-        <div class="col-md-6 text-right"><a href="javascript:void(0);">Contact & Credits</a> | <a href="javascript:void(0);">Terms of Service</a> | <a href="javascript:void(0);">Privacy Policy</a></div>
-
+        <div class="col-md-6 text-right bottom-menu"><a href="javascript:void(0);">Contact & Credits</a> | <a href="javascript:void(0);">Terms of Service</a> | <a href="javascript:void(0);">Privacy Policy</a></div>
     </div>
-
     <div class="mt20 text-center">Copyright &copy; 2017. All rights reserved.</div>
-
-
 </footer>
 <!-- #End Footer -->
 

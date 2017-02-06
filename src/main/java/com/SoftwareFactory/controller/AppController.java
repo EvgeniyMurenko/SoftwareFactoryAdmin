@@ -92,6 +92,7 @@ public class AppController {
 
 
 
+
 	/**
 	 * This method will provide the medium to add a new user.
 	 */

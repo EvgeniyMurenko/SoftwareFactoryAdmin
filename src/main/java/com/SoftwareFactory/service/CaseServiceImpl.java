@@ -34,6 +34,13 @@ public class CaseServiceImpl implements CaseService {
 
     @Override
     @Transactional
+    public Case getCaseById(Long id) {
+        Case aCase = caseDao.read(id);
+        return aCase;
+    }
+
+    @Override
+    @Transactional
     public void updateCase(Case aCase) {
         caseDao.update(aCase);
     }
@@ -43,5 +50,6 @@ public class CaseServiceImpl implements CaseService {
     public void deleteCase(Case aCase) {
         caseDao.delete(aCase);
     }
+
 
 }

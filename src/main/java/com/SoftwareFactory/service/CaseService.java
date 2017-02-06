@@ -10,4 +10,5 @@ public interface CaseService {
     void updateCase(Case aCase);
     void deleteCase(Case aCase);
     List<Case> getAllCases();
+    Case getCaseById(Long id);
 }
