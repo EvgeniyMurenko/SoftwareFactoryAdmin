@@ -4,7 +4,7 @@ package com.SoftwareFactory.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 
 
@@ -29,7 +29,8 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "message_time")
+    @Column(name = "message_time", columnDefinition="DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date messageTime;
 
     @Column(name = "message_text")

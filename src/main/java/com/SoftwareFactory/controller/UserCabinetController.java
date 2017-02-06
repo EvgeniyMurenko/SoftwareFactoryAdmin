@@ -1,3 +1,4 @@
+
 package com.SoftwareFactory.controller;
 
 
@@ -77,8 +78,8 @@ public class UserCabinetController {
 
 
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-        /*Long projectId = */
 
+        
         System.out.print("Project id " + id + "userId " + userId);
 
 
@@ -125,7 +126,7 @@ public class UserCabinetController {
 
 
         for (Message m : messagesSorted){
-            System.out.println(m.getMessageTime().toString() + m.getMessageTime().toLocalDate().);
+            System.out.println(m.getMessageTime().toString() + m.getMessageTime() );
         }
 
         System.out.println("------------------------");

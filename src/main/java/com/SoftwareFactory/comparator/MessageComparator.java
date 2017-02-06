@@ -2,7 +2,7 @@ package com.SoftwareFactory.comparator;
 
 import com.SoftwareFactory.model.Message;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Comparator;
 
 
@@ -17,3 +17,4 @@ public class MessageComparator implements Comparator<Message> {
         return messageDate1.compareTo(messageDate2);
     }
 }
+
