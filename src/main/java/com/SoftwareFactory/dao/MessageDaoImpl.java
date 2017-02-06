@@ -44,14 +44,14 @@ public class MessageDaoImpl implements MessageDao {
     public void update(Message message) {
         Session session = sessionFactory.getCurrentSession();
         session.update(message);
-        logger.error("Case update successfully, Case=" + message);
+        logger.error("Message update successfully, Case=" + message);
     }
 
     @Override
     public void delete(Message message) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(message);
-        logger.info("Case deleted successfully, Case details=" + message);
+        logger.info("Message deleted successfully, Case details=" + message);
     }
 
     @Override

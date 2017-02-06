@@ -3,16 +3,10 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.constant.RoleEnum;
 import com.SoftwareFactory.constant.StatusEnum;
-import com.SoftwareFactory.dao.CustomerInfoDaoImpl;
-import com.SoftwareFactory.dao.EstimateDao;
-import com.SoftwareFactory.dao.StatusDaoImpl;
-import com.SoftwareFactory.dao.UserProfileDao;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,8 +41,8 @@ MessageService messageService;*/
         Case aCase = cases.get(0);
         Set<Message> messages = aCase.getMessages();
         System.out.println("messages" + messages);
-        Status status = aCase.getStatus();
-        System.out.println(status.getStatusType());
+        String status = aCase.getStatus();
+        System.out.println(status);
         if (messages == null) {
             System.out.println("messages null");
         }
@@ -154,11 +148,11 @@ MessageService messageService;*/
 
         //CREATE #$GENERAL PROJECT FOR CUSTOMER
         Date projectCreationDate = new Date(1990, 12, 13);
-        Status projectStatus = new Status(1L , "open");
+
         Set<Case> cases = new HashSet<>();
 
 
-        Project project = new Project("#$GENERAL" , projectCreationDate  , projectStatus ,customerInfo,  cases ,"test" );
+        Project project = new Project("#$GENERAL" , projectCreationDate , StatusEnum.OPEN.toString() ,customerInfo,  cases ,"test" );
 
         Set<Project> projectsToAdd = new HashSet<>();
         projectsToAdd.add(project);

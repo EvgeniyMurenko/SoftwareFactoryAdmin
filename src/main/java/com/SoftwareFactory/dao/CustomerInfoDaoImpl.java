@@ -36,7 +36,7 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     public CustomerInfo read(Long id) {
         Session session = sessionFactory.getCurrentSession();
         CustomerInfo customerInfo = (CustomerInfo) session.get(CustomerInfo.class, id);
-        logger.error("Case read successfully, Case=" + customerInfo);
+        logger.error("CustomerInfo read successfully, Case=" + customerInfo);
         return customerInfo;
     }
 
@@ -44,14 +44,14 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     public void update(CustomerInfo customerInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.update(customerInfo);
-        logger.error("Case update successfully, Case=" + customerInfo);
+        logger.error("CustomerInfo update successfully, Case=" + customerInfo);
     }
 
     @Override
     public void delete(CustomerInfo customerInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(customerInfo);
-        logger.info("Case deleted successfully, Case details=" + customerInfo);
+        logger.info("CustomerInfo deleted successfully, Case details=" + customerInfo);
     }
 
     @Override

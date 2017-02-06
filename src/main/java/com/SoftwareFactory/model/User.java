@@ -9,29 +9,29 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="APP_USER")
+@Table(name="app_user")
 public class User implements Serializable{
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@NotEmpty
-	@Column(name="SSO_ID", unique=true, nullable=false)
+	@Column(name="sso_id", unique=true, nullable=false)
 	private String ssoId;
 
 	@NotEmpty
-	@Column(name="PASSWORD", nullable=false)
+	@Column(name="password", nullable=false)
 	private String password;
 
 	@NotEmpty
-	@Column(name="EMAIL", nullable=false)
+	@Column(name="email", nullable=false)
 	private String email;
 
 	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "APP_USER_USER_PROFILE",
-			joinColumns = { @JoinColumn(name = "USER_ID") },
-			inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
+	@JoinTable(name = "app_user_user_profile",
+			joinColumns = { @JoinColumn(name = "user_id") },
+			inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 
@@ -120,7 +120,7 @@ public class User implements Serializable{
 				", ssoId='" + ssoId + '\'' +
 				", password='" + password + '\'' +
 				", email='" + email + '\'' +
-				", userProfiles=" + userProfiles +
+		/*		", userProfiles=" + userProfiles +*/
 				'}';
 	}
 }

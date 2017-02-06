@@ -57,7 +57,7 @@ public class IndexPageController {
 
 
         if (isCurrentAuthenticationAnonymous()) {
-            return new ModelAndView("index");
+            return new ModelAndView("index1");
         } else {
             ModelAndView modelAndView = new ModelAndView("redirect:/list");
             return modelAndView;

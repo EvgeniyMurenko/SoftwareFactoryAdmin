@@ -42,14 +42,14 @@ public class EstimateDaoImpl implements EstimateDao {
     public void update(Estimate estimate) {
         Session session = sessionFactory.getCurrentSession();
         session.update(estimate);
-        logger.error("Case update successfully, Case=" + estimate);
+        logger.error("Estimate update successfully, Case=" + estimate);
     }
 
     @Override
     public void delete(Estimate estimate) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(estimate);
-        logger.info("Case deleted successfully, Case details=" + estimate);
+        logger.info("Estimate deleted successfully, Case details=" + estimate);
     }
 
     @Override

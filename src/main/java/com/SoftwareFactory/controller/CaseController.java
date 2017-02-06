@@ -1,6 +1,7 @@
 package com.SoftwareFactory.controller;
 
 
+import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.*;
@@ -52,6 +53,9 @@ public class CaseController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ProjectService projectService;
+
     @RequestMapping(value = "/createCase", method = RequestMethod.POST)
     public ModelAndView createCase(HttpSession httpSession, @ModelAttribute("projectName") String projectName,
                                    @ModelAttribute("caseName") String caseName,
@@ -62,75 +66,94 @@ public class CaseController {
         System.out.println("=========CREATE CASE=========");
         System.out.println("Case selector " + projectName);
         System.out.println("Case name " + caseName);
-        System.out.println("Case message " + message);
+        System.out.println("Case message " + message + " /n =============================");
 
-      /*  for(int i = 0; i < file.length; i++){
-            System.out.println("Case files " + file[i]);
-        }*/
 
-        System.out.println("=============================");
 
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
 
         Set<Project> projects = customerInfo.getProjects();
-        Long idProject = -1l;
+
+
+        Project project = null;
         if (projects != null){
             Iterator<Project> itr = projects.iterator();
             while (itr.hasNext()) {
-                Project project = itr.next();
+
+                project = itr.next();
+
                 if(project.getProjectName().equals(projectName)){
-                    System.out.println("=========FOUND SUCSES");
-                    //Set<Case> caseSet = project.getCases();
-            System.out.println ("STEP1");
-                    Case newCase = new Case();
-                    System.out.println ("STEP1");
-                    newCase.setProject(project);
-                    newCase.setProjectTitle(caseName);
-                    System.out.println ("STEP2");
-                    Status status = new Status();
-                    status.setId(2l);
-                    status.setStatusType("open");
-                    newCase.setStatus(status);
-                    System.out.println ("STEP3");
-                    Date date = new Date(201, 02, 03);
-                    newCase.setCreationDate(date);
-                    System.out.println ("STEP4");
-                    caseService.addNewCase(newCase);
-
-                    System.out.println ("STEP5");
-                    Case caseCreated = caseService.getCaseById(newCase.getId());
-                    System.out.println ("STEP6");
-
-                    Set<Message> messages = new HashSet<>();
-                    System.out.println ("STEP7");
-                    Message msg = new Message();
-                    System.out.println ("STEP8");
-                    msg.setaCase(caseCreated);
-                    System.out.println ("STEP9");
-                    User us = userService.findById(userId.intValue());
-                    msg.setUser(us);
-                    msg.setMessageTime(date);
-                    msg.setMessageText(message);
-                    System.out.println ("STEP10");
-                    messages.add(msg);
-                    System.out.println ("STEP11");
-                    caseCreated.setMessages(messages);
-
-                    System.out.println ("STEP12");
-                    caseService.updateCase(caseCreated);
-
-                    //caseSet.add(newCase);
-                    //project.setCases(caseSet);
-                    System.out.println("================= END!!!!");
+                    break;
                 }
             }
 
         }
 
 
+
+        System.out.println ("STEP1");
+
+        Case newCase = new Case();
+
+        System.out.println ("STEP1");
+
+        newCase.setProject(project);
+
+        newCase.setProjectTitle(caseName);
+        System.out.println ("STEP2");
+
+        newCase.setStatus(StatusEnum.OPEN.toString());
+        System.out.println ("STEP3");
+        Date date = new Date(2017, 02, 06);
+        newCase.setCreationDate(date);
+        newCase.setUserManagerId(22L);
+        System.out.println ("STEP4");
+
+        Set<Case> caseSet = project.getCases();
+        caseSet.add(newCase);
+
+
+        project.setCases(caseSet);
+
+        projectService.updateProject(project);
+
+
+
+        System.out.println ("STEP5");
+        Case caseCreated = caseService.getCaseById(newCase.getId());
+        System.out.println ("STEP6");
+
+        Set<Message> messages = caseCreated.getMessages();
+        System.out.println ("STEP7");
+        Message msg = new Message();
+        System.out.println ("STEP8");
+        msg.setaCase(caseCreated);
+        System.out.println ("STEP9");
+        User us = userService.findById(userId.intValue());
+        msg.setUser(us);
+        msg.setMessageTime(date);
+        msg.setMessageText(message);
+        msg.setIsRead(MessageEnum.NOTREAD.toString());
+        System.out.println ("STEP10");
+        messages.add(msg);
+        messageService.addNewMessage(msg);
+        System.out.println ("STEP11");
+        caseCreated.setMessages(messages);
+
+        System.out.println ("STEP12");
+
+            caseService.updateCase(caseCreated);
+            System.out.println("STEP13");
+
+        //caseSet.add(newCase);
+        //project.setCases(caseSet);
+        System.out.println("================= END!!!!");
+
+
+
         ModelAndView modelAndView = new ModelAndView("redirect:/list");
-        return null;
+        return modelAndView;
     }
 }
 

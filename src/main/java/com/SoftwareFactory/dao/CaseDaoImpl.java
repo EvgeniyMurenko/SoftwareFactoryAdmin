@@ -44,7 +44,6 @@ public class CaseDaoImpl implements CaseDao {
     public void update(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
         session.update(aCase);
-        session.getTransaction().commit();
         logger.error("Case update successfully, Case=" + aCase);
     }
 

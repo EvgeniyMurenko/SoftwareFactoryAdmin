@@ -44,14 +44,14 @@ public class ProjectDaoImpl implements ProjectDao {
     public void update(Project project) {
         Session session = sessionFactory.getCurrentSession();
         session.update(project);
-        logger.error("Case update successfully, Case=" + project);
+        logger.error("Project update successfully, Case=" + project);
     }
 
     @Override
     public void delete(Project project) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(project);
-        logger.info("Case deleted successfully, Case details=" + project);
+        logger.info("Project deleted successfully, Case details=" + project);
     }
 
     @Override
