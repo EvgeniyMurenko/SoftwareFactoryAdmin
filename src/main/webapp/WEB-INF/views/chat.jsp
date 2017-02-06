@@ -1,5 +1,8 @@
 <%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+<%@ page import="com.SoftwareFactory.model.Message" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.ArrayList" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -82,27 +85,14 @@
                 <div class="chat-message">
                     <ul class="chat">
 
-                        <li class="left clearfix">
-                            <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">John Doe</strong>
-                                    <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </li>
 
-                        <li class="right clearfix">
-                            <span><img src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar"></span>
-                            <div class="chat-body clearfix">
-                                <div class="header text-right">
-                                    <strong class="primary-font">Sarah</strong>
-                                    <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-                                </div>
-                                <p class="text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.</p>
-                            </div>
-                        </li>
+                        <%
+                            ArrayList<Message> messages =  (ArrayList<Message>)request.getAttribute("messagesSorted");
+                            Iterator<Message> messageIterator = messages.iterator();
+                            while (messageIterator.hasNext()) {
+                                Message message = messageIterator.next();
+                        %>
+
 
                         <li class="left clearfix">
                             <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
@@ -111,42 +101,11 @@
                                     <strong class="primary-font">John Doe</strong>
                                     <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <p> <% out.print(message.getMessageText()); %></p>
                             </div>
                         </li>
 
-                        <li class="right clearfix">
-                            <span><img src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar"></span>
-                            <div class="chat-body clearfix">
-                                <div class="header text-right">
-                                    <strong class="primary-font">Sarah</strong>
-                                    <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-                                </div>
-                                <p class="text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.</p>
-                            </div>
-                        </li>
-
-                        <li class="left clearfix">
-                            <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">John Doe</strong>
-                                    <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </li>
-
-                        <li class="right clearfix">
-                            <span><img src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar"></span>
-                            <div class="chat-body clearfix">
-                                <div class="header text-right">
-                                    <strong class="primary-font">Sarah</strong>
-                                    <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-                                </div>
-                                <p class="text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.</p>
-                            </div>
-                        </li>
+                        <% } %>
 
                     </ul>
 

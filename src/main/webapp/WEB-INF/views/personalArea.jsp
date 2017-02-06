@@ -180,7 +180,7 @@
 
                                 <td><a href="javascript:void(0);"><%  out.print(aCase.getProjectTitle().toString());  %></a></td>
                                 <td class="text-center"><a href="javascript:void(0);"> <% out.print(aCase.getProject().getProjectName()); %> </a></td>
-                                <td class="text-center"><%  out.print(aCase.getStatus().getStatusType()); %></td>
+                                <td class="text-center"><%  out.print(aCase.getStatus()); %></td>
                                 <td class="hidden-xs text-center"> <%  out.print(aCase.getCreationDate().toString());  %></td>
                                 <td class="hidden-xs text-center">10 hours ago</td>
                                 <td class="hidden-xs text-center"><%  out.print(aCase.getMessages().size());   %></td>
