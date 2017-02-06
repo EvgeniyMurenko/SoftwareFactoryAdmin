@@ -26,13 +26,13 @@
     </script>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-    <link href="resources/personalArea/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <link href="resources/personalArea/css/languages.min.css" rel="stylesheet">
-    <link href="resources/personalArea/css/style.css" rel='stylesheet' type='text/css'/>
-    <link href="resources/personalArea/css/font-awesome.css" rel="stylesheet">
-    <link href="resources/personalArea/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="resources/personalArea/css/fileinput.min.css" rel="stylesheet">
-    <link href="resources/personalArea/css/custom.css" rel="stylesheet">
+    <link href="/resources/personalArea/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/resources/personalArea/css/languages.min.css" rel="stylesheet">
+    <link href="/resources/personalArea/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="/resources/personalArea/css/font-awesome.css" rel="stylesheet">
+    <link href="/resources/personalArea/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/resources/personalArea/css/fileinput.min.css" rel="stylesheet">
+    <link href="/resources/personalArea/css/custom.css" rel="stylesheet">
 </head>
 <body>
 <div id="wrapper">
@@ -174,12 +174,12 @@
     </div>
     <!-- /#page-wrapper -->
 </div>
-<script src="resources/personalArea/js/jquery.min.js"></script>
-<script src="resources/personalArea/js/bootstrap.min.js"></script>
-<script src="resources/personalArea/js/bootstrap-select.min.js"></script>
-<script src="resources/personalArea/js/fileinput.min.js"></script>
-<script src="resources/personalArea/js/metisMenu.min.js"></script>
-<script src="resources/personalArea/js/ckeditor/ckeditor.js"></script>
-<script src="resources/personalArea/js/custom.js"></script>
+<script src="/resources/personalArea/js/jquery.min.js"></script>
+<script src="/resources/personalArea/js/bootstrap.min.js"></script>
+<script src="/resources/personalArea/js/bootstrap-select.min.js"></script>
+<script src="/resources/personalArea/js/fileinput.min.js"></script>
+<script src="/resources/personalArea/js/metisMenu.min.js"></script>
+<script src="/resources/personalArea/js/ckeditor/ckeditor.js"></script>
+<script src="/resources/personalArea/js/custom.js"></script>
 </body>
 </html>

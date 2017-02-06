@@ -23,14 +23,14 @@ import java.util.Locale;
 import java.util.Set;
 
 @Controller
-/*@RequestMapping("cabinet")*/
+@RequestMapping("/cabinet")
 @SessionAttributes("roles")
 public class UserCabinetController {
 
     @Autowired
     CustomerInfoService customerInfoService;
 
-    @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getCustomerCabinet(HttpSession httpSession) {
 
         System.out.println("cabinet");
@@ -72,7 +72,7 @@ public class UserCabinetController {
     @Autowired
     ProjectService projectService;
 
-    @RequestMapping(value = "/project{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ModelAndView getProjectCases(@PathVariable Long id , HttpSession httpSession) {
 
         System.out.print("ID" + id);
@@ -109,9 +109,22 @@ public class UserCabinetController {
     }
 
 
+    @RequestMapping(value = "/case/{id}", method = RequestMethod.GET)
+    public ModelAndView caseChatController(@PathVariable Long id , HttpSession httpSession) {
+
+        ModelAndView caseChat = new ModelAndView("chat");
+
+        System.out.print("ID" + id);
+        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
 
 
 
+
+
+
+
+        return caseChat;
+    }
 
     //PUT ALL CASES FROM PROJECTS TO ONE ARRAY;
     private void getCasesFromProject(Project project, ArrayList<Case> casesToShow) {
@@ -125,6 +138,5 @@ public class UserCabinetController {
                 casesToShow.add(aCase);
             }
         }
-        System.out.println("STEP5");
     }
 }
