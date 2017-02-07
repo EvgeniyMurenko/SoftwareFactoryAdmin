@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -105,7 +104,7 @@ public class CaseController {
 
         newCase.setStatus(StatusEnum.OPEN.toString());
         System.out.println ("STEP3");
-        Date date = new Date(2017, 02, 06);
+        Date date = new Date();
         newCase.setCreationDate(date);
         newCase.setUserManagerId(22L);
         System.out.println ("STEP4");

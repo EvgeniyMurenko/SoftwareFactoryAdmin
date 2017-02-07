@@ -29,7 +29,6 @@ public class CaseDaoImpl implements CaseDao {
     public Long create(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
         Long id = (Long) session.save(aCase);
-        session.getTransaction().commit();
         return id;
     }
 

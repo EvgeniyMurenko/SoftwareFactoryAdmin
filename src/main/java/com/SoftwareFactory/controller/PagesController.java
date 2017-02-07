@@ -43,7 +43,4 @@ public class PagesController {
         ModelAndView modelAndView = new ModelAndView("whatIsSofac");
         return modelAndView;
     }
-
-
-
 }

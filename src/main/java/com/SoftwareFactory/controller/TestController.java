@@ -27,8 +27,8 @@ public class TestController {
     @Autowired
     CaseService caseService;
 
-/*@Autowired
-MessageService messageService;*/
+    @Autowired
+    MessageService messageService;
 
 
     @Autowired
@@ -152,7 +152,7 @@ MessageService messageService;*/
         Set<Case> cases = new HashSet<>();
 
 
-        Project project = new Project("#$GENERAL" , projectCreationDate , StatusEnum.OPEN.toString() ,customerInfo,  cases ,"test" );
+        Project project = new Project("#$GENERAL", projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
 
         Set<Project> projectsToAdd = new HashSet<>();
         projectsToAdd.add(project);
@@ -166,11 +166,11 @@ MessageService messageService;*/
 
 
     @RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
-    public void createAdmin(){
+    public void createAdmin() {
         String emailSSO = randomeSSO();
         String password = "123";
 
-        if (checkSSo(emailSSO)){
+        if (checkSSo(emailSSO)) {
             User user = new User();
             user.setPassword(password);
             user.setEmail(emailSSO);
@@ -191,11 +191,11 @@ MessageService messageService;*/
         }
     }
 
-    public void createManager(){
+    public void createManager() {
         String emailSSO = randomeSSO();
         String password = "123";
 
-        if (checkSSo(emailSSO)){
+        if (checkSSo(emailSSO)) {
             User user = new User();
             user.setPassword(password);
             user.setEmail(emailSSO);
@@ -228,45 +228,47 @@ MessageService messageService;*/
         }
     }
 
-    private String randomeSSO(){
-        System.out.println("==========random SSO");
+    private String randomeSSO() {
         String str = "qwertyuiopasdfghjklzxcvbnm";
         String strSso = "";
-        for(int i = 0; i < 4; i++){
-            int value = (int) (Math.random()*str.length()-1);
-            strSso+= str.charAt(value);
+        for (int i = 0; i < 4; i++) {
+            int value = (int) (Math.random() * str.length() - 1);
+            strSso += str.charAt(value);
         }
-        return strSso+"@mail.com";
+        return strSso + "@mail.com";
     }
 
-    private boolean checkSSo(String nameSSO){
-        System.out.println("==========check SSO");
-            if(userService.findBySSO(nameSSO)== null){
-                return true;
-            }
+    private boolean checkSSo(String nameSSO) {
+        if (userService.findBySSO(nameSSO) == null) {
+            return true;
+        }
         return false;
     }
 
-    private int getTypeID(String str){
-        System.out.println("==========find TypeID");
-        switch (str){
-            case "ADMIN": return 2;
-            case "CUSTOMER": return 1;
-            case "MANAGER": return 3;
+    private int getTypeID(String str) {
+        switch (str) {
+            case "ADMIN":
+                return 2;
+            case "CUSTOMER":
+                return 1;
+            case "MANAGER":
+                return 3;
         }
         return -1;
     }
 
     @RequestMapping(value = "/q", method = RequestMethod.GET)
-    public void test3(){
+    public void test3() {
         System.out.println("==============test sort by status");
-        List<Case> aCases = caseService.getAllCases();
-        for (Case aCase:aCases){
-            if(aCase.getStatus().equals(StatusEnum.OPEN.toString())){
-                aCases.add(0, aCase);
-            }
+        List<Project> projects = projectService.getAllProjects();
+
+        //Collections.sort(aCases , new ProjectByDateComparator());
+
+        for (int i = 0; i < projects.size(); i++) {
+            System.out.println("========Sort by status===========" + projects.get(i));
         }
-        System.out.println("========Sort by status==========="+aCases);
+        System.out.println("======== FINISH ==========");
+
     }
 }
 

@@ -4,9 +4,7 @@ package com.SoftwareFactory.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -36,7 +34,8 @@ public class Case {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "date_create")
+    @Column(name = "date_create", columnDefinition="DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
     @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -107,9 +106,7 @@ public class Case {
         this.messages = messages;
     }
 
-
-
-    /*@Override
+/*@Override
     public String toString() {
         return "Case{" +
                 "project=" + project +
