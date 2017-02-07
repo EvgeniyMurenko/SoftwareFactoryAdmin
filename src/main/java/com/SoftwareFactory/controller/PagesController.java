@@ -43,4 +43,16 @@ public class PagesController {
         ModelAndView modelAndView = new ModelAndView("whatIsSofac");
         return modelAndView;
     }
+
+    @RequestMapping(value = { "/whatIsCase" }, method = RequestMethod.GET)
+    public ModelAndView whatIsCase() {
+        ModelAndView modelAndView = new ModelAndView("whatIsCase");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = { "/documents" }, method = RequestMethod.GET)
+    public ModelAndView documents() {
+        ModelAndView modelAndView = new ModelAndView("documents");
+        return modelAndView;
+    }
 }

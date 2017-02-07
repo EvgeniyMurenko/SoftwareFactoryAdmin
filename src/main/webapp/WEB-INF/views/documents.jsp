@@ -18,7 +18,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>We Builid SoftwareFactory :: Software Factory</title>
+    <title>Certification &amp; News :: Software Factory</title>
 
     <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
@@ -40,7 +40,7 @@
 <header class="container header">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 logo">
-            <div class="orange-button"><a href="./"><img src="resources/newIndexPage/images/home-button.png" alt="" /></a></div>
+            <div class="orange-button"><a href="./"><img src="resources/newIndexPage/images/home-button.png" alt="" class="img-responsive position-center" /></a></div>
             <a href="./">소프트웨어<span>팩토리</span></a>
             <div class="small-logo">SoFAC : <i>Software Factory</i></div>
         </div>
@@ -51,44 +51,66 @@
 
 <!-- Content -->
 <section class="container content mb40">
-
     <div class="row pt40">
-        <div class="col-md-8">
+        <div class="col-md-12">
 
-            <h3 class="mt40">기술 제공 기업 최초로 서비스 개념을 도입하여<br />
-                스마트 시대에 맞는 특화된 기술과 고객 정보 보안을<br />
-                철저히 보장하는 소프트웨어 개발 및 유지 운영 대행<br />
-                기업 입니다.</h3>
-            <img src="resources/newIndexPage/images/circle-logo.png" alt="" />
-            <h3>We Builid  SoftwareFactory</h3>
+            <h3 class="text-center">Certification &amp; News</h3>
 
-            <div class="row mt20 mb40 clearfix">
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">Korea</h3></div>
-                    <div>㈜굿앤굿 재무설계 법인</div>
-                    <div><a href="http://www.gngasset.co.kr/" target="_blank">www.gngasset.co.kr</a></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="certificate">
+                        <div class="cf-title">
+                            <span class="mb10 text-center">SoFAC 개발 제품 일본에 상표등록</span>
+                        </div>
+                        <div class="text-center"><img src="resources/newIndexPage/images/serf4.jpg" alt="" class="img-responsive position-center"></div>
+                    </div>
                 </div>
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">USA</h3></div>
-                    <div>CHON&HOUGH 세무법인</div>
-                    <div><a href="http://www.chonhoughpc.com/" target="_blank">www.chonhoughpc.com</a></div>
+                <div class="col-md-4">
+                    <div class="certificate">
+                        <div class="cf-title">
+                            <span class="mb10 text-center">특허 제 10-2014-0034487호</span>
+                        </div>
+                        <div class="text-center"><img src="resources/newIndexPage/images/serf3.jpg" alt="" class="img-responsive position-center"></div>
+                    </div>
                 </div>
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">Ukraine</h3></div>
-                    <div>Shevchenko National University</div>
-                    <div><a href="http://www.fit.univ.kiev.ua/" target="_blank">www.fit.univ.kiev.ua</a></div>
-                    <div><small>Factory headquarter Engineer Office<br />(Kiev, ukraine)</small></div>
-                    <div class="mt10"><a data-fancybox="gallery" href="resources/newIndexPage/images/cafe.jpg" class="position-center"><img src="resources/newIndexPage/images/cafe-small.jpg" alt=""></a></div>
+                <div class="col-md-4">
+                    <div class="certificate">
+                        <div class="cf-title">
+                            <span class="mb10 text-center">일본에서 인정한 통신 기술 라이센스</span>
+                        </div>
+                        <div class="text-center"><img src="resources/newIndexPage/images/serf5.jpg" alt="" class="img-responsive position-center"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="row" style="margin-top: 200px;">
-                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/staff.png" class="position-center"><img src="resources/newIndexPage/images/staff-small.png" alt="" class="img-responsive staff" /></a></div>
+            <div class="row mt20">
+                <div class="col-md-4">
+                    <div class="certificate">
+                        <div class="cf-title">
+                            <span class="mb10 text-center">ISO9001 인증</span>
+                        </div>
+                        <div class="text-center"><img src="resources/newIndexPage/images/serf1.jpg" alt="" class="img-responsive position-center"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="certificate">
+                        <div class="cf-title">
+                            <span class="mb10 text-center">고객 감사 편지</span>
+                        </div>
+                        <div class="text-center"><img src="resources/newIndexPage/images/serf2.jpg" alt="" class="img-responsive position-center"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="certificate">
+                        <div class="cf-title">
+                            <span class="mb10 text-center">스마트폰에서 실시간 통신 특허 획득</span>
+                        </div>
+                        <div class="text-center"><img src="resources/newIndexPage/images/serf6.jpg" alt="" class="img-responsive position-center"></div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
-
 </section>
 <!-- #End Content -->
 

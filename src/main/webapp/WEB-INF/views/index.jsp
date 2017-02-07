@@ -26,6 +26,7 @@
     <link href="resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/style.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/responsive.css" rel="stylesheet" />
 
@@ -115,7 +116,7 @@
                 <!-- #End Information -->
 
                 <!-- Video button -->
-                <div class="text-center mb20"><a href="javascript:void(0);" class="btn btn-default"><i class="fa fa-video-camera"></i>SoFAC Video</a></div>
+                <div class="text-center mb20"><a href="javascript:void(0);" class="btn btn-info"><i class="fa fa-video-camera"></i>SoFAC Video</a></div>
                 <!-- #End Video button -->
 
             </div>
@@ -133,7 +134,7 @@
             <div>
                 <h3 class="text-center">CASE 란 무엇인가요 ?</h3>
                 <div class="text-justify">스마트 시대가 되면 대부분의 개발은 국제 표준에 대한 개념을 지속적으로 적용하여야 합니다 <b>CASE개념은 24시간 지속적인 고객 지원이 가능한 고객과의 소통 방법이며 정확한 시간 약속과 지원에 대한 결과를 확인할 수 있는 체계 입니다.</b></div>
-                <div class="mt10 text-justify"> <a href="javascript:void(0);"><i>자세히  알아보기...</i></a></div>
+                <div class="mt10 text-justify"> <a href="<c:url value='/whatIsCase'/>"><i>자세히  알아보기...</i></a></div>
             </div>
         </div>
         <div class="col-md-4 mb20">
@@ -190,27 +191,27 @@
                         <div class="row">
                             <!-- <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div> -->
                             <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
@@ -228,8 +229,8 @@
 <!-- Features -->
 <div class="container features mt30 mb30">
     <div class="text-center mb20">
-        <h3>More awesome features are already in the works</h3>
-        <p>The following features are not yet available in now.do but are planned as part of our effort to make now.do the best productivity tool you will ever use.</p>
+        <h3>소프트웨어 팩토리 자세히 알아 보기</h3>
+        <p>소프트웨어 팩토리는 모든 종류의 소프트웨어를 개발 할 수 있는 다국적 인프라를 구축하고 있습니다.</p>
     </div>
 
     <!-- Features list -->
@@ -239,7 +240,7 @@
                 <div class="ft-icon"><i class="fa fa-external-link"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">SoFAC의 유지보수 서비스 개념</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>CASE개념 자세히  알아보기...</i></a></div>
+                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -248,7 +249,7 @@
                 <div class="ft-icon"><i class="fa fa-star"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">GXM 개발시스템의 특징</div>
-                    <div class="ft-body">소프트웨어팩토리는 GAX개발 시스템에 의해서 병렬화 대량화 작업이 가능한 전문 소프트웨어 개발 대행 기업 입니다. <a href="<c:url value='/gxm'/>"><i>CASE개념 자세히  알아보기...</i></a></div>
+                    <div class="ft-body">소프트웨어팩토리는 GAX개발 시스템에 의해서 병렬화 대량화 작업이 가능한 전문 소프트웨어 개발 대행 기업 입니다. <a href="<c:url value='/gxm'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -259,8 +260,8 @@
             <article class="feature clearfix">
                 <div class="ft-icon"><i class="fa fa-file-o"></i></div>
                 <div class="ft-content">
-                    <div class="ft-title">인증 및 보도자료</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>CASE개념 자세히  알아보기...</i></a></div>
+                    <div class="ft-title">인증자료</div>
+                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="<c:url value='/documents'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -269,7 +270,7 @@
                 <div class="ft-icon"><i class="fa fa-terminal"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">스타트업과 함께 하는 SoFAC</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>CASE개념 자세히  알아보기...</i></a></div>
+                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -281,7 +282,7 @@
                 <div class="ft-icon"><i class="fa fa-mobile"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">지점 및 협력업체</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>CASE개념 자세히  알아보기...</i></a></div>
+                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -290,7 +291,7 @@
                 <div class="ft-icon"><i class="fa fa-flask"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">SoFAC 정책</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>CASE개념 자세히  알아보기...</i></a></div>
+                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -319,34 +320,53 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-
             <c:url var="loginUrl" value="/login"/>
             <!-- Authorization modal title -->
             <form action="${loginUrl}" id="authorizationForm" method="post" class="form-horizontal">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4><i class="fa fa-user-o" aria-hidden="true"></i> 권한 부여</h4>
+                    <h4><i class="fa fa-user-o" aria-hidden="true"></i> 고객님 CASE 로그인에 오신 것을 환영합니다.</h4>
+                    <div class="ml30">발급 받은 고객번호와 패스워드를 입력해 주세요</div>
                 </div>
 
-                <!-- Authorization modal -->
+                <!-- Authorization modal content -->
                 <div class="modal-body">
-                    <div class="form-group">
-                        <div class="col-lg-12 text-left">
-                            <input type="email" name="ssoId" class="form-control form-block" placeholder="이메일" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12 text-left">
-                            <input type="password" name="password" class="form-control form-block" placeholder="암호" required />
+                    <div class="row">
+                        <div class="col-md-6"><img src="resources/newIndexPage/images/hello-womam.jpg" class="img-responsive" alt=""></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-lg-12 text-left">
+                                    <input type="email" name="ssoId" class="form-control form-block" placeholder="고객 ID" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12 text-left">
+                                    <input type="password" name="password" class="form-control form-block" placeholder="패스워드" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-12 text-left">
+                                    <button type="submit" class="btn btn-primary">로그인</button>
+                                </div>
+                            </div>
+
+                            <div class="mt10 mb10 forgot-password"><a href="javascript:void(0);">패스워드를 잊어 버리셨나요 ?</a></div>
+
+                            <p class="mt20"><small><i>고객ID는 SoFAC 과 지속적인 대화를 원하실 경우<br />
+                                임시고객ID를 발급하여 드립니다.<br />
+                                발급요청은 초기 화면에서 문의하기를 통해서<br />
+                                접수하실 수 있습니다.<br />
+                                일회성 질문이나 견적문의는 고객ID를 발급하지<br />
+                                않습니다.</i></small>
+                            </p>
                         </div>
                     </div>
                 </div>
-
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <!-- Authorization modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                    <button type="submit" class="btn btn-primary">들어가다</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                 </div>
             </form>
         </div>
@@ -365,7 +385,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4><i class="fa fa-address-card-o" aria-hidden="true"></i> 문의 해 주세요...</h4>
                     <b>견적요청 및 문의사항을 남겨 주시면 1시간 이내에 답변을 메일로 보내드립니다.</b>
-                    <div class="mt10"><small><i>이 페이지는 단 한번만 답변을 받으실 수 있습니다.<br /> 지속적인 대화가 필요할 경우 아이디를 발급 받으신 후 CASE를 통해서<br /> 지속적으로 대화를 하실 수 있습니다.</i></small></div>
+                    <div class="mt10 es-form-title">
+                        <p><i>이 페이지는 단 한번만의 답변을 받으실 수 있습니다.<br />견적 또는 어떠한 질문도 하실 수 있으며 한번의 질문에 한번의 답변만 받으실 수 있습니다.</i></p>
+                        <p><i>따라서 협상, 업무협의등 지속성이 필요하실 경우 답변으로 받으신 이메일에 기재 되어 있는 방법대로 요청하시면 고객 ID를 발급하여 드립니다.</i></p>
+                        <p><i>고객 아이디를 발급 받으신 분은 어떤 문제에 대해서도 CASE로그인을 통하여 언제든지 대화를 이어 가실 수 있습니다.</i></p>
+                    </div>
                 </div>
 
                 <!-- Estimate modal -->
@@ -402,27 +426,26 @@
                                 <input id="question" name="request[]" class="styled" type="checkbox">
                                 <label for="question">일반문의</label>
                             </div>
-
-                            <div class="form-group mt20">
-                                <div class="col-lg-12 text-left">
-                                    <input type="password" name="password" class="form-control form-block" placeholder="임시패스워드 (내용확인용)" required />
-                                </div>
-                            </div>
                         </div>
                         <!-- message -->
                         <div class="col-md-8">
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
-                                    <textarea class="form-control form-block" name="message" rows="12" placeholder="문의사항을 적어 주세요" required></textarea>
+                                    <textarea class="form-control form-block" name="message" rows="9" placeholder="문의사항을 적어 주세요" required></textarea>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt20">
+                        <div class="col-lg-12 text-left">
+                            <input id="input-repl-2" name="inputrepl2[]" type="file" class="file-loading" accept="image/*" multiple>
                         </div>
                     </div>
                 </div>
 
                 <!-- Estimate modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                     <button type="submit" class="btn btn-primary">보내기</button>
                 </div>
             </form>
@@ -440,6 +463,8 @@
 <script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
+<script src="resources/newIndexPage/js/fileinput.min.js"></script>
+<script src="resources/newIndexPage/js/sortable.min.js"></script>
 <script src="resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="resources/newIndexPage/js/main.js"></script>
 </body>

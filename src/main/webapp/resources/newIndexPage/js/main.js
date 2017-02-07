@@ -27,6 +27,14 @@ jQuery(document).ready(function($) {
         interval: false,
     });
 
+    // upload file
+    $("#input-repl-2").fileinput({
+        uploadUrl: "/file-upload-batch/2",
+        autoReplace: true,
+        maxFileCount: 5,
+        //allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+    });
+
     // Authorization from validation
     $('#authorizationForm').formValidation({
         framework: 'bootstrap',

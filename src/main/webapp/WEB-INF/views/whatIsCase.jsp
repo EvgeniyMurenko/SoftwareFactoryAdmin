@@ -18,7 +18,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>We Builid SoftwareFactory :: Software Factory</title>
+    <title>What is the “CASE” ? :: Software Factory</title>
 
     <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
@@ -51,44 +51,22 @@
 
 <!-- Content -->
 <section class="container content mb40">
-
     <div class="row pt40">
         <div class="col-md-8">
 
-            <h3 class="mt40">기술 제공 기업 최초로 서비스 개념을 도입하여<br />
-                스마트 시대에 맞는 특화된 기술과 고객 정보 보안을<br />
-                철저히 보장하는 소프트웨어 개발 및 유지 운영 대행<br />
-                기업 입니다.</h3>
-            <img src="resources/newIndexPage/images/circle-logo.png" alt="" />
-            <h3>We Builid  SoftwareFactory</h3>
+            <h3>What is the “CASE” ?</h3>
+            <p>소프트웨어 팩토리는 원가 절감 및 고객과의 소통에서 가장 효율적인 방법으로 CASE 라는 개념을 통해서 고객과 소통 합니다.</p>
+            <p><b>고객은 CASE를 통해서 견적, 작업내용, 수정사항 대응, 비상조치 등 모든 내용을 언제든지 CASE 화면을 열어서 질문하시면 됩니다.</b></p>
+            <p>접수된 CASE는 실시간으로 자동 번역되어 관련부서로 전송되며 요청 내용에 따라 어떤 즉시답변 또는 답변 시간 약속 이메일이 전송되며 정해진 시간에 정확히 답변 드리도록 하고 있습니다.</p>
+            <p>또한 CASE는 고객이 만족할때 까지 지속적으로 대화가 진행되며 업무가 완료되면 고객이 CASE를 닫을 수 있는 권한을 가지고 있습니다.</p>
+            <p>소프트웨어 팩토리는 이러한 개념으로 고객의 요청사항에 최대한 충실히 대응하는 온라인 소통 시스템 입니다.</p>
+            <p><b>만약 온라인 소통을 원치 않으실 경우 소프트웨어팩토리의 지점을 통하여 대면 상담도 가능합니다.</b></p>
 
-            <div class="row mt20 mb40 clearfix">
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">Korea</h3></div>
-                    <div>㈜굿앤굿 재무설계 법인</div>
-                    <div><a href="http://www.gngasset.co.kr/" target="_blank">www.gngasset.co.kr</a></div>
-                </div>
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">USA</h3></div>
-                    <div>CHON&HOUGH 세무법인</div>
-                    <div><a href="http://www.chonhoughpc.com/" target="_blank">www.chonhoughpc.com</a></div>
-                </div>
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">Ukraine</h3></div>
-                    <div>Shevchenko National University</div>
-                    <div><a href="http://www.fit.univ.kiev.ua/" target="_blank">www.fit.univ.kiev.ua</a></div>
-                    <div><small>Factory headquarter Engineer Office<br />(Kiev, ukraine)</small></div>
-                    <div class="mt10"><a data-fancybox="gallery" href="resources/newIndexPage/images/cafe.jpg" class="position-center"><img src="resources/newIndexPage/images/cafe-small.jpg" alt=""></a></div>
-                </div>
+            <div class="row mt40 mb30 clearfix">
+                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/sfema2.png"><img src="resources/newIndexPage/images/sfema2.png" alt="" class="img-responsive" /></a></div>
             </div>
-
-            <div class="row" style="margin-top: 200px;">
-                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/staff.png" class="position-center"><img src="resources/newIndexPage/images/staff-small.png" alt="" class="img-responsive staff" /></a></div>
-            </div>
-
         </div>
     </div>
-
 </section>
 <!-- #End Content -->
 

@@ -72,15 +72,16 @@
 
     </div>
     <!-- /.row -->
+</div>
 
-    <script src="resources/newIndexPage/js/jquery.min.js"></script>
-    <script src="resources/newIndexPage/js/jquery-ui.min.js"></script>
-    <script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
-    <script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
-    <script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
-    <script src="resources/newIndexPage/js/bootstrap.min.js"></script>
-    <script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
-    <script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
-    <script src="resources/newIndexPage/js/main.js"></script>
+<script src="resources/newIndexPage/js/jquery.min.js"></script>
+<script src="resources/newIndexPage/js/jquery-ui.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
+<script src="resources/newIndexPage/js/main.js"></script>
 </body>
 </html>
