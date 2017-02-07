@@ -109,17 +109,21 @@
 
                     </ul>
 
-                    <div class="clearfix chat-message-section">
-                        <div><textarea id="editor" name="message" rows="3"></textarea></div>
-                        <div class="margin-top">
-                            <div class="row">
-                                <div class="col-md-6"><input id="chat-upload" name="file[]" multiple type="file"></div>
-                                <div class="col-md-6 text-right"><button class="btn btn-success" name="send">Send message</button></div>
+                    <% Long caseId =  (Long) request.getAttribute("caseId"); %>
+                    <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/print_message?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                        <div class="clearfix chat-message-section">
+                            <div><textarea id="editor" type="text" name="message" rows="3"></textarea></div>
+                            <div class="margin-top">
+                                <div class="row">
+                                    <div class="col-md-6"><input id="chat-upload" name="file" multiple type="file"></div>
+                                    <div class="col-md-6 text-right"><button class="btn btn-success"  type="submit" name="send">Send message</button></div>
+                                </div>
                             </div>
-
-
                         </div>
-                    </div>
+                    </form>
                 </div>
 
 

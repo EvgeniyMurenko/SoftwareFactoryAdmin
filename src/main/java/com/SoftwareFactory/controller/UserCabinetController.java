@@ -3,19 +3,16 @@ package com.SoftwareFactory.controller;
 
 
 import com.SoftwareFactory.comparator.MessageByDateComparator;
-import com.SoftwareFactory.model.Case;
-import com.SoftwareFactory.model.CustomerInfo;
-import com.SoftwareFactory.model.Message;
-import com.SoftwareFactory.model.Project;
+import com.SoftwareFactory.constant.MessageEnum;
+import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.CaseService;
 import com.SoftwareFactory.service.CustomerInfoService;
 import com.SoftwareFactory.service.ProjectService;
+import com.SoftwareFactory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -122,10 +119,47 @@ public class UserCabinetController {
 
         //PUT OBJECTS TO MODEL
         caseChat.addObject("messagesSorted", messagesSorted);
-
+        caseChat.addObject("caseId", id);
         return caseChat;
     }
 
+    @Autowired
+    UserService userService;
+
+
+
+    @RequestMapping (value = "/case/{id}/print_message", method = RequestMethod.POST)
+    public ModelAndView casePrintMessageController( @PathVariable Long id, @RequestParam("message") String messageText,
+                                                   /*@RequestParam("file") MultipartFile  file, */HttpSession httpSession){
+       /* System.out.print("CONTROLLER" + name);*/
+
+        // GET
+        Case aCase = caseService.getCaseById(id);
+        int userId = (Integer) httpSession.getAttribute("UserId");
+        User currentUser = userService.findById(userId);
+
+        // CREATE MESSAGE
+        Message message = new Message();
+        message.setaCase(aCase);
+
+        message.setUser(currentUser);
+        message.setMessageTime(new Date());
+        message.setMessageText(messageText);
+        message.setIsRead(MessageEnum.READ.toString());
+
+
+        // SAVE MESSAGE TO CASE
+        Set <Message> messages = aCase.getMessages();
+        messages.add(message);
+        aCase.setMessages(messages);
+        caseService.updateCase(aCase);
+
+
+        // REDIRECT TO CHAT
+        String redirectLink = "redirect:/cabinet/case/" + id;
+
+        return new ModelAndView(redirectLink);
+    }
 
     //PUT ALL CASES FROM PROJECTS TO ONE ARRAY;
     private void getCasesFromProject(Project project, ArrayList<Case> casesToShow) {
