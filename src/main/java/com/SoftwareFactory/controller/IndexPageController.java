@@ -42,18 +42,13 @@ public class IndexPageController {
     @Autowired
     EstimateService estimateService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView loginPage(Locale locale, Model model  ) {
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public ModelAndView loginPage(Model model ) {
 
 
-
-	/*	// add parametrized message from controller
-        String welcome = messageSource.getMessage("welcome.message", new Object[]{"John Doe"}, locale);
-		model.addAttribute("message", welcome);*/
-
-        // obtain locale from LocaleContextHolder
-        Locale currentLocale = LocaleContextHolder.getLocale();
-        model.addAttribute("locale", currentLocale);
+                        // LOCALE
+      /*  Locale currentLocale = LocaleContextHolder.getLocale();
+        model.addAttribute("locale", currentLocale);*/
 
 
         if (isCurrentAuthenticationAnonymous()) {

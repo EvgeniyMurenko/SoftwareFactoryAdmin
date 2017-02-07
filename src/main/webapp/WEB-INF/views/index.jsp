@@ -319,8 +319,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
+
+            <c:url var="loginUrl" value="/login"/>
             <!-- Authorization modal title -->
-            <form id="authorizationForm" method="post" class="form-horizontal">
+            <form action="${loginUrl}" id="authorizationForm" method="post" class="form-horizontal">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4><i class="fa fa-user-o" aria-hidden="true"></i> 권한 부여</h4>
@@ -330,7 +332,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="col-lg-12 text-left">
-                            <input type="email" name="email" class="form-control form-block" placeholder="이메일" required />
+                            <input type="email" name="ssoId" class="form-control form-block" placeholder="이메일" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -340,6 +342,7 @@
                     </div>
                 </div>
 
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <!-- Authorization modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>

@@ -79,7 +79,7 @@ public class UserCabinetController {
 
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
 
-        
+
         System.out.print("Project id " + id + "userId " + userId);
 
 
@@ -95,20 +95,22 @@ public class UserCabinetController {
         Project project = projectService.getProjectById(id);
         System.out.println("STEP4");
         getCasesFromProject(project, casesToShow);
-        System.out.println("STEP6");
 
 
         //PUT OBJECTS TO MODEL
         customerCabinetShowOneProject.addObject("projects", projectsToShow);
         customerCabinetShowOneProject.addObject("cases", casesToShow);
 
+
         System.out.print("READY");
 
         return customerCabinetShowOneProject;
     }
 
+
     @Autowired
     CaseService caseService;
+
 
     @RequestMapping(value = "/case/{id}", method = RequestMethod.GET)
     public ModelAndView caseChatController(@PathVariable Long id, HttpSession httpSession) {
