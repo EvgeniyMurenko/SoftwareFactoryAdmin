@@ -219,7 +219,7 @@ public class AppController {
 			persistentTokenBasedRememberMeServices.logout(request, response, auth);
 			SecurityContextHolder.getContext().setAuthentication(null);
 		}
-		return "redirect:/login?logout";
+		return "redirect:/main?logout";
 	}
 
 	/**

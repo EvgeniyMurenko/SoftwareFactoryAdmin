@@ -2,7 +2,7 @@
 package com.SoftwareFactory.controller;
 
 
-import com.SoftwareFactory.comparator.MessageComparator;
+import com.SoftwareFactory.comparator.MessageByDateComparator;
 import com.SoftwareFactory.model.Case;
 import com.SoftwareFactory.model.CustomerInfo;
 import com.SoftwareFactory.model.Message;
@@ -74,28 +74,20 @@ public class UserCabinetController {
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ModelAndView getProjectCases(@PathVariable Long id, HttpSession httpSession) {
 
-        System.out.print("ID" + id);
-
-
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-
-
         System.out.print("Project id " + id + "userId " + userId);
 
-
+        // GET CASES FROM PROJECT BY ID
         ModelAndView customerCabinetShowOneProject = new ModelAndView("personalArea");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
-        System.out.println("STEP1");
+
         Set<Project> projectsToShow = customerInfo.getProjects();
-        System.out.println("STEP2");
+
         ArrayList<Case> casesToShow = new ArrayList<>();
-        System.out.println("STEP3");
 
         Project project = projectService.getProjectById(id);
-        System.out.println("STEP4");
         getCasesFromProject(project, casesToShow);
-
 
         //PUT OBJECTS TO MODEL
         customerCabinetShowOneProject.addObject("projects", projectsToShow);
@@ -117,28 +109,18 @@ public class UserCabinetController {
 
         ModelAndView caseChat = new ModelAndView("chat");
 
-        System.out.print("ID" + id);
-        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-
+        // GET MESSAGE FROM CASE BY ID
         Case aCase = caseService.getCaseById(id);
         Set<Message> messagesUnsorted = aCase.getMessages();
         List<Message> messagesSorted = new ArrayList<>(messagesUnsorted);
 
-        MessageComparator messageComparator = new MessageComparator();
+        MessageByDateComparator messageByDateComparator = new MessageByDateComparator();
 
 
-        for (Message m : messagesSorted){
-            System.out.println(m.getMessageTime().toString() + m.getMessageTime() );
-        }
+        // SORT BY DATE
+        Collections.sort(messagesSorted, messageByDateComparator);
 
-        System.out.println("------------------------");
-        Collections.sort(messagesSorted, messageComparator);
-
-        for (Message m : messagesSorted){
-            System.out.println(m.getMessageTime().toString());
-        }
-
-
+        //PUT OBJECTS TO MODEL
         caseChat.addObject("messagesSorted", messagesSorted);
 
         return caseChat;
