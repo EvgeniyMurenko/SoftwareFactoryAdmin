@@ -256,5 +256,17 @@ MessageService messageService;*/
         }
         return -1;
     }
+
+    @RequestMapping(value = "/q", method = RequestMethod.GET)
+    public void test3(){
+        System.out.println("==============test sort by status");
+        List<Case> aCases = caseService.getAllCases();
+        for (Case aCase:aCases){
+            if(aCase.getStatus().equals(StatusEnum.OPEN.toString())){
+                aCases.add(0, aCase);
+            }
+        }
+        System.out.println("========Sort by status==========="+aCases);
+    }
 }
 

@@ -1,5 +1,6 @@
 package com.SoftwareFactory.service;
 
+import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.dao.CaseDao;
 import com.SoftwareFactory.dao.CaseDaoImpl;
 import com.SoftwareFactory.model.Case;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -51,5 +54,16 @@ public class CaseServiceImpl implements CaseService {
         caseDao.delete(aCase);
     }
 
+    @Transactional(readOnly=true)
+    public List<Case> sortByStatusDate() {
+        List<Case> aCases = caseDao.findAll();
+        int msgMax = -1;
+        for (Case aCase:aCases){
+            if(aCase.getStatus().equals(StatusEnum.OPEN.toString())){
+                aCases.add(0, aCase);
+            }
+        }
 
+        return aCases;
+    }
 }

@@ -4,7 +4,9 @@ package com.SoftwareFactory.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.Set;
 
 @Entity
@@ -104,6 +106,8 @@ public class Case {
         this.creationDate = creationDate;
         this.messages = messages;
     }
+
+
 
     /*@Override
     public String toString() {

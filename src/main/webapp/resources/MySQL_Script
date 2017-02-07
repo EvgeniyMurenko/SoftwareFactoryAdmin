@@ -109,22 +109,22 @@ VALUES ('customer2@mail.com',123, 'customer2@mail.com');
 INSERT INTO `app_user`(sso_id, password, email)
 VALUES ('customer3@mail.com',123, 'customer3@mail.com');
 
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
   value(4,1);
 
-  INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
 	value(5,1);
 
-   INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+   INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
   value(6,1);
 
-    INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+    INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
   value(2,3);
 
-  INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
   value(3,1);
 
-  INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+  INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
     value(1,2);
 
 INSERT INTO `s_customer_info`(user_id, first_name, last_name, company, avatar)
