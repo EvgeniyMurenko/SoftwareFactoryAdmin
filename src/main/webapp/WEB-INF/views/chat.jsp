@@ -2,7 +2,8 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <%@ page import="com.SoftwareFactory.model.Message" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.ArrayList" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.SoftwareFactory.model.CustomerInfo" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -48,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="resources/personalArea/control/index.html">SoFAC CRM</a>
+            <a class="navbar-brand" href="<c:url value='/cabinet/'/>">SoFAC CRM</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-nav navbar-right">
@@ -98,7 +99,9 @@
                             <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <strong class="primary-font">John Doe</strong>
+
+                                    <% CustomerInfo customerInfo = message.getaCase().getProject().getCustomerInfo();%>
+                                    <strong class="primary-font"> <% out.print(customerInfo.getFirstName() + " " + customerInfo.getLastName());    %></strong>
                                     <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
                                 </div>
                                 <p> <% out.print(message.getMessageText()); %></p>
