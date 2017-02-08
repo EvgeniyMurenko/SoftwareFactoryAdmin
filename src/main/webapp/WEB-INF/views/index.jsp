@@ -190,8 +190,8 @@
                     <div class="item active">
                         <div class="row">
                             <!-- <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div> -->
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.jsp" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                             <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                             <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
