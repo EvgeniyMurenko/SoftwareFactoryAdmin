@@ -113,7 +113,6 @@ public class UserCabinetController {
 
         MessageByDateComparator messageByDateComparator = new MessageByDateComparator();
 
-
         // SORT BY DATE
         Collections.sort(messagesSorted, messageByDateComparator);
 
@@ -131,7 +130,6 @@ public class UserCabinetController {
     @RequestMapping (value = "/case/{id}/print_message", method = RequestMethod.POST)
     public ModelAndView casePrintMessageController( @PathVariable Long id, @RequestParam("message") String messageText,
                                                    /*@RequestParam("file") MultipartFile  file, */HttpSession httpSession){
-       /* System.out.print("CONTROLLER" + name);*/
 
         // GET
         Case aCase = caseService.getCaseById(id);
