@@ -103,7 +103,7 @@ a { color: #03a9f4; cursor: pointer !important; }
 .file-drop-zone-title { padding: 10px !important; max-height: 100px !important; }
 .thumbnail:hover, .thumbnail:focus, .thumbnail:active  { border-color: #03a9f4; }
 .forgot-password a { font-size: 8pt; color: #999; }
-.other-font { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; }
+.other-font { font-family: 'WebNanum', Arial, Tahoma, Verdana, sans-serif; }
 .certificate { background-color: #f9f9f9; padding: 20px; }
 .certificate span { display: block; font-size: 11pt; }
 .cf-title { border-bottom: 1px solid #eee; margin-bottom: 20px; }
