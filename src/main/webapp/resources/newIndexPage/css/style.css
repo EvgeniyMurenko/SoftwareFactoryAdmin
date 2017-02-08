@@ -100,7 +100,7 @@ a { color: #03a9f4; cursor: pointer !important; }
     -moz-box-shadow: 0px 0px 10px 7px rgba(238,238,238,1);
     box-shadow: 0px 0px 10px 7px rgba(238,238,238,1); }
 .modal-header h4 { color: #03a9f4; }
-.file-drop-zone-title { padding: 10px !important; }
+.file-drop-zone-title { padding: 10px !important; max-height: 100px !important; }
 .thumbnail:hover, .thumbnail:focus, .thumbnail:active  { border-color: #03a9f4; }
 .forgot-password a { font-size: 8pt; color: #999; }
 .other-font { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; }
