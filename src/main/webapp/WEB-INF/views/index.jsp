@@ -1,5 +1,8 @@
 <%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+<%@ page import="com.SoftwareFactory.model.Estimate" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -76,35 +79,21 @@
 
                 <!-- Estimation list case -->
                 <section class="estimation-list">
-                    <div class="clearfix estimate">
-                        <span class="check-on"></span>
-                        <a href="javascript:void(0);"><span class="cb-title">청산유수</span></a> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
-                    </div>
+                <%
+                    ArrayList<Estimate> estimates =  (ArrayList<Estimate>)request.getAttribute("estimates");
+                    Iterator<Estimate> estimateIterator = estimates.iterator();
+                    while (estimateIterator.hasNext()) {
+                        Estimate estimate = estimateIterator.next();
+                %>
+                    <% if (estimate != null){  %>
 
-                    <div class="clearfix estimate">
-                        <span class="check-off"></span>
-                        <a href="javascript:void(0);"><span class="cb-title">박도혁</span></a> : 작업 방법에 대해서 <span class="cb-time">17.01.27 12:26:04</span>
-                    </div>
+                        <div class="clearfix estimate">
+                            <span class=<%if(estimate.isRespond()) out.print("check-on"); else out.print("check-off");%>></span>
+                            <a href="javascript:void(0);"><span class="cb-title"><% out.print(estimate.getName());   %></span></a> : <%if(estimate.isPriceRequest()) out.print("견적문의 "); if(estimate.isQuestionRequest()) out.print(" 일반문의");%><span class="cb-time"><% out.print(estimate.getDateRequest().toString().substring(0 , 19));  %></span>
+                        </div>
 
-                    <div class="clearfix estimate">
-                        <span class="check-on"></span>
-                        <a href="javascript:void(0);"><span class="cb-title">청산유수</span></a> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
-                    </div>
-
-                    <div class="clearfix estimate">
-                        <span class="check-off"></span>
-                        <a href="javascript:void(0);"><span class="cb-title">박도혁</span></a> : 작업 방법에 대해서 <span class="cb-time">17.01.27 12:26:04</span>
-                    </div>
-
-                    <div class="clearfix estimate">
-                        <span class="check-on"></span>
-                        <a href="javascript:void(0);"><span class="cb-title">청산유수</span></a> : 견적 문의 드립니다 <span class="cb-time">17.01.25 11:28:00</span>
-                    </div>
-
-                    <div class="clearfix estimate">
-                        <span class="check-off"></span>
-                        <a href="javascript:void(0);"><span class="cb-title">박도혁</span></a> : 작업 방법에 대해서 <span class="cb-time">17.01.27 12:26:04</span>
-                    </div>
+                    <%}%>
+                <%}%>
                 </section>
                 <!-- #End Estimation list case -->
 

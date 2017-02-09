@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by Alex on 1/12/2017.
@@ -57,7 +59,7 @@ public class IndexPageController {
             Collections.sort(estimateUnsorted, new EstimateByDateComparator());
 
             ArrayList<Estimate> estimatesSorted = getSixEstimatesFromArray(estimateUnsorted);
-            mainPage.addObject("Estimates" ,estimatesSorted );
+            mainPage.addObject("estimates" ,estimatesSorted );
             return mainPage;
         } else {
             ModelAndView modelAndView = new ModelAndView("redirect:/list");
@@ -75,9 +77,13 @@ public class IndexPageController {
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
 
 
-        System.out.println("ESTIMATE");
+
+        generateEstimateId(new Date() , 13231);
+       /* System.out.println("ESTIMATE");
         System.out.println("name " + recipientName + " email " + recipientMail + " text "
                 + recipientRequestText + "phone" + phone);
+
+        Date currentDate = new Date();
 
 
         Estimate estimate = new Estimate();
@@ -86,11 +92,13 @@ public class IndexPageController {
         estimate.setPhone(phone);
         estimate.setPriceRequest(priceRequest);
         estimate.setQuestionRequest(questionRequest);
-        estimate.setDateRequest(new Date());
+        estimate.setDateRequest(currentDate);
         estimate.setRespond(false);
 
-        estimateService.addNewEstimate(estimate);
 
+
+        estimateService.addNewEstimate(estimate);
+*/
 /*
 
         mailService.sendEmail(recipientMail, recipientName);
@@ -128,6 +136,41 @@ public class IndexPageController {
             }
         }
         return estimateToShow;
+    }
+
+    private String generateEstimateId(Date currentDate , long id){
+
+
+        java.sql.Date date = new java.sql.Date(currentDate.getTime());
+
+
+        String dateWithoutHours = date.toString();
+        dateWithoutHours = dateWithoutHours.substring(2 ,10);
+        dateWithoutHours = dateWithoutHours.replaceAll("-","");
+
+
+        System.out.println("DATE" + dateWithoutHours);
+
+
+        String stringId = Long.toString(id);
+
+
+        String generatedEstimateId = "";
+        if (stringId.length() <= 4){
+            System.out.println("o");
+            String zero = "";
+            for (int i = 0; i < 4-stringId.length(); i++){
+                zero = zero + "0";
+                System.out.println("1");
+            }
+            generatedEstimateId = dateWithoutHours + zero + stringId;
+        } else {
+            generatedEstimateId = dateWithoutHours + stringId;
+        }
+
+
+        System.out.println(generatedEstimateId);
+        return generatedEstimateId;
     }
 
 }

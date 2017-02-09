@@ -47,6 +47,10 @@ public class Estimate {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRequest;
 
+
+    @Column(name ="estimate_generated_id")
+    private String estimateGeneratedId;
+
     public Long getId() {
         return id;
     }
@@ -111,7 +115,15 @@ public class Estimate {
         this.dateRequest = dateRequest;
     }
 
-    public Estimate(String name, String email, boolean isRespond, boolean isPriceRequest, boolean isQuestionRequest, String phone, Date dateRequest) {
+    public String getEstimateGeneratedId() {
+        return estimateGeneratedId;
+    }
+
+    public void setEstimateGeneratedId(String estimateGeneratedId) {
+        this.estimateGeneratedId = estimateGeneratedId;
+    }
+
+    public Estimate(String name, String email, boolean isRespond, boolean isPriceRequest, boolean isQuestionRequest, String phone, Date dateRequest, String estimateGeneratedId) {
         this.name = name;
         this.email = email;
         this.isRespond = isRespond;
@@ -119,6 +131,7 @@ public class Estimate {
         this.isQuestionRequest = isQuestionRequest;
         this.phone = phone;
         this.dateRequest = dateRequest;
+        this.estimateGeneratedId = estimateGeneratedId;
     }
 
     public Estimate() {
