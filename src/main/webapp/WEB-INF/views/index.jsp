@@ -37,6 +37,18 @@
 </head>
 <body>
 
+<!-- Для Сашеньки!
+<script>
+    jQuery(document).ready(function($) {
+        swal(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+        );
+    });
+</script>
+-->
+
 <!-- Header -->
 <header class="container header">
     <div class="row">
@@ -190,10 +202,10 @@
                     <div class="item active">
                         <div class="row">
                             <!-- <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div> -->
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.jsp" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio1-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio1-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio2-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio2-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio3-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio3-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio4-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio4-small.jpg" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 

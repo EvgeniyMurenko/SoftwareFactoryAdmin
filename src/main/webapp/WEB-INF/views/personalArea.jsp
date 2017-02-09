@@ -1,11 +1,11 @@
-<%@ page import="java.util.Locale" %>
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
-<%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.Project" %>
-<%@ page import="java.util.Set" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.SoftwareFactory.model.Case" %>
-<%@ page import="java.net.URL" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.SoftwareFactory.model.Message" %>
+<%@ page import="com.SoftwareFactory.constant.MessageEnum" %>
+<%@ page import="com.SoftwareFactory.comparator.MessageByDateComparator" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -95,16 +95,25 @@
 
                         <%
 
-                            Set<Project> projectSet =  (Set<Project>)request.getAttribute("projects");
+                            List<Project> projectSet =  (List<Project>)request.getAttribute("projects");
                             Project generalDiscussionProject;
                             Iterator<Project> itr = projectSet.iterator();
-                            while (itr.hasNext()) {
-                                Project project = itr.next();
+                            for(Project project : projectSet){
                                 if (!project.getProjectName().equals("#$GENERAL")){
+                                    int countNewMessage = 0;
+                                    for(Case aCase : project.getCases()){
+                                        for(Message msg : aCase.getMessages()){
+                                            if(msg.getIsRead().equals(MessageEnum.NOTREAD.toString())){
+
+                                                //if(msg.getUser().getId().equals()) =====> must check current user
+                                                countNewMessage++;
+                                            }
+                                        }
+                                    }
                         %>
 
                         <li class="collection-item avatar email-unread">
-                            <i class="icon_4">A</i>
+                            <i class="icon_4"><%out.println(project.getProjectName().charAt(0));%></i>
                             <div class="avatar_left">
 
                                 <%  String projectId= Long.toString(project.getId()); %>
@@ -113,7 +122,7 @@
                                 <a href="/cabinet/project/<%out.print(projectId); %>" ><span class="email-title"><% out.println(project.getProjectName()); %></span></a>
                                 <p class="truncate grey-text ultra-small"> <%   out.println(project.getTechnologyType());  %></p>
                             </div>
-                            <a href="#!" class="secondary-content"><span class="new badge blue"> <% out.println(project.getCases().size()); %> </span></a>
+                            <a href="#!" class="secondary-content"><span class="new badge blue"> <% out.println(countNewMessage); %> </span></a>
                             <div class="clearfix"></div>
                         </li>
 
@@ -182,7 +191,12 @@
                                 <td class="text-center"><a href="javascript:void(0);"> <% out.print(aCase.getProject().getProjectName()); %> </a></td>
                                 <td class="text-center"><%  out.print(aCase.getStatus()); %></td>
                                 <td class="hidden-xs text-center"> <%  out.print(aCase.getCreationDate().toString());  %></td>
-                                <td class="hidden-xs text-center">10 hours ago</td>
+                                <td class="hidden-xs text-center">
+                                    <% List<Message> messages = new ArrayList<>(aCase.getMessages());
+                                        Message msg = messages.get(0); %>
+
+                                    <time class="timeago" datetime="<%  out.print(msg.getMessageTime()); %>"></time>
+                                </td>
                                 <td class="hidden-xs text-center"><%  out.print(aCase.getMessages().size());   %></td>
                             </tr>
 
@@ -202,6 +216,8 @@
 </div>
 
 <script src="/resources/personalArea/js/jquery.min.js"></script>
+<script src="/resources/personalArea/js/jquery.timeago.js"></script>
+<%--<script src="/resources/personalArea/js/jquery.timeago.ko.js"></script>--%>
 <script src="/resources/personalArea/js/bootstrap.min.js"></script>
 <script src="/resources/personalArea/js/bootstrap-select.min.js"></script>
 <script src="/resources/personalArea/js/fileinput.min.js"></script>
@@ -209,5 +225,8 @@
 <script src="/resources/personalArea/js/ckeditor/ckeditor.js"></script>
 <script src="/resources/personalArea/js/pagination.min.js"></script>
 <script src="/resources/personalArea/js/custom.js"></script>
+
+
+
 </body>
 </html>

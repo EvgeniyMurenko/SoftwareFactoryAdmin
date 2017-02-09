@@ -37,6 +37,7 @@ $(function() {
         containerID : "itemContainer",
         perPage     : 10
     });
+    $("time.timeago").timeago();
 });
 
 

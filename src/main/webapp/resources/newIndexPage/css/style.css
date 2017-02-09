@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 
-html, body { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; font-size: 10pt; }
+html, body { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; font-size: 10pt; background-color: #ffffff; }
 a { color: #03a9f4; cursor: pointer !important; }
 
 /* Header */
@@ -100,10 +100,10 @@ a { color: #03a9f4; cursor: pointer !important; }
     -moz-box-shadow: 0px 0px 10px 7px rgba(238,238,238,1);
     box-shadow: 0px 0px 10px 7px rgba(238,238,238,1); }
 .modal-header h4 { color: #03a9f4; }
-.file-drop-zone-title { padding: 10px !important; }
+.file-drop-zone-title { padding: 10px !important; max-height: 100px !important; }
 .thumbnail:hover, .thumbnail:focus, .thumbnail:active  { border-color: #03a9f4; }
 .forgot-password a { font-size: 8pt; color: #999; }
-.other-font { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; }
+.other-font { font-family: 'WebNanum', Arial, Tahoma, Verdana, sans-serif; }
 .certificate { background-color: #f9f9f9; padding: 20px; }
 .certificate span { display: block; font-size: 11pt; }
 .cf-title { border-bottom: 1px solid #eee; margin-bottom: 20px; }

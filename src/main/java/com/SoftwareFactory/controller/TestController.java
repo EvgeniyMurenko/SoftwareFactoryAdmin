@@ -1,6 +1,7 @@
 
 package com.SoftwareFactory.controller;
 
+import com.SoftwareFactory.comparator.MessageByDateComparator;
 import com.SoftwareFactory.constant.RoleEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
@@ -260,13 +261,14 @@ public class TestController {
     @RequestMapping(value = "/q", method = RequestMethod.GET)
     public void test3() {
         System.out.println("==============test sort by status");
-        List<Project> projects = projectService.getAllProjects();
+        List<Case> aCases = caseService.getAllCases();
+        List<Message> messagesList = new ArrayList<>(aCases.get(0).getMessages());
 
-        //Collections.sort(aCases , new ProjectByDateComparator());
+        //Collections.sort(messagesList , new MessageByDateComparator());
 
-        for (int i = 0; i < projects.size(); i++) {
-            System.out.println("========Sort by status===========" + projects.get(i));
-        }
+        //for(Message acase : messagesList){
+            System.out.println("========Sort by status===========" + messagesList.get(0).getMessageTime().toString());
+        //}
         System.out.println("======== FINISH ==========");
 
     }
