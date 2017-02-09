@@ -1,5 +1,6 @@
 package com.SoftwareFactory.controller;
 
+import com.SoftwareFactory.comparator.EstimateByDateComparator;
 import com.SoftwareFactory.model.Estimate;
 import com.SoftwareFactory.service.EstimateService;
 import com.SoftwareFactory.service.MailService;
@@ -17,8 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Alex on 1/12/2017.
@@ -37,22 +37,28 @@ public class IndexPageController {
 
 
     @Autowired
-    MailService mailService;
-
-    @Autowired
     EstimateService estimateService;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView loginPage(Model model ) {
+    public ModelAndView loginPage(Model model) {
 
 
-                        // LOCALE
+        // LOCALE
       /*  Locale currentLocale = LocaleContextHolder.getLocale();
         model.addAttribute("locale", currentLocale);*/
 
 
         if (isCurrentAuthenticationAnonymous()) {
-            return new ModelAndView("index");
+            ModelAndView mainPage = new ModelAndView("index");
+
+
+            ArrayList<Estimate> estimateUnsorted = (ArrayList<Estimate>) estimateService.getAllEstimates();
+
+            Collections.sort(estimateUnsorted, new EstimateByDateComparator());
+
+            ArrayList<Estimate> estimatesSorted = getSixEstimatesFromArray(estimateUnsorted);
+            mainPage.addObject("Estimates" ,estimatesSorted );
+            return mainPage;
         } else {
             ModelAndView modelAndView = new ModelAndView("redirect:/list");
             return modelAndView;
@@ -60,34 +66,40 @@ public class IndexPageController {
     }
 
 
+    @Autowired
+    MailService mailService;
 
-
-
-
-    @ResponseBody
     @RequestMapping(value = "/estimate", method = RequestMethod.POST)
-    public String estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("message") String recipientRequestText, Model model) {
+    public ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
+                                       @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
+                                       @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
 
-        System.out.print("name " + recipientName + " email " + recipientMail + " text " + recipientRequestText);
+
+        System.out.println("ESTIMATE");
+        System.out.println("name " + recipientName + " email " + recipientMail + " text "
+                + recipientRequestText + "phone" + phone);
 
 
-        JSONObject myJsonObj = new JSONObject();
-
-/*        if (estimateService == null) {
-            System.out.print("estimate service null");
-        }
-
-        Estimate estimate = new Estimate(recipientName, recipientMail, recipientRequestText, 0);
-        System.out.print("domain created ");
+        Estimate estimate = new Estimate();
+        estimate.setName(recipientName);
+        estimate.setEmail(recipientMail);
+        estimate.setPhone(phone);
+        estimate.setPriceRequest(priceRequest);
+        estimate.setQuestionRequest(questionRequest);
+        estimate.setDateRequest(new Date());
+        estimate.setRespond(false);
 
         estimateService.addNewEstimate(estimate);
-*/
 
+/*
 
         mailService.sendEmail(recipientMail, recipientName);
+*/
+        ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
 
-        myJsonObj.append("response", "ok");
-        return myJsonObj.toString();
+        mainPageEstimateSuccess.addObject("isSuccess", true);
+
+        return mainPageEstimateSuccess;
     }
 
 
@@ -100,6 +112,22 @@ public class IndexPageController {
     }
 
 
+    private ArrayList<Estimate> getSixEstimatesFromArray(ArrayList<Estimate> sortedEstimateList) {
 
+        ArrayList<Estimate> estimateToShow = new ArrayList<>();
+        if (sortedEstimateList.size() >= 6) {
+            for (int i = 0; i < 6; i++) {
+                estimateToShow.add(sortedEstimateList.get(i));
+            }
+        } else {
+            for (int i = 0; i < 6; i++) {
+                estimateToShow.add(null);
+            }
+            for (int i = 0; i < sortedEstimateList.size(); i++) {
+                estimateToShow.set(i, sortedEstimateList.get(i));
+            }
+        }
+        return estimateToShow;
+    }
 
 }
