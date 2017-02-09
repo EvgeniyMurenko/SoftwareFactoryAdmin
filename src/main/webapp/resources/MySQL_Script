@@ -47,8 +47,11 @@ CREATE TABLE `s_estimates` (
 	`name` VARCHAR(255) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`estimate_request` TEXT NOT NULL,
-	`status` VARCHAR(255) NOT NULL,
 	`date_request` DATETIME NOT NULL,
+	`phone` VARCHAR(20) NOT NULL,
+	`is_responce` TINYINT(1) NOT NULL,
+	`is_price_request` TINYINT(1) NOT NULL,
+	`is_question_request` TINYINT(1) NOT NULL,
 	PRIMARY KEY (`estimate_id`)
 );
 
@@ -184,8 +187,10 @@ VALUES (2, 3, '2017-01-25 13:00:00','yayayaya','READ');
 INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
 VALUES (3, 5, '2017-01-25 13:00:00','hello, i need.....','NOTREAD');
 
-INSERT INTO `s_estimates`(name, email, estimate_request, status, date_request)
-VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', 1, '2017-01-25 13:00:00');
+INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_responce, is_price_request, is_question_request)
+VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', '2017-01-25 13:00:00', '+38 000 00 00', false, false, false);
 
-INSERT INTO `s_estimates`(name, email, estimate_request, status, date_request)
-VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', 2, '2017-01-25 13:00:00');
+INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_responce, is_price_request, is_question_request)
+VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', '2017-01-25 13:00:00', '+38 111 111 11 11', false, false, false);
+
+

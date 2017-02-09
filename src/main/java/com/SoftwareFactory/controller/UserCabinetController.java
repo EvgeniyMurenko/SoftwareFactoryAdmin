@@ -2,7 +2,9 @@
 package com.SoftwareFactory.controller;
 
 
+import com.SoftwareFactory.comparator.CaseByStatusAndDateComparator;
 import com.SoftwareFactory.comparator.MessageByDateComparator;
+import com.SoftwareFactory.comparator.ProjectByDateComparator;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.CaseService;
@@ -56,8 +58,14 @@ public class UserCabinetController {
 
         }
 
+        //SORT PROJECT & CASE
+        List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
+        Collections.sort(sortedProjectListToShow, new ProjectByDateComparator());
+
+        Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
+
         //PUT OBJECTS TO MODEL
-        customerCabinet.addObject("projects", projectsToShow);
+        customerCabinet.addObject("projects", sortedProjectListToShow);
         customerCabinet.addObject("cases", casesToShow);
 
 
@@ -86,8 +94,12 @@ public class UserCabinetController {
         Project project = projectService.getProjectById(id);
         getCasesFromProject(project, casesToShow);
 
+        List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
+
+        Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
+
         //PUT OBJECTS TO MODEL
-        customerCabinetShowOneProject.addObject("projects", projectsToShow);
+        customerCabinetShowOneProject.addObject("projects", sortedProjectListToShow);
         customerCabinetShowOneProject.addObject("cases", casesToShow);
 
 
@@ -119,6 +131,7 @@ public class UserCabinetController {
         //PUT OBJECTS TO MODEL
         caseChat.addObject("messagesSorted", messagesSorted);
         caseChat.addObject("caseId", id);
+
         return caseChat;
     }
 
