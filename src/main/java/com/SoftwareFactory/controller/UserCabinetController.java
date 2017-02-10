@@ -94,7 +94,9 @@ public class UserCabinetController {
         Project project = projectService.getProjectById(id);
         getCasesFromProject(project, casesToShow);
 
+        //SORT PROJECT & CASE
         List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
+        Collections.sort(sortedProjectListToShow, new ProjectByDateComparator());
 
         Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
 

@@ -67,6 +67,13 @@ public class IndexPageController {
         }
     }
 
+    @RequestMapping(value = "/requestId", method = RequestMethod.GET)
+    public ModelAndView newUser(ModelMap model) {
+
+        ModelAndView modelAndView = new ModelAndView("/requestId");
+        return modelAndView;
+    }
+
 
     @Autowired
     MailService mailService;

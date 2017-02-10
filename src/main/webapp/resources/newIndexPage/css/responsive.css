@@ -11,6 +11,9 @@
     .es-btn a { width: 100%; margin-top: 10px; }
     .certificate { height: auto !important; margin-bottom: 20px; }
     .cf-title { height: auto !important; }
+    .request-id .btn { width: 100%; }
+    .holder { margin: 10px 0; text-align: center; }
+    .container .btn { width: 100%; margin: 10px 0; }
 }
 @media screen and (max-width:640px) {
     .information .btn { width: 100%; }
