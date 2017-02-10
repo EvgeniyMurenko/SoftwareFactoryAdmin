@@ -35,6 +35,15 @@ jQuery(document).ready(function($) {
         //allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
     });
 
+    // table pagination
+    $("div.holder").jPages({
+        containerID : "itemContainer",
+        perPage     : 10
+    });
+
+    // timeago
+    $("time.timeago").timeago();
+
     // Authorization from validation
     $('#authorizationForm').formValidation({
         framework: 'bootstrap',

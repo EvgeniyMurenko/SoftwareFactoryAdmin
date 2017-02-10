@@ -99,7 +99,12 @@ public class IndexPageController {
         return authenticationTrustResolver.isAnonymous(authentication);
     }
 
+    @RequestMapping(value = "/requestId", method = RequestMethod.GET)
+    public ModelAndView newUser(ModelMap model) {
 
+        ModelAndView modelAndView = new ModelAndView("/requestId");
+        return modelAndView;
+    }
 
 
 }
