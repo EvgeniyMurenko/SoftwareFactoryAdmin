@@ -78,13 +78,12 @@ public class IndexPageController {
 
 
 
-        generateEstimateId(new Date() , 13231);
-       /* System.out.println("ESTIMATE");
+        System.out.println("ESTIMATE");
         System.out.println("name " + recipientName + " email " + recipientMail + " text "
                 + recipientRequestText + "phone" + phone);
 
-        Date currentDate = new Date();
 
+        Date currentDate = new Date();
 
         Estimate estimate = new Estimate();
         estimate.setName(recipientName);
@@ -94,15 +93,16 @@ public class IndexPageController {
         estimate.setQuestionRequest(questionRequest);
         estimate.setDateRequest(currentDate);
         estimate.setRespond(false);
-
-
-
         estimateService.addNewEstimate(estimate);
-*/
-/*
+
+        String generatedEstimateId = generateEstimateId(estimate.getDateRequest() , estimate.getId());
+
+        estimate.setEstimateGeneratedId(generatedEstimateId);
+        estimateService.updateEstimate(estimate);
+
 
         mailService.sendEmail(recipientMail, recipientName);
-*/
+
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
 
         mainPageEstimateSuccess.addObject("isSuccess", true);
@@ -140,20 +140,13 @@ public class IndexPageController {
 
     private String generateEstimateId(Date currentDate , long id){
 
-
         java.sql.Date date = new java.sql.Date(currentDate.getTime());
-
 
         String dateWithoutHours = date.toString();
         dateWithoutHours = dateWithoutHours.substring(2 ,10);
         dateWithoutHours = dateWithoutHours.replaceAll("-","");
 
-
-        System.out.println("DATE" + dateWithoutHours);
-
-
         String stringId = Long.toString(id);
-
 
         String generatedEstimateId = "";
         if (stringId.length() <= 4){
@@ -167,8 +160,6 @@ public class IndexPageController {
         } else {
             generatedEstimateId = dateWithoutHours + stringId;
         }
-
-
         System.out.println(generatedEstimateId);
         return generatedEstimateId;
     }

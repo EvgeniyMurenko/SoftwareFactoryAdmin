@@ -8,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Alex on 1/18/2017.
- */
+
 
 @Service("estimateService")
 public class EstimateServiceImpl implements EstimateService {
