@@ -10,4 +10,5 @@ public interface EstimateService {
     void updateEstimate(Estimate estimate);
     void deleteEstimate(Estimate estimate);
     List<Estimate> getAllEstimates();
+    Estimate getEstimateById(long estimateId);
 }

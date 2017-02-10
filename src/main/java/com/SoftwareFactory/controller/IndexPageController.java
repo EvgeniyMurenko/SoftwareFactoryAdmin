@@ -2,8 +2,11 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
 import com.SoftwareFactory.model.Estimate;
+import com.SoftwareFactory.model.User;
+import com.SoftwareFactory.model.UserProfile;
 import com.SoftwareFactory.service.EstimateService;
 import com.SoftwareFactory.service.MailService;
+import com.SoftwareFactory.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,9 +25,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
-/**
- * Created by Alex on 1/12/2017.
- */
+
 @Controller
 @SessionAttributes("roles")
 public class IndexPageController {
@@ -33,22 +34,14 @@ public class IndexPageController {
      * If users is already logged-in and tries to goto login page again, will be redirected to list page.
      */
 
-
     @Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
-
 
     @Autowired
     EstimateService estimateService;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView loginPage(Model model , @RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess) {
-
-
-        // LOCALE
-      /*  Locale currentLocale = LocaleContextHolder.getLocale();
-        model.addAttribute("locale", currentLocale);*/
-
+    public ModelAndView loginPage(@RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess) {
 
         if (isCurrentAuthenticationAnonymous()) {
             ModelAndView mainPage = new ModelAndView("index");
@@ -56,8 +49,6 @@ public class IndexPageController {
             if (isEstimateSuccess != null){
                 mainPage.addObject("isEstimateSuccess" , isEstimateSuccess);
             }
-
-
 
             ArrayList<Estimate> estimateUnsorted = (ArrayList<Estimate>) estimateService.getAllEstimates();
 
@@ -70,13 +61,6 @@ public class IndexPageController {
             ModelAndView modelAndView = new ModelAndView("redirect:/list");
             return modelAndView;
         }
-    }
-
-    @RequestMapping(value = "/requestId", method = RequestMethod.GET)
-    public ModelAndView newUser(ModelMap model) {
-
-        ModelAndView modelAndView = new ModelAndView("/requestId");
-        return modelAndView;
     }
 
 
@@ -122,6 +106,93 @@ public class IndexPageController {
         return mainPageEstimateSuccess;
     }
 
+    @RequestMapping(value = "/requestId/{estimateId}", method = RequestMethod.GET)
+    public ModelAndView requestIdShowPage(@PathVariable String estimateId /*, @PathVariable Long generatedEstimateId *//* */){
+
+        ModelAndView requestIdPage = new ModelAndView("/requestId");
+
+        Estimate estimate = estimateService.getEstimateById(Long.valueOf(estimateId));
+
+        requestIdPage.addObject("CustomerEstimate" , estimate);
+
+        return requestIdPage;
+    }
+
+    /*@Autowired
+    UserService userService;
+
+    @RequestMapping(value = "/generateCustomerId", method = RequestMethod.POST)
+    public ModelAndView requestIdCreateAccount(@RequestParam("estimateId") String estimateId , @RequestParam("name") String name, @RequestParam("email") String email,
+                                               @RequestParam("phone") String phone , @RequestParam("companyName") String companyName, @RequestParam("companySite") String companySite){
+
+        String password = phone.replace(" " , "");
+        // CREATE USER WITH ROLE CUSTOMER
+        String ssoId =  generateCustomerId(estimateId);
+
+
+
+        User user = new User();
+
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setSsoId(ssoId);
+
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId(1);
+        userProfile.setType("CUSTOMER");
+
+        Set<UserProfile> userProfiles = new HashSet<>();
+        userProfiles.add(userProfile);
+
+        user.setUserProfiles(userProfiles);
+
+        userService.saveUser(user);
+
+        // CREATE CUSTOMER PROFILE
+
+        User userAfterSave = userService.findBySSO(emailSSO);
+
+        Long userId = new Long(userAfterSave.getId());
+        String firstName = "test";
+        String lastName = "test";
+        String company = "test";
+        String avatar = "test";
+
+
+        //CREATE FINAL NEW CUSTOMER
+        Set<Project> projects = new HashSet<>();
+
+        CustomerInfo customerInfo = new CustomerInfo(userId, firstName, lastName, company, avatar, projects);
+        customerInfoService.addNewCustomerInfo(customerInfo);
+
+
+        CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(userId);
+
+
+        //CREATE #$GENERAL PROJECT FOR CUSTOMER
+        Date projectCreationDate = new Date(1990, 12, 13);
+
+        Set<Case> cases = new HashSet<>();
+
+
+        Project project = new Project("#$GENERAL", projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
+
+        Set<Project> projectsToAdd = new HashSet<>();
+        projectsToAdd.add(project);
+        customerInfoCreated.setProjects(projectsToAdd);
+
+
+        customerInfoService.updateCustomerInfo(customerInfoCreated);
+
+
+
+
+
+
+
+        return new ModelAndView("redirect:/main");
+    }*/
+
 
     /**
      * This method returns true if users is already authenticated [logged-in], else false.
@@ -150,7 +221,7 @@ public class IndexPageController {
         return estimateToShow;
     }
 
-    private String generateEstimateId(Date currentDate , long id){
+    private String generateEstimateId(Date currentDate , long id) {
 
         java.sql.Date date = new java.sql.Date(currentDate.getTime());
 
@@ -162,7 +233,6 @@ public class IndexPageController {
 
         String generatedEstimateId = "";
         if (stringId.length() <= 4){
-            System.out.println("o");
             String zero = "";
             for (int i = 0; i < 4-stringId.length(); i++){
                 zero = zero + "0";
@@ -176,4 +246,16 @@ public class IndexPageController {
         return generatedEstimateId;
     }
 
+    private String generateCustomerId(String id){
+        if (id.length() <= 4){
+            String zero = "";
+            for (int i = 0; i < 4-id.length(); i++){
+                zero = zero + "0";
+                System.out.println("1");
+            }
+             return zero + id;
+        } else {
+            return id;
+        }
+    }
 }

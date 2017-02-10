@@ -100,6 +100,7 @@ public class TestController {
 
     @Autowired
     UserService userService;
+/*
 
     @RequestMapping(value = "/createCustomer", method = RequestMethod.GET)
     public ModelAndView createCustomer() {
@@ -165,6 +166,7 @@ public class TestController {
         return new ModelAndView("index");
     }
 
+*/
 
     @RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
     public void createAdmin() {
