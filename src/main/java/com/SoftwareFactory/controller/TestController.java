@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -167,6 +168,14 @@ public class TestController {
     }
 
 */
+
+    @Autowired
+    MailService mailService;
+
+    @RequestMapping(value = "/testSendMail")
+    public void send (){
+        mailService.sendEmailAfterEstimate("101010041" , "www.google.com" , "o.grument@gmail.com");
+    }
 
     @RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
     public void createAdmin() {
