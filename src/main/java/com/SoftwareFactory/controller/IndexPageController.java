@@ -42,7 +42,7 @@ public class IndexPageController {
     EstimateService estimateService;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView loginPage(Model model) {
+    public ModelAndView loginPage(Model model , @RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess) {
 
 
         // LOCALE
@@ -52,6 +52,11 @@ public class IndexPageController {
 
         if (isCurrentAuthenticationAnonymous()) {
             ModelAndView mainPage = new ModelAndView("index");
+
+            if (isEstimateSuccess != null){
+                mainPage.addObject("isEstimateSuccess" , isEstimateSuccess);
+            }
+
 
 
             ArrayList<Estimate> estimateUnsorted = (ArrayList<Estimate>) estimateService.getAllEstimates();
@@ -97,6 +102,7 @@ public class IndexPageController {
         estimate.setEmail(recipientMail);
         estimate.setPhone(phone);
         estimate.setPriceRequest(priceRequest);
+        estimate.setEstimateRequest(recipientRequestText);
         estimate.setQuestionRequest(questionRequest);
         estimate.setDateRequest(currentDate);
         estimate.setRespond(false);
@@ -108,11 +114,10 @@ public class IndexPageController {
         estimateService.updateEstimate(estimate);
 
 
-        mailService.sendEmail(recipientMail, recipientName);
 
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
 
-        mainPageEstimateSuccess.addObject("isSuccess", true);
+        mainPageEstimateSuccess.addObject("isEstimateSuccess", new Boolean(true));
 
         return mainPageEstimateSuccess;
     }

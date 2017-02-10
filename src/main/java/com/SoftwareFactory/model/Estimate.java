@@ -23,6 +23,9 @@ public class Estimate {
     private String name;
 
 
+    @Column(name ="estimate_request" , nullable = false)
+    private String estimateRequest;
+
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -123,8 +126,17 @@ public class Estimate {
         this.estimateGeneratedId = estimateGeneratedId;
     }
 
-    public Estimate(String name, String email, boolean isRespond, boolean isPriceRequest, boolean isQuestionRequest, String phone, Date dateRequest, String estimateGeneratedId) {
+    public String getEstimateRequest() {
+        return estimateRequest;
+    }
+
+    public void setEstimateRequest(String estimateRequest) {
+        this.estimateRequest = estimateRequest;
+    }
+
+    public Estimate(String name, String estimateRequest, String email, boolean isRespond, boolean isPriceRequest, boolean isQuestionRequest, String phone, Date dateRequest, String estimateGeneratedId) {
         this.name = name;
+        this.estimateRequest = estimateRequest;
         this.email = email;
         this.isRespond = isRespond;
         this.isPriceRequest = isPriceRequest;

@@ -39,19 +39,6 @@
     <![endif]-->
 </head>
 <body>
-
-<!-- Для Сашеньки!
-<script>
-    jQuery(document).ready(function($) {
-        swal(
-            'Good job!',
-            'You clicked the button!',
-            'success'
-        );
-    });
-</script>
--->
-
 <!-- Header -->
 <header class="container header">
     <div class="row">
@@ -89,7 +76,7 @@
 
                         <div class="clearfix estimate">
                             <span class=<%if(estimate.isRespond()) out.print("check-on"); else out.print("check-off");%>></span>
-                            <a href="javascript:void(0);"><span class="cb-title"><% out.print(estimate.getName());   %></span></a> : <%if(estimate.isPriceRequest()) out.print("견적문의 "); if(estimate.isQuestionRequest()) out.print(" 일반문의");%><span class="cb-time"><% out.print(estimate.getDateRequest().toString().substring(0 , 19));  %></span>
+                            <a href="javascript:void(0);"><span class="cb-title"><% out.print(estimate.getName() + " : ");   %></span></a><span><%out.print(estimate.getEstimateGeneratedId());%></span> : <%if(estimate.isPriceRequest()) out.print("견적문의 "); if(estimate.isQuestionRequest()) out.print(" 일반문의");%><span class="cb-time"><% out.print(estimate.getDateRequest().toString().substring(0 , 19));  %></span>
                         </div>
 
                     <%}%>
@@ -471,5 +458,32 @@
 <script src="resources/newIndexPage/js/sortable.min.js"></script>
 <script src="resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="resources/newIndexPage/js/main.js"></script>
+
+<%   Boolean isEstimateSuccess = (Boolean) request.getAttribute("isEstimateSuccess"); %>
+<%   if (isEstimateSuccess !=null && isEstimateSuccess) { %>
+<script>
+    jQuery(document).ready(function($) {
+        swal(
+            '정상적으로 접수 되었습니다!',
+            '감사합니다',
+            'success'
+        );
+    });
+</script>
+<% } %>
+<%--
+<%} else if (isEstimateSuccess !=null && !isEstimateSuccess) {%>
+<script>
+    jQuery(document).ready(function($) {
+        swal(
+            'Good job!',
+            'You clicked the button!',
+            'error'
+        );
+    });
+</script>
+<%}%>
+--%>
+
 </body>
 </html>
