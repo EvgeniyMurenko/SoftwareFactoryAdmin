@@ -8,9 +8,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 
-
-
-
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
@@ -24,15 +22,15 @@
 
     <title>소팩소개 :: Software Factory</title>
 
-    <link href="/resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/style.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/responsive.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/style.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
     <script src="resources/newIndexPage/js/html5shiv.js"></script>
@@ -52,6 +50,7 @@
 <!-- #End Header -->
 
 <% Estimate estimate = (Estimate) request.getAttribute("CustomerEstimate") ;              %>
+
 
 <section class="container content mb40 request-id">
 
@@ -252,18 +251,18 @@
 </div>
 <!-- #End Estimate modal window -->
 
-<script src="/resources/newIndexPage/js/jquery.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery-ui.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.fancybox.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap-select.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap.validator.min.js"></script>
-<script src="/resources/newIndexPage/js/fileinput.min.js"></script>
-<script src="/resources/newIndexPage/js/sortable.min.js"></script>
-<script src="/resources/newIndexPage/js/form-validation.min.js"></script>
-<script src="/resources/newIndexPage/js/main.js"></script>
+<script src="resources/newIndexPage/js/jquery.min.js"></script>
+<script src="resources/newIndexPage/js/jquery-ui.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
+<script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
+<script src="resources/newIndexPage/js/fileinput.min.js"></script>
+<script src="resources/newIndexPage/js/sortable.min.js"></script>
+<script src="resources/newIndexPage/js/form-validation.min.js"></script>
+<script src="resources/newIndexPage/js/main.js"></script>
 </body>
 </html>

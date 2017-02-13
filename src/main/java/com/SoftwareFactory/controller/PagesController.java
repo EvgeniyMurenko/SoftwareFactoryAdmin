@@ -20,6 +20,24 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = { "/branch" }, method = RequestMethod.GET)
+    public ModelAndView branch() {
+        ModelAndView modelAndView = new ModelAndView("branch");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = { "/control" }, method = RequestMethod.GET)
+    public ModelAndView control() {
+        ModelAndView modelAndView = new ModelAndView("control");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = { "/documents" }, method = RequestMethod.GET)
+    public ModelAndView documents() {
+        ModelAndView modelAndView = new ModelAndView("documents");
+        return modelAndView;
+    }
+
     @RequestMapping(value = { "/guide" }, method = RequestMethod.GET)
     public ModelAndView guide() {
         ModelAndView modelAndView = new ModelAndView("guide");
@@ -38,21 +56,16 @@ public class PagesController {
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/whatIsSofac" }, method = RequestMethod.GET)
-    public ModelAndView whatIsSofac() {
-        ModelAndView modelAndView = new ModelAndView("whatIsSofac");
-        return modelAndView;
-    }
-
     @RequestMapping(value = { "/whatIsCase" }, method = RequestMethod.GET)
     public ModelAndView whatIsCase() {
         ModelAndView modelAndView = new ModelAndView("whatIsCase");
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/documents" }, method = RequestMethod.GET)
-    public ModelAndView documents() {
-        ModelAndView modelAndView = new ModelAndView("documents");
+    @RequestMapping(value = { "/whatIsSofac" }, method = RequestMethod.GET)
+    public ModelAndView whatIsSofac() {
+        ModelAndView modelAndView = new ModelAndView("whatIsSofac");
         return modelAndView;
     }
+
 }

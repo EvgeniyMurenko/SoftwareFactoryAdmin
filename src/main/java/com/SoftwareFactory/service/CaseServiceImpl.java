@@ -54,16 +54,5 @@ public class CaseServiceImpl implements CaseService {
         caseDao.delete(aCase);
     }
 
-    @Transactional(readOnly=true)
-    public List<Case> sortByStatusDate() {
-        List<Case> aCases = caseDao.findAll();
-        int msgMax = -1;
-        for (Case aCase:aCases){
-            if(aCase.getStatus().equals(StatusEnum.OPEN.toString())){
-                aCases.add(0, aCase);
-            }
-        }
 
-        return aCases;
-    }
 }

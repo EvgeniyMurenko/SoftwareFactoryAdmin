@@ -9,14 +9,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
-
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="og:site_name" content="software factory" />
+    <meta property="og:title" content="소팩소개" />
+    <meta property="og:image" content="http://www.sofac.kr/resources/newIndexPage/images/web-logo1.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="259" />
+    <meta property="og:image:height" content="110" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="address=no" />
+
+    <meta property="og:site_name" content="software factory" />
+    <meta property="og:title" content="소팩소개" />
+    <meta property="og:image" content="images/web-logo.jpg" />
+    <meta property="og:url" content="http://sofac/" />
+    <meta property="og:description" content="" />
 
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -32,6 +45,24 @@
     <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/style.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/responsive.css" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="resources/newIndexPage/images/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="resources/newIndexPage/images/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="resources/newIndexPage/images/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="resources/newIndexPage/images/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="resources/newIndexPage/images/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="resources/newIndexPage/images/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="resources/newIndexPage/images/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="resources/newIndexPage/images/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/newIndexPage/images/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192"  href="resources/newIndexPage/images/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="resources/newIndexPage/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="resources/newIndexPage/images/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="resources/newIndexPage/images/favicon-16x16.png" />
+    <link rel="manifest" href="resources/newIndexPage/images/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="resources/newIndexPage/images/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
 
     <!--[if lt IE 9]>
     <script src="resources/newIndexPage/js/html5shiv.js"></script>
@@ -60,27 +91,27 @@
                 <!-- Estimation -->
                 <section class="estimation mt40 mb20 clearfix">
                     <div class="es-title">처음 오신 고객은 견적, 작업등 모든 문의를 하실 수 있습니다</div>
-                    <div class="es-btn"><a href="javascript:void(0);" class="btn btn-primary" data-toggle="modal" data-target="#estimationModal"><i class="fa fa-paper-plane-o"></i>문의하기</a></div>
+                    <div class="es-btn"><a href="javascript:void(0);" class="btn btn-primary btn-mobile" data-toggle="modal" data-target="#estimationModal"><i class="fa fa-paper-plane-o"></i>문의하기</a></div>
                 </section>
                 <!-- #End Estimation -->
 
                 <!-- Estimation list case -->
                 <section class="estimation-list">
-                <%
-                    ArrayList<Estimate> estimates =  (ArrayList<Estimate>)request.getAttribute("estimates");
-                    Iterator<Estimate> estimateIterator = estimates.iterator();
-                    while (estimateIterator.hasNext()) {
-                        Estimate estimate = estimateIterator.next();
-                %>
+                    <%
+                        ArrayList<Estimate> estimates =  (ArrayList<Estimate>)request.getAttribute("estimates");
+                        Iterator<Estimate> estimateIterator = estimates.iterator();
+                        while (estimateIterator.hasNext()) {
+                            Estimate estimate = estimateIterator.next();
+                    %>
                     <% if (estimate != null){  %>
 
-                        <div class="clearfix estimate">
-                            <span class=<%if(estimate.isRespond()) out.print("check-on"); else out.print("check-off");%>></span>
-                            <a href="javascript:void(0);"><span class="cb-title"><% out.print(estimate.getName() + " : ");   %></span></a><span><%out.print(estimate.getEstimateGeneratedId());%></span> : <%if(estimate.isPriceRequest()) out.print("견적문의 "); if(estimate.isQuestionRequest()) out.print(" 일반문의");%><span class="cb-time"><% out.print(estimate.getDateRequest().toString().substring(0 , 19));  %></span>
-                        </div>
+                    <div class="clearfix estimate">
+                        <span class=<%if(estimate.isRespond()) out.print("check-on"); else out.print("check-off");%>></span>
+                        <a href="javascript:void(0);"><span class="cb-title"><% out.print(estimate.getName() + " : ");   %></span></a><span><%out.print(estimate.getEstimateGeneratedId());%></span> : <%if(estimate.isPriceRequest()) out.print("견적문의 "); if(estimate.isQuestionRequest()) out.print(" 일반문의");%><span class="cb-time"><% out.print(estimate.getDateRequest().toString().substring(0 , 19));  %></span>
+                    </div>
 
                     <%}%>
-                <%}%>
+                    <%}%>
                 </section>
                 <!-- #End Estimation list case -->
 
@@ -98,13 +129,13 @@
                         SoFAC의 모든 작업은 CASE 라는 개념을 통하여 소통과 작업이 이루어지며 지속적이고 정확한 서비스를 제공 받으실 수 있습니다. <br>
                     </div>
                     <div class="text-right">
-                        <a href="<c:url value='/whatIsSofac'/>" class="btn btn-primary"><i class="fa fa-link"></i>SoFAC 알아보기</a>
+                        <a href="<c:url value='/whatIsSofac'/>" class="btn btn-primary btn-mobile"><i class="fa fa-link"></i>SoFAC 알아보기</a>
                     </div>
                 </section>
                 <!-- #End Information -->
 
                 <!-- Video button -->
-                <div class="text-center mb20"><a href="javascript:void(0);" class="btn btn-info"><i class="fa fa-video-camera"></i>SoFAC Video</a></div>
+                <div class="text-center mb20"><a href="javascript:void(0);" class="btn btn-info btn-mobile"><i class="fa fa-video-camera"></i>SoFAC Video</a></div>
                 <!-- #End Video button -->
 
             </div>
@@ -128,7 +159,7 @@
         <div class="col-md-4 mb20">
             <div class="ad-icon"><i class="fa fa-envira"></i></div>
             <div>
-                <h3 class="text-center">SoFAC의 가격 정책</h3>
+                <h3 class="text-center">가격 및 유지보수 정책</h3>
                 <div class="text-justify">현대 사회의 모든 사업은 소프트웨어 지원이 필수적입니다. 따라서 기존의 개발비용 개념과 <b>달리 다양한 방법으로 비용을 절감하거나 고객이 원하는 형태로 비용 지불 방법을 정할 수 있는 유연한 가격 정책과 기술료를 받지 않는 정책을 운영합니다.</b></div>
                 <div class="mt10 text-justify"> <a href="javascript:void(0);"><i>자세히  알아보기...</i></a></div>
             </div>
@@ -136,7 +167,7 @@
         <div class="col-md-4 mb20">
             <div class="ad-icon"><i class="fa fa-laptop"></i></div>
             <div>
-                <h3 class="text-center">SoFAC의 다국적 작업 방법</h3>
+                <h3 class="text-center">FXM기법과 다국적 작업</h3>
                 <div class="text-justify">SoFAC은 기존의 소규모 개발 회사와 달리 저비용을 실현하면서 개발 및 지속적인 관리가 가능하게 하기 위하여 <b>다국적 개발 및 관리 시스템인 GXM플랫폼을 통하여 공장형 개발 기법을 실현하였습니다.</b></div>
                 <div class="mt10 text-justify"> <a href="<c:url value='/guide'/>"><i>자세히  알아보기...</i></a></div>
             </div>
@@ -179,27 +210,27 @@
                         <div class="row">
                             <!-- <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div> -->
                             <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio1-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio1-small.jpg" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio2-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio2-small.jpg" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio3-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio3-small.jpg" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio4-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio4-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="<c:url value='/portfolio'/>" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
@@ -227,7 +258,7 @@
             <article class="feature clearfix">
                 <div class="ft-icon"><i class="fa fa-external-link"></i></div>
                 <div class="ft-content">
-                    <div class="ft-title">SoFAC의 유지보수 서비스 개념</div>
+                    <div class="ft-title">보유기술 및 정책</div>
                     <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
@@ -236,8 +267,8 @@
             <article class="feature clearfix">
                 <div class="ft-icon"><i class="fa fa-star"></i></div>
                 <div class="ft-content">
-                    <div class="ft-title">GXM 개발시스템의 특징</div>
-                    <div class="ft-body">소프트웨어팩토리는 GAX개발 시스템에 의해서 병렬화 대량화 작업이 가능한 전문 소프트웨어 개발 대행 기업 입니다. <a href="<c:url value='/gxm'/>"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-title">고객 지원 인프라 소개</div>
+                    <div class="ft-body">SoFAC은 좋은 품질의 소프트웨어의 개발과 지속적인 유지보수를 위하여 다양한 인프라를 갖추고 있습니다. <a href="<c:url value='/gxm'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -248,7 +279,7 @@
             <article class="feature clearfix">
                 <div class="ft-icon"><i class="fa fa-file-o"></i></div>
                 <div class="ft-content">
-                    <div class="ft-title">인증자료</div>
+                    <div class="ft-title">회사연혁 및 인증자료</div>
                     <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="<c:url value='/documents'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
@@ -270,7 +301,7 @@
                 <div class="ft-icon"><i class="fa fa-mobile"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">지점 및 협력업체</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-body">SoFAC은 온라인을 기본으로 한 공장형 소프트웨어 개발 회사 이지만  오프라인 거래는 지점을 통해서 같은 효과를 누릴 수 있습니다. <a href="<c:url value='/branch'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -320,7 +351,7 @@
                 <!-- Authorization modal content -->
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6"><img src="resources/newIndexPage/images/hello-womam.jpg" class="img-responsive" alt=""></div>
+                        <div class="col-md-6 mb10 text-center"><img src="resources/newIndexPage/images/hello-womam.jpg" class="img-responsive position-center" alt=""></div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
@@ -335,7 +366,7 @@
 
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
-                                    <button type="submit" class="btn btn-primary">로그인</button>
+                                    <button type="submit" class="btn btn-primary btn-mobile">로그인</button>
                                 </div>
                             </div>
 
@@ -352,11 +383,11 @@
                     </div>
                 </div>
 
-       <%--         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+                <%--         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 
                 <!-- Authorization modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
                 </div>
             </form>
         </div>
@@ -374,7 +405,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4><i class="fa fa-address-card-o" aria-hidden="true"></i> 문의 해 주세요...</h4>
-                    <b>견적요청 및 문의사항을 남겨 주시면 1시간 이내에 답변을 메일로 보내드립니다.</b>
+                    <b>견적요청 및 문의사항을 남겨 주시면 3시간 이내에 답변을 메일로 보내드립니다.</b>
                     <div class="mt10 es-form-title">
                         <p><i>이 페이지는 단 한번만의 답변을 받으실 수 있습니다.<br />견적 또는 어떠한 질문도 하실 수 있으며 한번의 질문에 한번의 답변만 받으실 수 있습니다.</i></p>
                         <p><i>따라서 협상, 업무협의등 지속성이 필요하실 경우 답변으로 받으신 이메일에 기재 되어 있는 방법대로 요청하시면 고객 ID를 발급하여 드립니다.</i></p>
@@ -387,7 +418,6 @@
 
                     <div class="row">
                         <!-- fields -->
-
                         <div class="col-md-4">
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
@@ -409,12 +439,12 @@
                             </div>
 
                             <div class="checkbox">
-                                <input id="request" name="price_request" class="styled" type="checkbox">
+                                <input id="request" name="request[]" class="styled" type="checkbox">
                                 <label for="request">견적문의</label>
                             </div>
 
                             <div class="checkbox">
-                                <input id="question" name="question_request" class="styled" type="checkbox">
+                                <input id="question" name="request[]" class="styled" type="checkbox">
                                 <label for="question">일반문의</label>
                             </div>
                         </div>
@@ -436,8 +466,8 @@
 
                 <!-- Estimate modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                    <button type="submit" class="btn btn-primary">보내기</button>
+                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary btn-mobile">보내기</button>
                 </div>
             </form>
         </div>
@@ -450,6 +480,8 @@
 <script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
 <script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
 <script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
+<script src="resources/newIndexPage/js/jquery.timeago.js"></script>
+<script src="resources/newIndexPage/js/jquery.timeago.ko.js"></script>
 <script src="resources/newIndexPage/js/bootstrap.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
@@ -457,6 +489,7 @@
 <script src="resources/newIndexPage/js/fileinput.min.js"></script>
 <script src="resources/newIndexPage/js/sortable.min.js"></script>
 <script src="resources/newIndexPage/js/form-validation.min.js"></script>
+<script src="resources/newIndexPage/js/pagination.min.js"></script>
 <script src="resources/newIndexPage/js/main.js"></script>
 
 
