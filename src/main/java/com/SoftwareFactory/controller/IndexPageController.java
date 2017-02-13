@@ -1,9 +1,9 @@
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
-import com.SoftwareFactory.model.Estimate;
-import com.SoftwareFactory.model.User;
-import com.SoftwareFactory.model.UserProfile;
+import com.SoftwareFactory.constant.StatusEnum;
+import com.SoftwareFactory.model.*;
+import com.SoftwareFactory.service.CustomerInfoService;
 import com.SoftwareFactory.service.EstimateService;
 import com.SoftwareFactory.service.MailService;
 import com.SoftwareFactory.service.UserService;
@@ -41,13 +41,17 @@ public class IndexPageController {
     EstimateService estimateService;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView loginPage(@RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess) {
+    public ModelAndView loginPage(@RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess ,
+                                  @RequestParam(value = "isGenerateCustomerIdSuccess" , required=false) Boolean isGenerateSuccess) {
 
         if (isCurrentAuthenticationAnonymous()) {
             ModelAndView mainPage = new ModelAndView("index");
 
             if (isEstimateSuccess != null){
                 mainPage.addObject("isEstimateSuccess" , isEstimateSuccess);
+            }
+            if (isGenerateSuccess !=null){
+                mainPage.addObject("isGenerateCustomerIdSuccess" , isGenerateSuccess);
             }
 
             ArrayList<Estimate> estimateUnsorted = (ArrayList<Estimate>) estimateService.getAllEstimates();
@@ -73,12 +77,11 @@ public class IndexPageController {
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
 
 
-
-        System.out.println("ESTIMATE");
         System.out.println("name " + recipientName + " email " + recipientMail + " text "
                 + recipientRequestText + "phone" + phone);
 
 
+        // CREATE ESTIMATE
         Date currentDate = new Date();
 
         Estimate estimate = new Estimate();
@@ -91,24 +94,32 @@ public class IndexPageController {
         estimate.setDateRequest(currentDate);
         estimate.setRespond(false);
         estimateService.addNewEstimate(estimate);
-
+        //GENERATE SPECIAL ESTIMATE ID
         String generatedEstimateId = generateEstimateId(estimate.getDateRequest() , estimate.getId());
 
         estimate.setEstimateGeneratedId(generatedEstimateId);
         estimateService.updateEstimate(estimate);
 
+        //GENERATE REQUEST ID LINK FOR REGISTRATION
+        String registrationLink = "www.sofac.kr/requestId/";
+        registrationLink = registrationLink+estimate.getId() + "/"+generatedEstimateId;
 
+        //SEND EMAIL TO CUSTOMER WITH DETAILS
+        mailService.sendEmailAfterEstimate(generatedEstimateId, registrationLink , recipientMail);
 
+        //REDIRECT TO MAIN AND SHOW SUCCESS
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
-
         mainPageEstimateSuccess.addObject("isEstimateSuccess", new Boolean(true));
 
         return mainPageEstimateSuccess;
     }
 
-    @RequestMapping(value = "/requestId/{estimateId}", method = RequestMethod.GET)
-    public ModelAndView requestIdShowPage(@PathVariable String estimateId /*, @PathVariable Long generatedEstimateId *//* */){
+    @RequestMapping(value = "/requestId/{estimateId}/{generatedEstimateId}", method = RequestMethod.GET)
+    public ModelAndView requestIdShowPage(@PathVariable String estimateId , @PathVariable Long generatedEstimateId){
 
+        if (userService.findBySSO(generateCustomerId(estimateId)) !=null){
+            return new ModelAndView("redirect:/main");
+        }
         ModelAndView requestIdPage = new ModelAndView("/requestId");
 
         Estimate estimate = estimateService.getEstimateById(Long.valueOf(estimateId));
@@ -118,19 +129,25 @@ public class IndexPageController {
         return requestIdPage;
     }
 
-    /*@Autowired
+    @Autowired
     UserService userService;
+
+    @Autowired
+    CustomerInfoService customerInfoService;
 
     @RequestMapping(value = "/generateCustomerId", method = RequestMethod.POST)
     public ModelAndView requestIdCreateAccount(@RequestParam("estimateId") String estimateId , @RequestParam("name") String name, @RequestParam("email") String email,
                                                @RequestParam("phone") String phone , @RequestParam("companyName") String companyName, @RequestParam("companySite") String companySite){
 
+        ModelAndView main = new ModelAndView("redirect:/main");
+
         String password = phone.replace(" " , "");
-        // CREATE USER WITH ROLE CUSTOMER
         String ssoId =  generateCustomerId(estimateId);
 
 
 
+
+        // CREATE USER WITH ROLE CUSTOMER
         User user = new User();
 
         user.setPassword(password);
@@ -150,27 +167,22 @@ public class IndexPageController {
 
         // CREATE CUSTOMER PROFILE
 
-        User userAfterSave = userService.findBySSO(emailSSO);
+        User userAfterSave = userService.findBySSO(ssoId);
 
         Long userId = new Long(userAfterSave.getId());
-        String firstName = "test";
-        String lastName = "test";
-        String company = "test";
-        String avatar = "test";
-
 
         //CREATE FINAL NEW CUSTOMER
+
         Set<Project> projects = new HashSet<>();
 
-        CustomerInfo customerInfo = new CustomerInfo(userId, firstName, lastName, company, avatar, projects);
+        CustomerInfo customerInfo = new CustomerInfo(userId, name, companyName, phone, email, companySite , projects);
         customerInfoService.addNewCustomerInfo(customerInfo);
 
 
         CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(userId);
 
-
         //CREATE #$GENERAL PROJECT FOR CUSTOMER
-        Date projectCreationDate = new Date(1990, 12, 13);
+        Date projectCreationDate = new Date();
 
         Set<Case> cases = new HashSet<>();
 
@@ -184,14 +196,12 @@ public class IndexPageController {
 
         customerInfoService.updateCustomerInfo(customerInfoCreated);
 
+        mailService.sendEmailAfterRegistration(password , ssoId , email , name);
 
 
-
-
-
-
-        return new ModelAndView("redirect:/main");
-    }*/
+        main.addObject("isGenerateCustomerIdSuccess" , new Boolean(true));
+        return main;
+    }
 
 
     /**

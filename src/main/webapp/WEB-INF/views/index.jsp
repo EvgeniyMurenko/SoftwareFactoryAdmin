@@ -355,7 +355,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
-                                    <input type="email" name="ssoId" class="form-control form-block" placeholder="고객 ID" required />
+                                    <input type="text" name="ssoId" class="form-control form-block" placeholder="고객 ID" required />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -504,6 +504,22 @@
     });
 </script>
 <% } %>
+<% Boolean isGenerateSuccess = (Boolean) request.getAttribute("isGenerateCustomerIdSuccess");  %>
+<% if (isGenerateSuccess != null && isGenerateSuccess) { %>
+<script>
+    jQuery(document).ready(function($) {
+        swal(
+            '정상적으로 접수 되었습니다!',
+            '감사합니다',
+            'success'
+        );
+    });
+</script>
+<% } %>
+
+
+
+
 <%--
 <%} else if (isEstimateSuccess !=null && !isEstimateSuccess) {%>
 <script>
@@ -517,6 +533,5 @@
 </script>
 <%}%>
 --%>
-
 </body>
 </html>
