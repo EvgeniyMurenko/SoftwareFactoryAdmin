@@ -459,6 +459,7 @@
 <script src="resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="resources/newIndexPage/js/main.js"></script>
 
+
 <%   Boolean isEstimateSuccess = (Boolean) request.getAttribute("isEstimateSuccess"); %>
 <%   if (isEstimateSuccess !=null && isEstimateSuccess) { %>
 <script>
@@ -499,6 +500,7 @@
     });
 </script>
 <%}%>
+&ndash;%&gt;--%>
 --%>
 </body>
 </html>
