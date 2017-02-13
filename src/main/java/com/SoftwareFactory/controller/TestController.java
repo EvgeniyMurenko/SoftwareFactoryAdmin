@@ -174,7 +174,7 @@ public class TestController {
 
     @RequestMapping(value = "/testSendMail")
     public void send (){
-        mailService.sendEmailAfterEstimate("101010041" , "www.google.com" , "o.grument@gmail.com");
+        mailService.sendEmailAfterRegistration("123" , "login" , "o.grument@gmail.com" , "name");
     }
 
     @RequestMapping(value = "/createAdmin", method = RequestMethod.GET)

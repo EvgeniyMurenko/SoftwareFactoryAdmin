@@ -3,9 +3,8 @@ package com.SoftwareFactory.service;
 
 public interface MailService {
 
-    void sendEmail(String recipientMail , String recipientName);
-
-    void sendEmailAfterRegistration(String password , String login);
+    void sendEmailAfterRegistration(String password , String login , String recipientMail , String recipientName );
 
     void sendEmailAfterEstimate(String estimateId , String registrationLink , String recipientMail);
+
 }
