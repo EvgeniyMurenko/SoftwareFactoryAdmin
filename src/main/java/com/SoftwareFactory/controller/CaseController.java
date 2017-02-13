@@ -4,17 +4,19 @@ package com.SoftwareFactory.controller;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
+import com.SoftwareFactory.savefile.SaveFile;
 import com.SoftwareFactory.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -59,16 +61,11 @@ public class CaseController {
     public ModelAndView createCase(HttpSession httpSession, @ModelAttribute("projectName") String projectName,
                                    @ModelAttribute("caseName") String caseName,
                                    @ModelAttribute("message") String message,
-                                   @ModelAttribute("file[]") String[] file){
+                                   @RequestParam("file[]") MultipartFile[] files){
 
-
-        System.out.println("=========CREATE CASE=========");
-        System.out.println("Case selector " + projectName);
-        System.out.println("Case name " + caseName);
-        System.out.println("Case message " + message + " /n =============================");
-
-
-
+        SaveFile sf = new SaveFile("E:"+File.separator+"test", files);
+        sf.saveFile();
+        //===================================================
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
 
@@ -79,77 +76,37 @@ public class CaseController {
         if (projects != null){
             Iterator<Project> itr = projects.iterator();
             while (itr.hasNext()) {
-
                 project = itr.next();
-
                 if(project.getProjectName().equals(projectName)){
                     break;
                 }
             }
-
         }
-
-
-
-        System.out.println ("STEP1");
-
         Case newCase = new Case();
-
-        System.out.println ("STEP1");
-
         newCase.setProject(project);
-
         newCase.setProjectTitle(caseName);
-        System.out.println ("STEP2");
-
         newCase.setStatus(StatusEnum.OPEN.toString());
-        System.out.println ("STEP3");
         Date date = new Date();
         newCase.setCreationDate(date);
-        newCase.setUserManagerId(22L);
-        System.out.println ("STEP4");
+        newCase.setUserManagerId(0L);
 
         Set<Case> caseSet = project.getCases();
         caseSet.add(newCase);
-
-
         project.setCases(caseSet);
-
         projectService.updateProject(project);
-
-
-
-        System.out.println ("STEP5");
         Case caseCreated = caseService.getCaseById(newCase.getId());
-        System.out.println ("STEP6");
-
         Set<Message> messages = caseCreated.getMessages();
-        System.out.println ("STEP7");
         Message msg = new Message();
-        System.out.println ("STEP8");
         msg.setaCase(caseCreated);
-        System.out.println ("STEP9");
         User us = userService.findById(userId.intValue());
         msg.setUser(us);
         msg.setMessageTime(date);
         msg.setMessageText(message);
         msg.setIsRead(MessageEnum.NOTREAD.toString());
-        System.out.println ("STEP10");
         messages.add(msg);
         messageService.addNewMessage(msg);
-        System.out.println ("STEP11");
         caseCreated.setMessages(messages);
-
-        System.out.println ("STEP12");
-
-            caseService.updateCase(caseCreated);
-            System.out.println("STEP13");
-
-        //caseSet.add(newCase);
-        //project.setCases(caseSet);
-        System.out.println("================= END!!!!");
-
-
+        caseService.updateCase(caseCreated);
 
         ModelAndView modelAndView = new ModelAndView("redirect:/list");
         return modelAndView;

@@ -146,6 +146,9 @@ public class UserCabinetController {
     public ModelAndView casePrintMessageController( @PathVariable Long id, @RequestParam("message") String messageText,
                                                    /*@RequestParam("file") MultipartFile  file, */HttpSession httpSession){
 
+
+
+
         // GET
         Case aCase = caseService.getCaseById(id);
         int userId = (Integer) httpSession.getAttribute("UserId");

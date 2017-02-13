@@ -86,9 +86,8 @@
                     <div class="tab-pane active" id="horizontal-form">
 
                         <%--this form--%>
-                            <c:url var="createCase" value="/createCase"/>
-                        <form class="form-horizontal" method="post" action="${createCase}" >
-
+                        <c:url var="createCase" value="/createCase?${_csrf.parameterName}=${_csrf.token}"/>
+                        <form class="form-horizontal" method="POST" action="${createCase} " enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="selector" class="col-sm-2 control-label">Project code</label>
                                 <div class="col-sm-8">
@@ -128,8 +127,6 @@
                                     <input id="file-upload" name="file[]" multiple type="file" class="form-control1">
                                 </div>
                             </div>
-
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                             <div>
                                 <div class="row">

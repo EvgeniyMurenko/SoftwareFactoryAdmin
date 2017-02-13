@@ -44,6 +44,12 @@ jQuery(document).ready(function($) {
     // timeago
     $("time.timeago").timeago();
 
+    // selectpicker
+    $('.selectpicker').selectpicker({
+        style: 'btn-info',
+        size: 4
+    });
+
     // Authorization from validation
     $('#authorizationForm').formValidation({
         framework: 'bootstrap',

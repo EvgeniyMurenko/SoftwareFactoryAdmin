@@ -7,6 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />

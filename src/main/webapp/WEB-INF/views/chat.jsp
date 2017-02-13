@@ -113,7 +113,7 @@
                     </ul>
 
                     <% Long caseId =  (Long) request.getAttribute("caseId"); %>
-                    <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/print_message?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+                    <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/print_message?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data">
 
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
