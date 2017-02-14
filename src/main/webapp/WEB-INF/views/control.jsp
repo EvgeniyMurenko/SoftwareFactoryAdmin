@@ -1,5 +1,11 @@
 <%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+<%@ page import="com.SoftwareFactory.model.Project" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.SoftwareFactory.model.Case" %>
+<%@ page import="com.SoftwareFactory.model.Message" %>
+<%@ page import="com.SoftwareFactory.constant.MessageEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -21,19 +27,19 @@
 
     <title>소팩소개 :: Software Factory</title>
 
-    <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/style.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/responsive.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/style.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/responsive.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
-    <script src="resources/newIndexPage/js/html5shiv.js"></script>
-    <script src="resources/newIndexPage/js/respond.min.js"></script>
+    <script src="/resources/newIndexPage/js/html5shiv.js"></script>
+    <script src="/resources/newIndexPage/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -67,12 +73,31 @@
     <div class="row">
         <div class="col-md-3">
 
+
             <!-- Projects -->
             <h3 class="mt0">프로젝트</h3>
             <ul class="projects-list">
-                <li><a href="javascript:void(0);" class="active"><i class="fa fa-angle-double-right"></i> AMMATA</a></li>
-                <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i> ComeOnBaby</a></li>
-                <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i> SomeOther</a></li>
+                <%
+                    List<Project> projectSet =  (List<Project>)request.getAttribute("projects");
+                    Project generalDiscussionProject;
+                    Iterator<Project> itr = projectSet.iterator();
+                    for(Project project : projectSet){
+                        if (!project.getProjectName().equals("#$GENERAL")){
+                            int countNewMessage = 0;
+                            for(Case aCase : project.getCases()){
+                                for(Message msg : aCase.getMessages()){
+                                    if(msg.getIsRead().equals(MessageEnum.NOTREAD.toString())){
+
+                                        //if(msg.getUser().getId().equals()) =====> must check current user
+                                        countNewMessage++;
+                                    }
+                                }
+                            }
+                %>
+
+                <%--<li><a href="javascript:void(0);" class="active"><i class="fa fa-angle-double-right"></i> AMMATA</a></li>--%>
+                <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i> <% out.println(project.getProjectName()); %></a></li>
+                <%}}%>
             </ul>
             <!-- #End Projects -->
 
@@ -100,7 +125,7 @@
                     <!-- #End table pagination -->
 
                 </div>
-                <div class="col-md-6 text-right"><a href="newCase.html" class="btn btn-primary">새 CASE 생성</a></div>
+                <div class="col-md-6 text-right"><a href="<c:url value="/newCase"/>" class="btn btn-primary">새 CASE 생성</a></div>
             </div>
             <!-- Projects list table -->
             <table class="table table-striped">
@@ -354,21 +379,21 @@
 </footer>
 <!-- #End Footer -->
 
-<script src="resources/newIndexPage/js/jquery.min.js"></script>
-<script src="resources/newIndexPage/js/jquery-ui.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.timeago.js"></script>
-<script src="resources/newIndexPage/js/jquery.timeago.ko.js"></script>
-<script src="resources/newIndexPage/js/bootstrap.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
-<script src="resources/newIndexPage/js/fileinput.min.js"></script>
-<script src="resources/newIndexPage/js/sortable.min.js"></script>
-<script src="resources/newIndexPage/js/form-validation.min.js"></script>
-<script src="resources/newIndexPage/js/pagination.min.js"></script>
-<script src="resources/newIndexPage/js/main.js"></script>
+<script src="/resources/newIndexPage/js/jquery.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery-ui.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.fancybox.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.timeago.js"></script>
+<script src="/resources/newIndexPage/js/jquery.timeago.ko.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-select.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap.validator.min.js"></script>
+<script src="/resources/newIndexPage/js/fileinput.min.js"></script>
+<script src="/resources/newIndexPage/js/sortable.min.js"></script>
+<script src="/resources/newIndexPage/js/form-validation.min.js"></script>
+<script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/main.js"></script>
 </body>
 </html>
