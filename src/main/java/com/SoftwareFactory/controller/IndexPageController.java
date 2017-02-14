@@ -148,6 +148,10 @@ public class IndexPageController {
         ModelAndView main = new ModelAndView("redirect:/main");
 
         String password = phone.replace(" " , "");
+        password = password.replace(")" ,"");
+        password = password.replace("(" , "");
+        password = password.replace("-" ,"");
+
         String ssoId =  generateCustomerId(estimateId);
 
         // CREATE USER WITH ROLE CUSTOMER
