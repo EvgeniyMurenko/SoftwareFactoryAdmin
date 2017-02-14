@@ -34,6 +34,8 @@ public class IndexPageController {
      * If users is already logged-in and tries to goto login page again, will be redirected to list page.
      */
 
+
+
     @Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
 
@@ -75,7 +77,7 @@ public class IndexPageController {
     @Autowired
     MailService mailService;
 
-    @RequestMapping(value = "/estimate", method = RequestMethod.POST)
+    @RequestMapping(value = "/estimate", method = RequestMethod.POST )
     public ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
                                        @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
