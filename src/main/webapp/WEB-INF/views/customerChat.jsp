@@ -84,7 +84,7 @@
             <!-- Projects -->
             <h3 class="mt0">프로젝트</h3>
             <ul class="projects-list">
-                <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i> AMMATA</a></li>
+                <li><a href="javascript:void(0);" class="active"><i class="fa fa-angle-double-right"></i> AMMATA</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i> ComeOnBaby</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i> SomeOther</a></li>
             </ul>
@@ -102,95 +102,95 @@
             <!-- Breadcrumbs -->
             <ol class="breadcrumb">
                 <li><a href="control.html"><i class="fa fa-home"></i></a></li>
-                <li class="active">새 사례 만들기</li>
+                <li class="active">AMMATA Chat</li>
             </ol>
             <!-- #End Breadcrumbs -->
 
-            <!-- Estimation -->
-            <form>
-                <div class="form-group">
-                    <label for="project">Project</label>
-                    <select class="form-control selectpicker" id="project">
-                        <option value="1">AMMATA</option>
-                        <option value="2">ComeOnBaby</option>
-                    </select>
-                </div>
+            <!-- Chat messages -->
+            <div class="chat-message">
+                <ul class="chat">
 
-                <div class="form-group">
-                    <label for="title">Issue title</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="Issue title">
-                </div>
+                    <li class="left clearfix">
+                        <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">John Doe</strong>
+                                <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
 
-                <div class="form-group">
-                    <label for="lang">Language</label>
-                    <select class="form-control selectpicker" name="lang" id="lang">
-                        <option value="AR">العربية / Arabic</option>
-                        <option value="BE">Беларускі / Belarusian</option>
-                        <option value="BG">Български / Bulgarian</option>
-                        <option value="CS">Čeština / Czech</option>
-                        <option value="DA">Dansk / Danish</option>
-                        <option value="DE">Deutsch / German</option>
-                        <option value="EL">Ελληνικά / Greek</option>
-                        <option value="EN">English / English</option>
-                        <option value="ES">Español / Spanish</option>
-                        <option value="ET">Eesti / Estonian</option>
-                        <option value="FI">Suomi / Finnish</option>
-                        <option value="FR">Français / French</option>
-                        <option value="GA">Gaeilge / Irish</option>
-                        <option value="HI">हिंदी / Hindi</option>
-                        <option value="HR">Hrvatski / Croatian</option>
-                        <option value="HU">Magyar / Hungarian</option>
-                        <option value="IN">Bahasa indonesia / Indonesian</option>
-                        <option value="IS">Íslenska / Icelandic</option>
-                        <option value="IT">Italiano / Italian</option>
-                        <option value="IW">עברית / Hebrew</option>
-                        <option value="JA">日本語 / Japanese</option>
-                        <option value="KO">한국어 / Korean</option>
-                        <option value="LT">Lietuvių / Lithuanian</option>
-                        <option value="LV">Latviešu / Latvian</option>
-                        <option value="MK">Македонски / Macedonian</option>
-                        <option value="MS">Bahasa melayu / Malay</option>
-                        <option value="MT">Malti / Maltese</option>
-                        <option value="NL">Nederlands / Dutch</option>
-                        <option value="NO">Norsk / Norwegian</option>
-                        <option value="PL">Polski / Polish</option>
-                        <option value="PT">Português / Portuguese</option>
-                        <option value="RO">Română / Romanian</option>
-                        <option value="RU">Русский / Russian</option>
-                        <option value="SK">Slovenčina / Slovak</option>
-                        <option value="SL">Slovenščina / Slovenian</option>
-                        <option value="SQ">Shqipe / Albanian</option>
-                        <option value="SR">Српски / Serbian</option>
-                        <option value="SV">Svenska / Swedish</option>
-                        <option value="TH">ไทย / Thai</option>
-                        <option value="TR">Türkçe / Turkish</option>
-                        <option value="UK">Українська / Ukrainian</option>
-                        <option value="VI">Tiếng việt / Vietnamese</option>
-                        <option value="ZH">中文 / Chinese</option>
-                        <option value="OL">Other language</option>
-                    </select>
-                </div>
+                    <li class="right clearfix">
+                        <span><img src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar"></span>
+                        <div class="chat-body clearfix">
+                            <div class="header text-right">
+                                <strong class="primary-font">Sarah</strong>
+                                <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 13 mins ago</small>
+                            </div>
+                            <p class="text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.</p>
+                        </div>
+                    </li>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea class="form-control" name="message" rows="7" id="message" placeholder="Message"></textarea>
-                </div>
+                    <li class="left clearfix">
+                        <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">John Doe</strong>
+                                <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
 
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label">Select File</label>
-                            <input id="caseInput" name="input4[]" type="file" multiple class="file-loading">
+                    <li class="right clearfix">
+                        <span><img src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar"></span>
+                        <div class="chat-body clearfix">
+                            <div class="header text-right">
+                                <strong class="primary-font">Sarah</strong>
+                                <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 13 mins ago</small>
+                            </div>
+                            <p class="text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.</p>
+                        </div>
+                    </li>
+
+                    <li class="left clearfix">
+                        <span><img src="http://bootdey.com/img/Content/user_3.jpg" alt="User Avatar"></span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">John Doe</strong>
+                                <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
+
+                    <li class="right clearfix">
+                        <span><img src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar"></span>
+                        <div class="chat-body clearfix">
+                            <div class="header text-right">
+                                <strong class="primary-font">Sarah</strong>
+                                <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i> 13 mins ago</small>
+                            </div>
+                            <p class="text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.</p>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div class="clearfix chat-message-section">
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="7" id="message" placeholder="Message"></textarea>
+                    </div>
+                    <div class="mt20">
+                        <div class="row">
+                            <div class="col-md-6"><input id="chat-upload" name="file[]" multiple type="file"></div>
+                            <div class="col-md-6 text-right"><button class="btn btn-primary btn-mobile" name="send">Send message</button></div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="form-group text-right mt25">
-                            <button type="submit" class="btn btn-primary btn-mobile">Send case</button>
-                        </div>
-                    </div>
                 </div>
-            </form>
-            <!-- #End Estimation -->
+            </div>
+            <!-- #End Chat messages -->
 
         </div>
     </div>
