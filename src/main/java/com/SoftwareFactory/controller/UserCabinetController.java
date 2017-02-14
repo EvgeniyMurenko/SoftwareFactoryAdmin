@@ -132,7 +132,7 @@ public class UserCabinetController {
     @RequestMapping(value = "/case/{id}", method = RequestMethod.GET)
     public ModelAndView caseChatController(@PathVariable Long id, HttpSession httpSession) {
 
-        ModelAndView caseChat = new ModelAndView("chat");
+        ModelAndView caseChat = new ModelAndView("customerChat");
 
         // GET MESSAGE FROM CASE BY ID
         Case aCase = caseService.getCaseById(id);
