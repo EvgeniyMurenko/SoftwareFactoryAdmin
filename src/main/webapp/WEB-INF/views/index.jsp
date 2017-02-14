@@ -401,7 +401,7 @@
         <div class="modal-content">
 
             <!-- Estimate modal title -->
-            <form id="estimationForm" action="/estimate?${_csrf.parameterName}=${_csrf.token}" method="post" class="form-horizontal" role="form" data-toggle="validator" enctype="multipart/form-data">
+            <form id="estimationForm" action="/estimate?${_csrf.parameterName}=${_csrf.token}" method="post" class="form-horizontal" role="form" data-toggle="validator" <%--enctype="multipart/form-data"--%>>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4><i class="fa fa-address-card-o" aria-hidden="true"></i> 문의 해 주세요...</h4>
@@ -441,12 +441,12 @@
 
                             <div class="form-group m0" style="margin: 0 !important;">
                                 <div class="checkbox">
-                                    <input id="request" name="request[]" class="styled" type="checkbox">
+                                    <input id="request" name="price_request" class="styled" type="checkbox">
                                     <label for="request">견적문의</label>
                                 </div>
 
                                 <div class="checkbox">
-                                    <input id="question" name="request[]" class="styled" type="checkbox">
+                                    <input id="question" name="question_request" class="styled" type="checkbox">
                                     <label for="question">일반문의</label>
                                 </div>
                                 <div id="alertCheckboxMessage"></div>
@@ -514,8 +514,9 @@
 <script>
     jQuery(document).ready(function($) {
         swal(
-            '정상적으로 접수 되었습니다!',
-            '감사합니다',
+            '축하드립니다.',
+            '고객님의 CASE ID가 등록되었습니다.입력하신 E-MAIL로 ID가 발송되었습니다.E-MAIL 확인 후 접속해 주시기 바랍니다.' +
+            '감사합니다.',
             'success'
         );
     });

@@ -49,7 +49,10 @@ public class HibernateConfiguration {
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        return properties;        
+        properties.setProperty("hibernate.connection.useUnicode", "yes");
+        properties.setProperty("hibernate.connection.characterEncoding", "UTF-8"); // UTF-8 or utf8?
+        return properties;
+
     }
     
 	@Bean
