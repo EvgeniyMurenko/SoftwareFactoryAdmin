@@ -433,8 +433,9 @@
 
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
-                                    <!-- <input type="text" name="phone" class="form-control form-block" pattern="[\+]\d{3}\s[\(]\d{2}[\)]\s\d{3}[\-]\d{4}$" data-format="+380 (dd) ddd-dddd" maxlength="100" placeholder="전화번호" required />-->
-                                    <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="" pattern="[\+]\d{2}\s[\(]\d{2}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="+82 (dd) dddd-dddd" maxlength="100" required />
+                                    <!-- <input type="text" name="phone" class="form-control form-block" pattern="[\+]\d{3}\s[\(]\d{2}[\)]\s\d{3}[\-]\d{4}$" data-format="+380 (dd) ddd-dddd" maxlength="100" placeholder="전화번호" required />
+                                    <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="" pattern="[\+]\d{2}\s[\(]\d{2}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="+82 (dd) dddd-dddd" maxlength="100" required /> -->
+                                    <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="" pattern="[\(]\d{3}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="(ddd) dddd-dddd" maxlength="100" required />
                                 </div>
                             </div>
 
