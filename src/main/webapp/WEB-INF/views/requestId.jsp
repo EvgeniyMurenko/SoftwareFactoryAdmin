@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="<%out.print(estimate.getPhone());%>" pattern="[\+]\d{2}\s[\(]\d{2}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="+82 (dd) dddd-dddd" maxlength="100" required />
+                            <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="<%out.print(estimate.getPhone());%>" pattern="[\(]\d{3}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="(ddd) dddd-dddd" maxlength="100" required />
                         </div>
 
                         <div class="form-group">

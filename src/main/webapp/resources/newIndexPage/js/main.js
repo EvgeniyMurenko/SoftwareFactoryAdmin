@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
                         message: '암호는ㄴ 3자 이상 입력해야 하며 20자 입력 할 수 있습니다.'
                     },
                     regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        regexp: /^[0-9_\.]+$/,
                         message: '암호는 알파벳, 숫자, 특수문자 (“.” , “_”)만 쓸 수 있습니다.'
                     }
                 }
@@ -103,33 +103,10 @@ jQuery(document).ready(function($) {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            email: {
+            ssoId: {
                 validators: {
                     notEmpty: {
-                        message: '이메일은 필수 입력 항목 입니다.'
-                    },
-                    emailAddress: {
-                        enabled: false,
-                    },
-                    regexp: {
-                        regexp: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
-                        message: '이메일이 잘못 입력 되었습니다.'
-                    },
-                }
-            },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: '암호는 필수 입력 항목입니다. (공백은 허용하지 않습니다)'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 20,
-                        message: '암호는ㄴ 3자 이상 입력해야 하며 20자 입력 할 수 있습니다.'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: '암호는 알파벳, 숫자, 특수문자 (“.” , “_”)만 쓸 수 있습니다.'
+                        message: '항목을 채워 주세요 (이름 또는 별명)'
                     }
                 }
             },
