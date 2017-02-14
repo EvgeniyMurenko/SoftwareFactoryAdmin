@@ -34,12 +34,13 @@ public class UserCabinetController {
 
         System.out.println("cabinet");
 
-        ModelAndView customerCabinet = new ModelAndView("personalArea");
+        ModelAndView customerCabinet = new ModelAndView("customerCabinet");
 
 
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
 
+        String customerName = customerInfo.getName();
 
         Set<Project> projectsToShow = customerInfo.getProjects();
         ArrayList<Case> casesToShow = new ArrayList<>();
@@ -65,6 +66,8 @@ public class UserCabinetController {
         Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
 
         //PUT OBJECTS TO MODEL
+        customerCabinet.addObject("customerName" , customerName);
+        customerCabinet.addObject("currentProjectCasesName" , "All Cases");
         customerCabinet.addObject("projects", sortedProjectListToShow);
         customerCabinet.addObject("cases", casesToShow);
 
@@ -80,13 +83,15 @@ public class UserCabinetController {
     public ModelAndView getProjectCases(@PathVariable Long id, HttpSession httpSession) {
 
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
+
         System.out.print("Project id " + id + "userId " + userId);
 
         // GET CASES FROM PROJECT BY ID
-        ModelAndView customerCabinetShowOneProject = new ModelAndView("personalArea");
+        ModelAndView customerCabinetShowOneProject = new ModelAndView("customerCabinet");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
 
+        String customerName = customerInfo.getName();
         Set<Project> projectsToShow = customerInfo.getProjects();
 
         ArrayList<Case> casesToShow = new ArrayList<>();
@@ -100,12 +105,21 @@ public class UserCabinetController {
 
         Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
 
+
+        //GET PROJECT NAME
+        String projectName = "";
+        if (project.getProjectName().equals("#$GENERAL")){
+            projectName = "Discussion Room";
+        } else {
+            projectName = project.getProjectName();
+        }
+
         //PUT OBJECTS TO MODEL
+        customerCabinetShowOneProject.addObject("customerName" , customerName);
+        customerCabinetShowOneProject.addObject("currentProjectCasesName" , projectName);
+        customerCabinetShowOneProject.addObject("projectId" , Long.toString(project.getId()));
         customerCabinetShowOneProject.addObject("projects", sortedProjectListToShow);
         customerCabinetShowOneProject.addObject("cases", casesToShow);
-
-
-        System.out.print("READY");
 
         return customerCabinetShowOneProject;
     }
