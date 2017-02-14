@@ -77,7 +77,7 @@
             <a href="./">소프트웨어<span>팩토리</span></a>
             <div class="small-logo">SoFAC : <i>Software Factory</i></div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 text-right login"><a href="javascript:void(0);" data-toggle="modal" data-target="#authorizationModal">이미 회원입니까? 로그인하십시오!</a></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 text-right login"><b>CASE OPEN</b> : <a href="javascript:void(0);" data-toggle="modal" data-target="#authorizationModal">고객 아이디로 로그인하세요</a></div>
     </div>
 </header>
 <!-- #End Header -->
@@ -372,12 +372,12 @@
 
                             <div class="mt10 mb10 forgot-password"><a href="javascript:void(0);">패스워드를 잊어 버리셨나요 ?</a></div>
 
-                            <p class="mt20"><small><i>고객ID는 SoFAC 과 지속적인 대화를 원하실 경우<br />
+                            <p class="mt20"><span style="font-size: 9pt;"><i>고객ID는 SoFAC 과 지속적인 대화를 원하실 경우<br />
                                 임시고객ID를 발급하여 드립니다.<br />
                                 발급요청은 초기 화면에서 문의하기를 통해서<br />
                                 접수하실 수 있습니다.<br />
                                 일회성 질문이나 견적문의는 고객ID를 발급하지<br />
-                                않습니다.</i></small>
+                                않습니다.</i></span>
                             </p>
                         </div>
                     </div>
@@ -466,8 +466,8 @@
 
                 <!-- Estimate modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
                     <button type="submit" class="btn btn-primary btn-mobile">보내기</button>
+                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
                 </div>
             </form>
         </div>

@@ -17,7 +17,7 @@ a { color: #03a9f4; cursor: pointer !important; }
 .logo a span { font-weight: 600; color: #03a9f4; }
 .small-logo { font-size: 9pt; color: #999; }
 .login { padding-top: 12px; }
-.login a { font-size: 12pt; color: #333; }
+.login a { color: #333; }
 /* #End Header */
 
 /* Cover */
@@ -29,7 +29,7 @@ a { color: #03a9f4; cursor: pointer !important; }
 .estimation { background: url('../images/space.png'); background-position: center top; background-repeat: repeat; padding: 20px; }
 .es-btn { float: right; width: 30%; text-align: right; }
 .es-title { padding-top: 7px; float: left; width: 70%; }
-.es-form-title p { font-size: 8pt; margin-bottom: 3px; color: #777; }
+.es-form-title p { font-size: 9pt; margin-bottom: 3px; color: #777; }
 .estimation-list { margin: 0 0 0 20px; }
 .estimate { color: #333; margin: 6px 0; }
 .check-on { display: block; background: url('../images/checkbox-check.png'); background-repeat: no-repeat; background-position: center top; height: 18px; width: 18px; float: left; margin-right: 10px; }

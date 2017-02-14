@@ -53,7 +53,7 @@
 <!-- Content -->
 <section class="container content mb40">
     <div class="row pt40">
-        <div class="col-md-12">
+        <div class="col-md-8">
 
             <div class="row mb30">
                 <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/image004.png"><img src="resources/newIndexPage/images/image004.png" alt="" class="img-responsive" /></a></div>
@@ -123,7 +123,7 @@
             <h3 style="font-size: 13pt;">인증자료</h3>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="certificate">
                         <div class="cf-title">
                             <span class="mb10 text-center">SoFAC 개발 제품 일본에 상표등록</span>
@@ -131,7 +131,7 @@
                         <div class="text-center"><img src="resources/newIndexPage/images/serf4.jpg" alt="" class="img-responsive position-center"></div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="certificate">
                         <div class="cf-title">
                             <span class="mb10 text-center">특허 제 10-2014-0034487호</span>
@@ -139,7 +139,9 @@
                         <div class="text-center"><img src="resources/newIndexPage/images/serf3.jpg" alt="" class="img-responsive position-center"></div>
                     </div>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row mt20">
+                <div class="col-md-6">
                     <div class="certificate">
                         <div class="cf-title">
                             <span class="mb10 text-center">일본에서 인정한 통신 기술 라이센스</span>
@@ -147,10 +149,7 @@
                         <div class="text-center"><img src="resources/newIndexPage/images/serf5.jpg" alt="" class="img-responsive position-center"></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row mt20">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="certificate">
                         <div class="cf-title">
                             <span class="mb10 text-center">ISO9001 인증</span>
@@ -158,7 +157,9 @@
                         <div class="text-center"><img src="resources/newIndexPage/images/serf1.jpg" alt="" class="img-responsive position-center"></div>
                     </div>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row mt20">
+                <div class="col-md-6">
                     <div class="certificate">
                         <div class="cf-title">
                             <span class="mb10 text-center">스마트폰에서 실시간 통신 특허 획득</span>

@@ -61,7 +61,7 @@
 
                 <p>공정자동화 시스템에 의하여 <b>다양한 프로젝트를 동시에 진행할 수 있으며</b><br />
                     다국적 인력운영시스템에 의하여 <b>개발 기간을 단축 시키는 병렬화 작업이 가능하고</b><br />
-                    기술 및 리소스를 빅데이터화 하여 중복 개발 <b>하지 않으며</b><br />
+                    기술 및 리소스를 빅데이터화 하여 <b>중복 개발 하지 않으며</b><br />
                     전문 분야 문제해결 능력을 지원하는 <b>WIKI 방식의 개발인력 멤버쉽 제도를 운영하고</b> 있습니다.</p>
 
 
@@ -71,10 +71,10 @@
                     현존하는 대부분의 소프트웨어적인 <b>작업대행과 유지보수 를 체계적으로</b> 수행합니다.</p>
 
                 <h3 style="color: #03a9f4;">앱개발 이제 더 이상 실패하지 마십시요.<br />
-                    특급호텔급 개발 서비스를 누려 보세요</h3>
+                    <span style="font-size: 12pt; line-height: 20px;">특급호텔급 개발 서비스를 누려 보세요</span></h3>
 
                 <div class="row">
-                    <div class="col-md-12"><img src="resources/newIndexPage/images/shema3.png" alt="" class="img-responsive"></div>
+                    <div class="col-md-8"><img src="resources/newIndexPage/images/shema3.png" alt="" class="img-responsive"></div>
                 </div>
 
                 <h3 style="font-size: 12pt; font-weight: bold; margin-bottom: 5px !important;">소프트웨어팩토리의 생각 ...</h3>
