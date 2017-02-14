@@ -42,7 +42,8 @@ public class IndexPageController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess ,
-                                  @RequestParam(value = "isGenerateCustomerIdSuccess" , required=false) Boolean isGenerateSuccess) {
+                                  @RequestParam(value = "isGenerateCustomerIdSuccess" , required=false) Boolean isGenerateSuccess ,
+                                    @RequestParam(value ="isSessionExpired" , required = false) Boolean isSessionExpired ) {
 
         if (isCurrentAuthenticationAnonymous()) {
             ModelAndView mainPage = new ModelAndView("index");
@@ -52,6 +53,9 @@ public class IndexPageController {
             }
             if (isGenerateSuccess !=null){
                 mainPage.addObject("isGenerateCustomerIdSuccess" , isGenerateSuccess);
+            }
+            if (isSessionExpired !=null){
+                mainPage.addObject("isSessionExpired" , isSessionExpired);
             }
 
             ArrayList<Estimate> estimateUnsorted = (ArrayList<Estimate>) estimateService.getAllEstimates();
@@ -144,9 +148,6 @@ public class IndexPageController {
         String password = phone.replace(" " , "");
         String ssoId =  generateCustomerId(estimateId);
 
-
-
-
         // CREATE USER WITH ROLE CUSTOMER
         User user = new User();
 
@@ -203,6 +204,14 @@ public class IndexPageController {
         return main;
     }
 
+    @RequestMapping(value = "/session_expired", method = RequestMethod.POST)
+    public ModelAndView sessionExpired( ){
+        ModelAndView modelAndView = new ModelAndView("redirect:/main");
+
+        modelAndView.addObject("isSessionExpired" , new Boolean(true));
+
+        return modelAndView;
+    }
 
     /**
      * This method returns true if users is already authenticated [logged-in], else false.
