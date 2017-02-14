@@ -156,7 +156,16 @@ jQuery(document).ready(function($) {
                         message: '항목을 채워 주세요.'
                     }
                 }
+            },
+            'request[]': {
+                err: '#alertCheckboxMessage',
+                validators: {
+                    notEmpty: {
+                        message: '체크 박스를 하나 이상 선택하십시오.'
+                    }
+                }
             }
+
         }
     });
 });

@@ -438,14 +438,17 @@
                                 </div>
                             </div>
 
-                            <div class="checkbox">
-                                <input id="request" name="request[]" class="styled" type="checkbox">
-                                <label for="request">견적문의</label>
-                            </div>
+                            <div class="form-group m0" style="margin: 0 !important;">
+                                <div class="checkbox">
+                                    <input id="request" name="request[]" class="styled" type="checkbox">
+                                    <label for="request">견적문의</label>
+                                </div>
 
-                            <div class="checkbox">
-                                <input id="question" name="request[]" class="styled" type="checkbox">
-                                <label for="question">일반문의</label>
+                                <div class="checkbox">
+                                    <input id="question" name="request[]" class="styled" type="checkbox">
+                                    <label for="question">일반문의</label>
+                                </div>
+                                <div id="alertCheckboxMessage"></div>
                             </div>
                         </div>
                         <!-- message -->
