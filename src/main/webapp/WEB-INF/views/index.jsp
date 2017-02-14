@@ -168,7 +168,7 @@
             <div class="ad-icon"><i class="fa fa-laptop"></i></div>
             <div>
                 <h3 class="text-center">FXM기법과 다국적 작업</h3>
-                <div class="text-justify">SoFAC은 기존의 소규모 개발 회사와 달리 저비용을 실현하면서 개발 및 지속적인 관리가 가능하게 하기 위하여 <b>다국적 개발 및 관리 시스템인 GXM플랫폼을 통하여 공장형 개발 기법을 실현하였습니다.</b></div>
+                <div class="text-justify">SoFAC은 기존의 소규모 개발 회사와 달리 저비용을 실현하면서 개발 및 지속적인 관리가 가능하게 하기 위하여 <b>다국적 개발 및 관리 시스템인 FXM플랫폼을 통하여 공장형 개발 기법을 실현하였습니다.</b></div>
                 <div class="mt10 text-justify"> <a href="<c:url value='/guide'/>"><i>자세히  알아보기...</i></a></div>
             </div>
         </div>
@@ -268,7 +268,7 @@
                 <div class="ft-icon"><i class="fa fa-star"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">고객 지원 인프라 소개</div>
-                    <div class="ft-body">SoFAC은 좋은 품질의 소프트웨어의 개발과 지속적인 유지보수를 위하여 다양한 인프라를 갖추고 있습니다. <a href="<c:url value='/gxm'/>"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-body">SoFAC은 좋은 품질의 소프트웨어의 개발과 지속적인 유지보수를 위하여 다양한 인프라를 갖추고 있습니다. <a href="<c:url value='/fxm'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>

@@ -44,9 +44,9 @@ public class PagesController {
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/gxm" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/fxm" }, method = RequestMethod.GET)
     public ModelAndView gxm() {
-        ModelAndView modelAndView = new ModelAndView("gxm");
+        ModelAndView modelAndView = new ModelAndView("fxm");
         return modelAndView;
     }
 
