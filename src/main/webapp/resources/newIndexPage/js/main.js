@@ -34,6 +34,8 @@ jQuery(document).ready(function($) {
         maxFileCount: 5,
         //allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
     });
+    $("#caseInput").fileinput({showCaption: false});
+    $("#chat-upload").fileinput({showCaption: false});
 
     // table pagination
     $("div.holder").jPages({

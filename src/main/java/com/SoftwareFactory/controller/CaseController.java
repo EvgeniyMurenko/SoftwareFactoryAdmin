@@ -33,7 +33,7 @@ public class CaseController {
     @RequestMapping(value = "/newCase", method = RequestMethod.GET)
     public ModelAndView newCase(HttpSession httpSession ) {
         System.out.println("=========new Case=========");
-        ModelAndView customerCabinet = new ModelAndView("newCase");
+        ModelAndView customerCabinet = new ModelAndView("customerCase");
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
         Set<Project> projects = customerInfo.getProjects();
