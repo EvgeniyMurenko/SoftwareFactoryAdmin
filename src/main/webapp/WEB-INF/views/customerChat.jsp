@@ -3,7 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.Project" %>
-<%@ page import="java.util.List" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.SoftwareFactory.constant.StatusEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -121,11 +122,15 @@
 
         </div>
         <div class="col-md-9">
-
+            <% Long caseId =  (Long) request.getAttribute("caseId"); %>
+            <% String caseStatus = (String) request.getAttribute("caseStatus"); %>
+            <%if (!caseStatus.equals(StatusEnum.CLOSE.toString())){%>
             <!-- Close button -->
-            <div class="text-right"><button class="btn btn-primary btn-mobile"><i class="fa fa-close"></i>Close case</button></div>
+            <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/close_case?${_csrf.parameterName}=${_csrf.token}" method="POST" >
+                <div class="text-right"><button type="submit" class="btn btn-primary btn-mobile"><i class="fa fa-close"></i>Close case</button></div>
+            </form>
             <!-- #End Close button -->
-
+            <%}%>
             <!-- Chat messages -->
             <div class="chat-message">
                 <ul class="chat">
@@ -164,8 +169,7 @@
 
 
                 </ul>
-
-                <% Long caseId =  (Long) request.getAttribute("caseId"); %>
+                <%if (!caseStatus.equals(StatusEnum.CLOSE.toString())){%>
                     <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/print_message?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data">
                         <div class="clearfix chat-message-section">
                             <div class="form-group">
@@ -179,6 +183,7 @@
                             </div>
                         </div>
                     </form>
+                <%}%>
                 </div>
 
             <!-- #End Chat messages -->

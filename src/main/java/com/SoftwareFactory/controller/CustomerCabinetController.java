@@ -6,6 +6,7 @@ import com.SoftwareFactory.comparator.CaseByStatusAndDateComparator;
 import com.SoftwareFactory.comparator.MessageByDateComparator;
 import com.SoftwareFactory.comparator.ProjectByDateComparator;
 import com.SoftwareFactory.constant.MessageEnum;
+import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.CaseService;
 import com.SoftwareFactory.service.CustomerInfoService;
@@ -126,7 +127,7 @@ public class CustomerCabinetController {
         //PUT OBJECTS TO MODEL
         caseChat.addObject("messagesSorted", messagesSorted);
         caseChat.addObject("caseId", id);
-
+        caseChat.addObject("caseStatus" , aCase.getStatus());
         return caseChat;
     }
 
@@ -138,9 +139,6 @@ public class CustomerCabinetController {
     @RequestMapping (value = "/case/{id}/print_message", method = RequestMethod.POST)
     public ModelAndView casePrintMessageController( @PathVariable Long id, @RequestParam("message") String messageText,
                                                    /*@RequestParam("file") MultipartFile  file, */HttpSession httpSession){
-
-
-
 
         // GET
         Case aCase = caseService.getCaseById(id);
@@ -170,8 +168,19 @@ public class CustomerCabinetController {
         return new ModelAndView(redirectLink);
     }
 
+    @RequestMapping (value = "/case/{id}/close_case", method = RequestMethod.POST)
+    public ModelAndView caseCloseController( @PathVariable Long id) {
 
-    //ADD GENERAL OBJECT THAT PERSIST IN ALL JSP
+        Case caseToClose = caseService.getCaseById(id);
+        caseToClose.setStatus(StatusEnum.CLOSE.toString());
+        caseService.updateCase(caseToClose);
+
+        return new ModelAndView("redirect:/cabinet/");
+    }
+
+
+
+        //ADD GENERAL OBJECT THAT PERSIST IN ALL JSP
     private Set<Project>  addGeneralDataToMAVAndReturnProjects(ModelAndView modelAndView , HttpSession httpSession){
 
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));

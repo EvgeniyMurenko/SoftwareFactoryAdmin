@@ -1,6 +1,7 @@
 package com.SoftwareFactory.controller;
 
 
+import com.SoftwareFactory.comparator.ProjectByDateComparator;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
@@ -18,9 +19,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -32,16 +31,22 @@ public class CaseController {
 
     @RequestMapping(value = "/newCase", method = RequestMethod.GET)
     public ModelAndView newCase(HttpSession httpSession ) {
-        System.out.println("=========new Case=========");
+
         ModelAndView customerCabinet = new ModelAndView("customerCase");
-        Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
-        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
-        Set<Project> projects = customerInfo.getProjects();
+        addGeneralDataToMAVAndReturnProjects(customerCabinet , httpSession);
+
+
+
+        /*Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
+
+
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);*/
+     /*   Set<Project> projects = customerInfo.getProjects();
         if (projects != null){
             System.out.println("add projects to casepage");
             customerCabinet.addObject("projects" , projects);
-        }
-        System.out.print(httpSession.getAttribute("UserRole"));
+        }*/
+
         return customerCabinet;
     }
 
@@ -59,15 +64,16 @@ public class CaseController {
     ProjectService projectService;
 
     @RequestMapping(value = "/createCase", method = RequestMethod.POST)
-    public ModelAndView createCase(HttpSession httpSession, @ModelAttribute("projectName") String projectName,
-                                   @ModelAttribute("caseName") String caseName,
-                                   @ModelAttribute("message") String message,
+    public ModelAndView createCase(HttpSession httpSession, @RequestParam("projectName") String projectName,
+                                   @RequestParam("caseName") String caseName,
+                                   @RequestParam("message") String message, @RequestParam("language") String language,
                                    @RequestParam("file[]") MultipartFile[] files){
 
+        System.out.print(projectName + " " + " " + caseName + " " + message + " " + " " + language);
 
-
+/*
         SaveFile sf = new SaveFile("C:"+File.separator+"test", files);
-        sf.saveFile();
+        sf.saveFile();*/
         //===================================================
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
@@ -104,9 +110,9 @@ public class CaseController {
         User us = userService.findById(userId.intValue());
         msg.setUser(us);
         msg.setMessageTime(date);
+        msg.setMessageText(message);
+       /* *//**//*msg.setMessageText(new StringConvector(message).convector());*/
 
-        /*msg.setMessageText(new StringConvector(message).convector());
-*/
         msg.setIsRead(MessageEnum.NOTREAD.toString());
         messages.add(msg);
         messageService.addNewMessage(msg);
@@ -116,6 +122,26 @@ public class CaseController {
         ModelAndView modelAndView = new ModelAndView("redirect:/list");
         return modelAndView;
     }
+
+    private Set<Project>  addGeneralDataToMAVAndReturnProjects(ModelAndView modelAndView , HttpSession httpSession){
+
+        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
+
+        String customerName = customerInfo.getName();
+
+        Set<Project> projectsToShow = customerInfo.getProjects();
+
+        List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
+        Collections.sort(sortedProjectListToShow, new ProjectByDateComparator());
+
+        //PUT OBJECTS TO MODEL
+        modelAndView.addObject("customerName" , customerName);
+        modelAndView.addObject("projects", sortedProjectListToShow);
+
+        return projectsToShow;
+    }
+
 }
 
 

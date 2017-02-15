@@ -2,6 +2,7 @@ package com.SoftwareFactory.model;
 
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class Message {
     private Date messageTime;
 
     @Column(name = "message_text")
+    @Type(type="text")
     private String messageText;
 
     @Column(name = "is_read")
