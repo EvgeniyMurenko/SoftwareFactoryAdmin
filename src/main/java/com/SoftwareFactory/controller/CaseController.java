@@ -111,7 +111,6 @@ public class CaseController {
         msg.setUser(us);
         msg.setMessageTime(date);
         msg.setMessageText(message);
-       /* *//**//*msg.setMessageText(new StringConvector(message).convector());*/
 
         msg.setIsRead(MessageEnum.NOTREAD.toString());
         messages.add(msg);

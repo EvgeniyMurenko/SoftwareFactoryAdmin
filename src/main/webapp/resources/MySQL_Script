@@ -3,7 +3,7 @@ CREATE TABLE `s_messages` (
 	`case_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
 	`message_time` DATETIME NOT NULL,
-	`message_text` VARCHAR(255) NOT NULL,
+	`message_text` TEXT NOT NULL,
     `is_read` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`message_id`)
 );

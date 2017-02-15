@@ -77,7 +77,7 @@ public class IndexPageController {
     @Autowired
     MailService mailService;
 
-    @RequestMapping(value = "/estimate", method = RequestMethod.POST )
+    @RequestMapping(value = "/estimate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     public ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
                                        @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
@@ -86,6 +86,8 @@ public class IndexPageController {
         System.out.println("name " + recipientName + " email " + recipientMail + " text "
                 + recipientRequestText + "phone" + phone);
 
+        System.out.println("========================START ESTIMATE CREATE");
+        System.out.println("========================ESTIMATE NAME: "+ recipientName);
 
         // CREATE ESTIMATE
         Date currentDate = new Date();

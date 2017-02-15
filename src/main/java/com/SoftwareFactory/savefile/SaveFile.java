@@ -22,8 +22,6 @@ public class SaveFile {
     }
 
     public void saveFile(){
-        System.out.println("============== TEST UPLOAD FILE");
-        System.out.println("==============UPLOAD FILE length " + this.files.length);
 
         //===================================================
         if (this.files.length == 0){

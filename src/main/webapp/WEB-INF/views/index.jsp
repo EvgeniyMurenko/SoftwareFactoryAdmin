@@ -2,10 +2,11 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <%@ page import="com.SoftwareFactory.model.Estimate" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="java.util.Iterator" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%--<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
@@ -13,7 +14,7 @@
 <html lang="kr">
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta property="og:site_name" content="software factory" />
     <meta property="og:title" content="소팩소개" />
     <meta property="og:image" content="http://www.sofac.kr/resources/newIndexPage/images/web-logo1.jpg" />

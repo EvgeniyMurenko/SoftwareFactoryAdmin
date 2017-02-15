@@ -103,25 +103,25 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 
                 /*Localization beans*/
-
+/*
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:locale");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
-    }
+    }*/
 
-    @Bean
+ /*   @Bean
     public CookieLocaleResolver localeResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
         localeResolver.setDefaultLocale(Locale.ENGLISH);
         localeResolver.setCookieName("my-locale-cookie");
         localeResolver.setCookieMaxAge(3600);
         return localeResolver;
-    }
+    }*/
 
-    @Bean
+ /*   @Bean
     public LocaleChangeInterceptor localeInterceptor() {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
@@ -131,7 +131,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeInterceptor());
-    }
+    }*/
 
 
     // Java mail
