@@ -17,7 +17,7 @@ a { color: #03a9f4; cursor: pointer !important; }
 .logo a span { font-weight: 600; color: #03a9f4; }
 .small-logo { font-size: 9pt; color: #999; }
 .login { padding-top: 12px; }
-.login a { color: #333; }
+.login a {  color: #333; }
 /* #End Header */
 
 /* Cover */
@@ -147,10 +147,12 @@ a { color: #03a9f4; cursor: pointer !important; }
 .certificate { background-color: #f9f9f9; padding: 20px; }
 .certificate span { display: block; font-size: 11pt; }
 .cf-title { border-bottom: 1px solid #eee; margin-bottom: 20px; }
-.document-table { font-size: 10pt; }
-.document-table td { padding: 5px; border: 1px solid #eee;  }
-.document-table td:first-child { border-left: 0; }
-.document-table td:last-child { border-right: 0; }
+.document-table { font-size: 10pt; width: 100%; }
+.document-table th { text-align: center; border-top: 0 !important; background-color: #ddd; }
+.document-table td, .document-table th { padding: 8px; border: 1px solid #eee;  }
+.document-table td:first-child, .document-table th:first-child { border-left: 0; }
+.document-table td:last-child, .document-table th:last-child { border-right: 0; }
+.document-table tr:last-child td { border-bottom: 0; }
 
 .request-id { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; }
 .request-id h3 { font-size: 12pt; }

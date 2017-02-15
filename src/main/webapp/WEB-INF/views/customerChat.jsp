@@ -11,7 +11,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="kr">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,8 +21,8 @@
 
     <meta property="og:site_name" content="software factory" />
     <meta property="og:title" content="소팩소개" />
-    <meta property="og:image" content="images/web-logo.jpg" />
-    <meta property="og:url" content="http://sofac/" />
+    <meta property="og:image" content="/resources/newIndexPage/images/web-logo.jpg" />
+    <meta property="og:url" content="http://www.sofac.kr/" />
     <meta property="og:description" content="" />
 
     <meta name="description" content="" />
@@ -121,6 +121,10 @@
 
         </div>
         <div class="col-md-9">
+
+            <!-- Close button -->
+            <div class="text-right"><button class="btn btn-primary btn-mobile"><i class="fa fa-close"></i>Close case</button></div>
+            <!-- #End Close button -->
 
             <!-- Chat messages -->
             <div class="chat-message">

@@ -68,4 +68,16 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = { "/technology" }, method = RequestMethod.GET)
+    public ModelAndView technology() {
+        ModelAndView modelAndView = new ModelAndView("technology");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = { "/pricing" }, method = RequestMethod.GET)
+    public ModelAndView pricing() {
+        ModelAndView modelAndView = new ModelAndView("pricing");
+        return modelAndView;
+    }
+
 }

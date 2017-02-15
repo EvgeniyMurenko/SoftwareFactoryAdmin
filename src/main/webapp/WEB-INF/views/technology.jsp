@@ -1,5 +1,9 @@
-<%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="com.SoftwareFactory.model.CustomerInfo" %>
+<%@ page import="com.SoftwareFactory.model.Message" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.SoftwareFactory.model.Project" %>
+<%@ page import="java.util.List" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -24,7 +28,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>We Builid SoftwareFactory :: Software Factory</title>
+    <title>실시간 데이터 교환 엔진 (ExD) :: Software Factory</title>
 
     <link href="/resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
@@ -75,44 +79,43 @@
 <!-- #End Header -->
 
 <!-- Content -->
-<section class="container content mb40">
-
+<section class="container content other-font2 mb40">
     <div class="row pt40">
-        <div class="col-md-7">
+        <div class="col-md-8">
 
-            <h3 class="mt40">스마트 시대형 국제표준화를 준수하는 소프트웨어 개발 운영 대행 전문 기업입니다.</h3>
-            <p>한국의 ㈜굿앤굿 재무설계 법인이 주체가 되고 미국의 IT법인, 러시아, 우크라이나, 베트남 기업 및 대학들과 협력하고 있으며,<br />
-                재무설계 법인의 특성상 자금 및 법률 행정 지원과 더불어 소프트웨어가 동시에 지원이 되어야 기업이 성장할 수 있다는 새로운 시대적 요구에 따라 좋은 아이디어와 사업의 의지가 있는 스타트업 기업의 종합 지원도 가능한 구조를 갖추고 있습니다.</p>
-            <img src="/resources/newIndexPage/images/circle-logo.png" alt="" />
-            <h3>We Builid  SoftwareFactory</h3>
+            <h3>실시간 데이터 교환 엔진 (ExD)</h3>
+            <p>ExD(Engine of High speed Realtime exchange Data) 엔진은 1997에 최초로 탄생하여 실시간 데이터 통신 시대를 여는데 핵심적인 역할을 하였으며, 한국 및 일본의 실시간 주가공급 시스템 및 유명 메신저의 서버 엔진으로 활용되어 왔습니다.<br />
+                이 엔진은 노하우만 살리고 기술적인 부분은 구소련의 자연과학 기술을 보유한 유능한 엔지니어들에 의해서 모바일 지원용으로 전면 교체 개발 되어 있습니다.<br />
+                이것은 고객님들의 어플 개발시 막대한 비용절감 및 고성능 앱 개발에 큰 도움이 될 것입니다.</p>
 
-            <div class="row mt20 mb40 clearfix">
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">Korea</h3></div>
-                    <div>㈜굿앤굿 재무설계 법인</div>
-                    <div><a href="http://www.gngasset.co.kr/" target="_blank">www.gngasset.co.kr</a></div>
-                </div>
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">USA</h3></div>
-                    <div>CHON&HOUGH 세무법인</div>
-                    <div><a href="http://www.chonhoughpc.com/" target="_blank">www.chonhoughpc.com</a></div>
-                </div>
-                <div class="col-md-12 mb20">
-                    <div class="mb10"><h3 class="mb0 mt0">Ukraine</h3></div>
-                    <div>Shevchenko National University</div>
-                    <div><a href="http://www.fit.univ.kiev.ua/" target="_blank">www.fit.univ.kiev.ua</a></div>
-                    <div class="mt10 mb10">Factory headquarter Engineer Office<br />(Kiev, ukraine)</div>
-                    <div class="mt10"><a data-fancybox="gallery" href="/resources/newIndexPage/images/cafe.jpg" class="position-center"><img src="/resources/newIndexPage/images/cafe-small.jpg" alt=""></a></div>
-                </div>
+            <div class="row">
+                <div class="col-md-12 mt20"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema9.png"><img src="/resources/newIndexPage/images/shema9.png" alt="" class="img-responsive"></a></div>
+                <div class="col-md-12 clearfix mt40"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema10.png"><img src="/resources/newIndexPage/images/shema10.png" alt="" class="img-responsive"></a></div>
             </div>
 
-            <div class="row mt200">
-                <div class="col-md-12"><a data-fancybox="gallery" href="/resources/newIndexPage/images/staff.png" class="position-center"><img src="/resources/newIndexPage/images/staff-small.png" alt="" class="img-responsive staff" /></a></div>
+            <h3>SPRIM Socket</h3>
+            <p>실시간 통신 기술에서는 Socket 통신을 사용합니다.<br />
+                스마트폰 시대에도 Socket 통신을 사용하지만 스마트폰은 항상 이동하고 있으므로 통신 접속의 유지 기술이 매우 중요합니다.
+            </p>
+            <p><b>SPRIM(Socket protocol redefinition for intelligent mobile)</b> 소켓 전송 <b>기술은 스마트폰에서</b><br />
+                <b>안정적인 통신을 보장하는 최적의 알고리즘 정리한 특허 기술 입니다.</b></p>
+
+            <div class="row">
+                <div class="col-md-12 mt20 mb40"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema11.png"><img src="/resources/newIndexPage/images/shema11.png" alt="" class="img-responsive"></a></div>
             </div>
 
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-6" style="border-right: 3px dotted #aaa;"><img src="/resources/newIndexPage/images/serf7.png" alt="" class="img-responsive"></div>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <h3>SoFAC의 기술제공 정책</h3>
+
+                    <p>소프트웨어팩토리는<br />
+                        스마트 시대에 필요한 핵심 엔진을 보유하고 있으며 앱 개발시 엔진 적용 및 기술료를 받지 않는 것을 기본 정책으로 하고 있습니다.</p>
+
+                </div>
+            </div>
         </div>
     </div>
-
 </section>
 <!-- #End Content -->
 
@@ -135,9 +138,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <c:url var="loginUrl" value="/login?${_csrf.parameterName}=${_csrf.token}"/>
             <!-- Authorization modal title -->
-            <form action="${loginUrl}" id="authorizationForm" method="post" class="form-horizontal">
+            <form id="authorizationForm" method="post" class="form-horizontal">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4><i class="fa fa-user-o" aria-hidden="true"></i> 고객님 CASE 로그인에 오신 것을 환영합니다.</h4>
@@ -151,7 +153,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="col-lg-12 text-left">
-                                    <input type="text" name="ssoId" class="form-control form-block" placeholder="고객 ID" required />
+                                    <input type="email" name="email" class="form-control form-block" placeholder="고객 ID" required />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -169,17 +171,15 @@
                             <div class="mt10 mb10 forgot-password"><a href="javascript:void(0);">패스워드를 잊어 버리셨나요 ?</a></div>
 
                             <p class="mt20"><span style="font-size: 9pt;"><i>고객ID는 SoFAC 과 지속적인 대화를 원하실 경우<br />
-                                임시고객ID를 발급하여 드립니다.<br />
-                                발급요청은 초기 화면에서 문의하기를 통해서<br />
-                                접수하실 수 있습니다.<br />
-                                일회성 질문이나 견적문의는 고객ID를 발급하지<br />
-                                않습니다.</i></span>
+                                    임시고객ID를 발급하여 드립니다.<br />
+                                    발급요청은 초기 화면에서 문의하기를 통해서<br />
+                                    접수하실 수 있습니다.<br />
+                                    일회성 질문이나 견적문의는 고객ID를 발급하지<br />
+                                    않습니다.</i></span>
                             </p>
                         </div>
                     </div>
                 </div>
-
-                <%--         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 
                 <!-- Authorization modal footer -->
                 <div class="modal-footer">

@@ -10,7 +10,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="kr">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -161,7 +161,7 @@
             <div>
                 <h3 class="text-center">가격 및 유지보수 정책</h3>
                 <div class="text-justify">현대 사회의 모든 사업은 소프트웨어 지원이 필수적입니다. 따라서 기존의 개발비용 개념과 <b>달리 다양한 방법으로 비용을 절감하거나 고객이 원하는 형태로 비용 지불 방법을 정할 수 있는 유연한 가격 정책과 기술료를 받지 않는 정책을 운영합니다.</b></div>
-                <div class="mt10 text-justify"> <a href="javascript:void(0);"><i>자세히  알아보기...</i></a></div>
+                <div class="mt10 text-justify"> <a href="<c:url value='/pricing'/>"><i>자세히  알아보기...</i></a></div>
             </div>
         </div>
         <div class="col-md-4 mb20">
@@ -259,7 +259,7 @@
                 <div class="ft-icon"><i class="fa fa-external-link"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">보유기술 및 정책</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="<c:url value='/technology'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>

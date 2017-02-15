@@ -62,11 +62,18 @@ jQuery(document).ready(function($) {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            ssoId: {
+            email: {
                 validators: {
                     notEmpty: {
-                        message: '항목을 채워 주세요 (이름 또는 별명)'
-                    }
+                        message: '이메일은 필수 입력 항목 입니다.'
+                    },
+                    emailAddress: {
+                        enabled: false,
+                    },
+                    regexp: {
+                        regexp: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
+                        message: '이메일이 잘못 입력 되었습니다.'
+                    },
                 }
             },
             password: {
@@ -144,7 +151,6 @@ jQuery(document).ready(function($) {
                     }
                 }
             }
-
         }
     });
 });
