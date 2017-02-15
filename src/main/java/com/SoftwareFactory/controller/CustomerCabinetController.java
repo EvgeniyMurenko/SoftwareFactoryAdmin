@@ -24,7 +24,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/cabinet")
 @SessionAttributes("roles")
-public class UserCabinetController {
+public class CustomerCabinetController {
 
     @Autowired
     CustomerInfoService customerInfoService;
