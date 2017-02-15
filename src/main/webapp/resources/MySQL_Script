@@ -40,7 +40,7 @@ CREATE TABLE `s_customer_info` (
 	`company` VARCHAR(255) NOT NULL,
 	`phone` VARCHAR(255) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
-	`web_site` VARCHAR(255) NOT NULL,
+	`web_site` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `s_estimates` (

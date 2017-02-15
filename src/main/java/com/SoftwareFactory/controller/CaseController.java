@@ -3,6 +3,7 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
+import com.SoftwareFactory.converter.StringConvector;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.savefile.SaveFile;
 import com.SoftwareFactory.service.*;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -63,7 +65,9 @@ public class CaseController {
                                    @ModelAttribute("message") String message,
                                    @RequestParam("file[]") MultipartFile[] files){
 
-        SaveFile sf = new SaveFile("E:"+File.separator+"test", files);
+
+
+        SaveFile sf = new SaveFile("C:"+File.separator+"test", files);
         sf.saveFile();
         //===================================================
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
@@ -101,7 +105,9 @@ public class CaseController {
         User us = userService.findById(userId.intValue());
         msg.setUser(us);
         msg.setMessageTime(date);
-        msg.setMessageText(message);
+
+        msg.setMessageText(new StringConvector(message).convector());
+
         msg.setIsRead(MessageEnum.NOTREAD.toString());
         messages.add(msg);
         messageService.addNewMessage(msg);
