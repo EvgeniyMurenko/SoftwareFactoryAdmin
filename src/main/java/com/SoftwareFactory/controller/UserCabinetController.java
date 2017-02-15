@@ -36,44 +36,31 @@ public class UserCabinetController {
 
         ModelAndView customerCabinet = new ModelAndView("customerCabinet");
 
-
-        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
-
-        String customerName = customerInfo.getName();
-
-        Set<Project> projectsToShow = customerInfo.getProjects();
+        Set<Project> projectsToShow = addGeneralDataToMAVAndReturnProjects(customerCabinet , httpSession);
         ArrayList<Case> casesToShow = new ArrayList<>();
 
-
         if (projectsToShow != null) {
-            System.out.println("add projects");
 
-
-            // GET PROJECTS FROM CUSTOMER
+            // GET CASES FROM PROJECT
             Iterator<Project> projectIterator = projectsToShow.iterator();
             while (projectIterator.hasNext()) {
                 Project project = projectIterator.next();
                 getCasesFromProject(project, casesToShow);
             }
-
         }
 
-        //SORT PROJECT & CASE
-        List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
-        Collections.sort(sortedProjectListToShow, new ProjectByDateComparator());
-
+        // SORT CASE
         Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
 
         //PUT OBJECTS TO MODEL
-        customerCabinet.addObject("customerName" , customerName);
         customerCabinet.addObject("currentProjectCasesName" , "All Cases");
-        customerCabinet.addObject("projects", sortedProjectListToShow);
         customerCabinet.addObject("cases", casesToShow);
 
 
         return customerCabinet;
     }
+
+
 
 
     @Autowired
@@ -82,17 +69,10 @@ public class UserCabinetController {
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ModelAndView getProjectCases(@PathVariable Long id, HttpSession httpSession) {
 
-        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-
-        System.out.print("Project id " + id + "userId " + userId);
-
         // GET CASES FROM PROJECT BY ID
         ModelAndView customerCabinetShowOneProject = new ModelAndView("customerCabinet");
 
-        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
-
-        String customerName = customerInfo.getName();
-        Set<Project> projectsToShow = customerInfo.getProjects();
+        addGeneralDataToMAVAndReturnProjects(customerCabinetShowOneProject , httpSession);
 
         ArrayList<Case> casesToShow = new ArrayList<>();
 
@@ -100,9 +80,6 @@ public class UserCabinetController {
         getCasesFromProject(project, casesToShow);
 
         //SORT PROJECT & CASE
-        List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
-        Collections.sort(sortedProjectListToShow, new ProjectByDateComparator());
-
         Collections.sort(casesToShow, new CaseByStatusAndDateComparator());
 
 
@@ -115,10 +92,9 @@ public class UserCabinetController {
         }
 
         //PUT OBJECTS TO MODEL
-        customerCabinetShowOneProject.addObject("customerName" , customerName);
+
         customerCabinetShowOneProject.addObject("currentProjectCasesName" , projectName);
         customerCabinetShowOneProject.addObject("projectId" , Long.toString(project.getId()));
-        customerCabinetShowOneProject.addObject("projects", sortedProjectListToShow);
         customerCabinetShowOneProject.addObject("cases", casesToShow);
 
         return customerCabinetShowOneProject;
@@ -133,6 +109,9 @@ public class UserCabinetController {
     public ModelAndView caseChatController(@PathVariable Long id, HttpSession httpSession) {
 
         ModelAndView caseChat = new ModelAndView("customerChat");
+
+        addGeneralDataToMAVAndReturnProjects(caseChat , httpSession);
+
 
         // GET MESSAGE FROM CASE BY ID
         Case aCase = caseService.getCaseById(id);
@@ -189,6 +168,27 @@ public class UserCabinetController {
         String redirectLink = "redirect:/cabinet/case/" + id;
 
         return new ModelAndView(redirectLink);
+    }
+
+
+    //ADD GENERAL OBJECT THAT PERSIST IN ALL JSP
+    private Set<Project>  addGeneralDataToMAVAndReturnProjects(ModelAndView modelAndView , HttpSession httpSession){
+
+        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
+
+        String customerName = customerInfo.getName();
+
+        Set<Project> projectsToShow = customerInfo.getProjects();
+
+        List<Project> sortedProjectListToShow = new ArrayList<>(projectsToShow);
+        Collections.sort(sortedProjectListToShow, new ProjectByDateComparator());
+
+        //PUT OBJECTS TO MODEL
+        modelAndView.addObject("customerName" , customerName);
+        modelAndView.addObject("projects", sortedProjectListToShow);
+
+        return projectsToShow;
     }
 
     //PUT ALL CASES FROM PROJECTS TO ONE ARRAY;

@@ -3,7 +3,6 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
-import com.SoftwareFactory.converter.StringConvector;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.savefile.SaveFile;
 import com.SoftwareFactory.service.*;
@@ -106,8 +105,8 @@ public class CaseController {
         msg.setUser(us);
         msg.setMessageTime(date);
 
-        msg.setMessageText(new StringConvector(message).convector());
-
+        /*msg.setMessageText(new StringConvector(message).convector());
+*/
         msg.setIsRead(MessageEnum.NOTREAD.toString());
         messages.add(msg);
         messageService.addNewMessage(msg);

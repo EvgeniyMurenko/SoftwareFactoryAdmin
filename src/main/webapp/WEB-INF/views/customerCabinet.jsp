@@ -82,10 +82,9 @@
                     String currentProjectId= (String) request.getAttribute("projectId");
                     List<Project> projectSet =  (List<Project>)request.getAttribute("projects");
                     Project generalDiscussionProject = projectSet.get(projectSet.size()-1);
-                    Iterator<Project> itr = projectSet.iterator();
                     for(Project project : projectSet){
                         if (!project.getProjectName().equals("#$GENERAL")){
-                            int countNewMessage = 0;
+                        /*    int countNewMessage = 0;
                             for(Case aCase : project.getCases()){
                                 for(Message msg : aCase.getMessages()){
                                     if(msg.getIsRead().equals(MessageEnum.NOTREAD.toString())){
@@ -94,7 +93,7 @@
                                         countNewMessage++;
                                     }
                                 }
-                            }
+                            }*/
                 %>
                 <%  String projectId= Long.toString(project.getId()); %>
                 <li><a href="/cabinet/project/<%out.print(projectId); %>" <%if (projectId.equals(currentProjectId)) out.print("class=\"active\"");%>     ><i class="fa fa-angle-double-right"></i> <% out.println(project.getProjectName()); %></a></li>
