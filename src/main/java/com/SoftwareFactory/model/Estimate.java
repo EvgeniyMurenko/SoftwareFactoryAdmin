@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "s_estimates")
@@ -23,7 +24,7 @@ public class Estimate {
     private String name;
 
 
-    @Column(name ="estimate_request" , nullable = false)
+    @Column(name = "estimate_request", nullable = false)
     private String estimateRequest;
 
     @Column(name = "email", nullable = false)
@@ -46,13 +47,18 @@ public class Estimate {
     private String phone;
 
 
-    @Column(name ="date_request" , columnDefinition="DATETIME")
+    @Column(name = "date_request", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRequest;
 
 
-    @Column(name ="estimate_generated_id")
+    @Column(name = "estimate_generated_id")
     private String estimateGeneratedId;
+
+
+    @OneToMany(mappedBy = "Estimate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<FileEstimate> estimateFiles;
+
 
     public Long getId() {
         return id;

@@ -16,8 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.filter.CharacterEncodingFilter;
+
 
 @Configuration
 @EnableWebSecurity
@@ -39,11 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-	/*	CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding("UTF-8");
-		filter.setForceEncoding(true);
-		http.addFilterBefore(filter,CsrfFilter.class);*/
-
 		http.authorizeRequests().antMatchers("/", "/list")
 				.access("hasRole('CUSTOMER') or hasRole('ADMIN') or hasRole('DBA')")
 				.antMatchers("/newuser/**", "/delete-user-*").access("hasRole('ADMIN')").antMatchers("/edit-user-*")
@@ -51,8 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()
 				.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
 				.tokenValiditySeconds(86400).and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");
-
-/*		http.sessionManagement().invalidSessionUrl("/session_expired");*/
 
 	}
 

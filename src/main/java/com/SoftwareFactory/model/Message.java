@@ -6,7 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
-
+import java.util.Set;
 
 
 @Entity
@@ -40,6 +40,12 @@ public class Message {
 
     @Column(name = "is_read")
     private String isRead;
+
+    @Column(name="language")
+    private String language;
+
+    @OneToMany(mappedBy = "Message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<FileMessage> messagesFiles;
 
     public Long getId() {
         return id;
@@ -89,23 +95,30 @@ public class Message {
         this.isRead = isRead;
     }
 
-    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead) {
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public Set<FileMessage> getMessagesFiles() {
+        return messagesFiles;
+    }
+
+    public void setMessagesFiles(Set<FileMessage> messagesFiles) {
+        this.messagesFiles = messagesFiles;
+    }
+
+    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, String language, Set<FileMessage> messagesFiles) {
         this.aCase = aCase;
         this.user = user;
         this.messageTime = messageTime;
         this.messageText = messageText;
         this.isRead = isRead;
+        this.language = language;
+        this.messagesFiles = messagesFiles;
     }
 
-/*
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", aCase=" + aCase +
-               ", user=" + user +
-             ", messageTime=" + messageTime +
-                ", messageText='" + messageText + '\'' +
-                '}';
-    }*/
 }
