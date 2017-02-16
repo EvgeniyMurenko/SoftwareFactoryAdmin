@@ -83,7 +83,7 @@ public class IndexPageController {
 
     /*@RequestMapping(value = "/estimate", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")*/
     @RequestMapping(value = {"/estimate"},consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = {RequestMethod.POST})
-    public ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
+    public @ResponseBody ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
                                        @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model,
                                        @RequestParam("fileEstimate[]") MultipartFile[] files) {
