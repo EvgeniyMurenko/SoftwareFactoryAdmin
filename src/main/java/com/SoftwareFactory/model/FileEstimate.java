@@ -1,5 +1,7 @@
 package com.SoftwareFactory.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 
@@ -10,8 +12,10 @@ public class FileEstimate {
     public FileEstimate(){}
 
     @Id
-    @Column(name = "estimate_id")
-    private Long estimateId;
+    @GeneratedValue(generator = "increment2")
+    @GenericGenerator(name = "increment2", strategy = "increment")
+    @Column(name = "file_estimate_id")
+    private long fileEstimateId;
 
     @Column(name = "link_to_file")
     private String linkToFile;
@@ -20,13 +24,6 @@ public class FileEstimate {
     @JoinColumn(name = "estimate_id")
     private Estimate estimate;
 
-    public Long getEstimateId() {
-        return estimateId;
-    }
-
-    public void setEstimateId(Long estimateId) {
-        this.estimateId = estimateId;
-    }
 
     public String getLinkToFile() {
         return linkToFile;
@@ -36,16 +33,25 @@ public class FileEstimate {
         this.linkToFile = linkToFile;
     }
 
+    public long getFileEstimateId() {
+        return fileEstimateId;
+    }
+
+    public void setFileEstimateId(long fileEstimateId) {
+        this.fileEstimateId = fileEstimateId;
+    }
+
     public Estimate getEstimate() {
         return estimate;
     }
+
 
     public void setEstimate(Estimate estimate) {
         this.estimate = estimate;
     }
 
     public FileEstimate(Long estimateId, String linkToFile, Estimate estimate) {
-        this.estimateId = estimateId;
+
         this.linkToFile = linkToFile;
         this.estimate = estimate;
     }

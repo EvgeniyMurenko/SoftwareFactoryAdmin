@@ -89,13 +89,17 @@ CREATE TABLE `persistent_logins` (
 );
 
 CREATE TABLE `s_file_estimate` (
+    file_estimate_id BIGINT NOT NULL AUTO_INCREMENT,
     estimate_id INT NOT NULL,
-    link_to_file TEXT NOT NULL
+    link_to_file TEXT NOT NULL,
+    PRIMARY KEY (file_estimate_id)
 );
 
 CREATE TABLE `s_file_message` (
+    file_message_id BIGINT NOT NULL AUTO_INCREMENT,
     message_id INT NOT NULL,
-    link_to_file TEXT NOT NULL
+    link_to_file TEXT NOT NULL,
+    PRIMARY KEY (file_message_id)
 );
 
 INSERT INTO `user_profile`(type)

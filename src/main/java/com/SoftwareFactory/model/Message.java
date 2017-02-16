@@ -44,7 +44,7 @@ public class Message {
     @Column(name="language")
     private String language;
 
-    @OneToMany(mappedBy = "Message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<FileMessage> messagesFiles;
 
     public Long getId() {

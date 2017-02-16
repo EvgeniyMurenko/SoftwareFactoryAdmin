@@ -108,19 +108,4 @@ public class Project {
         this.technologyType = technologyType;
     }
 
-
-    /*    @Override
-    public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", projectName='" + projectName + '\'' +
-                ", createDate=" + createDate +
-                ", status=" + status +
-                ", customerInfo=" + customerInfo +
-                ", cases=" + cases +
-                ", technologyType='" + technologyType + '\'' +
-                '}';
-    }*/
-
-
 }

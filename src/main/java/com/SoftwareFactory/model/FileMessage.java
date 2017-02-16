@@ -1,4 +1,7 @@
+
 package com.SoftwareFactory.model;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -6,11 +9,14 @@ import javax.persistence.*;
 @Table(name = "s_file_message")
 public class FileMessage {
 
-    public FileMessage(){}
+    public FileMessage() {
+    }
 
     @Id
-    @Column(name = "message_id")
-    private Long messageId;
+    @GeneratedValue(generator = "increment2")
+    @GenericGenerator(name = "increment2", strategy = "increment")
+    @Column(name = "file_message_id")
+    private long fileMessageId;
 
     @Column(name = "link_to_file")
     private String linkToFile;
@@ -20,13 +26,7 @@ public class FileMessage {
     private Message message;
 
 
-    public Long getMessageId() {
-        return messageId;
-    }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
-    }
 
     public String getLinkToFile() {
         return linkToFile;
@@ -44,9 +44,11 @@ public class FileMessage {
         this.message = message;
     }
 
-    public FileMessage(Long messageId, String linkToFile, Message message) {
-        this.messageId = messageId;
-        this.linkToFile = linkToFile;
-        this.message = message;
+    public long getFileMessageId() {
+        return fileMessageId;
+    }
+
+    public void setFileMessageId(long fileMessageId) {
+        this.fileMessageId = fileMessageId;
     }
 }

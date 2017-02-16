@@ -126,7 +126,7 @@ public class IndexPageController {
         mainPageEstimateSuccess.addObject("isEstimateSuccess", new Boolean(true));
 
         //Save to file
-        SaveFile sf = new SaveFile("E:"+ File.separator+ "test"+File.separator, files);
+        SaveFile sf = new SaveFile("C:"+ File.separator+ "test"+File.separator, files);
         sf.saveFile();
 
         return mainPageEstimateSuccess;

@@ -56,7 +56,7 @@ public class Estimate {
     private String estimateGeneratedId;
 
 
-    @OneToMany(mappedBy = "Estimate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<FileEstimate> estimateFiles;
 
 
@@ -140,17 +140,15 @@ public class Estimate {
         this.estimateRequest = estimateRequest;
     }
 
-    public Estimate(String name, String estimateRequest, String email, boolean isRespond, boolean isPriceRequest, boolean isQuestionRequest, String phone, Date dateRequest, String estimateGeneratedId) {
-        this.name = name;
-        this.estimateRequest = estimateRequest;
-        this.email = email;
-        this.isRespond = isRespond;
-        this.isPriceRequest = isPriceRequest;
-        this.isQuestionRequest = isQuestionRequest;
-        this.phone = phone;
-        this.dateRequest = dateRequest;
-        this.estimateGeneratedId = estimateGeneratedId;
+
+    public Set<FileEstimate> getEstimateFiles() {
+        return estimateFiles;
     }
+
+    public void setEstimateFiles(Set<FileEstimate> estimateFiles) {
+        this.estimateFiles = estimateFiles;
+    }
+
 
     public Estimate() {
     }
