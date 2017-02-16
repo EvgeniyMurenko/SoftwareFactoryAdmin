@@ -14,18 +14,14 @@ import com.SoftwareFactory.model.User;
 import com.SoftwareFactory.model.UserProfile;
 import com.SoftwareFactory.service.UserProfileService;
 import com.SoftwareFactory.service.UserService;
-import com.SoftwareFactory.util.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -221,14 +217,10 @@ public class AppController {
 			persistentTokenBasedRememberMeServices.logout(request, response, auth);
 			SecurityContextHolder.getContext().setAuthentication(null);
 		}
+		request.getSession().invalidate();
 		return "redirect:/main?logout";
 	}
 
-/*	@ExceptionHandler(ResourceNotFoundException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public String handleResourceNotFoundException() {
-		return "branch";
-	}*
 
 	/**
 	 * This method returns the principal[user-name] of logged-in user.
@@ -245,5 +237,5 @@ public class AppController {
 		return userName;
 	}
 }
-/*
-request.getSession().invalidate();*/
+
+

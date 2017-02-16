@@ -44,8 +44,8 @@ public class Message {
     @Column(name="language")
     private String language;
 
-    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<FileMessage> messagesFiles;
+    @Column(name="path")
+    private String messagePath;
 
     public Long getId() {
         return id;
@@ -103,22 +103,21 @@ public class Message {
         this.language = language;
     }
 
-    public Set<FileMessage> getMessagesFiles() {
-        return messagesFiles;
+    public String getMessagePath() {
+        return messagePath;
     }
 
-    public void setMessagesFiles(Set<FileMessage> messagesFiles) {
-        this.messagesFiles = messagesFiles;
+    public void setMessagePath(String messagePath) {
+        this.messagePath = messagePath;
     }
 
-    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, String language, Set<FileMessage> messagesFiles) {
+    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, String language, String messagePath) {
         this.aCase = aCase;
         this.user = user;
         this.messageTime = messageTime;
         this.messageText = messageText;
         this.isRead = isRead;
         this.language = language;
-        this.messagesFiles = messagesFiles;
+        this.messagePath = messagePath;
     }
-
 }
