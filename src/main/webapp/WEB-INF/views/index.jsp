@@ -402,7 +402,7 @@
         <div class="modal-content">
 
             <!-- Estimate modal title -->
-            <form id="estimationForm" action="/estimate?${_csrf.parameterName}=${_csrf.token}" method="post" class="form-horizontal" role="form" data-toggle="validator" <%--enctype="multipart/form-data"--%>>
+            <form id="estimationForm" action="/estimate?${_csrf.parameterName}=${_csrf.token}" method="POST" class="form-horizontal" role="form" data-toggle="validator" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4><i class="fa fa-address-card-o" aria-hidden="true"></i> 문의 해 주세요...</h4>
@@ -464,7 +464,7 @@
                     </div>
                     <div class="form-group mt20">
                         <div class="col-lg-12 text-left">
-                            <input id="input-repl-2" name="inputrepl2[]" type="file" class="file-loading" accept="image/*" multiple>
+                            <input id="input-repl-2" name="fileEstimate[]" type="file" class="file-loading" accept="image/*" multiple>
                         </div>
                     </div>
                 </div>

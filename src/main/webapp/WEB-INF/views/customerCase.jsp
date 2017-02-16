@@ -213,7 +213,7 @@
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label">Select File</label>
-                            <input id="caseInput" name="input4[]" type="file" multiple class="file-loading">
+                            <input id="caseInput" name="fileCase[]" type="file" multiple class="file-loading">
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">

@@ -67,13 +67,13 @@ public class CaseController {
     public ModelAndView createCase(HttpSession httpSession, @RequestParam("projectName") String projectName,
                                    @RequestParam("caseName") String caseName,
                                    @RequestParam("message") String message, @RequestParam("language") String language,
-                                   @RequestParam("file[]") MultipartFile[] files){
+                                   @RequestParam("fileCase[]") MultipartFile[] files){
 
         System.out.print(projectName + " " + " " + caseName + " " + message + " " + " " + language);
 
-/*
-        SaveFile sf = new SaveFile("C:"+File.separator+"test", files);
-        sf.saveFile();*/
+
+        SaveFile sf = new SaveFile("E:"+File.separator+ "test"+File.separator, files);
+        sf.saveFile();
         //===================================================
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);

@@ -22,7 +22,7 @@ public class SaveFile {
     }
 
     public void saveFile(){
-
+        System.out.println("============SAVE FILE=============");
         //===================================================
         if (this.files.length == 0){
             System.out.println("================NOT FILE ATTACH");
@@ -36,6 +36,7 @@ public class SaveFile {
                     File dir = new File(getPathForSaveFile());
                     if (!dir.exists()) {
                         dir.mkdirs();
+                        System.out.println("==========CREATE DIR" + dir.getAbsolutePath());
                     }
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath() + File.separator + name);

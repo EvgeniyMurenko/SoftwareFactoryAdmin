@@ -3,6 +3,7 @@ package com.SoftwareFactory.controller;
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
+import com.SoftwareFactory.savefile.SaveFile;
 import com.SoftwareFactory.service.CustomerInfoService;
 import com.SoftwareFactory.service.EstimateService;
 import com.SoftwareFactory.service.MailService;
@@ -19,9 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
@@ -82,7 +85,8 @@ public class IndexPageController {
     @RequestMapping(value = {"/estimate"},consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = {RequestMethod.POST})
     public ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
                                        @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
-                                       @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
+                                       @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model,
+                                       @RequestParam("fileEstimate[]") MultipartFile[] files) {
 
 
         System.out.println("name " + recipientName + " email " + recipientMail + " text "
@@ -120,6 +124,10 @@ public class IndexPageController {
         //REDIRECT TO MAIN AND SHOW SUCCESS
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
         mainPageEstimateSuccess.addObject("isEstimateSuccess", new Boolean(true));
+
+        //Save to file
+        SaveFile sf = new SaveFile("E:"+ File.separator+ "test"+File.separator, files);
+        sf.saveFile();
 
         return mainPageEstimateSuccess;
     }
