@@ -1,6 +1,5 @@
 package com.SoftwareFactory.configuration;
 
-
 import com.fasterxml.classmate.Filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,13 +43,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Autowired
     RoleToUserProfileConverter roleToUserProfileConverter;
 
-
     /**
      * Configure ViewResolvers to deliver preferred views.
      */
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
-
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
@@ -164,13 +161,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return multipartResolver;
     }
 
-
-    @Bean
+/*    @Bean
     public org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter() {
         org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter = new org.springframework.web.filter.CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
-    }
+    }*/
+
 }
 

@@ -31,9 +31,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 //        logger.info("Definition UTF-8 Encoding (CharsetFilter())");
         FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("charsetFilter", new CharsetFilter());
         encodingFilter.addMappingForUrlPatterns(null, false, "/*");
-
-
-
     }
 
 }

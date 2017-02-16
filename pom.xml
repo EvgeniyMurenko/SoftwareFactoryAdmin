@@ -61,8 +61,7 @@
 			<version>${springsecurity.version}</version>
 		</dependency>
 
-
-		<!-- Hibernate -->
+	<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>

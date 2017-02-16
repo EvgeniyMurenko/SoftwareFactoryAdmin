@@ -10,6 +10,7 @@ import com.SoftwareFactory.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -77,7 +78,8 @@ public class IndexPageController {
     @Autowired
     MailService mailService;
 
-    @RequestMapping(value = "/estimate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    /*@RequestMapping(value = "/estimate", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")*/
+    @RequestMapping(value = {"/estimate"},consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = {RequestMethod.POST})
     public ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
                                        @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model) {
