@@ -39,6 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
+	/*	CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		http.addFilterBefore(filter,CsrfFilter.class);*/
 
 		http.authorizeRequests().antMatchers("/", "/list")
 				.access("hasRole('CUSTOMER') or hasRole('ADMIN') or hasRole('DBA')")
@@ -47,11 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()
 				.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
 				.tokenValiditySeconds(86400).and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");
+
 /*		http.sessionManagement().invalidSessionUrl("/session_expired");*/
-		/*CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding("UTF-8");
-		filter.setForceEncoding(true);
-		http.addFilterBefore(filter,CsrfFilter.class);*/
+
 	}
 
 	@Bean
