@@ -87,7 +87,7 @@
 
                 <h3>SoFAC 개발 및 유지보수 비용 정책</h3>
 
-                <table class="document-table">
+                <table class="document-table2 other-font2">
                     <thead>
                     <tr>
                         <th class="hidden-xs"></th>
@@ -110,14 +110,14 @@
                         <td>ALL</td>
                         <td>개발작업<br />유지보수<br />업데이트<br />서버사용<br /><br />일괄포함</td>
                         <td>개발작업 및 개발 이후<br />- 소팩 IDC 를 통하여 일괄 의뢰<br />- 하드웨어 및 구성등은 소팩에서 책임 구성<br />- 패킷보안, 암호화 적용되어 있음<br />- 모니터링 서버와 연결되는 구조 내장<br />- 정기적 데이터 백업 기능 제공<br />- 접속 통계 자료 제공<br />- 사용자 폭주시를 위한 수축형 대응 체제<br />- 서버가 일시적으로 늘어나야 할 경우 자동<br />으로 증가되는 구조 내장</td>
-                        <td><b>개발규모에 따라<br />개발비 책정<br />유지보수 별도 계약하는 구조</b><br /><br />기본유지보수0.5M/M<br />(월 일정 데이터 사용량이 초과 할 경우 추가 비용이 발생되며 3개월 이상 지속될 경우 계속 변경 필요함)</td>
+                        <td>개발규모에 따라<br />개발비 책정<br />유지보수 별도 계약하는 구조<br /><br />기본유지보수0.5M/M<br />(월 일정 데이터 사용량이 초과 할 경우 추가 비용이 발생되며 3개월 이상 지속될 경우 계속 변경 필요함)</td>
                     </tr>
                     <tr style="background-color: #f9f9f9;">
                         <td class="hidden-xs">3</td>
                         <td>MNT</td>
                         <td>(상동)<br /><br />개발비 없이<br />지속 개발 및 유지보수 계약</td>
                         <td>(상동)</td>
-                        <td><b>2번항목의<br />ALL 상품과 동일하나 개발비용은 천만원 이내에서 보증금 형태로 결정되며 지속적인 유지보수를 개념으로 하는 무비용 개발 정책</b></td>
+                        <td>2번항목의<br />ALL 상품과 동일하나 개발비용은 천만원 이내에서 보증금 형태로 결정되며 지속적인 유지보수를 개념으로 하는 무비용 개발 정책</td>
                     </tr>
                     <tr>
                         <td class="hidden-xs">4</td>
@@ -150,11 +150,11 @@
                     </tbody>
                 </table>
 
-                <h3 class="mt200">[SoFAC  IDC 제공사항]</h3>
-                <table class="document-table">
+                <h3 class="mt40 mb0" style="font-size: 12pt;">[SoFAC  IDC 제공사항]</h3>
+                <table class="document-table2 other-font2">
                     <thead>
                     <tr>
-                        <th>브레닉스 서버</th>
+                        <th>서버</th>
                         <th>서버장비 보유상태</th>
                         <th>모니터링</th>
                         <th>과금</th>
@@ -173,8 +173,8 @@
                     </tbody>
                 </table>
 
-                <h3 class="mt200">[본사 IDC 정책]</h3>
-                <table class="document-table">
+                <h3 class="mt40 mb0" style="font-size: 12pt;">[본사 IDC 정책]</h3>
+                <table class="document-table2 other-font2">
                     <thead>
                     <tr>
                         <th>항목</th>

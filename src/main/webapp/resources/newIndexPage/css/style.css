@@ -154,6 +154,13 @@ a { color: #03a9f4; cursor: pointer !important; }
 .document-table td:last-child, .document-table th:last-child { border-right: 0; }
 .document-table tr:last-child td { border-bottom: 0; }
 
+.document-table2 { font-size: 9pt; width: 100%; }
+.document-table2 th { text-align: center; border-top: 0 !important; background-color: #ddd; }
+.document-table2 td, .document-table2 th { padding: 8px; border: 1px solid #aaa;  }
+.document-table2 td:first-child, .document-table2 th:first-child { border-left: 0; }
+.document-table2 td:last-child, .document-table2 th:last-child { border-right: 0; }
+.document-table2 tr:last-child td { border-bottom: 0; }
+
 .request-id { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; }
 .request-id h3 { font-size: 12pt; }
 .request-id .form-group label { font-weight: 100; font-size: 9pt; }

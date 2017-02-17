@@ -281,7 +281,7 @@
                 <div class="ft-icon"><i class="fa fa-file-o"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">회사연혁 및 인증자료</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="<c:url value='/documents'/>"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-body">기술과 금융이 조합된 10년의 노하우로 미래를 준비하여 100년이 지속되는 기업이 되겠습니다. <a href="<c:url value='/documents'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
