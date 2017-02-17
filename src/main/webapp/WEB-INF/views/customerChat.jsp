@@ -127,7 +127,27 @@
             <%if (!caseStatus.equals(StatusEnum.CLOSE.toString())){%>
             <!-- Close button -->
             <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/close_case?${_csrf.parameterName}=${_csrf.token}" method="POST" >
-                <div class="text-right"><button type="submit" class="btn btn-primary btn-mobile"><i class="fa fa-close"></i>Close case</button></div>
+                <div class="text-right">
+                    <%--<button type="submit" class="btn btn-primary btn-mobile">--%>
+                    <button class="btn btn-primary btn-mobile" type="button" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-close"></i>Close case
+                    </button>
+                </div>
+                <%--Modal window--%>
+                <div id="myModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+                                <h4 class="modal-title">ATTENTION</h4>
+                            </div>
+                            <div class="modal-body">Are you sure to close?</div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary btn-mobile">YES</button>
+                                <button class="btn btn-default" type="button" data-dismiss="modal">NO</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
             <!-- #End Close button -->
             <%}%>
@@ -191,6 +211,8 @@
         </div>
     </div>
 </section>
+
+
 
 <!-- Footer -->
 <footer class="container footer mb20">

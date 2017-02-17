@@ -119,7 +119,7 @@ public class CaseController {
 
         if(files.length != 0) {
             System.out.println("=======FILE LENGTH NOT NULL " + files.length);
-            String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"case"+File.separator + projectName + File.separator + caseName + File.separator + msg.getId();
+            String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"case"+File.separator + project.getId() + File.separator + newCase.getId() + File.separator + msg.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             msg.setMessagePath(pathToSaveFile);

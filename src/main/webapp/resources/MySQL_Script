@@ -214,5 +214,3 @@ VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', '2017-01-25 13:00:00
 
 INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request)
 VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', '2017-01-25 13:00:00', '+38 111 111 11', false, false, false);
-
-
