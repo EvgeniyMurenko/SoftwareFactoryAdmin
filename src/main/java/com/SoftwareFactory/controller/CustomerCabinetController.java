@@ -12,6 +12,7 @@ import com.SoftwareFactory.service.CaseService;
 import com.SoftwareFactory.service.CustomerInfoService;
 import com.SoftwareFactory.service.ProjectService;
 import com.SoftwareFactory.service.UserService;
+import com.SoftwareFactory.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.*;
 
 @Controller
@@ -138,12 +140,15 @@ public class CustomerCabinetController {
 
     @RequestMapping (value = "/case/{id}/print_message", method = RequestMethod.POST)
     public ModelAndView casePrintMessageController( @PathVariable Long id, @RequestParam("message") String messageText,
-                                                   /*@RequestParam("file") MultipartFile  file, */HttpSession httpSession){
+                                                   @RequestParam("file") MultipartFile[]  files, HttpSession httpSession){
 
         // GET
         Case aCase = caseService.getCaseById(id);
         int userId = (Integer) httpSession.getAttribute("UserId");
         User currentUser = userService.findById(userId);
+
+
+
 
         // CREATE MESSAGE
         Message message = new Message();
@@ -159,6 +164,19 @@ public class CustomerCabinetController {
         Set <Message> messages = aCase.getMessages();
         messages.add(message);
         aCase.setMessages(messages);
+
+        //SAVE FILE
+        if(files.length != 0) {
+            System.out.println("=======FILE LENGTH NOT NULL " + files.length);
+            String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"case"+File.separator + aCase.getProject().getId() + File.separator + aCase.getId() + File.separator + message.getId();
+            SaveFile sf = new SaveFile(pathToSaveFile, files);
+            sf.saveFile();
+            message.setMessagePath(pathToSaveFile);
+        } else {
+            System.out.println("=======FILE LENGTH NULL");
+        }
+
+
         caseService.updateCase(aCase);
 
 
