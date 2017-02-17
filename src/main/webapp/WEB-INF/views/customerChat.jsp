@@ -4,7 +4,9 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.Project" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.SoftwareFactory.constant.StatusEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="com.SoftwareFactory.constant.StatusEnum" %>
+<%@ page import="java.io.File" %>
+<%@ page import="com.SoftwareFactory.constant.GlobalEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -150,7 +152,18 @@
                                 <strong class="primary-font"><% out.print(customerInfo.getName());  %></strong>
                                 <small class="text-muted padding-l-5"><i class="fa fa-clock-o"></i><time class="timeago" datetime="<%  out.print(message.getMessageTime()); %>"></time></small>
                             </div>
-                            <p> <% out.print(message.getMessageText()); %></p>
+                            <p> <% out.print(message.getMessageText()); %>
+                                <% if (message.getMessagePath()!=null) {
+                                    File directory = new File(message.getMessagePath());
+                                    File[] files= directory.listFiles();
+                                    for (int i=0; i<files.length; i++){
+                                        String fileName =files[0].getName();
+                                        out.print("<br>" + "<a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                    }
+                                } %>
+
+
+                            </p>
                         </div>
                     </li>
 

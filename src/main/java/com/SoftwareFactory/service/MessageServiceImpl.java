@@ -33,6 +33,12 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     @Transactional
+    public Message getMessageById(Long id) {
+        return messageDao.read(id);
+    }
+
+    @Override
+    @Transactional
     public void updateMessage(Message message) {
         messageDao.update(message);
     }

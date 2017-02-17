@@ -1,17 +1,20 @@
 package com.SoftwareFactory.controller;
 
+import java.io.*;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
+import com.SoftwareFactory.model.Message;
 import com.SoftwareFactory.model.User;
 import com.SoftwareFactory.model.UserProfile;
+import com.SoftwareFactory.service.MessageService;
 import com.SoftwareFactory.service.UserProfileService;
 import com.SoftwareFactory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,208 +36,158 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes("roles")
 public class AppController {
 
-	@Autowired
-	UserService userService;
+    @Autowired
+    UserService userService;
 
-	@Autowired
-	UserProfileService userProfileService;
+    @Autowired
+    UserProfileService userProfileService;
 
-	@Autowired
-	MessageSource messageSource;
+    @Autowired
+    MessageSource messageSource;
 
-	@Autowired
-	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+    @Autowired
+    PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
-	@Autowired
-	AuthenticationTrustResolver authenticationTrustResolver;
-
-
-	/**
-	 * This method will list all existing users .
-	 */
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-	public ModelAndView listUsers(HttpSession session) {
-
-		User currentUser = userService.findBySSO(getPrincipal());
-
-		Set profiles = currentUser.getUserProfiles();
-
-		UserProfile userProfile = null;
-		Iterator iterator = profiles.iterator();
-		while (iterator.hasNext()) {
-			userProfile = (UserProfile) iterator.next();
-		}
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (userProfile.getType().equals("ADMIN")){
-			System.out.println("LOGIN AS ADMIN");
-
-			modelAndView.setViewName("userslist");
-
-		} else if (userProfile.getType().equals("CUSTOMER")){
-			System.out.println("LOGIN AS CUSTOMER");
-			modelAndView.setViewName("redirect:/cabinet/");
-		}
-
-		System.out.println(currentUser.getId());
-		System.out.println(userProfile.getType());
-
-		session.setAttribute("UserId" , currentUser.getId());
-		session.setAttribute("UserRole" , userProfile.getType());
-
-		return modelAndView;
-	}
+    @Autowired
+    AuthenticationTrustResolver authenticationTrustResolver;
 
 
+    /**
+     * This method will list all existing users .
+     */
+    @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
+    public ModelAndView listUsers(HttpSession session) {
+
+        User currentUser = userService.findBySSO(getPrincipal());
+
+        Set profiles = currentUser.getUserProfiles();
+
+        UserProfile userProfile = null;
+        Iterator iterator = profiles.iterator();
+        while (iterator.hasNext()) {
+            userProfile = (UserProfile) iterator.next();
+        }
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (userProfile.getType().equals("ADMIN")) {
+            System.out.println("LOGIN AS ADMIN");
+
+            modelAndView.setViewName("userslist");
+
+        } else if (userProfile.getType().equals("CUSTOMER")) {
+            System.out.println("LOGIN AS CUSTOMER");
+            modelAndView.setViewName("redirect:/cabinet/");
+        }
+
+        System.out.println(currentUser.getId());
+        System.out.println(userProfile.getType());
+
+        session.setAttribute("UserId", currentUser.getId());
+        session.setAttribute("UserRole", userProfile.getType());
+
+        return modelAndView;
+    }
 
 
+    /**
+     * This method will provide UserProfile list to views
+     */
+    @ModelAttribute("roles")
+    public List<UserProfile> initializeProfiles() {
+        return userProfileService.findAll();
+    }
 
-	/**
-	 * This method will provide the medium to add a new user.
-	 */
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
-	public String newUser(ModelMap model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		model.addAttribute("edit", false);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "registration";
-	}
+    /**
+     * This method handles Access-Denied redirect.
+     */
+    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+    public String accessDeniedPage(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "accessDenied";
+    }
 
-	/**
-	 * This method will be called on form submission, handling POST request for
-	 * saving user in database. It also validates the user input
-	 */
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result,
-						   ModelMap model) {
+    /**
+     * This method handles logout requests.
+     * Toggle the handlers if you are RememberMe functionality is useless in your app.
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            //new SecurityContextLogoutHandler().logout(request, response, auth);
+            persistentTokenBasedRememberMeServices.logout(request, response, auth);
+            SecurityContextHolder.getContext().setAuthentication(null);
+        }
+        request.getSession().invalidate();
+        return "redirect:/main?logout";
+    }
 
-		if (result.hasErrors()) {
-			return "registration";
-		}
+    @Autowired
+    MessageService messageService;
 
-		/*
-		 * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
-		 * and applying it on field [sso] of Model class [User].
-		 *
-		 * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-		 * framework as well while still using internationalized messages.
-		 *
-		 */
-		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-			result.addError(ssoError);
-			return "registration";
-		}
-
-		userService.saveUser(user);
-
-		model.addAttribute("success", "User " + " registered successfully");
-		model.addAttribute("loggedinuser", getPrincipal());
-		//return "success";
-		return "registrationsuccess";
-	}
+    @RequestMapping(value = "/download/{messageId}/{filename}/", method = RequestMethod.GET)
+    public void downloadFile(HttpServletResponse response, @PathVariable Long messageId, @PathVariable String filename) throws IOException {
 
 
-	/**
-	 * This method will provide the medium to update an existing user.
-	 */
-	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.GET)
-	public String editUser(@PathVariable String ssoId, ModelMap model) {
-		User user = userService.findBySSO(ssoId);
-		model.addAttribute("user", user);
-		model.addAttribute("edit", true);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "registration";
-	}
+        Message message = messageService.getMessageById(messageId);
 
-	/**
-	 * This method will be called on form submission, handling POST request for
-	 * updating user in database. It also validates the user input
-	 */
-	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
-	public String updateUser(@Valid User user, BindingResult result,
-							 ModelMap model, @PathVariable String ssoId) {
+        String EXTERNAL_FILE_PATH = message.getMessagePath() + File.separator + filename;
 
-		if (result.hasErrors()) {
-			return "registration";
-		}
-
-		/*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
-		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-		    result.addError(ssoError);
-			return "registration";
-		}*/
+        File file = new File(EXTERNAL_FILE_PATH);
 
 
-		userService.updateUser(user);
-
-		model.addAttribute("success", "User " + " updated successfully");
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "registrationsuccess";
-	}
-
-
-	/**
-	 * This method will delete an user by it's SSOID value.
-	 */
-	@RequestMapping(value = { "/delete-user-{ssoId}" }, method = RequestMethod.GET)
-	public String deleteUser(@PathVariable String ssoId) {
-		userService.deleteUserBySSO(ssoId);
-		return "redirect:/list";
-	}
+        if (!file.exists()) {
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
 
 
-	/**
-	 * This method will provide UserProfile list to views
-	 */
-	@ModelAttribute("roles")
-	public List<UserProfile> initializeProfiles() {
-		return userProfileService.findAll();
-	}
+        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType == null) {
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
 
-	/**
-	 * This method handles Access-Denied redirect.
-	 */
-	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
-	public String accessDeniedPage(ModelMap model) {
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "accessDenied";
-	}
+        System.out.println("mimetype : " + mimeType);
 
-	/**
-	 * This method handles logout requests.
-	 * Toggle the handlers if you are RememberMe functionality is useless in your app.
-	 */
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response){
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null){
-			//new SecurityContextLogoutHandler().logout(request, response, auth);
-			persistentTokenBasedRememberMeServices.logout(request, response, auth);
-			SecurityContextHolder.getContext().setAuthentication(null);
-		}
-		request.getSession().invalidate();
-		return "redirect:/main?logout";
-	}
+        response.setContentType(mimeType);
+
+        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+        response.setHeader("Content-Disposition : attachment", String.format("inline; filename=\"" + file.getName() + "\""));
 
 
-	/**
-	 * This method returns the principal[user-name] of logged-in user.
-	 */
-	private String getPrincipal(){
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
 
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails)principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
-	}
+        response.setContentLength((int) file.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
+
+
+    /**
+     * This method returns the principal[user-name] of logged-in user.
+     */
+    private String getPrincipal() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
 }
 
 
