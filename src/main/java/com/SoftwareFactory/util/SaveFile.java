@@ -27,13 +27,13 @@ public class SaveFile {
         if (this.files.length == 0){
             System.out.println("================NOT FILE ATTACH");
         } else {
-            String rootPath = System.getProperty("catalina.home");
+            /*String rootPath = System.getProperty("catalina.home");*/
             for (int i = 0; i < this.files.length; i++) {
                 MultipartFile file = this.files[i];
                 String name = file.getOriginalFilename();
                 try {
                     byte[] bytes = file.getBytes();
-                    File dir = new File(rootPath + getPathForSaveFile());
+                    File dir = new File(/*rootPath*//* + */getPathForSaveFile());
                     if (!dir.exists()) {
                         dir.mkdirs();
                         System.out.println("==========CREATE DIR" + dir.getAbsolutePath());
