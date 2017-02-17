@@ -41,9 +41,6 @@ public class Message {
     @Column(name = "is_read")
     private String isRead;
 
-    @Column(name="language")
-    private String language;
-
     @Column(name="path")
     private String messagePath;
 
@@ -95,14 +92,6 @@ public class Message {
         this.isRead = isRead;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public String getMessagePath() {
         return messagePath;
     }
@@ -111,13 +100,12 @@ public class Message {
         this.messagePath = messagePath;
     }
 
-    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, String language, String messagePath) {
+    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, String messagePath) {
         this.aCase = aCase;
         this.user = user;
         this.messageTime = messageTime;
         this.messageText = messageText;
         this.isRead = isRead;
-        this.language = language;
         this.messagePath = messagePath;
     }
 }

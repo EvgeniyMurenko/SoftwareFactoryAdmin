@@ -92,7 +92,8 @@ public class CaseController {
         newCase.setStatus(StatusEnum.OPEN.toString());
         Date date = new Date();
         newCase.setCreationDate(date);
-        newCase.setUserManagerId(0L);
+        newCase.setUserManagerId(0L); // <======MUST BE MANAGER ID
+        newCase.setLanguage(language);
 
         Set<Case> caseSet = project.getCases();
         caseSet.add(newCase);
@@ -101,7 +102,6 @@ public class CaseController {
         Case caseCreated = caseService.getCaseById(newCase.getId());
         Set<Message> messages = caseCreated.getMessages();
         Message msg = new Message();
-        msg.setLanguage(language);
         msg.setaCase(caseCreated);
         User us = userService.findById(userId.intValue());
         msg.setUser(us);
@@ -119,7 +119,7 @@ public class CaseController {
 
         if(files.length != 0) {
             System.out.println("=======FILE LENGTH NOT NULL " + files.length);
-            String pathToSaveFile = File.separator +"CASES"+File.separator + projectName + File.separator + caseName + File.separator + msg.getId();
+            String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"case"+File.separator + projectName + File.separator + caseName + File.separator + msg.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             msg.setMessagePath(pathToSaveFile);

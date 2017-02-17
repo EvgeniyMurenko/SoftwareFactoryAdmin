@@ -41,6 +41,9 @@ public class Case {
     @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Message> messages;
 
+    @Column(name="language")
+    private String language;
+
     public Project getProject() {
         return project;
     }
@@ -97,13 +100,22 @@ public class Case {
         this.messages = messages;
     }
 
-    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages) {
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages, String language) {
         this.project = project;
         this.userManagerId = userManagerId;
         this.projectTitle = projectTitle;
         this.status = status;
         this.creationDate = creationDate;
         this.messages = messages;
+        this.language = language;
     }
 
 /*@Override

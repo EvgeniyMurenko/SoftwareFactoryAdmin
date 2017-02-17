@@ -75,8 +75,7 @@ public class IndexPageController {
     @Autowired
     MailService mailService;
 
-    /*@RequestMapping(value = "/estimate", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")*/
-    @RequestMapping(value = {"/estimate"},consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = {RequestMethod.POST})
+    @RequestMapping(value = "/estimate", method = RequestMethod.POST)
     public @ResponseBody ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
                                        @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
                                        @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model,
@@ -115,13 +114,16 @@ public class IndexPageController {
         //SEND EMAIL TO CUSTOMER WITH DETAILS
         mailService.sendEmailAfterEstimate(generatedEstimateId, registrationLink , recipientMail);
 
+        //Save to file
+        String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"estimate"+File.separator +estimate.getId();
+        SaveFile sf = new SaveFile(pathToSaveFile, files);
+        sf.saveFile();
+        estimate.setEstimatePath(pathToSaveFile);
+        estimateService.updateEstimate(estimate);
+
         //REDIRECT TO MAIN AND SHOW SUCCESS
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
         mainPageEstimateSuccess.addObject("isEstimateSuccess", new Boolean(true));
-
-        //Save to file
-        SaveFile sf = new SaveFile("C:"+ File.separator+ "test"+File.separator, files);
-        sf.saveFile();
 
         return mainPageEstimateSuccess;
     }
