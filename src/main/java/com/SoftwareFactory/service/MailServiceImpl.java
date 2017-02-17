@@ -24,7 +24,7 @@ public class MailServiceImpl implements MailService {
             mailSender.send(new MimeMessagePreparator() {
 
                 public void prepare(MimeMessage mimeMessage) throws Exception {
-                 /*   mimeMessage.setFrom("SoftwareFactory@server.com");*/
+                    mimeMessage.setFrom(new InternetAddress("SoftwareFactory@server.com"));
                     mimeMessage.setRecipient(Message.RecipientType.TO,
                             new InternetAddress(recipientMail));
                     mimeMessage.setSubject("소프트웨어팩토리에 가입 하신 것을 축하드립니다." , "utf-8");
@@ -76,7 +76,7 @@ public class MailServiceImpl implements MailService {
             mailSender.send(new MimeMessagePreparator() {
 
                 public void prepare(MimeMessage mimeMessage) throws Exception {
-                    /*mimeMessage.setFrom("SoftwareFactory@server.com");*/
+                    mimeMessage.setFrom(new InternetAddress("SoftwareFactory@server.com"));
                     mimeMessage.setRecipient(Message.RecipientType.TO,
                             new InternetAddress(recipientMail));
                     mimeMessage.setSubject("[자동발송] 소프트웨어팩토리에 문의해 주셔서 감사드립니다. (" + estimateId + ")", "utf-8");
