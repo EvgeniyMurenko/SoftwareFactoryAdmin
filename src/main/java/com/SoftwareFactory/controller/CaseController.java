@@ -5,7 +5,7 @@ import com.SoftwareFactory.comparator.ProjectByDateComparator;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
-import com.SoftwareFactory.savefile.SaveFile;
+import com.SoftwareFactory.util.SaveFile;
 import com.SoftwareFactory.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpSession;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 
@@ -72,8 +69,6 @@ public class CaseController {
         System.out.print(projectName + " " + " " + caseName + " " + message + " " + " " + language);
 
 
-        SaveFile sf = new SaveFile("E:"+File.separator+ "test"+File.separator, files);
-        sf.saveFile();
         //===================================================
         Long userId = new Long((Integer)httpSession.getAttribute("UserId"));
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
@@ -106,6 +101,7 @@ public class CaseController {
         Case caseCreated = caseService.getCaseById(newCase.getId());
         Set<Message> messages = caseCreated.getMessages();
         Message msg = new Message();
+        msg.setLanguage(language);
         msg.setaCase(caseCreated);
         User us = userService.findById(userId.intValue());
         msg.setUser(us);
@@ -113,10 +109,25 @@ public class CaseController {
         msg.setMessageText(message);
 
         msg.setIsRead(MessageEnum.NOTREAD.toString());
+
+
+
         messages.add(msg);
         messageService.addNewMessage(msg);
         caseCreated.setMessages(messages);
         caseService.updateCase(caseCreated);
+
+        if(files.length != 0) {
+            System.out.println("=======FILE LENGTH NOT NULL " + files.length);
+            String pathToSaveFile = File.separator +"CASES"+File.separator + projectName + File.separator + caseName + File.separator + msg.getId();
+            SaveFile sf = new SaveFile(pathToSaveFile, files);
+            sf.saveFile();
+            msg.setMessagePath(pathToSaveFile);
+            messageService.updateMessage(msg);
+        } else {
+            System.out.println("=======FILE LENGTH NULL");
+        }
+
 
         ModelAndView modelAndView = new ModelAndView("redirect:/list");
         return modelAndView;
