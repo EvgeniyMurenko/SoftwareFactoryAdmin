@@ -256,7 +256,7 @@
                 <div class="ft-icon"><i class="fa fa-external-link"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">보유기술 및 정책</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="<c:url value='/technology'/>"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-body">소프트웨어팩토리는 공장형 소프트웨어 개발 대행에 필요한 많은 기술을 보유하고 있으며 그 중에 핵심적인 본사의 기술적 베이스를 소개드립니다. <a href="<c:url value='/technology'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>

@@ -22,9 +22,7 @@ public class SaveFile {
     }
 
     public void saveFile(){
-        System.out.println("============SAVE FILE=============");
-        //===================================================
-        if (this.files.length == 0){
+        if (files[0].isEmpty()){
             System.out.println("================NOT FILE ATTACH");
         } else {
             /*String rootPath = System.getProperty("catalina.home");*/
@@ -33,18 +31,28 @@ public class SaveFile {
                 String name = file.getOriginalFilename();
                 try {
                     byte[] bytes = file.getBytes();
-                    File dir = new File(/*rootPath*//* + */getPathForSaveFile());
+                    /*String absolutePath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+                    absolutePath = absolutePath.substring(0, absolutePath.lastIndexOf("/"));*/
+                    //String homeDir = System.getProperty("catalina.home");
+                    File dir = new File("opt/tomcat/webapps/softwarefactory/"+ getPathForSaveFile());
+                    dir.setReadable(true, false);
+                    dir.setExecutable(true, false);
+                    dir.setWritable(true, false);
                     if (!dir.exists()) {
                         dir.mkdirs();
                         System.out.println("==========CREATE DIR" + dir.getAbsolutePath());
                     }
                     // Create the file on server
-                    File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+                    File serverFile = new File(dir.getAbsolutePath()+"/"+ name);
 
+                    serverFile.setReadable(true, false);
+                    serverFile.setExecutable(true, false);
+                    serverFile.setWritable(true, false);
+
+                    serverFile.createNewFile();
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
                     stream.write(bytes);
                     stream.close();
-
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
