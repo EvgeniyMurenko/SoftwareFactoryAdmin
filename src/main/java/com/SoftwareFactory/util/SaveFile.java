@@ -31,7 +31,6 @@ public class SaveFile {
                 String name = file.getOriginalFilename();
                 try {
                     byte[] bytes = file.getBytes();
-                    System.out.println("============GET BYTE: "+ bytes);
                     /*String absolutePath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
                     absolutePath = absolutePath.substring(0, absolutePath.lastIndexOf("/"));*/
                     //String homeDir = System.getProperty("catalina.home");
