@@ -493,12 +493,12 @@
 <script src="resources/newIndexPage/js/pagination.min.js"></script>
 <script src="resources/newIndexPage/js/main.js"></script>
 
-
 <%   Boolean isEstimateSuccess = (Boolean) request.getAttribute("isEstimateSuccess"); %>
 <%   if (isEstimateSuccess !=null && isEstimateSuccess) { %>
 <script>
     jQuery(document).ready(function($) {
         swal(
+
             '정상적으로 접수 되었습니다!',
             '감사합니다',
             'success'

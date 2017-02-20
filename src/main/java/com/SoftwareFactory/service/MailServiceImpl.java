@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.nio.charset.Charset;
 
 
 @Service("mailService")
@@ -76,6 +77,7 @@ public class MailServiceImpl implements MailService {
             mailSender.send(new MimeMessagePreparator() {
 
                 public void prepare(MimeMessage mimeMessage) throws Exception {
+
                     mimeMessage.setFrom(new InternetAddress("sorcus100500@gmail.com", "Company XYZ"));
                     mimeMessage.setRecipient(Message.RecipientType.TO,
                             new InternetAddress(recipientMail));
