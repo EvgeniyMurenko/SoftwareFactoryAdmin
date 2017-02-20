@@ -40,9 +40,11 @@ public class SaveFile {
                     }
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
                     stream.write(bytes);
                     stream.close();
+
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
