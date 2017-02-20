@@ -117,15 +117,13 @@ public class CaseController {
         caseCreated.setMessages(messages);
         caseService.updateCase(caseCreated);
 
-        if(files.length != 0) {
+        if(!files[0].isEmpty()){
             System.out.println("=======FILE LENGTH NOT NULL " + files.length);
-            String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"case"+File.separator + project.getId() + File.separator + newCase.getId() + File.separator + msg.getId();
+            String pathToSaveFile = "case/" + project.getId() + "/"+ newCase.getId() + "/" + msg.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             msg.setMessagePath(pathToSaveFile);
             messageService.updateMessage(msg);
-        } else {
-            System.out.println("=======FILE LENGTH NULL");
         }
 
 

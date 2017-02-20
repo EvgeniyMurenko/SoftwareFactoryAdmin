@@ -115,11 +115,13 @@ public class IndexPageController {
         mailService.sendEmailAfterEstimate(generatedEstimateId, registrationLink , recipientMail);
 
         //Save to file
-        String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"estimate"+File.separator +estimate.getId();
-        SaveFile sf = new SaveFile(pathToSaveFile, files);
-        sf.saveFile();
-        estimate.setEstimatePath(pathToSaveFile);
-        estimateService.updateEstimate(estimate);
+        if(!files[0].isEmpty()){
+            String pathToSaveFile = "estimate/" + estimate.getId();
+            SaveFile sf = new SaveFile(pathToSaveFile, files);
+            sf.saveFile();
+            estimate.setEstimatePath(pathToSaveFile);
+            estimateService.updateEstimate(estimate);
+        }
 
         //REDIRECT TO MAIN AND SHOW SUCCESS
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
