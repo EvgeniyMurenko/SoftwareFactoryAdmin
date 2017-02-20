@@ -21,16 +21,12 @@
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="259" />
     <meta property="og:image:height" content="110" />
+    <meta property="og:url" content="http://sofac.kr/" />
+    <meta property="og:description" content="" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="address=no" />
-
-    <meta property="og:site_name" content="software factory" />
-    <meta property="og:title" content="소팩소개" />
-    <meta property="og:image" content="images/web-logo.jpg" />
-    <meta property="og:url" content="http://sofac/" />
-    <meta property="og:description" content="" />
 
     <meta name="description" content="" />
     <meta name="keywords" content="" />
