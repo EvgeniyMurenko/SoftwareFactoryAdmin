@@ -44,7 +44,7 @@ public class IndexPageController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "isEstimateSuccess", required = false) Boolean isEstimateSuccess ,
                                   @RequestParam(value = "isGenerateCustomerIdSuccess" , required=false) Boolean isGenerateSuccess ,
-                                    @RequestParam(value ="isSessionExpired" , required = false) Boolean isSessionExpired ) {
+                                  @RequestParam(value ="isSessionExpired" , required = false) Boolean isSessionExpired ) {
 
         if (isCurrentAuthenticationAnonymous()) {
             ModelAndView mainPage = new ModelAndView("index");
@@ -78,9 +78,9 @@ public class IndexPageController {
 
     @RequestMapping(value = "/estimate", method = RequestMethod.POST)
     public @ResponseBody ModelAndView estimateWindow(@RequestParam("name") String recipientName, @RequestParam("email") String recipientMail, @RequestParam("phone") String phone,
-                                       @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
-                                       @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model,
-                                       @RequestParam("fileEstimate[]") MultipartFile[] files) {
+                                                     @RequestParam("message") String recipientRequestText, @RequestParam(value = "price_request", required = false) boolean priceRequest,
+                                                     @RequestParam(value = "question_request", required = false) boolean questionRequest, Model model,
+                                                     @RequestParam("fileEstimate[]") MultipartFile[] files) {
 
 
         System.out.println("name " + recipientName + " email " + recipientMail + " text "
@@ -289,7 +289,7 @@ public class IndexPageController {
                 zero = zero + "0";
                 System.out.println("1");
             }
-             return zero + id;
+            return zero + id;
         } else {
             return id;
         }

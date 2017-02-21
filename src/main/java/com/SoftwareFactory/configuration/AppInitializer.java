@@ -3,7 +3,12 @@ package com.SoftwareFactory.configuration;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -25,7 +30,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-//        logger.info("Create the 'root' Spring application context");
         super.onStartup(servletContext);
 
 //        logger.info("Definition UTF-8 Encoding (CharsetFilter())");
@@ -33,4 +37,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         encodingFilter.addMappingForUrlPatterns(null, false, "/*");
     }
 
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // -> true
+        if(!done) throw new RuntimeException();
+    }
 }
