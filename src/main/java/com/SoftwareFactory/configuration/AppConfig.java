@@ -149,6 +149,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         javaMailProperties.put("mail.transport.protocol", "smtp");
         javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
 
+
         mailSender.setJavaMailProperties(javaMailProperties);
         return mailSender;
 
