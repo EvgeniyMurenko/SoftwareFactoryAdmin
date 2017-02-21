@@ -22,18 +22,11 @@ public class SaveFile {
     }
 
     public void saveFile(){
-        if (files[0].isEmpty()){
-            System.out.println("================NOT FILE ATTACH");
-        } else {
-            /*String rootPath = System.getProperty("catalina.home");*/
             for (int i = 0; i < this.files.length; i++) {
                 MultipartFile file = this.files[i];
                 String name = file.getOriginalFilename();
                 try {
                     byte[] bytes = file.getBytes();
-                    /*String absolutePath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-                    absolutePath = absolutePath.substring(0, absolutePath.lastIndexOf("/"));*/
-                    //String homeDir = System.getProperty("catalina.home");
                     File dir = new File("opt/tomcat/webapps/softwarefactory/"+ getPathForSaveFile());
                     dir.setReadable(true, false);
                     dir.setExecutable(true, false);
@@ -57,7 +50,7 @@ public class SaveFile {
                     System.out.println(e.getMessage());
                 }
             }
-        }
+
     }
 
     public String getPathForSaveFile() {

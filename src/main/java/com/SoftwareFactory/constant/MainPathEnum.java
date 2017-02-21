@@ -1,13 +1,14 @@
 package com.SoftwareFactory.constant;
 
-
-public enum  GlobalEnum {
-    webRoot ("http://www.sofac.kr");
-
+/**
+ * Created by adm on 2/21/2017.
+ */
+public enum MainPathEnum {
+    mainPath("opt/tomcat/webapps/softwarefactory/");
 
     private String value;
 
-    GlobalEnum(final String value) {
+    MainPathEnum(final String value) {
         this.value = value;
     }
 

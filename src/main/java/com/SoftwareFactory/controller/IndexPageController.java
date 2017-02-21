@@ -1,6 +1,7 @@
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
+import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.util.SaveFile;
@@ -119,7 +120,7 @@ public class IndexPageController {
             String pathToSaveFile = "estimate/" + estimate.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
-            estimate.setEstimatePath(pathToSaveFile);
+            estimate.setEstimatePath(MainPathEnum.mainPath + pathToSaveFile);
             estimateService.updateEstimate(estimate);
         }
 

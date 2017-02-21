@@ -2,6 +2,7 @@ package com.SoftwareFactory.controller;
 
 
 import com.SoftwareFactory.comparator.ProjectByDateComparator;
+import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
@@ -122,7 +123,7 @@ public class CaseController {
             String pathToSaveFile = "case/" + project.getId() + "/"+ newCase.getId() + "/" + msg.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
-            msg.setMessagePath(pathToSaveFile);
+            msg.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
             messageService.updateMessage(msg);
         }
 

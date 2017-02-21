@@ -132,7 +132,7 @@ public class AppController {
 
         Message message = messageService.getMessageById(messageId);
 
-        String EXTERNAL_FILE_PATH = message.getMessagePath() + File.separator + filename;
+        String EXTERNAL_FILE_PATH = message.getMessagePath() + "/"+ filename;
 
         File file = new File(EXTERNAL_FILE_PATH);
 
