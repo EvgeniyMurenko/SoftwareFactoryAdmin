@@ -175,7 +175,7 @@
                 %>
 
                     <tbody id="itemContainer">
-                        <tr class="unread checked" onclick= location.href("/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>");>
+                        <tr class="unread checked"   onclick="javascript:window.location.href='/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>'; return false;"     >
                             <td><a href="javascript:void(0);"><%  out.print(aCase.getProjectTitle().toString());  %></a></td>
                             <td class="text-center"><a href="javascript:void(0);"><% out.print(aCase.getProject().getProjectName()); %></a></td>
                             <td class="text-center"><%  out.print(aCase.getStatus()); %></td>
