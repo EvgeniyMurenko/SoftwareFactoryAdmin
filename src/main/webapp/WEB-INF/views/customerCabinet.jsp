@@ -175,9 +175,10 @@
                 %>
 
                     <tbody id="itemContainer">
-                        <tr class="unread checked"   onclick="javascript:window.location.href='/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>'; return false;"     >
+                        <tr class="unread checked"   onclick="javascript:window.location.href='/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>'; return false;">
                             <td><a href="javascript:void(0);"><%  out.print(aCase.getProjectTitle().toString());  %></a></td>
-                            <td class="text-center"><a href="javascript:void(0);"><% out.print(aCase.getProject().getProjectName()); %></a></td>
+                            <%String projectName = aCase.getProject().getProjectName();  %>
+                            <td class="text-center"><a href="javascript:void(0);"><% if (projectName.equals("#$GENERAL")) out.print("Discussion room"); else out.print(projectName); %></a></td>
                             <td class="text-center"><%  out.print(aCase.getStatus()); %></td>
                             <td class="hidden-xs text-center"><%  out.print(aCase.getCreationDate().toString().substring(0, 10));  %></td>
 

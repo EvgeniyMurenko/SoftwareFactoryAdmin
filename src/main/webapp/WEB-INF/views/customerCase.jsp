@@ -157,6 +157,7 @@
                 <div class="form-group">
                     <label for="lang">Language</label>
                     <select class="form-control selectpicker" name="language" id="lang">
+                        <option value="KO">한국어 / Korean</option>
                         <option value="AR">العربية / Arabic</option>
                         <option value="BE">Беларускі / Belarusian</option>
                         <option value="BG">Български / Bulgarian</option>
@@ -178,7 +179,6 @@
                         <option value="IT">Italiano / Italian</option>
                         <option value="IW">עברית / Hebrew</option>
                         <option value="JA">日本語 / Japanese</option>
-                        <option value="KO">한국어 / Korean</option>
                         <option value="LT">Lietuvių / Lithuanian</option>
                         <option value="LV">Latviešu / Latvian</option>
                         <option value="MK">Македонски / Macedonian</option>
