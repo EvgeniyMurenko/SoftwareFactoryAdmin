@@ -143,7 +143,8 @@ jQuery(document).ready(function($) {
                     }
                 }
             },
-            'request[]': {
+            checkEstimation: {
+                selector: '.checkEstimation',
                 err: '#alertCheckboxMessage',
                 validators: {
                     notEmpty: {

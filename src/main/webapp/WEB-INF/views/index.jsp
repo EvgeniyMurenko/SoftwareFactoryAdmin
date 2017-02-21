@@ -438,12 +438,12 @@
 
                             <div class="form-group m0" style="margin: 0 !important;">
                                 <div class="checkbox">
-                                    <input id="request" name="price_request" class="styled" type="checkbox">
+                                    <input id="request" name="price_request" class="styled checkEstimation" type="checkbox">
                                     <label for="request">견적문의</label>
                                 </div>
 
                                 <div class="checkbox">
-                                    <input id="question" name="question_request" class="styled" type="checkbox">
+                                    <input id="question" name="question_request" class="styled checkEstimation" type="checkbox">
                                     <label for="question">일반문의</label>
                                 </div>
                                 <div id="alertCheckboxMessage"></div>
