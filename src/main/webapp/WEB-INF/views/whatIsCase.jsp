@@ -64,7 +64,7 @@
             <p><b>만약 온라인 소통을 원치 않으실 경우 소프트웨어팩토리의 지점을 통하여 대면 상담도 가능합니다.</b></p>
 
             <div class="row mt40 mb30 clearfix">
-                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/sfema2.png"><img src="resources/newIndexPage/images/sfema2.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/sfema2.jpg"><img src="resources/newIndexPage/images/sfema2.jpg" alt="" class="img-responsive" /></a></div>
             </div>
         </div>
     </div>

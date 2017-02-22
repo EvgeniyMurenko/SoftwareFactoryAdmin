@@ -66,7 +66,7 @@
             <p>언제 어디서든 고객의 질문과 질문에 대응 하며 고객의 비상상황을 가장 빨리 감지하고 긴급 대응하는 구조를 갖추고 있습니다.</p>
 
             <div class="row mb30">
-                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema6.png"><img src="resources/newIndexPage/images/shema6.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema6.jpg"><img src="resources/newIndexPage/images/shema6.jpg" alt="" class="img-responsive" /></a></div>
             </div>
 
             <h3 style="margin-top: 100px;">개발 지원용 기술 및 리소스 뱅크</h3>
@@ -77,7 +77,7 @@
                 SoFAC만이 보유하고 있는 리소스 축척 시스템은  좋은 제품을 위한 중요한 시스템 입니다.</p>
 
             <div class="row mb30">
-                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema7.png"><img src="resources/newIndexPage/images/shema7.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema7.jpg"><img src="resources/newIndexPage/images/shema7.jpg" alt="" class="img-responsive" /></a></div>
             </div>
 
             <h3 style="margin-top: 100px;">예술의 역사를 가진 디자인 조직</h3>
@@ -90,8 +90,8 @@
                 위치를 차지하고 있습니다.</p>
 
             <div class="row mb30">
-                <div class="col-md-5 mb10"><a data-fancybox="gallery" href="resources/newIndexPage/images/image001.png"><img src="resources/newIndexPage/images/image001.png" alt="" class="img-responsive" /></a></div>
-                <div class="col-md-5 mb10"><a data-fancybox="gallery" href="resources/newIndexPage/images/image002.png"><img src="resources/newIndexPage/images/image002.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/image001.jpg"><img src="resources/newIndexPage/images/image001.jpg" alt="" class="img-responsive" /></a></div>
+               <%-- <div class="col-md-5 mb10"><a data-fancybox="gallery" href="resources/newIndexPage/images/image002.png"><img src="resources/newIndexPage/images/image002.png" alt="" class="img-responsive" /></a></div>--%>
             </div>
 
             <h3 style="margin-top: 100px;">모니터링 시스템</h3>
@@ -103,7 +103,7 @@
                 고객의 비상상황 접수시 실시간 대응하는 구조를 갖추고 있습니다.</p>
 
             <div class="row mb30">
-                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema8.png"><img src="resources/newIndexPage/images/shema8.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema8.jpg"><img src="resources/newIndexPage/images/shema8.jpg" alt="" class="img-responsive" /></a></div>
             </div>
 
         </div>

@@ -27,7 +27,7 @@ public class SaveFile {
                 String name = file.getOriginalFilename();
                 try {
                     byte[] bytes = file.getBytes();
-                    File dir = new File("opt/tomcat/webapps/softwarefactory/"+ getPathForSaveFile());
+                    File dir = new File("opt/tomcat/webapps/softwarefactory/"+ this.pathForSaveFile);
                     dir.setReadable(true, false);
                     dir.setExecutable(true, false);
                     dir.setWritable(true, false);

@@ -88,7 +88,7 @@ public class MailServiceImpl implements MailService {
                                     "<p>대부분 업무시간 이내의 경우 3시간 이내에 답변을 드리며 질문이 필요할 경우 질문 메일을 드릴 수 도 있습니다.</p>\n" +
                                     "<p>내용 확인 후 지속적인 대화를 원하실 경우 소팩은 CASE라는 개념으로 고객과 소통하는 기능을 제공하고 있습니다.<br>\n" +
                                     "따라서 예비 고객등록을 먼저 해 주시면 아이디를 발급해 드리며<br>\n" +
-                                    "그 아이디를 통하여 지속적인 대화가 가능합니다. (CASE ID 발급 요청 : <a href=\"Registration\">" + registrationLink + "</a>)<br>\n" +
+                                    "그 아이디를 통하여 지속적인 대화가 가능합니다. (CASE ID 발급 요청 : <a href=\"http://"+registrationLink+"\">" + registrationLink + "</a>)<br>\n" +
                                     "질문과 답변 형식으로 대화가 진행되며 대화는 견적, 작업방법등 모든 종류의 대화 진행이 가능합니다. <br>\n" +
                                     "소팩은 소프트웨어(앱, 웹, IOT 등) 개발 및 유지보수 서비스를 대행하는 기업 입니다.<br>\n" +
                                     "<br>" +
