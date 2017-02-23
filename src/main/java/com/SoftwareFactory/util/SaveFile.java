@@ -1,5 +1,6 @@
 package com.SoftwareFactory.util;
 
+import com.SoftwareFactory.constant.MainPathEnum;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -27,7 +28,7 @@ public class SaveFile {
                 String name = file.getOriginalFilename();
                 try {
                     byte[] bytes = file.getBytes();
-                    File dir = new File("opt/tomcat/webapps/softwarefactory/"+ this.pathForSaveFile);
+                    File dir = new File(MainPathEnum.mainPath + this.pathForSaveFile);
                     dir.setReadable(true, false);
                     dir.setExecutable(true, false);
                     dir.setWritable(true, false);

@@ -118,8 +118,10 @@ public class CaseController {
         caseCreated.setMessages(messages);
         caseService.updateCase(caseCreated);
 
+
         if(!files[0].isEmpty()){
             System.out.println("=======FILE LENGTH NOT NULL " + files.length);
+            System.out.println("=======message id " + msg.getId());
             String pathToSaveFile = "case/" + project.getId() + "/"+ newCase.getId() + "/" + msg.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();

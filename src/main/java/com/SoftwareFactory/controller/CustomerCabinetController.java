@@ -5,6 +5,7 @@ package com.SoftwareFactory.controller;
 import com.SoftwareFactory.comparator.CaseByStatusAndDateComparator;
 import com.SoftwareFactory.comparator.MessageByDateComparator;
 import com.SoftwareFactory.comparator.ProjectByDateComparator;
+import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
@@ -147,9 +148,6 @@ public class CustomerCabinetController {
         int userId = (Integer) httpSession.getAttribute("UserId");
         User currentUser = userService.findById(userId);
 
-
-
-
         // CREATE MESSAGE
         Message message = new Message();
         message.setaCase(aCase);
@@ -166,12 +164,12 @@ public class CustomerCabinetController {
         aCase.setMessages(messages);
 
         //SAVE FILE
-        if(files.length != 0) {
+        if(!files[0].isEmpty()){
             System.out.println("=======FILE LENGTH NOT NULL " + files.length);
-            String pathToSaveFile = File.separator +"softwarefactory"+File.separator +"case"+File.separator + aCase.getProject().getId() + File.separator + aCase.getId() + File.separator + message.getId();
+            String pathToSaveFile = "case/" + aCase.getProject().getId() + "/"+ aCase.getId() + "/" + message.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
-            message.setMessagePath(pathToSaveFile);
+            message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
         } else {
             System.out.println("=======FILE LENGTH NULL");
         }
