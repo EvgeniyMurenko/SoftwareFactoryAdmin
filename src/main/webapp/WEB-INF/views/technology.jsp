@@ -89,7 +89,7 @@
                 이것은 고객님들의 어플 개발시 막대한 비용절감 및 고성능 앱 개발에 큰 도움이 될 것입니다.</p>
 
             <div class="row">
-                <div class="col-md-12 mt20"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema9.png"><img src="/resources/newIndexPage/images/shema9.png" alt="" class="img-responsive"></a></div>
+                <div class="col-md-12 mt20"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema9.jpg"><img src="/resources/newIndexPage/images/shema9.jpg" alt="" class="img-responsive"></a></div>
                 <div class="col-md-12 clearfix mt40"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema10.png"><img src="/resources/newIndexPage/images/shema10.png" alt="" class="img-responsive"></a></div>
             </div>
 
@@ -101,7 +101,7 @@
                 <b>안정적인 통신을 보장하는 최적의 알고리즘 정리한 특허 기술 입니다.</b></p>
 
             <div class="row">
-                <div class="col-md-12 mt20 mb40"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema11.png"><img src="/resources/newIndexPage/images/shema11.png" alt="" class="img-responsive"></a></div>
+                <div class="col-md-12 mt20 mb40"><a data-fancybox="gallery" href="/resources/newIndexPage/images/shema11.jpg"><img src="/resources/newIndexPage/images/shema11.jpg" alt="" class="img-responsive"></a></div>
             </div>
 
             <div class="row">
