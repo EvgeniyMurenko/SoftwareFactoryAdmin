@@ -1,15 +1,11 @@
 package com.SoftwareFactory.service;
 
-import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.dao.CaseDao;
-import com.SoftwareFactory.dao.CaseDaoImpl;
 import com.SoftwareFactory.model.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -18,7 +14,7 @@ public class CaseServiceImpl implements CaseService {
 
     private CaseDao caseDao;
 
-    @Autowired(required=true)
+    @Autowired(required = true)
     public void setCaseDao(CaseDao caseDao) {
         this.caseDao = caseDao;
     }
@@ -30,7 +26,7 @@ public class CaseServiceImpl implements CaseService {
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Case> getAllCases() {
         return caseDao.findAll();
     }
