@@ -1,6 +1,7 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <%@ page import="com.SoftwareFactory.model.Project" %>
-<%@ page import="java.util.*" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.SoftwareFactory.constant.ProjectEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -75,7 +76,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
-                        <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
+                        <%--<li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
                         <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                     </ul>
                 </li>
@@ -87,15 +88,14 @@
 <!-- #End Header -->
 
 <section class="container mb20">
-    <div class="row">
+    <%--<div class="row">
         <div class="col-md-3">
 
             <!-- Projects -->
             <h3 class="mt0">프로젝트</h3>
             <ul class="projects-list">
                 <%
-                    String currentProjectId= (String) request.getAttribute("projectId");
-                    List<Project> projectSet =  (List<Project>)request.getAttribute("projects");
+
                     Project generalDiscussionProject = projectSet.get(projectSet.size()-1);
                     for(Project project : projectSet){
                         if (!project.getProjectName().equals("#$GENERAL")){
@@ -115,9 +115,12 @@
                 <li><a href="/cabinet/project/<%out.print(generalDiscussionProject.getId()); %>"  <%if (Long.toString(generalDiscussionProject.getId()).equals(currentProjectId)) out.print("class=\"active\"");%>><i class="fa fa-angle-double-right"></i>Discussion room</a></li>
             </ul>
             <!-- #End Discussion room -->
+        </div>--%>
 
-        </div>
-        <div class="col-md-9">
+        <%String currentProjectId= (String) request.getAttribute("projectId");
+            List<Project> projectSet =  (List<Project>)request.getAttribute("projects");%>
+
+        <div class="col-md-12">
             <!-- Breadcrumbs -->
             <ol class="breadcrumb">
                 <li><a href="<c:url value="/cabinet/" />"><i class="fa fa-home"></i></a></li>
@@ -137,10 +140,12 @@
                                 Project project = itr.next();%>
                         <option value=" <%out.print(project.getProjectName());%>">
                             <%
-                            if(!project.getProjectName().equals("#$GENERAL")){
-                                out.print(project.getProjectName());
+                            if(project.getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                out.print(ProjectEnum.projectNameNormal.getValue());
+                            } else if(project.getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){
+                                out.print(ProjectEnum.projectNameEstimate.getValue());
                             } else {
-                                out.print("Discussion Room");
+                                out.print(project.getProjectName());
                             }
                             %>
                         </option>

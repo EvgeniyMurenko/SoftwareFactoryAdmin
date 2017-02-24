@@ -9,10 +9,7 @@ import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
-import com.SoftwareFactory.service.CaseService;
-import com.SoftwareFactory.service.CustomerInfoService;
-import com.SoftwareFactory.service.ProjectService;
-import com.SoftwareFactory.service.UserService;
+import com.SoftwareFactory.service.*;
 import com.SoftwareFactory.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,8 @@ public class CustomerCabinetController {
 
     @Autowired
     CustomerInfoService customerInfoService;
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getCustomerCabinet(HttpSession httpSession) {
@@ -155,7 +154,8 @@ public class CustomerCabinetController {
         message.setUser(currentUser);
         message.setMessageTime(new Date());
         message.setMessageText(messageText);
-        message.setIsRead(MessageEnum.READ.toString());
+        message.setIsRead(MessageEnum.NOTREAD.toString());
+        messageService.addNewMessage(message);
 
 
         // SAVE MESSAGE TO CASE
@@ -170,6 +170,7 @@ public class CustomerCabinetController {
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
+            messageService.updateMessage(message);
         } else {
             System.out.println("=======FILE LENGTH NULL");
         }

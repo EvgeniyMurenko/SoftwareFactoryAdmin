@@ -2,6 +2,8 @@
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.MessageByDateComparator;
+import com.SoftwareFactory.constant.GlobalEnum;
+import com.SoftwareFactory.constant.ProjectEnum;
 import com.SoftwareFactory.constant.RoleEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
@@ -38,8 +40,11 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test() {
-        System.out.println("test");
-        List<Case> cases = caseService.getAllCases();
+        System.out.println("============test");
+        System.out.println("============estimate " + ProjectEnum.projectNameEstimate.getDbValue());
+        System.out.println("============normal " + ProjectEnum.projectNameNormal.getDbValue());
+
+        /*List<Case> cases = caseService.getAllCases();
         Case aCase = cases.get(0);
         Set<Message> messages = aCase.getMessages();
         System.out.println("messages" + messages);
@@ -53,7 +58,7 @@ public class TestController {
         while (iterator.hasNext()) {
             Message message = iterator.next();
             System.out.println(message.getMessageText());
-        }
+        }*/
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         return modelAndView;
     }

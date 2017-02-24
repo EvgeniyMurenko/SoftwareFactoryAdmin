@@ -1,7 +1,9 @@
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
+import com.SoftwareFactory.constant.GlobalEnum;
 import com.SoftwareFactory.constant.MainPathEnum;
+import com.SoftwareFactory.constant.ProjectEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.util.SaveFile;
@@ -205,10 +207,12 @@ public class IndexPageController {
         Set<Case> cases = new HashSet<>();
 
 
-        Project project = new Project("#$GENERAL", projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
+        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
+        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
 
         Set<Project> projectsToAdd = new HashSet<>();
-        projectsToAdd.add(project);
+        projectsToAdd.add(projectNormal);
+        projectsToAdd.add(projectEstimate);
         customerInfoCreated.setProjects(projectsToAdd);
 
 

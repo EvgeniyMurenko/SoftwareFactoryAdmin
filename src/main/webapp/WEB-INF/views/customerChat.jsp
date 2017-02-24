@@ -81,7 +81,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
-                        <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
+                        <%--<li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
                         <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                     </ul>
                 </li>
@@ -93,7 +93,7 @@
 <!-- #End Header -->
 
 <section class="container mb20">
-    <div class="row">
+   <%-- <div class="row">
         <div class="col-md-3">
 
             <!-- Projects -->
@@ -122,8 +122,8 @@
             </ul>
             <!-- #End Discussion room -->
 
-        </div>
-        <div class="col-md-9">
+        </div>--%>
+        <div class="col-md-12">
             <% Long caseId =  (Long) request.getAttribute("caseId"); %>
             <% String caseStatus = (String) request.getAttribute("caseStatus"); %>
             <%if (!caseStatus.equals(StatusEnum.CLOSE.toString())){%>
