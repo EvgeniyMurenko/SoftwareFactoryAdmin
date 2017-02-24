@@ -78,8 +78,8 @@
                 <div class="clearfix logo"><a href="./">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
-                <li class="active"><a href="estimate.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="case.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="estimate.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li class="active"><a href="case.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -112,36 +112,62 @@
 
         <div class="container-fluid content mb40">
 
-            <h3 class="mb20">Estimate ID 000011</h3>
+            <h3 class="mb20">Case ID: 000021</h3>
 
-            <a href="estimate.html" class="btn btn-primary mb20">Cancel ESTIMATE write</a>
+            <!-- Table case info -->
+            <a href="case.html" class="btn btn-primary mb20">Cancel CASE write</a>
+            <table class="table table-striped">
+                <tbody>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- #End Table case info -->
 
-            <div class="row">
-                <div class="col-md-3">
-                    <!-- Customer information -->
-                    <section class="customer-info">
-                        <div class="ci-name">Pupkin Vasiliy</div>
-                        <div class="ci-annotation">Pupkin Corporation LTD</div>
-                        <div class="ci-annotation"><a href="javascript:void(0);">info@someserver.com</a></div>
-                        <div class="ci-annotation">(000) 0000-0000</div>
-                    </section>
-                    <!-- #End Customer information -->
+            <section class="messages">
+
+                <div class="message-customer-informer">
+                    <div class="mi-c-title">Customer Name <a href="javascript:void(0);">(ID 000011)</a> <span class="mi-c-time pull-right">10/01/2017 10:56</span></div>
+                    <div class="mi-c-message">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo</div>
                 </div>
-                <div class="col-md-9">
 
-                    <div class="mb30">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo </div>
+                <div class="message-manager-informer">
+                    <div class="mi-m-title">Manager Name <a href="javascript:void(0);">(ID 000011)</a> <span class="mi-m-time pull-right">10/01/2017 10:56</span></div>
+                    <div class="mi-m-message">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo</div>
+                </div>
 
-                    <form action="" method="post">
+                <div class="message-customer-informer">
+                    <div class="mi-c-title">Customer Name <a href="javascript:void(0);">(ID 000011)</a> <span class="mi-c-time pull-right">10/01/2017 10:56</span></div>
+                    <div class="mi-c-message">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo</div>
+                </div>
+
+                <div class="message-input-field">
+                    <textarea id="editor" name="message" rows="3"></textarea>
+                </div>
+
+                <div class="row mt20 mb20">
+                    <div class="col-sm-6">
                         <div class="form-group">
-                            <textarea id="editor" name="message" rows="3"></textarea>
+                            <div class="input-group date" id="datetimepicker">
+                                <input type="text" class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Send answer</button>
-                        </div>
-                    </form>
-
+                    </div>
+                    <div class="col-sm-6 text-right"><input id="chat-upload" name="file[]" multiple type="file"></div>
                 </div>
-            </div>
+
+                <button class="btn btn-primary">Send message</button>
+            </section>
+
 
         </div>
 

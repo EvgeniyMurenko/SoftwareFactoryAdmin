@@ -77,7 +77,8 @@
                 <div class="clearfix logo"><a href="./">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
-                <li class="active"><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li><a href="estimate.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li class="active"><a href="case.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -110,47 +111,87 @@
 
         <div class="container-fluid content">
 
-            <h3 class="mb20">Estimate</h3>
+            <h3 class="mb20">Cases</h3>
+
+            <!-- Sort filter -->
+            <div class="mb20">
+                <form class="form-inline" action="" method="post">
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" placeholder="ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="email" class="form-control" id="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="company_name">Company</label>
+                        <input type="email" class="form-control" id="company_name" placeholder="Company name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sort</button>
+                </form>
+            </div>
+            <!-- #End Sort filter -->
 
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th class="hidden-xs">E-mail</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Date</th>
+                    <th class="hidden-xs text-center">Status</th>
+                    <th class="hidden-xs text-center">날짜</th>
+                    <th class="text-center">프로젝트</th>
+                    <th class="text-center">CASE 제목</th>
+                    <th class="text-center">Appointment time</th>
+                    <th class="hidden-xs text-center">Check</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="unread checked">
-                    <td><a href="magagerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                    <td class="hidden-xs"><a href="javascript:void(0);">info@someserver.com</a></td>
-                    <td class="text-center">Proceeding</td>
-                    <td class="text-center">10/01/2017</td>
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerCase.html">Come On Baby</a></td>
+                    <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
                 </tr>
                 <tr class="unread checked">
-                    <td><a href="javascript:void(0);">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                    <td class="hidden-xs"><a href="javascript:void(0);">info@someserver.com</a></td>
-                    <td class="text-center">Proceeding</td>
-                    <td class="text-center">10/01/2017</td>
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerCase.html">Come On Baby</a></td>
+                    <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
                 </tr>
                 <tr class="unread checked">
-                    <td><a href="javascript:void(0);">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                    <td class="hidden-xs"><a href="javascript:void(0);">info@someserver.com</a></td>
-                    <td class="text-center">Proceeding</td>
-                    <td class="text-center">10/01/2017</td>
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerCase.html">Come On Baby</a></td>
+                    <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
                 </tr>
                 <tr class="unread checked">
-                    <td><a href="javascript:void(0);">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                    <td class="hidden-xs"><a href="javascript:void(0);">info@someserver.com</a></td>
-                    <td class="text-center">Proceeding</td>
-                    <td class="text-center">10/01/2017</td>
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerCase.html">Come On Baby</a></td>
+                    <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
                 </tr>
                 <tr class="unread checked">
-                    <td><a href="javascript:void(0);">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                    <td class="hidden-xs"><a href="javascript:void(0);">info@someserver.com</a></td>
-                    <td class="text-center">Proceeding</td>
-                    <td class="text-center">10/01/2017</td>
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerCase.html">Come On Baby</a></td>
+                    <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerCase.html">Come On Baby</a></td>
+                    <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
                 </tr>
                 </tbody>
             </table>
