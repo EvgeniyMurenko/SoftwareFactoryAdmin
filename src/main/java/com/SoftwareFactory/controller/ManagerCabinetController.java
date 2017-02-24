@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 public class ManagerCabinetController {
 
 
-
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getCustomerCabinet(HttpSession httpSession) {
 
@@ -25,7 +23,7 @@ public class ManagerCabinetController {
         Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
 
 
-        ModelAndView customerCabinet = new ModelAndView("customerCabinet");
+        ModelAndView customerCabinet = new ModelAndView("admin");
 
 
         return customerCabinet;
