@@ -52,6 +52,13 @@ jQuery(document).ready(function($) {
         size: 4
     });
 
+    // datetimepicker
+    $('#datetimepicker').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+        daysOfWeekDisabled: [0, 6],
+    });
+
+
     // Authorization from validation
     $('#authorizationForm').formValidation({
         framework: 'bootstrap',
@@ -155,3 +162,10 @@ jQuery(document).ready(function($) {
         }
     });
 });
+
+var editor = CKEDITOR.replace('editor', {
+    toolbar : 'Basic',
+    width : '100%',
+    height : '250',
+});
+editor.add;

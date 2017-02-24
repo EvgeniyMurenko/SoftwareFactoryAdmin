@@ -34,7 +34,6 @@
     <title>소팩소개 :: Software Factory</title>
 
     <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
@@ -110,38 +109,73 @@
         </header>
         <!-- #End Top line -->
 
-        <div class="container-fluid content mb40">
+        <div class="container-fluid content">
 
-            <h3 class="mb20">Estimate ID 000011</h3>
+            <h3 class="mb20">Estimate</h3>
 
-            <a href="estimate.html" class="btn btn-primary mb20">Cancel ESTIMATE write</a>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="hidden-xs text-center">Status</th>
+                    <th class="hidden-xs text-center">날짜</th>
+                    <th class="text-center">프로젝트</th>
+                    <th class="text-center">CASE 제목</th>
+                    <th class="text-center">Appointment time</th>
+                    <th class="hidden-xs text-center">Check</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                <tr class="unread checked">
+                    <td class="hidden-xs text-center">Open</td>
+                    <td class="hidden-xs text-center">10/01/2017</td>
+                    <td><a href="managerEstimate.html">Come On Baby</a></td>
+                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
+                    <td class="text-center">48시간 남음</td>
+                    <td class="hidden-xs text-center">3</td>
+                </tr>
+                </tbody>
+            </table>
 
-            <div class="row">
-                <div class="col-md-3">
-                    <!-- Customer information -->
-                    <section class="customer-info">
-                        <div class="ci-name">Pupkin Vasiliy</div>
-                        <div class="ci-annotation">Pupkin Corporation LTD</div>
-                        <div class="ci-annotation"><a href="javascript:void(0);">info@someserver.com</a></div>
-                        <div class="ci-annotation">(000) 0000-0000</div>
-                    </section>
-                    <!-- #End Customer information -->
-                </div>
-                <div class="col-md-9">
-
-                    <div class="mb30">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo </div>
-
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <textarea id="editor" name="message" rows="3"></textarea>
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Send answer</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
 
         </div>
 
@@ -159,7 +193,6 @@
 <script src="resources/newIndexPage/js/jquery.timeago.js"></script>
 <script src="resources/newIndexPage/js/jquery.timeago.ko.js"></script>
 <script src="resources/newIndexPage/js/bootstrap.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-datetimepicker.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
 <script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
