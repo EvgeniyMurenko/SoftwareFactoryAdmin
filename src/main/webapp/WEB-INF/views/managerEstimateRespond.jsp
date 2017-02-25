@@ -33,37 +33,37 @@
 
     <title>소팩소개 :: Software Factory</title>
 
-    <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/admin.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/admin.css" rel="stylesheet" />
 
-    <link rel="apple-touch-icon" sizes="57x57" href="resources/newIndexPage/images/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="resources/newIndexPage/images/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="resources/newIndexPage/images/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="resources/newIndexPage/images/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="resources/newIndexPage/images/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="resources/newIndexPage/images/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="resources/newIndexPage/images/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="resources/newIndexPage/images/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/newIndexPage/images/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192"  href="resources/newIndexPage/images/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/newIndexPage/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="resources/newIndexPage/images/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/newIndexPage/images/favicon-16x16.png" />
-    <link rel="manifest" href="resources/newIndexPage/images/manifest.json" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/resources/newIndexPage/images/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/resources/newIndexPage/images/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/resources/newIndexPage/images/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/resources/newIndexPage/images/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/resources/newIndexPage/images/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/resources/newIndexPage/images/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/resources/newIndexPage/images/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/resources/newIndexPage/images/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/newIndexPage/images/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192"  href="/resources/newIndexPage/images/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/newIndexPage/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/resources/newIndexPage/images/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/newIndexPage/images/favicon-16x16.png" />
+    <link rel="manifest" href="/resources/newIndexPage/images/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="resources/newIndexPage/images/ms-icon-144x144.png" />
+    <meta name="msapplication-TileImage" content="/resources/newIndexPage/images/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
 
     <!--[if lt IE 9]>
-    <script src="resources/newIndexPage/js/html5shiv.js"></script>
-    <script src="resources/newIndexPage/js/respond.min.js"></script>
+    <script src="/resources/newIndexPage/js/html5shiv.js"></script>
+    <script src="/resources/newIndexPage/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -111,19 +111,20 @@
         <!-- #End Top line -->
 
         <div class="container-fluid content mb40">
-
-            <h3 class="mb20">Estimate ID 000011</h3>
+            <% Estimate estimate =(Estimate) request.getAttribute("estimate");%>
+            <h3 class="mb20">Estimate ID <%out.print(estimate.getEstimateGeneratedId());%></h3>
 
             <a href="estimate.html" class="btn btn-primary mb20">Cancel ESTIMATE write</a>
 
             <div class="row">
                 <div class="col-md-3">
                     <!-- Customer information -->
+
                     <section class="customer-info">
-                        <div class="ci-name">Pupkin Vasiliy</div>
-                        <div class="ci-annotation">Pupkin Corporation LTD</div>
-                        <div class="ci-annotation"><a href="javascript:void(0);">info@someserver.com</a></div>
-                        <div class="ci-annotation">(000) 0000-0000</div>
+                        <div class="ci-name"><%out.print(estimate.getName());%></div>
+                        <div class="ci-annotation">Company !!!</div>
+                        <div class="ci-annotation"><a href="javascript:void(0);"><%out.print(estimate.getEmail());%></a></div>
+                        <div class="ci-annotation"><%out.print(estimate.getPhone());%></div>
                     </section>
                     <!-- #End Customer information -->
                 </div>
@@ -151,23 +152,23 @@
 </div>
 <!-- #End Wrapper -->
 
-<script src="resources/newIndexPage/js/jquery.min.js"></script>
-<script src="resources/newIndexPage/js/jquery-ui.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.timeago.js"></script>
-<script src="resources/newIndexPage/js/jquery.timeago.ko.js"></script>
-<script src="resources/newIndexPage/js/bootstrap.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-datetimepicker.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
-<script src="resources/newIndexPage/js/fileinput.min.js"></script>
-<script src="resources/newIndexPage/js/sortable.min.js"></script>
-<script src="resources/newIndexPage/js/form-validation.min.js"></script>
-<script src="resources/newIndexPage/js/pagination.min.js"></script>
-<script src="resources/newIndexPage/js/main.js"></script>
+<script src="/resources/newIndexPage/js/jquery.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery-ui.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.fancybox.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
+<script src="/resources/newIndexPage/js/jquery.timeago.js"></script>
+<script src="/resources/newIndexPage/js/jquery.timeago.ko.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-select.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap.validator.min.js"></script>
+<script src="/resources/newIndexPage/js/fileinput.min.js"></script>
+<script src="/resources/newIndexPage/js/sortable.min.js"></script>
+<script src="/resources/newIndexPage/js/form-validation.min.js"></script>
+<script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/main.js"></script>
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
