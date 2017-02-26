@@ -114,7 +114,7 @@
             <% Estimate estimate =(Estimate) request.getAttribute("estimate");%>
             <h3 class="mb20">Estimate ID <%out.print(estimate.getEstimateGeneratedId());%></h3>
 
-            <a href="estimate.html" class="btn btn-primary mb20">Cancel ESTIMATE write</a>
+            <a href="estimate.html" class="btn btn-primary mb20">Cancel write Estimate</a>
 
             <div class="row">
                 <div class="col-md-3">
@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-md-9">
 
-                    <div class="mb30">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo </div>
+                    <div class="mb30"> <%out.print(estimate.getEstimateRequest());%> </div>
 
                     <form action="" method="post">
                         <div class="form-group">
