@@ -36,15 +36,13 @@ public class ManagerCabinetController {
         List<Estimate> estimates = estimateService.getAllEstimates();
 
 
-
         // SORT BY DATE
         EstimateByDateComparator estimateByDateComparator = new EstimateByDateComparator();
         Collections.sort(estimates, estimateByDateComparator);
 
         //PUT OBJECTS TO MODEL
 
-        managerCabinetEstimate.addObject("estimates" , estimates);
-
+        managerCabinetEstimate.addObject("estimates", estimates);
 
 
         return managerCabinetEstimate;
@@ -57,7 +55,7 @@ public class ManagerCabinetController {
         Estimate estimate = estimateService.getEstimateById(estimateId);
         CustomerInfo customerInfo = estimate.getCustomerInfo();
 
-        estimateRespond.addObject("estimate" , estimate);
+        estimateRespond.addObject("estimate", estimate);
         estimateRespond.addObject("customerInfo", customerInfo);
 
 
@@ -76,8 +74,8 @@ public class ManagerCabinetController {
     @Autowired
     MailService mailService;
 
-    @RequestMapping(value = "/set-respond/{estimateId}" , method = RequestMethod.POST)
-    public ModelAndView setRespond(@PathVariable Long estimateId , @RequestParam (value = "message") String message , HttpSession httpSession){
+    @RequestMapping(value = "/set-respond/{estimateId}", method = RequestMethod.POST)
+    public ModelAndView setRespond(@PathVariable Long estimateId, @RequestParam(value = "message") String message, HttpSession httpSession) {
 
         Estimate estimate = estimateService.getEstimateById(estimateId);
         CustomerInfo customerInfo = estimate.getCustomerInfo();
@@ -89,10 +87,10 @@ public class ManagerCabinetController {
 
 
         Set<Project> projectSet = customerInfo.getProjects();
-        Iterator<Project> projectIterator= projectSet.iterator();
-        while(projectIterator.hasNext()){
+        Iterator<Project> projectIterator = projectSet.iterator();
+        while (projectIterator.hasNext()) {
             Project project = projectIterator.next();
-            if (project.getProjectName().equals("#$ESTIMATE")){
+            if (project.getProjectName().equals("#$ESTIMATE")) {
 
                 //CREATE CASE ESTIMATION
                 Set<Message> emptyMessageSet = new HashSet<Message>();
@@ -151,7 +149,7 @@ public class ManagerCabinetController {
             }
         }
 
-        mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail() , message);
+        mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), message);
 
         return new ModelAndView("redirect:/manager-cabinet/estimate");
     }
@@ -159,29 +157,38 @@ public class ManagerCabinetController {
     @Autowired
     CaseService caseService;
 
-    @RequestMapping(value = "/case/{id}/{name}/{companyName}", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase(@PathVariable Long id ,@PathVariable String name ,@PathVariable String companyName) {
+    @RequestMapping(value = "/case/", method = RequestMethod.GET)
+    public ModelAndView getManagerCabinetCase() {
 
         ModelAndView managerCabinetCase = new ModelAndView("managerCabinetCase");
+        ArrayList<Case> caseArrayList = new ArrayList<>();
+        caseArrayList = (ArrayList<Case>) caseService.getAllCases();
 
-        //GET ALL CASES SORTED BY DATE
-        if (id.toString().equals("0") & name.equals("0") & companyName.equals("0")){
-            ArrayList<Case> caseArrayList = (ArrayList<Case>) caseService.getAllCases();
-            managerCabinetCase.addObject("cases" , caseArrayList);
-        } /*else if (!id.equals(0)) {
-
-        } else (){
-
-        }*/
-
-
-
-
+        managerCabinetCase.addObject("cases", caseArrayList);
 
         return managerCabinetCase;
     }
 
+    @RequestMapping(value = "/case-sorted/", method = RequestMethod.POST)
+    public ModelAndView getManagerCaseByNameAndProject(@RequestParam(value = "case_id") Long caseId ,@RequestParam (value = "case_name" , required = false) String name , @RequestParam(value = "case_project" , required = false) String project) {
+        System.out.println("CASE");
+        ModelAndView managerCaseByNameAndProject = new ModelAndView("managerCabinetCase");
+
+        ArrayList<Case> caseArrayList = new ArrayList<>();
+
+         if (!caseId.equals(null)) {
+            Case aCase = caseService.getCaseById(caseId);
+            caseArrayList.add(aCase);
+        } else {
+            caseArrayList = (ArrayList<Case>) caseService.findByField(name , "");
+        }
 
 
+
+        managerCaseByNameAndProject.addObject("cases" , caseArrayList);
+
+
+        return managerCaseByNameAndProject;
+    }
 
 }

@@ -80,7 +80,7 @@
             </div>
             <ul>
                 <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="<c:out value="/manager-cabinet/case/0/0/0"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 

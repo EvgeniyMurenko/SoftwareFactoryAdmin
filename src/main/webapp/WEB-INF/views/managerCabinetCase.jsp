@@ -81,7 +81,7 @@
             </div>
             <ul>
                 <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="<c:out value="/manager-cabinet/case/0/0/0"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -118,18 +118,18 @@
 
             <!-- Sort filter  -->
             <div class="mb20">
-                <form class="form-inline" action="" method="post">
+                <form class="form-inline" action="/manager-cabinet/case-sorted/?${_csrf.parameterName}=${_csrf.token}" method="post">
                     <div class="form-group">
                         <label for="case_id">ID</label>
-                        <input type="text" class="form-control" id="case_id" onkeyup="checkParams()" placeholder="ID">
+                        <input type="text" class="form-control" id="case_id" name="case_id" onkeyup="checkParams()" placeholder="ID">
                     </div>
                     <div class="form-group">
                         <label for="case_name">Name</label>
-                        <input type="email" class="form-control" id="case_name" onkeyup="checkParams()" placeholder="Name">
+                        <input type="text" class="form-control" id="case_name" name="case_name" onkeyup="checkParams()" placeholder="Name">
                     </div>
                     <div class="form-group">
                         <label for="case_project_name">Project</label>
-                        <input type="email" class="form-control" id="case_project_name" onkeyup="checkParams()" placeholder="Project name">
+                        <input type="text" class="form-control" id="case_project_name" name="case_project" onkeyup="checkParams()" placeholder="Project name">
                     </div>
                     <button type="submit" class="btn btn-primary">Sort</button>
                 </form>
