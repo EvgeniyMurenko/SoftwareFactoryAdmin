@@ -3,6 +3,7 @@
 <%@ page import="com.SoftwareFactory.model.Estimate" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="com.SoftwareFactory.model.CustomerInfo" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -112,19 +113,24 @@
 
         <div class="container-fluid content mb40">
             <% Estimate estimate =(Estimate) request.getAttribute("estimate");%>
+            <% CustomerInfo customerInfo = (CustomerInfo) request.getAttribute("customerInfo"); %>
             <h3 class="mb20">Estimate ID <%out.print(estimate.getEstimateGeneratedId());%></h3>
 
             <a href="estimate.html" class="btn btn-primary mb20">Cancel write Estimate</a>
+
+
+
 
             <div class="row">
                 <div class="col-md-3">
                     <!-- Customer information -->
 
                     <section class="customer-info">
-                        <div class="ci-name"><%out.print(estimate.getName());%></div>
-                        <div class="ci-annotation">Company !!!</div>
-                        <div class="ci-annotation"><a href="javascript:void(0);"><%out.print(estimate.getEmail());%></a></div>
-                        <div class="ci-annotation"><%out.print(estimate.getPhone());%></div>
+                        <div class="ci-name"><%out.print(customerInfo.getName());%></div>
+                        <div class="ci-annotation"><a href="javascript:void(0);"><%out.print(customerInfo.getEmail());%></a></div>
+                        <div class="ci-annotation"><%out.print(customerInfo.getPhone());%></div>
+                        <div class="ci-annotation"><% out.print(customerInfo.getCompany());%></div>
+                        <div class="ci-annotation"><% out.print(customerInfo.getWebsite());%></div>
                     </section>
                     <!-- #End Customer information -->
                 </div>
@@ -132,15 +138,16 @@
 
                     <div class="mb30"> <%out.print(estimate.getEstimateRequest());%> </div>
 
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <textarea id="editor" name="message" rows="3"></textarea>
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Send answer</button>
-                        </div>
-                    </form>
-
+                     <%if (!estimate.isRespond()){%>
+                        <form action="<%out.print("/manager-cabinet/set-respond/" + estimate.getId());%>?${_csrf.parameterName}=${_csrf.token}" method="post">
+                            <div class="form-group">
+                                <textarea id="editor" name="message" rows="3"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Send answer</button>
+                            </div>
+                        </form>
+                     <%}%>
                 </div>
             </div>
 

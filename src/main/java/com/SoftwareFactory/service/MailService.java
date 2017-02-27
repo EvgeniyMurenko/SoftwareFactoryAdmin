@@ -7,4 +7,5 @@ public interface MailService {
 
     void sendEmailAfterEstimate(String estimateId , String registrationLink , String recipientMail);
 
+    void sendEmailAfterEstimateRespond(String recipientMail , String respondText );
 }

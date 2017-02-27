@@ -59,6 +59,10 @@ public class Estimate {
     @Column(name = "path")
     private String estimatePath;
 
+    @OneToOne
+    @JoinColumn(name="customer_info_id")
+    CustomerInfo customerInfo;
+
     public Long getId() {
         return id;
     }
@@ -145,6 +149,14 @@ public class Estimate {
 
     public void setEstimatePath(String estimatePath) {
         this.estimatePath = estimatePath;
+    }
+
+    public CustomerInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(CustomerInfo customerInfo) {
+        this.customerInfo = customerInfo;
     }
 
     public Estimate() {

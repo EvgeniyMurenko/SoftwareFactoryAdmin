@@ -126,8 +126,11 @@ public class IndexPageController {
 
         //GENERATE CUSTOMER INFO ACCOUNT
         String ssoId =  getCustomerId(estimate.getId().toString());
-        generateCustomerInfo(ssoId , phone , recipientMail , recipientName);
+        CustomerInfo customerInfo =  generateCustomerInfo(ssoId , phone , recipientMail , recipientName);
 
+        //ADD CUSTOMER INFO TO ESTIMATE
+        estimate.setCustomerInfo(customerInfo);
+        estimateService.updateEstimate(estimate);
 
         //REDIRECT TO MAIN AND SHOW SUCCESS
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
@@ -270,7 +273,7 @@ public class IndexPageController {
         }
     }
 
-    private void generateCustomerInfo(String ssoId , String phone , String recipientMail , String recipientName ){
+    private CustomerInfo generateCustomerInfo(String ssoId , String phone , String recipientMail , String recipientName ){
 
         // CREATE USER WITH ROLE CUSTOMER
         User user = new User();
@@ -323,5 +326,6 @@ public class IndexPageController {
 
 
         customerInfoService.updateCustomerInfo(customerInfoCreated);
+        return customerInfo;
     }
 }
