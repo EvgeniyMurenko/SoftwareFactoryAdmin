@@ -88,45 +88,29 @@
 <!-- #End Header -->
 
 <section class="container mb20">
-    <%--<div class="row">
-        <div class="col-md-3">
-
-            <!-- Projects -->
-            <h3 class="mt0">프로젝트</h3>
-            <ul class="projects-list">
-                <%
-
-                    Project generalDiscussionProject = projectSet.get(projectSet.size()-1);
-                    for(Project project : projectSet){
-                        if (!project.getProjectName().equals("#$GENERAL")){
-                %>
-                <%  String projectId= Long.toString(project.getId()); %>
-                <li><a href="/cabinet/project/<%out.print(projectId); %>" <%if (projectId.equals(currentProjectId)) out.print("class=\"active\"");%>     ><i class="fa fa-angle-double-right"></i> <% out.println(project.getProjectName()); %></a></li>
-
-                <%}
-                }%>
-
-            </ul>
-            <!-- #End Projects -->
-
-            <!-- Discussion room -->
-            <h3 class="mt20">일반 토론</h3>
-            <ul class="projects-list">
-                <li><a href="/cabinet/project/<%out.print(generalDiscussionProject.getId()); %>"  <%if (Long.toString(generalDiscussionProject.getId()).equals(currentProjectId)) out.print("class=\"active\"");%>><i class="fa fa-angle-double-right"></i>Discussion room</a></li>
-            </ul>
-            <!-- #End Discussion room -->
-        </div>--%>
 
         <%String currentProjectId= (String) request.getAttribute("projectId");
             List<Project> projectSet =  (List<Project>)request.getAttribute("projects");%>
 
         <div class="col-md-12">
-            <!-- Breadcrumbs -->
-            <ol class="breadcrumb">
-                <li><a href="<c:url value="/cabinet/" />"><i class="fa fa-home"></i></a></li>
-                <li class="active">새 사례 만들기</li>
-            </ol>
-            <!-- #End Breadcrumbs -->
+            <!-- Warning Block -->
+            <div class="row mb20">
+                <div class="col-md-12">
+
+                    <!-- Text warning -->
+                    <p class="bg-warning p10">
+                        우선 기존에 같은 이슈에 대해서 CASE를 오픈한 내용이 있는지 확인하시기 바랍니다. <br />
+                        하나의 이슈에 대해서는 하나의 CASE만 오픈 하셔야 합니다.<br />
+                        (이슈는 구체적으로 기록해 주세요 : ex  견적진행, 개발작업스토리, 앱작동불능, 유지보수요청 등)<br /><br />
+
+                        <a href="<c:url value="/cabinet/" />">Check current CASE lise... </a>
+
+                    </p>
+                    <!-- #End text warning -->
+
+                </div>
+            </div>
+            <!-- #End Warning Block -->
 
             <!-- Estimation -->
             <c:url var="createCase" value="/createCase?${_csrf.parameterName}=${_csrf.token}"/>
@@ -210,8 +194,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea class="form-control" name="message" rows="7" id="message" placeholder="Message" required></textarea>
+                    <label for="editor">Message</label>
+                    <textarea class="form-control" name="message" rows="7" id="editor" placeholder="Message" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox abc-checkbox">
+                        <input type="checkbox" id="emergency" name="emergency">
+                        <label for="emergency">Emergency</label>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -256,6 +247,7 @@
 <script src="/resources/newIndexPage/js/sortable.min.js"></script>
 <script src="/resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/ckeditor/ckeditor.js"></script>
 <script src="/resources/newIndexPage/js/main.js"></script>
 </body>
 </html>
