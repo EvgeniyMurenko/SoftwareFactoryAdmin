@@ -168,7 +168,11 @@ public class ManagerCabinetController {
         if (id.toString().equals("0") & name.equals("0") & companyName.equals("0")){
             ArrayList<Case> caseArrayList = (ArrayList<Case>) caseService.getAllCases();
             managerCabinetCase.addObject("cases" , caseArrayList);
-        }
+        } /*else if (!id.equals(0)) {
+
+        } else (){
+
+        }*/
 
 
 

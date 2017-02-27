@@ -119,16 +119,16 @@
             <div class="mb20">
                 <form class="form-inline" action="" method="post">
                     <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="text" class="form-control" id="id" placeholder="ID">
+                        <label for="case_id">ID</label>
+                        <input type="text" class="form-control" id="case_id" onkeyup="checkParams()" placeholder="ID">
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="email" class="form-control" id="name" placeholder="Name">
+                        <label for="case_name">Name</label>
+                        <input type="email" class="form-control" id="case_name" onkeyup="checkParams()" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="company_name">Company</label>
-                        <input type="email" class="form-control" id="company_name" placeholder="Company name">
+                        <label for="case_project_name">Project</label>
+                        <input type="email" class="form-control" id="case_project_name" onkeyup="checkParams()" placeholder="Project name">
                     </div>
                     <button type="submit" class="btn btn-primary">Sort</button>
                 </form>

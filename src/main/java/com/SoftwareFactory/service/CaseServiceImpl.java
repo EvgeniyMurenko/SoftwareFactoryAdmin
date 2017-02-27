@@ -39,6 +39,11 @@ public class CaseServiceImpl implements CaseService {
     }
 
     @Override
+    public List<Case> findByField(String name, String project) {
+        return caseDao.findByField(name,project);
+    }
+
+    @Override
     @Transactional
     public void updateCase(Case aCase) {
         caseDao.update(aCase);
