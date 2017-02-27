@@ -32,8 +32,7 @@ CREATE TABLE `s_cases` (
 
 CREATE TABLE `s_manager_info` (
 	`user_id` INT NOT NULL,
-	`first_name` VARCHAR(255) NOT NULL,
-	`last_name` VARCHAR(255) NOT NULL
+	`name` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `s_customer_info` (
@@ -158,11 +157,11 @@ VALUES (5, 'maxim','customer2','111 111 11 11','email2@mail.com', 'xxx2.com');
 INSERT INTO `s_customer_info`(user_id, name, company, phone, email, web_site)
 VALUES (5, 'oksana','customer3','111 111 11 11','email3@mail.com', 'xxx3.com');
 
-INSERT INTO `s_manager_info`(user_id, first_name, last_name)
-VALUES (2, 'petya','manager1');
+INSERT INTO `s_manager_info`(user_id, name)
+VALUES (2, 'petya');
 
-INSERT INTO `s_manager_info`(user_id, first_name, last_name)
-VALUES (3, 'masha','manager2');
+INSERT INTO `s_manager_info`(user_id, name)
+VALUES (3, 'masha');
 
 INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
 VALUES ('AMMATA', 4,'2017-01-20 13:00:00', 1, 'JAVA');

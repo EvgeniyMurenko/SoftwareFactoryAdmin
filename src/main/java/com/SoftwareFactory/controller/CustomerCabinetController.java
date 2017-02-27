@@ -106,6 +106,8 @@ public class CustomerCabinetController {
 
     @Autowired
     CaseService caseService;
+    @Autowired
+    ManagerInfoService managerInfoService;
 
 
     @RequestMapping(value = "/case/{id}", method = RequestMethod.GET)
@@ -129,7 +131,9 @@ public class CustomerCabinetController {
         //PUT OBJECTS TO MODEL
         caseChat.addObject("messagesSorted", messagesSorted);
         caseChat.addObject("caseId", id);
+        caseChat.addObject("case", aCase);
         caseChat.addObject("caseStatus" , aCase.getStatus());
+        caseChat.addObject("managerInfo" , managerInfoService.getManagerInfoById(aCase.getUserManagerId()));
         return caseChat;
     }
 
@@ -193,6 +197,21 @@ public class CustomerCabinetController {
         caseService.updateCase(caseToClose);
 
         return new ModelAndView("redirect:/cabinet/");
+    }
+
+    @RequestMapping (value = "/case/{id}/answer", method = RequestMethod.GET)
+    public ModelAndView caseAnswerController( @PathVariable Long id) {
+
+        ModelAndView caseAnswerChat = new ModelAndView("customerChatAnswer");
+
+        Case aCase = caseService.getCaseById(id);
+        Set<Message> messages = aCase.getMessages();
+
+        caseAnswerChat.addObject("caseId", id);
+        caseAnswerChat.addObject("case" , aCase);
+        caseAnswerChat.addObject("messages" , messages);
+
+        return caseAnswerChat;
     }
 
 

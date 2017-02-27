@@ -14,8 +14,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
+
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -72,18 +73,18 @@
 <header class="container header">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 logo">
-            <a href="<c:url value="/cabinet/"/>">소프트웨어<span>팩토리</span></a>
+            <a href="./">소프트웨어<span>팩토리</span></a>
             <div class="small-logo">SoFAC : <i>Software Factory</i></div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 text-right login">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <span class="avatar-welcome"><%out.print((String)request.getAttribute("customerName"));%> 님 접속을 환영합니다.</span>
+                    <span class="avatar-welcome">MAXIM 님 접속을 환영합니다.</span>
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
                         <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
-                        <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -95,44 +96,16 @@
 
 <section class="container content mb20">
 
+    <% Long caseId =  (Long) request.getAttribute("caseId"); %>
+    <% Case aCase = (Case) request.getAttribute("case"); %>
+    <% ArrayList<Message> messages =  new ArrayList<>(aCase.getMessages()); %>
+
     <!-- Buttons -->
     <div class="row mb20">
-        <% Long caseId =  (Long) request.getAttribute("caseId"); %>
-        <% Case aCase = (Case) request.getAttribute("case"); %>
-        <% String caseStatus = (String) request.getAttribute("caseStatus"); %>
-        <% ArrayList<Message> messages =  (ArrayList<Message>)request.getAttribute("messagesSorted"); %>
-        <% ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>
-
-        <div class="col-md-6"><a href="<c:url value="/cabinet/"/>" class="btn btn-primary btn-mobile">Back to CASE list</a></div>
-
-        <%if (!caseStatus.equals(StatusEnum.CLOSE.toString())){%>
-            <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/close_case?${_csrf.parameterName}=${_csrf.token}" method="POST" >
-                <div class="col-md-6 text-right">
-                    <a href="/cabinet/case/<%out.print(Long.toString(aCase.getId())); %>/answer" class="btn btn-primary btn-mobile">Write this CASE</a>
-
-
-                    <button type="button" class="btn btn-warning btn-mobile" data-toggle="modal" data-target="#myModal">Close this CASE</button>
-                    <%--Modal window--%>
-                    <div id="myModal" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
-                                    <h4 class="modal-title">ATTENTION</h4>
-                                </div>
-                                <div class="modal-body">Are you sure to close?</div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary btn-mobile">YES</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%--END Modal window--%>
-                </div>
-            </form>
-        <%}%>
+        <div class="col-md-12"><a href="<c:url value="/cabinet/"/>" class="btn btn-primary btn-mobile">Back to CASE list</a></div>
     </div>
     <!-- #End Buttons -->
+
 
     <!-- Case table -->
     <table class="table table-striped">
@@ -140,8 +113,8 @@
         <tr class="unread checked">
             <td><a href="javascript:void(0);"><%out.print(aCase.getProjectTitle());%></a></td>
             <td class="text-center"><a href="javascript:void(0);"><%out.print(aCase.getProject().getProjectName());%></a></td>
-            <td class="text-center"><%out.print(aCase.getProject().getStatus());%></td>
-            <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+            <td class="text-center"><%out.print(aCase.getStatus());%></td>
+            <td class="hidden-xs text-center"><%out.print(aCase.getProject().getCreateDate());%></td>
             <td class="hidden-xs text-center"><time class="timeago" datetime="<%  out.print(messages.get(0).getMessageTime()); %>"></time></td>
             <td class="hidden-xs text-center"><%  out.print(messages.size()); %></td>
         </tr>
@@ -149,27 +122,33 @@
     </table>
     <!-- #End Case table -->
 
-    <!-- Case Messages -->
-    <section class="messages">
+    <form action="/cabinet/case/<% out.print(Long.toString(caseId)); %>/print_message?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data" >
+        <div class="form-group">
+            <textarea class="form-control" name="message" rows="7" id="editor" placeholder="Message"></textarea>
+        </div>
 
-        <%for (Message message : messages){
-            Long newLong =  new Long(message.getUser().getId());
-            if(aCase.getProject().getCustomerInfo().getId().equals( newLong )) {%>
-                <div class="message-customer-informer">
-                    <div class="mi-c-title"><%  out.print(aCase.getProject().getCustomerInfo().getName()); %><a href="javascript:void(0);"><%  out.print("(ID "+message.getId()+")"); %></a> <span class="mi-c-time pull-right"><%  out.print(message.getMessageTime()); %></span></div>
-                    <div class="mi-c-message"><%  out.print(message.getMessageText()); %></div>
-                </div>
-            <%}else {%>
-                <div class="message-manager-informer">
-                    <%    %>
-                    <div class="mi-m-title"><%  out.print(managerInfo.getName()); %> <a href="javascript:void(0);"><%  out.print("(ID "+message.getId()+")"); %></a> <span class="mi-m-time pull-right"><%  out.print(message.getMessageTime()); %></span></div>
-                    <div class="mi-m-message"><%  out.print(message.getMessageText()); %> </div>
-                </div>
-            <%}%>
-        <%}%>
+        <div class="form-group">
+            <div class="checkbox abc-checkbox">
+                <input type="checkbox" id="emergency" name="emergency">
+                <label for="emergency">Emergency</label>
+            </div>
+        </div>
 
-    </section>
-    <!-- #End Case Messages -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label class="control-label">Select File</label>
+                    <input id="caseInput" name="file[]" type="file" multiple class="file-loading">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group text-right mt25">
+                    <a href="/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>" class="btn btn-default btn-mobile">Back</a>
+                    <button type="submit" class="btn btn-primary btn-mobile">Send</button>
+                </div>
+            </div>
+        </div>
+    </form>
 
 
 </section>
@@ -196,6 +175,7 @@
 <script src="/resources/newIndexPage/js/sortable.min.js"></script>
 <script src="/resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/ckeditor/ckeditor.js"></script>
 <script src="/resources/newIndexPage/js/main.js"></script>
 </body>
 </html>
