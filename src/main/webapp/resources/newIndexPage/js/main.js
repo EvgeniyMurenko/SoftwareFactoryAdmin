@@ -163,6 +163,24 @@ jQuery(document).ready(function($) {
     });
 });
 
+// Change admin params
+function checkParams() {
+    var case_id = $('#case_id').val();
+    var case_name = $('#case_name').val();
+    var case_project_name = $('#case_project_name').val();
+
+    if (case_id.length != 0) {
+        $('#case_name').attr('disabled', 'disabled');
+        $('#case_project_name').attr('disabled', 'disabled');
+    } else if(case_name.length != 0 || case_project_name.length != 0) {
+        $('#case_id').attr('disabled', 'disabled');
+    } else {
+        $('#case_id').removeAttr('disabled');
+        $('#case_name').removeAttr('disabled');
+        $('#case_project_name').removeAttr('disabled');
+    }
+}
+
 var editor = CKEDITOR.replace('editor', {
     toolbar : 'Basic',
     width : '100%',

@@ -4,6 +4,8 @@ import com.SoftwareFactory.model.Case;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,17 @@ public class CaseDaoImpl implements CaseDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Case");
         return query.list();
+    }
+
+    @Override
+    public List<Case> findByField(String name, String project) {
+        Session session = sessionFactory.getCurrentSession();
+        List cases = session.createCriteria(Case.class)
+                .add(Restrictions.like("name", name, MatchMode.ANYWHERE))
+     /*           .add(Restrictions.like("project", name, MatchMode.ANYWHERE))*/
+                .list();
+
+        return cases;
     }
 
 }

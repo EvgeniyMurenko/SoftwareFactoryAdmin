@@ -42,6 +42,7 @@
     <link href="/resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
     <link href="/resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
     <link href="/resources/newIndexPage/css/admin.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/admin-responsive.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" sizes="57x57" href="/resources/newIndexPage/images/apple-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="/resources/newIndexPage/images/apple-icon-60x60.png" />
@@ -79,7 +80,7 @@
             </div>
             <ul>
                 <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="<c:out value="/manager-cabinet/case/0/0/0"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 

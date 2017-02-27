@@ -43,6 +43,7 @@
     <link href="/resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
     <link href="/resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
     <link href="/resources/newIndexPage/css/admin.css" rel="stylesheet" />
+    <link href="/resources/newIndexPage/css/admin-responsive.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" sizes="57x57" href="/resources/newIndexPage/images/apple-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="/resources/newIndexPage/images/apple-icon-60x60.png" />
@@ -80,7 +81,7 @@
             </div>
             <ul>
                 <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="<c:out value="/manager-cabinet/case/0/0/0"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -115,20 +116,20 @@
 
             <h3 class="mb20">Cases</h3>
 
-            <!-- Sort filter -->
+            <!-- Sort filter  -->
             <div class="mb20">
-                <form class="form-inline" action="" method="post">
+                <form class="form-inline" action="/manager-cabinet/case-sorted/?${_csrf.parameterName}=${_csrf.token}" method="post">
                     <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="text" class="form-control" id="id" placeholder="ID">
+                        <label for="case_id">ID</label>
+                        <input type="text" class="form-control" id="case_id" name="case_id" onkeyup="checkParams()" placeholder="ID">
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="email" class="form-control" id="name" placeholder="Name">
+                        <label for="case_name">Name</label>
+                        <input type="text" class="form-control" id="case_name" name="case_name" onkeyup="checkParams()" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="company_name">Company</label>
-                        <input type="email" class="form-control" id="company_name" placeholder="Company name">
+                        <label for="case_project_name">Project</label>
+                        <input type="text" class="form-control" id="case_project_name" name="case_project" onkeyup="checkParams()" placeholder="Project name">
                     </div>
                     <button type="submit" class="btn btn-primary">Sort</button>
                 </form>
@@ -139,11 +140,11 @@
                 <thead>
                 <tr>
                     <th class="hidden-xs text-center">Status</th>
-                    <th class="hidden-xs text-center">날짜</th>
-                    <th class="text-center">프로젝트</th>
-                    <th class="text-center">CASE 제목</th>
+                    <th class="hidden-xs text-center">Date</th>
+                    <th class="text-center">Project</th>
+                    <th class="text-center">Case issue</th>
                     <th class="text-center">Appointment time</th>
-                    <th class="hidden-xs text-center">Check</th>
+                    <th class="hidden-xs text-center">Messages</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -154,12 +155,12 @@
                         Case aCase = caseIterator.next();
                 %>
                     <tr class="unread checked">
-                        <td class="hidden-xs text-center">Open</td>
-                        <td class="hidden-xs text-center">10/01/2017</td>
-                        <td><a href="managerCase.html">Come On Baby</a></td>
-                        <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                        <td class="text-center">48시간 남음</td>
-                        <td class="hidden-xs text-center">3</td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+                        <td><a href="managerCase.html"><%out.print(aCase.getProject().getProjectName());%></a></td>
+                        <td><a href="managerCase.html"><%out.print(aCase.getProjectTitle());%></a></td>
+                        <td class="text-center"><%out.print("time!!!");%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getMessages().size());%></td>
                     </tr>
                 <%}%>
                 </tbody>

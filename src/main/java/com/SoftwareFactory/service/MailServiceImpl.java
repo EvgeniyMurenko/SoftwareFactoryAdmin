@@ -111,4 +111,23 @@ public class MailServiceImpl implements MailService {
             System.err.println(ex.getMessage());
         }
     }
+   public void sendEmailAfterEstimateRespond(String recipientMail , String respondText ){
+       try {
+           mailSender.send(new MimeMessagePreparator() {
+
+               public void prepare(MimeMessage mimeMessage) throws Exception {
+                   mimeMessage.setFrom(new InternetAddress("sorcus100500@gmail.com", "SoFAC"));
+                   mimeMessage.setRecipient(Message.RecipientType.TO,
+                           new InternetAddress(recipientMail));
+                   mimeMessage.setSubject("check", "utf-8");
+                   mimeMessage.setContent(
+                           respondText, "text/html; charset=utf-8");
+
+               }
+           });
+           System.out.println("Message Send...Hurrey");
+       } catch (MailException ex) {
+           System.err.println(ex.getMessage());
+       }
+    }
 }

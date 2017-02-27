@@ -38,6 +38,7 @@
     <link href="resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
     <link href="resources/newIndexPage/css/admin.css" rel="stylesheet" />
+    <link href="resources/newIndexPage/css/admin-responsive.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" sizes="57x57" href="resources/newIndexPage/images/apple-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="resources/newIndexPage/images/apple-icon-60x60.png" />
