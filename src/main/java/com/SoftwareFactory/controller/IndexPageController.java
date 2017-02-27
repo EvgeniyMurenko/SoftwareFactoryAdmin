@@ -1,7 +1,6 @@
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
-import com.SoftwareFactory.constant.GlobalEnum;
 import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.ProjectEnum;
 import com.SoftwareFactory.constant.StatusEnum;
@@ -12,7 +11,6 @@ import com.SoftwareFactory.service.EstimateService;
 import com.SoftwareFactory.service.MailService;
 import com.SoftwareFactory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
 import java.util.*;
 import java.util.Date;
 
@@ -104,6 +101,7 @@ public class IndexPageController {
         estimate.setDateRequest(currentDate);
         estimate.setRespond(false);
         estimateService.addNewEstimate(estimate);
+
         //GENERATE SPECIAL ESTIMATE ID
         String generatedEstimateId = generateEstimateId(estimate.getDateRequest() , estimate.getId());
 
@@ -126,6 +124,11 @@ public class IndexPageController {
             estimateService.updateEstimate(estimate);
         }
 
+        //GENERATE CUSTOMER INFO ACCOUNT
+        String ssoId =  getCustomerId(estimate.getId().toString());
+        generateCustomerInfo(ssoId , phone , recipientMail , recipientName);
+
+
         //REDIRECT TO MAIN AND SHOW SUCCESS
         ModelAndView mainPageEstimateSuccess = new ModelAndView("redirect:/main");
         mainPageEstimateSuccess.addObject("isEstimateSuccess", new Boolean(true));
@@ -136,13 +139,16 @@ public class IndexPageController {
     @RequestMapping(value = "/requestId/{estimateId}/{generatedEstimateId}", method = RequestMethod.GET)
     public ModelAndView requestIdShowPage(@PathVariable String estimateId , @PathVariable Long generatedEstimateId){
 
-        if (userService.findBySSO(generateCustomerId(estimateId)) !=null){
+
+        String ssoId = getCustomerId(estimateId);
+        User user =userService.findBySSO(ssoId);
+
+        if (user == null || user.isFullCreated()){
             return new ModelAndView("redirect:/main");
         }
+
         ModelAndView requestIdPage = new ModelAndView("/requestId");
-
         Estimate estimate = estimateService.getEstimateById(Long.valueOf(estimateId));
-
         requestIdPage.addObject("CustomerEstimate" , estimate);
 
         return requestIdPage;
@@ -165,61 +171,26 @@ public class IndexPageController {
         password = password.replace("(" , "");
         password = password.replace("-" ,"");
 
-        String ssoId =  generateCustomerId(estimateId);
-
-        // CREATE USER WITH ROLE CUSTOMER
-        User user = new User();
-
+        //UPDATE USER PASSWORD RELATED TO CUSTOMER
+        String ssoId = getCustomerId(getCustomerId(estimateId));
+        User user = userService.findBySSO(ssoId);
         user.setPassword(password);
-        user.setEmail(email);
-        user.setSsoId(ssoId);
+        user.setFullCreated(true);
+        userService.updateUser(user);
 
-        UserProfile userProfile = new UserProfile();
-        userProfile.setId(1);
-        userProfile.setType("CUSTOMER");
-
-        Set<UserProfile> userProfiles = new HashSet<>();
-        userProfiles.add(userProfile);
-
-        user.setUserProfiles(userProfiles);
-
-        userService.saveUser(user);
-
-        // CREATE CUSTOMER PROFILE
-
-        User userAfterSave = userService.findBySSO(ssoId);
-
-        Long userId = new Long(userAfterSave.getId());
-
-        //CREATE FINAL NEW CUSTOMER
-
-        Set<Project> projects = new HashSet<>();
-
-        CustomerInfo customerInfo = new CustomerInfo(userId, name, companyName, phone, email, companySite , projects);
-        customerInfoService.addNewCustomerInfo(customerInfo);
+        //UPDATE CUSTOMER INFO AFTER FULL REGISTRATION
+        Long customerInfoId = new Long(user.getId());
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerInfoId);
+        customerInfo.setName(name);
+        customerInfo.setEmail(email);
+        customerInfo.setPhone(phone);
+        customerInfo.setCompany(companyName);
+        customerInfo.setWebsite(companySite);
+        customerInfoService.updateCustomerInfo(customerInfo);
 
 
-        CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(userId);
-
-        //CREATE #$GENERAL PROJECT FOR CUSTOMER
-        Date projectCreationDate = new Date();
-
-        Set<Case> cases = new HashSet<>();
-
-
-        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
-        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
-
-        Set<Project> projectsToAdd = new HashSet<>();
-        projectsToAdd.add(projectNormal);
-        projectsToAdd.add(projectEstimate);
-        customerInfoCreated.setProjects(projectsToAdd);
-
-
-        customerInfoService.updateCustomerInfo(customerInfoCreated);
-
+        //SEND INFORMATION TO CUSTOMER
         mailService.sendEmailAfterRegistration(password , ssoId , email , name);
-
 
         main.addObject("isGenerateCustomerIdSuccess" , new Boolean(true));
         return main;
@@ -286,7 +257,7 @@ public class IndexPageController {
         return generatedEstimateId;
     }
 
-    private String generateCustomerId(String id){
+    private String getCustomerId(String id){
         if (id.length() <= 4){
             String zero = "";
             for (int i = 0; i < 4-id.length(); i++){
@@ -297,5 +268,60 @@ public class IndexPageController {
         } else {
             return id;
         }
+    }
+
+    private void generateCustomerInfo(String ssoId , String phone , String recipientMail , String recipientName ){
+
+        // CREATE USER WITH ROLE CUSTOMER
+        User user = new User();
+
+        user.setPassword(phone);
+        user.setEmail(recipientMail);
+        user.setSsoId(ssoId);
+        user.setFullCreated(false);
+
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId(1);
+        userProfile.setType("CUSTOMER");
+
+        Set<UserProfile> userProfiles = new HashSet<>();
+        userProfiles.add(userProfile);
+
+        user.setUserProfiles(userProfiles);
+
+        userService.saveUser(user);
+
+        // CREATE CUSTOMER PROFILE
+
+        User userAfterSave = userService.findBySSO(ssoId);
+
+        Long userId = new Long(userAfterSave.getId());
+
+        //CREATE FINAL NEW CUSTOMER
+
+        Set<Project> projects = new HashSet<>();
+
+        CustomerInfo customerInfo = new CustomerInfo(userId, recipientName, "", phone, recipientMail, "" , projects);
+        customerInfoService.addNewCustomerInfo(customerInfo);
+
+
+        CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(userId);
+
+        //CREATE #$GENERAL PROJECT FOR CUSTOMER
+        Date projectCreationDate = new Date();
+
+        Set<Case> cases = new HashSet<>();
+
+
+        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
+        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
+
+        Set<Project> projectsToAdd = new HashSet<>();
+        projectsToAdd.add(projectNormal);
+        projectsToAdd.add(projectEstimate);
+        customerInfoCreated.setProjects(projectsToAdd);
+
+
+        customerInfoService.updateCustomerInfo(customerInfoCreated);
     }
 }

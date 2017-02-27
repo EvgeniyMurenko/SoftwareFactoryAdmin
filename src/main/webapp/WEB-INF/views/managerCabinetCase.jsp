@@ -139,11 +139,11 @@
                 <thead>
                 <tr>
                     <th class="hidden-xs text-center">Status</th>
-                    <th class="hidden-xs text-center">날짜</th>
-                    <th class="text-center">프로젝트</th>
-                    <th class="text-center">CASE 제목</th>
+                    <th class="hidden-xs text-center">Date</th>
+                    <th class="text-center">Project</th>
+                    <th class="text-center">Case issue</th>
                     <th class="text-center">Appointment time</th>
-                    <th class="hidden-xs text-center">Check</th>
+                    <th class="hidden-xs text-center">Messages</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -154,12 +154,12 @@
                         Case aCase = caseIterator.next();
                 %>
                     <tr class="unread checked">
-                        <td class="hidden-xs text-center">Open</td>
-                        <td class="hidden-xs text-center">10/01/2017</td>
-                        <td><a href="managerCase.html">Come On Baby</a></td>
-                        <td><a href="managerCase.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                        <td class="text-center">48시간 남음</td>
-                        <td class="hidden-xs text-center">3</td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+                        <td><a href="managerCase.html"><%out.print(aCase.getProject().getProjectName());%></a></td>
+                        <td><a href="managerCase.html"><%out.print(aCase.getProjectTitle());%></a></td>
+                        <td class="text-center"><%out.print("time!!!");%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getMessages().size());%></td>
                     </tr>
                 <%}%>
                 </tbody>

@@ -168,7 +168,9 @@
 <script src="/resources/newIndexPage/js/sortable.min.js"></script>
 <script src="/resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/ckeditor/ckeditor.js"></script>
 <script src="/resources/newIndexPage/js/main.js"></script>
+
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
