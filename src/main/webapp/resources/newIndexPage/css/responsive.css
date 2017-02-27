@@ -42,6 +42,12 @@
     .bottom-informer { text-align: center !important; }
     .bottom-menu { margin-top: 10px; text-align: center !important; }
     .orange-button { display: none; }
+    .error-page .error-404 { font-size: 100pt; }
+
+    .content .messages .message-manager-informer,
+    .content .messages .message-customer-informer { margin-right: 0 !important; margin-left: 0 !important; }
+    .content .messages .message-manager-informer .mi-m-time,
+    .content .messages .message-customer-informer .mi-c-time { display: block !important; float: none !important;  }
 }
 @media screen and (max-width:480px) {
 }

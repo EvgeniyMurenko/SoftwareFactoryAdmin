@@ -93,36 +93,6 @@
 <!-- #End Header -->
 
 <section class="container mb20">
-   <%-- <div class="row">
-        <div class="col-md-3">
-
-            <!-- Projects -->
-            <h3 class="mt0">프로젝트</h3>
-            <ul class="projects-list">
-                <%
-                    String currentProjectId= (String) request.getAttribute("projectId");
-                    List<Project> projectSet =  (List<Project>)request.getAttribute("projects");
-                    Project generalDiscussionProject = projectSet.get(projectSet.size()-1);
-                    for(Project project : projectSet){
-                        if (!project.getProjectName().equals("#$GENERAL")){
-                %>
-                <%  String projectId= Long.toString(project.getId()); %>
-                <li><a href="/cabinet/project/<%out.print(projectId); %>" <%if (projectId.equals(currentProjectId)) out.print("class=\"active\"");%>     ><i class="fa fa-angle-double-right"></i> <% out.println(project.getProjectName()); %></a></li>
-
-                <%}
-                }%>
-
-            </ul>
-            <!-- #End Projects -->
-
-            <!-- Discussion room -->
-            <h3 class="mt20">일반 토론</h3>
-            <ul class="projects-list">
-                <li><a href="/cabinet/project/<%out.print(generalDiscussionProject.getId()); %>"  <%if (Long.toString(generalDiscussionProject.getId()).equals(currentProjectId)) out.print("class=\"active\"");%>><i class="fa fa-angle-double-right"></i>Discussion room</a></li>
-            </ul>
-            <!-- #End Discussion room -->
-
-        </div>--%>
         <div class="col-md-12">
             <% Long caseId =  (Long) request.getAttribute("caseId"); %>
             <% String caseStatus = (String) request.getAttribute("caseStatus"); %>
