@@ -116,7 +116,7 @@
 
             <h3 class="mb20">Cases</h3>
 
-            <!-- Sort filter -->
+            <!-- Sort filter  -->
             <div class="mb20">
                 <form class="form-inline" action="" method="post">
                     <div class="form-group">
