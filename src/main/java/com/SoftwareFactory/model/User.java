@@ -24,10 +24,6 @@ public class User implements Serializable{
 	private String password;
 
 	@NotEmpty
-	@Column(name="email", nullable=false)
-	private String email;
-
-	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "app_user_user_profile",
 			joinColumns = { @JoinColumn(name = "user_id") },
@@ -59,14 +55,6 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Set<UserProfile> getUserProfiles() {
@@ -127,7 +115,6 @@ public class User implements Serializable{
 				"id=" + id +
 				", ssoId='" + ssoId + '\'' +
 				", password='" + password + '\'' +
-				", email='" + email + '\'' +
 		/*		", userProfiles=" + userProfiles +*/
 				'}';
 	}

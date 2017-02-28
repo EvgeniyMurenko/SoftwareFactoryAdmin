@@ -1,7 +1,9 @@
 <%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <%@ page import="com.SoftwareFactory.model.Project" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.SoftwareFactory.constant.ProjectEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="com.SoftwareFactory.constant.ProjectEnum" %>
+<%@ page import="com.SoftwareFactory.model.CustomerInfo" %>
+<%@ page import="com.SoftwareFactory.model.User" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -62,6 +64,10 @@
     <![endif]-->
 </head>
 <body>
+
+<%CustomerInfo customerInfo =  (CustomerInfo)request.getAttribute("customerInfo");%>
+<%User user =  (User)request.getAttribute("user");%>
+
 <!-- Header -->
 <header class="container header">
     <div class="row">
@@ -72,11 +78,11 @@
         <div class="col-lg-6 col-md-6 col-sm-6 text-right login">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <span class="avatar-welcome"><%out.print((String)request.getAttribute("customerName"));%> 님 접속을 환영합니다.</span>
+                    <span class="avatar-welcome"><%out.print(customerInfo.getName());%> 님 접속을 환영합니다.</span>
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
-                        <%--<li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
+                        <li><a href="<c:url value="/cabinet/customerSettings"/>"><i class="fa fa-user"></i> MY</a></li>
                         <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                     </ul>
                 </li>
@@ -90,30 +96,33 @@
 <section class="container mb20">
     <h3 class="mb20">프로필 정보 변경</h3>
 
-    <form method="post">
-        <div class="row">
+
+
+    <%--information form--%>
+    <form id="infoSettings" action="/cabinet/infoSettings?${_csrf.parameterName}=${_csrf.token}" method="POST">
+            <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">이름</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="이름" required />
+                    <input type="text" name="name" id="name" value="<%  out.print(customerInfo.getName());  %>" class="form-control" placeholder="이름" required />
                 </div>
                 <div class="form-group">
                     <label for="email">이메일</label>
-                    <input type="email" name="email" id="email" class="form-control form-block" placeholder="이메일" required />
+                    <input type="email" name="email" id="email"  value="<%  out.print(customerInfo.getEmail());  %>" class="form-control form-block" placeholder="이메일" required />
                 </div>
                 <div class="form-group">
                     <label for="phone">전화번호</label>
-                    <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="" pattern="(]\d{3}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="(ddd) dddd-dddd" maxlength="100" required />
+                    <input type="text" name="phone" id="phone" class="form-control bfh-phone"  value="<%  out.print(customerInfo.getPhone());  %>" pattern="(]\d{3}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="(ddd) dddd-dddd" maxlength="100" required />
                 </div>
 
                 <div class="form-group">
                     <label for="companyName">회사명</label>
-                    <input type="text" name="companyName" id="companyName" class="form-control" value="" placeholder="회사명" required />
+                    <input type="text" name="companyName" id="companyName" class="form-control"  value="<%  out.print(customerInfo.getCompany());  %>" placeholder="회사명" required />
                 </div>
 
                 <div class="form-group">
                     <label for="companySite">회사 홈페이지</label>
-                    <input type="text" name="companySite" id="companySite" pattern="http?://.+" maxlength="100" class="form-control" value="" placeholder="회사 홈페이지" required />
+                    <input type="text" name="companySite" id="companySite" class="form-control"  value="<%  out.print(customerInfo.getWebsite());  %>" placeholder="회사 홈페이지"  />
                 </div>
 
                 <div class="form-group text-right">
@@ -123,11 +132,20 @@
                 <!-- Delimiter -->
                 <div class="delimiter"></div>
                 <!-- #End Delimiter -->
+            </div>
+        </div>
+    </form>
+    <%-- end information form--%>
 
-                <div class="form-group mt10">
+    <%--password form--%>
+    <form id="passwordSettings" action="/cabinet/passwordSettings?${_csrf.parameterName}=${_csrf.token}" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+
+<%--                <div class="form-group mt10">
                     <label for="oldPassword">기존 비밀번호</label>
                     <input type="password" name="oldPassword" id="oldPassword" class="form-control" placeholder="기존 비밀번호" required />
-                </div>
+                </div>--%>
 
                 <div class="form-group">
                     <label for="newPassword">새 비밀번호</label>
@@ -145,6 +163,7 @@
             </div>
         </div>
     </form>
+    <%-- end password form--%>
 </section>
 
 <!-- Footer -->

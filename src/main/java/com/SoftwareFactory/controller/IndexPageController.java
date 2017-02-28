@@ -279,7 +279,7 @@ public class IndexPageController {
         User user = new User();
 
         user.setPassword(phone);
-        user.setEmail(recipientMail);
+        //user.setEmail(recipientMail);
         user.setSsoId(ssoId);
         user.setFullCreated(false);
 

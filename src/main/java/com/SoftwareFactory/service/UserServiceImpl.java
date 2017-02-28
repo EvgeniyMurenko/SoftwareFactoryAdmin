@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 			}
 			//entity.setFirstName(user.getFirstName());
 			//entity.setLastName(user.getLastName());
-			entity.setEmail(user.getEmail());
+			//entity.setEmail(user.getEmail());
 			entity.setUserProfiles(user.getUserProfiles());
 		}
 	}

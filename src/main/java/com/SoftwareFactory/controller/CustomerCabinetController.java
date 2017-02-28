@@ -13,6 +13,7 @@ import com.SoftwareFactory.service.*;
 import com.SoftwareFactory.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -215,6 +216,59 @@ public class CustomerCabinetController {
         caseAnswerChat.addObject("messages" , messages);
 
         return caseAnswerChat;
+    }
+
+    @RequestMapping (value = "/customerSettings/", method = RequestMethod.GET)
+    public ModelAndView customerSettings(HttpSession httpSession) {
+
+        long userId = (Integer) httpSession.getAttribute("UserId");
+
+        ModelAndView customerSettings = new ModelAndView("customerSettings");
+
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
+        User user = userService.findById((int) userId);
+
+        customerSettings.addObject("user", user);
+        customerSettings.addObject("customerInfo", customerInfo);
+
+        return customerSettings;
+    }
+
+    @RequestMapping(value = "/infoSettings", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView infoSettings(HttpSession httpSession, @RequestParam("name") String recipientName, @RequestParam("email") String recipientMail,
+                                                   @RequestParam("phone") String phone, @RequestParam("companyName") String companyName,
+                                                   @RequestParam("companySite") String companySite) {
+
+        long userId = (Integer) httpSession.getAttribute("UserId");
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
+
+        customerInfo.setName(recipientName);
+        customerInfo.setEmail(recipientMail);
+        customerInfo.setPhone(phone);
+        customerInfo.setCompany(companyName);
+        customerInfo.setWebsite(companySite);
+
+        customerInfoService.updateCustomerInfo(customerInfo);
+        System.out.println("======CHANGE INFORMATION USER");
+
+        return new ModelAndView("redirect:/cabinet/customerSettings/");
+    }
+
+    @RequestMapping(value = "/passwordSettings", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView infoSettings(HttpSession httpSession,
+                                                   @RequestParam("newPassword") String newPassword,
+                                                   @RequestParam("confirmNewPassword") String confirmNewPassword) {
+
+        int userId = (Integer) httpSession.getAttribute("UserId");
+        User user = userService.findById(userId);
+        System.out.println("======CHANGE PASSWORD1");
+        if(newPassword.equals(confirmNewPassword) ){
+            user.setPassword(newPassword);
+            userService.updateUser(user);
+            System.out.println("======CHANGE PASSWORD2");
+        }
+
+        return new ModelAndView("redirect:/cabinet/customerSettings/");
     }
 
 

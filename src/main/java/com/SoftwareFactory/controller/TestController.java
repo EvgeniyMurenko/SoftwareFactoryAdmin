@@ -190,7 +190,7 @@ public class TestController {
         if (checkSSo(emailSSO)) {
             User user = new User();
             user.setPassword(password);
-            user.setEmail(emailSSO);
+            //user.setEmail(emailSSO);
             user.setSsoId(emailSSO);
 
             UserProfile userProfile = new UserProfile();
@@ -215,7 +215,7 @@ public class TestController {
         if (checkSSo(emailSSO)) {
             User user = new User();
             user.setPassword(password);
-            user.setEmail(emailSSO);
+            //user.setEmail(emailSSO);
             user.setSsoId(emailSSO);
 
             UserProfile userProfile = new UserProfile();
