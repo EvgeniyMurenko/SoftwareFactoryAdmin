@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,8 +40,16 @@ public class CaseServiceImpl implements CaseService {
     }
 
     @Override
-    public List<Case> findByField(String name, String project) {
-        return caseDao.findByField(name,project);
+    @Transactional
+    public List<Case> findByField(String title, String projectName) {
+        ArrayList<Case> cases = new ArrayList<>();
+        if (!title.equals("")){
+            cases.addAll(caseDao.findByTitle(title));
+        }
+        if (!projectName.equals("")) {
+            cases.addAll(caseDao.findByProjectName(projectName));
+        }
+        return cases ;
     }
 
     @Override

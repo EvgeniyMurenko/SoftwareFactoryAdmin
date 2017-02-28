@@ -1,6 +1,7 @@
 package com.SoftwareFactory.dao;
 
 import com.SoftwareFactory.model.Case;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -63,14 +64,19 @@ public class CaseDaoImpl implements CaseDao {
     }
 
     @Override
-    public List<Case> findByField(String name, String project) {
+    public List<Case> findByTitle(String title) {
         Session session = sessionFactory.getCurrentSession();
-        List cases = session.createCriteria(Case.class)
-                .add(Restrictions.like("name", name, MatchMode.ANYWHERE))
-     /*           .add(Restrictions.like("project", name, MatchMode.ANYWHERE))*/
-                .list();
+        Query query = session.createQuery("From Case where projectTitle  like :projectTitle");
+        query.setParameter("projectTitle","%"+title+"%");
+        return query.list();
+    }
 
-        return cases;
+    @Override
+    public List<Case> findByProjectName(String projectName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("From Case c where c.project.projectName like :projectName");
+        query.setParameter("projectName","%"+projectName+"%");
+        return query.list();
     }
 
 }

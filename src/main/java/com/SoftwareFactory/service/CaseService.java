@@ -11,5 +11,5 @@ public interface CaseService {
     void deleteCase(Case aCase);
     List<Case> getAllCases();
     Case getCaseById(Long id);
-    List<Case> findByField(String name , String project);
+    List<Case> findByField(String title, String projectName);
 }
