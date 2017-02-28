@@ -83,7 +83,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
-                       <%-- <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
+                        <li><a href="javascript:void(0);"><i class="fa fa-user"></i> MY</a></li>
                         <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                     </ul>
                 </li>
@@ -163,12 +163,15 @@
             </div>
             <!-- #End Warning Block -->
 
+            <%ArrayList<Case> cases =  (ArrayList<Case>)request.getAttribute("cases");%>
 
             <div class="row mb20">
                 <div class="col-md-6">
 
                     <!-- table pagination -->
-                    <div class="holder"></div>
+                    <%if (cases.size()>10){%>
+                        <div class="holder"></div>
+                    <%}%>
                     <!-- #End table pagination -->
 
                 </div>
@@ -188,16 +191,15 @@
                     <th class="hidden-xs text-center">Messages</th>
                 </tr>
                 </thead>
-
-                <%
-                    ArrayList<Case> cases =  (ArrayList<Case>)request.getAttribute("cases");
-                    Iterator<Case> caseIterator = cases.iterator();
-                    while (caseIterator.hasNext()) {
-                        Case aCase = caseIterator.next();
-                %>
+                <tbody id="itemContainer">
+                    <%
+                        Iterator<Case> caseIterator = cases.iterator();
+                        while (caseIterator.hasNext()) {
+                            Case aCase = caseIterator.next();
+                    %>
 
                 <!--<tr class="unread checked danger" // что бы сделать красным добавить в класс danger-->
-                    <tbody id="itemContainer">
+
                         <tr class="unread checked"   onclick="javascript:window.location.href='/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>'; return false;">
                             <td><a href="javascript:void(0);"><%  out.print(aCase.getProjectTitle().toString());  %></a></td>
                             <%String projectName = aCase.getProject().getProjectName();  %>

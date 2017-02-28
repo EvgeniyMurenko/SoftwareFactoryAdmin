@@ -79,11 +79,11 @@
         <div class="col-lg-6 col-md-6 col-sm-6 text-right login">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <span class="avatar-welcome">MAXIM 님 접속을 환영합니다.</span>
+                    <span class="avatar-welcome"><%out.print((String)request.getAttribute("customerName"));%> 님 접속을 환영합니다.</span>
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
-                        <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-user"></i> MY</a></li>
                         <li><a href="javascript:void(0);"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                     </ul>
                 </li>

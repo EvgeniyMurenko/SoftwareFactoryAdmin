@@ -27,6 +27,7 @@ CREATE TABLE `s_cases` (
 	`status` VARCHAR(255) NOT NULL,
 	`date_create` DATETIME NOT NULL,
 	`language` VARCHAR(5) NOT NULL,
+	`emergency` TINYINT(1) NOT NULL,
 	PRIMARY KEY (`case_id`)
 );
 
@@ -89,20 +90,6 @@ CREATE TABLE `persistent_logins` (
     token VARCHAR(64) NOT NULL,
     last_used TIMESTAMP NOT NULL,
     PRIMARY KEY (series)
-);
-
-CREATE TABLE `s_file_estimate` (
-    file_estimate_id BIGINT NOT NULL AUTO_INCREMENT,
-    estimate_id INT NOT NULL,
-    link_to_file TEXT NOT NULL,
-    PRIMARY KEY (file_estimate_id)
-);
-
-CREATE TABLE `s_file_message` (
-    file_message_id BIGINT NOT NULL AUTO_INCREMENT,
-    message_id INT NOT NULL,
-    link_to_file TEXT NOT NULL,
-    PRIMARY KEY (file_message_id)
 );
 
 INSERT INTO `user_profile`(type)
@@ -177,17 +164,17 @@ VALUES ('DRONE', 5,'2017-01-27 13:00:00', 1, 'JS');
 INSERT INTO s_projects(name, user_customer_id, date_create, status, technology_type)
 VALUES ('#$GENERAL', 6,'2017-01-27 13:00:00', 1, 'IOS');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language)
-VALUES (1, 2, 'database1', 2, '2017-01-25 13:00:00', 'kr');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency)
+VALUES (1, 2, 'database1', 2, '2017-01-25 13:00:00', 'kr', 0);
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language)
-VALUES (1, 2, 'database2', 1, '2017-01-25 13:00:00', 'kr');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency)
+VALUES (1, 2, 'database2', 1, '2017-01-25 13:00:00', 'kr', 0);
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language)
-VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00', 'kr');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency)
+VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00', 'kr', 0);
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language)
-VALUES (2, 3, 'database1', 1, '2017-01-25 13:00:00', 'kr');
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency)
+VALUES (2, 3, 'database1', 1, '2017-01-25 13:00:00', 'kr', 0);
 
 INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
 VALUES (1, 4, '2017-01-25 13:00:00','hello, i need.....', 'READ');

@@ -44,6 +44,9 @@ public class Case {
     @Column(name="language")
     private String language;
 
+    @Column(name = "emergency")
+    private boolean emergency;
+
     public Project getProject() {
         return project;
     }
@@ -108,7 +111,15 @@ public class Case {
         this.language = language;
     }
 
-    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages, String language) {
+    public boolean isEmergency() {
+        return emergency;
+    }
+
+    public void setEmergency(boolean emergency) {
+        this.emergency = emergency;
+    }
+
+    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages, String language, boolean emergency) {
         this.project = project;
         this.userManagerId = userManagerId;
         this.projectTitle = projectTitle;
@@ -116,9 +127,10 @@ public class Case {
         this.creationDate = creationDate;
         this.messages = messages;
         this.language = language;
+        this.emergency = emergency;
     }
 
-/*@Override
+    /*@Override
     public String toString() {
         return "Case{" +
                 "project=" + project +

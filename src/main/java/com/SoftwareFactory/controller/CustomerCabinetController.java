@@ -144,12 +144,15 @@ public class CustomerCabinetController {
 
     @RequestMapping (value = "/case/{id}/print_message", method = RequestMethod.POST)
     public ModelAndView casePrintMessageController( @PathVariable Long id, @RequestParam("message") String messageText,
-                                                   @RequestParam("file[]") MultipartFile[]  files, HttpSession httpSession){
+                                                    @RequestParam("file[]") MultipartFile[]  files, HttpSession httpSession,
+                                                    @RequestParam(value = "emergency", required = false) boolean emergency){
 
         // GET
         Case aCase = caseService.getCaseById(id);
         int userId = (Integer) httpSession.getAttribute("UserId");
         User currentUser = userService.findById(userId);
+
+        aCase.setEmergency(emergency);
 
         // CREATE MESSAGE
         Message message = new Message();

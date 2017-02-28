@@ -65,7 +65,8 @@ public class CaseController {
     public ModelAndView createCase(HttpSession httpSession, @RequestParam("projectName") String projectName,
                                    @RequestParam("caseName") String caseName,
                                    @RequestParam("message") String message, @RequestParam("language") String language,
-                                   @RequestParam("fileCase[]") MultipartFile[] files){
+                                   @RequestParam("fileCase[]") MultipartFile[] files,
+                                   @RequestParam(value = "emergency", required = false) boolean emergency){
 
         System.out.print(projectName + " " + " " + caseName + " " + message + " " + " " + language);
 
@@ -95,6 +96,7 @@ public class CaseController {
         newCase.setCreationDate(date);
         newCase.setUserManagerId(0L); // <======MUST BE MANAGER ID
         newCase.setLanguage(language);
+        newCase.setEmergency(emergency);
 
         Set<Case> caseSet = project.getCases();
         caseSet.add(newCase);
