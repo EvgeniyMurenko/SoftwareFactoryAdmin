@@ -115,6 +115,16 @@
 
             <h3 class="mb20">Estimates List</h3>
 
+            <div class="row mb20">
+                <div class="col-md-6">
+
+                    <!-- table pagination -->
+                    <div class="holder"></div>
+                    <!-- #End table pagination -->
+
+                </div>
+            </div>
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -126,7 +136,7 @@
                     <th class="hidden-xs text-center">Status</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="itemContainer">
 
                 <%
                     List<Estimate> estimateList =  (List<Estimate>)request.getAttribute("estimates");
@@ -171,6 +181,8 @@
 <script src="/resources/newIndexPage/js/jquery.timeago.js"></script>
 <script src="/resources/newIndexPage/js/jquery.timeago.ko.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap.min.js"></script>
+<script src="/resources/newIndexPage/js/moment.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap-select.min.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap.validator.min.js"></script>
@@ -178,6 +190,7 @@
 <script src="/resources/newIndexPage/js/sortable.min.js"></script>
 <script src="/resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/ckeditor/ckeditor.js"></script>
 <script src="/resources/newIndexPage/js/main.js"></script>
 <script>
     $("#menu-toggle").click(function(e) {

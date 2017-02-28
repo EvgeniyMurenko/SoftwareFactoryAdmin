@@ -84,6 +84,18 @@ form .btn i.fa { padding-right: 5px; }
 .content .messages .message-customer-informer .mi-c-message { padding: 5px 10px 5px 0; }
 .content .messages .message-input-field { border-top: 1px solid #ccc; padding-top: 20px; }
 
+/* cabinet pagination */
+.holder { }
+.holder a { font-size: 12px; cursor: pointer; color: #333; display: inline-block; padding: 8px 14px; text-decoration: none; border: 1px solid #ddd; border-left: 0; transition: background-color .1s; }
+.holder a:hover { background-color: #03a9f4; color: #fff; border-color: #ddd; }
+.holder a.jp-previous { border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-left: 1px solid #ddd; }
+.holder a.jp-next { border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
+.holder a.jp-current, a.jp-current:hover { background-color: #03a9f4 !important; color: #fff; border-color: #ddd; }
+.holder a.jp-disabled, a.jp-disabled:hover { color: #bbb; }
+.holder a.jp-current, a.jp-current:hover,
+.holder a.jp-disabled, a.jp-disabled:hover { cursor: default; background: none; }
+.holder span { font-size: 12px; color: #333; display: inline-block; padding: 8px 12px; text-decoration: none;  border: 1px solid #ddd; border-left: 0; }
+
 /* --- margins --- */
 .m0 { margin: 0 !important; } .m5 { margin: 5px; } .m10 { margin: 10px; } .m15 { margin: 15px; } .m20 { margin: 20px; } .m25 { margin: 25px; } .m30 { margin: 30px; } .m35 { margin: 35px; } .m40 { margin: 40px; } .m45 { margin: 45px; } .m50 { margin: 50px; }
 .mt0 { margin-top: 0 !important; } .mt5 { margin-top: 5px; } .mt10 { margin-top: 10px; } .mt15 { margin-top: 15px; } .mt20 { margin-top: 20px; } .mt25 { margin-top: 25px; } .mt30 { margin-top: 30px; } .mt35 { margin-top: 35px; } .mt40 { margin-top: 40px; } .mt45 { margin-top: 45px; } .mt50 { margin-top: 50px; } .mt200 { margin-top: 50px; }

@@ -132,6 +132,16 @@
             </div>
             <!-- #End Sort filter -->
 
+            <div class="row mb20">
+                <div class="col-md-6">
+
+                    <!-- table pagination -->
+                    <div class="holder"></div>
+                    <!-- #End table pagination -->
+
+                </div>
+            </div>
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -144,7 +154,7 @@
                     <th class="hidden-xs text-center">Messages</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="itemContainer">
                 <%
                     List<Case> cases =  (List<Case>)request.getAttribute("cases");
                     Iterator<Case> caseIterator = cases.iterator();
