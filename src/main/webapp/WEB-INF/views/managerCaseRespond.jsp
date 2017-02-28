@@ -1,4 +1,4 @@
-
+<%@ page import="com.SoftwareFactory.model.Case" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -106,10 +106,10 @@
             </div>
         </header>
         <!-- #End Top line -->
-
+        <% Case aCase = (Case) request.getAttribute("case");%>
         <div class="container-fluid content mb40">
 
-            <h3 class="mb20">Case ID: 000021</h3>
+            <h3 class="mb20">Case ID: <%out.print(aCase.getId());%></h3>
 
             <!-- Table case info -->
             <a href="case.html" class="btn btn-primary mb20">Cancel CASE write</a>

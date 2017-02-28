@@ -196,6 +196,10 @@ public class ManagerCabinetController {
     public ModelAndView getCaseToShow(@PathVariable Long caseId){
         ModelAndView managerCaseRespond = new ModelAndView("managerCaseRespond");
 
+        Case aCase = caseService.getCaseById(caseId);
+
+        managerCaseRespond.addObject("case" , aCase);
+
         return managerCaseRespond;
     }
 

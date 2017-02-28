@@ -1,7 +1,3 @@
-<%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
-<%@ page import="com.SoftwareFactory.model.Estimate" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.Case" %>
 <%@ page import="java.util.List" %>
@@ -185,6 +181,8 @@
 <script src="/resources/newIndexPage/js/jquery.timeago.js"></script>
 <script src="/resources/newIndexPage/js/jquery.timeago.ko.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap.min.js"></script>
+<script src="/resources/newIndexPage/js/moment.min.js"></script>
+<script src="/resources/newIndexPage/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap-select.min.js"></script>
 <script src="/resources/newIndexPage/js/bootstrap.validator.min.js"></script>
@@ -192,6 +190,7 @@
 <script src="/resources/newIndexPage/js/sortable.min.js"></script>
 <script src="/resources/newIndexPage/js/form-validation.min.js"></script>
 <script src="/resources/newIndexPage/js/pagination.min.js"></script>
+<script src="/resources/newIndexPage/js/ckeditor/ckeditor.js"></script>
 <script src="/resources/newIndexPage/js/main.js"></script>
 <script>
     $("#menu-toggle").click(function(e) {
