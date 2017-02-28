@@ -140,10 +140,10 @@
                 <thead>
                 <tr>
                     <th class="hidden-xs text-center">ID</th>
-                    <th class="hidden-xs text-center">Status</th>
-                    <th class="hidden-xs text-center">Date</th>
-                    <th class="text-center">Project</th>
                     <th class="text-center">Case issue</th>
+                    <th class="text-center">Project</th>
+                    <th class="hidden-xs text-center">Date</th>
+                    <th class="hidden-xs text-center">Status</th>
                     <th class="text-center">Appointment time</th>
                     <th class="hidden-xs text-center">Messages</th>
                 </tr>
@@ -155,12 +155,13 @@
                     while (caseIterator.hasNext()) {
                         Case aCase = caseIterator.next();
                 %>
+
                     <tr class="unread checked">
                         <td class="hidden-xs text-center"><%out.print(aCase.getId());%></td>
-                        <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
-                        <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+                        <td class="hidden-xs text-center"><a href="<%out.print("/manager-cabinet/case/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getProject().getProjectName());%></td>
-                        <td class="hidden-xs text-center"><%out.print(aCase.getProjectTitle());%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
                         <td class="text-center"><%out.print("time!!!");%></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getMessages().size());%></td>
                     </tr>
