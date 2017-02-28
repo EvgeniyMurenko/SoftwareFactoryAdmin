@@ -58,6 +58,12 @@ jQuery(document).ready(function($) {
         daysOfWeekDisabled: [0, 6],
     });
 
+    // Don't use character in admin panel
+    $('#case_id').keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
 
     // Authorization from validation
     $('#authorizationForm').formValidation({
