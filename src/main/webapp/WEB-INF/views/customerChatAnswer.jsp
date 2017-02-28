@@ -69,17 +69,22 @@
     <![endif]-->
 </head>
 <body>
+
+<% Long caseId =  (Long) request.getAttribute("caseId"); %>
+<% Case aCase = (Case) request.getAttribute("case"); %>
+<% ArrayList<Message> messages =  new ArrayList<>(aCase.getMessages()); %>
+
 <!-- Header -->
 <header class="container header">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 logo">
-            <a href="./">소프트웨어<span>팩토리</span></a>
+            <a href="/">소프트웨어<span>팩토리</span></a>
             <div class="small-logo">SoFAC : <i>Software Factory</i></div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 text-right login">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <span class="avatar-welcome"><%out.print((String)request.getAttribute("customerName"));%> 님 접속을 환영합니다.</span>
+                    <span class="avatar-welcome"><%out.print(aCase.getProject().getCustomerInfo().getName());%> 님 접속을 환영합니다.</span>
                     <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-menu-header text-center">설정</li>
@@ -95,10 +100,6 @@
 <!-- #End Header -->
 
 <section class="container content mb20">
-
-    <% Long caseId =  (Long) request.getAttribute("caseId"); %>
-    <% Case aCase = (Case) request.getAttribute("case"); %>
-    <% ArrayList<Message> messages =  new ArrayList<>(aCase.getMessages()); %>
 
     <!-- Buttons -->
     <div class="row mb20">

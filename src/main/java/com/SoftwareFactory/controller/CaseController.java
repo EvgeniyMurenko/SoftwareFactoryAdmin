@@ -30,9 +30,14 @@ public class CaseController {
     @RequestMapping(value = "/newCase", method = RequestMethod.GET)
     public ModelAndView newCase(HttpSession httpSession ) {
 
+        int userId = (Integer) httpSession.getAttribute("UserId");
+        User currentUser = userService.findById(userId);
+
         ModelAndView customerCabinet = new ModelAndView("customerCase");
         addGeneralDataToMAVAndReturnProjects(customerCabinet , httpSession);
 
+
+        customerCabinet.addObject("currentUser", currentUser);
 
 
         /*Long userId = new Long((Integer)httpSession.getAttribute("UserId"));

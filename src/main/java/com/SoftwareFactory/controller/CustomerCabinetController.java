@@ -249,7 +249,6 @@ public class CustomerCabinetController {
         customerInfo.setWebsite(companySite);
 
         customerInfoService.updateCustomerInfo(customerInfo);
-        System.out.println("======CHANGE INFORMATION USER");
 
         return new ModelAndView("redirect:/cabinet/customerSettings/");
     }
@@ -261,11 +260,9 @@ public class CustomerCabinetController {
 
         int userId = (Integer) httpSession.getAttribute("UserId");
         User user = userService.findById(userId);
-        System.out.println("======CHANGE PASSWORD1");
         if(newPassword.equals(confirmNewPassword) ){
             user.setPassword(newPassword);
             userService.updateUser(user);
-            System.out.println("======CHANGE PASSWORD2");
         }
 
         return new ModelAndView("redirect:/cabinet/customerSettings/");
