@@ -124,11 +124,11 @@
                         <input type="text" class="form-control" id="case_id" name="case_id" onkeyup="checkParams()" placeholder="ID">
                     </div>
                     <div class="form-group">
-                        <label for="case_name">Name</label>
+                        <label for="case_name">Case issue</label>
                         <input type="text" class="form-control" id="case_name" name="case_name" onkeyup="checkParams()" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="case_project_name">Project</label>
+                        <label for="case_project_name">Project name</label>
                         <input type="text" class="form-control" id="case_project_name" name="case_project" onkeyup="checkParams()" placeholder="Project name">
                     </div>
                     <button type="submit" class="btn btn-primary">Sort</button>
@@ -139,6 +139,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th class="hidden-xs text-center">ID</th>
                     <th class="hidden-xs text-center">Status</th>
                     <th class="hidden-xs text-center">Date</th>
                     <th class="text-center">Project</th>
@@ -155,10 +156,11 @@
                         Case aCase = caseIterator.next();
                 %>
                     <tr class="unread checked">
+                        <td class="hidden-xs text-center"><%out.print(aCase.getId());%></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
-                        <td><a href="managerCase.html"><%out.print(aCase.getProject().getProjectName());%></a></td>
-                        <td><a href="managerCase.html"><%out.print(aCase.getProjectTitle());%></a></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getProject().getProjectName());%></td>
+                        <td class="hidden-xs text-center"><%out.print(aCase.getProjectTitle());%></td>
                         <td class="text-center"><%out.print("time!!!");%></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getMessages().size());%></td>
                     </tr>
@@ -169,7 +171,7 @@
         </div>
 
     </div>
-    <!-- #End Ppage-content -->
+    <!-- #End Page-content -->
 
 </div>
 <!-- #End Wrapper -->

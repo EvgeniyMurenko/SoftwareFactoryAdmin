@@ -11,5 +11,6 @@ public interface CaseDao {
     void update(Case cases);
     void delete(Case cases);
     List<Case> findAll();
-    List<Case> findByField(String name , String project);
+    List<Case> findByTitle(String title);
+    List<Case> findByProjectName(String projectName);
 }

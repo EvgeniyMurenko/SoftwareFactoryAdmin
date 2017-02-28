@@ -170,24 +170,27 @@ public class ManagerCabinetController {
     }
 
     @RequestMapping(value = "/case-sorted/", method = RequestMethod.POST)
-    public ModelAndView getManagerCaseByNameAndProject(@RequestParam(value = "case_id") Long caseId ,@RequestParam (value = "case_name" , required = false) String name , @RequestParam(value = "case_project" , required = false) String project) {
-        System.out.println("CASE");
+    public ModelAndView getManagerCaseByNameAndProject(@RequestParam(value = "case_id" , required = false) Long caseId ,@RequestParam (value = "case_name" , required = false) String caseTitle , @RequestParam(value = "case_project" , required = false) String projectName) {
+/*
+        System.out.println("CASE" + caseTitle + project);*/
         ModelAndView managerCaseByNameAndProject = new ModelAndView("managerCabinetCase");
 
         ArrayList<Case> caseArrayList = new ArrayList<>();
 
-         if (!caseId.equals(null)) {
+         if (caseId !=null) {
+             System.out.println("ID null");
             Case aCase = caseService.getCaseById(caseId);
             caseArrayList.add(aCase);
         } else {
-            caseArrayList = (ArrayList<Case>) caseService.findByField(name , "");
+             System.out.println("FIND BY");
+            caseArrayList = (ArrayList<Case>) caseService.findByField(caseTitle, projectName);
         }
 
-
+        System.out.println("add OBJECTS");
 
         managerCaseByNameAndProject.addObject("cases" , caseArrayList);
 
-
+        System.out.println("RETURN");
         return managerCaseByNameAndProject;
     }
 
