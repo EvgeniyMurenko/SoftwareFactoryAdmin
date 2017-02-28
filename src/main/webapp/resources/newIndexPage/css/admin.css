@@ -47,15 +47,15 @@ html, body { font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif; fo
 .nav > li > a { padding: 0; }
 .nav > li > a, .nav > li > a:hover, .nav > li > a:focus, .nav > li > a:active, .nav > li > a:after,
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .nav .open > a:active, .nav .open > a:after { background: none; border-color: #fff; }
-.dropdown .avatar { display: block; border: 1px solid #fff; border-radius: 50%; font-size: 12pt; color: #fff; padding: 5px 10px; }
-.dropdown-menu:before { position: absolute; top: -9.5px; right: 8px; display: inline-block; border-right: 8px solid transparent; border-bottom: 8px solid #e1e6ef; border-left: 8px solid transparent; content: ''; }
-.dropdown-menu { top: 40px; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; border: 1px solid #eee;
+.top-line .dropdown .avatar { display: block; border: 1px solid #fff; border-radius: 50%; font-size: 12pt; color: #fff; padding: 5px 10px; }
+.top-line .dropdown-menu:before { position: absolute; top: -9.5px; right: 8px; display: inline-block; border-right: 8px solid transparent; border-bottom: 8px solid #e1e6ef; border-left: 8px solid transparent; content: ''; }
+.top-line .dropdown-menu { top: 40px; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; border: 1px solid #eee;
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125); -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.125); padding: 0; }
-.dropdown-menu li:not(:last-child) { border-bottom: 1px solid #eee; }
-.dropdown-menu li { padding: 0; position: relative; line-height: 40px; font-size: 14px; min-width: 250px; }
-.dropdown-menu li a { line-height: 35px; }
-.dropdown-menu li a i.fa { padding-right: 7px; color: #03a9f4; }
-.dropdown-menu .dropdown-menu-header { background-color: #f6f6f6; color: #03a9f4; }
+.top-line .dropdown-menu li:not(:last-child) { border-bottom: 1px solid #eee; }
+.top-line .dropdown-menu li { padding: 0; position: relative; line-height: 40px; font-size: 14px; min-width: 250px; }
+.top-line .dropdown-menu li a { line-height: 35px; }
+.top-line .dropdown-menu li a i.fa { padding-right: 7px; color: #03a9f4; }
+.top-line .dropdown-menu .dropdown-menu-header { background-color: #f6f6f6; color: #03a9f4; }
 /* #End Header */
 
 .top-switcher { float: left; z-index: 1000; position: relative; }
