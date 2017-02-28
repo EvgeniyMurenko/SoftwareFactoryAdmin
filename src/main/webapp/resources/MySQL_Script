@@ -54,8 +54,9 @@ CREATE TABLE `s_estimates` (
 	`is_respond` TINYINT(1) NOT NULL,
 	`is_price_request` TINYINT(1) NOT NULL,
 	`is_question_request` TINYINT(1) NOT NULL,
-	`estimate_generated_id` VARCHAR(255),
 	`path` VARCHAR(255),
+	`estimate_generated_id` VARCHAR(50) NOT NULL,
+	`customer_info_id` INT NOT NULL,
 	PRIMARY KEY (`estimate_id`)
 );
 
@@ -64,6 +65,7 @@ CREATE TABLE `app_user` (
 	sso_id VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
+	is_full_created TINYINT(1) NOT NULL DEFAULT 0,
 	PRIMARY KEY (id),
     UNIQUE (sso_id)
 );
@@ -208,8 +210,8 @@ VALUES (3, 5, '2017-01-25 13:00:00','hello, i need.....','NOTREAD');
 INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
 VALUES (4, 5, '2017-02-15 13:00:00','hello, i need.....','NOTREAD');
 
-INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request)
-VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', '2017-01-25 13:00:00', '+38 000 00 00', false, false, false);
+INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request , estimate_generated_id, customer_info_id)
+VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', '2017-01-25 13:00:00', '+38 000 00 00', false, false, false, "0001", 4);
 
-INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request)
-VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', '2017-01-25 13:00:00', '+38 111 111 11', false, false, false);
+INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request, estimate_generated_id, customer_info_id)
+VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', '2017-01-25 13:00:00', '+38 111 111 11', false, false, false, "0002", 4);
