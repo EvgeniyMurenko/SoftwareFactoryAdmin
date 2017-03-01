@@ -56,8 +56,8 @@ CREATE TABLE `s_estimates` (
 	`is_price_request` TINYINT(1) NOT NULL,
 	`is_question_request` TINYINT(1) NOT NULL,
 	`path` VARCHAR(255),
-	`estimate_generated_id` VARCHAR(50) NOT NULL,
-	`customer_info_id` INT NOT NULL,
+	`estimate_generated_id` VARCHAR(50) DEFAULT NULL,
+	`customer_info_id` INT DEFAULT NULL,
 	PRIMARY KEY (`estimate_id`)
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE `app_user` (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	sso_id VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
-	is_full_created TINYINT(1) NOT NULL DEFAULT 0,
+	is_full_created TINYINT(1) NOT NULL,
 	PRIMARY KEY (id),
     UNIQUE (sso_id)
 );
@@ -100,23 +100,23 @@ VALUES ('ADMIN');
 INSERT INTO `user_profile`(type)
 VALUES ('MANAGER');
 
-INSERT INTO `app_user`(sso_id, password)
-VALUES ('admin@mail.com',123);
+INSERT INTO `app_user`(sso_id, password, is_full_created)
+VALUES ('admin@mail.com',123, 0);
 
-INSERT INTO `app_user`(sso_id, password)
-VALUES ('manager1@mail.com',123);
+INSERT INTO `app_user`(sso_id, password, is_full_created)
+VALUES ('manager1@mail.com',123, 0);
 
-INSERT INTO `app_user`(sso_id, password)
-VALUES ('manager2@mail.com',123);
+INSERT INTO `app_user`(sso_id, password, is_full_created)
+VALUES ('manager2@mail.com',123, 0);
 
-INSERT INTO `app_user`(sso_id, password)
-VALUES ('customer1@mail.com',123);
+INSERT INTO `app_user`(sso_id, password, is_full_created)
+VALUES ('customer1@mail.com',123, 0);
 
-INSERT INTO `app_user`(sso_id, password)
-VALUES ('customer2@mail.com',123);
+INSERT INTO `app_user`(sso_id, password, is_full_created)
+VALUES ('customer2@mail.com',123, 0);
 
-INSERT INTO `app_user`(sso_id, password)
-VALUES ('customer3@mail.com',123);
+INSERT INTO `app_user`(sso_id, password, is_full_created)
+VALUES ('customer3@mail.com',123, 0);
 
 INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
   value(4,1);

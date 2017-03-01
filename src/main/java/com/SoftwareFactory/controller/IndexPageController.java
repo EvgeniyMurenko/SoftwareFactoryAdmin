@@ -100,6 +100,7 @@ public class IndexPageController {
         estimate.setQuestionRequest(questionRequest);
         estimate.setDateRequest(currentDate);
         estimate.setRespond(false);
+
         estimateService.addNewEstimate(estimate);
 
         //GENERATE SPECIAL ESTIMATE ID
@@ -189,6 +190,7 @@ public class IndexPageController {
         customerInfo.setPhone(phone);
         customerInfo.setCompany(companyName);
         customerInfo.setWebsite(companySite);
+
         customerInfoService.updateCustomerInfo(customerInfo);
 
 

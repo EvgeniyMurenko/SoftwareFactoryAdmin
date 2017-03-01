@@ -60,7 +60,6 @@ public class CustomerCabinetController {
         customerCabinet.addObject("currentProjectCasesName" , "All Cases");
         customerCabinet.addObject("cases", casesToShow);
 
-
         return customerCabinet;
     }
 

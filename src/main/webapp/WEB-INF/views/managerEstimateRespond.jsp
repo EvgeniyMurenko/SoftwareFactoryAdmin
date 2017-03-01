@@ -4,6 +4,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.CustomerInfo" %>
+<%@ page import="java.io.File" %>
+<%@ page import="com.SoftwareFactory.constant.GlobalEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -77,11 +79,11 @@
 
         <aside class="sidebar-nav">
             <div class="left-top-line">
-                <div class="clearfix logo"><a href="./">소프트웨어<span>팩토리</span></a></div>
+                <div class="clearfix logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
-                <li class="active"><a href="estimate.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="case.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -117,7 +119,7 @@
             <% CustomerInfo customerInfo = (CustomerInfo) request.getAttribute("customerInfo"); %>
             <h3 class="mb20">Estimate ID <%out.print(estimate.getEstimateGeneratedId());%></h3>
 
-            <a href="estimate.html" class="btn btn-primary mb20">Cancel write Estimate</a>
+            <a href="<c:out value="/manager-cabinet/estimate"/>" class="btn btn-primary mb20">Cancel write Estimate</a>
 
 
 
@@ -137,7 +139,17 @@
                 </div>
                 <div class="col-md-9">
 
-                    <div class="mb30"> <%out.print(estimate.getEstimateRequest());%> </div>
+                    <div class="mb30">
+                        <%out.print(estimate.getEstimateRequest());%>
+                        <% if (estimate.getEstimatePath()!=null) {
+                            File directory = new File(estimate.getEstimatePath());
+                            File[] files= directory.listFiles();
+                            for (int i=0; i<files.length; i++){
+                                String fileName =files[i].getName();
+                                out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+estimate.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                            }
+                        } %>
+                    </div>
 
                      <%if (!estimate.isRespond()){%>
                         <form action="<%out.print("/manager-cabinet/set-respond/" + estimate.getId());%>?${_csrf.parameterName}=${_csrf.token}" method="post">

@@ -164,7 +164,7 @@
                             File[] files= directory.listFiles();
                             for (int i=0; i<files.length; i++){
                                 String fileName =files[i].getName();
-                                out.print("<a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
                             }
                         } %>
                     </div>

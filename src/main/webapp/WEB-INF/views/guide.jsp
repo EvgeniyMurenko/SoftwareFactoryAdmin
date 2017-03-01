@@ -69,7 +69,7 @@
                 <i>(모든 시나리오는 코드화 관리 되므로 차후 유지보수 또는 수정 작업시 효과적인 대응이 가능합니다)</i></p>
 
             <div class="row mb30">
-                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema4.png"><img src="resources/newIndexPage/images/shema4.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema4.png"><img src="resources/newIndexPage/images/shema4.png" alt="" class="img-responsive" /></a></div>
             </div>
 
             <h3 style="margin-top: 100px;">WIKI 방식의 다국적 Membership 개발</h3>
@@ -84,7 +84,7 @@
                 다양한 분야의 작업이 가능하게 하는 수년간 개발 되어온 본사의 개발 방법 입니다.</p>
 
             <div class="row mb30">
-                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema5.jpg"><img src="resources/newIndexPage/images/shema5.jpg" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-12"><a data-fancybox="gallery" href="resources/newIndexPage/images/shema5.jpg"><img src="resources/newIndexPage/images/shema5.jpg" alt="" class="img-responsive" /></a></div>
             </div>
 
         </div>

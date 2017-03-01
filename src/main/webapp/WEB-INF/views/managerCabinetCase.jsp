@@ -73,7 +73,7 @@
 
         <aside class="sidebar-nav">
             <div class="left-top-line">
-                <div class="clearfix logo"><a href="./">소프트웨어<span>팩토리</span></a></div>
+                <div class="clearfix logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
                 <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
@@ -100,7 +100,7 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu-header text-center">설정</li>
                             <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-lock"></i> 로그 아웃</a></li>
+                            <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -132,11 +132,15 @@
             </div>
             <!-- #End Sort filter -->
 
+            <%List<Case> cases =  (List<Case>)request.getAttribute("cases");%>
+
             <div class="row mb20">
                 <div class="col-md-6">
 
                     <!-- table pagination -->
-                    <div class="holder"></div>
+                    <%if (cases.size()>10){%>
+                        <div class="holder"></div>
+                    <%}%>
                     <!-- #End table pagination -->
 
                 </div>
@@ -156,7 +160,7 @@
                 </thead>
                 <tbody id="itemContainer">
                 <%
-                    List<Case> cases =  (List<Case>)request.getAttribute("cases");
+
                     Iterator<Case> caseIterator = cases.iterator();
                     while (caseIterator.hasNext()) {
                         Case aCase = caseIterator.next();

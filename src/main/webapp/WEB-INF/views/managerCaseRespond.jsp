@@ -72,11 +72,11 @@
 
         <aside class="sidebar-nav">
             <div class="left-top-line">
-                <div class="clearfix logo"><a href="./">소프트웨어<span>팩토리</span></a></div>
+                <div class="clearfix logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
-                <li><a href="estimate.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li class="active"><a href="case.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="<c:out value="/manager-cabinet/estimate"/>">"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li class="active"><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -98,7 +98,7 @@
                         <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu-header text-center">설정</li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
+                            <%--<li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
                             <li><a href="javascript:void(0);"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                         </ul>
                     </li>
