@@ -47,6 +47,9 @@ public class Case {
     @Column(name = "emergency")
     private boolean emergency;
 
+    @Column(name = "appointment_time")
+    private Date appointmentTime;
+
     public Project getProject() {
         return project;
     }
@@ -119,7 +122,15 @@ public class Case {
         this.emergency = emergency;
     }
 
-    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages, String language, boolean emergency) {
+    public Date getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(Date appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    public Case(Project project, Long userManagerId, String projectTitle, String status, Date creationDate, Set<Message> messages, String language, boolean emergency, Date appointmentTime) {
         this.project = project;
         this.userManagerId = userManagerId;
         this.projectTitle = projectTitle;
@@ -128,9 +139,10 @@ public class Case {
         this.messages = messages;
         this.language = language;
         this.emergency = emergency;
+        this.appointmentTime = appointmentTime;
     }
 
-    /*@Override
+/*@Override
     public String toString() {
         return "Case{" +
                 "project=" + project +

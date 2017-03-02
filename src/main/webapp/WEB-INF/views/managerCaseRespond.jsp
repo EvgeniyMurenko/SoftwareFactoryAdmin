@@ -1,4 +1,11 @@
 <%@ page import="com.SoftwareFactory.model.Case" %>
+<%@ page import="com.SoftwareFactory.model.Message" %>
+<%@ page import="java.io.File" %>
+<%@ page import="com.SoftwareFactory.constant.GlobalEnum" %>
+<%@ page import="com.SoftwareFactory.model.ManagerInfo" %>
+<%@ page import="com.SoftwareFactory.constant.ProjectEnum" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.SoftwareFactory.comparator.MessageByDateComparator" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -75,7 +82,7 @@
                 <div class="clearfix logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
-                <li><a href="<c:out value="/manager-cabinet/estimate"/>">"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
                 <li class="active"><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
@@ -99,70 +106,101 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu-header text-center">설정</li>
                             <%--<li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
-                            <li><a href="javascript:void(0);"><i class="fa fa-lock"></i> 로그 아웃</a></li>
+                            <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </header>
         <!-- #End Top line -->
+
         <% Case aCase = (Case) request.getAttribute("case");%>
+        <% ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>
+
         <div class="container-fluid content mb40">
 
             <h3 class="mb20">Case ID: <%out.print(aCase.getId());%></h3>
 
             <!-- Table case info -->
-            <a href="case.html" class="btn btn-primary mb20">Cancel CASE write</a>
+            <a href="<c:out value="/manager-cabinet/case/"/>" class="btn btn-primary mb20">Cancel CASE write</a>
             <table class="table table-striped">
                 <tbody>
                 <tr class="unread checked">
-                    <td class="hidden-xs text-center">Open</td>
-                    <td class="hidden-xs text-center">10/01/2017</td>
-                    <td><a href="managerEstimate.html">Come On Baby</a></td>
-                    <td><a href="managerEstimate.html">Nullam quis risus eget urna mollis ornare vel eu leo</a></td>
-                    <td class="text-center">48시간 남음</td>
-                    <td class="hidden-xs text-center">3</td>
+                    <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
+                    <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+                    <td><% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                        out.print(ProjectEnum.projectNameNormal.getValue());
+                    }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                        out.print(ProjectEnum.projectNameEstimate.getValue());
+                    } else out.print(aCase.getProject().getProjectName()); %></td>
+                    <td><%out.print(aCase.getProjectTitle());%></td>
+                    <td class="text-center"><time class="timeago" datetime="<%  out.print(aCase.getMessages().iterator().next().getMessageTime()); %>"></time></td>
+                    <td class="hidden-xs text-center"><%out.print(aCase.getMessages().size());%></td>
                 </tr>
                 </tbody>
             </table>
             <!-- #End Table case info -->
 
             <section class="messages">
+                <%ArrayList<Message> messages = new ArrayList<Message>(aCase.getMessages());
+                messages.sort(new MessageByDateComparator());%>
+                <%for (Message message : messages){
+                    Long newLong =  new Long(message.getUser().getId());
+                    if(aCase.getProject().getCustomerInfo().getId().equals( newLong )) {%>
 
-                <div class="message-customer-informer">
-                    <div class="mi-c-title">Customer Name <a href="javascript:void(0);">(ID 000011)</a> <span class="mi-c-time pull-right">10/01/2017 10:56</span></div>
-                    <div class="mi-c-message">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo</div>
-                </div>
-
-                <div class="message-manager-informer">
-                    <div class="mi-m-title">Manager Name <a href="javascript:void(0);">(ID 000011)</a> <span class="mi-m-time pull-right">10/01/2017 10:56</span></div>
-                    <div class="mi-m-message">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo</div>
-                </div>
-
-                <div class="message-customer-informer">
-                    <div class="mi-c-title">Customer Name <a href="javascript:void(0);">(ID 000011)</a> <span class="mi-c-time pull-right">10/01/2017 10:56</span></div>
-                    <div class="mi-c-message">Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo Nullam quis risus eget urna mollis ornare vel eu leo</div>
-                </div>
-
-                <div class="message-input-field">
-                    <textarea id="editor" name="message" rows="3"></textarea>
-                </div>
-
-                <div class="row mt20 mb20">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="input-group date" id="datetimepicker">
-                                <input type="text" class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                        <div class="message-customer-informer">
+                            <div class="mi-c-title"><%  out.print(aCase.getProject().getCustomerInfo().getName()); %><a href="javascript:void(0);"><%  out.print("(ID "+message.getId()+")"); %></a> <span class="mi-c-time pull-right"><%  out.print(message.getMessageTime()); %></span></div>
+                            <div class="mi-c-message">
+                                <% out.print(message.getMessageText()); %>
+                                <% if (message.getMessagePath()!=null) {
+                                    File directory = new File(message.getMessagePath());
+                                    File[] files= directory.listFiles();
+                                    for (int i=0; i<files.length; i++){
+                                        String fileName =files[i].getName();
+                                        out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                    }
+                                } %>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 text-right"><input id="chat-upload" name="file[]" multiple type="file"></div>
-                </div>
+                    <%}else {%>
+                        <div class="message-manager-informer">
+                            <div class="mi-m-title"><%  out.print(managerInfo.getName()); %> <a href="javascript:void(0);"><%  out.print("(ID "+message.getId()+")"); %></a> <span class="mi-m-time pull-right"><%  out.print(message.getMessageTime()); %></span></div>
+                            <div class="mi-m-message">
+                                <% out.print(message.getMessageText()); %>
+                                <% if (message.getMessagePath()!=null) {
+                                    File directory = new File(message.getMessagePath());
+                                    File[] files= directory.listFiles();
+                                    for (int i=0; i<files.length; i++){
+                                        String fileName =files[i].getName();
+                                        out.print("<a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                    }
+                                } %>
+                            </div>
+                        </div>
+                    <%}%>
+                <%}%>
 
-                <button class="btn btn-primary">Send message</button>
+                <form action="/manager-cabinet/case/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data" >
+
+                    <div class="message-input-field">
+                        <textarea id="editor" name="message" rows="3"></textarea>
+                    </div>
+
+                    <div class="row mt20 mb20">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="input-group date" id="datetimepicker">
+                                    <input type="text" name="appointmentTime" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 text-right"><input id="chat-upload" name="file[]" multiple type="file"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send message</button>
+                </form>
             </section>
 
 

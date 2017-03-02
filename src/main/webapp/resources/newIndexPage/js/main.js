@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
 
     // datetimepicker
     $('#datetimepicker').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm',
+        format: 'YYYY-MM-DD HH:mm',
         daysOfWeekDisabled: [0, 6],
     });
 

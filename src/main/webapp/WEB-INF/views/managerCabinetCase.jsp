@@ -1,6 +1,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.SoftwareFactory.model.Case" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.SoftwareFactory.constant.ProjectEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -76,8 +77,8 @@
                 <div class="clearfix logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
             </div>
             <ul>
-                <li class="active"><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
-                <li><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
+                <li><a href="<c:out value="/manager-cabinet/estimate"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Estimate</a></li>
+                <li class="active"><a href="<c:out value="/manager-cabinet/case/"/>"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Case</a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Settings</a></li>
             </ul>
 
@@ -99,7 +100,7 @@
                         <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu-header text-center">설정</li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>
+                            <%--<li><a href="javascript:void(0);"><i class="fa fa-user"></i> 윤곽</a></li>--%>
                             <li><a href="<c:url value="/logout" />"><i class="fa fa-lock"></i> 로그 아웃</a></li>
                         </ul>
                     </li>
@@ -169,10 +170,14 @@
                     <tr class="unread checked">
                         <td class="hidden-xs text-center"><%out.print(aCase.getId());%></td>
                         <td class="hidden-xs text-center"><a href="<%out.print("/manager-cabinet/case/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
-                        <td class="hidden-xs text-center"><%out.print(aCase.getProject().getProjectName());%></td>
+                        <td class="hidden-xs text-center"><% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                            out.print(ProjectEnum.projectNameNormal.getValue());
+                        }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                            out.print(ProjectEnum.projectNameEstimate.getValue());
+                        } else out.print(aCase.getProject().getProjectName()); %></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getStatus());%></td>
-                        <td class="text-center"><%out.print("time!!!");%></td>
+                        <td class="text-center"><time class="timeago" datetime="<%  out.print(aCase.getAppointmentTime()); %>"></time></td>
                         <td class="hidden-xs text-center"><%out.print(aCase.getMessages().size());%></td>
                     </tr>
                 <%}%>

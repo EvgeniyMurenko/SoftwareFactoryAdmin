@@ -1,18 +1,22 @@
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
+import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.*;
+import com.SoftwareFactory.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.sql.*;
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -191,6 +195,8 @@ public class ManagerCabinetController {
         return managerCaseByNameAndProject;
     }
 
+    @Autowired
+    ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/case/{caseId}" , method = RequestMethod.GET )
     public ModelAndView getCaseToShow(@PathVariable Long caseId){
@@ -200,7 +206,58 @@ public class ManagerCabinetController {
 
         managerCaseRespond.addObject("case" , aCase);
 
+        managerCaseRespond.addObject("managerInfo" , managerInfoService.getManagerInfoById(aCase.getUserManagerId()));
+
         return managerCaseRespond;
+    }
+
+    @RequestMapping (value = "/case/{id}/print_answer", method = RequestMethod.POST)
+    public ModelAndView casePrintMessageAnswer(@PathVariable Long id, @RequestParam("message") String messageText,
+                                               @RequestParam("appointmentTime") String appointmentTime,
+                                               @RequestParam("file[]") MultipartFile[]  files, HttpSession httpSession){
+
+        // GET
+        Case aCase = caseService.getCaseById(id);
+        int userId = (Integer) httpSession.getAttribute("UserId");
+        User currentUser = userService.findById(userId);
+        aCase.setEmergency(false);
+
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = formatter.parse(appointmentTime+":00");
+            aCase.setAppointmentTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        // CREATE MESSAGE
+        Message message = new Message();
+        message.setaCase(aCase);
+
+        message.setUser(currentUser);
+        message.setMessageTime(new java.util.Date());
+        message.setMessageText(messageText);
+        message.setIsRead(MessageEnum.NOTREAD.toString());
+        messageService.addNewMessage(message);
+
+        // SAVE MESSAGE TO CASE
+        Set <Message> messages = aCase.getMessages();
+        messages.add(message);
+        aCase.setMessages(messages);
+
+        //SAVE FILE
+        if(!files[0].isEmpty()){
+            String pathToSaveFile = "case/" + aCase.getProject().getId() + "/"+ aCase.getId() + "/" + message.getId();
+            SaveFile sf = new SaveFile(pathToSaveFile, files);
+            sf.saveFile();
+            message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
+            messageService.updateMessage(message);
+        }
+
+        caseService.updateCase(aCase);
+
+        return new ModelAndView("redirect:/manager-cabinet/case/"+id);
     }
 
 }

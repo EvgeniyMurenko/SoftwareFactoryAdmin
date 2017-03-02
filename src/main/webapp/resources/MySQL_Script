@@ -28,6 +28,7 @@ CREATE TABLE `s_cases` (
 	`date_create` DATETIME NOT NULL,
 	`language` VARCHAR(5) NOT NULL,
 	`emergency` TINYINT(1) NOT NULL,
+	`appointment_time` DATETIME DEFAULT NULL,
 	PRIMARY KEY (`case_id`)
 );
 
@@ -163,17 +164,17 @@ VALUES ('DRONE', 5,'2017-01-27 13:00:00', 1, 'JS');
 INSERT INTO s_projects(name, user_customer_id, date_create, status, technology_type)
 VALUES ('#$GENERAL', 6,'2017-01-27 13:00:00', 1, 'IOS');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency)
-VALUES (1, 2, 'database1', 2, '2017-01-25 13:00:00', 'kr', 0);
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency, appointment_time)
+VALUES (1, 2, 'database1', 2, '2017-01-23 13:00:00', 'kr', 0, '2017-01-24 13:00:00');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency)
-VALUES (1, 2, 'database2', 1, '2017-01-25 13:00:00', 'kr', 0);
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency, appointment_time)
+VALUES (1, 2, 'database2', 1, '2017-01-24 13:00:00', 'kr', 0, '2017-01-25 13:00:00');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency)
-VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00', 'kr', 0);
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency, appointment_time)
+VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00', 'kr', 0, '2017-01-26 13:00:00');
 
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency)
-VALUES (2, 3, 'database1', 1, '2017-01-25 13:00:00', 'kr', 0);
+INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency, appointment_time)
+VALUES (2, 3, 'database1', 1, '2017-01-26 13:00:00', 'kr', 0, '2017-01-27 13:00:00');
 
 INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
 VALUES (1, 4, '2017-01-25 13:00:00','hello, i need.....', 'READ');
