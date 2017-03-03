@@ -207,27 +207,27 @@
                         <div class="row">
                             <!-- <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div> -->
                             <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio1-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio1-small.jpg" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio2-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio2-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio3-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio3-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio4-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio4-small.jpg" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio5-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio5-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio6-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio6-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio7-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio7-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio8-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio8-small.jpg" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
                     <div class="item">
                         <div class="row">
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
-                            <div class="col-md-3"><a data-fancybox="" data-src="portfolio.html" data-type="iframe" href="javascript:void(0);" class="thumbnail"><img src="http://placehold.it/250x250" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio9-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio9-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio10-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio10-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio11-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio11-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio12-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio12-small.jpg" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
