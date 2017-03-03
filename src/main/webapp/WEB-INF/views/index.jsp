@@ -286,7 +286,7 @@
                 <div class="ft-icon"><i class="fa fa-terminal"></i></div>
                 <div class="ft-content">
                     <div class="ft-title">스타트업과 함께 하는 SoFAC</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-body">스타트업 기업들은 대부분 IT 지원을 필요로 합니다. 그리고 IT가 실패의 원인이 되기도 합니다. 비싼 개발비, 유지보수 안되는 개발로 좌절하지 마세요... SoFAC과 함게 하세요 <a href="<c:url value='/startup'/>"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>

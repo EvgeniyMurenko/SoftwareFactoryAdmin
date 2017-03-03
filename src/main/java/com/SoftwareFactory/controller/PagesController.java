@@ -80,4 +80,10 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = { "/startup" }, method = RequestMethod.GET)
+    public ModelAndView startup() {
+        ModelAndView modelAndView = new ModelAndView("startup");
+        return modelAndView;
+    }
+
 }
