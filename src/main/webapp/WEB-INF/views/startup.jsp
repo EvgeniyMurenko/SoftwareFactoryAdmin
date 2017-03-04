@@ -58,7 +58,7 @@
             <h3>SoFAC은 스타트업과 함께 합니다</h3>
 
             <div class="row mb20">
-                <div class="col-md-10"><a data-fancybox="gallery" href="resources/newIndexPage/images/image006.jpg"><img src="resources/newIndexPage/images/image006.jpg" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-11"><a data-fancybox="gallery" href="resources/newIndexPage/images/image006.jpg"><img src="resources/newIndexPage/images/image006.jpg" alt="" class="img-responsive" /></a></div>
             </div>
 
             <p>스타트업 기업의 대부분은 아이디어와 열정을 가지고 있습니다.</p>
