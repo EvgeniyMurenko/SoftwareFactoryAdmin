@@ -86,4 +86,10 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = { "/policy" }, method = RequestMethod.GET)
+    public ModelAndView policy() {
+        ModelAndView modelAndView = new ModelAndView("policy");
+        return modelAndView;
+    }
+
 }

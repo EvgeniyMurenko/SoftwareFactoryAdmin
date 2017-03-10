@@ -1,5 +1,3 @@
-<%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <%@ page import="com.SoftwareFactory.model.Estimate" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
@@ -9,75 +7,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta property="og:site_name" content="software factory" />
-    <meta property="og:title" content="소팩소개" />
-    <meta property="og:image" content="http://www.sofac.kr/resources/newIndexPage/images/web-logo1.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="259" />
-    <meta property="og:image:height" content="110" />
-    <meta property="og:url" content="http://sofac.kr/" />
-    <meta property="og:description" content="" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="format-detection" content="address=no" />
-
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <%@ include file="siteHeaderMeta.jsp" %>
 
     <title>소팩소개 :: Software Factory</title>
 
-    <link href="resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/style.css" rel="stylesheet" />
-    <link href="resources/newIndexPage/css/responsive.css" rel="stylesheet" />
+    <%@ include file="siteHeaderStyle.jsp" %>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="resources/newIndexPage/images/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="resources/newIndexPage/images/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="resources/newIndexPage/images/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="resources/newIndexPage/images/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="resources/newIndexPage/images/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="resources/newIndexPage/images/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="resources/newIndexPage/images/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="resources/newIndexPage/images/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/newIndexPage/images/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192"  href="resources/newIndexPage/images/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/newIndexPage/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="resources/newIndexPage/images/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/newIndexPage/images/favicon-16x16.png" />
-    <link rel="manifest" href="resources/newIndexPage/images/manifest.json" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="resources/newIndexPage/images/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffffff" />
-
-    <!--[if lt IE 9]>
-    <script src="resources/newIndexPage/js/html5shiv.js"></script>
-    <script src="resources/newIndexPage/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
-<!-- Header -->
-<header class="container header">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 logo">
-            <a href="./">소프트웨어<span>팩토리</span></a>
-            <div class="small-logo">SoFAC : <i>Software Factory</i></div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 text-right login"><b>CASE OPEN</b> : <a href="javascript:void(0);" data-toggle="modal" data-target="#authorizationModal">고객 아이디로 로그인하세요</a></div>
-    </div>
-</header>
-<!-- #End Header -->
+
+<%@ include file="siteHeader.jsp" %>
 
 <!-- Cover section -->
 <div class="container-fluid cover">
@@ -198,6 +141,7 @@
                     <li data-target="#portfolio" data-slide-to="0" class="active"></li>
                     <li data-target="#portfolio" data-slide-to="1"></li>
                     <li data-target="#portfolio" data-slide-to="2"></li>
+                    <li data-target="#portfolio" data-slide-to="3"></li>
                 </ol>
 
                 <!-- Carousel items -->
@@ -228,6 +172,15 @@
                             <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio10-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio10-small.jpg" alt=""></a></div>
                             <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio11-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio11-small.jpg" alt=""></a></div>
                             <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio12-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio12-small.jpg" alt=""></a></div>
+                        </div><!--.row-->
+                    </div><!--.item-->
+
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio13-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio13-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio14-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio14-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio15-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio15-small.jpg" alt=""></a></div>
+                            <div class="col-md-3"><a data-fancybox="gallery" href="resources/newIndexPage/images/portfolio16-big.jpg" class="thumbnail"><img src="resources/newIndexPage/images/portfolio16-small.jpg" alt=""></a></div>
                         </div><!--.row-->
                     </div><!--.item-->
 
@@ -306,8 +259,8 @@
             <article class="feature clearfix">
                 <div class="ft-icon"><i class="fa fa-flask"></i></div>
                 <div class="ft-content">
-                    <div class="ft-title">SoFAC 정책</div>
-                    <div class="ft-body">개발 이후 지속적으로 소비자가 편안한 비즈니스를 유지할 수 있도록 서비스 개념이 적용된 종합 유지보수 개념을 적용하고 있습니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
+                    <div class="ft-title">알려드립니다</div>
+                    <div class="ft-body">공지사항<br />소프트팩토리에서 고객 여러분들께 알려드립니다. <a href="javascript:void(0);"><i>자세히 알아보기...</i></a></div>
                 </div>
             </article>
         </div>
@@ -318,180 +271,13 @@
 <div class="clearfix"></div>
 <!-- #End Features -->
 
-<!-- Footer -->
-<footer class="container footer mb20">
-    <div class="row">
-        <div class="col-md-6 bottom-informer">
-            Do you have any questions or suggestions?<br />
-            Let us know at <a href="javascript:void(0);">info@sofac.com</a>!
-        </div>
-        <div class="col-md-6 text-right bottom-menu"><a href="javascript:void(0);">Contact & Credits</a> | <a href="javascript:void(0);">Terms of Service</a> | <a href="javascript:void(0);">Privacy Policy</a></div>
-    </div>
-    <div class="mt20 text-center">Copyright &copy; 2017. All rights reserved.</div>
-</footer>
-<!-- #End Footer -->
+<%@ include file="siteFooter.jsp" %>
 
-<!-- Authorization modal window -->
-<div id="authorizationModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<%@ include file="siteAuthorizationModal.jsp" %>
 
-            <c:url var="loginUrl" value="/login?${_csrf.parameterName}=${_csrf.token}"/>
-            <!-- Authorization modal title -->
-            <form action="${loginUrl}" id="authorizationForm" method="post" class="form-horizontal">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4><i class="fa fa-user-o" aria-hidden="true"></i> 고객님 CASE 로그인에 오신 것을 환영합니다.</h4>
-                    <div class="ml30">발급 받은 고객번호와 패스워드를 입력해 주세요</div>
-                </div>
+<%@ include file="siteEstimateModal.jsp" %>
 
-                <!-- Authorization modal content -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 mb10 text-center"><img src="resources/newIndexPage/images/hello-womam.jpg" class="img-responsive position-center" alt=""></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <input type="text" name="ssoId" class="form-control form-block" placeholder="고객 ID" required />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <input type="password" name="password" class="form-control form-block" placeholder="패스워드" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <button type="submit" class="btn btn-primary btn-mobile">로그인</button>
-                                </div>
-                            </div>
-
-                            <div class="mt10 mb10 forgot-password"><a href="javascript:void(0);">패스워드를 잊어 버리셨나요 ?</a></div>
-
-                            <p class="mt20"><span style="font-size: 9pt;"><i>고객ID는 SoFAC 과 지속적인 대화를 원하실 경우<br />
-                                임시고객ID를 발급하여 드립니다.<br />
-                                발급요청은 초기 화면에서 문의하기를 통해서<br />
-                                접수하실 수 있습니다.<br />
-                                일회성 질문이나 견적문의는 고객ID를 발급하지<br />
-                                않습니다.</i></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <%--         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-
-                <!-- Authorization modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- #End Authorization modal window -->
-
-<!-- Estimate modal window -->
-<div id="estimationModal" class="modal fade">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <!-- Estimate modal title -->
-            <form id="estimationForm" action="/estimate?${_csrf.parameterName}=${_csrf.token}" method="POST" class="form-horizontal" <%--role="form" data-toggle="validator" --%>enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4><i class="fa fa-address-card-o" aria-hidden="true"></i> 문의 해 주세요...</h4>
-                    <b>견적요청 및 문의사항을 남겨 주시면 3시간 이내에 답변을 메일로 보내드립니다.</b>
-                    <div class="mt10 es-form-title">
-                        <p><i>이 페이지는 단 한번만의 답변을 받으실 수 있습니다.<br />견적 또는 어떠한 질문도 하실 수 있으며 한번의 질문에 한번의 답변만 받으실 수 있습니다.</i></p>
-                        <p><i>따라서 협상, 업무협의등 지속성이 필요하실 경우 답변으로 받으신 이메일에 기재 되어 있는 방법대로 요청하시면 고객 ID를 발급하여 드립니다.</i></p>
-                        <p><i>고객 아이디를 발급 받으신 분은 어떤 문제에 대해서도 CASE로그인을 통하여 언제든지 대화를 이어 가실 수 있습니다.</i></p>
-                    </div>
-                </div>
-
-                <!-- Estimate modal -->
-                <div class="modal-body">
-
-                    <div class="row">
-                        <!-- fields -->
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <input type="text" name="name" class="form-control form-block" placeholder="이름" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <input type="email" name="email" class="form-control form-block" placeholder="이메일" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <!-- <input type="text" name="phone" class="form-control form-block" pattern="[\+]\d{3}\s[\(]\d{2}[\)]\s\d{3}[\-]\d{4}$" data-format="+380 (dd) ddd-dddd" maxlength="100" placeholder="전화번호" required />
-                                    <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="" pattern="[\+]\d{2}\s[\(]\d{2}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="+82 (dd) dddd-dddd" maxlength="100" required /> -->
-                                    <input type="text" name="phone" id="phone" class="form-control bfh-phone" value="" pattern="[\(]\d{3}[\)]\s\d{4}[\-]\d{4}$" placeholder="전화번호" data-format="(ddd) dddd-dddd" maxlength="100" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group m0" style="margin: 0 !important;">
-                                <div class="checkbox">
-                                    <input id="request" name="price_request" class="styled checkEstimation" type="checkbox">
-                                    <label for="request">견적문의</label>
-                                </div>
-
-                                <div class="checkbox">
-                                    <input id="question" name="question_request" class="styled checkEstimation" type="checkbox">
-                                    <label for="question">일반문의</label>
-                                </div>
-                                <div id="alertCheckboxMessage"></div>
-                            </div>
-                        </div>
-                        <!-- message -->
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <textarea class="form-control form-block" name="message" rows="9" placeholder="문의사항을 적어 주세요" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mt20">
-                        <div class="col-lg-12 text-left">
-                            <input id="input-repl-2" name="fileEstimate[]" type="file" multiple class="file-loading">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Estimate modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-mobile">보내기</button>
-                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- #End Estimate modal window -->
-
-<script src="resources/newIndexPage/js/jquery.min.js"></script>
-<script src="resources/newIndexPage/js/jquery-ui.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.fancybox.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
-<script src="resources/newIndexPage/js/jquery.timeago.js"></script>
-<script src="resources/newIndexPage/js/jquery.timeago.ko.js"></script>
-<script src="resources/newIndexPage/js/bootstrap.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap-select.min.js"></script>
-<script src="resources/newIndexPage/js/bootstrap.validator.min.js"></script>
-<script src="resources/newIndexPage/js/fileinput.min.js"></script>
-<script src="resources/newIndexPage/js/sortable.min.js"></script>
-<script src="resources/newIndexPage/js/form-validation.min.js"></script>
-<script src="resources/newIndexPage/js/pagination.min.js"></script>
-<script src="resources/newIndexPage/js/main.js"></script>
+<%@ include file="siteFooterJavaScript.jsp" %>
 
 <%   Boolean isEstimateSuccess = (Boolean) request.getAttribute("isEstimateSuccess"); %>
 <%   if (isEstimateSuccess !=null && isEstimateSuccess) { %>
@@ -520,22 +306,5 @@
 </script>
 <% } %>
 
-
-
-
-<%--
-<%} else if (isEstimateSuccess !=null && !isEstimateSuccess) {%>
-<script>
-    jQuery(document).ready(function($) {
-        swal(
-            'Good job!',
-            'You clicked the button!',
-            'error'
-        );
-    });
-</script>
-<%}%>
-&ndash;%&gt;--%>
---%>
 </body>
 </html>

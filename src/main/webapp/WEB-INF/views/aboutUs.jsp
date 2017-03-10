@@ -1,5 +1,3 @@
-<%@ page import="java.util.Locale" %>
-<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -9,70 +7,17 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="format-detection" content="address=no" />
 
-    <meta property="og:site_name" content="software factory" />
-    <meta property="og:title" content="소팩소개" />
-    <meta property="og:image" content="/resources/newIndexPage/images/web-logo.jpg" />
-    <meta property="og:url" content="http://www.sofac.kr/" />
-    <meta property="og:description" content="" />
-
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <%@ include file="siteHeaderMeta.jsp" %>
 
     <title>We Builid SoftwareFactory :: Software Factory</title>
 
-    <link href="/resources/newIndexPage/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/jquery.fancybox.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/jquery.sweet-alert.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/awesome-bootstrap-checkbox.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/fileinput.min.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/style.css" rel="stylesheet" />
-    <link href="/resources/newIndexPage/css/responsive.css" rel="stylesheet" />
+    <%@ include file="siteHeaderStyle.jsp" %>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/resources/newIndexPage/images/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="/resources/newIndexPage/images/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/resources/newIndexPage/images/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/resources/newIndexPage/images/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/resources/newIndexPage/images/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="/resources/newIndexPage/images/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="/resources/newIndexPage/images/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/resources/newIndexPage/images/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/resources/newIndexPage/images/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192"  href="/resources/newIndexPage/images/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/resources/newIndexPage/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/resources/newIndexPage/images/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/resources/newIndexPage/images/favicon-16x16.png" />
-    <link rel="manifest" href="/resources/newIndexPage/images/manifest.json" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/resources/newIndexPage/images/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffffff" />
-
-    <!--[if lt IE 9]>
-    <script src="/resources/newIndexPage/js/html5shiv.js"></script>
-    <script src="/resources/newIndexPage/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 
-<!-- Header -->
-<header class="container header">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 logo">
-            <div class="orange-button"><a href="./"><img src="/resources/newIndexPage/images/home-button.png" alt="" /></a></div>
-            <a href="./">소프트웨어<span>팩토리</span></a>
-            <div class="small-logo">SoFAC : <i>Software Factory</i></div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 text-right login"><b>CASE OPEN</b> : <a href="javascript:void(0);" data-toggle="modal" data-target="#authorizationModal">고객 아이디로 로그인하세요</a></div>
-    </div>
-</header>
-<!-- #End Header -->
+<%@ include file="siteHeader.jsp" %>
 
 <!-- Content -->
 <section class="container content mb40">
@@ -116,96 +61,11 @@
 </section>
 <!-- #End Content -->
 
-<!-- Footer -->
-<footer class="container footer mb20">
-    <div class="row">
-        <div class="col-md-6 col-sm-6 bottom-informer">
-            Do you have any questions or suggestions?<br />
-            Let us know at <a href="javascript:void(0);">info@sofac.com</a>!
-        </div>
-        <div class="col-md-6 col-sm-6 text-right bottom-menu"><a href="javascript:void(0);">Contact & Credits</a> | <a href="javascript:void(0);">Terms of Service</a> | <a href="javascript:void(0);">Privacy Policy</a></div>
+<%@ include file="siteFooter.jsp" %>
 
-    </div>
-    <div class="mt20 text-center">Copyright &copy; 2017. All rights reserved.</div>
-</footer>
-<!-- #End Footer -->
+<%@ include file="siteAuthorizationModal.jsp" %>
 
-<!-- Authorization modal window -->
-<div id="authorizationModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<%@ include file="siteFooterJavaScript.jsp" %>
 
-            <c:url var="loginUrl" value="/login?${_csrf.parameterName}=${_csrf.token}"/>
-            <!-- Authorization modal title -->
-            <form action="${loginUrl}" id="authorizationForm" method="post" class="form-horizontal">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4><i class="fa fa-user-o" aria-hidden="true"></i> 고객님 CASE 로그인에 오신 것을 환영합니다.</h4>
-                    <div class="ml30">발급 받은 고객번호와 패스워드를 입력해 주세요</div>
-                </div>
-
-                <!-- Authorization modal content -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 mb10 text-center"><img src="/resources/newIndexPage/images/hello-womam.jpg" class="img-responsive position-center" alt=""></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <input type="text" name="ssoId" class="form-control form-block" placeholder="고객 ID" required />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <input type="password" name="password" class="form-control form-block" placeholder="패스워드" required />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-12 text-left">
-                                    <button type="submit" class="btn btn-primary btn-mobile">로그인</button>
-                                </div>
-                            </div>
-
-                            <div class="mt10 mb10 forgot-password"><a href="javascript:void(0);">패스워드를 잊어 버리셨나요 ?</a></div>
-
-                            <p class="mt20"><span style="font-size: 9pt;"><i>고객ID는 SoFAC 과 지속적인 대화를 원하실 경우<br />
-                                임시고객ID를 발급하여 드립니다.<br />
-                                발급요청은 초기 화면에서 문의하기를 통해서<br />
-                                접수하실 수 있습니다.<br />
-                                일회성 질문이나 견적문의는 고객ID를 발급하지<br />
-                                않습니다.</i></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <%--         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-
-                <!-- Authorization modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- #End Authorization modal window -->
-
-<script src="/resources/newIndexPage/js/jquery.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery-ui.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.mousewheel.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.fancybox.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.sweet-alert.min.js"></script>
-<script src="/resources/newIndexPage/js/jquery.timeago.js"></script>
-<script src="/resources/newIndexPage/js/jquery.timeago.ko.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap-form-helpers.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap-select.min.js"></script>
-<script src="/resources/newIndexPage/js/bootstrap.validator.min.js"></script>
-<script src="/resources/newIndexPage/js/fileinput.min.js"></script>
-<script src="/resources/newIndexPage/js/sortable.min.js"></script>
-<script src="/resources/newIndexPage/js/form-validation.min.js"></script>
-<script src="/resources/newIndexPage/js/pagination.min.js"></script>
-<script src="/resources/newIndexPage/js/main.js"></script>
 </body>
 </html>
