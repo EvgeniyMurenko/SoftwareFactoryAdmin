@@ -17,6 +17,6 @@
             대표자 : 박상만
         </div>
     </div>
-    <div class="mt20 text-center" style="color: #999; font-size: 9pt;">Copyright &copy; 2016. All rights reserved.</div>
+    <div class="mt20 text-center" style="color: #999; font-size: 9pt;">Copyright &copy; 2016. All rights reserved</div>
 </footer>
 <!-- #End Footer -->
