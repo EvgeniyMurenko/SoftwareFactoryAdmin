@@ -194,6 +194,11 @@ a { color: #03a9f4; cursor: pointer !important; }
 .content .messages .message-customer-informer .mi-c-message { padding: 5px 10px 5px 0; }
 .content .messages .message-input-field { border-top: 1px solid #ccc; padding-top: 20px; }
 
+/* notice */
+.notice-box { width: 100%; }
+.notice-box a { border-bottom: 1px solid #eee; display: block; padding: 15px 10px; color: #333; font-size: 12pt; }
+.notice-box a.active { background-color: #03a9f4 !important; color: #fff !important; border-bottom: 1px solid #00BFF4; }
+.notice-box-information { padding: 10px 20px; font-size: 10pt; border: 1px solid #eee; border-top: 0; background-color: #f9f9f9 !important; }
 
 /* 404 error*/
 .error-page {  }

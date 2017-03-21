@@ -1,6 +1,25 @@
 "use strict";
 jQuery(document).ready(function($) {
 
+    // Notices
+    $(".notice-box a").each(function () {
+        var notice_id = $(this).attr('id');
+
+        $("#" + notice_id).click(function() {
+            if ( $("#" + notice_id).hasClass("active")) {
+                $("#" + notice_id).removeClass("active");
+                $("#" + notice_id + " i.fa").removeClass("fa-chevron-up");
+                $("#" + notice_id + " i.fa").addClass("fa-chevron-down");
+            } else {
+                $("#" + notice_id).addClass("active");
+                $("#" + notice_id + " i.fa").removeClass("fa-chevron-down");
+                $("#" + notice_id + " i.fa").addClass("fa-chevron-up");
+            }
+
+            $("#box_" + notice_id).toggle();
+        });
+    });
+
     // Back to top
     var offset = 300,
         offset_opacity = 1200,
@@ -64,6 +83,7 @@ jQuery(document).ready(function($) {
             return false;
         }
     });
+
 
     // Authorization from validation
     $('#authorizationForm').formValidation({

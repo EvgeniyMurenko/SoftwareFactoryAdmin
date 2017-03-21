@@ -92,4 +92,10 @@ public class PagesController {
         return modelAndView;
     }
 
+    @RequestMapping(value = { "/notices" }, method = RequestMethod.GET)
+    public ModelAndView notices() {
+        ModelAndView modelAndView = new ModelAndView("notices");
+        return modelAndView;
+    }
+
 }

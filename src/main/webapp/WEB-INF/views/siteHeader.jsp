@@ -8,7 +8,7 @@
 <header class="container header">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 logo">
-            <div class="orange-button"><a href="./"><img src="resources/newIndexPage/images/home-button.png" alt="" /></a></div>
+            <div class="orange-button"><a href="./"><img src="/resources/newIndexPage/images/home-button.png" alt="" /></a></div>
             <a href="./">소프트웨어<span>팩토리</span></a>
             <div class="small-logo" >SoFAC : <i>Software Factory</i></div>
 
