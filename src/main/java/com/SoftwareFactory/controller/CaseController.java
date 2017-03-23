@@ -82,7 +82,6 @@ public class CaseController {
 
         Set<Project> projects = customerInfo.getProjects();
 
-
         Project project = null;
         if (projects != null){
             Iterator<Project> itr = projects.iterator();

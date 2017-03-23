@@ -117,24 +117,23 @@
             <form action="${createCase}" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <label for="project">Project</label>
-                    <select name="projectName" class="form-control selectpicker" id="project">
+                    <select name="projectName" class="form-control" id="project">
                         <%
                             Iterator<Project> itr = projectSet.iterator();
                             while (itr.hasNext()) {
                                 Project project = itr.next();%>
-                        <option value=" <%out.print(project.getProjectName());%>">
-                            <%
-                            if(project.getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
-                                out.print(ProjectEnum.projectNameNormal.getValue());
-                            } else if(project.getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){
-                                out.print(ProjectEnum.projectNameEstimate.getValue());
-                            } else {
-                                out.print(project.getProjectName());
-                            }
-                            %>
-                        </option>
-
-                        <%}%>
+                                <option value="<%out.print(project.getProjectName());%>">
+                                    <%
+                                    if(project.getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                        out.print(ProjectEnum.projectNameNormal.getValue());
+                                    } else if(project.getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){
+                                        out.print(ProjectEnum.projectNameEstimate.getValue());
+                                    } else {
+                                        out.print(project.getProjectName());
+                                    }
+                                    %>
+                                 </option>
+                         <%}%>
                     </select>
                 </div>
 
@@ -145,7 +144,7 @@
 
                 <div class="form-group">
                     <label for="lang">Language</label>
-                    <select class="form-control selectpicker" name="language" id="lang">
+                    <select class="form-control" name="language" id="lang">
                         <option value="KO">한국어 / Korean</option>
                         <option value="AR">العربية / Arabic</option>
                         <option value="BE">Беларускі / Belarusian</option>

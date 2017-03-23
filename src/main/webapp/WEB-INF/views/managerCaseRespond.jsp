@@ -145,8 +145,8 @@
                 <%ArrayList<Message> messages = new ArrayList<Message>(aCase.getMessages());
                 messages.sort(new MessageByDateComparator());%>
                 <%for (Message message : messages){
-                    Long newLong =  new Long(message.getUser().getId());
-                    if(aCase.getProject().getCustomerInfo().getId().equals( newLong )) {%>
+                    Long userId =  new Long(message.getUser().getId());
+                    if(aCase.getProject().getCustomerInfo().getId().equals(userId)) {%>
 
                         <div class="message-customer-informer">
                             <div class="mi-c-title"><%  out.print(aCase.getProject().getCustomerInfo().getName()); %><a href="javascript:void(0);"><%  out.print("(ID "+message.getId()+")"); %></a> <span class="mi-c-time pull-right"><%  out.print(message.getMessageTime()); %></span></div>

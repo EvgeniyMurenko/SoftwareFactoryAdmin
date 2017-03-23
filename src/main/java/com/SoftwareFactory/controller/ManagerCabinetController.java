@@ -165,9 +165,7 @@ public class ManagerCabinetController {
     public ModelAndView getManagerCabinetCase() {
 
         ModelAndView managerCabinetCase = new ModelAndView("managerCabinetCase");
-        ArrayList<Case> caseArrayList = new ArrayList<>();
-        caseArrayList = (ArrayList<Case>) caseService.getAllCases();
-
+        List<Case> caseArrayList = caseService.getAllCases();
         managerCabinetCase.addObject("cases", caseArrayList);
 
         return managerCabinetCase;
@@ -181,10 +179,8 @@ public class ManagerCabinetController {
         ArrayList<Case> caseArrayList = new ArrayList<>();
 
         if (caseId != null) {
-
             Case aCase = caseService.getCaseById(caseId);
-            if (aCase != null)
-                caseArrayList.add(aCase);
+            if (aCase != null) caseArrayList.add(aCase);
         } else {
             System.out.println("FIND BY");
             caseArrayList = (ArrayList<Case>) caseService.findByField(caseTitle, projectName);
@@ -198,23 +194,23 @@ public class ManagerCabinetController {
     @Autowired
     ManagerInfoService managerInfoService;
 
-    @RequestMapping(value = "/case/{caseId}" , method = RequestMethod.GET )
-    public ModelAndView getCaseToShow(@PathVariable Long caseId){
+    @RequestMapping(value = "/case/{caseId}", method = RequestMethod.GET)
+    public ModelAndView getCaseToShow(@PathVariable Long caseId) {
         ModelAndView managerCaseRespond = new ModelAndView("managerCaseRespond");
 
         Case aCase = caseService.getCaseById(caseId);
 
-        managerCaseRespond.addObject("case" , aCase);
+        managerCaseRespond.addObject("case", aCase);
 
-        managerCaseRespond.addObject("managerInfo" , managerInfoService.getManagerInfoById(aCase.getUserManagerId()));
+        managerCaseRespond.addObject("managerInfo", managerInfoService.getManagerInfoById(aCase.getUserManagerId()));
 
         return managerCaseRespond;
     }
 
-    @RequestMapping (value = "/case/{id}/print_answer", method = RequestMethod.POST)
+    @RequestMapping(value = "/case/{id}/print_answer", method = RequestMethod.POST)
     public ModelAndView casePrintMessageAnswer(@PathVariable Long id, @RequestParam("message") String messageText,
                                                @RequestParam("appointmentTime") String appointmentTime,
-                                               @RequestParam("file[]") MultipartFile[]  files, HttpSession httpSession){
+                                               @RequestParam("file[]") MultipartFile[] files, HttpSession httpSession) {
 
         // GET
         Case aCase = caseService.getCaseById(id);
@@ -224,7 +220,7 @@ public class ManagerCabinetController {
 
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = formatter.parse(appointmentTime+":00");
+            Date date = formatter.parse(appointmentTime + ":00");
             aCase.setAppointmentTime(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -242,13 +238,13 @@ public class ManagerCabinetController {
         messageService.addNewMessage(message);
 
         // SAVE MESSAGE TO CASE
-        Set <Message> messages = aCase.getMessages();
+        Set<Message> messages = aCase.getMessages();
         messages.add(message);
         aCase.setMessages(messages);
 
         //SAVE FILE
-        if(!files[0].isEmpty()){
-            String pathToSaveFile = "case/" + aCase.getProject().getId() + "/"+ aCase.getId() + "/" + message.getId();
+        if (!files[0].isEmpty()) {
+            String pathToSaveFile = "case/" + aCase.getProject().getId() + "/" + aCase.getId() + "/" + message.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
@@ -257,7 +253,7 @@ public class ManagerCabinetController {
 
         caseService.updateCase(aCase);
 
-        return new ModelAndView("redirect:/manager-cabinet/case/"+id);
+        return new ModelAndView("redirect:/manager-cabinet/case/" + id);
     }
 
 }

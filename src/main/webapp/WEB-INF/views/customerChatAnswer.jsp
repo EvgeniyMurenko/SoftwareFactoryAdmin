@@ -7,7 +7,8 @@
 <%@ page import="com.SoftwareFactory.model.*" %>
 <%@ page import="com.SoftwareFactory.constant.RoleEnum" %>
 <%@ page import="com.SoftwareFactory.service.ManagerInfoServiceImpl" %>
-<%@ page import="com.SoftwareFactory.service.ManagerInfoService" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
+<%@ page import="com.SoftwareFactory.service.ManagerInfoService" %>
+<%@ page import="com.SoftwareFactory.constant.ProjectEnum" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -111,9 +112,19 @@
     <!-- Case table -->
     <table class="table table-striped">
         <tbody>
+
+        <%String projectName = "";
+            if(aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                projectName = ProjectEnum.projectNameNormal.getValue();
+            } else if(aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){
+                projectName = ProjectEnum.projectNameEstimate.getValue();
+            } else {
+                projectName = aCase.getProject().getProjectName();
+            }
+        %>
         <tr class="unread checked">
             <td><a href="javascript:void(0);"><%out.print(aCase.getProjectTitle());%></a></td>
-            <td class="text-center"><a href="javascript:void(0);"><%out.print(aCase.getProject().getProjectName());%></a></td>
+            <td class="text-center"><a href="javascript:void(0);"><%out.print(projectName);%></a></td>
             <td class="text-center"><%out.print(aCase.getStatus());%></td>
             <td class="hidden-xs text-center"><%out.print(aCase.getProject().getCreateDate());%></td>
             <td class="hidden-xs text-center"><time class="timeago" datetime="<%  out.print(messages.get(0).getMessageTime()); %>"></time></td>
