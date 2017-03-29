@@ -32,7 +32,7 @@ public class ManagerCabinetController {
     public ModelAndView getManagerCabinetEstimate(HttpSession httpSession) {
 
         System.out.println("manager cabinet");
-        Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
+
 
         ModelAndView managerCabinetEstimate = new ModelAndView("managerCabinetEstimate");
 
