@@ -106,6 +106,8 @@ public class TestController {
 
     @Autowired
     UserService userService;
+
+
 /*
 
     @RequestMapping(value = "/createCustomer", method = RequestMethod.GET)
@@ -270,21 +272,50 @@ public class TestController {
                 return 1;
             case "MANAGER":
                 return 3;
+            case "STAFF":
+                return 4;
         }
         return -1;
     }
 
+
+
+    @Autowired
+    StaffInfoService staffInfoService;
+
     @RequestMapping(value = "/q", method = RequestMethod.GET)
     public void test3() {
-        System.out.println("==============test sort by status");
-        List<Case> aCases = caseService.getAllCases();
-        List<Message> messagesList = new ArrayList<>(aCases.get(0).getMessages());
+        System.out.println("==============test create staff");
 
-        //Collections.sort(messagesList , new MessageByDateComparator());
+        User user = new User();
+        user.setPassword("123");
+        user.setSsoId("mr_jeka");
+        UserProfile userProfile = new UserProfile();
+        userProfile.setType(RoleEnum.STAFF.toString());
+        userProfile.setId(getTypeID(userProfile.getType()));
+        Set<UserProfile> userProfiles = new HashSet<>();
+        userProfiles.add(userProfile);
+        user.setUserProfiles(userProfiles);
+        userService.saveUser(user);
 
-        //for(Message acase : messagesList){
-            System.out.println("========Sort by status===========" + messagesList.get(0).getMessageTime().toString());
-        //}
+        Set<MessageTask> messageTasks = new HashSet<>();
+        Set<GoogleCloudKey> googleCloudKeys = new HashSet<>();
+
+
+        StaffInfo staffInfo = new StaffInfo();
+        staffInfo.setUser((long)user.getId());
+        staffInfo.setName("Murenko Evgeniy");
+        staffInfo.setPhone("0939091062");
+        staffInfo.setEmail("mr_jeka@bk.ru");
+        staffInfo.setBirthday(new java.util.Date(5, 7, 1989));
+
+        staffInfo.setMessageTasks(messageTasks);
+        staffInfo.setGoogleCloudKeys(googleCloudKeys);
+
+       staffInfoService.addStaffInfo(staffInfo);
+
+
+
         System.out.println("======== FINISH ==========");
 
     }

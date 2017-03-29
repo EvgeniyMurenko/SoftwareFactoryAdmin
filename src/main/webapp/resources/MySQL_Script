@@ -92,6 +92,32 @@ CREATE TABLE `persistent_logins` (
     PRIMARY KEY (series)
 );
 
+CREATE TABLE `s_staff_info` (
+	`user_id` INT NOT NULL,
+	`name` VARCHAR(255) NOT NULL,
+	`phone` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`birthday` DATE NOT NULL
+);
+
+CREATE TABLE `s_google_cloud_keys` (
+  `google_cloud_keys_id` INT NOT NULL AUTO_INCREMENT,
+  `staff_info_id` INT NOT NULL,
+  `key` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`google_cloud_keys_id`)
+);
+
+CREATE TABLE `software_factory`.`s_message_task` (
+  `message_task_id` INT NOT NULL AUTO_INCREMENT,
+  `staff_info_id` INT NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `message_text` TEXT NOT NULL,
+  `date` DATETIME NOT NULL,
+  `app_user_id` INT NOT NULL,
+  `is_approve` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`message_task_id`)
+);
+
 INSERT INTO `user_profile`(type)
 VALUES ('CUSTOMER');
 
@@ -100,6 +126,9 @@ VALUES ('ADMIN');
 
 INSERT INTO `user_profile`(type)
 VALUES ('MANAGER');
+
+INSERT INTO `user_profile`(type)
+VALUES ('STAFF');
 
 INSERT INTO `app_user`(sso_id, password, is_full_created)
 VALUES ('admin@mail.com',123, 0);
