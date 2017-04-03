@@ -15,7 +15,7 @@ public class GoogleCloudKey {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "staff_info_id")
+    @JoinColumn(name = "staff_info_id", insertable=false, updatable=false)
     private StaffInfo staffInfo;
 
     @Column(name = "key")

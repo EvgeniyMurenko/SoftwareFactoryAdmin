@@ -74,10 +74,13 @@ public class AppController {
 
         if (userProfile.getType().equals("MANAGER")) {
             System.out.println("LOGIN AS MANAGER");
-            modelAndView.setViewName("redirect:/manager-cabinet/estimate/");
+            modelAndView.setViewName("redirect:/staff-cabinet/estimate/");
         } else if (userProfile.getType().equals("CUSTOMER")) {
             System.out.println("LOGIN AS CUSTOMER");
             modelAndView.setViewName("redirect:/cabinet/");
+        }else if(userProfile.getType().equals("ADMIN")){
+            System.out.println("LOGIN AS ADMIN");
+            modelAndView.setViewName("redirect:/staff-cabinet/estimate/");
         }
 
         System.out.println(currentUser.getId());

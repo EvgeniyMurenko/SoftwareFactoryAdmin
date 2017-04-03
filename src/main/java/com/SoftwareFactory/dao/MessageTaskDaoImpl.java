@@ -1,6 +1,7 @@
 package com.SoftwareFactory.dao;
 
 import com.SoftwareFactory.model.MessageTask;
+import com.SoftwareFactory.model.StaffInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,6 +55,16 @@ public class MessageTaskDaoImpl implements MessageTaskDao {
     public List<MessageTask> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from MessageTask");
+        return query.list();
+    }
+
+    @Override
+    public List<MessageTask> findAllMessageTaskByStaff(Long staffInfo) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("select distinct messageTask From MessageTask messageTask where messageTask.staffInfo.id = :staffInfo");
+        query.setParameter("staffInfo", staffInfo);
+
         return query.list();
     }
 }
