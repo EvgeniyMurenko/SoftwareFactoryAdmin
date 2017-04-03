@@ -12,11 +12,11 @@ public class MessageTask {
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
-    @Column(name = "google_cloud_keys_id")
+    @Column(name = "message_task_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "staff_info_id", insertable=false, updatable=false)
+    @JoinColumn(name = "staff_info_id")
     private StaffInfo staffInfo;
 
     @Column(name = "title")
@@ -28,22 +28,21 @@ public class MessageTask {
     @Column(name="date")
     private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "app_user_id", insertable = false, updatable = false)
-    private User user;
+    @Column(name = "app_user_id")
+    private Long userId;
 
     @Column(name = "is_approve")
-    private Boolean isApprove;
+    private boolean isApprove;
 
     public MessageTask() {
     }
 
-    public MessageTask(StaffInfo staffInfo, String title, String messageText, Date date, User user, Boolean isApprove) {
+    public MessageTask(StaffInfo staffInfo, String title, String messageText, Date date, Long userId, boolean isApprove) {
         this.staffInfo = staffInfo;
         this.title = title;
         this.messageText = messageText;
         this.date = date;
-        this.user = user;
+        this.userId = userId;
         this.isApprove = isApprove;
     }
 
@@ -87,19 +86,19 @@ public class MessageTask {
         this.date = date;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Boolean getApprove() {
+    public boolean getApprove() {
         return isApprove;
     }
 
-    public void setApprove(Boolean isApprove) {
+    public void setApprove(boolean isApprove) {
         isApprove = isApprove;
     }
 }

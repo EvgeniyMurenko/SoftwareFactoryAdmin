@@ -2,6 +2,7 @@ package com.SoftwareFactory.service;
 
 import com.SoftwareFactory.dao.MessageTaskDao;
 import com.SoftwareFactory.model.MessageTask;
+import com.SoftwareFactory.model.StaffInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,12 @@ public class MessageTaskServiceImpl implements MessageTaskService {
     @Transactional(readOnly = true)
     public List<MessageTask> getAllMessageTask() {
         return messageTaskDao.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MessageTask> getAllMessageTaskByStaff(Long staffInfo) {
+        return messageTaskDao.findAllMessageTaskByStaff(staffInfo);
     }
 
     @Override
