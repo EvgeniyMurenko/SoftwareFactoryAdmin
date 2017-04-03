@@ -1,6 +1,8 @@
 package com.SoftwareFactory.configuration;
 
 import com.fasterxml.classmate.Filter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +10,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import com.SoftwareFactory.converter.RoleToUserProfileConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -162,14 +166,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         multipartResolver.setMaxUploadSize(1000000000);
         return multipartResolver;
     }
-
-/*    @Bean
-    public org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter() {
-        org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter = new org.springframework.web.filter.CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
-    }*/
 
 }
 
