@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Set;
 
 import static com.SoftwareFactory.constant.AppRequestEnum.AUTHORIZATION_REQUEST;
-
+import static com.SoftwareFactory.constant.AppRequestEnum.REQUEST_FAIL;
+import static com.SoftwareFactory.constant.AppRequestEnum.REQUEST_SUCCESS;
 
 
 @Controller
@@ -50,7 +51,7 @@ public class FxmApplicationController {
         ServerRequest serverRequest = new Gson().fromJson(request, ServerRequest.class);
         String requestType = serverRequest.getRequestType();
 
-
+        ServerResponse serverResponse;
 
         if (requestType.equals(AUTHORIZATION_REQUEST.toString())) {
 
@@ -86,18 +87,24 @@ public class FxmApplicationController {
             System.out.println(staffInfo);
             System.out.println(messageTaskSet);
 
-            ServerResponse serverResponse = new ServerResponse("status" , new Authorization("1" , "2" , "3"));
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.toString(), new Authorization("1" , "2" , "3"));
             String response = new Gson().toJson(serverResponse);
 
-            System.out.print("response send");
-            return response;
+            System.out.print("response send succses");
+
 
         } else if (requestType.equals("")) {
             return "";
 
 
+        }else {
+            serverResponse = new ServerResponse(REQUEST_FAIL.toString() , null);
+            System.out.print("response send fail");
         }
-        return "";
+
+        String response = new Gson().toJson(serverResponse);
+        return response;
+
     }
 
 
