@@ -59,7 +59,7 @@
             <h3><i class="fa fa-pie-chart"></i>Case ID: <%out.print(aCase.getId());%></h3>
 
             <div class="mb20">
-                <a href="/staff-cabinet/cases/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel write Case</a>
+                <a href="/cases/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel write Case</a>
             </div>
 
             <!-- Information from table -->
@@ -167,7 +167,7 @@
 
             <%if (!aCase.getStatus().equals(StatusEnum.CLOSE.toString())){%>
                 <!-- Case answer section -->
-                <form action="/staff-cabinet/case/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data" >
+                <form action="/cases/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="col-md-4">
 

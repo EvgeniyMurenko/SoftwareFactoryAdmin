@@ -10,4 +10,5 @@ public interface StaffInfoDao {
     void update(StaffInfo staffInfo);
     void delete(StaffInfo staffInfo);
     List<StaffInfo> findAll();
+    void deleteAllByStaff(Long staffId);
 }

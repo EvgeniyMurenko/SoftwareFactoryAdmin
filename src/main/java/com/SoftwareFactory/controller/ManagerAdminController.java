@@ -1,4 +1,4 @@
-package com.SoftwareFactory.controller;
+/* package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
 import com.SoftwareFactory.constant.MainPathEnum;
@@ -56,7 +56,7 @@ public class ManagerAdminController {
     @Autowired
     GoogleCloudKeyService googleCloudKeyService;
 
-    @RequestMapping(value = "/estimate", method = RequestMethod.GET)
+   @RequestMapping(value = "/estimate", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetEstimate(HttpSession httpSession) {
 
         ModelAndView adminCabinetEstimate = new ModelAndView("managerAdminViews/estimatesList");
@@ -176,7 +176,7 @@ public class ManagerAdminController {
         return new ModelAndView("redirect:/staff-cabinet/estimate");
     }
 
-    @RequestMapping(value = "/cases", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/cases", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {
 
         ModelAndView managerAdminCabinetCase = new ModelAndView("managerAdminViews/casesList");
@@ -411,4 +411,4 @@ public class ManagerAdminController {
 
         return pushNotification;
     }
-}
+}*/

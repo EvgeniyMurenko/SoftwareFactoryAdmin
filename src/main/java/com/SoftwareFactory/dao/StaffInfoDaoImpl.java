@@ -56,4 +56,12 @@ public class StaffInfoDaoImpl implements StaffInfoDao {
         Query query = session.createQuery("from StaffInfo");
         return query.list();
     }
+
+    @Override
+    public void deleteAllByStaff(Long staffId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete StaffInfo where id = :staffId");
+        query.setParameter("staffId", staffId);
+
+    }
 }

@@ -55,7 +55,7 @@
             </h3>
 
             <div class="mb20">
-                <a href="<c:out value="/staff-cabinet/staff"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel add
+                <a href="<c:out value="/staff/"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel add
                     Task</a>
             </div>
 
@@ -79,7 +79,7 @@
                     </section>
 
                     <div class="border-bottom mb20"></div>
-                    <%String formAction = "/staff-cabinet/addTaskToStaff/"+staffInfo.getUser();%>
+                    <%String formAction = "/staff/addTaskToStaff/"+staffInfo.getUser();%>
                     <form action="<%out.print(formAction);%>?${_csrf.parameterName}=${_csrf.token}" method="post">
 
                         <h4 class="mb10">Task text</h4>

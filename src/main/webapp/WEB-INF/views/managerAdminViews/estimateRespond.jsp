@@ -51,7 +51,7 @@
             <h3><i class="fa fa-file-text-o"></i>Estimate ID <%out.print(estimate.getEstimateGeneratedId());%></h3>
 
             <div class="mb20">
-                <a href="<c:out value="/staff-cabinet/estimate"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel write Estimate</a>
+                <a href="<c:out value="/estimate/"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel write Estimate</a>
             </div>
 
             <div class="row">
@@ -82,7 +82,7 @@
                         }
                     } %>
                     <%if (!estimate.isRespond()){%>
-                        <form action="<%out.print("/staff-cabinet/set-respond/" + estimate.getId());%>?${_csrf.parameterName}=${_csrf.token}" method="post">
+                        <form action="<%out.print("/estimate/set-respond/" + estimate.getId());%>?${_csrf.parameterName}=${_csrf.token}" method="post">
                             <h4 class="mb10 mt20">Estimate answer</h4>
                             <textarea class="form-control" name="message" id="editor"></textarea>
 

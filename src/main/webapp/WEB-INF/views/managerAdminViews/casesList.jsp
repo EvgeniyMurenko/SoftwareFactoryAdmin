@@ -78,7 +78,7 @@
                 <%for (Case aCase :cases){%>
                     <tr>
                         <td align="center"><%out.print(aCase.getId());%></td>
-                        <td><a href="<%out.print("/staff-cabinet/case/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
+                        <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
                         <td align="center">
                             <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
                                 out.print(ProjectEnum.projectNameNormal.getValue());

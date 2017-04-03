@@ -11,4 +11,5 @@ public interface StaffInfoService {
     void deleteStaffInfo(StaffInfo staffInfo);
     List<StaffInfo> getAllStaffInfo();
     StaffInfo getStaffInfo(Long id);
+    void deleteAllByStaff(Long staffId);
 }

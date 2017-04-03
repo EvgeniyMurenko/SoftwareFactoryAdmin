@@ -12,12 +12,12 @@
 
     <!-- Left categories -->
     <ul>
-        <li><a href="/"><i class="fa fa-file-text-o" aria-hidden="true"></i> Estimate</a></li>
-        <li><a href="/staff-cabinet/cases"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
+        <li><a href="/estimate/"><i class="fa fa-file-text-o" aria-hidden="true"></i> Estimate</a></li>
+        <li><a href="/cases/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
 
         <%HttpSession session = request.getSession();
         if (session != null && "ADMIN".equals(session.getAttribute("UserRole"))) {%>
-            <li><a href="/staff-cabinet/staff"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
+            <li><a href="/staff/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
         <%}%>
     </ul>
     <!-- #End Left categories -->

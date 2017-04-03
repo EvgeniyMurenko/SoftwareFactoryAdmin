@@ -1,4 +1,3 @@
-/*
 package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
@@ -40,17 +39,6 @@ public class EstimateController {
     @Autowired
     CaseService caseService;
 
-    @Autowired
-    StaffInfoService staffInfoService;
-
-    @Autowired
-    MessageTaskService messageTaskService;
-
-    @Autowired
-    NotificationService notificationService;
-
-    @Autowired
-    GoogleCloudKeyService googleCloudKeyService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetEstimate(HttpSession httpSession) {
@@ -77,7 +65,7 @@ public class EstimateController {
 
     }
 
-    @RequestMapping(value = "/estimate-respond/{estimateId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/respond/{estimateId}", method = RequestMethod.GET)
     public ModelAndView getManagerEstimateRespond(@PathVariable Long estimateId) {
 
         ModelAndView estimateRespond = new ModelAndView("managerAdminViews/estimateRespond");
@@ -172,4 +160,3 @@ public class EstimateController {
         return new ModelAndView("redirect:/staff-cabinet/estimate");
     }
 }
-*/

@@ -74,7 +74,7 @@
                 <%for (Estimate estimate : estimateList){%>
                     <tr>
 
-                        <td><a href="<%out.print("/staff-cabinet/estimate-respond/" + estimate.getId()+"/");%>"><% out.print(estimate.getEstimateGeneratedId());%></a></td>
+                        <td><a href="<%out.print("/estimate/respond/" + estimate.getId()+"/");%>"><% out.print(estimate.getEstimateGeneratedId());%></a></td>
                         <td align="center"><%out.print(dateFormatShow.format(estimate.getDateRequest()));%></td>
                         <td align="center"><i class="<%if (estimate.isPriceRequest())out.print("fa fa-check-square"); else out.print("fa fa-square-o");%>"></i></td>
                         <td align="center"><i class="<%if (estimate.isQuestionRequest())out.print("fa fa-check-square"); else out.print("fa fa-square-o");%>"></i></td>

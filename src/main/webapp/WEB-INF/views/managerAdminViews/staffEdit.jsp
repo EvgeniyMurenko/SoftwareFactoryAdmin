@@ -66,10 +66,10 @@
             </h3>
 
             <div class="mb20">
-                <a href="<c:out value="/staff-cabinet/staff"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
+                <a href="<c:out value="/staff/"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
             </div>
 
-            <form action="/staff-cabinet/saveStaff?${_csrf.parameterName}=${_csrf.token}" method="post">
+            <form action="/staff/saveStaff?${_csrf.parameterName}=${_csrf.token}" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <input type="hidden" name="id" value="<%if (!isNew)out.print(user.getId());%>">

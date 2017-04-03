@@ -53,24 +53,23 @@ public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
     @Override
     public List<GoogleCloudKey> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from GoogleCloudKeys");
+        Query query = session.createQuery("from GoogleCloudKey");
         return query.list();
     }
 
     @Override
     public List<String> getAllStringKeys() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKeys googleCloudKeys");
+        Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKey googleCloudKeys");
         return query.list();
     }
 
     @Override
     public List<String> findAllKeysByStaff(Long staffInfo) {
         Session session = sessionFactory.getCurrentSession();
-
-        Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKeys googleCloudKeys where googleCloudKeys.staffInfo.id = :staffInfo");
+        Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKey googleCloudKeys where googleCloudKeys.staffInfo.id = :staffInfo");
         query.setParameter("staffInfo", staffInfo);
-
         return query.list();
     }
+
 }

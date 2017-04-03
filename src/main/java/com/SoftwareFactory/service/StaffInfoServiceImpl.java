@@ -46,4 +46,10 @@ public class StaffInfoServiceImpl implements StaffInfoService {
     public StaffInfo getStaffInfo(Long id) {
         return staffInfoDao.read(id);
     }
+
+    @Override
+    @Transactional
+    public void deleteAllByStaff(Long staffId){
+        staffInfoDao.deleteAllByStaff(staffId);
+    }
 }

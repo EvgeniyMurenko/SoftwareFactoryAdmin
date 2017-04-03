@@ -47,7 +47,7 @@
             <h3><i class="fa fa-users"></i>Staff List</h3>
 
             <div class="mb20">
-                <a href="/staff-cabinet/addNewStaff" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
+                <a href="/staff/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
             </div>
 
 
@@ -77,12 +77,12 @@
 
                         <tr>
                             <td align="center"><%out.print(staffInfo.getUser());%></td>
-                            <td><a href="<%out.print("/staff-cabinet/staffEdit/" + staffInfo.getUser()+"/");%>"><%out.print(staffInfo.getName());%></a></td>
+                            <td><a href="<%out.print("/staff/" + staffInfo.getUser()+"/edit/");%>"><%out.print(staffInfo.getName());%></a></td>
                             <td><a href="<%out.print(staffInfo.getEmail());%>"><%out.print(staffInfo.getEmail());%></a></td>
                             <td align="center">
-                                <a href="<%out.print("/staff-cabinet/task/" + staffInfo.getUser()+"/");%>" data-toggle="tooltip" title="Tasks"><i class="fa fa-tasks"></i>
+                                <a href="<%out.print("/staff/" + staffInfo.getUser()+"/tasks/");%>" data-toggle="tooltip" title="Tasks"><i class="fa fa-tasks"></i>
                                     Tasks</a>&nbsp; |&nbsp;
-                                <a href="<%out.print("/staff-cabinet/staffDelete/" + staffInfo.getUser()+"/");%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
+                                <a href="<%out.print("/staff/staffDelete/" + staffInfo.getUser()+"/");%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
                                         class="fa fa-trash"></i> Delete</a>
                             </td>
                         </tr>
