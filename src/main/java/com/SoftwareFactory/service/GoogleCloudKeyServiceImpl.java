@@ -49,4 +49,16 @@ public class GoogleCloudKeyServiceImpl implements GoogleCloudKeyService {
     public GoogleCloudKey getGoogleCloudKeyById(Long id) {
         return googleCloudKeyDao.read(id);
     }
+
+    @Override
+    @Transactional
+    public List<String> getAllStringKeys(){
+        return googleCloudKeyDao.getAllStringKeys();
+    }
+
+    @Override
+    @Transactional
+    public List<String> findAllKeysByStaff(Long staffInfo){
+        return googleCloudKeyDao.findAllKeysByStaff(staffInfo);
+    }
 }

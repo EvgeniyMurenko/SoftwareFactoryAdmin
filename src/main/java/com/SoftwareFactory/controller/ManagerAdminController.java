@@ -3,7 +3,6 @@ package com.SoftwareFactory.controller;
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
 import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
-import com.SoftwareFactory.constant.ProjectEnum;
 import com.SoftwareFactory.constant.StatusEnum;
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.*;
@@ -50,6 +49,12 @@ public class ManagerAdminController {
 
     @Autowired
     MessageTaskService messageTaskService;
+
+    @Autowired
+    NotificationService notificationService;
+
+    @Autowired
+    GoogleCloudKeyService googleCloudKeyService;
 
     @RequestMapping(value = "/estimate", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetEstimate(HttpSession httpSession) {
@@ -379,19 +384,31 @@ public class ManagerAdminController {
                                        @RequestParam("task") String task,
                                        HttpSession httpSession) {
 
+        ModelAndView pushNotification = new ModelAndView("redirect:/staff-cabinet/task/" + staffId);
+
         StaffInfo staffInfo = staffInfoService.getStaffInfo(staffId);
-        long userId = (Integer) httpSession.getAttribute("UserId");
+        if (staffInfo !=null) {
+            long userId = (Integer) httpSession.getAttribute("UserId");
 
-        MessageTask messageTask = new MessageTask();
-        messageTask.setStaffInfo(staffInfo);
-        messageTask.setTitle(title);
-        messageTask.setMessageText(task);
-        messageTask.setDate(new Date());
-        messageTask.setUserId(userId);
-        messageTask.setApprove(new Boolean(false));
+            List<String> keys = new ArrayList<>(googleCloudKeyService.findAllKeysByStaff(staffId));
 
-        messageTaskService.addMessageTask(messageTask);
+            MessageTask messageTask = new MessageTask();
+            messageTask.setStaffInfo(staffInfo);
+            messageTask.setTitle(title);
+            messageTask.setMessageText(task);
+            messageTask.setDate(new Date());
+            messageTask.setUserId(userId);
+            messageTask.setApprove(new Boolean(false));
 
-        return new ModelAndView("redirect:/staff-cabinet/task/" + staffId);
+            notificationService.pushNotificationToGCM(keys , messageTask.getMessageText(), messageTask.getTitle());
+
+            pushNotification.addObject("isSuccess", true);
+
+            messageTaskService.addMessageTask(messageTask);
+        }else {
+            pushNotification.addObject("isFalse", true);
+        }
+
+        return pushNotification;
     }
 }

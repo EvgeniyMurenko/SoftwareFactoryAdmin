@@ -11,4 +11,6 @@ public interface GoogleCloudKeyService {
     void deleteGoogleCloudKey(GoogleCloudKey googleCloudKey);
     List<GoogleCloudKey> getAllGoogleCloudKey();
     GoogleCloudKey getGoogleCloudKeyById(Long id);
+    List<String> getAllStringKeys();
+    List<String> findAllKeysByStaff(Long staffInfo);
 }
