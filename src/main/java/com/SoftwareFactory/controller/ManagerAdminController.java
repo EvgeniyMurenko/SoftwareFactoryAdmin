@@ -84,6 +84,7 @@ public class ManagerAdminController {
         CustomerInfo customerInfo = estimate.getCustomerInfo();
 
         estimateRespond.addObject("estimate", estimate);
+
         estimateRespond.addObject("customerInfo", customerInfo);
 
 
