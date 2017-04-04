@@ -4,7 +4,7 @@ package com.SoftwareFactory.constant;
  * Created by adm on 2/21/2017.
  */
 public enum MainPathEnum {
-    mainPath("opt/tomcat/webapps/softwarefactory/");
+    mainPath("opt/tomcat/webapps/softwarefactory");
 
     private String value;
 

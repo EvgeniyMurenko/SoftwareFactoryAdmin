@@ -88,13 +88,21 @@
 
                         <!-- Files -->
                         <% if(!isNew && notice.getFilePath()!= null){
-                            File directory = new File(notice.getFilePath());
+                            File directory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath());
                             File[] files= directory.listFiles();
                             for (int i=0; i<files.length; i++){
-                                String fileName =files[i].getName();
-                                out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+notice.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
-                            }
-                        <%}%>
+                                String urlPic = GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+files[i].getName(); %>
+                                <div class="form-group form-img-thumbnail">
+                                    <a data-fancybox="gallery" href="<%out.print(urlPic);%>">
+                                        <img src="<%out.print(urlPic);%>" alt="<%out.print(files[i].getName());%>" class="img-thumbnail">
+                                    </a>
+                                    <a href="<%out.print("/notice/delete-image-from-notice/"+notice.getId()+"/"+i);%>" class="delete deleteConfirm">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                                <%--out.print("<br><a href="+ GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+fileName+">"+fileName+"</a>");--%>
+                            <%}
+                        }%>
                         <!-- #End files -->
 
                         <!-- Attach files -->
