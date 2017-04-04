@@ -107,7 +107,7 @@ CREATE TABLE `s_google_cloud_keys` (
   PRIMARY KEY (`google_cloud_keys_id`)
 );
 
-CREATE TABLE `software_factory`.`s_message_task` (
+CREATE TABLE `s_message_task` (
   `message_task_id` INT NOT NULL AUTO_INCREMENT,
   `staff_info_id` INT NOT NULL,
   `title` VARCHAR(45) NOT NULL,
@@ -116,6 +116,16 @@ CREATE TABLE `software_factory`.`s_message_task` (
   `app_user_id` INT NOT NULL,
   `is_approve` TINYINT(1) NOT NULL,
   PRIMARY KEY (`message_task_id`)
+);
+
+CREATE TABLE `s_notices` (
+	`notices_id` INT NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`notices_text` text NOT NULL,
+	`data_create` datetime NOT NULL,
+	`isActiv` tinyint(1) NOT NULL,
+	`path` VARCHAR(255),
+	PRIMARY KEY (`notices_id`)
 );
 
 INSERT INTO `user_profile`(type)

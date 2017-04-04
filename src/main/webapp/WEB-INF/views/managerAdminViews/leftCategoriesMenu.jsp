@@ -18,6 +18,7 @@
         <%HttpSession session = request.getSession();
         if (session != null && "ADMIN".equals(session.getAttribute("UserRole"))) {%>
             <li><a href="/staff/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
+            <li><a href="/notice/"><i class="fa fa-list" aria-hidden="true"></i> Notices</a></li>
         <%}%>
     </ul>
     <!-- #End Left categories -->

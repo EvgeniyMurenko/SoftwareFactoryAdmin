@@ -1,5 +1,8 @@
 package com.SoftwareFactory.controller;
 
+import com.SoftwareFactory.model.Notice;
+import com.SoftwareFactory.service.NoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -92,9 +96,14 @@ public class PagesController {
         return modelAndView;
     }
 
+    @Autowired
+    NoticeService noticeService;
+
     @RequestMapping(value = { "/notices" }, method = RequestMethod.GET)
     public ModelAndView notices() {
         ModelAndView modelAndView = new ModelAndView("notices");
+        List<Notice> noticeList = noticeService.getAllNotices();
+        modelAndView.addObject("noticeList", noticeList);
         return modelAndView;
     }
 
