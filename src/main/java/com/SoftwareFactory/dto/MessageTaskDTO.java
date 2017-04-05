@@ -1,13 +1,13 @@
 package com.SoftwareFactory.dto;
 
 
-import java.sql.Date;
+import java.util.Date;
 
-public class MessageTask {
+public class MessageTaskDTO {
 
-    public MessageTask(){}
+    public MessageTaskDTO(){}
 
-    public MessageTask(String title, String messageText, Date date, Boolean isApprove) {
+    public MessageTaskDTO(String title, String messageText, Date date, Boolean isApprove) {
         this.title = title;
         this.messageText = messageText;
         this.date = date;

@@ -4,13 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
-<!-- Authorization modal window -->
+<!-- AuthorizationDTO modal window -->
 <div id="authorizationModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <c:url var="loginUrl" value="/login?${_csrf.parameterName}=${_csrf.token}"/>
-            <!-- Authorization modal title -->
+            <!-- AuthorizationDTO modal title -->
             <form action="${loginUrl}" id="authorizationForm" method="post" class="form-horizontal">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -18,7 +18,7 @@
                     <div class="ml30">발급 받은 고객번호와 패스워드를 입력해 주세요</div>
                 </div>
 
-                <!-- Authorization modal content -->
+                <!-- AuthorizationDTO modal content -->
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6 mb10 text-center"><img src="resources/newIndexPage/images/hello-womam.jpg" class="img-responsive position-center" alt=""></div>
@@ -55,7 +55,7 @@
 
                 <%--         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 
-                <!-- Authorization modal footer -->
+                <!-- AuthorizationDTO modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-mobile" data-dismiss="modal">닫기</button>
                 </div>
@@ -63,4 +63,4 @@
         </div>
     </div>
 </div>
-<!-- #End Authorization modal window -->
+<!-- #End AuthorizationDTO modal window -->

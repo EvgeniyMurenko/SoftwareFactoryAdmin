@@ -18,7 +18,7 @@ public class GoogleCloudKey {
     @JoinColumn(name = "staff_info_id")
     private StaffInfo staffInfo;
 
-    @Column(name = "key")
+    @Column(name = "cloud_key")
     private String key;
 
 

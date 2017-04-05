@@ -1,6 +1,8 @@
 package com.SoftwareFactory.controller;
 
-import com.SoftwareFactory.dto.Authorization;
+import com.SoftwareFactory.converter.DtoConverter;
+import com.SoftwareFactory.dto.AuthorizationDTO;
+import com.SoftwareFactory.dto.StaffInfoDTO;
 import com.SoftwareFactory.dto.base.ServerRequest;
 import com.SoftwareFactory.dto.base.ServerResponse;
 
@@ -48,65 +50,60 @@ public class FxmApplicationController {
     public String authorization(@RequestBody String request) throws IOException {
         System.out.println(request);
 
+        // get server request type
         ServerRequest serverRequest = new Gson().fromJson(request, ServerRequest.class);
         String requestType = serverRequest.getRequestType();
 
-        ServerResponse serverResponse;
+        // default server response ( FAIL_REQUEST )
+        ServerResponse serverResponse = new ServerResponse(REQUEST_FAIL.getValue() , null);
 
         if (requestType.equals(AUTHORIZATION_REQUEST.toString())) {
 
-
-            Type authorizationType = new TypeToken<ServerRequest<Authorization>>() {
+            Type authorizationType = new TypeToken<ServerRequest<AuthorizationDTO>>() {
             }.getType();
 
-            ServerRequest<Authorization> authorizationServerRequest = new Gson().fromJson(request, authorizationType);
+            ServerRequest<AuthorizationDTO> authorizationServerRequest = new Gson().fromJson(request, authorizationType);
 
-            Authorization authorization = (Authorization) authorizationServerRequest.getDataTransferObject();
+            AuthorizationDTO authorizationDTO = (AuthorizationDTO) authorizationServerRequest.getDataTransferObject();
 
-            User staffUser = userService.findBySSO(authorization.getSsoId());
+            User staffUser = userService.findBySSO(authorizationDTO.getSsoId());
 
-            StaffInfo staffInfo = staffInfoService.getStaffInfo((long)staffUser.getId());
+            if (staffUser != null) {
+                StaffInfo staffInfo = staffInfoService.getStaffInfo((long) staffUser.getId());
 
-            Set<MessageTask> messageTaskSet = null;
-            if (staffUser != null && authorization.getPassword().equals(staffUser.getPassword())){
 
-                List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
+                if (authorizationDTO.getPassword().equals(staffUser.getPassword())) {
 
-                if (googleCloudKeyList.indexOf(authorization.getGoogleCloudKey())< 0){
-                    GoogleCloudKey googleCloudKey = new GoogleCloudKey();
-                    googleCloudKey.setStaffInfo(staffInfo);
-                    googleCloudKey.setKey(authorization.getGoogleCloudKey());
-                    googleCloudKeyList.add(googleCloudKey);
 
-                    googleCloudKeyService.addGoogleCloudKey(googleCloudKey);
+                    List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
+
+                    if (googleCloudKeyList.indexOf(authorizationDTO.getGoogleCloudKey()) < 0) {
+
+                        GoogleCloudKey googleCloudKey = new GoogleCloudKey();
+                        googleCloudKey.setStaffInfo(staffInfo);
+                        googleCloudKey.setKey(authorizationDTO.getGoogleCloudKey());
+                        googleCloudKeyService.addGoogleCloudKey(googleCloudKey);
+
+                    }
+
+                    StaffInfoDTO staffInfoDTO = DtoConverter.staffInfoDTOConverter(staffInfo);
+
+                    serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), staffInfoDTO);
+
+
                 }
-
-                messageTaskSet = staffInfo.getMessageTasks();
             }
-
-            System.out.println(staffInfo);
-            System.out.println(messageTaskSet);
-
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.toString(), new Authorization("1" , "2" , "3"));
-            String response = new Gson().toJson(serverResponse);
-
-            System.out.print("response send succses");
-
 
         } else if (requestType.equals("")) {
             return "";
 
 
-        }else {
-            serverResponse = new ServerResponse(REQUEST_FAIL.toString() , null);
-            System.out.print("response send fail");
         }
 
         String response = new Gson().toJson(serverResponse);
         return response;
 
     }
-
 
 
 }

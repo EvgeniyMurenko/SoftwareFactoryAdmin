@@ -130,7 +130,7 @@ public class StaffController {
     public ModelAndView staffDelete(@PathVariable Long staffId) {
 
         StaffInfo staffInfo = staffInfoService.getStaffInfo((long) staffId);
-        //List<MessageTask> messageTaskList = new ArrayList<>(staffInfo.getMessageTasks());
+        //List<MessageTaskDTO> messageTaskList = new ArrayList<>(staffInfo.getMessageTaskDTOS());
         //List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
 
         //messageTaskService.deleateAllMessageTaskByStaff(messageTaskList);
