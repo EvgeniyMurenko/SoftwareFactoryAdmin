@@ -49,7 +49,6 @@
 <section class="container mb20">
 
     <%
-        String currentProjectId = (String) request.getAttribute("projectId");
         List<Project> projectSet = (List<Project>) request.getAttribute("projects");
     %>
 
@@ -74,27 +73,26 @@
         <!-- #End Warning Block -->
 
         <!-- Estimation -->
-        <c:url var="createCase" value="/createCase?${_csrf.parameterName}=${_csrf.token}"/>
+        <c:url var="createCase" value="/cabinet/createCase?${_csrf.parameterName}=${_csrf.token}"/>
         <form action="${createCase}" enctype="multipart/form-data" method="POST">
             <div class="form-group">
                 <label for="project">Project</label>
                 <select name="projectName" class="form-control" id="project">
-                    <%
-                        Iterator<Project> itr = projectSet.iterator();
+                    <%Iterator<Project> itr = projectSet.iterator();
                         while (itr.hasNext()) {
                             Project project = itr.next();%>
-                    <option value="<%out.print(project.getProjectName());%>">
-                        <%
-                            if (project.getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
-                                out.print(ProjectEnum.projectNameNormal.getValue());
-                            } else if (project.getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
-                                out.print(ProjectEnum.projectNameEstimate.getValue());
-                            } else {
-                                out.print(project.getProjectName());
-                            }
-                        %>
-                    </option>
-                    <%}%>
+                            <option value="<%out.print(project.getProjectName());%>">
+                                <%
+                                    if (project.getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                        out.print(ProjectEnum.projectNameNormal.getValue());
+                                    } else if (project.getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                                        out.print(ProjectEnum.projectNameEstimate.getValue());
+                                    } else {
+                                        out.print(project.getProjectName());
+                                    }
+                                %>
+                            </option>
+                        <%}%>
                 </select>
             </div>
 

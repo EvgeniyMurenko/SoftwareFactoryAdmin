@@ -111,7 +111,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group text-right mt25">
-                    <a href="/cabinet/case/<%    out.print(Long.toString(aCase.getId()));   %>"
+                    <a href="/cabinet/case/<%    out.print(Long.toString(aCase.getId()));  %>"
                        class="btn btn-default btn-mobile">Back</a>
                     <button type="submit" class="btn btn-primary btn-mobile">Send</button>
                 </div>

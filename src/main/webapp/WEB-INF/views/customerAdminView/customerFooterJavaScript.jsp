@@ -10,8 +10,8 @@
 <script src="/resources/baseStyle/jquery/jquery.mousewheel.min.js"></script>
 <script src="/resources/baseStyle/jquery/jquery.fancybox.min.js"></script>
 <script src="/resources/baseStyle/jquery/jquery.sweet-alert.min.js"></script>
-<script src="/resources/customerAdminView/js/jquery/jquery.timeago.js"></script>
-<script src="/resources/customerAdminView/js/jquery/jquery.timeago.ko.js"></script>
+<script src="/resources/customerAdminPage/js/jquery/jquery.timeago.js"></script>
+<script src="/resources/customerAdminPage/js/jquery/jquery.timeago.ko.js"></script>
 <!-- Bootstrap -->
 <script src="/resources/baseStyle/bootstrap/bootstrap.min.js"></script>
 <script src="/resources/baseStyle/bootstrap/bootstrap-form-helpers.min.js"></script>
@@ -22,7 +22,7 @@
 <!-- Ckeditor -->
 <script src="/resources/baseStyle/ckeditor/ckeditor.js"></script>
 <!-- Other -->
-<script src="/resources/customerAdminView/js/sortable.min.js"></script>
-<script src="/resources/customerAdminView/js/pagination.min.js"></script>
+<script src="/resources/customerAdminPage/js/sortable.min.js"></script>
+<script src="/resources/customerAdminPage/js/pagination.min.js"></script>
 <!-- Base -->
-<script src="/resources/customerAdminView/js/main.js"></script>
+<script src="/resources/customerAdminPage/js/main.js"></script>

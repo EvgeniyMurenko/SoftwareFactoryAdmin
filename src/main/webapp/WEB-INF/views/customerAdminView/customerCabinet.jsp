@@ -91,7 +91,7 @@
                     <!-- #End table pagination -->
 
                 </div>
-                <div class="col-md-6 text-right"><a href="<c:url value="/newCase"/>" class="btn btn-primary">새 CASE
+                <div class="col-md-6 text-right"><a href="<c:url value="/cabinet/newCase"/>" class="btn btn-primary">새 CASE
                     생성</a></div>
             </div>
             <!-- Projects list table -->
