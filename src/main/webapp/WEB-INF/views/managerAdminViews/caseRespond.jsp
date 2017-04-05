@@ -58,10 +58,19 @@
 
             <h3><i class="fa fa-pie-chart"></i>Case ID: <%out.print(aCase.getId());%></h3>
 
-            <div class="mb20">
+            <div class="mb20 pull-left">
                 <a href="/cases/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel write Case</a>
             </div>
 
+            <%if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){%>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
+                </div>
+            <%} else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())){%>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
+                </div>
+            <%}%>
             <!-- Information from table -->
             <table class="table table-striped table-bordered" width="100%" cellspacing="0">
                 <thead>
@@ -220,7 +229,39 @@
 </div>
 <!-- #End Wrapper -->
 
+<!-- Open Project -->
+<div id="openProject" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form action="/cases/<%out.print(aCase.getProject().getId());%>/createNewProject?${_csrf.parameterName}=${_csrf.token}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Open Project</h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="control-label" for="project">Project name</label>
+                        <input type="text" id="project" name="project_name" class="form-control" required/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="save" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- #End Open Project -->
+
 <%@ include file="footerJavaScript.jsp" %>
+
+
 
 </body>
 </html>
