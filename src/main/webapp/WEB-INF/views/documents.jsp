@@ -1,9 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -25,7 +26,8 @@
         <div class="col-md-8">
 
             <div class="row mb30">
-                <div class="col-md-8"><a data-fancybox="gallery" href="resources/newIndexPage/images/image004.png"><img src="resources/newIndexPage/images/image004.png" alt="" class="img-responsive" /></a></div>
+                <div class="col-md-8"><a data-fancybox="gallery" href="resources/indexPage/images/image004.png"><img
+                        src="resources/indexPage/images/image004.png" alt="" class="img-responsive"/></a></div>
             </div>
 
             <div style="margin-bottom: 50px;">
@@ -51,11 +53,15 @@
                     </tr>
                     <tr>
                         <td>2010</td>
-                        <td>패키지형 메세징 플랫폼 UC-STATION 개발 완료 스마트폰 시대를 대비한 “SPRIM” 기술 개발 시작 (모바일에서 원활한 소켓통신을 지원하기 위한 기술) 생활밀착형 앱 서비스 1472(일사천리) 서비스 시작 (www.1472.net)</td>
+                        <td>패키지형 메세징 플랫폼 UC-STATION 개발 완료 스마트폰 시대를 대비한 “SPRIM” 기술 개발 시작 (모바일에서 원활한 소켓통신을 지원하기 위한 기술)
+                            생활밀착형 앱 서비스 1472(일사천리) 서비스 시작 (www.1472.net)
+                        </td>
                     </tr>
                     <tr>
                         <td>2011</td>
-                        <td>스마트폰 사업을 위한 기반 기술 “SPRIM”프로젝트 완성 1472서비스 1탄 (1472뷰티톡 서비스 오픈) 1472서비스 2탄 (1472워키톡 오픈) 1472서비스 3탄 (대학가자 어플 오픈)</td>
+                        <td>스마트폰 사업을 위한 기반 기술 “SPRIM”프로젝트 완성 1472서비스 1탄 (1472뷰티톡 서비스 오픈) 1472서비스 2탄 (1472워키톡 오픈) 1472서비스
+                            3탄 (대학가자 어플 오픈)
+                        </td>
                     </tr>
                     <tr>
                         <td>2012</td>
@@ -75,14 +81,14 @@
                     </tr>
                     <tr>
                         <td>2016</td>
-                        <td>우크라이나 소프트웨어 팩토리  엔지니어 코어 센터 구축</td>
+                        <td>우크라이나 소프트웨어 팩토리 엔지니어 코어 센터 구축</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>- 마이챗 미스리메신저, 삼성증권FN메신저등 개발<br />
-                            - 정부 국책 지원기술 선정<br />
-                            - 정통부장관상 수상<br />
-                            - 정보통신부 Nep 신제품 인증<br />
+                        <td>- 마이챗 미스리메신저, 삼성증권FN메신저등 개발<br/>
+                            - 정부 국책 지원기술 선정<br/>
+                            - 정통부장관상 수상<br/>
+                            - 정보통신부 Nep 신제품 인증<br/>
                             - 국내 기업용 메시징 솔루션 1위 업체
                         </td>
                     </tr>
@@ -97,7 +103,8 @@
                         <div class="cf-title">
                             <span class="mb10 text-center">SoFAC 개발 제품 일본에 상표등록</span>
                         </div>
-                        <div class="text-center"><img src="resources/newIndexPage/images/serf4.jpg" alt="" class="img-responsive position-center"></div>
+                        <div class="text-center"><img src="resources/indexPage/images/serf4.jpg" alt=""
+                                                      class="img-responsive position-center"></div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -105,7 +112,8 @@
                         <div class="cf-title">
                             <span class="mb10 text-center">특허 제 10-2014-0034487호</span>
                         </div>
-                        <div class="text-center"><img src="resources/newIndexPage/images/serf3.jpg" alt="" class="img-responsive position-center"></div>
+                        <div class="text-center"><img src="resources/indexPage/images/serf3.jpg" alt=""
+                                                      class="img-responsive position-center"></div>
                     </div>
                 </div>
             </div>
@@ -115,7 +123,8 @@
                         <div class="cf-title">
                             <span class="mb10 text-center">일본에서 인정한 통신 기술 라이센스</span>
                         </div>
-                        <div class="text-center"><img src="resources/newIndexPage/images/serf5.jpg" alt="" class="img-responsive position-center"></div>
+                        <div class="text-center"><img src="resources/indexPage/images/serf5.jpg" alt=""
+                                                      class="img-responsive position-center"></div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -123,7 +132,8 @@
                         <div class="cf-title">
                             <span class="mb10 text-center">ISO9001 인증</span>
                         </div>
-                        <div class="text-center"><img src="resources/newIndexPage/images/serf1.jpg" alt="" class="img-responsive position-center"></div>
+                        <div class="text-center"><img src="resources/indexPage/images/serf1.jpg" alt=""
+                                                      class="img-responsive position-center"></div>
                     </div>
                 </div>
             </div>
@@ -133,7 +143,8 @@
                         <div class="cf-title">
                             <span class="mb10 text-center">스마트폰에서 실시간 통신 특허 획득</span>
                         </div>
-                        <div class="text-center"><img src="resources/newIndexPage/images/serf6.jpg" alt="" class="img-responsive position-center"></div>
+                        <div class="text-center"><img src="resources/indexPage/images/serf6.jpg" alt=""
+                                                      class="img-responsive position-center"></div>
                     </div>
                 </div>
             </div>
