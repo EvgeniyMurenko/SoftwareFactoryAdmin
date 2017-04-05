@@ -1,9 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -31,7 +32,8 @@
 <section class="container text-center error-page mb40">
     <span class="error-404">404</span>
     <h3>Oops! Page not found...</h3>
-    <p>Looks like the page you're looking for was moved or never existed.<br />Make sure you typed the correct URL or followed a valid link.</p>
+    <p>Looks like the page you're looking for was moved or never existed.<br/>Make sure you typed the correct URL or
+        followed a valid link.</p>
     <a href="<c:url value="/"/>" class="btn btn-primary mt30 mb30">Home page</a>
 </section>
 <!-- #End 404 -->

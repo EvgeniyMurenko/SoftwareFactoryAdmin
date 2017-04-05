@@ -2,10 +2,7 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
-import com.SoftwareFactory.model.Case;
-import com.SoftwareFactory.model.ManagerInfo;
-import com.SoftwareFactory.model.Message;
-import com.SoftwareFactory.model.User;
+import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.*;
 import com.SoftwareFactory.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +35,9 @@ public class CaseManagerController {
 
     @Autowired
     CaseService caseService;
+
+    @Autowired
+    ProjectService projectService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -112,5 +113,33 @@ public class CaseManagerController {
         caseService.updateCase(aCase);
 
         return new ModelAndView("redirect:/cases/" + id);
+    }
+
+    @RequestMapping(value = "/{projectId}/createNewProject", method = RequestMethod.POST)
+    public ModelAndView createProjectFromEstimate(@PathVariable Long projectId,
+                                                  @RequestParam("project_name") String projectName) {
+        ModelAndView managerAdminCaseRespond = new ModelAndView("redirect:/cases/");
+
+        Project projectEstimate = projectService.getProjectById(projectId);
+
+        Project newProject = projectEstimate;
+        newProject.setProjectName(projectName);
+        newProject.setCreateDate(new Date());
+
+        projectService.addNewProject(newProject);
+
+        Set<Case> caseSet = projectEstimate.getCases();
+        if (caseSet.size()>0){
+            for (Case aCase : caseSet){
+                aCase.setProject(newProject);
+            }
+        }
+
+        newProject.setCases(caseSet);
+        projectService.updateProject(newProject);
+
+
+
+        return managerAdminCaseRespond;
     }
 }
