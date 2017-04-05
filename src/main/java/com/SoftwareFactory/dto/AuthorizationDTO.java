@@ -2,11 +2,11 @@ package com.SoftwareFactory.dto;
 
 
 
-public class Authorization {
+public class AuthorizationDTO {
 
-    public Authorization(){}
+    public AuthorizationDTO(){}
 
-    public Authorization(String ssoId, String password, String googleCloudKey) {
+    public AuthorizationDTO(String ssoId, String password, String googleCloudKey) {
         this.ssoId = ssoId;
         this.password = password;
         this.googleCloudKey = googleCloudKey;

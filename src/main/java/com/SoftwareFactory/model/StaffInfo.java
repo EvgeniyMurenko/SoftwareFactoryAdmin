@@ -26,10 +26,10 @@ public class StaffInfo {
     @Column(name="birthday")
     private Date birthday;
 
-    @OneToMany(mappedBy = "staffInfo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "staffInfo" ,fetch = FetchType.EAGER)
     private Set<GoogleCloudKey> googleCloudKeys;
 
-    @OneToMany(mappedBy = "staffInfo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "staffInfo", fetch = FetchType.EAGER)
     private Set<MessageTask> messageTasks;
 
     public StaffInfo() {

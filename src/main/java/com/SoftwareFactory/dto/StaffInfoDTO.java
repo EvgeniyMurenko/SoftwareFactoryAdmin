@@ -1,19 +1,20 @@
 package com.SoftwareFactory.dto;
 
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
-public class StaffInfo {
+public class StaffInfoDTO {
 
-    public StaffInfo(){}
+    public StaffInfoDTO(){}
 
-    public StaffInfo(String name, String phone, String email, Date birthday, Set<MessageTask> messageTasks) {
+    public StaffInfoDTO(String name, String phone, String email, Date birthday, List<MessageTaskDTO> messageTaskDTOS) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
-        this.messageTasks = messageTasks;
+        this.messageTaskDTOS = messageTaskDTOS;
     }
 
     private String name;
@@ -24,7 +25,7 @@ public class StaffInfo {
 
     private Date birthday;
 
-    private Set<MessageTask> messageTasks;
+    private List<MessageTaskDTO> messageTaskDTOS;
 
     public String getName() {
         return name;
@@ -58,11 +59,11 @@ public class StaffInfo {
         this.birthday = birthday;
     }
 
-    public Set<MessageTask> getMessageTasks() {
-        return messageTasks;
+    public List<MessageTaskDTO> getMessageTaskDTOS() {
+        return messageTaskDTOS;
     }
 
-    public void setMessageTasks(Set<MessageTask> messageTasks) {
-        this.messageTasks = messageTasks;
+    public void setMessageTaskDTOS(List<MessageTaskDTO> messageTaskDTOS) {
+        this.messageTaskDTOS = messageTaskDTOS;
     }
 }

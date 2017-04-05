@@ -41,14 +41,14 @@ public class MessageTaskDaoImpl implements MessageTaskDao {
     public void update(MessageTask messageTask) {
         Session session = sessionFactory.getCurrentSession();
         session.update(messageTask);
-        logger.error("MessageTask update successfully, messageTask=" + messageTask);
+        logger.error("MessageTaskDTO update successfully, messageTask=" + messageTask);
     }
 
     @Override
     public void delete(MessageTask messageTask) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(messageTask);
-        logger.info("MessageTask deleted successfully, messageTask details=" + messageTask);
+        logger.info("MessageTaskDTO deleted successfully, messageTask details=" + messageTask);
     }
 
     @Override

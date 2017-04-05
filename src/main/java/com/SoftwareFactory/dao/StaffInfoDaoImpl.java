@@ -40,14 +40,14 @@ public class StaffInfoDaoImpl implements StaffInfoDao {
     public void update(StaffInfo staffInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.update(staffInfo);
-        logger.error("StaffInfo update successfully, staffInfo=" + staffInfo);
+        logger.error("StaffInfoDTO update successfully, staffInfo=" + staffInfo);
     }
 
     @Override
     public void delete(StaffInfo staffInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(staffInfo);
-        logger.info("StaffInfo deleted successfully, staffInfo details=" + staffInfo);
+        logger.info("StaffInfoDTO deleted successfully, staffInfo details=" + staffInfo);
     }
 
     @Override
