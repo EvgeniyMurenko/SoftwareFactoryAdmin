@@ -45,7 +45,7 @@
                 %>
 
                 <!-- Notice box -->
-                <div class="notice-box">
+                <div class="notice-box other-font2" style="color: #000;">
                     <a href="javascript:void(0);" id="<%out.print("notice_"+count);%>" class="clearfix">
                         <span class="pull-left"><%out.print(notice.getTitle());%></span>
                         <span class="pull-right"><%out.print(dateFormatShow.format(notice.getDataCreate()));%>
