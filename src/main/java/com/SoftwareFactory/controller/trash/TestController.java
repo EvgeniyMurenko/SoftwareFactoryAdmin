@@ -1,5 +1,5 @@
 
-package com.SoftwareFactory.controller;
+package com.SoftwareFactory.controller.trash;
 
 import com.SoftwareFactory.comparator.MessageByDateComparator;
 import com.SoftwareFactory.constant.GlobalEnum;
@@ -171,7 +171,7 @@ public class TestController {
 
         customerInfoService.updateCustomerInfo(customerInfoCreated);
 
-        return new ModelAndView("index");
+        return new ModelAndView("views");
     }
 
 */

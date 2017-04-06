@@ -1,5 +1,5 @@
 
-package com.SoftwareFactory.controller.customer;
+package com.SoftwareFactory.controller.customerAdmin;
 
 
 import com.SoftwareFactory.comparator.CaseByStatusAndDateComparator;
@@ -13,14 +13,12 @@ import com.SoftwareFactory.service.*;
 import com.SoftwareFactory.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.*;
 
 @Controller
@@ -51,7 +49,7 @@ public class CustomerCabinetController {
 
         System.out.println("cabinet");
 
-        ModelAndView customerCabinet = new ModelAndView("customerAdminView/customerCabinet");
+        ModelAndView customerCabinet = new ModelAndView("customerAdminViews/customerCabinet");
 
         Set<Project> projectsToShow = addGeneralDataToMAVAndReturnProjects(customerCabinet , httpSession);
         ArrayList<Case> casesToShow = new ArrayList<>();
@@ -79,7 +77,7 @@ public class CustomerCabinetController {
     @RequestMapping(value = "/newCase", method = RequestMethod.GET)
     public ModelAndView newCase(HttpSession httpSession ) {
 
-        ModelAndView customerCabinet = new ModelAndView("customerAdminView/customerCase");
+        ModelAndView customerCabinet = new ModelAndView("customerAdminViews/customerCase");
 
         int userId = (Integer) httpSession.getAttribute("UserId");
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById((long)userId);
@@ -195,7 +193,7 @@ public class CustomerCabinetController {
         //SAVE FILE
         if(!files[0].isEmpty()){
             System.out.println("=======FILE LENGTH NOT NULL " + files.length);
-            String pathToSaveFile = "case/" + aCase.getProject().getId() + "/"+ aCase.getId() + "/" + message.getId();
+            String pathToSaveFile = "/case/" + aCase.getProject().getId() + "/"+ aCase.getId() + "/" + message.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
@@ -262,7 +260,7 @@ public class CustomerCabinetController {
     @RequestMapping(value = "/case/{id}", method = RequestMethod.GET)
     public ModelAndView caseChatController(@PathVariable Long id, HttpSession httpSession) {
 
-        ModelAndView caseChat = new ModelAndView("customerAdminView/customerChat");
+        ModelAndView caseChat = new ModelAndView("customerAdminViews/customerChat");
 
         addGeneralDataToMAVAndReturnProjects(caseChat , httpSession);
 
@@ -289,7 +287,7 @@ public class CustomerCabinetController {
     @RequestMapping (value = "/case/{id}/answer", method = RequestMethod.GET)
     public ModelAndView caseAnswerController( @PathVariable Long id) {
 
-        ModelAndView caseAnswerChat = new ModelAndView("customerAdminView/customerChatAnswer");
+        ModelAndView caseAnswerChat = new ModelAndView("customerAdminViews/customerChatAnswer");
 
         Case aCase = caseService.getCaseById(id);
         Set<Message> messages = aCase.getMessages();

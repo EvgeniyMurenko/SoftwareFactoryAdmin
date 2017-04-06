@@ -1,4 +1,4 @@
-package com.SoftwareFactory.controller;
+package com.SoftwareFactory.controller.views;
 
 import com.SoftwareFactory.comparator.EstimateByDateComparator;
 import com.SoftwareFactory.constant.MainPathEnum;
@@ -118,7 +118,7 @@ public class IndexPageController {
 
         //Save to file
         if(!files[0].isEmpty()){
-            String pathToSaveFile = "estimate/" + estimate.getId();
+            String pathToSaveFile = "/estimate/" + estimate.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             estimate.setEstimatePath(MainPathEnum.mainPath + pathToSaveFile);

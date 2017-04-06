@@ -130,7 +130,7 @@
                                     File[] files= directory.listFiles();
                                     for (int i=0; i<files.length; i++){
                                         String fileName =files[i].getName();
-                                        out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                        out.print("<p><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
                                     }
                                 } %>
                             </div>
@@ -160,7 +160,7 @@
                                     File[] files= directory.listFiles();
                                     for (int i=0; i<files.length; i++){
                                         String fileName =files[i].getName();
-                                        out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                        out.print("<p><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
                                     }
                                 } %>
                             </div>

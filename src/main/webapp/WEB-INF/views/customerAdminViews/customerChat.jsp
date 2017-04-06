@@ -4,6 +4,7 @@
 <%@ page import="com.SoftwareFactory.constant.GlobalEnum" %>
 <%@ page import="com.SoftwareFactory.model.*" %>
 <%@ page import="com.SoftwareFactory.constant.ProjectEnum" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -35,6 +36,7 @@
         <% String caseStatus = (String) request.getAttribute("caseStatus"); %>
         <% ArrayList<Message> messages = (ArrayList<Message>) request.getAttribute("messagesSorted"); %>
         <% ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>
+        <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
         <div class="col-md-6"><a href="<c:url value="/cabinet/"/>" class="btn btn-primary btn-mobile">Back to CASE
             list</a></div>
@@ -90,7 +92,7 @@
             <td><a href="javascript:void(0);"><%out.print(aCase.getProjectTitle());%></a></td>
             <td class="text-center"><%out.print(projectName);%></td>
             <td class="text-center"><%out.print(aCase.getProject().getStatus());%></td>
-            <td class="hidden-xs text-center"><%out.print(aCase.getCreationDate());%></td>
+            <td class="hidden-xs text-center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
             <td class="hidden-xs text-center">
                 <time class="timeago" datetime="<%  out.print(messages.get(0).getMessageTime()); %>"></time>
             </td>
@@ -103,46 +105,44 @@
     <!-- Case Messages -->
     <section class="messages">
 
-        <%
-            for (Message message : messages) {
-                Long newLong = new Long(message.getUser().getId());
-                if (aCase.getProject().getCustomerInfo().getId().equals(newLong)) {
-        %>
-        <div class="message-customer-informer">
-            <div class="mi-c-title"><% out.print(aCase.getProject().getCustomerInfo().getName()); %><a
-                    href="javascript:void(0);"><% out.print("(ID " + message.getId() + ")"); %></a> <span
-                    class="mi-c-time pull-right"><% out.print(message.getMessageTime()); %></span></div>
-            <div class="mi-c-message">
-                <% out.print(message.getMessageText()); %>
-                <% if (message.getMessagePath() != null) {
-                    File directory = new File(message.getMessagePath());
-                    File[] files = directory.listFiles();
-                    for (int i = 0; i < files.length; i++) {
-                        String fileName = files[i].getName();
-                        out.print("<br><a href=" + GlobalEnum.webRoot + "/download/" + message.getId() + "/" + fileName + "/" + ">" + fileName + "</a>");
-                    }
-                } %>
-            </div>
-        </div>
-        <%} else {%>
-        <div class="message-manager-informer">
-            <% %>
-            <div class="mi-m-title"><% out.print(managerInfo.getName()); %> <a href="javascript:void(0);"><%
-                out.print("(ID " + message.getId() + ")"); %></a> <span class="mi-m-time pull-right"><%
-                out.print(message.getMessageTime()); %></span></div>
-            <div class="mi-m-message">
-                <% out.print(message.getMessageText()); %>
-                <% if (message.getMessagePath() != null) {
-                    File directory = new File(message.getMessagePath());
-                    File[] files = directory.listFiles();
-                    for (int i = 0; i < files.length; i++) {
-                        String fileName = files[i].getName();
-                        out.print("<a href=" + GlobalEnum.webRoot + "/download/" + message.getId() + "/" + fileName + "/" + ">" + fileName + "</a>");
-                    }
-                } %>
-            </div>
-        </div>
-        <%}%>
+        <%for (Message message : messages) {
+            Long newLong = new Long(message.getUser().getId());
+            if (aCase.getProject().getCustomerInfo().getId().equals(newLong)) {%>
+                <div class="message-customer-informer">
+                    <div class="mi-c-title"><% out.print(aCase.getProject().getCustomerInfo().getName()); %><a
+                            href="javascript:void(0);"><% out.print("(ID " + message.getId() + ")"); %></a> <span
+                            class="mi-c-time pull-right"><% out.print(dateFormatShow.format(message.getMessageTime())); %></span></div>
+                    <div class="mi-c-message">
+                        <% out.print(message.getMessageText()); %>
+                        <% if (message.getMessagePath() != null) {
+                            File directory = new File(message.getMessagePath());
+                            File[] files = directory.listFiles();
+                            for (int i = 0; i < files.length; i++) {
+                                String fileName = files[i].getName();
+                                out.print("<a href=" + GlobalEnum.webRoot + "/download/" + message.getId() + "/" + fileName + "/" + ">" + fileName + "</a>");
+                            }
+                        } %>
+                    </div>
+                </div>
+            <%} else {%>
+                <div class="message-manager-informer">
+                    <% %>
+                    <div class="mi-m-title"><% out.print(managerInfo.getName()); %> <a href="javascript:void(0);"><%
+                        out.print("(ID " + message.getId() + ")"); %></a> <span class="mi-m-time pull-right"><%
+                        out.print(dateFormatShow.format(message.getMessageTime())); %></span></div>
+                    <div class="mi-m-message">
+                        <% out.print(message.getMessageText()); %>
+                        <% if (message.getMessagePath() != null) {
+                            File directory = new File(message.getMessagePath());
+                            File[] files = directory.listFiles();
+                            for (int i = 0; i < files.length; i++) {
+                                String fileName = files[i].getName();
+                                out.print("<a href=" + GlobalEnum.webRoot + "/download/" + message.getId() + "/" + fileName + "/" + ">" + fileName + "</a>");
+                            }
+                        } %>
+                    </div>
+                </div>
+            <%}%>
         <%}%>
 
     </section>

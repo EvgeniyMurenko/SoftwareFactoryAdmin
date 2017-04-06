@@ -1,4 +1,4 @@
-package com.SoftwareFactory.controller;
+package com.SoftwareFactory.controller.managerAdmin;
 
 import com.SoftwareFactory.model.*;
 import com.SoftwareFactory.service.*;

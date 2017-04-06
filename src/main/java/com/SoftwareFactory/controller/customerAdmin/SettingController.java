@@ -1,4 +1,4 @@
-package com.SoftwareFactory.controller.customer;
+package com.SoftwareFactory.controller.customerAdmin;
 
 import com.SoftwareFactory.model.CustomerInfo;
 import com.SoftwareFactory.model.User;
@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/cabinet")
 @SessionAttributes("roles")
 public class SettingController {
 
@@ -21,12 +22,12 @@ public class SettingController {
     @Autowired
     CustomerInfoService customerInfoService;
 
-    @RequestMapping(value = "/customerSettings/", method = RequestMethod.GET)
+    @RequestMapping(value = "/settings/", method = RequestMethod.GET)
     public ModelAndView customerSettings(HttpSession httpSession) {
 
         long userId = (Integer) httpSession.getAttribute("UserId");
 
-        ModelAndView customerSettings = new ModelAndView("customerAdminView/customerSettings");
+        ModelAndView customerSettings = new ModelAndView("customerAdminViews/customerSettings");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userId);
         User user = userService.findById((int) userId);

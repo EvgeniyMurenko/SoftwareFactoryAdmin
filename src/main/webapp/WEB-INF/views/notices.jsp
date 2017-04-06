@@ -53,7 +53,7 @@
                             </span>
                     </a>
                 </div>
-                <div class="notice-box-information" id="<%out.print("box_notice_"+count);%>" style="display: none;">
+                <div class="notice-box-information other-font2" id="<%out.print("box_notice_"+count);%>" style="display: none; color: #000;">
                     <%out.print(notice.getNoticeText());%>
                     <%
                         if (notice.getFilePath() != null) {

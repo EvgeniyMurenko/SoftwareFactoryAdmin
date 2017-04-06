@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.SoftwareFactory.model.*" %>
 <%@ page import="com.SoftwareFactory.constant.ProjectEnum" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -24,6 +25,7 @@
 <% Long caseId = (Long) request.getAttribute("caseId"); %>
 <% Case aCase = (Case) request.getAttribute("case"); %>
 <% ArrayList<Message> messages = new ArrayList<>(aCase.getMessages()); %>
+<%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
 <%@ include file="customerHeader.jsp" %>
 
@@ -55,7 +57,7 @@
             <td><a href="javascript:void(0);"><%out.print(aCase.getProjectTitle());%></a></td>
             <td class="text-center"><a href="javascript:void(0);"><%out.print(projectName);%></a></td>
             <td class="text-center"><%out.print(aCase.getStatus());%></td>
-            <td class="hidden-xs text-center"><%out.print(aCase.getProject().getCreateDate());%></td>
+            <td class="hidden-xs text-center"><%out.print(dateFormatShow.format(aCase.getProject().getCreateDate()));%></td>
             <td class="hidden-xs text-center">
                 <time class="timeago" datetime="<%  out.print(messages.get(0).getMessageTime()); %>"></time>
             </td>

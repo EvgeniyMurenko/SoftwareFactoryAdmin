@@ -1,4 +1,4 @@
-package com.SoftwareFactory.controller;
+package com.SoftwareFactory.controller.managerAdmin;
 
 import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.constant.MessageEnum;
@@ -22,7 +22,7 @@ import java.util.Set;
 @Controller
 @RequestMapping("/cases")
 @SessionAttributes("roles")
-public class CaseManagerController {
+public class CaseController {
 
     @Autowired
     UserService userService;
@@ -103,7 +103,7 @@ public class CaseManagerController {
 
         //SAVE FILE
         if (!files[0].isEmpty()) {
-            String pathToSaveFile = "case/" + aCase.getProject().getId() + "/" + aCase.getId() + "/" + message.getId();
+            String pathToSaveFile = "/case/" + aCase.getProject().getId() + "/" + aCase.getId() + "/" + message.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);

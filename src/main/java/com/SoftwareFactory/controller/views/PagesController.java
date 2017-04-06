@@ -1,4 +1,4 @@
-package com.SoftwareFactory.controller;
+package com.SoftwareFactory.controller.views;
 
 import com.SoftwareFactory.model.Notice;
 import com.SoftwareFactory.service.NoticeService;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
