@@ -17,12 +17,13 @@ jQuery(document).ready(function($) {
     $back_to_top.on('click', function(event){
         event.preventDefault();
         $('body,html').animate({
-                scrollTop: 0 ,
+                scrollTop: 0
             }, scroll_top_duration
         );
     });
 
-    $("#chat-upload").fileinput({showCaption: false});
+    // upload file
+    $("#caseInput").fileinput({showCaption: false});
 
     // table pagination
     $("div.holder").jPages({
@@ -42,13 +43,13 @@ jQuery(document).ready(function($) {
     // datetimepicker
     $('#datetimepicker').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
-        daysOfWeekDisabled: [0, 6],
+        daysOfWeekDisabled: [0, 6]
     });
 });
 
 var editor = CKEDITOR.replace('editor', {
     toolbar : 'Basic',
     width : '100%',
-    height : '250',
+    height : '250'
 });
 editor.add;
