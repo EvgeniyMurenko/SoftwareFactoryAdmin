@@ -7,21 +7,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.SoftwareFactory.constant.GlobalEnum;
 import com.SoftwareFactory.constant.MainPathEnum;
+import com.SoftwareFactory.dto.base.ServerRequest;
 import com.SoftwareFactory.model.Message;
 import com.SoftwareFactory.model.User;
 import com.SoftwareFactory.model.UserProfile;
 import com.SoftwareFactory.service.MessageService;
 import com.SoftwareFactory.service.UserProfileService;
 import com.SoftwareFactory.service.UserService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -80,7 +87,7 @@ public class AppController {
         } else if (userProfile.getType().equals("CUSTOMER")) {
             System.out.println("LOGIN AS CUSTOMER");
             modelAndView.setViewName("redirect:/cabinet/");
-        }else if(userProfile.getType().equals("ADMIN")){
+        } else if (userProfile.getType().equals("ADMIN")) {
             System.out.println("LOGIN AS ADMIN");
             modelAndView.setViewName("redirect:/estimate/");
         }
@@ -137,19 +144,12 @@ public class AppController {
 
         Message message = messageService.getMessageById(messageId);
 
-        String EXTERNAL_FILE_PATH = message.getMessagePath() + "/"+ filename;
+        String EXTERNAL_FILE_PATH = message.getMessagePath() + "/" + filename;
 
         File file = new File(EXTERNAL_FILE_PATH);
 
 
-        if (!file.exists()) {
-            String errorMessage = "Sorry. The file you are looking for does not exist";
-            System.out.println(errorMessage);
-            OutputStream outputStream = response.getOutputStream();
-            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-            outputStream.close();
-            return;
-        }
+        checkFile(file, response);
 
 
         String mimeType = URLConnection.guessContentTypeFromName(file.getName());
@@ -178,6 +178,84 @@ public class AppController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
+
+
+
+    @RequestMapping(value = "/show-image/{folderName}/{folderId}/{filename}", method = RequestMethod.GET)
+    public void downloadFile(HttpServletResponse response,
+                             @PathVariable String folderName,
+                             @PathVariable String folderId,
+                             @PathVariable String filename) throws IOException {
+
+        String EXTERNAL_FILE_PATH = MainPathEnum.mainPath + "/" + folderName + "/" + folderId + "/" + filename;
+
+        File file = new File(EXTERNAL_FILE_PATH);
+
+        checkFile(file, response);
+
+        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType == null) {
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+
+        System.out.println("mimetype : " + mimeType);
+
+        response.setContentType(mimeType);
+
+        response.setHeader("Content-Disposition : attachment", String.format("inline; filename=\"" + file.getName() + "\""));
+
+        response.setContentLength((int) file.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
+
+    @RequestMapping(value = "/show-video/{noticeId}/{filename}", method = RequestMethod.GET)
+    public void showVideo(HttpServletResponse response, @PathVariable String noticeId,
+                          @PathVariable String filename) throws IOException {
+        String EXTERNAL_FILE_PATH = MainPathEnum.mainPath + "/notice/" + noticeId + "/video/" + filename;
+        try {
+
+            int fileSize = (int) new File(EXTERNAL_FILE_PATH).length();
+            response.setContentLength(fileSize);
+            FileInputStream inputStream = new FileInputStream(EXTERNAL_FILE_PATH);
+            ServletOutputStream outputStream = response.getOutputStream();
+            int value = IOUtils.copy(inputStream, outputStream);
+            System.out.println("File Size :: " + fileSize);
+            System.out.println("Copied Bytes :: " + value);
+            IOUtils.closeQuietly(inputStream);
+            IOUtils.closeQuietly(outputStream);
+            response.setStatus(HttpServletResponse.SC_OK);
+        } catch (java.io.FileNotFoundException e) {
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+        } catch (Exception e) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        }
+    }
+
+    /**
+     * This method check if file exist and return error
+     */
+    private void checkFile(File file, HttpServletResponse response) {
+        if (!file.exists()) {
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            OutputStream outputStream = null;
+            try {
+                outputStream = response.getOutputStream();
+                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+                outputStream.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                return;
+            }
+
+        }
+    }
 
     /**
      * This method returns the principal[user-name] of logged-in user.
@@ -193,55 +271,6 @@ public class AppController {
         }
         return userName;
     }
-
-    @RequestMapping(value = "/show-image/{folderName}/{folderId}/{filename}", method = RequestMethod.GET)
-    public void downloadFile(HttpServletResponse response,
-                             @PathVariable String folderName,
-                             @PathVariable String folderId,
-                             @PathVariable String filename) throws IOException {
-
-
-        String EXTERNAL_FILE_PATH = MainPathEnum.mainPath +"/"+ folderName +"/"+ folderId +"/"+ filename;
-
-        File file = new File(EXTERNAL_FILE_PATH);
-
-
-        if (!file.exists()) {
-            String errorMessage = "Sorry. The file you are looking for does not exist";
-            System.out.println(errorMessage);
-            OutputStream outputStream = response.getOutputStream();
-            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-            outputStream.close();
-            return;
-        }
-
-
-        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
-        if (mimeType == null) {
-            System.out.println("mimetype is not detectable, will take default");
-            mimeType = "application/octet-stream";
-        }
-
-        System.out.println("mimetype : " + mimeType);
-
-        response.setContentType(mimeType);
-
-        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
-            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
-        response.setHeader("Content-Disposition : attachment", String.format("inline; filename=\"" + file.getName() + "\""));
-
-
-        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
-        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
-
-        response.setContentLength((int) file.length());
-
-        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-
-        //Copy bytes from source to destination(outputstream in this example), closes both streams.
-        FileCopyUtils.copy(inputStream, response.getOutputStream());
-    }
-
 }
 
 

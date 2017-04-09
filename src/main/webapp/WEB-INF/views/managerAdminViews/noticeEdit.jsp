@@ -76,7 +76,7 @@
 
                         <div class="form-group">
                             <div class="checkbox">
-                                <input id="active" class="styled" type="checkbox" name="activ" <%if (!isNew && notice.getActiv()) out.print("checked");%>>
+                                <input id="active" class="styled" type="checkbox" name="active" <%if (!isNew && notice.getActiv()) out.print("checked");%>>
                                 <label for="active">Active notice</label>
                             </div>
                         </div>
@@ -86,31 +86,57 @@
                             <input type="text" name="title" class="form-control" placeholder="Title" value="<%if (!isNew) out.print(notice.getTitle());%>"/>
                         </div>
 
-                        <!-- Files -->
+                        <!-- images -->
                         <% if(!isNew && notice.getFilePath()!= null){
                             File directory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath());
                             File[] files= directory.listFiles();
                             for (int i=0; i<files.length; i++){
+                                if (!files[i].isDirectory()){
                                 String urlPic = GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+files[i].getName(); %>
                                 <div class="form-group form-img-thumbnail">
                                     <a data-fancybox="gallery" href="<%out.print(urlPic);%>">
                                         <img src="<%out.print(urlPic);%>" alt="<%out.print(files[i].getName());%>" class="img-thumbnail">
                                     </a>
-                                    <a href="<%out.print("/notice/delete-image-from-notice/"+notice.getId()+"/"+i);%>" class="delete deleteConfirm">
+                                    <a href="<%out.print("/notice/delete-file-from-notice/"+notice.getId()+"/"+i+"/image");%>" class="delete deleteConfirm">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
-                                <%--out.print("<br><a href="+ GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+fileName+">"+fileName+"</a>");--%>
+                                <%}
+                             }
+                        }%>
+                        <!-- #End images -->
+
+                        <!-- videos -->
+                        <% if(!isNew && notice.getFilePath()!= null){
+                            File directory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath()+"/video");
+                            File[] files= directory.listFiles();
+                            for (int i=0; i<files.length; i++){
+                                String urlVideo = GlobalEnum.webRoot+"/show-video/"+notice.getId()+"/"+files[i].getName(); %>
+
+                                 <div class="form-group form-img-thumbnail">
+                                     <video width="400" height="300" controls >
+                                         <source src="<%out.print(urlVideo);%>" >
+                                     </video>
+                                     <a href="<%out.print("/notice/delete-file-from-notice/"+notice.getId()+"/"+i+"/video");%>" class="delete deleteConfirm">
+                                         <i class="fa fa-times"></i>
+                                     </a>
+                                 </div>
                             <%}
                         }%>
-                        <!-- #End files -->
+                        <!-- #End videos -->
 
                         <!-- Attach files -->
                         <div class="form-group">
-                            <label class="control-label">Attach files</label>
-                            <input id="chatUpload" name="file[]" multiple type="file">
+                            <label class="control-label">Attach images</label>
+                           <%-- <input id="chatUpload" name="file[]" multiple type="file">--%>
+                            <input id="imageUpload" name="file[]" multiple type="file">
                         </div>
                         <!-- #End Attach files -->
+
+                        <div class="form-group">
+                            <label class="control-label">Attach videos</label>
+                            <input id="videoUpload" name="video-file[]" multiple type="file">
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label">Text</label>

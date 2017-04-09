@@ -57,17 +57,33 @@
                     <%out.print(notice.getNoticeText());%>
                     <%
                         if (notice.getFilePath() != null) {
-                            File directory = new File(MainPathEnum.mainPath + "/" + notice.getFilePath());
-                            File[] files = directory.listFiles();
-                            for (int i = 0; i < files.length; i++) {
-                                String fileName = files[i].getName();
-                    %>
-                    <img src="<%out.print(GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+fileName);%>"
-                         alt="<%out.print(fileName);%>" class="img-responsive mb10">
-                    <%
+                            File imageDirectory = new File(MainPathEnum.mainPath + "/" + notice.getFilePath());
+                            File[] imageFiles = imageDirectory.listFiles();
+                            for (int i = 0; i < imageFiles.length; i++) {
+                                if(!imageFiles[i].isDirectory()){
+                                String fileName = imageFiles[i].getName();
+                        %>
+                                    <img src="<%out.print(GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+fileName);%>"
+                                         alt="<%out.print(fileName);%>" class="img-responsive mb10">
+                        <%
+                                }
+                            }
+
+                            File videoDirectory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath()+"/video");
+                            File[] videoFiles= videoDirectory.listFiles();
+                            for (int i=0; i<videoFiles.length; i++){
+                                String urlVideo = GlobalEnum.webRoot+"/show-video/"+notice.getId()+"/"+videoFiles[i].getName(); %>
+
+                                    <div class="form-group form-img-thumbnail">
+                                        <video width="400" height="300" controls >
+                                            <source src="<%out.print(urlVideo);%>" >
+                                        </video>
+                                    </div>
+                        <%
                             }
                         }
-                    %>
+                        %>
+
                 </div>
                 <!-- #End Notice box -->
                 <% count++;

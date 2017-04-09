@@ -4,13 +4,16 @@ import com.SoftwareFactory.constant.MainPathEnum;
 import com.SoftwareFactory.model.Notice;
 import com.SoftwareFactory.service.NoticeService;
 import com.SoftwareFactory.util.SaveFile;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -53,86 +56,98 @@ public class NoticeController {
     }
 
     @RequestMapping(value = "/saveNotice", method = RequestMethod.POST)
-    public
     @ResponseBody
-    ModelAndView saveManager(@RequestParam(value = "id") String id,
+    public ModelAndView saveNotice(@RequestParam(value = "id") String id,
                              @RequestParam("title") String title,
                              @RequestParam("text") String text,
-                             @RequestParam(value = "activ", required = false) boolean isActiv,
-                             @RequestParam("file[]") MultipartFile[] files) {
+                             @RequestParam(value = "active", required = false) boolean isActive,
+                             @RequestParam("file[]") MultipartFile[] imageFiles ,
+                             @RequestParam("video-file[]") MultipartFile[] videoFiles) {
 
         Notice notice;
 
-        System.out.println("=========files size " + files.length);
+        System.out.println("=========files size " + imageFiles.length);
+        System.out.println("=========files size " + videoFiles.length);
 
         if (id.equals("")) {
             notice = new Notice();
-            notice.setTitle(title);
-            notice.setNoticeText(text);
-            notice.setActiv(isActiv);
-            notice.setDataCreate(new Date());
-
-            noticeService.addNewNotice(notice);
-
-            if (!files[0].isEmpty()) {
-                String pathToSaveFile = "/notice/" + notice.getId();
-                SaveFile saveFile = new SaveFile(pathToSaveFile, files);
-                saveFile.saveFile();
-                notice.setFilePath(pathToSaveFile);
-                noticeService.updateNotice(notice);
-            }
         } else {
             notice = noticeService.getNoticeById(Long.parseLong(id));
-
+        }
             notice.setTitle(title);
             notice.setNoticeText(text);
-            notice.setActiv(isActiv);
+            notice.setActiv(isActive);
             notice.setDataCreate(new Date());
 
-            if (!files[0].isEmpty()) {
-                String pathToSaveFile = "/notice/" + notice.getId();
-                SaveFile saveFile = new SaveFile(pathToSaveFile, files);
-                saveFile.saveFile();
-                notice.setFilePath(pathToSaveFile);
-            }
-
-        }
+       if (id.equals("") ){
+           noticeService.addNewNotice(notice);
+           String pathToSaveFile = "/notice/" + notice.getId();
+           notice.setFilePath(pathToSaveFile);
+       }
         noticeService.updateNotice(notice);
+
+            saveImage(imageFiles , notice);
+            saveVideo(videoFiles , notice);
 
 
         return new ModelAndView("redirect:/notice/" + notice.getId() + "/edit");
     }
 
-    @RequestMapping(value = "/noticeDelete/{notiesId}", method = RequestMethod.GET)
-    public ModelAndView staffDelete(@PathVariable Long notiesId) {
+    @RequestMapping(value = "/noticeDelete/{noticeId}", method = RequestMethod.GET)
+    public ModelAndView staffDelete(@PathVariable Long noticeId) throws IOException {
 
-        Notice notice = noticeService.getNoticeById(notiesId);
+        Notice notice = noticeService.getNoticeById(noticeId);
         if (notice.getFilePath() != null) {
-            File directory = new File(MainPathEnum.mainPath + "" + notice.getFilePath());
-            directory.delete();
+            File directory = new File(MainPathEnum.mainPath  + notice.getFilePath());
+            FileUtils.deleteDirectory(directory);
         }
         noticeService.deleteNotice(notice);
 
         return new ModelAndView("redirect:/notice/");
     }
 
-    @RequestMapping(value = "/delete-image-from-notice/{noticeId}/{imageIndex}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete-file-from-notice/{noticeId}/{fileIndex}/{type}", method = RequestMethod.GET)
     public ModelAndView deleteImageFromNotice(@PathVariable(value = "noticeId") Long noticeId,
-                                              @PathVariable(value = "imageIndex") Integer imageIndex) {
+                                              @PathVariable(value = "fileIndex") Integer fileIndex,
+                                              @PathVariable(value = "type") String type) {
 
         Notice notice = noticeService.getNoticeById(noticeId);
 
-        File directory = new File(MainPathEnum.mainPath + "/" + notice.getFilePath());
-        File[] files = directory.listFiles();
-
-        if (files.length > imageIndex) {
-            files[imageIndex].delete();
+        String directoryPath;
+        if (type.equals("image")){
+            directoryPath = MainPathEnum.mainPath + "/" + notice.getFilePath();
+        } else {
+            directoryPath = MainPathEnum.mainPath + "/" + notice.getFilePath()+"/video";
         }
 
-        System.out.println("=======delete file: " + files[imageIndex].getName());
+        File directory = new File(directoryPath);
+        File[] files = directory.listFiles();
+
+        System.out.print("files lengt =" + files.length);
+
+        if (files.length > fileIndex) {
+            files[fileIndex].delete();
+        }
+
+        System.out.println("=======delete file: " + files[fileIndex].getName());
 
         return new ModelAndView("redirect:/notice/" + noticeId + "/edit");
     }
 
+    private void saveImage(MultipartFile[] imageFiles , Notice notice){
+        String pathToSaveFile = "/notice/" + notice.getId();
+        SaveFile saveFile = new SaveFile(pathToSaveFile, imageFiles);
+        if (!imageFiles[0].isEmpty()) {
+            saveFile.saveFile();
+        }
+    }
+
+    private void saveVideo(MultipartFile [] videoFiles , Notice notice){
+        String pathToSaveFile = "/notice/" + notice.getId() +"/video";
+        SaveFile saveFile = new SaveFile(pathToSaveFile, videoFiles);
+        if(!videoFiles[0].isEmpty()) {
+            saveFile.saveVideoFile();
+        }
+    }
 
 }
