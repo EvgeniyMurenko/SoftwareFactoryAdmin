@@ -11,6 +11,7 @@ import com.SoftwareFactory.model.MessageTask;
 import com.SoftwareFactory.model.StaffInfo;
 import com.SoftwareFactory.model.User;
 import com.SoftwareFactory.service.GoogleCloudKeyService;
+import com.SoftwareFactory.service.MessageTaskService;
 import com.SoftwareFactory.service.StaffInfoService;
 import com.SoftwareFactory.service.UserService;
 import com.google.gson.Gson;
@@ -41,6 +42,9 @@ public class FxmApplicationController {
 
     @Autowired
     GoogleCloudKeyService googleCloudKeyService;
+
+    @Autowired
+    MessageTaskService messageTaskService;
 
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
@@ -97,12 +101,27 @@ public class FxmApplicationController {
             }.getType();
             ServerRequest<Long> getStaffInfoServerRequest = new Gson().fromJson(request, getStaffInfoType);
 
+            Long staffInfoId = (Long) getStaffInfoServerRequest.getDataTransferObject();
 
-            if (getStaffInfoServerRequest.getDataTransferObject() != null) {
-                StaffInfo staffInfo = staffInfoService.getStaffInfo((Long) getStaffInfoServerRequest.getDataTransferObject());
+            if (staffInfoId != null) {
+                StaffInfo staffInfo = staffInfoService.getStaffInfo(staffInfoId);
                 StaffInfoDTO staffInfoDTO = DtoConverter.staffInfoDTOConverter(staffInfo);
                 serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), staffInfoDTO);
 
+            }
+
+        } else if (requestType.equals(SET_READ_MESSAGE_TASK_REQUEST.toString())) {
+            Type setReadMessageTaskType = new TypeToken<ServerRequest<Long>>() {
+            }.getType();
+            ServerRequest<Long> setReadMessageTaskServerRequest = new Gson().fromJson(request, setReadMessageTaskType);
+
+            Long messageTaskId = (Long) setReadMessageTaskServerRequest.getDataTransferObject();
+
+            if (messageTaskId != null) {
+                MessageTask messageTask = messageTaskService.getMessageTask(messageTaskId);
+                messageTask.setApprove(true);
+                messageTaskService.updateMessageTask(messageTask);
+                serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
             }
 
         }

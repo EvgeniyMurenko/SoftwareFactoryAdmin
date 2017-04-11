@@ -28,7 +28,7 @@ public class DtoConverter {
         while (messageTaskIterator.hasNext()) {
             MessageTask messageTask = messageTaskIterator.next();
 
-            messageTaskDTOList.add(new MessageTaskDTO(messageTask.getTitle(), messageTask.getMessageText(), messageTask.getDate(), messageTask.getApprove()));
+            messageTaskDTOList.add(new MessageTaskDTO(messageTask.getId(),messageTask.getTitle(), messageTask.getMessageText(), messageTask.getDate(), messageTask.getApprove()));
 
         }
 
