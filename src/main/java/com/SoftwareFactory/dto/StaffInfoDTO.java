@@ -9,13 +9,16 @@ public class StaffInfoDTO {
 
     public StaffInfoDTO(){}
 
-    public StaffInfoDTO(String name, String phone, String email, Date birthday, List<MessageTaskDTO> messageTaskDTOS) {
+    public StaffInfoDTO(Long id, String name, String phone, String email, Date birthday, List<MessageTaskDTO> messageTaskDTOS) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
         this.messageTaskDTOS = messageTaskDTOS;
     }
+
+    private Long id;
 
     private String name;
 
@@ -65,5 +68,13 @@ public class StaffInfoDTO {
 
     public void setMessageTaskDTOS(List<MessageTaskDTO> messageTaskDTOS) {
         this.messageTaskDTOS = messageTaskDTOS;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

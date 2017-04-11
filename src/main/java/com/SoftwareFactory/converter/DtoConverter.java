@@ -12,9 +12,9 @@ public class DtoConverter {
 
     public static StaffInfoDTO staffInfoDTOConverter(StaffInfo staffInfo) {
 
-        List<MessageTaskDTO> messageTaskDTOLisy = messageTaskDTOConverter(staffInfo.getMessageTasks());
+        List<MessageTaskDTO> messageTaskDTOList = messageTaskDTOConverter(staffInfo.getMessageTasks());
 
-        StaffInfoDTO staffInfoDTO = new StaffInfoDTO(staffInfo.getName(), staffInfo.getPhone(), staffInfo.getEmail(), staffInfo.getBirthday(), messageTaskDTOLisy);
+        StaffInfoDTO staffInfoDTO = new StaffInfoDTO(staffInfo.getId(),  staffInfo.getName(), staffInfo.getPhone(), staffInfo.getEmail(), staffInfo.getBirthday(), messageTaskDTOList);
 
         return staffInfoDTO;
     }

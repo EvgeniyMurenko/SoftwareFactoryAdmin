@@ -99,4 +99,12 @@ public class StaffInfo {
     public void setMessageTasks(Set<MessageTask> messageTasks) {
         this.messageTasks = messageTasks;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

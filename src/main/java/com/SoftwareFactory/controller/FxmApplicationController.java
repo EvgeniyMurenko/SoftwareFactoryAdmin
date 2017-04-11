@@ -26,9 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static com.SoftwareFactory.constant.AppRequestEnum.AUTHORIZATION_REQUEST;
-import static com.SoftwareFactory.constant.AppRequestEnum.REQUEST_FAIL;
-import static com.SoftwareFactory.constant.AppRequestEnum.REQUEST_SUCCESS;
+import static com.SoftwareFactory.constant.AppRequestEnum.*;
 
 
 @Controller
@@ -94,9 +92,18 @@ public class FxmApplicationController {
                 }
             }
 
-        } else if (requestType.equals("")) {
-            return "";
+        } else if (requestType.equals(GET_STAFF_INFO_REQUEST.toString())) {
+            Type getStaffInfoType = new TypeToken<ServerRequest<Long>>() {
+            }.getType();
+            ServerRequest<Long> getStaffInfoServerRequest = new Gson().fromJson(request, getStaffInfoType);
 
+
+            if (getStaffInfoServerRequest.getDataTransferObject() != null) {
+                StaffInfo staffInfo = staffInfoService.getStaffInfo((Long) getStaffInfoServerRequest.getDataTransferObject());
+                StaffInfoDTO staffInfoDTO = DtoConverter.staffInfoDTOConverter(staffInfo);
+                serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), staffInfoDTO);
+
+            }
 
         }
 
