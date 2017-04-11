@@ -48,7 +48,7 @@ public class FxmApplicationController {
     public String authorization(@RequestBody String request) throws IOException {
         System.out.println(request);
 
-        // get server request type
+        //  get server request type
         ServerRequest serverRequest = new Gson().fromJson(request, ServerRequest.class);
         String requestType = serverRequest.getRequestType();
 
