@@ -32,7 +32,7 @@ public class MessageTask {
     private Long userId;
 
     @Column(name = "is_approve")
-    private boolean isApprove;
+    private Boolean isApprove;
 
     public MessageTask() {
     }
@@ -99,6 +99,6 @@ public class MessageTask {
     }
 
     public void setApprove(boolean isApprove) {
-        isApprove = isApprove;
+        this.isApprove = isApprove;
     }
 }
