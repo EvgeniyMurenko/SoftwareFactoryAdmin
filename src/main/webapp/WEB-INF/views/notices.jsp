@@ -59,27 +59,29 @@
                         if (notice.getFilePath() != null) {
                             File imageDirectory = new File(MainPathEnum.mainPath + "/" + notice.getFilePath());
                             File[] imageFiles = imageDirectory.listFiles();
-                            for (int i = 0; i < imageFiles.length; i++) {
-                                if(!imageFiles[i].isDirectory()){
-                                String fileName = imageFiles[i].getName();
-                        %>
-                                    <img src="<%out.print(GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+fileName);%>"
-                                         alt="<%out.print(fileName);%>" class="img-responsive mb10">
-                        <%
+                            if (imageFiles != null && imageFiles.length>0){
+                                for (int i = 0; i < imageFiles.length; i++) {
+                                    if(!imageFiles[i].isDirectory()){
+                                        String fileName = imageFiles[i].getName();
+                                %>
+                                            <img src="<%out.print(GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+fileName);%>"
+                                                 alt="<%out.print(fileName);%>" class="img-responsive mb10">
+                            <%      }
                                 }
                             }
 
                             File videoDirectory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath()+"/video");
                             File[] videoFiles= videoDirectory.listFiles();
-                            for (int i=0; i<videoFiles.length; i++){
-                                String urlVideo = GlobalEnum.webRoot+"/show-video/"+notice.getId()+"/"+videoFiles[i].getName(); %>
+                            if( videoFiles!= null && videoFiles.length > 0){
+                                for (int i=0; i<videoFiles.length; i++){
+                                    String urlVideo = GlobalEnum.webRoot+"/show-video/"+notice.getId()+"/"+videoFiles[i].getName(); %>
 
-                                    <div class="form-group form-img-thumbnail">
-                                        <video width="400" height="300" controls >
-                                            <source src="<%out.print(urlVideo);%>" >
-                                        </video>
-                                    </div>
-                        <%
+                                        <div class="form-group form-img-thumbnail">
+                                            <video width="400" height="300" controls >
+                                                <source src="<%out.print(urlVideo);%>" >
+                                            </video>
+                                        </div>
+                            <%  }
                             }
                         }
                         %>
