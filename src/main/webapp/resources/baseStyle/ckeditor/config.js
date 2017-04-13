@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function( config ) {
     // are not needed in a basic editor. They are removed here.
     config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript';
 
-    config.extraPlugins = 'sourcearea';
+    config.extraPlugins = 'sourcearea,iframe';
 
     // Dialog windows are also simplified.
     config.removeDialogTabs = 'link:advanced';
