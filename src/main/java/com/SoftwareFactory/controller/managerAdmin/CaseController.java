@@ -39,6 +39,9 @@ public class CaseController {
     @Autowired
     ProjectService projectService;
 
+    @Autowired
+    MailService mailService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {
@@ -111,6 +114,8 @@ public class CaseController {
         }
 
         caseService.updateCase(aCase);
+
+        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message.getMessageText());
 
         return new ModelAndView("redirect:/cases/" + id);
     }

@@ -61,13 +61,12 @@ public class NoticeController {
                              @RequestParam("title") String title,
                              @RequestParam("text") String text,
                              @RequestParam(value = "active", required = false) boolean isActive,
-                             @RequestParam("file[]") MultipartFile[] imageFiles ,
-                             @RequestParam("video-file[]") MultipartFile[] videoFiles) {
+                             @RequestParam("file[]") MultipartFile[] imageFiles
+                             /*@RequestParam("video-file[]") MultipartFile[] videoFiles*/) {
 
         Notice notice;
 
         System.out.println("=========files size " + imageFiles.length);
-        System.out.println("=========files size " + videoFiles.length);
 
         if (id.equals("")) {
             notice = new Notice();
@@ -87,7 +86,6 @@ public class NoticeController {
         noticeService.updateNotice(notice);
 
             saveImage(imageFiles , notice);
-            saveVideo(videoFiles , notice);
 
 
         return new ModelAndView("redirect:/notice/" + notice.getId() + "/edit");

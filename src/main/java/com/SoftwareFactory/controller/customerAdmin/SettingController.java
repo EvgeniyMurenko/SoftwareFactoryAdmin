@@ -55,7 +55,7 @@ public class SettingController {
 
         customerInfoService.updateCustomerInfo(customerInfo);
 
-        return new ModelAndView("redirect:/cabinet/customerSettings/");
+        return new ModelAndView("redirect:/cabinet/settings/");
     }
 
     @RequestMapping(value = "/passwordSettings", method = RequestMethod.POST)
@@ -70,6 +70,6 @@ public class SettingController {
             userService.updateUser(user);
         }
 
-        return new ModelAndView("redirect:/cabinet/customerSettings/");
+        return new ModelAndView("redirect:/cabinet/settings/");
     }
 }
