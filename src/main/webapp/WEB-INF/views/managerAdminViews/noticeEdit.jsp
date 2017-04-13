@@ -125,10 +125,10 @@
                         }%>
                         <!-- #End videos -->
 
+
                         <!-- Attach files -->
                         <div class="form-group">
                             <label class="control-label">Attach images</label>
-                           <%-- <input id="chatUpload" name="file[]" multiple type="file">--%>
                             <input id="imageUpload" name="file[]" multiple type="file">
                         </div>
                         <!-- #End Attach files -->
