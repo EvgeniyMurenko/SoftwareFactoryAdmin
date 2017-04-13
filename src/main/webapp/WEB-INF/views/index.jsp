@@ -345,8 +345,8 @@
             <article class="feature clearfix">
                 <div class="ft-icon"><i class="fa fa-flask"></i></div>
                 <div class="ft-content">
-                    <div class="ft-title">알려드립니다</div>
-                    <div class="ft-body">공지사항<br/>소프트팩토리에서 고객 여러분들께 알려드립니다. <a href="<c:url value='/notices'/>"><i>자세히
+                    <div class="ft-title" style="color: #03a9f4;">알려드립니다</div>
+                    <div class="ft-body">공지사항<br/>소프트팩토리에서 고객 여러분들께 알려드립니다.<br> <a href="<c:url value='/notices'/>"><i>자세히
                         알아보기...</i></a></div>
                 </div>
             </article>

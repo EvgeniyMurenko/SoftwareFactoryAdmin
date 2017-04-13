@@ -36,7 +36,7 @@
 
             <div>
 
-                <h3>공지 사항</h3>
+                <h3 class="other-font2">공지 사항</h3>
 
                 <%
                     int count = 1;

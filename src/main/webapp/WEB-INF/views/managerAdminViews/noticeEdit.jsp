@@ -133,10 +133,12 @@
                         </div>
                         <!-- #End Attach files -->
 
+                        <!--
                         <div class="form-group">
                             <label class="control-label">Attach videos</label>
                             <input id="videoUpload" name="video-file[]" multiple type="file">
                         </div>
+                        -->
 
                         <div class="form-group">
                             <label class="control-label">Text</label>
