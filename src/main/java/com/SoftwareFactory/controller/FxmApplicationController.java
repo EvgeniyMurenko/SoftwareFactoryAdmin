@@ -13,6 +13,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,8 +74,8 @@ public class FxmApplicationController {
             if (staffUser != null) {
                 StaffInfo staffInfo = staffInfoService.getStaffInfo((long) staffUser.getId());
 
-
-                if (authorizationDTO.getPassword().equals(staffUser.getPassword())) {
+                String staffUserPassword = new BCryptPasswordEncoder().encode(staffUser.getPassword());
+                if (authorizationDTO.getPassword().equals(staffUserPassword)) {
 
 
                     List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
@@ -131,7 +134,6 @@ public class FxmApplicationController {
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), caseDTOS);
 
         }
-
 
         String response = new Gson().toJson(serverResponse);
         return response;

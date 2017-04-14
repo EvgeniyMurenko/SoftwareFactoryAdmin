@@ -212,6 +212,7 @@ public class AppController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
+/*
     @RequestMapping(value = "/show-video/{noticeId}/{filename}", method = RequestMethod.GET)
     public void showVideo(HttpServletResponse response, @PathVariable String noticeId,
                           @PathVariable String filename) throws IOException {
@@ -234,6 +235,7 @@ public class AppController {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
+*/
 
     /**
      * This method check if file exist and return error
