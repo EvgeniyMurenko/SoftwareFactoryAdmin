@@ -64,5 +64,11 @@ public class CaseServiceImpl implements CaseService {
         caseDao.delete(aCase);
     }
 
+    @Override
+    @Transactional
+    public List<Case> getCasesHundredLimit(){
+        return caseDao.findCasesHundredLimit();
+    }
+
 
 }
