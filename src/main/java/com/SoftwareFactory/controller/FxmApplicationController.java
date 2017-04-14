@@ -2,18 +2,13 @@ package com.SoftwareFactory.controller;
 
 import com.SoftwareFactory.converter.DtoConverter;
 import com.SoftwareFactory.dto.AuthorizationDTO;
+import com.SoftwareFactory.dto.CaseDTO;
 import com.SoftwareFactory.dto.StaffInfoDTO;
 import com.SoftwareFactory.dto.base.ServerRequest;
 import com.SoftwareFactory.dto.base.ServerResponse;
 
-import com.SoftwareFactory.model.GoogleCloudKey;
-import com.SoftwareFactory.model.MessageTask;
-import com.SoftwareFactory.model.StaffInfo;
-import com.SoftwareFactory.model.User;
-import com.SoftwareFactory.service.GoogleCloudKeyService;
-import com.SoftwareFactory.service.MessageTaskService;
-import com.SoftwareFactory.service.StaffInfoService;
-import com.SoftwareFactory.service.UserService;
+import com.SoftwareFactory.model.*;
+import com.SoftwareFactory.service.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +40,9 @@ public class FxmApplicationController {
 
     @Autowired
     MessageTaskService messageTaskService;
+
+    @Autowired
+    CaseService caseService;
 
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
@@ -124,7 +122,16 @@ public class FxmApplicationController {
                 serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
             }
 
+        } else if (requestType.equals(LOAD_ALL_CASES_REQUEST.toString())) {
+
+            List<Case> cases = caseService.getCasesHundredLimit();
+
+            List<CaseDTO> caseDTOS = DtoConverter.caseDTOConverter(cases);
+
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), caseDTOS);
+
         }
+
 
         String response = new Gson().toJson(serverResponse);
         return response;

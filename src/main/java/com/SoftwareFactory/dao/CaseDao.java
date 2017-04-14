@@ -13,4 +13,5 @@ public interface CaseDao {
     List<Case> findAll();
     List<Case> findByTitle(String title);
     List<Case> findByProjectName(String projectName);
+    List<Case> findCasesHundredLimit();
 }

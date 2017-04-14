@@ -12,4 +12,5 @@ public interface CaseService {
     List<Case> getAllCases();
     Case getCaseById(Long id);
     List<Case> findByField(String title, String projectName);
+    List<Case> getCasesHundredLimit();
 }
