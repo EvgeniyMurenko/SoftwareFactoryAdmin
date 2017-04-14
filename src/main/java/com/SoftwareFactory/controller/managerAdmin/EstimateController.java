@@ -46,16 +46,6 @@ public class EstimateController {
         ModelAndView adminCabinetEstimate = new ModelAndView("managerAdminViews/estimatesList");
         List<Estimate> estimates = estimateService.getAllEstimates();
 
-        if (httpSession != null && "ADMIN".equals(httpSession.getAttribute("UserRole"))) {
-            adminCabinetEstimate.addObject("managerAdminName", "ADMIN");
-        } else if (httpSession != null && "MANAGER".equals(httpSession.getAttribute("UserRole"))) {
-            Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
-            adminCabinetEstimate.addObject("managerAdminName", managerInfo.getName());
-        } else {
-            adminCabinetEstimate.addObject("managerAdminName", "NOT NAME");
-        }
-
         // SORT BY DATE
         EstimateByDateComparator estimateByDateComparator = new EstimateByDateComparator();
         Collections.sort(estimates, estimateByDateComparator);

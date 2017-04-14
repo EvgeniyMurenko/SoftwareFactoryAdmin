@@ -15,7 +15,7 @@
             <li class="dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user-o"></i></a>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-menu-header text-center"><%out.print((String)request.getAttribute("managerAdminName"));%></li>
+                    <li class="dropdown-menu-header text-center"> Welcome</li>
                     <li><a href="javascript:void(0);"><i class="fa fa-cog"></i> Settings</a></li>
                     <li><a href="<c:url value="/logout" />"><i class="fa fa-sign-out"></i> Logout</a></li>
                 </ul>
