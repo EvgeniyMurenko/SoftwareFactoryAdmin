@@ -49,8 +49,9 @@ public class EstimateController {
         if (httpSession != null && "ADMIN".equals(httpSession.getAttribute("UserRole"))) {
             adminCabinetEstimate.addObject("managerAdminName", "ADMIN");
         } else if (httpSession != null && "MANAGER".equals(httpSession.getAttribute("UserRole"))) {
-            //Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
-            adminCabinetEstimate.addObject("managerAdminName", "MANAGER");
+            Long userId = new Long((Integer) httpSession.getAttribute("UserId"));
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
+            adminCabinetEstimate.addObject("managerAdminName", managerInfo.getName());
         } else {
             adminCabinetEstimate.addObject("managerAdminName", "NOT NAME");
         }

@@ -42,6 +42,15 @@ public class CaseController {
     @Autowired
     MailService mailService;
 
+    @Autowired
+    NotificationService notificationService;
+
+    @Autowired
+    GoogleCloudKeyService googleCloudKeyService;
+
+    @Autowired
+    StaffInfoService staffInfoService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {
@@ -116,6 +125,14 @@ public class CaseController {
         caseService.updateCase(aCase);
 
         mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message.getMessageText());
+
+        List<StaffInfo> staffInfoList = staffInfoService.getAllStaffInfo();
+        for (StaffInfo staffInfo : staffInfoList){
+            List<String> keys = new ArrayList<>(googleCloudKeyService.findAllKeysByStaff(staffInfo.getId()));
+            if (keys.size()>0){
+                notificationService.pushNotificationToGCM(keys, message.getMessageText(),aCase.getProjectTitle());
+            }
+        }
 
         return new ModelAndView("redirect:/cases/" + id);
     }

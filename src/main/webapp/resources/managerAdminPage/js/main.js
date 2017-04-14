@@ -56,6 +56,7 @@ jQuery(document).ready(function($) {
     // Case upload file
     $("#imageUpload").fileinput();
     $("#videoUpload").fileinput();
+    $("#chatUpload").fileinput();
 
     // Delete confirm
     function sebSweetConfirm(originLink){

@@ -106,7 +106,7 @@
                         }%>
                         <!-- #End images -->
 
-                        <!-- videos -->
+                       <%-- <!-- videos -->
                         <% if(!isNew && notice.getFilePath()!= null){
                             File directory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath()+"/video");
                             File[] files= directory.listFiles();
@@ -123,7 +123,7 @@
                                  </div>
                             <%}
                         }%>
-                        <!-- #End videos -->
+                        <!-- #End videos -->--%>
 
 
                         <!-- Attach files -->
