@@ -27,7 +27,7 @@ public class Message {
     private Case aCase;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id" )
     private User user;
 
     @Column(name = "message_time", columnDefinition="DATETIME")

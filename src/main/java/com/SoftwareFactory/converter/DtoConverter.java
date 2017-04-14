@@ -71,15 +71,16 @@ public class DtoConverter {
 
               Set<String> filesUrl = new HashSet<>();
 
-              if (message.getMessagePath() !=null){
+              if (message.getMessagePath() !=null) {
                   File dir = new File(message.getMessagePath());
 
                   File[] files = dir.listFiles();
+                  if (files != null)
+                      for (File file : files) {
+                          String fileUrl = "/download/" + message.getId() + "/" + file.getName() + "/";
+                          filesUrl.add(fileUrl);
+                      }
 
-                  for (File file : files){
-                      String fileUrl = "/download/"+message.getId()+"/"+file.getName()+"/";
-                      filesUrl.add(fileUrl);
-                  }
               }
 
               messageDTOS.add(new MessageDTO(message.getMessageTime() , message.getMessageText() ,message.getIsRead() , filesUrl));

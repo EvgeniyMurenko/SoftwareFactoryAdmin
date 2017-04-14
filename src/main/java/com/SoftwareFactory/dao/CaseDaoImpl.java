@@ -79,8 +79,9 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public List<Case> findCasesHundredLimit(){
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Case aCase order by aCase.creationDate desc ");
-        query.setMaxResults(100);
+        Query query = session.createQuery("select distinct aCase from Case aCase  order by aCase.creationDate desc ");
+
+          query.setMaxResults(100);
         return query.list();
     }
 
