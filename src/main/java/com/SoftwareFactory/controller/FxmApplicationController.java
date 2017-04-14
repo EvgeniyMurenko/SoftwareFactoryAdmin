@@ -74,8 +74,8 @@ public class FxmApplicationController {
             if (staffUser != null) {
                 StaffInfo staffInfo = staffInfoService.getStaffInfo((long) staffUser.getId());
 
-                String staffUserPassword = new BCryptPasswordEncoder().encode(staffUser.getPassword());
-                if (authorizationDTO.getPassword().equals(staffUserPassword)) {
+                //String staffUserPassword = new BCryptPasswordEncoder().encode(staffUser.getPassword());
+                if (authorizationDTO.getPassword().equals(staffUser.getPassword())) {
 
 
                     List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
