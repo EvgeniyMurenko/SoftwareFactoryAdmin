@@ -8,12 +8,15 @@ import com.SoftwareFactory.dto.base.ServerRequest;
 import com.SoftwareFactory.dto.base.ServerResponse;
 
 import com.SoftwareFactory.model.*;
+import com.SoftwareFactory.security.SecurityConfiguration;
 import com.SoftwareFactory.service.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -47,6 +50,9 @@ public class FxmApplicationController {
     @Autowired
     CaseService caseService;
 
+    @Autowired
+    UserDetailsService userDetailsService;
+
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/app-exchange", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
@@ -74,9 +80,9 @@ public class FxmApplicationController {
             if (staffUser != null) {
                 StaffInfo staffInfo = staffInfoService.getStaffInfo((long) staffUser.getId());
 
-                String staffUserPassword = new BCryptPasswordEncoder().encode(staffUser.getPassword());
-                if (authorizationDTO.getPassword().equals(staffUserPassword)) {
+                BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+                if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,staffUser.getPassword())) {
 
                     List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
 
@@ -92,7 +98,6 @@ public class FxmApplicationController {
                     StaffInfoDTO staffInfoDTO = DtoConverter.staffInfoDTOConverter(staffInfo);
 
                     serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), staffInfoDTO);
-
 
                 }
             }
