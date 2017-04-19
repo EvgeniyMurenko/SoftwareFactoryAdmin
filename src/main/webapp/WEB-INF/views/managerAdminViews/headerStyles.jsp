@@ -19,7 +19,7 @@
 <link href="/resources/managerAdminPage/css/dataTables/dataTables.bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/managerAdminPage/css/dataTables/dataTables.responsive.min.css" rel="stylesheet" />
 <!-- Base -->
-<link href="/resources/managerAdminPage/css/style.css" rel="stylesheet" />
+<link href="/resources/managerAdminPage/css/style.css" rel="stylesheet"/>
 <link href="/resources/managerAdminPage/css/responsive.css" rel="stylesheet" />
 <!-- HTML hack -->
 <!--[if lt IE 9]>
