@@ -73,9 +73,9 @@ CREATE TABLE `app_user` (
 
 CREATE TABLE `user_profile` (
 	id BIGINT NOT NULL AUTO_INCREMENT,
-	type VARCHAR(255) NOT NULL,
+	permission VARCHAR(255) NOT NULL,
 	PRIMARY KEY (id),
-    UNIQUE (type)
+    UNIQUE (permission)
 );
 
 CREATE TABLE `app_user_user_profile` (
@@ -128,16 +128,16 @@ CREATE TABLE `s_notices` (
 	PRIMARY KEY (`notices_id`)
 );
 
-INSERT INTO `user_profile`(type)
+INSERT INTO `user_profile`(permission)
 VALUES ('CUSTOMER');
 
-INSERT INTO `user_profile`(type)
+INSERT INTO `user_profile`(permission)
 VALUES ('ADMIN');
 
-INSERT INTO `user_profile`(type)
+INSERT INTO `user_profile`(permission)
 VALUES ('MANAGER');
 
-INSERT INTO `user_profile`(type)
+INSERT INTO `user_profile`(permission)
 VALUES ('STAFF');
 
 INSERT INTO `app_user`(sso_id, password, is_full_created)
