@@ -13,9 +13,16 @@ public class ManagerInfo {
 
     public ManagerInfo(){}
 
+
     @Id
-    @Column(name = "user_id")
-    private Long Id;
+    @Column(name = "user_id", nullable = false)
+    private Long id;
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     @Column(name = "name")
     private String name;
@@ -42,14 +49,23 @@ public class ManagerInfo {
     @OneToMany(mappedBy = "managerInfo" ,fetch = FetchType.EAGER)
     private Set<GoogleCloudKey> googleCloudKeys;
 
-    public ManagerInfo(Long id, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions, Set<GoogleCloudKey> googleCloudKeys) {
-        Id = id;
+    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions, Set<GoogleCloudKey> googleCloudKeys) {
+        this.id = id;
+        this.user = user;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
         this.managerInfoPermissions = managerInfoPermissions;
         this.googleCloudKeys = googleCloudKeys;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getPhone() {
@@ -93,11 +109,11 @@ public class ManagerInfo {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

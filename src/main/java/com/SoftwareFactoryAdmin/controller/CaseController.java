@@ -86,7 +86,7 @@ public class CaseController {
 
         // GET
         Case aCase = caseService.getCaseById(id);
-        int userId = (Integer) httpSession.getAttribute("UserId");
+        Long userId = (Long) httpSession.getAttribute("UserId");
         User currentUser = userService.findById(userId);
         aCase.setEmergency(false);
 

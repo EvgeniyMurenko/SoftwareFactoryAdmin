@@ -1,3 +1,4 @@
+<%@ page import="com.SoftwareFactoryAdmin.model.CustomerInfo" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,12 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
+    <%CustomerInfo customerInfo = (CustomerInfo) request.getAttribute("customerInfo");%>
+    <%boolean isNew = (boolean) request.getAttribute("isNew");%>
+    <%String formAction = "/customer-mm/save-new-customer";
+    if(!isNew) formAction = "/customer-mm/update-customer";
+    %>
+
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
 
@@ -34,50 +41,66 @@
 
         <!-- Content section -->
         <section class="container-fluid content">
-            <h3><i class="fa fa-user"></i>Customer edit</h3>
 
-            <form action="" method="post">
+            <%
+                String headTitle = "Create new customer";
+                if (!isNew) headTitle = customerInfo.getName();
+            %>
+
+            <h3><i class="fa fa-user"></i><%out.print(headTitle);%></h3>
+
+            <form action="<%out.print(formAction);%>" method="post">
                 <div class="row">
                     <div class="col-md-6">
 
-                        <div class="form-group">
-                            <label class="control-label">SSO ID</label>
-                            <input type="text" class="form-control" placeholder="SSO ID" value="0001" disabled/>
-                        </div>
+                        <input type="hidden" name="id" value="<%if (!isNew)out.print(customerInfo.getUser().getId());%>">
 
+                        <%if(!isNew){%>
+                            <div class="form-group">
+                                <label class="control-label">SSO ID</label>
+                                <input type="text" class="form-control" placeholder="SSO ID" value="<%out.print(customerInfo.getUser().getSsoId());%>" disabled/>
+                            </div>
+                        <%}%>
+
+                        <%String name = ""; if (!isNew && !"".equals(customerInfo.getName())) name = customerInfo.getName();%>
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Name" value=""/>
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="<%out.print(name);%>"/>
                         </div>
 
+                        <%String email = ""; if (!isNew && !"".equals(customerInfo.getEmail())) email = customerInfo.getEmail();%>
                         <div class="form-group">
                             <label class="control-label">E-mail</label>
-                            <input type="email" name="email" class="form-control" placeholder="E-mail" value=""/>
+                            <input type="email" name="email" class="form-control" placeholder="E-mail" value="<%out.print(email);%>"/>
                         </div>
 
+                        <%String phone = ""; if (!isNew && !"".equals(customerInfo.getPhone())) phone = customerInfo.getPhone();%>
                         <div class="form-group">
                             <label class="control-label">Phone</label>
-                            <input type="text" name="phone" class="form-control" placeholder="Phone" value=""/>
+                            <input type="text" name="phone" class="form-control" placeholder="Phone" value="<%out.print(phone);%>"/>
                         </div>
 
+                        <%String company = ""; if (!isNew && !"".equals(customerInfo.getCompany())) company = customerInfo.getCompany();%>
                         <div class="form-group">
                             <label class="control-label">Company</label>
-                            <input type="text" name="company" class="form-control" placeholder="Company" value=""/>
+                            <input type="text" name="company" class="form-control" placeholder="Company" value="<%out.print(company);%>"/>
                         </div>
 
+                        <%String webSite = ""; if (!isNew && !"".equals(customerInfo.getWebsite())) webSite = customerInfo.getWebsite();%>
                         <div class="form-group">
                             <label class="control-label">WEB site</label>
-                            <input type="text" name="site_link" class="form-control" placeholder="WEB site" value=""/>
+                            <input type="text" name="site_link" class="form-control" placeholder="WEB site" value="<%out.print(webSite);%>"/>
                         </div>
+
 
                         <div class="form-group">
                             <label for="new_password">New password</label>
-                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" required/>
+                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" <%if(!isNew){%>required<%}%>/>
                         </div>
 
                         <div class="form-group">
                             <label for="confirm_password">Confirm new password</label>
-                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" required/>
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(!isNew){%>required<%}%>/>
                         </div>
 
                         <div class="form-group text-right">
@@ -97,6 +120,32 @@
 
 <%@ include file="footerJavaScript.jsp" %>
 
+<% String isPasswordError = request.getParameter("isPasswordError");
+System.out.print(isPasswordError);%>
+<% if (isPasswordError != null && isPasswordError.equals("true")) { %>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Password error',
+            'Password do not match',
+            'error'
+        );
+    });
+</script>
+<% } %>
+
+<% String isEditCreateSuccess = request.getParameter("isEditCreateSuccess"); %>
+<% if (isEditCreateSuccess != null && isEditCreateSuccess.equals("true")) { %>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success',
+            'Customer edit/create success',
+            'success'
+        );
+    });
+</script>
+<% } %>
 
 </body>
 </html>

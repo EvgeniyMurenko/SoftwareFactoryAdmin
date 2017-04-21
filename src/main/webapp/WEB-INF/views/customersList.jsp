@@ -22,6 +22,7 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
+
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
 
@@ -41,7 +42,7 @@
 
 
             <div class="mb20">
-                <a href="/add-customer" class="btn btn-primary"><i class="fa fa-plus-circle mr10"></i>Add new customer</a>
+                <a href="/customer-mm/add-customer" class="btn btn-primary"><i class="fa fa-plus-circle mr10"></i>Add new customer</a>
             </div>
 
 
@@ -83,8 +84,8 @@
                     %>
                         <tr>
                             <td align="center"><%out.print(customerInfo.getId());%></td>
-                            <td><a href="<%out.print(editCustomerInfoUrl);%>"><%%></a></td>
-                            <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.println(customerInfo.getName());%></a></td>
+                            <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
+                            <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getName());%></a></td>
                             <td><a href="mailto:<%out.print(customerInfo.getEmail());%>"><%out.print(customerInfo.getEmail());%></a></td>
                             <td align="center"><%out.print(customerInfo.getCompany());%></td>
                             <td align="center">

@@ -77,10 +77,10 @@ public class EstimateController {
         Estimate estimate = estimateService.getEstimateById(estimateId);
         CustomerInfo customerInfo = estimate.getCustomerInfo();
 
-        int managerId = (Integer) httpSession.getAttribute("UserId");
+        Long managerId = (Long) httpSession.getAttribute("UserId");
         User manager = userService.findById(managerId);
 
-        int customerId = customerInfo.getId().intValue();
+        Long customerId = customerInfo.getId();
         User customer = userService.findById(customerId);
 
         Set<Project> projectSet = customerInfo.getProjects();
