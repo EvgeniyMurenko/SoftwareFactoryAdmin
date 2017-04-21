@@ -72,45 +72,45 @@
             <form action="/staff/saveStaff?${_csrf.parameterName}=${_csrf.token}" method="post">
                 <div class="row">
                     <div class="col-md-6">
-                        <input permission="hidden" name="id" value="<%if (!isNew)out.print(user.getId());%>">
+                        <input type="hidden" name="id" value="<%if (!isNew)out.print(user.getId());%>">
                         <%if (!isNew){%>
-                            <input permission="hidden" name="name" value="<%if (!isNew)out.print(staffInfo.getName());%>" />
+                            <input type="hidden" name="name" value="<%if (!isNew)out.print(staffInfo.getName());%>" />
                         <%} else {%>
                             <div class="form-group">
                                 <label class="control-label">Name</label>
-                                <input permission="text" name="name" class="form-control" placeholder="Name" />
+                                <input type="text" name="name" class="form-control" placeholder="Name" />
                             </div>
                         <%}%>
 
                         <div class="form-group">
                             <label class="control-label">Login</label>
-                            <input permission="text" name="login" class="form-control" placeholder="Login" value="<%if (!isNew) out.print(user.getSsoId());%>"/>
+                            <input type="text" name="login" class="form-control" placeholder="Login" value="<%if (!isNew) out.print(user.getSsoId());%>"/>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">E-mail</label>
-                            <input permission="email" name="email" class="form-control" placeholder="E-mail"
+                            <input type="email" name="email" class="form-control" placeholder="E-mail"
                                    value="<%if (!isNew) out.print(staffInfo.getEmail());%>"/>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Phone</label>
-                            <input permission="text" name="phone" class="form-control" placeholder="Phone"
+                            <input type="text" name="phone" class="form-control" placeholder="Phone"
                                    value="<%if (!isNew) out.print(staffInfo.getPhone());%>"/>
                         </div>
 
                         <div class="form-group delimiter mt10">
                             <label for="new_password">New password</label>
-                            <input permission="password" name="password" id="new_password" class="form-control" placeholder="New password"/>
+                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password"/>
                         </div>
 
                         <div class="form-group">
                             <label for="confirm_password">Confirm password</label>
-                            <input permission="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm password"/>
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm password"/>
                         </div>
 
                         <div class="form-group text-right">
-                            <button permission="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save
+                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save
                             </button>
                         </div>
                     </div>

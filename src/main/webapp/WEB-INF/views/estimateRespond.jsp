@@ -87,7 +87,7 @@
                             <textarea class="form-control" name="message" id="editor"></textarea>
 
                             <div class="form-group text-right mt20">
-                                <button permission="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
                             </div>
                         </form>
                     <%}%>

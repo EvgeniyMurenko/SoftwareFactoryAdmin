@@ -35,10 +35,10 @@
         <c:url var="loginUrl" value="/login"/>
         <form class="form-signin" action="${loginUrl}" method="post">
 
-            <input permission="text"  name="ssoId" id="inputId" class="form-control" placeholder="Login" required autofocus>
-            <input permission="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="text"  name="ssoId" id="inputId" class="form-control" placeholder="Login" required autofocus>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-            <button class="btn btn-block btn-signin" permission="submit">Sign in</button>
+            <button class="btn btn-block btn-signin" type="submit">Sign in</button>
         </form>
         <div class="text-center mt30 copyright">2017 © SoFAC</div>
     </div>

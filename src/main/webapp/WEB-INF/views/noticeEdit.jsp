@@ -72,18 +72,18 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <input permission="hidden" name="id" value="<%if (!isNew)out.print(notice.getId());%>">
+                        <input type="hidden" name="id" value="<%if (!isNew)out.print(notice.getId());%>">
 
                         <div class="form-group">
                             <div class="checkbox">
-                                <input id="active" class="styled" permission="checkbox" name="active" <%if (!isNew && notice.getActiv()) out.print("checked");%>>
+                                <input id="active" class="styled" type="checkbox" name="active" <%if (!isNew && notice.getActiv()) out.print("checked");%>>
                                 <label for="active">Active notice</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Title</label>
-                            <input permission="text" name="title" class="form-control" placeholder="Title" value="<%if (!isNew) out.print(notice.getTitle());%>"/>
+                            <input type="text" name="title" class="form-control" placeholder="Title" value="<%if (!isNew) out.print(notice.getTitle());%>"/>
                         </div>
 
                         <!-- images -->
@@ -129,7 +129,7 @@
                         <!-- Attach files -->
                         <div class="form-group">
                             <label class="control-label">Attach images</label>
-                            <input id="imageUpload" name="file[]" multiple permission="file">
+                            <input id="imageUpload" name="file[]" multiple type="file">
                         </div>
                         <!-- #End Attach files -->
 
@@ -148,7 +148,7 @@
                         </div>
 
                         <div class="form-group text-right">
-                            <button permission="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save</button>
+                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save</button>
                         </div>
                     </div>
                 </div>

@@ -86,7 +86,7 @@
 
                         <div class="form-group">
                             <label class="control-label">Title</label>
-                            <input permission="text" name="title" class="form-control" placeholder="Title" />
+                            <input type="text" name="title" class="form-control" placeholder="Title" />
                         </div>
 
                         <div class="form-group">
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="form-group text-right mt20">
-                            <button permission="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send
                                 task
                             </button>
                         </div>

@@ -64,11 +64,11 @@
 
             <%if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){%>
                 <div class="pull-right">
-                    <button permission="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
                 </div>
             <%} else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())){%>
                 <div class="pull-right">
-                    <button permission="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
                 </div>
             <%}%>
             <!-- Information from table -->
@@ -184,7 +184,7 @@
                             <h4 class="mb10">Appointment time</h4>
                             <div class="form-group">
                                 <div class="input-group date" id="datetimepicker">
-                                    <input permission="text" name="appointmentTime" class="form-control" />
+                                    <input type="text" name="appointmentTime" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -195,7 +195,7 @@
                             <!-- Attach files -->
                             <h4 class="mb10">Attach files</h4>
                             <div class="form-group">
-                                <input id="chatUpload" name="file[]" multiple permission="file">
+                                <input id="chatUpload" name="file[]" multiple type="file">
                             </div>
                             <!-- #End Attach files -->
 
@@ -213,7 +213,7 @@
                     </div>
 
                     <div class="form-group text-right mt20">
-                        <button permission="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
                     </div>
 
                 </form>
@@ -237,20 +237,20 @@
         <form action="/cases/<%out.print(aCase.getProject().getId());%>/createNewProject?${_csrf.parameterName}=${_csrf.token}" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button permission="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title">Open Project</h3>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label class="control-label" for="project">Project name</label>
-                        <input permission="text" id="project" name="project_name" class="form-control" required/>
+                        <input type="text" id="project" name="project_name" class="form-control" required/>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button permission="submit" name="save" class="btn btn-primary">Save</button>
-                    <button permission="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="save" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </form>

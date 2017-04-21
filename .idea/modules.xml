@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SoftwareFactory.iml" filepath="$PROJECT_DIR$/SoftwareFactory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftwareFactoryAdmin.iml" filepath="$PROJECT_DIR$/SoftwareFactoryAdmin.iml" />
     </modules>
   </component>
 </project>

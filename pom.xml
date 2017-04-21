@@ -2,11 +2,11 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.SowtwareFactory</groupId>
-	<artifactId>SoftwareFactory</artifactId>
+	<groupId>com.SowtwareFactoryAdmin</groupId>
+	<artifactId>SoftwareFactoryAdmin</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>SoftwareFactory</name>
+	<name>SoftwareFactoryAdmin</name>
 
 	<properties>
 		<springframework.version>4.2.5.RELEASE</springframework.version>
@@ -189,6 +189,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<finalName>SoftwareFactory</finalName>
+		<finalName>SoftwareFactoryAdmin</finalName>
 	</build>
 </project>
