@@ -95,12 +95,12 @@
 
                         <div class="form-group">
                             <label for="new_password">New password</label>
-                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" <%if(!isNew){%>required<%}%>/>
+                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" <%if(isNew)out.print("required");%>/>
                         </div>
 
                         <div class="form-group">
                             <label for="confirm_password">Confirm new password</label>
-                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(!isNew){%>required<%}%>/>
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(isNew)out.print("required");%>/>
                         </div>
 
                         <div class="form-group text-right">

@@ -4,18 +4,9 @@ package com.SoftwareFactoryAdmin.dto;
 import java.util.Date;
 import java.util.List;
 
-public class StaffInfoDTO {
+public class ManagerInfoDTO {
 
-    public StaffInfoDTO(){}
-
-    public StaffInfoDTO(Long id, String name, String phone, String email, Date birthday, List<MessageTaskDTO> messageTaskDTOS) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.birthday = birthday;
-        this.messageTaskDTOS = messageTaskDTOS;
-    }
+    public ManagerInfoDTO(){}
 
     private Long id;
 
@@ -27,7 +18,17 @@ public class StaffInfoDTO {
 
     private Date birthday;
 
-    private List<MessageTaskDTO> messageTaskDTOS;
+   /* private List<MessageTaskDTO> messageTaskDTOS;*/
+
+    private List<String> permissions;
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
+    }
 
     public String getName() {
         return name;
@@ -61,14 +62,14 @@ public class StaffInfoDTO {
         this.birthday = birthday;
     }
 
-    public List<MessageTaskDTO> getMessageTaskDTOS() {
+    /*public List<MessageTaskDTO> getMessageTaskDTOS() {
         return messageTaskDTOS;
     }
 
     public void setMessageTaskDTOS(List<MessageTaskDTO> messageTaskDTOS) {
         this.messageTaskDTOS = messageTaskDTOS;
     }
-
+*/
     public Long getId() {
         return id;
     }

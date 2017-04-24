@@ -12,7 +12,6 @@ import com.SoftwareFactoryAdmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -147,8 +146,10 @@ public class CustomerManagementController {
 
         User user = userService.findById(id);
 
-        user.setPassword(password);
-
+        if (password !=null && confirmPassword !=null && !"".equals(password) && !"".equals(confirmPassword)) {
+            System.out.println("set pass" + password);
+            user.setPassword(password);
+        }
         userService.updateUser(user);
 
         ModelAndView editCustomer = new ModelAndView("redirect:/customer-mm/edit-customer/" + id , "isEditCreateSuccess" , "true");
