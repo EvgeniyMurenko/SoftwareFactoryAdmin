@@ -114,7 +114,15 @@ public class EstimateController {
                 messageFromCustomer.setaCase(aCase);
                 messageFromCustomer.setMessageTime(estimate.getDateRequest());
                 messageFromCustomer.setMessageText(estimate.getEstimateRequest());
-           /*     messageFromCustomer.setMessagePath(estimate.getEstimatePath());*/
+
+                Set<MessageLink> messageLinks = new HashSet<>();
+
+                Set<EstimateLink> estimateLinks = estimate.getEstimateLinks();
+                for (EstimateLink estimateLink : estimateLinks) {
+                    messageLinks.add(new MessageLink(messageFromCustomer, estimateLink.getFileLink(), estimateLink.getFileName(), estimateLink.getFileUuidName()));
+                }
+
+                messageFromCustomer.setMessageLinks(messageLinks);
                 messageFromCustomer.setIsRead(MessageEnum.READ.toString());
                 messageService.addNewMessage(messageFromCustomer);
 
@@ -123,7 +131,7 @@ public class EstimateController {
                 messageFromManager.setaCase(aCase);
                 messageFromManager.setMessageTime(new java.util.Date());
                 messageFromManager.setMessageText(message);
-            /*    messageFromManager.setMessagePath(null);*/
+                messageFromManager.setMessageLinks(new HashSet<>());
                 messageFromManager.setIsRead(MessageEnum.READ.toString());
                 messageFromManager.setUser(manager);
                 messageService.addNewMessage(messageFromManager);

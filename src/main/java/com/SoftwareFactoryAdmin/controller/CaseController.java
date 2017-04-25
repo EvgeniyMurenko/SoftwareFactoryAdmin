@@ -1,6 +1,6 @@
 package com.SoftwareFactoryAdmin.controller;
 
-import com.SoftwareFactoryAdmin.constant.MainPathEnum;
+
 import com.SoftwareFactoryAdmin.constant.MessageEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -48,8 +47,8 @@ public class CaseController {
     @Autowired
     GoogleCloudKeyService googleCloudKeyService;
 
-   /* @Autowired
-    StaffInfoService staffInfoService;*/
+    @Autowired
+    NoticeLinkService noticeLinkService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -114,13 +113,10 @@ public class CaseController {
         aCase.setMessages(messages);
 
         //SAVE FILE
-/*        if (!files[0].isEmpty()) {
-            String pathToSaveFile = "/case/" + aCase.getProject().getId() + "/" + aCase.getId() + "/" + message.getId();
-            SaveFile sf = new SaveFile(pathToSaveFile, files);
-            sf.saveFile();
-            message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
-            messageService.updateMessage(message);
-        }*/
+        SaveFile saveFile = new SaveFile(files);
+        saveFile.saveMessageFilesToMessage(message);
+        messageService.updateMessage(message);
+
 
         caseService.updateCase(aCase);
 
@@ -159,7 +155,6 @@ public class CaseController {
 
         newProject.setCases(caseSet);
         projectService.updateProject(newProject);
-
 
 
         return managerAdminCaseRespond;

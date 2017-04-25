@@ -2,8 +2,7 @@ package com.SoftwareFactoryAdmin.util;
 
 import com.SoftwareFactoryAdmin.constant.GlobalEnum;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
-import com.SoftwareFactoryAdmin.model.Notice;
-import com.SoftwareFactoryAdmin.model.NoticeLink;
+import com.SoftwareFactoryAdmin.model.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -34,17 +33,54 @@ public class SaveFile {
 
         Set<NoticeLink> noticeLinks = notice.getNoticeLinks();
 
-
-        for (int i = 0; i < this.files.length; i++) {
-            MultipartFile file = this.files[i];
-
+        for (MultipartFile file : this.files) {
             try {
                 String name = file.getOriginalFilename();
                 String generatedName = generateUUIDname(name);
                 String link = GlobalEnum.webRoot + "/get-file/notice/" + generatedName;
                 saveFile(generatedName, file);
-                NoticeLink noticeLink = new NoticeLink(notice, link, name , generatedName);
+                NoticeLink noticeLink = new NoticeLink(notice, link, name, generatedName);
                 noticeLinks.add(noticeLink);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveMessageFilesToMessage(Message message) {
+
+        pathForSaveFile = MainPathEnum.mainPath + "/message/";
+
+        Set<MessageLink> messageLinks = message.getMessageLinks();
+
+        for (MultipartFile file : this.files) {
+            try {
+                String name = file.getOriginalFilename();
+                String generatedName = generateUUIDname(name);
+                String link = GlobalEnum.webRoot + "/get-file/message/" + generatedName;
+                saveFile(generatedName, file);
+                MessageLink messageLink = new MessageLink(message, link, name, generatedName);
+                messageLinks.add(messageLink);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveEstimateFilesToEstimate(Estimate estimate) {
+
+        pathForSaveFile = MainPathEnum.mainPath + "/estimate/";
+
+        Set<EstimateLink> estimateLinks = estimate.getEstimateLinks();
+
+        for (MultipartFile file : this.files) {
+            try {
+                String name = file.getOriginalFilename();
+                String generatedName = generateUUIDname(name);
+                String link = GlobalEnum.webRoot + "/get-file/estimate/" + generatedName;
+                saveFile(generatedName, file);
+                EstimateLink estimateLink = new EstimateLink(estimate, link, name, generatedName);
+                estimateLinks.add(estimateLink);
             } catch (IOException e) {
                 e.printStackTrace();
             }

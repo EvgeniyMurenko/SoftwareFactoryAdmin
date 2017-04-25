@@ -10,11 +10,13 @@ public class EstimateLink {
 
     public EstimateLink(){}
 
-    public EstimateLink(Estimate estimate, String fileLink, String fileName) {
+    public EstimateLink(Estimate estimate, String fileLink, String fileName, String fileUuidName) {
         this.estimate = estimate;
         this.fileLink = fileLink;
         this.fileName = fileName;
+        this.fileUuidName = fileUuidName;
     }
+
 
     @Id
     @GeneratedValue(generator = "increment2")
@@ -31,6 +33,9 @@ public class EstimateLink {
 
     @Column(name = "file_name")
     private String fileName;
+
+    @Column(name = "file_uuid_name")
+    private String fileUuidName;
 
     public Long getId() {
         return id;
@@ -62,5 +67,13 @@ public class EstimateLink {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getFileUuidName() {
+        return fileUuidName;
+    }
+
+    public void setFileUuidName(String fileUuidName) {
+        this.fileUuidName = fileUuidName;
     }
 }

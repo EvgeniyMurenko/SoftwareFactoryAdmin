@@ -167,5 +167,11 @@ public class Estimate {
         this.customerInfo = customerInfo;
     }
 
+    public Set<EstimateLink> getEstimateLinks() {
+        return estimateLinks;
+    }
 
+    public void setEstimateLinks(Set<EstimateLink> estimateLinks) {
+        this.estimateLinks = estimateLinks;
+    }
 }

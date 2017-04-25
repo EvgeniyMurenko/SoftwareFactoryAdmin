@@ -4,10 +4,10 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.Message" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.SoftwareFactoryAdmin.comparator.MessageByDateComparator" %>
-<%@ page import="java.io.File" %>
-<%@ page import="com.SoftwareFactoryAdmin.constant.GlobalEnum" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.SoftwareFactoryAdmin.constant.StatusEnum" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.MessageLink" %>
+<%@ page import="java.util.Set" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -125,14 +125,15 @@
                             <!-- Message body -->
                             <div class="description">
                                 <% out.print(message.getMessageText());%>
-                                <% if (message.getMessagePath()!=null) {
-                                    File directory = new File(message.getMessagePath());
-                                    File[] files= directory.listFiles();
-                                    for (int i=0; i<files.length; i++){
-                                        String fileName =files[i].getName();
-                                        out.print("<p><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                <%  out.print(message.getMessageText());%>
+                                <%  Set<MessageLink> messageLinks = message.getMessageLinks();
+                                    if (!messageLinks.isEmpty()) {
+
+                                        for (MessageLink messageLink : messageLinks){
+                                            out.print("<p><a href="+ messageLink.getFileLink() +">"+messageLink.getFileName()+"</a>");
+                                        }
                                     }
-                                } %>
+                                %>
                             </div>
                             <!-- #End Message body -->
 
@@ -154,13 +155,12 @@
 
                             <!-- Message body -->
                             <div class="description">
-                                <% out.print(message.getMessageText());%>
-                                <% if (message.getMessagePath()!=null) {
-                                    File directory = new File(message.getMessagePath());
-                                    File[] files= directory.listFiles();
-                                    for (int i=0; i<files.length; i++){
-                                        String fileName =files[i].getName();
-                                        out.print("<p><a href="+ GlobalEnum.webRoot+"/download/"+message.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                                <%  out.print(message.getMessageText());%>
+                                <%  Set<MessageLink> messageLinks = message.getMessageLinks();
+                                    if (!messageLinks.isEmpty()) {
+
+                                    for (MessageLink messageLink : messageLinks){
+                                        out.print("<p><a href="+ messageLink.getFileLink() +">"+messageLink.getFileName()+"</a>");
                                     }
                                 } %>
                             </div>

@@ -2,6 +2,8 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.CustomerInfo" %>
 <%@ page import="java.io.File" %>
 <%@ page import="com.SoftwareFactoryAdmin.constant.GlobalEnum" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.EstimateLink" %>
+<%@ page import="java.util.Set" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -73,12 +75,12 @@
                     <h4 class="mb10">Estimate body</h4>
                     <section class="estimate-user-info"><%out.print(estimate.getEstimateRequest());%></section>
 
-                    <% if (estimate.getEstimatePath()!=null) {
-                        File directory = new File(estimate.getEstimatePath());
-                        File[] files= directory.listFiles();
-                        for (int i=0; i<files.length; i++){
-                            String fileName =files[i].getName();
-                            out.print("<br><a href="+ GlobalEnum.webRoot+"/download/"+estimate.getId()+"/"+fileName+"/"+">"+fileName+"</a>");
+                    <%  Set<EstimateLink> estimateLinks = estimate.getEstimateLinks();
+                        if (!estimateLinks.isEmpty()) {
+
+
+                        for (EstimateLink estimateLink : estimateLinks){
+                            out.print("<br><a href="+ estimateLink.getFileLink()+">"+estimateLink.getFileName()+"</a>");
                         }
                     } %>
                     <%if (!estimate.isRespond()){%>
