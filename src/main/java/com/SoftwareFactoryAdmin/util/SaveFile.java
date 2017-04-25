@@ -1,45 +1,92 @@
 package com.SoftwareFactoryAdmin.util;
 
+import com.SoftwareFactoryAdmin.constant.GlobalEnum;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
+import com.SoftwareFactoryAdmin.model.Notice;
+import com.SoftwareFactoryAdmin.model.NoticeLink;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SaveFile {
+
     private String pathForSaveFile;
     private MultipartFile[] files;
 
     public SaveFile() {
     }
 
-    public SaveFile(String pathForSaveFile, MultipartFile[] files) {
-        this.pathForSaveFile = pathForSaveFile;
+    public SaveFile(MultipartFile[] files) {
         this.files = files;
+    }
 
-        File directory = new File(MainPathEnum.mainPath + pathForSaveFile);
-        if (!directory.exists()){
-            directory.setReadable(true, false);
-            directory.setExecutable(true, false);
-            directory.setWritable(true, false);
+
+    public void saveNoticeFilesToNotice(Notice notice) {
+
+        pathForSaveFile = MainPathEnum.mainPath + "/notice/";
+
+        Set<NoticeLink> noticeLinks = notice.getNoticeLinks();
+
+
+        for (int i = 0; i < this.files.length; i++) {
+            MultipartFile file = this.files[i];
+
+            try {
+                String name = file.getOriginalFilename();
+                String generatedName = generateUUIDname(name);
+                String link = GlobalEnum.webRoot + "/get-file/notice/" + generatedName;
+                saveFile(generatedName, file);
+                NoticeLink noticeLink = new NoticeLink(notice, link, name , generatedName);
+                noticeLinks.add(noticeLink);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveFile(String name, MultipartFile file) throws IOException {
+
+        byte[] bytes = file.getBytes();
+        File directory = new File(this.pathForSaveFile);
+        directory.setReadable(true, false);
+        directory.setExecutable(true, false);
+        directory.setWritable(true, false);
+        if (!directory.exists()) {
             directory.mkdirs();
             System.out.println("==========CREATE DIR" + directory.getAbsolutePath());
         }
+        // Create the file on server
+        File serverFile = new File(directory.getAbsolutePath() + "/" + name);
+
+        serverFile.setReadable(true, false);
+        serverFile.setExecutable(true, false);
+        serverFile.setWritable(true, false);
+
+        serverFile.createNewFile();
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+        stream.write(bytes);
+        stream.close();
     }
 
-    public void saveFile() {
-        for (int i = 0; i < this.files.length; i++) {
-            MultipartFile file = this.files[i];
-            String name = file.getOriginalFilename();
-            saveFile(name, file);
-        }
+
+    private String generateUUIDname(String originalFileName) {
+
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String generatedUUIDname = (java.util.UUID.randomUUID() + fileExtension);
+        return generatedUUIDname;
 
     }
 
-    public void saveVideoFile() {
+}
+
+    /*    public void saveVideoFile() {
 
 
         String[] extensions = {".mp4", ".avi"};
@@ -57,50 +104,5 @@ public class SaveFile {
                 }
             }
         }
-    }
-
-    public String getPathForSaveFile() {
-        return pathForSaveFile;
-    }
-
-    public void setPathForSaveFile(String pathForSaveFile) {
-        this.pathForSaveFile = pathForSaveFile;
-    }
-
-    public MultipartFile[] getFiles() {
-        return files;
-    }
-
-    public void setFiles(MultipartFile[] files) {
-        this.files = files;
-    }
-
-    private void saveFile(String name, MultipartFile file) {
-
-        try {
-            byte[] bytes = file.getBytes();
-            File dir = new File(MainPathEnum.mainPath + this.pathForSaveFile);
-       /*     dir.setReadable(true, false);
-            dir.setExecutable(true, false);
-            dir.setWritable(true, false);
-            if (!dir.exists()) {
-                dir.mkdirs();
-                System.out.println("==========CREATE DIR" + dir.getAbsolutePath());
-            }*/
-            // Create the file on server
-            File serverFile = new File(dir.getAbsolutePath() + "/" + name);
-
-            serverFile.setReadable(true, false);
-            serverFile.setExecutable(true, false);
-            serverFile.setWritable(true, false);
-
-            serverFile.createNewFile();
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-            stream.write(bytes);
-            stream.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-}
+    }*/
 

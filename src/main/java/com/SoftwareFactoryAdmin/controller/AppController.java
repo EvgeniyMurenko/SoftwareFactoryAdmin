@@ -56,8 +56,8 @@ public class AppController {
     /**
      * This method will list all existing users .
      */
-    @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
-    public ModelAndView listUsers(HttpSession session ) {
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+    public ModelAndView listUsers(HttpSession session) {
 
         User currentUser = userService.findBySSO(getPrincipal());
 
@@ -90,6 +90,20 @@ public class AppController {
         return modelAndView;
     }
 
+    /**
+     * This method returns the principal[user-name] of logged-in user.
+     */
+    private String getPrincipal() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
 
     /**
      * This method will provide UserProfile list to views
@@ -124,22 +138,17 @@ public class AppController {
         return "redirect:/main?logout";
     }
 
-    @Autowired
-    MessageService messageService;
 
-    @RequestMapping(value = "/download/{messageId}/{filename}/", method = RequestMethod.GET)
-    public void downloadFile(HttpServletResponse response, @PathVariable Long messageId, @PathVariable String filename) throws IOException {
+    @RequestMapping(value = "/get-file/{type}/{filename}", method = RequestMethod.GET)
+    public void getFile(HttpServletResponse response,
+                        @PathVariable String type,
+                        @PathVariable String filename) throws IOException {
 
-
-        Message message = messageService.getMessageById(messageId);
-
-        String EXTERNAL_FILE_PATH = message.getMessagePath() + "/" + filename;
+        String EXTERNAL_FILE_PATH = MainPathEnum.mainPath + "/" + type + "/" + filename;
 
         File file = new File(EXTERNAL_FILE_PATH);
 
-
         checkFile(file, response);
-
 
         String mimeType = URLConnection.guessContentTypeFromName(file.getName());
         if (mimeType == null) {
@@ -151,25 +160,45 @@ public class AppController {
 
         response.setContentType(mimeType);
 
-        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
-            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
         response.setHeader("Content-Disposition : attachment", String.format("inline; filename=\"" + file.getName() + "\""));
 
-
-        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
-        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
 
         response.setContentLength((int) file.length());
 
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
 
-        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
+    /**
+     * This method check if file exist and return error
+     */
+    private void checkFile(File file, HttpServletResponse response) {
+        System.out.println("STEP4");
+        if (!file.exists()) {
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            OutputStream outputStream = null;
+            try {
+                outputStream = response.getOutputStream();
+                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+                outputStream.close();
+
+            } catch (IOException e) {
+                System.out.println("STEP5");
+                e.printStackTrace();
+            } finally {
+                return;
+            }
+
+        }
+    }
+
+}
 
 
-
+/*
     @RequestMapping(value = "/show-image/{folderName}/{folderId}/{filename}", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response,
                              @PathVariable String folderName,
@@ -200,6 +229,52 @@ public class AppController {
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
+*/
+
+
+/*@Autowired
+    MessageService messageService;
+
+    @RequestMapping(value = "/download/{messageId}/{filename}/", method = RequestMethod.GET)
+    public void downloadFile(HttpServletResponse response, @PathVariable Long messageId, @PathVariable String filename) throws IOException {
+
+
+        Message message = messageService.getMessageById(messageId);
+
+        String EXTERNAL_FILE_PATH =*//* message.getMessagePath() +*//* "/" + filename;
+
+        File file = new File(EXTERNAL_FILE_PATH);
+
+
+        checkFile(file, response);
+
+
+        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType == null) {
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+
+        System.out.println("mimetype : " + mimeType);
+
+        response.setContentType(mimeType);
+
+        *//* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*//*
+        response.setHeader("Content-Disposition : attachment", String.format("inline; filename=\"" + file.getName() + "\""));
+
+
+        *//* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*//*
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+
+        response.setContentLength((int) file.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }*/
+
 
 /*
     @RequestMapping(value = "/show-video/{noticeId}/{filename}", method = RequestMethod.GET)
@@ -225,43 +300,4 @@ public class AppController {
         }
     }
 */
-
-    /**
-     * This method check if file exist and return error
-     */
-    private void checkFile(File file, HttpServletResponse response) {
-        if (!file.exists()) {
-            String errorMessage = "Sorry. The file you are looking for does not exist";
-            System.out.println(errorMessage);
-            OutputStream outputStream = null;
-            try {
-                outputStream = response.getOutputStream();
-                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-                outputStream.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                return;
-            }
-
-        }
-    }
-
-    /**
-     * This method returns the principal[user-name] of logged-in user.
-     */
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
-}
-
 

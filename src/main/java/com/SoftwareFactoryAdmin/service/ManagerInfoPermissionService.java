@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ManagerInfoPermissionService {
 
-    ManagerInfoPermission findById(int id);
+    ManagerInfoPermission findById(Long id);
 
     ManagerInfoPermission findByPermission(String permission);
 

@@ -114,7 +114,7 @@ public class EstimateController {
                 messageFromCustomer.setaCase(aCase);
                 messageFromCustomer.setMessageTime(estimate.getDateRequest());
                 messageFromCustomer.setMessageText(estimate.getEstimateRequest());
-                messageFromCustomer.setMessagePath(estimate.getEstimatePath());
+           /*     messageFromCustomer.setMessagePath(estimate.getEstimatePath());*/
                 messageFromCustomer.setIsRead(MessageEnum.READ.toString());
                 messageService.addNewMessage(messageFromCustomer);
 
@@ -123,7 +123,7 @@ public class EstimateController {
                 messageFromManager.setaCase(aCase);
                 messageFromManager.setMessageTime(new java.util.Date());
                 messageFromManager.setMessageText(message);
-                messageFromManager.setMessagePath(null);
+            /*    messageFromManager.setMessagePath(null);*/
                 messageFromManager.setIsRead(MessageEnum.READ.toString());
                 messageFromManager.setUser(manager);
                 messageService.addNewMessage(messageFromManager);

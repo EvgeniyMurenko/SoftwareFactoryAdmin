@@ -8,6 +8,15 @@ public class ManagerInfoDTO {
 
     public ManagerInfoDTO(){}
 
+    public ManagerInfoDTO(Long id, String name, String phone, String email, Date birthday, List<String> permissions) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.birthday = birthday;
+        this.permissions = permissions;
+    }
+
     private Long id;
 
     private String name;

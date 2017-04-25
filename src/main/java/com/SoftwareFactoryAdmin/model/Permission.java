@@ -5,9 +5,11 @@ import java.io.Serializable;
 
 public enum  Permission implements Serializable {
 
-    PERMISSION("PERMISSION"),
+    ADMIN_PERMISSION("ADMIN_PERMISSION");
+/*
     CASE_PERMISSION("CASE_PERMISSION"),
     CUSTOMER_INFO_PERMISSION("CUSTOMER_INFO_PERMISSION");
+*/
 
 
     String permission;

@@ -1,9 +1,9 @@
-/*
 package com.SoftwareFactoryAdmin.converter;
 
+import com.SoftwareFactoryAdmin.dto.ManagerInfoDTO;
 import com.SoftwareFactoryAdmin.dto.MessageDTO;
 import com.SoftwareFactoryAdmin.dto.MessageTaskDTO;
-import com.SoftwareFactoryAdmin.dto.StaffInfoDTO;
+
 import com.SoftwareFactoryAdmin.dto.CaseDTO;
 import com.SoftwareFactoryAdmin.model.*;
 
@@ -15,17 +15,19 @@ public class DtoConverter {
 
 
 
-    public static StaffInfoDTO staffInfoDTOConverter(StaffInfo staffInfo) {
+    public static ManagerInfoDTO managerInfoDTOConverter(ManagerInfo managerInfo) {
 
-        List<MessageTaskDTO> messageTaskDTOList = messageTaskDTOConverter(staffInfo.getMessageTasks());
+        /*List<MessageTaskDTO> messageTaskDTOList = messageTaskDTOConverter(staffInfo.getMessageTasks());*/
 
-        StaffInfoDTO staffInfoDTO = new StaffInfoDTO(staffInfo.getId(),  staffInfo.getName(), staffInfo.getPhone(), staffInfo.getEmail(), staffInfo.getBirthday(), messageTaskDTOList);
+        ArrayList<String> permissions = new ArrayList<>();
 
-        return staffInfoDTO;
+        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(),  managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), permissions);
+
+        return managerInfoDTO;
     }
 
 
-    private static List<MessageTaskDTO> messageTaskDTOConverter(Set<MessageTask> messageTaskSet) {
+   /* private static List<MessageTaskDTO> messageTaskDTOConverter(Set<MessageTask> messageTaskSet) {
 
         List<MessageTaskDTO> messageTaskDTOList = new ArrayList<>();
 
@@ -39,7 +41,7 @@ public class DtoConverter {
         }
 
         return messageTaskDTOList;
-    }
+    }*/
 
   public static List<CaseDTO> caseDTOConverter (List<Case> caseList){
 
@@ -72,7 +74,7 @@ public class DtoConverter {
 
               Set<String> filesUrl = new HashSet<>();
 
-              if (message.getMessagePath() !=null) {
+             /* if (message.getMessagePath() !=null) {
                   File dir = new File(message.getMessagePath());
 
                   File[] files = dir.listFiles();
@@ -82,7 +84,7 @@ public class DtoConverter {
                           filesUrl.add(fileUrl);
                       }
 
-              }
+              }*/
 
               messageDTOS.add(new MessageDTO(message.getMessageTime() , message.getMessageText() ,message.getIsRead() , filesUrl));
           }
@@ -93,4 +95,3 @@ public class DtoConverter {
   }
 
 }
-*/

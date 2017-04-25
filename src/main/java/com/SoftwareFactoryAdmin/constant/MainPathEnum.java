@@ -1,10 +1,8 @@
 package com.SoftwareFactoryAdmin.constant;
 
-/**
- * Created by adm on 2/21/2017.
- */
+
 public enum MainPathEnum {
-    mainPath("opt/tomcat/webapps/softwarefactory");
+    mainPath("opt/tomcat/webapps/softwarefactoryadmin");
 
     private String value;
 
@@ -20,4 +18,6 @@ public enum MainPathEnum {
     public String toString() {
         return this.getValue();
     }
+
 }
+

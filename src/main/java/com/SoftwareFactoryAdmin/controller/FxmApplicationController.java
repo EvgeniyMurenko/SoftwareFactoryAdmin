@@ -1,10 +1,9 @@
-/*
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.converter.DtoConverter;
 import com.SoftwareFactoryAdmin.dto.AuthorizationDTO;
 import com.SoftwareFactoryAdmin.dto.CaseDTO;
-import com.SoftwareFactoryAdmin.dto.StaffInfoDTO;
+import com.SoftwareFactoryAdmin.dto.ManagerInfoDTO;
 import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
 import com.SoftwareFactoryAdmin.dto.base.ServerResponse;
 
@@ -35,13 +34,13 @@ public class FxmApplicationController {
     UserService userService;
 
     @Autowired
-    StaffInfoService staffInfoService;
+    ManagerInfoService managerInfoService;
 
     @Autowired
     GoogleCloudKeyService googleCloudKeyService;
 
-    @Autowired
-    MessageTaskService messageTaskService;
+   /* @Autowired
+    MessageTaskService messageTaskService;*/
 
     @Autowired
     CaseService caseService;
@@ -53,6 +52,7 @@ public class FxmApplicationController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/app-exchange", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
     public String authorization(@RequestBody String request) throws IOException {
+
         System.out.println(request);
 
         //  get server request type
@@ -74,45 +74,47 @@ public class FxmApplicationController {
             User staffUser = userService.findBySSO(authorizationDTO.getSsoId());
 
             if (staffUser != null) {
-                StaffInfo staffInfo = staffInfoService.getStaffInfo((long) staffUser.getId());
+                ManagerInfo managerInfo = managerInfoService.getManagerInfoById(staffUser.getId());
 
                 BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
                 if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,staffUser.getPassword())) {
 
-                    List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
+                    List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(managerInfo.getGoogleCloudKeys());
 
                     if (googleCloudKeyList.indexOf(authorizationDTO.getGoogleCloudKey()) < 0) {
 
                         GoogleCloudKey googleCloudKey = new GoogleCloudKey();
-                        googleCloudKey.setStaffInfo(staffInfo);
+                        googleCloudKey.setManagerInfo(managerInfo);
                         googleCloudKey.setKey(authorizationDTO.getGoogleCloudKey());
                         googleCloudKeyService.addGoogleCloudKey(googleCloudKey);
 
                     }
 
-                    StaffInfoDTO staffInfoDTO = DtoConverter.staffInfoDTOConverter(staffInfo);
+                    ManagerInfoDTO managerInfoDTO = DtoConverter.managerInfoDTOConverter(managerInfo);
 
-                    serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), staffInfoDTO);
+                    serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), managerInfoDTO);
 
                 }
             }
 
         } else if (requestType.equals(GET_STAFF_INFO_REQUEST.toString())) {
+
             Type getStaffInfoType = new TypeToken<ServerRequest<Long>>() {
             }.getType();
-            ServerRequest<Long> getStaffInfoServerRequest = new Gson().fromJson(request, getStaffInfoType);
+            ServerRequest<Long> getManagerInfoServerRequest = new Gson().fromJson(request, getStaffInfoType);
 
-            Long staffInfoId = (Long) getStaffInfoServerRequest.getDataTransferObject();
+            Long managerInfoId = (Long) getManagerInfoServerRequest.getDataTransferObject();
 
-            if (staffInfoId != null) {
-                StaffInfo staffInfo = staffInfoService.getStaffInfo(staffInfoId);
-                StaffInfoDTO staffInfoDTO = DtoConverter.staffInfoDTOConverter(staffInfo);
-                serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), staffInfoDTO);
+            if (managerInfoId != null) {
+                ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerInfoId);
+                ManagerInfoDTO managerInfoDTO = DtoConverter.managerInfoDTOConverter(managerInfo);
+                serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), managerInfoDTO);
 
             }
 
-        } else if (requestType.equals(SET_READ_MESSAGE_TASK_REQUEST.toString())) {
+        }
+      /*  else if (requestType.equals(SET_READ_MESSAGE_TASK_REQUEST.toString())) {
             Type setReadMessageTaskType = new TypeToken<ServerRequest<Long>>() {
             }.getType();
             ServerRequest<Long> setReadMessageTaskServerRequest = new Gson().fromJson(request, setReadMessageTaskType);
@@ -126,7 +128,8 @@ public class FxmApplicationController {
                 serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
             }
 
-        } else if (requestType.equals(LOAD_ALL_CASES_REQUEST.toString())) {
+        }*/
+        else if (requestType.equals(LOAD_ALL_CASES_REQUEST.toString())) {
 
             List<Case> cases = caseService.getCasesHundredLimit();
 
@@ -143,4 +146,3 @@ public class FxmApplicationController {
 
 
 }
-*/

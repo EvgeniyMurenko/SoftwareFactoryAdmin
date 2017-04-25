@@ -114,13 +114,13 @@ public class CaseController {
         aCase.setMessages(messages);
 
         //SAVE FILE
-        if (!files[0].isEmpty()) {
+/*        if (!files[0].isEmpty()) {
             String pathToSaveFile = "/case/" + aCase.getProject().getId() + "/" + aCase.getId() + "/" + message.getId();
             SaveFile sf = new SaveFile(pathToSaveFile, files);
             sf.saveFile();
             message.setMessagePath(MainPathEnum.mainPath + pathToSaveFile);
             messageService.updateMessage(message);
-        }
+        }*/
 
         caseService.updateCase(aCase);
 

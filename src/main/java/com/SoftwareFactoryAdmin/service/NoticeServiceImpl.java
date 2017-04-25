@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
 
@@ -48,4 +49,5 @@ public class NoticeServiceImpl implements NoticeService {
     public List<Notice> getAllNotices() {
         return noticeDao.findAll();
     }
+
 }

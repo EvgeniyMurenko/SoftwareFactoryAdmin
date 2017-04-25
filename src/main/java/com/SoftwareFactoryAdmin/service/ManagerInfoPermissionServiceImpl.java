@@ -18,7 +18,7 @@ public class ManagerInfoPermissionServiceImpl implements ManagerInfoPermissionSe
     @Autowired
     ManagerInfoPermissionDao managerInfoPermissionDao;
 
-    public ManagerInfoPermission findById(int id) {
+    public ManagerInfoPermission findById(Long id) {
         return managerInfoPermissionDao.findById(id);
     }
 

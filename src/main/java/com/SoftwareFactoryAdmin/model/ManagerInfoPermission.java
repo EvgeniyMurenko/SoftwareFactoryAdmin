@@ -5,15 +5,16 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="manager_info_permission")
+@Table(name = "s_permission")
 public class ManagerInfoPermission implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "permission_id")
     private Integer id;
 
-    @Column(name="s_permission", length=15, unique=true, nullable=false)
-    private String permission = Permission.PERMISSION.getPermission();
+    @Column(name = "permission", length = 15, unique = true, nullable = false)
+    private String permission = Permission.ADMIN_PERMISSION.getPermission();
 
     public Integer getId() {
         return id;

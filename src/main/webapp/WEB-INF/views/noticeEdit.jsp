@@ -2,6 +2,9 @@
 <%@ page import="java.io.File" %>
 <%@ page import="com.SoftwareFactoryAdmin.constant.MainPathEnum" %>
 <%@ page import="com.SoftwareFactoryAdmin.constant.GlobalEnum" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.NoticeLink" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.Iterator" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -87,23 +90,29 @@
                         </div>
 
                         <!-- images -->
-                        <% if(!isNew && notice.getFilePath()!= null){
-                            File directory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath());
-                            File[] files= directory.listFiles();
-                            for (int i=0; i<files.length; i++){
-                                if (!files[i].isDirectory()){
-                                String urlPic = GlobalEnum.webRoot+"/show-image/notice/"+notice.getId()+"/"+files[i].getName(); %>
+                        <% if(!isNew && !notice.getNoticeLinks().isEmpty()){
+
+                            Set<NoticeLink> noticeLinks = notice.getNoticeLinks();
+
+                            Iterator<NoticeLink> noticeLinkIterator = noticeLinks.iterator();
+
+                            while (noticeLinkIterator.hasNext()){
+
+                                NoticeLink noticeLink = noticeLinkIterator.next();
+
+                                String urlPic = noticeLink.getFileLink(); %>
                                 <div class="form-group form-img-thumbnail">
                                     <a data-fancybox="gallery" href="<%out.print(urlPic);%>">
-                                        <img src="<%out.print(urlPic);%>" alt="<%out.print(files[i].getName());%>" class="img-thumbnail">
+                                        <img src="<%out.print(urlPic);%>" alt="<%out.print(noticeLink.getFileName());%>" class="img-thumbnail">
                                     </a>
-                                    <a href="<%out.print("/notice/delete-file-from-notice/"+notice.getId()+"/"+i+"/image");%>" class="delete deleteConfirm">
+                                    <a href="<%out.print("/notice/delete-file-from-notice/"+noticeLink.getFileUuidName()+"/" +notice.getId()+"/"+noticeLink.getId());%>" class="delete deleteConfirm">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
                                 <%}
                              }
-                        }%>
+                        %>
+
                         <!-- #End images -->
 
                        <%-- <!-- videos -->

@@ -11,6 +11,6 @@ public interface ManagerInfoPermissionDao {
 
     ManagerInfoPermission findByPermission(String permission);
 
-    ManagerInfoPermission findById(int id);
+    ManagerInfoPermission findById(Long id);
 
 }
