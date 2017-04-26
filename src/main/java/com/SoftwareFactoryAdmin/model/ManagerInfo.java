@@ -11,8 +11,19 @@ import java.util.Set;
 @Table(name = "s_manager_info")
 public class ManagerInfo {
 
-    public ManagerInfo(){}
+    public ManagerInfo() {
+    }
 
+    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions, Set<GoogleCloudKey> googleCloudKeys) {
+        this.id = id;
+        this.user = user;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.birthday = birthday;
+        this.managerInfoPermissions = managerInfoPermissions;
+        this.googleCloudKeys = googleCloudKeys;
+    }
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -36,29 +47,19 @@ public class ManagerInfo {
     private String email;
 
 
-    @Column(name="birthday")
+    @Column(name = "birthday")
     private Date birthday;
 
     @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "s_manager_info_permission",
-            joinColumns = { @JoinColumn(name = "manager_info_id") },
-            inverseJoinColumns = { @JoinColumn(name = "permission_id") })
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "permission_id")})
     private Set<ManagerInfoPermission> managerInfoPermissions = new HashSet<ManagerInfoPermission>();
 
-    @OneToMany(mappedBy = "managerInfo" ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "managerInfo", fetch = FetchType.EAGER)
     private Set<GoogleCloudKey> googleCloudKeys;
 
-    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions, Set<GoogleCloudKey> googleCloudKeys) {
-        this.id = id;
-        this.user = user;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.birthday = birthday;
-        this.managerInfoPermissions = managerInfoPermissions;
-        this.googleCloudKeys = googleCloudKeys;
-    }
 
     public User getUser() {
         return user;

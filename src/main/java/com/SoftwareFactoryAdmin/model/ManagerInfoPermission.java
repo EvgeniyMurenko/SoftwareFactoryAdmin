@@ -10,7 +10,7 @@ public class ManagerInfoPermission implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "permission_id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "permission", length = 15, unique = true, nullable = false)

@@ -1,6 +1,6 @@
 package com.SoftwareFactoryAdmin.dao;
 
-import com.SoftwareFactoryAdmin.model.Message;
+import com.SoftwareFactoryAdmin.model.MessageLink;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,9 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-@Repository("messageDao")
-public class MessageDaoImpl implements MessageDao {
+@Repository("messageLinkDao")
+public class MessageLinkDaoImpl implements MessageLinkDao {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageDaoImpl.class);
 
@@ -26,38 +25,38 @@ public class MessageDaoImpl implements MessageDao {
 
 
     @Override
-    public Long create(Message message) {
+    public Long create(MessageLink messageLink) {
         Session session = sessionFactory.getCurrentSession();
-        Long id = (Long) session.save(message);
+        Long id = (Long) session.save(messageLink);
         return id;
     }
 
 
     @Override
-    public Message read(Long id) {
+    public MessageLink read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Message message = (Message) session.get(Message.class, id);
-        return message;
+        MessageLink messageLink = (MessageLink) session.get(MessageLink.class, id);
+        return messageLink;
     }
 
     @Override
-    public void update(Message message) {
+    public void update(MessageLink messageLink) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(message);
-        logger.error("Message update successfully, Case=" + message);
+        session.update(messageLink);
+        logger.error("MessageLink update successfully, MessageLink=" + messageLink);
     }
 
     @Override
-    public void delete(Message message) {
+    public void delete(MessageLink messageLink) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(message);
-        logger.info("Message deleted successfully, Case details=" + message);
+        session.delete(messageLink);
+        logger.info("MessageLink deleted successfully, MessageLink details=" + messageLink);
     }
 
     @Override
-    public List<Message> findAll() {
+    public List<MessageLink> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Message");
+        Query query = session.createQuery("from MessageLink");
         return query.list();
     }
 }

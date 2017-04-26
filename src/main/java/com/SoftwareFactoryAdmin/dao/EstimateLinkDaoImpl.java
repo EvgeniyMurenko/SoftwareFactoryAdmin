@@ -1,6 +1,6 @@
 package com.SoftwareFactoryAdmin.dao;
 
-import com.SoftwareFactoryAdmin.model.Message;
+import com.SoftwareFactoryAdmin.model.EstimateLink;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +11,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository("estimateLinkDao")
+public class EstimateLinkDaoImpl implements EstimateLinkDao {
 
-@Repository("messageDao")
-public class MessageDaoImpl implements MessageDao {
-
-    private static final Logger logger = LoggerFactory.getLogger(MessageDaoImpl.class);
+    static final Logger logger = LoggerFactory.getLogger(EstimateDaoImpl.class);
 
     private SessionFactory sessionFactory;
 
@@ -24,40 +23,38 @@ public class MessageDaoImpl implements MessageDao {
         this.sessionFactory = sessionFactory;
     }
 
-
     @Override
-    public Long create(Message message) {
+    public Long create(EstimateLink estimateLink) {
         Session session = sessionFactory.getCurrentSession();
-        Long id = (Long) session.save(message);
+        Long id = (Long) session.save(estimateLink);
         return id;
     }
 
-
     @Override
-    public Message read(Long id) {
+    public EstimateLink read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Message message = (Message) session.get(Message.class, id);
-        return message;
+        EstimateLink estimateLink = (EstimateLink) session.get(EstimateLink.class, id);
+        return estimateLink;
     }
 
     @Override
-    public void update(Message message) {
+    public void update(EstimateLink estimateLink) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(message);
-        logger.error("Message update successfully, Case=" + message);
+        session.update(estimateLink);
+        logger.error("EstimateLink update successfully, EstimateLink=" + estimateLink);
     }
 
     @Override
-    public void delete(Message message) {
+    public void delete(EstimateLink estimateLink) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(message);
-        logger.info("Message deleted successfully, Case details=" + message);
+        session.delete(estimateLink);
+        logger.info("EstimateLink deleted successfully, EstimateLink details=" + estimateLink);
     }
 
     @Override
-    public List<Message> findAll() {
+    public List<EstimateLink> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Message");
+        Query query = session.createQuery("from EstimateLink");
         return query.list();
     }
 }

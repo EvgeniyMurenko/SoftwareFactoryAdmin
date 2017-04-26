@@ -22,7 +22,7 @@
 
             <%if ("ADMIN".equals(session.getAttribute("UserRole"))) {%>
                 <li><a href="/manager-mm/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Managers Management</a></li>
-                <li><a href="/staff/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
+<%--                <li><a href="/staff/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>--%>
                 <li><a href="/notice/"><i class="fa fa-list" aria-hidden="true"></i> Notices</a></li>
             <%}%>
 
