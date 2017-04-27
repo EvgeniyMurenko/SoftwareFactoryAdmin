@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="SoftwareFactory:war exploded">
+  <artifact type="exploded-war" name="SoftwareFactoryAdmin:war exploded">
     <output-path>$PROJECT_DIR$/target/SoftwareFactoryAdmin</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">

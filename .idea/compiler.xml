@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SoftwareFactory" />
+        <module name="SoftwareFactoryAdmin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SoftwareFactory" target="1.8" />
+      <module name="SoftwareFactoryAdmin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
