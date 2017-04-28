@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setSsoId(UUID.randomUUID().toString());
         user.setPassword(UUID.randomUUID().toString());
-        user.setFullCreated(false);
+        user.setFullCreated(true);
 
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);

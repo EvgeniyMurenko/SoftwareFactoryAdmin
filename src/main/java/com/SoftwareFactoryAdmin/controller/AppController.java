@@ -175,7 +175,7 @@ public class AppController {
      * This method check if file exist and return error
      */
     private void checkFile(File file, HttpServletResponse response) {
-        System.out.println("STEP4");
+
         if (!file.exists()) {
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
@@ -186,7 +186,6 @@ public class AppController {
                 outputStream.close();
 
             } catch (IOException e) {
-                System.out.println("STEP5");
                 e.printStackTrace();
             } finally {
                 return;

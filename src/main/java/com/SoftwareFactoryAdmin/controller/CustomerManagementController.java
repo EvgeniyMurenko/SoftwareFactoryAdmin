@@ -91,23 +91,20 @@ public class CustomerManagementController {
 
         User customerUser = userService.createCustomerUser(password);
 
-        Set<Project> projects = new HashSet<>();
 
-        CustomerInfo customerInfo = new CustomerInfo(customerUser, name, company, phone, email, website , projects);
+        CustomerInfo customerInfo = new CustomerInfo(customerUser, name, company, phone, email, website , new HashSet<>());
         customerInfo.setId(customerUser.getId());
+
         customerInfoService.addNewCustomerInfo(customerInfo);
 
 
         CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(customerInfo.getId());
 
         //CREATE #$GENERAL PROJECT FOR CUSTOMER
-        Date projectCreationDate = new Date();
 
-        Set<Case> cases = new HashSet<>();
+        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo, new HashSet<>(), "test");
+        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo, new HashSet<>(), "test");
 
-
-        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
-        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), projectCreationDate, StatusEnum.OPEN.toString(), customerInfo, cases, "test");
 
         Set<Project> projectsToAdd = new HashSet<>();
         projectsToAdd.add(projectNormal);

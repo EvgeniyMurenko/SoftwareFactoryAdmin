@@ -64,9 +64,7 @@ public class EstimateController {
         CustomerInfo customerInfo = estimate.getCustomerInfo();
 
         estimateRespond.addObject("estimate", estimate);
-
         estimateRespond.addObject("customerInfo", customerInfo);
-
 
         return estimateRespond;
     }
@@ -98,7 +96,7 @@ public class EstimateController {
                 aCase.setStatus(StatusEnum.OPEN.toString());
                 aCase.setLanguage("kr");
                 aCase.setProjectTitle("Estimation");
-                aCase.setUserManagerId((long) manager.getId());
+                aCase.setUserManagerId(manager.getId());
                 aCase.setMessages(emptyMessageSet);
 
                 Set<Case> cases = project.getCases();

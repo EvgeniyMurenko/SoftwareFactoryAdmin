@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -105,6 +106,7 @@ public class CaseController {
         message.setMessageTime(new java.util.Date());
         message.setMessageText(messageText);
         message.setIsRead(MessageEnum.NOTREAD.toString());
+        message.setMessageLinks(new HashSet<>());
         messageService.addNewMessage(message);
 
         // SAVE MESSAGE TO CASE
