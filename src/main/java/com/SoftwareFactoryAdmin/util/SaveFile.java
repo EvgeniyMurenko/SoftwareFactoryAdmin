@@ -53,16 +53,18 @@ public class SaveFile {
 
         Set<MessageLink> messageLinks = message.getMessageLinks();
 
-        for (MultipartFile file : this.files) {
-            try {
-                String name = file.getOriginalFilename();
-                String generatedName = generateUUIDname(name);
-                String link = GlobalEnum.webRoot + "/get-file/message/" + generatedName;
-                saveFile(generatedName, file);
-                MessageLink messageLink = new MessageLink(message, link, name, generatedName);
-                messageLinks.add(messageLink);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (!this.files[0].isEmpty()) {
+            for (MultipartFile file : this.files) {
+                try {
+                    String name = file.getOriginalFilename();
+                    String generatedName = generateUUIDname(name);
+                    String link = GlobalEnum.webRoot + "/get-file/message/" + generatedName;
+                    saveFile(generatedName, file);
+                    MessageLink messageLink = new MessageLink(message, link, name, generatedName);
+                    messageLinks.add(messageLink);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
