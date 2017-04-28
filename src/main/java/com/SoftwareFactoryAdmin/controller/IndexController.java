@@ -1,6 +1,8 @@
 package com.SoftwareFactoryAdmin.controller;
 
 
+import com.SoftwareFactoryAdmin.model.User;
+import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.EstimateService;
 import com.SoftwareFactoryAdmin.service.UserProfileService;
 import com.SoftwareFactoryAdmin.service.UserService;
@@ -34,8 +36,11 @@ public class IndexController {
     UserProfileService userProfileService;
 
 
+
     @RequestMapping(value = {"/" , "/main"}, method = RequestMethod.GET )
     public ModelAndView loginPage() {
+
+
 
 
         if (isCurrentAuthenticationAnonymous()) {

@@ -15,6 +15,7 @@ import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.Message;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.model.UserProfile;
+import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.MessageService;
 import com.SoftwareFactoryAdmin.service.UserProfileService;
 import com.SoftwareFactoryAdmin.service.UserService;
@@ -53,11 +54,14 @@ public class AppController {
     AuthenticationTrustResolver authenticationTrustResolver;
 
 
+
     /**
      * This method will list all existing users .
      */
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public ModelAndView listUsers(HttpSession session) {
+
+
 
         User currentUser = userService.findBySSO(getPrincipal());
 
