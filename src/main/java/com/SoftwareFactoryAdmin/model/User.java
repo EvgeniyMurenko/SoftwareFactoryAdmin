@@ -30,8 +30,6 @@ public class User implements Serializable{
 			inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
-	@Column(name="is_full_created")
-	private boolean isFullCreated;
 
 	public Long getId() {
 		return id;
@@ -65,13 +63,6 @@ public class User implements Serializable{
 		this.userProfiles = userProfiles;
 	}
 
-	public boolean isFullCreated() {
-		return isFullCreated;
-	}
-
-	public void setFullCreated(boolean fullCreated) {
-		isFullCreated = fullCreated;
-	}
 
 	@Override
 	public int hashCode() {

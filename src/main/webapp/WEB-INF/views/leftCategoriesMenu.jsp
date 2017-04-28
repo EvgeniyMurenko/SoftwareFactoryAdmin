@@ -17,7 +17,7 @@
             <li><a href="/estimate/"><i class="fa fa-file-text-o" aria-hidden="true"></i> Estimate</a></li>
             <li><a href="/cases/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
             <li><a href="/customer-mm/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Customers Management</a></li>
-            <li><a href="/project-mm/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Projects Management</a></li>
+          <%--  <li><a href="/project-mm/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Projects Management</a></li>--%>
 
 
             <%if ("ADMIN".equals(session.getAttribute("UserRole"))) {%>

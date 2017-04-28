@@ -71,14 +71,14 @@ public class FxmApplicationController {
 
             AuthorizationDTO authorizationDTO = (AuthorizationDTO) authorizationServerRequest.getDataTransferObject();
 
-            User staffUser = userService.findBySSO(authorizationDTO.getSsoId());
+            User managerUser = userService.findBySSO(authorizationDTO.getSsoId());
 
-            if (staffUser != null) {
-                ManagerInfo managerInfo = managerInfoService.getManagerInfoById(staffUser.getId());
+            if (managerUser != null) {
+                ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerUser.getId());
 
                 BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-                if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,staffUser.getPassword())) {
+                if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,managerUser.getPassword())) {
 
                     List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(managerInfo.getGoogleCloudKeys());
 

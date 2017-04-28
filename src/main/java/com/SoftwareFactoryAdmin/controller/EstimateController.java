@@ -154,6 +154,6 @@ public class EstimateController {
 
         mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), message);
 
-        return new ModelAndView("redirect:/staff-cabinet/estimate");
+        return new ModelAndView("redirect:/estimate/");
     }
 }

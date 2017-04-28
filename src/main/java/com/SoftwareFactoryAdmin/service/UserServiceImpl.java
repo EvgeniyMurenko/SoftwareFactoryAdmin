@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setSsoId(UUID.randomUUID().toString());
         user.setPassword(UUID.randomUUID().toString());
-        user.setFullCreated(true);
+
 
         UserProfile userProfile = new UserProfile();
         userProfile.setId(1);
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(phone);
         user.setSsoId(ssoId);
-        user.setFullCreated(false);
+
 
 
         dao.save(user);

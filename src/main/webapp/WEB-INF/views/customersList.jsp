@@ -78,9 +78,13 @@
                         Iterator<CustomerInfo> customerInfoIterator = customerInfoArrayList.iterator();
 
                         while (customerInfoIterator.hasNext()) {
+
                             CustomerInfo customerInfo = customerInfoIterator.next();
-                            String editCustomerInfoUrl = "/customer-mm/edit-customer/"+customerInfo.getId();
-                            String deleteCustomerInfoUrl = "/customer-mm/delete-customer/"+customerInfo.getId();
+                            if(customerInfo.isFullCreated()){
+
+                                String editCustomerInfoUrl = "/customer-mm/edit-customer/"+customerInfo.getId();
+                                String deleteCustomerInfoUrl = "/customer-mm/delete-customer/"+customerInfo.getId();
+
                     %>
                         <tr>
                             <td align="center"><%out.print(customerInfo.getId());%></td>
@@ -93,6 +97,7 @@
                                 <a href="<%out.print(deleteCustomerInfoUrl);%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
                             </td>
                         </tr>
+                        <%}%>
                     <%}%>
                 </tbody>
                 <!-- #End Items list -->

@@ -92,8 +92,8 @@ public class CustomerManagementController {
         User customerUser = userService.createCustomerUser(password);
 
 
-        CustomerInfo customerInfo = new CustomerInfo(customerUser, name, company, phone, email, website , new HashSet<>());
-        customerInfo.setId(customerUser.getId());
+        CustomerInfo customerInfo = new CustomerInfo(customerUser.getId() ,customerUser, name, company, phone, email, website , new HashSet<>() , true);
+
 
         customerInfoService.addNewCustomerInfo(customerInfo);
 
