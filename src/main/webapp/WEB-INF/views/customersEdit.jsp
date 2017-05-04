@@ -103,6 +103,21 @@
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(isNew)out.print("required");%>/>
                         </div>
 
+
+                        <% String type1 = "temporal"; String type2 = "standard";
+                            if (customerInfo.isStandardAccount()){
+                                type1 = "standard";
+                                type2 = "temporal";
+                            }
+                        %>
+                        <div class="form-group">
+                            <label for="account_type">Account type</label>
+                            <select id="account_type" name="accountType" class="form-control">
+                                <option value="<%out.print(type1);%>"><%out.print(type1);%></option>
+                                <option value="<%out.print(type2);%>"><%out.print(type2);%></option>
+                            </select>
+                        </div>
+
                         <div class="form-group text-right">
                             <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save</button>
                         </div>
@@ -119,7 +134,6 @@
 <!-- #End Wrapper -->
 
 <%@ include file="footerJavaScript.jsp" %>
-
 <% String isPasswordError = request.getParameter("isPasswordError");
 System.out.print(isPasswordError);%>
 <% if (isPasswordError != null && isPasswordError.equals("true")) { %>

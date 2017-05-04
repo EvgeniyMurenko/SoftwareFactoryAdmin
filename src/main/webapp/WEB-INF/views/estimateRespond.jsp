@@ -84,9 +84,18 @@
                         }
                     } %>
                     <%if (!estimate.isRespond()){%>
-                        <form action="<%out.print("/estimate/set-respond/" + estimate.getId());%>?${_csrf.parameterName}=${_csrf.token}" method="post">
+                        <form action="/estimate/set-respond/" method="post" enctype="multipart/form-data">
                             <h4 class="mb10 mt20">Estimate answer</h4>
                             <textarea class="form-control" name="message" id="editor"></textarea>
+
+                            <input type="hidden" name="estimateId" value="<%out.print(estimate.getId());%>">
+
+                            <!-- Attach files -->
+                            <h4 class="mb10">Attach files</h4>
+                            <div class="form-group">
+                                <input id="chatUpload" name="file[]" multiple type="file">
+                            </div>
+                            <!-- #End Attach files -->
 
                             <div class="form-group text-right mt20">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>

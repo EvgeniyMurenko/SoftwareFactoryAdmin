@@ -57,7 +57,7 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public List<Message> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Message");
+        Query query = session.createQuery("select distinct message from Message message left join fetch message.messageLinks");
         return query.list();
     }
 }

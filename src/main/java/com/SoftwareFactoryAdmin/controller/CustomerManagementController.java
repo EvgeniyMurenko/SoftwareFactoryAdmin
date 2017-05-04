@@ -93,7 +93,7 @@ public class CustomerManagementController {
 
 
         CustomerInfo customerInfo = new CustomerInfo(customerUser.getId() ,customerUser, name, company, phone, email, website , new HashSet<>() , true);
-
+        customerInfo.setStandardAccount(true);
 
         customerInfoService.addNewCustomerInfo(customerInfo);
 
@@ -126,7 +126,8 @@ public class CustomerManagementController {
                                         @RequestParam("company") String company,
                                         @RequestParam("site_link") String website,
                                         @RequestParam("password") String password,
-                                        @RequestParam("confirm_password") String confirmPassword) {
+                                        @RequestParam("confirm_password") String confirmPassword,
+                                        @RequestParam("accountType") String accountType) {
 
 
         if (!password.equals(confirmPassword)) return new ModelAndView("redirect:/customer-mm/edit-customer/"+id ,"isPasswordError" ,"true");
@@ -138,6 +139,13 @@ public class CustomerManagementController {
         customerInfo.setPhone(phone);
         customerInfo.setCompany(company);
         customerInfo.setWebsite(website);
+        customerInfo.setFullCreated(true);
+
+        if (accountType.equals("standard")){
+            customerInfo.setStandardAccount(true);
+        } else {
+            customerInfo.setStandardAccount(false);
+        }
 
         customerInfoService.updateCustomerInfo(customerInfo);
 

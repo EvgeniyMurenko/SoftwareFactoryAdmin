@@ -1,11 +1,10 @@
 package com.SoftwareFactoryAdmin.service;
 
 
+import com.SoftwareFactoryAdmin.model.Message;
+
 public interface MailService {
 
-    void sendEmailAfterRegistration(String password , String login , String recipientMail , String recipientName );
+    void sendEmailAfterEstimateRespond(String recipientMail , Message message);
 
-    void sendEmailAfterEstimate(String estimateId , String registrationLink , String recipientMail);
-
-    void sendEmailAfterEstimateRespond(String recipientMail , String respondText );
 }

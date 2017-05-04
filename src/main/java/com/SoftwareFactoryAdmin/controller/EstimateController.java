@@ -5,12 +5,15 @@ import com.SoftwareFactoryAdmin.constant.MessageEnum;
 import com.SoftwareFactoryAdmin.constant.StatusEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
+import com.SoftwareFactoryAdmin.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.*;
 
 @Controller
@@ -69,8 +72,11 @@ public class EstimateController {
         return estimateRespond;
     }
 
-    @RequestMapping(value = "/set-respond/{estimateId}", method = RequestMethod.POST)
-    public ModelAndView setRespond(@PathVariable Long estimateId, @RequestParam(value = "message") String message, HttpSession httpSession) {
+    @RequestMapping(value = "/set-respond/", method = RequestMethod.POST)
+    public ModelAndView setRespond(@RequestParam(value = "estimateId") Long estimateId,
+                                   @RequestParam(value = "message") String message,
+                                   @RequestParam(value = "file[]") MultipartFile[] files,
+                                   HttpSession httpSession) {
 
         Estimate estimate = estimateService.getEstimateById(estimateId);
         CustomerInfo customerInfo = estimate.getCustomerInfo();
@@ -113,6 +119,7 @@ public class EstimateController {
                 messageFromCustomer.setMessageTime(estimate.getDateRequest());
                 messageFromCustomer.setMessageText(estimate.getEstimateRequest());
 
+
                 Set<MessageLink> messageLinks = new HashSet<>();
 
                 Set<EstimateLink> estimateLinks = estimate.getEstimateLinks();
@@ -127,11 +134,14 @@ public class EstimateController {
                 //MANAGER
                 Message messageFromManager = new Message();
                 messageFromManager.setaCase(aCase);
+                messageFromManager.setMessageLinks(new HashSet<>());
                 messageFromManager.setMessageTime(new java.util.Date());
                 messageFromManager.setMessageText(message);
                 messageFromManager.setMessageLinks(new HashSet<>());
                 messageFromManager.setIsRead(MessageEnum.READ.toString());
                 messageFromManager.setUser(manager);
+                SaveFile saveFile = new SaveFile(files);
+                saveFile.saveMessageFilesToMessage(messageFromManager);
                 messageService.addNewMessage(messageFromManager);
 
 
@@ -149,10 +159,10 @@ public class EstimateController {
                 //SET ESTIMATE RESPOND
                 estimate.setRespond(true);
                 estimateService.updateEstimate(estimate);
+
+                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager);
             }
         }
-
-        mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), message);
 
         return new ModelAndView("redirect:/estimate/");
     }

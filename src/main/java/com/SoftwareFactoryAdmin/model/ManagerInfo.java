@@ -3,13 +3,14 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "s_manager_info")
-public class ManagerInfo {
+public class ManagerInfo implements Serializable {
 
     public ManagerInfo() {
     }

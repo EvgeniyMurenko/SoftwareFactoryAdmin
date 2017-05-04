@@ -3,10 +3,11 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "s_google_cloud_keys")
-public class GoogleCloudKey {
+public class GoogleCloudKey implements Serializable {
 
     public GoogleCloudKey() {
     }

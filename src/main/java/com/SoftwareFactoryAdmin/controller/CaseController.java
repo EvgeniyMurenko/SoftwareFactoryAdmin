@@ -122,7 +122,7 @@ public class CaseController {
 
         caseService.updateCase(aCase);
 
-        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message.getMessageText());
+        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message);
 
 /*        List<StaffInfo> staffInfoList = staffInfoService.getAllStaffInfo();
         for (StaffInfo staffInfo : staffInfoList){

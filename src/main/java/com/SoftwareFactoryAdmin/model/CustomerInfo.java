@@ -1,11 +1,12 @@
 package com.SoftwareFactoryAdmin.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "s_customer_info")
-public class CustomerInfo {
+public class CustomerInfo implements Serializable {
 
     public CustomerInfo() {
     }
@@ -52,11 +53,15 @@ public class CustomerInfo {
     private String website;
 
 
-    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Project> projects;
 
     @Column(name="is_full_created")
     private boolean isFullCreated;
+
+
+    @Column(name = "is_standard_account")
+    private boolean isStandardAccount;
 
 
     public User getUser() {
@@ -131,6 +136,12 @@ public class CustomerInfo {
         isFullCreated = fullCreated;
     }
 
+    public boolean isStandardAccount() {
+        return isStandardAccount;
+    }
 
+    public void setStandardAccount(boolean standardAccount) {
+        isStandardAccount = standardAccount;
+    }
 }
 

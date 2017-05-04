@@ -35,9 +35,11 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public Case read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Case aCase = (Case) session.get(Case.class, id);
-        return aCase;
+        Query query = session.createQuery("select distinct aCase from Case aCase left join fetch aCase.messages message left join fetch message.messageLinks where aCase.id = :id");
+        query.setParameter("id", id);
+        return (Case) query.uniqueResult();
     }
+
 
     @Override
     public void update(Case aCase) {
@@ -56,7 +58,7 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public List<Case> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Case");
+        Query query = session.createQuery("select distinct aCase from Case aCase left join fetch aCase.messages");
         return query.list();
     }
 
@@ -64,7 +66,7 @@ public class CaseDaoImpl implements CaseDao {
     public List<Case> findByTitle(String title) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("From Case where projectTitle  like :projectTitle");
-        query.setParameter("projectTitle","%"+title+"%");
+        query.setParameter("projectTitle", "%" + title + "%");
         return query.list();
     }
 
@@ -72,16 +74,16 @@ public class CaseDaoImpl implements CaseDao {
     public List<Case> findByProjectName(String projectName) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("From Case c where c.project.projectName like :projectName");
-        query.setParameter("projectName","%"+projectName+"%");
+        query.setParameter("projectName", "%" + projectName + "%");
         return query.list();
     }
 
     @Override
-    public List<Case> findCasesHundredLimit(){
+    public List<Case> findCasesHundredLimit() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select distinct aCase from Case aCase  order by aCase.creationDate desc ");
 
-          query.setMaxResults(100);
+        query.setMaxResults(100);
         return query.list();
     }
 

@@ -34,8 +34,9 @@ public class EstimateDaoImpl implements EstimateDao {
     @Override
     public Estimate read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Estimate estimate = (Estimate) session.get(Estimate.class, id);
-        return estimate;
+        Query query = session.createQuery("select distinct estimate from Estimate estimate left join fetch estimate.estimateLinks where estimate.id = :id");
+        query.setParameter("id", id);
+        return (Estimate) query.uniqueResult();
     }
 
     @Override

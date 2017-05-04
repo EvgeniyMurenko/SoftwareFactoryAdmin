@@ -4,12 +4,13 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "s_estimates")
-public class Estimate {
+public class Estimate implements Serializable {
 
     public Estimate() {
     }
@@ -71,13 +72,14 @@ public class Estimate {
     private String estimateGeneratedId;
 
 
-    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<EstimateLink> estimateLinks;
 
 
     @OneToOne
     @JoinColumn(name = "customer_info_id")
     CustomerInfo customerInfo;
+
 
     public Long getId() {
         return id;

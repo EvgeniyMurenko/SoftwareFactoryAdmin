@@ -3,12 +3,13 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "s_notices")
-public class Notice {
+public class Notice implements Serializable {
 
     public Notice() {
     }
