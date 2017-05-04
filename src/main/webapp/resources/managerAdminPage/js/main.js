@@ -54,8 +54,6 @@ jQuery(document).ready(function($) {
     });
 
     // Case upload file
-    $("#imageUpload").fileinput();
-    $("#videoUpload").fileinput();
     $("#chatUpload").fileinput();
 
     // Delete confirm
@@ -102,9 +100,8 @@ jQuery(document).ready(function($) {
 });
 
 // CKEDITOR show
-var editor = CKEDITOR.replace('editor', {
+CKEDITOR.replace('editor', {
     toolbar : 'Basic',
     width : '100%',
     height : '250'
 });
-editor.add;

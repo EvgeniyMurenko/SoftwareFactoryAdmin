@@ -8,11 +8,18 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    <%@ include file="siteHeaderMeta.jsp" %>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
 
     <title>소팩소개 :: Software Factory</title>
 
-    <%@ include file="siteHeaderStyle.jsp" %>
+    <%@ include file="headerStyles.jsp" %>
 
 </head>
 <body>
@@ -38,9 +45,7 @@
 </section>
 <!-- #End 404 -->
 
-<%@ include file="siteFooter.jsp" %>
-
-<%@ include file="siteFooterJavaScript.jsp" %>
+<%@ include file="footerJavaScript.jsp" %>
 
 </body>
 </html>
