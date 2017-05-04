@@ -52,6 +52,7 @@
                 <tr>
                     <th width="20">ID</th>
                     <th>Case issue</th>
+                    <th width="150">Customer name</th>
                     <th width="150">Project</th>
                     <th width="170">Date</th>
                     <th width="50">Status</th>
@@ -63,6 +64,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Case issue</th>
+                    <th>Customer name</th>
                     <th>Project</th>
                     <th>Date</th>
                     <th>Status</th>
@@ -79,6 +81,7 @@
                     <tr>
                         <td align="center"><%out.print(aCase.getId());%></td>
                         <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
+                        <td><a href="<%out.print("/customer-mm/edit-customer/"+aCase.getProject().getCustomerInfo().getId());%>"><%out.print(aCase.getProject().getCustomerInfo().getName());%></a></td>
                         <td align="center">
                             <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
                                 out.print(ProjectEnum.projectNameNormal.getValue());
