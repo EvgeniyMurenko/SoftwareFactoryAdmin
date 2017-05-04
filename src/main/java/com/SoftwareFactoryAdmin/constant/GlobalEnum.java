@@ -2,7 +2,7 @@ package com.SoftwareFactoryAdmin.constant;
 
 
 public enum  GlobalEnum {
-/*    webRoot ("http://www.sofac.kr");*/
+/*    webRoot ("http://www.a.sofac.kr");*/
    /* webRoot ("http://localhost:8080");*/
     webRoot("http://52.211.242.225:8080");
 
