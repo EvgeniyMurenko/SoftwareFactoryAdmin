@@ -53,8 +53,9 @@ public class CustomerInfo implements Serializable {
     private String website;
 
 
-    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Project> projects;
+
 
     @Column(name="is_full_created")
     private boolean isFullCreated;
