@@ -52,7 +52,7 @@ public class Message implements Serializable {
     private String isRead;
 
 
-    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private Set<MessageLink> messageLinks;
 
     public Long getId() {

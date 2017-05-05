@@ -72,7 +72,7 @@ public class Estimate implements Serializable {
     private String estimateGeneratedId;
 
 
-    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<EstimateLink> estimateLinks;
 
 
