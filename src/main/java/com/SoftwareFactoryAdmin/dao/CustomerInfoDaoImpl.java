@@ -35,9 +35,9 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     @Override
     public CustomerInfo read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        CustomerInfo customerInfo = (CustomerInfo) session.get(CustomerInfo.class, id);
-        logger.error("CustomerInfo read successfully, Case=" + customerInfo);
-        return customerInfo;
+        Query query = session.createQuery("select distinct customerInfo from CustomerInfo customerInfo left join fetch customerInfo.projects project left join fetch project.aCase left join fetch customerInfo.user where customerInfo.id = :id");
+        query.setParameter("id", id);
+        return (CustomerInfo) query.uniqueResult();
     }
 
     @Override
