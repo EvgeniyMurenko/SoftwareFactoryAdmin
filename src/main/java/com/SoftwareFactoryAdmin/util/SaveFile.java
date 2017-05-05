@@ -19,15 +19,20 @@ public class SaveFile {
     private String pathForSaveFile;
     private MultipartFile[] files;
 
-    public SaveFile() {
-    }
 
     public SaveFile(MultipartFile[] files) {
-        this.files = files;
+        if (files.length > 0) {
+            this.files = files;
+        } else {
+            this.files = new MultipartFile[0];
+        }
     }
 
 
     public void saveNoticeFilesToNotice(Notice notice) {
+
+        if (files.length > 0) return;
+        if (files[0].isEmpty()) return;
 
         pathForSaveFile = MainPathEnum.mainPath + "/notice/";
 
@@ -48,6 +53,9 @@ public class SaveFile {
     }
 
     public void saveMessageFilesToMessage(Message message) {
+
+        if (files.length > 0) return;
+        if (files[0].isEmpty()) return;
 
         pathForSaveFile = MainPathEnum.mainPath + "/message/";
 
@@ -70,6 +78,9 @@ public class SaveFile {
     }
 
     public void saveEstimateFilesToEstimate(Estimate estimate) {
+
+        if (files.length > 0) return;
+        if (files[0].isEmpty()) return;
 
         pathForSaveFile = MainPathEnum.mainPath + "/estimate/";
 
@@ -121,6 +132,7 @@ public class SaveFile {
         return generatedUUIDname;
 
     }
+
 
 }
 
