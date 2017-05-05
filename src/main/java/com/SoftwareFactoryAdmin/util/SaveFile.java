@@ -31,8 +31,9 @@ public class SaveFile {
 
     public void saveNoticeFilesToNotice(Notice notice) {
 
-        if (files.length > 0) return;
+        if (files.length < 1) return;
         if (files[0].isEmpty()) return;
+
 
         pathForSaveFile = MainPathEnum.mainPath + "/notice/";
 
@@ -54,8 +55,9 @@ public class SaveFile {
 
     public void saveMessageFilesToMessage(Message message) {
 
-        if (files.length > 0) return;
+        if (files.length < 1) return;
         if (files[0].isEmpty()) return;
+
 
         pathForSaveFile = MainPathEnum.mainPath + "/message/";
 
@@ -79,7 +81,7 @@ public class SaveFile {
 
     public void saveEstimateFilesToEstimate(Estimate estimate) {
 
-        if (files.length > 0) return;
+        if (files.length < 1) return;
         if (files[0].isEmpty()) return;
 
         pathForSaveFile = MainPathEnum.mainPath + "/estimate/";
