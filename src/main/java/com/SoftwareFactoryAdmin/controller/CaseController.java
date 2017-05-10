@@ -124,7 +124,8 @@ public class CaseController {
 
         caseService.updateCase(aCase);
 
-        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message, customer.getSsoId());
+        String registrationLink = "www.sofac.kr";
+        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message, customer, registrationLink);
 
 /*        List<StaffInfo> staffInfoList = staffInfoService.getAllStaffInfo();
         for (StaffInfo staffInfo : staffInfoList){

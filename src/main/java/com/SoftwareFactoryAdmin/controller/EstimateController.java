@@ -160,10 +160,45 @@ public class EstimateController {
                 estimate.setRespond(true);
                 estimateService.updateEstimate(estimate);
 
-                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager, customer.getSsoId());
+                String registrationLink = "";
+
+                if (customerInfo.isFullCreated()){
+                    registrationLink = "www.sofac.kr";
+                }else{
+                    registrationLink = "www.sofac.kr/requestId/";
+                    registrationLink = registrationLink + customerInfo.getUser().getId() + "/" + generateEstimateId(estimate.getDateRequest(), estimate.getId()) + "/" + estimate.getId();
+                }
+
+                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager, customer, registrationLink);
             }
         }
 
         return new ModelAndView("redirect:/estimate/");
     }
+
+    private String generateEstimateId(Date currentDate, long id) {
+
+        Date date = new java.sql.Date(currentDate.getTime());
+
+        String dateWithoutHours = date.toString();
+        dateWithoutHours = dateWithoutHours.substring(2, 10);
+        dateWithoutHours = dateWithoutHours.replaceAll("-", "");
+
+        String stringId = Long.toString(id);
+
+        String generatedEstimateId = "";
+        if (stringId.length() <= 4) {
+            String zero = "";
+            for (int i = 0; i < 4 - stringId.length(); i++) {
+                zero = zero + "0";
+                System.out.println("1");
+            }
+            generatedEstimateId = dateWithoutHours + zero + stringId;
+        } else {
+            generatedEstimateId = dateWithoutHours + stringId;
+        }
+        System.out.println(generatedEstimateId);
+        return generatedEstimateId;
+    }
+
 }

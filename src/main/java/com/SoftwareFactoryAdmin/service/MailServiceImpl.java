@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.service;
 
 import com.SoftwareFactoryAdmin.model.MessageLink;
+import com.SoftwareFactoryAdmin.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -25,7 +26,8 @@ public class MailServiceImpl implements MailService {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일HH시mm분에 고객님께서 문의하신 내용에 대해서 답변드립니다.");
 
 
-   public void sendEmailAfterEstimateRespond(String recipientMail , com.SoftwareFactoryAdmin.model.Message message, String ssoId){
+   public void sendEmailAfterEstimateRespond(String recipientMail , com.SoftwareFactoryAdmin.model.Message message, User customerUser, String registrationLink){
+
        String textFooterNotFoolCreation = "<!-- Content Footer -->\n" +
                "\t<div style=\"margin: 20px 10px !important; content: '' !important; clear: both !important;padding: 5px 15px !important;\">\n" +
                "\t\t<p>이 메일은 문의 코너를 통해서 접수된 내용에 대한 답변 메일 입니다.</p>\n" +
@@ -33,7 +35,7 @@ public class MailServiceImpl implements MailService {
                "\t\t<p>저희 회사와 거래를 원하실 경우 고객등록을 먼저 하셔야 합니다.</p>\n" +
                "\t\t<p>고객 등록 이후에는 CASE라는 코너를 통해서 지속적인 대화가 가능합니다.</p>\n" +
                "\t\t<p>고객 등록을 원하시면 아래 URL을 클릭해 주세요</p>\n" +
-               "\t\t<p>(CASE ID 발급 요청 : <a href = \"www.sofac.kr/requestId/17/1705050010/10\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">www.sofac.kr/requestId/17/1705050010/10)</a></p>\n" +
+               "\t\t<p>(CASE ID 발급 요청 : <a href = \"+registrationLink+\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">"+registrationLink+")</a></p>\n" +
                "\t\t<br><p>소프트웨어팩토리 바로가기 <a href = \"www.sofac.kr\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">www.sofac.kr</a></p>\n" +
                "\t</div>\n" +
                "\t<!-- #End Content Footer -->";
@@ -45,8 +47,8 @@ public class MailServiceImpl implements MailService {
                "\t\t<p>아래를 클릭 하시면 CASE 코너를 통해서 손쉽게 문의하실 수 있습니다.</p>\n" +
                "\n" +
                "\t\t<br><p>고객님은 이미 아이디를 가지고 계십니다.</p>\n" +
-               "\t\t<p>고객 ID : "+ssoId+"</p>\n" +
-               "\t\t<p><a href = \"www.sofac.kr\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">CASE 로그인을 페이지로 이동 …</a></p>\n" +
+               "\t\t<p>고객 ID : "+customerUser.getSsoId()+"</p>\n" +
+               "\t\t<p><a href = "+registrationLink+"\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">CASE 로그인을 페이지로 이동 …</a></p>\n" +
                "\n" +
                "\t</div>\n" +
                "\t<!-- #End Content Footer2 -->";
