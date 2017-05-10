@@ -33,7 +33,9 @@ jQuery(document).ready(function($) {
         responsive: true,
         language: {
             url: "js/dataTables/dataTables.korean.lg"
-        }
+        },
+        "order": [[ 1, "desc" ]]
+
     });
 
     // Tooltipe
