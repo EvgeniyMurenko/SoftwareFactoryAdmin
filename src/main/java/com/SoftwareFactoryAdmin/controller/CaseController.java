@@ -90,6 +90,8 @@ public class CaseController {
         User currentUser = userService.findById(userId);
         aCase.setEmergency(false);
 
+        User customer = userService.findById(aCase.getProject().getCustomerInfo().getId());
+
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = formatter.parse(appointmentTime + ":00");
@@ -122,7 +124,7 @@ public class CaseController {
 
         caseService.updateCase(aCase);
 
-        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message);
+        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message, customer.getSsoId());
 
 /*        List<StaffInfo> staffInfoList = staffInfoService.getAllStaffInfo();
         for (StaffInfo staffInfo : staffInfoList){

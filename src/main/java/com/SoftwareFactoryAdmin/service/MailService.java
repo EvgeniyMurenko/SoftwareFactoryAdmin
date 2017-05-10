@@ -5,6 +5,6 @@ import com.SoftwareFactoryAdmin.model.Message;
 
 public interface MailService {
 
-    void sendEmailAfterEstimateRespond(String recipientMail , Message message);
+    void sendEmailAfterEstimateRespond(String recipientMail , Message message, String ssoId);
 
 }

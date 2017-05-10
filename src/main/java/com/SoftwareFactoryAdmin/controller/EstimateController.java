@@ -160,7 +160,7 @@ public class EstimateController {
                 estimate.setRespond(true);
                 estimateService.updateEstimate(estimate);
 
-                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager);
+                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager, customer.getSsoId());
             }
         }
 
