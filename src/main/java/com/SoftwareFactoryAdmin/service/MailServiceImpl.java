@@ -35,7 +35,7 @@ public class MailServiceImpl implements MailService {
                "\t\t<p>저희 회사와 거래를 원하실 경우 고객등록을 먼저 하셔야 합니다.</p>\n" +
                "\t\t<p>고객 등록 이후에는 CASE라는 코너를 통해서 지속적인 대화가 가능합니다.</p>\n" +
                "\t\t<p>고객 등록을 원하시면 아래 URL을 클릭해 주세요</p>\n" +
-               "\t\t<p>(CASE ID 발급 요청 : <a href = \"" + registrationLink + "\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">"+registrationLink+")</a></p>\n" +
+               "\t\t<p>(CASE ID 발급 요청 : <a href = \""+registrationLink+"\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">"+registrationLink+"</a>)</p>\n" +
                "\t\t<br><p>소프트웨어팩토리 바로가기 <a href = \"www.sofac.kr\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">www.sofac.kr</a></p>\n" +
                "\t</div>\n" +
                "\t<!-- #End Content Footer -->";
