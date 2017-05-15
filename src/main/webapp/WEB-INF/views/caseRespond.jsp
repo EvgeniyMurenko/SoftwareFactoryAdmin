@@ -149,7 +149,7 @@
                                 <%if(managerInfo != null ){%>
                                     <div class="name"><%out.print(managerInfo.getName());%></div>
                                 <%} else {%>
-                                    <div class="name">MANAGER NAME</div>
+                                    <div class="name">SoFac Team</div>
                                 <%}%>
                             </div>
 

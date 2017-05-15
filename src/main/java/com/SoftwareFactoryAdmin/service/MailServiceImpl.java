@@ -28,30 +28,78 @@ public class MailServiceImpl implements MailService {
 
    public void sendEmailAfterEstimateRespond(String recipientMail , com.SoftwareFactoryAdmin.model.Message message, User customerUser, String registrationLink){
 
-       String textFooterNotFoolCreation = "<!-- Content Footer -->\n" +
-               "\t<div style=\"margin: 20px 10px !important; content: '' !important; clear: both !important;padding: 5px 15px !important;\">\n" +
-               "\t\t<p>이 메일은 문의 코너를 통해서 접수된 내용에 대한 답변 메일 입니다.</p>\n" +
-               "\t\t<p>내용을 확인 하신 후 지속적인 문의가 필요하거나</p>\n" +
-               "\t\t<p>저희 회사와 거래를 원하실 경우 고객등록을 먼저 하셔야 합니다.</p>\n" +
-               "\t\t<p>고객 등록 이후에는 CASE라는 코너를 통해서 지속적인 대화가 가능합니다.</p>\n" +
-               "\t\t<p>고객 등록을 원하시면 아래 URL을 클릭해 주세요</p>\n" +
-               "\t\t<p>(CASE ID 발급 요청 : <a href = \""+registrationLink+"\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">"+registrationLink+"</a>)</p>\n" +
-               "\t\t<br><p>소프트웨어팩토리 바로가기 <a href = \"www.sofac.kr\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">www.sofac.kr</a></p>\n" +
-               "\t</div>\n" +
-               "\t<!-- #End Content Footer -->";
+       String textFooterNotFoolCreation = "<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 30px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t이 메일은 문의 코너를 통해서 접수된 내용에 대한 답변 메일 입니다.\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t내용을 확인 하신 후 지속적인 문의가 필요하거나\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t저희 회사와 거래를 원하실 경우 고객등록을 먼저 하셔야 합니다.\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t고객 등록 이후에는 CASE라는 코너를 통해서 지속적인 대화가 가능합니다.\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t고객 등록을 원하시면 아래 URL을 클릭해 주세요\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t(CASE ID 발급 요청 : <a href = \"http://"+registrationLink+"\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">"+registrationLink+"</a>)\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t<!-- End Footer #2 -->";
 
-       String textFooterFoolCreation = "<!-- Content Footer2 -->\n" +
-               "\t<div style=\"margin: 20px 10px !important; content: '' !important; clear: both !important;padding: 5px 15px !important;\">\n" +
-               "\t\t<p>이 메일은 문의 코너를 통해서 접수된 내용에 대한 답변 메일 입니다.</p>\n" +
-               "\t\t<p>내용을 확인 하신 후 지속적인 연속된 질문이 필요하실 경우</p>\n" +
-               "\t\t<p>아래를 클릭 하시면 CASE 코너를 통해서 손쉽게 문의하실 수 있습니다.</p>\n" +
-               "\n" +
-               "\t\t<br><p>고객님은 이미 아이디를 가지고 계십니다.</p>\n" +
-               "\t\t<p>고객 ID : "+customerUser.getSsoId()+"</p>\n" +
-               "\t\t<p><a href = \""+registrationLink+"\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">CASE 로그인을 페이지로 이동 …</a></p>\n" +
-               "\n" +
-               "\t</div>\n" +
-               "\t<!-- #End Content Footer2 -->";
+       String textFooterFoolCreation = "<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 30px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t이 메일은 문의 코너를 통해서 접수된 내용에 대한 답변 메일 입니다.\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t내용을 확인 하신 후 지속적인 연속된 질문이 필요하실 경우\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t아래를 클릭 하시면 CASE 코너를 통해서 손쉽게 문의하실 수 있습니다.\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 40px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t고객님은 이미 아이디를 가지고 계십니다.\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t고객 ID : "+customerUser.getSsoId()+"\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>\n" +
+               "\t\t\t\t\t\n" +
+               "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+               "\t\t\t\t\t\t\t<a href = \"http://www.sofac.kr/\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">CASE 로그인을 페이지로 이동 …</a>\n" +
+               "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+               "\t\t\t\t\t</tr>";
        String footerText;
        if(message.getaCase().getProject().getCustomerInfo().isFullCreated()){
            footerText = textFooterFoolCreation;
@@ -78,97 +126,141 @@ public class MailServiceImpl implements MailService {
                    mimeMessage.setRecipient(Message.RecipientType.TO,
                            new InternetAddress(recipientMail));
                    mimeMessage.setSubject("[SoFAC] 소프트웨어팩토리에서 보내드립니다.", "utf-8");
-                   mimeMessage.setContent("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n" +
-                           "        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
-                           "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
-                           "<head>\n" +
-                           "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n" +
-                           "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\n" +
-                           "    <meta name=\"viewport\"\n" +
-                           "          content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui\"/>\n" +
-                           "    <meta name=\"format-detection\" content=\"telephone=no\"/>\n" +
-                           "    <meta name=\"format-detection\" content=\"address=no\"/>\n" +
+                   mimeMessage.setContent("<table\n" +
+                           "       style=\"margin: 0px auto; padding: 0px; border: 0px currentColor; border-image: none; text-align: left;!important; line-height: inherit; font-size: inherit; border-collapse: collapse; border-spacing: 0; -premailer-cellpadding: 0; -premailer-cellspacing: 0;\"\n" +
+                           "       cellspacing=\"0\" cellpadding=\"0\" align=\"center\">\n" +
+                           "    <tbody>\n" +
+                           "    <tr>\n" +
+                           "        <td style=\"height: 16px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; -premailer-height: 16;\" height=\"16\"></td>\n" +
+                           "    </tr>\n" +
+                           "    <tr>\n" +
+                           "        <td style=\"width: 745px; -premailer-width: 685;\">\n" +
+                           "            <table class=\"iPhone_font\"\n" +
+                           "                   style=\"padding: 0px; border: 0px currentColor; border-image: none; line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: inherit;\">\n" +
+                           "                <tbody>\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"width: 600px;\">\n" +
+                           "\t\t\t\t\t\t\t<!-- Header -->\n" +
+                           "\t\t\t\t\t\t\t<div class=\"clearfix\" style=\"padding: 10px 0 15px 0; margin-bottom: 5px; \">\n" +
+                           "\t\t\t\t\t\t\t\t<div style=\"float: left;\">\n" +
+                           "\t\t\t\t\t\t\t\t\t<a href=\"http://www.sofac.kr\" target=\"_blank\" style=\"text-decoration: none; font-size: 24pt; color: #333;\">소프트웨어<span\n" +
+                           "\t\t\t\t\t\t\t\t\t\t\t\tstyle=\"font-weight: 600; color: #03a9f4;\">팩토리</span></a>\n" +
+                           "\t\t\t\t\t\t\t\t\t<div style=\"font-size: 9pt; color: #999;\">SoFAC : <span style=\"font-style: italic;\">Software Factory</span>\n" +
+                           "\t\t\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t\t\t</div>\n" +
                            "\n" +
-                           "    <title>소프트웨어팩토리</title>\n" +
+                           "\t\t\t\t\t\t\t\t<div style=\"float: right; padding-top: 15px;\">\n" +
+                           "\t\t\t\t\t\t\t\t\t<a href=\"http://www.sofac.kr/whatIsSofac\" target=\"_blank\">소프트웨어 팩토리 란 무엇입니까?</a>\n" +
+                           "\t\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t\t<!-- #End Header -->\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"text-align: left; color: rgb(51, 51, 51); line-height: 1px; padding-top: 0px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t<div class=\"clearfix\" style=\" margin: 10px 0; border-bottom: 1px solid #eee;\">\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
                            "\n" +
-                           "    <style type=\"text/css\">\n" +
-                           "        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css) !important;\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"text-align: left; color: rgb(51, 51, 51); line-height: 18px; padding-top: 10px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t안녕하세요\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
                            "\n" +
-                           "        html, body {\n" +
-                           "            font-family: 'Nanum Gothic', Arial, Tahoma, Verdana, sans-serif !important;\n" +
-                           "            font-size: 11pt !important;\n" +
-                           "            width: 100% !important;\n" +
-                           "        }\n" +
-                           "    </style>\n" +
-                           "\n" +
-                           "</head>\n" +
-                           "<body style=\"margin: 0 !important; padding: 0 !important; -webkit-font-smoothing: antialiased !important;\n" +
-                           "            mso-margin-top-alt: 0 !important; mso-margin-bottom-alt: 0 !important; mso-padding-alt: 0 !important; background: #E7E7E7 !important;\">\n" +
-                           "<div style=\"width: 850px !important; height: 100% !important;\n" +
-                           "            background: #ffffff !important; overflow: hidden !important; margin: 20px auto 40px auto !important; box-shadow: 0 0 7px #cdcccc !important;\n" +
-                           "            -webkit-box-shadow: 0 0 7px #cdcccc !important; -moz-box-shadow: 0 0 7px #cdcccc !important; -o-box-shadow: 0 0 7px #cdcccc !important;\">\n" +
-                           "\n" +
-                           "    <!-- Header -->\n" +
-                           "    <div style=\"padding: 10px 0 15px 0 !important; margin: 10px !important; border-bottom: 1px solid #eee !important; height: 55px !important;\">\n" +
-                           "        <div style=\"float: left !important;\">\n" +
-                           "            <a href=\"http://www.sofac.kr\" target=\"_blank\" style=\"text-decoration: none !important; font-size: 24pt !important; color: #333 !important;\">\n" +
-                           "                소프트웨어<span style=\"font-weight: 600 !important; color: #03a9f4 !important;\">팩토리</span></a>\n" +
-                           "            <div style=\"font-size: 9pt !important; color: #999 !important;\">SoFAC : <span style=\"font-style: italic !important;\">Software Factory</span>\n" +
-                           "            </div>\n" +
-                           "        </div>\n" +
-                           "\n" +
-                           "        <div style=\"float: right !important; padding-top: 15px !important;\">\n" +
-                           "            <a href=\"http://www.sofac.kr/whatIsSofac\" target=\"_blank\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\">소프트웨어 팩토리 란 무엇입니까?</a>\n" +
-                           "        </div>\n" +
-                           "    </div>\n" +
-                           "    <!-- #End Header -->\n" +
-                           "\t\n" +
-                           "\t<!-- Content Header -->\n" +
-                           "\t<div style=\"margin: 20px 10px !important; content: '' !important; clear: both !important;padding: 5px 15px !important;\">\n" +
-                           "\t\t<p>안녕하세요 </p>\n" +
-                           "\t\t<p>소프트웨어 팩토리 입니다.</p>\n" +
-                           "\t\t<p>"+dateFormat.format(message.getMessageTime())+"</p>\n" +
-                           "\t\t<p>문의결과와 첨부 파일을 확인해 주세요</p>\n" +
-                           "\n" +
-                           "\t\t<p>클릭하시면 첨부파일을 보실 수 있습니다  </p>\n" +
-                           "\t\t<div style=\"float: left; padding-top: 0px; padding-left:10px; color: #03a9f4 !important\">\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t소프트웨어 팩토리 입니다.\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t"+dateFormat.format(message.getMessageTime())+"\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t문의결과와 첨부 파일을 확인해 주세요\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t클릭하시면 첨부파일을 보실 수 있습니다\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 30px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
                                 allLinks+
-                           "\t\t</div>\n" +
-                           "\t</div>\n" +
-                           "\t<!-- End Content Header -->\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t<div style=\"margin: 0px 0px !important; background: #ddd !important; padding: 5px 15px !important;\">\n" +
                            "\n" +
-                           "    <!-- Content -->\n" +
-                           "    <div style=\"margin: 20px 10px !important; content: '' !important; clear: both !important; background: #ddd !important; padding: 5px 15px !important;\">\n" +
+                                message.getMessageText()+
                            "\n" +
-                                   message.getMessageText()+
+                           "\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\n" +
+                           "\t\t\t\t\t\n" +
+
+                                footerText+
+
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"padding: 10px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\tNo need to reply to this email.\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
                            "\n" +
-                           "    </div>\n" +
-                           "    <!-- #End Content -->\n" +
-                           "\t\n" +
-                           footerText+
+                           "\t\t\t\t\t<tr>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t\t<td style=\"text-align: left; color: rgb(51, 51, 51); line-height: 18px; padding-top: 0px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
+                           "\t\t\t\t\t\t\t<!-- Footer -->\n" +
+                           "\t\t\t\t\t\t\t<div class=\"clearfix\" style=\"margin: 20px 10px 10px 10px; padding-top: 15px; border-top: 1px solid #eee;\">\n" +
                            "\n" +
-                           "    <!-- Footer -->\n" +
-                           "    <div style=\"height: 50px !important; margin: 20px 10px 10px 10px !important; padding-top: 15px !important; border-top: 1px solid #eee !important;\">\n" +
+                           "\t\t\t\t\t\t\t\t<div style=\"color: #999; font-size: 9pt; float: left;\">\n" +
+                           "\t\t\t\t\t\t\t\t\tPolicy of SoFAC<br/>\n" +
+                           "\t\t\t\t\t\t\t\t\t<a href=\"http://www.sofac.kr/policy\"><span style=\"font-size: 9pt;\">SoFAC 고객 정책</span></a>\n" +
+                           "\t\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t\t\t<div style=\"color: #999; font-size: 9pt; float: right; text-align: right;\">\n" +
+                           "\t\t\t\t\t\t\t\t\t220-87-45112<br/>\n" +
+                           "\t\t\t\t\t\t\t\t\t서울시 강남구 역삼동 해성빌딩 7층<br/>\n" +
+                           "\t\t\t\t\t\t\t\t\t대표자 : 박상만\n" +
+                           "\t\t\t\t\t\t\t\t</div>\n" +
                            "\n" +
-                           "        <div style=\"color: #999 !important; font-size: 9pt !important; float: left !important;\">\n" +
-                           "            Policy of SoFAC<br/>\n" +
-                           "            <a href=\"http://www.sofac.kr/policy\" style=\"color: #03a9f4 !important; cursor: pointer !important; text-decoration: none !important;\"><span style=\"font-size: 9pt !important;\">SoFAC 고객 정책</span></a>\n" +
-                           "        </div>\n" +
-                           "        <div style=\"color: #999 !important; font-size: 9pt !important; float: right !important; text-align: right !important;\">\n" +
-                           "            220-87-45112<br/>\n" +
-                           "            서울시 강남구 역삼동 해성빌딩 7층<br/>\n" +
-                           "            대표자 : 박상만\n" +
-                           "        </div>\n" +
-                           "\n" +
-                           "    </div>\n" +
-                           "    <div style=\"color: #999 !important; font-size: 9pt !important; text-align: center !important; padding: 10px !important;\">\n" +
-                           "        Copyright © 2017. All rights reserved\n" +
-                           "    </div>\n" +
-                           "    <!-- Footer -->\n" +
-                           "\n" +
-                           "</div>\n" +
-                           "</body>\n" +
-                           "</html>", "text/html; charset=utf-8");
+                           "\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t\t<div style=\"color: #999; font-size: 9pt; text-align: center; padding: 10px;\">\n" +
+                           "\t\t\t\t\t\t\t\tCopyright © 2016. All rights reserved\n" +
+                           "\t\t\t\t\t\t\t</div>\n" +
+                           "\t\t\t\t\t\t\t<!-- Footer -->\n" +
+                           "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
+                           "\t\t\t\t\t</tr>\n" +
+                           "\t\t\t\t\t\t\n" +
+                           "                </tbody>\n" +
+                           "            </table>\n" +
+                           "        </td>\n" +
+                           "    </tr>\n" +
+                           "    <tr style=\"height: 17px; -premailer-height: 17;\" height=\"17\">\n" +
+                           "        <td style=\"font-family: Geneva, Helvetica, Arial, sans-serif;\"></td>\n" +
+                           "    </tr>\n" +
+                           "    <tr>\n" +
+                           "        <td style=\"background-position: top; padding: 15px 0px 12px; width: 685px; text-align: center; color: rgb(136, 136, 136); line-height: 14px; font-family: Geneva, Helvetica, Arial, sans-serif; font-size: 11px; background-repeat: no-repeat; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; font-smooth: always;\"\n" +
+                           "            colspan=\"3\" background=\"http://sofac.kr/resources/indexPage/images/footer_gradient_web.png\"\n" +
+                           "            align=\"center\">\n" +
+                           "               \n" +
+                           " \n" +
+                           "        </td>\n" +
+                           "    </tr>\n" +
+                           "    <tr style=\"height: 50px; -premailer-height: 50;\" height=\"50\">\n" +
+                           "        <td style=\"font-family: Geneva, Helvetica, Arial, sans-serif;\"></td>\n" +
+                           "    </tr>\n" +
+                           "    </tbody>\n" +
+                           "</table>", "text/html; charset=utf-8");
 
                }
            });

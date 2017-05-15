@@ -39,10 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers( "/list")
-				.access("hasRole('CUSTOMER') or hasRole('MANAGER') or hasRole('DBA') or hasRole('ADMIN')")
-/*				.antMatchers("/cabinet*//**").access("hasRole('CUSTOMER')")
-				.antMatchers("/notice*//**", "/staff*//**" ).access("hasRole('ADMIN')")
-				.antMatchers("/estimate*//**", "/cases*//**").access("hasRole('ADMIN') or hasRole('MANAGER')")*/
+				.access("hasRole('MANAGER') or hasRole('ADMIN')")
+				.antMatchers("/notice*//**").access("hasRole('ADMIN')")
+				.antMatchers("/estimate*//**", "/cases*//**", "/customer-mm*//**").access("hasRole('ADMIN') or hasRole('MANAGER')")
 				.and().formLogin().loginPage("/main")
 				.loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()
 				.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
