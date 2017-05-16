@@ -17,4 +17,6 @@ public interface EstimateService {
 
     Estimate getEstimateById(long estimateId);
 
+    Estimate findEstimateByCustomerInfoId(Long id);
+
 }

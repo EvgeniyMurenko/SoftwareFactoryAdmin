@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class NotificationService {
+public class PushNotificationService {
 
     /**
      * keys is the id which android app will give to server (one time)

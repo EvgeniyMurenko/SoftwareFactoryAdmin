@@ -16,4 +16,6 @@ public interface  EstimateDao {
 
     List<Estimate> findAll();
 
+    Estimate findEstimateByCustomerInfoId(Long id);
+
 }

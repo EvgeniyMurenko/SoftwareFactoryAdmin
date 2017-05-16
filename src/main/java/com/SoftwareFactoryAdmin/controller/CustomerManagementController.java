@@ -3,11 +3,9 @@ package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.constant.ProjectEnum;
 import com.SoftwareFactoryAdmin.constant.StatusEnum;
-import com.SoftwareFactoryAdmin.model.Case;
-import com.SoftwareFactoryAdmin.model.CustomerInfo;
-import com.SoftwareFactoryAdmin.model.Project;
-import com.SoftwareFactoryAdmin.model.User;
+import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.CustomerInfoService;
+import com.SoftwareFactoryAdmin.service.EstimateService;
 import com.SoftwareFactoryAdmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +21,9 @@ public class CustomerManagementController {
 
     @Autowired
     CustomerInfoService customerInfoService;
+
+    @Autowired
+    EstimateService estimateService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -67,8 +68,11 @@ public class CustomerManagementController {
     @RequestMapping(value = "/delete-customer/{customerId}", method = RequestMethod.GET)
     public ModelAndView deleteCustomer(@PathVariable Long customerId) {
 
-        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerId);
+        Estimate estimate = estimateService.findEstimateByCustomerInfoId(customerId);
+        estimate.setCustomerInfo(null);
+        estimateService.updateEstimate(estimate);
 
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerId);
         customerInfoService.deleteCustomerInfo(customerInfo);
 
         return new ModelAndView("redirect:/customer-mm/");

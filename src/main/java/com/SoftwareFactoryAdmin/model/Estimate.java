@@ -76,7 +76,7 @@ public class Estimate implements Serializable {
     private Set<EstimateLink> estimateLinks;
 
 
-    @OneToOne
+    @OneToOne/*(cascade = CascadeType.ALL, fetch = FetchType.EAGER)*/
     @JoinColumn(name = "customer_info_id")
     CustomerInfo customerInfo;
 

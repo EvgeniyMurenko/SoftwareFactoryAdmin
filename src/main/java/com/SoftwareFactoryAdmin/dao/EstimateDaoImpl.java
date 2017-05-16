@@ -59,4 +59,13 @@ public class EstimateDaoImpl implements EstimateDao {
         Query query = session.createQuery("from Estimate");
         return query.list();
     }
+
+    @Override
+    public Estimate findEstimateByCustomerInfoId(Long id){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select estimate from Estimate estimate where estimate.customerInfo.id =:id");
+        query.setParameter("id", id);
+        return (Estimate) query.uniqueResult();
+
+    }
 }

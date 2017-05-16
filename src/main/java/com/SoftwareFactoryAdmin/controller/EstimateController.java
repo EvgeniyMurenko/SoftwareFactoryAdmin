@@ -64,6 +64,7 @@ public class EstimateController {
 
         ModelAndView estimateRespond = new ModelAndView("/estimateRespond");
         Estimate estimate = estimateService.getEstimateById(estimateId);
+        
         CustomerInfo customerInfo = estimate.getCustomerInfo();
 
         estimateRespond.addObject("estimate", estimate);

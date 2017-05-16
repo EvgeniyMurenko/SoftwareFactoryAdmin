@@ -48,4 +48,10 @@ public class EstimateServiceImpl implements EstimateService {
     public Estimate getEstimateById(long estimateId) {
         return estimateDao.read(estimateId);
     }
+
+    @Override
+    @Transactional
+    public Estimate findEstimateByCustomerInfoId(Long id) {
+        return estimateDao.findEstimateByCustomerInfoId(id);
+    }
 }

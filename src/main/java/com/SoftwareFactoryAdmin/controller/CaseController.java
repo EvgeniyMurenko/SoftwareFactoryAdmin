@@ -43,7 +43,7 @@ public class CaseController {
     MailService mailService;
 
     @Autowired
-    NotificationService notificationService;
+    PushNotificationService pushNotificationService;
 
     @Autowired
     GoogleCloudKeyService googleCloudKeyService;

@@ -62,9 +62,13 @@
 
                     <h4 class="mb10">User information</h4>
                     <section class="estimate-user-info">
-                        <div class="name">Name: <%out.print(customerInfo.getName());%></div>
-                        <div class="email">E-mail: <a href="<%out.print(customerInfo.getEmail());%>"><%out.print(customerInfo.getEmail());%></a></div>
-                        <div class="phone">Phone: <a href="<%out.print(customerInfo.getPhone());%>"><%out.print(customerInfo.getPhone());%></a></div>
+                        <%if (customerInfo != null){%>
+                            <div class="name">Name: <%out.print(customerInfo.getName());%></div>
+                            <div class="email">E-mail: <a href="<%out.print(customerInfo.getEmail());%>"><%out.print(customerInfo.getEmail());%></a></div>
+                            <div class="phone">Phone: <a href="<%out.print(customerInfo.getPhone());%>"><%out.print(customerInfo.getPhone());%></a></div>
+                        <%}else {%>
+                        <div class="name">USER HAVE BEEN REMOVED</div>
+                        <%}%>
                     </section>
 
                 </div>
@@ -83,7 +87,7 @@
                             out.print("<br><a href="+ estimateLink.getFileLink()+">"+estimateLink.getFileName()+"</a>");
                         }
                     } %>
-                    <%if (!estimate.isRespond()){%>
+                    <%if (!estimate.isRespond() && customerInfo != null){%>
                         <form action="/estimate/set-respond/" method="post" enctype="multipart/form-data">
                             <h4 class="mb10 mt20">Estimate answer</h4>
                             <textarea class="form-control" name="message" id="editor"></textarea>

@@ -72,6 +72,7 @@
                 <!-- Items list -->
                 <tbody>
                 <%for (Estimate estimate : estimateList){%>
+
                     <tr>
 
                         <td><a href="<%out.print("/estimate/respond/" + estimate.getId()+"/");%>"><% out.print(estimate.getEstimateGeneratedId());%></a></td>
