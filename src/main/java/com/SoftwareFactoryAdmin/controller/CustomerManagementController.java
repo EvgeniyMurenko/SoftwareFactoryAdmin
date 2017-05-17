@@ -75,6 +75,8 @@ public class CustomerManagementController {
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerId);
         customerInfoService.deleteCustomerInfo(customerInfo);
 
+        userService.deleteUserById(customerId);
+
         return new ModelAndView("redirect:/customer-mm/");
     }
 

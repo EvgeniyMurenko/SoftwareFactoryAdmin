@@ -19,6 +19,8 @@ public interface UserService {
 
 	void deleteUserBySSO(String sso);
 
+	void deleteUserById(Long id);
+
 	List<User> findAllUsers();
 
 	boolean isUserSSOUnique(Long id, String sso);
