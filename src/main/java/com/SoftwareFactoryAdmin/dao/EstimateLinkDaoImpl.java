@@ -14,8 +14,6 @@ import java.util.List;
 @Repository("estimateLinkDao")
 public class EstimateLinkDaoImpl implements EstimateLinkDao {
 
-    static final Logger logger = LoggerFactory.getLogger(EstimateDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -41,14 +39,12 @@ public class EstimateLinkDaoImpl implements EstimateLinkDao {
     public void update(EstimateLink estimateLink) {
         Session session = sessionFactory.getCurrentSession();
         session.update(estimateLink);
-        logger.error("EstimateLink update successfully, EstimateLink=" + estimateLink);
     }
 
     @Override
     public void delete(EstimateLink estimateLink) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(estimateLink);
-        logger.info("EstimateLink deleted successfully, EstimateLink details=" + estimateLink);
     }
 
     @Override

@@ -17,8 +17,6 @@ import java.util.List;
 @Repository("managerInfoPermissionDao")
 public class ManagerInfoPermissionDaoImpl implements ManagerInfoPermissionDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerInfoDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -31,7 +29,6 @@ public class ManagerInfoPermissionDaoImpl implements ManagerInfoPermissionDao {
     public ManagerInfoPermission findById(Long id) {
         Session session = sessionFactory.getCurrentSession();
         ManagerInfoPermission managerInfoPermission = (ManagerInfoPermission) session.get(ManagerInfoPermission.class, id);
-        logger.error("ManagerInfoPermission read successfully, ManagerInfoPermission=" + managerInfoPermission);
         return managerInfoPermission;
     }
 

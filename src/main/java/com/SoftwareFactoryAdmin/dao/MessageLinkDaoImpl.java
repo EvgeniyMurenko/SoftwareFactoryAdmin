@@ -14,8 +14,6 @@ import java.util.List;
 @Repository("messageLinkDao")
 public class MessageLinkDaoImpl implements MessageLinkDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -43,14 +41,12 @@ public class MessageLinkDaoImpl implements MessageLinkDao {
     public void update(MessageLink messageLink) {
         Session session = sessionFactory.getCurrentSession();
         session.update(messageLink);
-        logger.error("MessageLink update successfully, MessageLink=" + messageLink);
     }
 
     @Override
     public void delete(MessageLink messageLink) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(messageLink);
-        logger.info("MessageLink deleted successfully, MessageLink details=" + messageLink);
     }
 
     @Override

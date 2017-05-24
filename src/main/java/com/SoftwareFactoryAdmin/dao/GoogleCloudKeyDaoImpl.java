@@ -14,7 +14,6 @@ import java.util.List;
 @Repository("googleCloudKeyDao")
 public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -40,14 +39,12 @@ public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
     public void update(GoogleCloudKey googleCloudKey) {
         Session session = sessionFactory.getCurrentSession();
         session.update(googleCloudKey);
-        logger.error("GoogleCloudKey update successfully, googleCloudKey=" + googleCloudKey);
     }
 
     @Override
     public void delete(GoogleCloudKey googleCloudKey) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(googleCloudKey);
-        logger.info("GoogleCloudKey deleted successfully, googleCloudKey details=" + googleCloudKey);
     }
 
     @Override

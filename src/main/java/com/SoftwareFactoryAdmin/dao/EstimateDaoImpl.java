@@ -15,8 +15,6 @@ import java.util.List;
 @Repository("estimateDao")
 public class EstimateDaoImpl implements EstimateDao {
 
-    static final Logger logger = LoggerFactory.getLogger(EstimateDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -43,14 +41,12 @@ public class EstimateDaoImpl implements EstimateDao {
     public void update(Estimate estimate) {
         Session session = sessionFactory.getCurrentSession();
         session.update(estimate);
-        logger.error("Estimate update successfully, Case=" + estimate);
     }
 
     @Override
     public void delete(Estimate estimate) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(estimate);
-        logger.info("Estimate deleted successfully, Case details=" + estimate);
     }
 
     @Override

@@ -15,8 +15,6 @@ import java.util.List;
 @Repository("caseDao")
 public class CaseDaoImpl implements CaseDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(CaseDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -45,14 +43,12 @@ public class CaseDaoImpl implements CaseDao {
     public void update(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
         session.update(aCase);
-        logger.error("Case update successfully, Case=" + aCase);
     }
 
     @Override
     public void delete(Case aCase) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(aCase);
-        logger.info("Case deleted successfully, Case details=" + aCase);
     }
 
     @Override
