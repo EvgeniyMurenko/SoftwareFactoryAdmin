@@ -87,8 +87,12 @@
                         <h4 class="mb10">Birth Date</h4>
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
-                                <%SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-                                <%String date = dateFormat.format(staffInfo.getBirthDate());%>
+                                <%  String date = "";
+                                    if (!isNew) {
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    date = dateFormat.format(staffInfo.getBirthDate());
+                                }
+                                %>
                                 <input type="text" name="birth_date" class="form-control" value="<%out.print(date);%>"/>
                                 <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -122,18 +126,6 @@
 
                         <%if (!isNew){%>
 
-
-                        <div class="form-group">
-                            <label class="control-label">Rating (0-5)</label>
-                            <select name="rating" class="form-control" id="project">
-                                <option value="0">Select Score</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
                             <div class="form-group">
                                 <label class="control-label">Android level (0-10)</label>
                                 <input type="number" min="0" max="10" name="android" class="form-control"

@@ -23,6 +23,6 @@ public interface StaffInfoService {
 
     StaffInfo getStaffInfoById(Long id);
 
-    void updateStaffInfoWithParameters(Long id, User user, ManagerInfo managerInfo ,String password,String name, String phone, String email, String birthDate, int rating, int android, int iOs, int java, int php, int javascript, int cSharp, int cPlusPlus, int frontend, int design);
+    void updateStaffInfoWithParameters(Long id, User user, ManagerInfo managerInfo ,String password,String name, String phone, String email, String birthDate, int android, int iOs, int java, int php, int javascript, int cSharp, int cPlusPlus, int frontend, int design);
 
 }

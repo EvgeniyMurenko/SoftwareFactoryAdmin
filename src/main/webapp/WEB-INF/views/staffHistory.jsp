@@ -2,6 +2,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.StaffHistory" %>
+<%@ page import="java.util.Collections" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -44,17 +45,18 @@
 
         <%@ include file="topLine.jsp" %>
 
-        <%StaffInfo staffInfo = (StaffInfo) request.getAttribute("staffInfo");%>
-        <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-        <%List<StaffHistory> staffHistories = staffInfo.getStaffHistories();%>
+            <%StaffInfo staffInfo = (StaffInfo) request.getAttribute("staffInfo");%>
+            <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+            <%List<StaffHistory> staffHistories = staffInfo.getStaffHistories();%>
         <!-- Content section -->
         <section class="container-fluid content">
             <h3><i class="fa fa-tasks"></i>
-                <%out.print(staffInfo.getName()+" :: History");%>
+                <%out.print(staffInfo.getName() + " :: History");%>
             </h3>
 
             <div class="mb20">
-                <a href="/membership-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back to staff list</a>
+                <a href="/membership-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back to staff
+                    list</a>
             </div>
 
             <div class="row">
@@ -63,39 +65,90 @@
                     <h4 class="mb10">Staff information</h4>
                     <section class="estimate-user-info">
                         <div class="name">Name: <%out.print(staffInfo.getName());%></div>
-                        <div class="email">E-mail: <a href="<%out.print(staffInfo.getEmail());%>"><%out.print(staffInfo.getEmail());%></a></div>
-                        <div class="phone">Phone: <a href="<%out.print(staffInfo.getPhone());%>"><%out.print(staffInfo.getPhone());%></a></div>
-                        <div class="name">Birth date: <% out.print(dateFormatShow.format(staffInfo.getBirthDate())); %></div>
+                        <div class="email">E-mail: <a
+                                href="<%out.print(staffInfo.getEmail());%>"><%out.print(staffInfo.getEmail());%></a>
+                        </div>
+                        <div class="phone">Phone: <a
+                                href="<%out.print(staffInfo.getPhone());%>"><%out.print(staffInfo.getPhone());%></a>
+                        </div>
+                        <div class="name">Birth
+                            date: <% out.print(dateFormatShow.format(staffInfo.getBirthDate())); %></div>
                     </section>
+
+                    <br>
+
+                    <input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>"
+                           class="rating-loading">
+                    <form action="/membership-mm/update-rating" method="post">
+                        <div class="form-group">
+                            <label class="control-label">Rating (0-5)</label>
+                            <select name="rating" class="form-control" id="project">
+                                <option value="0">Update rating</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="id" value="<%out.print(staffInfo.getId());%>">
+
+                        <div class="form-group text-right">
+                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Update
+                                rating
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="col-md-8">
                     <section class="cases-messages-section">
                         <br>
-                        <% for (StaffHistory staffHistory : staffHistories){%>
-                            <%-- <div class="manager-message">--%>
-                            <div class="manager-message">
-                                <div class="clearfix border-bottom pb5 mb10">
-                                    <div class="name"><%out.print(staffHistory.getManagerName() + " ID - " +staffHistory.getManagerId());%></div>
-                                    <div class="date"><% out.print(dateFormatShow.format(staffHistory.getDate())); %></div>
-                                </div>
-                                <!-- Message body -->
-                                <div class="description">
-                                    <%  out.print(staffHistory.getText());%>
-                                </div>
-                                <!-- #End Message body -->
+
+
+                        <%  Collections.reverse(staffHistories);
+                            for (StaffHistory staffHistory : staffHistories) {%>
+                        <div class="manager-message">
+                            <div class="clearfix border-bottom pb5 mb10">
+                                <div class="name"><%
+                                    out.print(staffHistory.getManagerName() + " ID - " + staffHistory.getManagerId());%></div>
+                                <div class="date"><% out.print(dateFormatShow.format(staffHistory.getDate())); %></div>
                             </div>
+                            <!-- Message body -->
+                            <div class="description">
+                                <% out.print(staffHistory.getText());%>
+                            </div>
+                            <!-- #End Message body -->
+                        </div>
 
                         <%}%>
                     </section>
                 </div>
             </div>
         </section>
-    <!-- #End Page-content -->
-    </div>
+        <!-- #End Page-content -->
+</div>
 <!-- #End Wrapper -->
 
 <%@ include file="footerJavaScript.jsp" %>
+
+<%
+    String isUpdated = request.getParameter("isUpdated");
+    if (isUpdated != null) {
+        String link = "/membership-mm/history/" + staffInfo.getId();
+%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            'Update',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}%>
 
 </body>
 </html>

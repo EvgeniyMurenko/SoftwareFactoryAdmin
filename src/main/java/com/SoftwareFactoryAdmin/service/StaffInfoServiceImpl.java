@@ -52,7 +52,7 @@ public class StaffInfoServiceImpl implements StaffInfoService {
 
     @Override
     public void updateStaffInfoWithParameters(Long id, User user, ManagerInfo managerInfo, String password,
-                                              String name, String phone, String email, String birthDate, int rating,
+                                              String name, String phone, String email, String birthDate,
                                               int android, int iOs, int java, int php, int javascript, int cSharp,
                                               int cPlusPlus, int frontend, int design) {
 
@@ -81,16 +81,6 @@ public class StaffInfoServiceImpl implements StaffInfoService {
         if (!staffInfo.getBirthDate().equals(birthDate)) {
             historyChanges.append("birth date changed from - " + staffInfo.getBirthDate() + " to  " + birthDate + "<br>");
             staffInfo.setBirthDate(AppMethods.getDateFromString(birthDate));
-        }
-        if (rating != 0) {
-            Double newRating;
-            if (staffInfo.getRating()==0){
-                newRating = (double) rating;
-            } else {
-                 newRating = Math.floor((staffInfo.getRating() + rating) / 2 * 100) / 100;
-            }
-            historyChanges.append("rating changed from - " + staffInfo.getRating() + " to  " + newRating + "<br>");
-            staffInfo.setRating(newRating);
         }
         if (staffInfo.getAndroid() != android) {
             historyChanges.append("android level changed from - " + staffInfo.getAndroid() + " to  " + android + "<br>");

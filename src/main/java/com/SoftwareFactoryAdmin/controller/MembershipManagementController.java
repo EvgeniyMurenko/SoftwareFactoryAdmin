@@ -111,7 +111,6 @@ public class MembershipManagementController {
                                   @RequestParam("phone") String phone,
                                   @RequestParam("password") String password,
                                   @RequestParam("confirm_password") String confirmPassword,
-                                  @RequestParam("rating") int rating,
                                   @RequestParam("android") int android,
                                   @RequestParam("ios") int iOs,
                                   @RequestParam("java") int java,
@@ -123,7 +122,7 @@ public class MembershipManagementController {
                                   @RequestParam("design") int design,
                                   HttpSession httpSession) {
 
-        System.out.print("rating " + rating);
+
         if (!password.equals(confirmPassword))
             return new ModelAndView("redirect:/membership-mm/create", "isPasswordError", "true");
 
@@ -132,7 +131,7 @@ public class MembershipManagementController {
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
 
         staffInfoService.updateStaffInfoWithParameters(id, userStaff, managerInfo, password, name,
-                phone, email, birthDate, rating, android,
+                phone, email, birthDate,  android,
                 iOs, java, php, javascript, cSharp, cPlusPlus, frontend, design);
 
 
@@ -162,6 +161,38 @@ public class MembershipManagementController {
         staffInfoService.deleteStaffInfo(staffInfo);
 
         return new ModelAndView("redirect:/membership-mm/");
+    }
+
+
+    @RequestMapping(value = "/update-rating" , method = RequestMethod.POST)
+    public ModelAndView updateRating(@RequestParam("id") Long id,
+                                     @RequestParam("rating") int rating,
+                                     HttpSession httpSession){
+
+        StaffInfo staffInfo = staffInfoService.getStaffInfoById(id);
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+
+          if (rating != 0) {
+            Double newRating;
+            if (staffInfo.getRating()==0){
+                newRating = (double) rating;
+            } else {
+                 newRating = Math.floor((staffInfo.getRating() + rating) / 2 * 100) / 100;
+            }
+            List<StaffHistory> staffHistories = staffInfo.getStaffHistories();
+
+            String historyText = "rating changed from - " + staffInfo.getRating() + " to  " + newRating + "<br>";
+            StaffHistory staffHistory = new StaffHistory(historyText , new Date() , staffInfo , managerInfo.getName(), managerId);
+            staffHistories.add(staffHistory);
+            staffInfo.setStaffHistories(staffHistories);
+            staffInfo.setRating(newRating);
+
+            staffInfoService.updateStaffInfo(staffInfo);
+            return new ModelAndView("redirect:/membership-mm/history/" + id , "isUpdated" , "true");
+        }
+
+        return new ModelAndView("redirect:/membership-mm/history/" + id);
     }
 }
 
