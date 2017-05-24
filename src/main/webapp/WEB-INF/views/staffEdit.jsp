@@ -79,7 +79,7 @@
 
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Name" value="<%if (!isNew)out.print(staffInfo.getName());%>" />
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="<%if (!isNew)out.print(staffInfo.getName());%>" <%if(isNew)out.print("required");%> />
                         </div>
 
                         <!-- Appointment time -->
@@ -93,7 +93,7 @@
                                     date = dateFormat.format(staffInfo.getBirthDate());
                                 }
                                 %>
-                                <input type="text" name="birth_date" class="form-control" value="<%out.print(date);%>"/>
+                                <input type="text" name="birth_date" class="form-control" value="<%out.print(date);%>"<%if(isNew)out.print("required");%>/>
                                 <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -105,23 +105,23 @@
                         <div class="form-group">
                             <label class="control-label">E-mail</label>
                             <input type="email" name="email" class="form-control" placeholder="E-mail"
-                                   value="<%if (!isNew) out.print(staffInfo.getEmail());%>"/>
+                                   value="<%if (!isNew) out.print(staffInfo.getEmail());%>" <%if(isNew)out.print("required");%>/>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Phone</label>
                             <input type="text" name="phone" class="form-control" placeholder="Phone"
-                                   value="<%if (!isNew) out.print(staffInfo.getPhone());%>"/>
+                                   value="<%if (!isNew) out.print(staffInfo.getPhone());%>"<%if(isNew)out.print("required");%>/>
                         </div>
 
                         <div class="form-group delimiter mt10">
                             <label for="new_password">New password</label>
-                            <input type="password" name="password" id="new_password" class="form-control" value="<%if (!isNew) out.print(staffInfo.getUser().getPassword());%>" placeholder="New password"/>
+                            <input type="password" name="password" id="new_password" class="form-control" value="<%if (!isNew) out.print(staffInfo.getUser().getPassword());%>" placeholder="New password"<%if(isNew)out.print("required");%>/>
                         </div>
 
                         <div class="form-group">
                             <label for="confirm_password">Confirm password</label>
-                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" value="<%if (!isNew) out.print(staffInfo.getUser().getPassword());%>" placeholder="Confirm password"/>
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" value="<%if (!isNew) out.print(staffInfo.getUser().getPassword());%>" placeholder="Confirm password"<%if(isNew)out.print("required");%>/>
                         </div>
 
                         <%if (!isNew){%>

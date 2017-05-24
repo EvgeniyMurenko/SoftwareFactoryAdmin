@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.SoftwareFactoryAdmin.dao.UserDao;
+import com.SoftwareFactoryAdmin.model.GoogleCloudKey;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.model.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +90,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setSsoId(UUID.randomUUID().toString());
         user.setPassword(UUID.randomUUID().toString());
-
+        user.setGoogleCloudKeys(new HashSet<>());
 
         UserProfile userProfile = new UserProfile();
         userProfile.setId(typeId);

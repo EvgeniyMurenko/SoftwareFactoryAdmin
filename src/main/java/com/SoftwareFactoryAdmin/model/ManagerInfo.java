@@ -15,7 +15,7 @@ public class ManagerInfo implements Serializable {
     public ManagerInfo() {
     }
 
-    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions, Set<GoogleCloudKey> googleCloudKeys) {
+    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -23,7 +23,6 @@ public class ManagerInfo implements Serializable {
         this.email = email;
         this.birthday = birthday;
         this.managerInfoPermissions = managerInfoPermissions;
-        this.googleCloudKeys = googleCloudKeys;
     }
 
     @Id
@@ -58,8 +57,6 @@ public class ManagerInfo implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "permission_id")})
     private Set<ManagerInfoPermission> managerInfoPermissions = new HashSet<ManagerInfoPermission>();
 
-    @OneToMany(mappedBy = "managerInfo", fetch = FetchType.EAGER)
-    private Set<GoogleCloudKey> googleCloudKeys;
 
     @OneToMany(mappedBy = "managerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Project> projects;
@@ -102,14 +99,6 @@ public class ManagerInfo implements Serializable {
 
     public void setManagerInfoPermissions(Set<ManagerInfoPermission> managerInfoPermissions) {
         this.managerInfoPermissions = managerInfoPermissions;
-    }
-
-    public Set<GoogleCloudKey> getGoogleCloudKeys() {
-        return googleCloudKeys;
-    }
-
-    public void setGoogleCloudKeys(Set<GoogleCloudKey> googleCloudKeys) {
-        this.googleCloudKeys = googleCloudKeys;
     }
 
     public Long getId() {
