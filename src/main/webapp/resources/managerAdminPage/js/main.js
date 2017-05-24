@@ -14,6 +14,8 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $('#rating').rating({displayOnly: true, step: 0.5, size: "xs", min: 0, max: 5, stars: 5 });
+
     $back_to_top.on('click', function(event){
         event.preventDefault();
         $('body,html').animate({

@@ -47,7 +47,7 @@
             <h3><i class="fa fa-users"></i>Staff List</h3>
 
             <div class="mb20">
-                <a href="/staff/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
+                <a href="/membership-mm/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
             </div>
 
 
@@ -56,38 +56,72 @@
                 <tr>
                     <th width="20">ID</th>
                     <th>Name</th>
-                    <th>E-mail</th>
+                <%--    <th>Creation Date</th>
+                    <th>Birth Date</th>
+                    <th>E-mail</th>--%>
+                    <th>Rating</th>
+                    <th>Android</th>
+                    <th>iOS</th>
+                    <th>Java</th>
+                    <th>PHP</th>
+                    <th>Java script</th>
+                    <th>C#</th>
+                    <th>С++</th>
+                    <th>Frontend(html+css)</th>
+                    <th>Design</th>
                     <th width="150">Action</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>ID</th>
+                    <th width="20">ID</th>
                     <th>Name</th>
-                    <th>E-mail</th>
-                    <th>Action</th>
+           <%--         <th>Creation Date</th>
+                    <th>Birth Date</th>
+                    <th>E-mail</th>--%>
+                    <th>Rating</th>
+                    <th>Android</th>
+                    <th>iOS</th>
+                    <th>Java</th>
+                    <th>PHP</th>
+                    <th>Java script</th>
+                    <th>C#</th>
+                    <th>С++</th>
+                    <th>Frontend(html+css)</th>
+                    <th>Design</th>
+                    <th width="150">Action</th>
                 </tr>
                 </tfoot>
 
                 <!-- Items list -->
                 <tbody>
-                <% List <StaffInfo> staffInfoList =  (List<StaffInfo>)request.getAttribute("StaffInfoList");%>
-                <% if (staffInfoList.size()> 0 ){
-                    for (StaffInfo staffInfo : staffInfoList){%>
+               <% List <StaffInfo> staffInfoList =  (List<StaffInfo>)request.getAttribute("staffList");%>
+                        <%for (StaffInfo staffInfo : staffInfoList){%>
 
-                        <tr>
-                            <td align="center"><%out.print(staffInfo.getUser());%></td>
-                            <td><a href="<%out.print("/staff/" + staffInfo.getUser()+"/edit/");%>"><%out.print(staffInfo.getName());%></a></td>
-                            <td><a href="<%out.print(staffInfo.getEmail());%>"><%out.print(staffInfo.getEmail());%></a></td>
-                            <td align="center">
-                                <a href="<%out.print("/staff/" + staffInfo.getUser()+"/tasks/");%>" data-toggle="tooltip" title="Tasks"><i class="fa fa-tasks"></i>
-                                    Tasks</a>&nbsp; |&nbsp;
-                                <a href="<%out.print("/staff/staffDelete/" + staffInfo.getUser()+"/");%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
-                                        class="fa fa-trash"></i> Delete</a>
-                            </td>
-                        </tr>
-                    <%}%>
-                <%}%>
+                            <tr>
+                                <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
+                                <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
+                                <%--<td align="center"><%out.print(staffInfo.getCreationDate());%></td>
+                                <td align="center"><%out.print(staffInfo.getBirthDate());%></td>--%>
+                                <td align="center"><input id="rating" name="input" value="2" class="rating-loading"></td>
+                              <%--  <td align="center"><%out.print(staffInfo.getRating());%></td>--%>
+                                <td align="center"><%out.print(staffInfo.getAndroid());%></td>
+                                <td align="center"><%out.print(staffInfo.getiOs());%></td>
+                                <td align="center"><%out.print(staffInfo.getJava());%></td>
+                                <td align="center"><%out.print(staffInfo.getPhp());%></td>
+                                <td align="center"><%out.print(staffInfo.getJavascript());%></td>
+                                <td align="center"><%out.print(staffInfo.getcSharp());%></td>
+                                <td align="center"><%out.print(staffInfo.getcPlusPlus());%></td>
+                                <td align="center"><%out.print(staffInfo.getFrontend());%></td>
+                                <td align="center"><%out.print(staffInfo.getDesign());%></td>
+                                <td align="center">
+                                    <a href="<%out.print("/membership-mm/edit/" + staffInfo.getId());%>" data-toggle="tooltip" title="Edit"><i class="fa fa-tasks"></i>
+                                        Edit</a>&nbsp; |&nbsp;
+                                    <a href="<%out.print("/membership-mm/staffDelete/" + staffInfo.getId());%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
+                                            class="fa fa-trash"></i> Delete</a>
+                                </td>
+                            </tr>
+                        <%}%>
                 </tbody>
                 <!-- #End Items list -->
 

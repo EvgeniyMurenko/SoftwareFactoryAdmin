@@ -9,6 +9,7 @@
 <link href="/resources/baseStyle/bootstrap/bootstrap.selectpicker.min.css" rel="stylesheet"/>
 <link href="/resources/baseStyle/bootstrap/bootstrap.fileinput.min.css" rel="stylesheet"/>
 <link href="/resources/baseStyle/bootstrap/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="/resources/baseStyle/bootstrap/star-rating.min.css" rel="stylesheet" />
 <!-- Font-awesome -->
 <link href="/resources/baseStyle/font-awesome/font-awesome.min.css" rel="stylesheet"/>
 <link href="/resources/baseStyle/font-awesome/awesome-bootstrap-checkbox.min.css" rel="stylesheet"/>

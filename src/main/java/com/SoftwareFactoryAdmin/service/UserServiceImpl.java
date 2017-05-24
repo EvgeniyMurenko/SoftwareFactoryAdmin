@@ -77,6 +77,14 @@ public class UserServiceImpl implements UserService {
     }
 
     public User createCustomerUser(String phone) {
+        return createUser("CUSTOMER" ,1, phone);
+    }
+
+    public User createStaffUser(String phone) {
+        return createUser("STAFF" , 4, phone);
+    }
+
+    private User createUser(String type , int typeId, String password){
 
         User user = new User();
         user.setSsoId(UUID.randomUUID().toString());
@@ -84,8 +92,8 @@ public class UserServiceImpl implements UserService {
 
 
         UserProfile userProfile = new UserProfile();
-        userProfile.setId(1);
-        userProfile.setType("CUSTOMER");
+        userProfile.setId(typeId);
+        userProfile.setType(type);
 
         Set<UserProfile> userProfiles = new HashSet<>();
         userProfiles.add(userProfile);
@@ -96,11 +104,8 @@ public class UserServiceImpl implements UserService {
 
         String ssoId = getCustomerId(user.getId().toString());
 
-        user.setPassword(phone);
+        user.setPassword(password);
         user.setSsoId(ssoId);
-
-
-
         dao.save(user);
 
         return user;
