@@ -22,6 +22,7 @@
 <script type="text/javascript" src="/resources/baseStyle/bootstrap/bootstrap.form-validation.min.js"></script>
 <script type="text/javascript" src="/resources/baseStyle/bootstrap/bootstrap.fileinput.min.js"></script>
 <script type="text/javascript" src="/resources/baseStyle/bootstrap/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/resources/baseStyle/bootstrap/star-rating.min.js"></script>
 <!-- Data Tables -->
 <script type="text/javascript" src="/resources/managerAdminPage/js/dataTables/dataTables.jquery.min.js"></script>
 <script type="text/javascript" src="/resources/managerAdminPage/js/dataTables/dataTables.bootstrap.min.js"></script>
@@ -33,3 +34,4 @@
 <script type="text/javascript" src="/resources/baseStyle/ckeditor/ckeditor.js"></script>
 <!-- Base -->
 <script type="text/javascript" src="/resources/managerAdminPage/js/main.js"></script>
+

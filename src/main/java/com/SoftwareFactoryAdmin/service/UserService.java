@@ -27,4 +27,6 @@ public interface UserService {
 
 	User createCustomerUser(String phone);
 
+	User createStaffUser(String password);
+
 }

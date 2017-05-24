@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.User" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -59,33 +60,47 @@
         <section class="container-fluid content">
             <h3><i class="fa fa-user"></i>
                 <%if (!isNew) {
-                    out.print(staffInfo.getName());
+                    out.print("Edit - " + staffInfo.getName());
                 }else {
                     out.print("Add new staff");
                 }%>
             </h3>
 
             <div class="mb20">
-                <a href="<c:out value="/staff/"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
+                <a href="<c:out value="/membership-mm/"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back to staff list</a>
             </div>
 
-            <form action="/staff/saveStaff?${_csrf.parameterName}=${_csrf.token}" method="post">
+            <%String formAction = "/membership-mm/saveStaff" ; if (!isNew) formAction = "/membership-mm/updateStaff" ;%>
+
+            <form action="<%out.print(formAction);%>" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <input type="hidden" name="id" value="<%if (!isNew)out.print(user.getId());%>">
-                        <%if (!isNew){%>
-                            <input type="hidden" name="name" value="<%if (!isNew)out.print(staffInfo.getName());%>" />
-                        <%} else {%>
-                            <div class="form-group">
-                                <label class="control-label">Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Name" />
-                            </div>
-                        <%}%>
 
                         <div class="form-group">
-                            <label class="control-label">Login</label>
-                            <input type="text" name="login" class="form-control" placeholder="Login" value="<%if (!isNew) out.print(user.getSsoId());%>"/>
+                            <label class="control-label">Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="<%if (!isNew)out.print(staffInfo.getName());%>" />
                         </div>
+
+                        <!-- Appointment time -->
+
+                        <h4 class="mb10">Birth Date</h4>
+                        <div class="form-group">
+                            <div class="input-group date" id="datetimepicker">
+                                <%  String date = "";
+                                    if (!isNew) {
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    date = dateFormat.format(staffInfo.getBirthDate());
+                                }
+                                %>
+                                <input type="text" name="birth_date" class="form-control" value="<%out.print(date);%>"/>
+                                <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- #End Appointment time -->
+
 
                         <div class="form-group">
                             <label class="control-label">E-mail</label>
@@ -101,14 +116,71 @@
 
                         <div class="form-group delimiter mt10">
                             <label for="new_password">New password</label>
-                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password"/>
+                            <input type="password" name="password" id="new_password" class="form-control" value="<%if (!isNew) out.print(staffInfo.getUser().getPassword());%>" placeholder="New password"/>
                         </div>
 
                         <div class="form-group">
                             <label for="confirm_password">Confirm password</label>
-                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm password"/>
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" value="<%if (!isNew) out.print(staffInfo.getUser().getPassword());%>" placeholder="Confirm password"/>
                         </div>
 
+                        <%if (!isNew){%>
+
+                            <div class="form-group">
+                                <label class="control-label">Android level (0-10)</label>
+                                <input type="number" min="0" max="10" name="android" class="form-control"
+                                       value="<%out.print(staffInfo.getAndroid());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">iOS level (0-10)</label>
+                                <input type="number" min="0" max="10" name="ios" class="form-control"
+                                       value="<%out.print(staffInfo.getiOs());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Java level (0-10)</label>
+                                <input type="number" min="0" max="10" name="java" class="form-control"
+                                       value="<%out.print(staffInfo.getJava());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">PHP level (0-10)</label>
+                                <input type="number" min="0" max="10" name="php" class="form-control"
+                                       value="<%out.print(staffInfo.getPhp());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Javascript level (0-10)</label>
+                                <input type="number" min="0" max="10" name="javascript" class="form-control"
+                                       value="<%out.print(staffInfo.getJavascript());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">C# level (0-10)</label>
+                                <input type="number" min="0" max="10" name="c_sharp" class="form-control"
+                                       value="<%out.print(staffInfo.getcSharp());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">C++ level (0-10)</label>
+                                <input type="number" min="0" max="10" name="c_plus_plus" class="form-control"
+                                       value="<%out.print(staffInfo.getcPlusPlus());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Frontend(HTML - CSS) level (0-10)</label>
+                                <input type="number" min="0" max="10" name="frontend" class="form-control"
+                                       value="<%out.print(staffInfo.getFrontend());%>"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Design level (0-10)</label>
+                                <input type="number" min="0" max="10" name="design" class="form-control"
+                                       value="<%out.print(staffInfo.getDesign());%>"/>
+                            </div>
+
+                        <%}%>
                         <div class="form-group text-right">
                             <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save
                             </button>
@@ -127,6 +199,40 @@
 <!-- #End Wrapper -->
 
 <%@ include file="footerJavaScript.jsp" %>
+
+<%
+    String isCreateUpdateSuccess =  request.getParameter("isCreateUpdateSuccess");
+    String isPasswordError =  request.getParameter("isPasswordError");
+    System.out.print("eroro?"+isPasswordError);
+    if(isPasswordError != null){
+        String link = "/membership-mm/create"; if(!isNew) link = "/membership-mm/edit/" + staffInfo.getId();
+%>
+
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Invalid password!',
+            '',
+            'error'
+        );
+         history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}
+    if (isCreateUpdateSuccess !=null){
+        String link = "/membership-mm/edit/" + staffInfo.getId();
+%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            '',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}%>
 
 </body>
 </html>
