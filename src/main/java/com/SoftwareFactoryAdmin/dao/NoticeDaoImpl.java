@@ -14,8 +14,6 @@ import java.util.List;
 @Repository("noticeDao")
 public class NoticeDaoImpl implements NoticeDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(NoticeDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -34,7 +32,6 @@ public class NoticeDaoImpl implements NoticeDao {
     public Notice read(Long id) {
         Session session = sessionFactory.getCurrentSession();
         Notice notice = (Notice) session.get(Notice.class, id);
-        logger.error("Notice read successfully, Notice=" + notice);
         return notice;
     }
 
@@ -42,14 +39,12 @@ public class NoticeDaoImpl implements NoticeDao {
     public void update(Notice notice) {
         Session session = sessionFactory.getCurrentSession();
         session.update(notice);
-        logger.error("Notice update successfully, Notice=" + notice);
     }
 
     @Override
     public void delete(Notice notice) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(notice);
-        logger.info("Notice deleted successfully, Notice details=" + notice);
     }
 
     @Override

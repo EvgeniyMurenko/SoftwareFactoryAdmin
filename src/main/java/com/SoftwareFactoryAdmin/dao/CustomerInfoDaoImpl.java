@@ -15,8 +15,6 @@ import java.util.List;
 @Repository("customerInfoDao")
 public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerInfoDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -36,9 +34,6 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     public CustomerInfo read(Long id) {
         Session session = sessionFactory.getCurrentSession();
         CustomerInfo customerInfo = (CustomerInfo) session.get(CustomerInfo.class, id);
-        logger.error("CustomerInfo read successfully, Case=" + customerInfo);
-      /*  Query query = session.createQuery("select distinct customerInfo from CustomerInfo customerInfo left join fetch customerInfo.projects left join fetch customerInfo.user where customerInfo.id = :id");
-        query.setParameter("id", id);*/
         return customerInfo;
     }
 
@@ -46,14 +41,12 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     public void update(CustomerInfo customerInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.update(customerInfo);
-        logger.error("CustomerInfo update successfully, Case=" + customerInfo);
     }
 
     @Override
     public void delete(CustomerInfo customerInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(customerInfo);
-        logger.info("CustomerInfo deleted successfully, Case details=" + customerInfo);
     }
 
     @Override

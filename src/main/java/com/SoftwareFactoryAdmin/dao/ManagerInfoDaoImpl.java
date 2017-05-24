@@ -15,8 +15,6 @@ import java.util.List;
 @Repository("managerInfoDao")
 public class ManagerInfoDaoImpl implements ManagerInfoDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(ManagerInfoDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -36,7 +34,6 @@ public class ManagerInfoDaoImpl implements ManagerInfoDao {
     public ManagerInfo read(Long id) {
         Session session = sessionFactory.getCurrentSession();
         ManagerInfo managerInfo = (ManagerInfo) session.get(ManagerInfo.class, id);
-        logger.error("ManagerInfo read successfully, ManagerInfo=" + managerInfo);
         return managerInfo;
     }
 
@@ -44,14 +41,12 @@ public class ManagerInfoDaoImpl implements ManagerInfoDao {
     public void update(ManagerInfo managerInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.update(managerInfo);
-        logger.error("ManagerInfo update successfully, ManagerInfo=" + managerInfo);
     }
 
     @Override
     public void delete(ManagerInfo managerInfo) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(managerInfo);
-        logger.info("ManagerInfo deleted successfully, ManagerInfo details=" + managerInfo);
     }
 
     @Override

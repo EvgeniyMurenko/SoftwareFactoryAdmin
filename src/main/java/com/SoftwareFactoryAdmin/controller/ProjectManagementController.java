@@ -1,7 +1,5 @@
 package com.SoftwareFactoryAdmin.controller;
 
-import com.SoftwareFactoryAdmin.constant.ProjectEnum;
-import com.SoftwareFactoryAdmin.constant.StatusEnum;
 import com.SoftwareFactoryAdmin.model.CustomerInfo;
 import com.SoftwareFactoryAdmin.model.ManagerInfo;
 import com.SoftwareFactoryAdmin.model.Project;
@@ -10,21 +8,17 @@ import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.ProjectService;
 import com.SoftwareFactoryAdmin.service.UserService;
-import javafx.scene.web.HTMLEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.HTML;
-import javax.swing.text.html.HTMLEditorKit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 
 @Controller

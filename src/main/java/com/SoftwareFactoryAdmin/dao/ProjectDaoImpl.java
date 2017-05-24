@@ -16,8 +16,6 @@ import java.util.List;
 @Repository("projectDao")
 public class ProjectDaoImpl implements ProjectDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -44,14 +42,12 @@ public class ProjectDaoImpl implements ProjectDao {
     public void update(Project project) {
         Session session = sessionFactory.getCurrentSession();
         session.update(project);
-        logger.error("Project update successfully, Case=" + project);
     }
 
     @Override
     public void delete(Project project) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(project);
-        logger.info("Project deleted successfully, Case details=" + project);
     }
 
     @Override

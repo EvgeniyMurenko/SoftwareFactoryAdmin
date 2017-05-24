@@ -15,8 +15,6 @@ import java.util.List;
 @Repository("messageDao")
 public class MessageDaoImpl implements MessageDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageDaoImpl.class);
-
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -44,14 +42,12 @@ public class MessageDaoImpl implements MessageDao {
     public void update(Message message) {
         Session session = sessionFactory.getCurrentSession();
         session.update(message);
-        logger.error("Message update successfully, Case=" + message);
     }
 
     @Override
     public void delete(Message message) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(message);
-        logger.info("Message deleted successfully, Case details=" + message);
     }
 
     @Override
