@@ -6,12 +6,14 @@ import com.SoftwareFactoryAdmin.constant.StatusEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.EstimateService;
+import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -83,6 +85,9 @@ public class CustomerManagementController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ManagerInfoService managerInfoService;
+
     @RequestMapping(value = "/save-new-customer", method = RequestMethod.POST)
     public ModelAndView saveNewCustomer(@RequestParam("name") String name,
                                       @RequestParam("email") String email,
@@ -90,26 +95,27 @@ public class CustomerManagementController {
                                       @RequestParam("company") String company,
                                       @RequestParam("site_link") String website,
                                       @RequestParam("password") String password,
-                                      @RequestParam("confirm_password") String confirmPassword) {
+                                      @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
 
         if (!password.equals(confirmPassword)) return new ModelAndView("redirect:/customer-mm/add-customer","isPasswordError" ,"true");
 
-
         User customerUser = userService.createCustomerUser(password);
-
 
         CustomerInfo customerInfo = new CustomerInfo(customerUser.getId() ,customerUser, name, company, phone, email, website , new HashSet<>() , true);
         customerInfo.setStandardAccount(true);
 
         customerInfoService.addNewCustomerInfo(customerInfo);
 
-
         CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(customerInfo.getId());
 
-        //CREATE #$GENERAL PROJECT FOR CUSTOMER
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
 
-        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo, new HashSet<>(), "test");
-        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo, new HashSet<>(), "test");
+        //CREATE #$GENERAL PROJECT FOR CUSTOMER
+        Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo,
+                new HashSet<>(), "test", new Date(0), new Date(0), "Default Normal project", managerInfo);
+        Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo,
+                new HashSet<>(), "test", new Date(0), new Date(0), "Default Estimate project", managerInfo);
 
 
         Set<Project> projectsToAdd = new HashSet<>();
@@ -117,9 +123,7 @@ public class CustomerManagementController {
         projectsToAdd.add(projectEstimate);
         customerInfoCreated.setProjects(projectsToAdd);
 
-
         customerInfoService.updateCustomerInfo(customerInfoCreated);
-
 
         return new ModelAndView("redirect:/customer-mm/edit-customer/" + customerInfoCreated.getId() , "isEditCreateSuccess" , "true");
     }

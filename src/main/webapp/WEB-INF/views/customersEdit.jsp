@@ -111,8 +111,9 @@
                         </div>
 
 
-                        <% String type1 = "temporal"; String type2 = "standard";
-                            if (customerInfo.isStandardAccount()){
+                        <% String type1 = "temporal";
+                            String type2 = "standard";
+                            if (!isNew && customerInfo.isStandardAccount()){
                                 type1 = "standard";
                                 type2 = "temporal";
                             }

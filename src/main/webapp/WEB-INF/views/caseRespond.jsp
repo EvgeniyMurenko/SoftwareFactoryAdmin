@@ -89,11 +89,13 @@
                     <td align="center"><%out.print(aCase.getId());%></td>
                     <td><%out.print(aCase.getProjectTitle());%></td>
                     <td align="center">
-                        <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
-                            out.print(ProjectEnum.projectNameNormal.getValue());
-                        }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
-                            out.print(ProjectEnum.projectNameEstimate.getValue());
-                        } else out.print(aCase.getProject().getProjectName()); %>
+                        <a href="<%out.print("/project-mm/view-project/"+aCase.getProject().getId()+"/");%>">
+                            <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                out.print(ProjectEnum.projectNameNormal.getValue());
+                            }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                                out.print(ProjectEnum.projectNameEstimate.getValue());
+                            } else out.print(aCase.getProject().getProjectName()); %>
+                        </a>
                     </td>
                     <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
                     <td align="center"><i class="fa fa-circle-o"></i></td>

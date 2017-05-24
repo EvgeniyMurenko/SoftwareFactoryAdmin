@@ -25,13 +25,11 @@ public class Project implements Serializable {
     @Column(name = "name")
     private String projectName;
 
-
     @Column(name = "date_create")
     private Date createDate;
 
     @Column(name = "status")
     private String status;
-
 
     @ManyToOne
     @JoinColumn(name = "user_customer_id")
@@ -42,6 +40,33 @@ public class Project implements Serializable {
 
     @Column(name = "technology_type")
     private String technologyType;
+
+    @Column(name = "date_start")
+    private Date startDate;
+
+    @Column(name = "date_end")
+    private Date endDate;
+
+    @Column(name = "description")
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "user_manager_id")
+    private ManagerInfo managerInfo;
+
+
+    public Project(String projectName, Date createDate, String status, CustomerInfo customerInfo, Set<Case> cases, String technologyType, Date startDate, Date endDate, String description, ManagerInfo managerInfo) {
+        this.projectName = projectName;
+        this.createDate = createDate;
+        this.status = status;
+        this.customerInfo = customerInfo;
+        this.cases = cases;
+        this.technologyType = technologyType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
+        this.managerInfo = managerInfo;
+    }
 
     public Long getId() {
         return id;
@@ -99,13 +124,35 @@ public class Project implements Serializable {
         this.technologyType = technologyType;
     }
 
-    public Project(String projectName, Date createDate, String status, CustomerInfo customerInfo, Set<Case> cases, String technologyType) {
-        this.projectName = projectName;
-        this.createDate = createDate;
-        this.status = status;
-        this.customerInfo = customerInfo;
-        this.cases = cases;
-        this.technologyType = technologyType;
+    public Date getStartDate() {
+        return startDate;
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ManagerInfo getManagerInfo() {
+        return managerInfo;
+    }
+
+    public void setManagerInfo(ManagerInfo managerInfo) {
+        this.managerInfo = managerInfo;
+    }
 }

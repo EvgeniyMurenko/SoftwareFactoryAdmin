@@ -44,16 +44,40 @@ jQuery(document).ready(function($) {
     // timeago
     $("time.timeago").timeago();
 
-    // datetimepicker
-    moment.lang('en', {
-        week : {
-            dow : 1
+    // Project add/edit from validation
+    $('#customerSOOID').keydown(function (event) {
+        // Разрешаем: backspace, delete, tab и escape
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 ||
+            // Разрешаем: Ctrl+A
+            (event.keyCode == 65 && event.ctrlKey === true) ||
+            // Разрешаем: home, end, влево, вправо
+            (event.keyCode >= 35 && event.keyCode <= 39)) {
+            // Ничего не делаем
+            return;
+        }
+        else {
+            // Обеждаемся, что это цифра, и останавливаем событие keypress
+            if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                event.preventDefault();
+            }
         }
     });
+
+    // datetimepicker
     $('#datetimepicker').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        daysOfWeekDisabled: [0, 6],
+        format: 'YYYY-MM-DD HH:mm'
     });
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#datetimepicker").on("dp.change", function (e) {
+        $('#datetimepicker1').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker1").on("dp.change", function (e) {
+        $('#datetimepicker').data("DateTimePicker").maxDate(e.date);
+    });
+
 
     // Case upload file
     $("#chatUpload").fileinput();

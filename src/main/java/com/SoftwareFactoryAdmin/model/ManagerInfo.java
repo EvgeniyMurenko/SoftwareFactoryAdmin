@@ -61,6 +61,8 @@ public class ManagerInfo implements Serializable {
     @OneToMany(mappedBy = "managerInfo", fetch = FetchType.EAGER)
     private Set<GoogleCloudKey> googleCloudKeys;
 
+    @OneToMany(mappedBy = "managerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Project> projects;
 
     public User getUser() {
         return user;
@@ -126,5 +128,11 @@ public class ManagerInfo implements Serializable {
         this.name = name;
     }
 
+    public Set<Project> getProjects() {
+        return projects;
+    }
 
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
 }
