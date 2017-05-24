@@ -177,20 +177,25 @@ public class ProjectManagementController {
             project.setStatus(selectStatus);
             project.setDescription(description);
             project.setManagerInfo(managerInfo);
+
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            try {
-                Date startDate = formatter.parse(dateStart + ":00");
-                project.setStartDate(startDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (!"".equals(dateStart)) {
+                try {
+                    Date startDate = formatter.parse(dateStart + ":00");
+                    project.setStartDate(startDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
-            try {
-                Date endDate = formatter.parse(dateEnd + ":00");
-                project.setEndDate(endDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (!"".equals(dateEnd)) {
+                try {
+                    Date endDate = formatter.parse(dateEnd + ":00");
+                    project.setEndDate(endDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             projectService.updateProject(project);

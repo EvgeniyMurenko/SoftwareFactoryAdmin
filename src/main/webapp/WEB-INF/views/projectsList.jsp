@@ -99,7 +99,6 @@
                         while (projectIterator.hasNext()) {
                             Project project = projectIterator.next();
                             String customerInfoUrl = "/customer-mm/edit-customer/"+project.getCustomerInfo().getId().toString();
-                            String managerInfoUrl = "/staff-mm/edit-staff/"+project.getManagerInfo().getId().toString();
 
                     %>
                         <tr>
@@ -118,7 +117,7 @@
                                 }%>
                             </td>
                             <td align="center"><%out.print(project.getStatus());%></td>
-                            <td><a href="<%out.print(managerInfoUrl);%>"><%out.print(project.getManagerInfo().getName());%></a></td>
+                            <td><%out.print(project.getManagerInfo().getName());%></td>
                             <td><%out.print(project.getDescription());%></td>
                             <td><a href="<%out.print(customerInfoUrl);%>"><%out.print(project.getCustomerInfo().getName());%></a></td>
                             <%--<td><%out.print(project.getCustomerInfo().getEmail());%></td>

@@ -73,7 +73,7 @@
             <h3><i class="fa fa-user"></i><%out.print(headTitle);%></h3>
 
             <div class="mb20">
-                <a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>" class="btn btn-primary">Back</a>
+                <a href="<%out.print("/project-mm/");%>" class="btn btn-primary">Back</a>
             </div>
 
             <form action="<%out.print(formAction);%>?${_csrf.parameterName}=${_csrf.token}" method="POST" id="projectEditForm">
@@ -95,7 +95,8 @@
 
                         <div class="form-group">
                             <label class="control-label">Project name</label>
-                            <input type="text" name="projectName" class="form-control" placeholder="Project name" value="<%out.print(projectName);%>" <%out.print(projectDisabled);%>/>
+                            <input type="hidden" name="projectName" value="<%out.print(project.getProjectName());%>">
+                            <input type="text" class="form-control" placeholder="Project name" value="<%out.print(projectName);%>" <%out.print(projectDisabled);%>/>
                         </div>
 
                         <div class="form-group">
