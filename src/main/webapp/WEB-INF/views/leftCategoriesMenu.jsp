@@ -17,7 +17,7 @@
             <li><a href="/estimate/"><i class="fa fa-file-text-o" aria-hidden="true"></i> Estimate</a></li>
             <li><a href="/cases/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
             <li><a href="/customer-mm/"><i class="fa fa-user-o" aria-hidden="true"></i> Customers Management</a></li>
-            <li><a href="/staff-mm/"><i class="fa fa-users" aria-hidden="true"></i> Staffs Management</a></li>
+            <li><a href="/membership-mm/"><i class="fa fa-users" aria-hidden="true"></i> Membership Management</a></li>
             <li><a href="/project-mm/"><i class="fa fa-archive" aria-hidden="true"></i> Projects Management</a></li>
           <%--  <li><a href="/project-mm/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Projects Management</a></li>--%>
 
