@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.User" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -82,13 +83,16 @@
                         </div>
 
                         <!-- Appointment time -->
+
                         <h4 class="mb10">Birth Date</h4>
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
-                                <input type="text" name="birth_date" class="form-control" value="<%if (!isNew) out.print(staffInfo.getBirthDate());%>"/>
+                                <%SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+                                <%String date = dateFormat.format(staffInfo.getBirthDate());%>
+                                <input type="text" name="birth_date" class="form-control" value="<%out.print(date);%>"/>
                                 <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                </span>
                             </div>
                         </div>
                         <!-- #End Appointment time -->
@@ -203,6 +207,40 @@
 <!-- #End Wrapper -->
 
 <%@ include file="footerJavaScript.jsp" %>
+
+<%
+    String isCreateUpdateSuccess =  request.getParameter("isCreateUpdateSuccess");
+    String isPasswordError =  request.getParameter("isPasswordError");
+    System.out.print("eroro?"+isPasswordError);
+    if(isPasswordError != null){
+        String link = "/membership-mm/create"; if(!isNew) link = "/membership-mm/edit/" + staffInfo.getId();
+%>
+
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Invalid password!',
+            '',
+            'error'
+        );
+         history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}
+    if (isCreateUpdateSuccess !=null){
+        String link = "/membership-mm/edit/" + staffInfo.getId();
+%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            '',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}%>
 
 </body>
 </html>

@@ -76,7 +76,7 @@
                             <%-- <div class="manager-message">--%>
                             <div class="manager-message">
                                 <div class="clearfix border-bottom pb5 mb10">
-                                    <div class="name"><%out.print(staffHistory.getManagerName() + " ID - " +staffHistory.getId());%></div>
+                                    <div class="name"><%out.print(staffHistory.getManagerName() + " ID - " +staffHistory.getManagerId());%></div>
                                     <div class="date"><% out.print(dateFormatShow.format(staffHistory.getDate())); %></div>
                                 </div>
                                 <!-- Message body -->

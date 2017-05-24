@@ -76,7 +76,7 @@ public class MembershipManagementController {
                                   HttpSession httpSession) {
 
         if (!password.equals(confirmPassword))
-            return new ModelAndView("redirect:/membership-mm/", "isPasswordError", "true");
+            return new ModelAndView("redirect:/membership-mm/create", "isPasswordError", "true");
 
         Long managerId = (Long) httpSession.getAttribute("UserId");
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
@@ -123,9 +123,9 @@ public class MembershipManagementController {
                                   @RequestParam("design") int design,
                                   HttpSession httpSession) {
 
-
+        System.out.print("rating " + rating);
         if (!password.equals(confirmPassword))
-            return new ModelAndView("redirect:/membership-mm/", "isPasswordError", "true");
+            return new ModelAndView("redirect:/membership-mm/create", "isPasswordError", "true");
 
         User userStaff = userService.findById(id);
         Long managerId = (Long) httpSession.getAttribute("UserId");

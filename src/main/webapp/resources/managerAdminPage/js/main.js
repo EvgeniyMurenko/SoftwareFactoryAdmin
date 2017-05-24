@@ -47,14 +47,8 @@ jQuery(document).ready(function($) {
     $("time.timeago").timeago();
 
     // datetimepicker
-    moment.lang('en', {
-        week : {
-            dow : 1
-        }
-    });
     $('#datetimepicker').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        daysOfWeekDisabled: [0, 6],
+        format: 'YYYY-MM-DD HH:mm'
     });
 
     // Case upload file

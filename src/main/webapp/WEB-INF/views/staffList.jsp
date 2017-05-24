@@ -76,9 +76,6 @@
                 <tr>
                     <th width="20">ID</th>
                     <th>Name</th>
-           <%--         <th>Creation Date</th>
-                    <th>Birth Date</th>
-                    <th>E-mail</th>--%>
                     <th>Rating</th>
                     <th>Android</th>
                     <th>iOS</th>
@@ -101,10 +98,7 @@
                             <tr>
                                 <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
                                 <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
-                                <%--<td align="center"><%out.print(staffInfo.getCreationDate());%></td>
-                                <td align="center"><%out.print(staffInfo.getBirthDate());%></td>--%>
-                                <td align="center"><input id="rating" name="input" value="2" class="rating-loading"></td>
-                              <%--  <td align="center"><%out.print(staffInfo.getRating());%></td>--%>
+                                <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
                                 <td align="center"><%out.print(staffInfo.getAndroid());%></td>
                                 <td align="center"><%out.print(staffInfo.getiOs());%></td>
                                 <td align="center"><%out.print(staffInfo.getJava());%></td>
