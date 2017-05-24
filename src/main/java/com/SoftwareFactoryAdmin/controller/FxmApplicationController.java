@@ -80,12 +80,12 @@ public class FxmApplicationController {
 
                 if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,managerUser.getPassword())) {
 
-                    List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(managerInfo.getGoogleCloudKeys());
+                    List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(managerUser.getGoogleCloudKeys());
 
                     if (googleCloudKeyList.indexOf(authorizationDTO.getGoogleCloudKey()) < 0) {
 
                         GoogleCloudKey googleCloudKey = new GoogleCloudKey();
-                        googleCloudKey.setManagerInfo(managerInfo);
+                        googleCloudKey.setUser(managerUser);
                         googleCloudKey.setKey(authorizationDTO.getGoogleCloudKey());
                         googleCloudKeyService.addGoogleCloudKey(googleCloudKey);
 

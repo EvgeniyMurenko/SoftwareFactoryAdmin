@@ -30,6 +30,8 @@ public class User implements Serializable{
 			inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private Set<GoogleCloudKey> googleCloudKeys;
 
 	public Long getId() {
 		return id;
@@ -63,6 +65,13 @@ public class User implements Serializable{
 		this.userProfiles = userProfiles;
 	}
 
+	public Set<GoogleCloudKey> getGoogleCloudKeys() {
+		return googleCloudKeys;
+	}
+
+	public void setGoogleCloudKeys(Set<GoogleCloudKey> googleCloudKeys) {
+		this.googleCloudKeys = googleCloudKeys;
+	}
 
 	@Override
 	public int hashCode() {
@@ -100,13 +109,4 @@ public class User implements Serializable{
 	 * It is done here just for convenience purpose.
 	 */
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", ssoId='" + ssoId + '\'' +
-				", password='" + password + '\'' +
-		/*		", userProfiles=" + userProfiles +*/
-				'}';
-	}
 }

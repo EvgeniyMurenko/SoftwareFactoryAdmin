@@ -90,11 +90,10 @@ public class MembershipManagementController {
         staffInfo.setCreationDate(new Date());
         staffInfo.setEmail(email);
         staffInfo.setPhone(phone);
-
+        staffInfo.setRating(0d);
 
         List<StaffHistory> staffHistories = new ArrayList<>();
         staffHistories.add(new StaffHistory("Staff was created", new Date(), staffInfo, managerInfo.getName(), managerId));
-            /*Set<GoogleCloudKey> googleCloudKeys = new HashSet<>();*/
 
         staffInfo.setStaffHistories(staffHistories);
 
@@ -153,10 +152,6 @@ public class MembershipManagementController {
     public ModelAndView staffDelete(@PathVariable Long staffId) {
 
         StaffInfo staffInfo = staffInfoService.getStaffInfoById(staffId);
-
-        //List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(staffInfo.getGoogleCloudKeys());
-        //googleCloudKeyService.deleteAllKeysByStaff((long) staffId);
-
         userService.deleteUserById(staffId);
         staffInfoService.deleteStaffInfo(staffInfo);
 

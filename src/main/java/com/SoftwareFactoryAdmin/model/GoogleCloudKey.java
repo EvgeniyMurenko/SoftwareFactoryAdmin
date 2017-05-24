@@ -12,6 +12,11 @@ public class GoogleCloudKey implements Serializable {
     public GoogleCloudKey() {
     }
 
+    public GoogleCloudKey(User user, String key) {
+        this.user = user;
+        this.key = key;
+    }
+
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
@@ -20,23 +25,17 @@ public class GoogleCloudKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private ManagerInfo managerInfo;
+    private User user;
 
     @Column(name = "cloud_key")
     private String key;
 
-
-    public GoogleCloudKey(ManagerInfo managerInfo, String key) {
-        this.managerInfo = managerInfo;
-        this.key = key;
+    public User getUser() {
+        return user;
     }
 
-    public ManagerInfo getManagerInfo() {
-        return managerInfo;
-    }
-
-    public void setManagerInfo(ManagerInfo managerInfo) {
-        this.managerInfo = managerInfo;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
