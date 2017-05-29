@@ -1,5 +1,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.*" %>
+<%@ page import="com.SoftwareFactoryAdmin.constant.ProjectEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -46,9 +47,17 @@
         <%SimpleDateFormat dateFormatStartEnd = new SimpleDateFormat("yyyy-MM-dd");%>
         <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
+        <%String projectName = ""; if (!"".equals(project.getProjectName())) projectName = project.getProjectName();%>
+        <% if (projectName.equals(ProjectEnum.projectNameNormal.getDbValue())) {
+            projectName = ProjectEnum.projectNameNormal.getValue();
+        }else if (projectName.equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+            projectName = ProjectEnum.projectNameEstimate.getValue();
+        }%>
+
+
         <!-- Content section -->
         <section class="container-fluid content">
-            <h3><i class="fa fa-file-text-o"></i>Project code: <%out.print(String.format("%05d", project.getCustomerInfo().getId()) + "-");%><%out.print(String.format("%05d", project.getId()));%> <%out.print(project.getProjectName());%></h3>
+            <h3><i class="fa fa-file-text-o"></i>Project code: <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%out.print(String.format("%05d", project.getId()));%> <%out.print(projectName);%></h3>
 
             <div class="mb20">
                 <a href="/project-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>

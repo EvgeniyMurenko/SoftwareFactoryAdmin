@@ -11,7 +11,7 @@ public class StaffInfo implements Serializable {
 
     public StaffInfo() {}
 
-    public StaffInfo(Long id, User user, String name, String phone, String email, Date birthDate, Date creationDate, Double rating, int android, int iOs, int java, int php, int javascript, int cSharp, int cPlusPlus, int frontend, int design, List<StaffHistory> staffHistories) {
+    public StaffInfo(Long id, User user, String name, String phone, String email, Date birthDate, Date creationDate, Double rating, int android, int iOs, int iot, int java, int php, int javascript, int cSharp, int cPlusPlus, int frontend, int design, List<StaffHistory> staffHistories) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -22,6 +22,7 @@ public class StaffInfo implements Serializable {
         this.rating = rating;
         this.android = android;
         this.iOs = iOs;
+        this.iot = iot;
         this.java = java;
         this.php = php;
         this.javascript = javascript;
@@ -68,6 +69,9 @@ public class StaffInfo implements Serializable {
 
     @Column(name = "ios")
     private int iOs;
+
+    @Column(name = "iot")
+    private int iot;
 
     @Column(name = "java")
     private int java;
@@ -173,6 +177,14 @@ public class StaffInfo implements Serializable {
 
     public void setiOs(int iOs) {
         this.iOs = iOs;
+    }
+
+    public int getIot() {
+        return iot;
+    }
+
+    public void setIot(int iot) {
+        this.iot = iot;
     }
 
     public int getJava() {

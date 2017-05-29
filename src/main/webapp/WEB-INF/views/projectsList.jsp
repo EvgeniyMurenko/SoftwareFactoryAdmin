@@ -43,8 +43,10 @@
     <div id="page-content-wrapper">
 
         <%@ include file="topLine.jsp" %>
+
         <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
         <%SimpleDateFormat dateFormatStartEnd = new SimpleDateFormat("yyyy-MM-dd");%>
+
         <!-- Content section -->
         <section class="container-fluid content">
             <h3><i class="fa fa-user"></i>Projects</h3>

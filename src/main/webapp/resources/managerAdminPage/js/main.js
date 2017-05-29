@@ -22,6 +22,9 @@ jQuery(document).ready(function($) {
         );
     });
 
+    //star-rating
+    $('#rating').rating({displayOnly: true, step: 0.5, size: "xs", min: 0, max: 5, stars: 5 });
+
     // Left menu block toggle
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -45,7 +48,7 @@ jQuery(document).ready(function($) {
     $("time.timeago").timeago();
 
     // Project add/edit from validation
-    $('#customerSOOID').keydown(function (event) {
+    $('#customerSOID').keydown(function (event) {
         // Разрешаем: backspace, delete, tab и escape
         if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 ||
             // Разрешаем: Ctrl+A

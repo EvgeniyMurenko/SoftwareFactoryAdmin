@@ -8,6 +8,7 @@ import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.ProjectService;
 import com.SoftwareFactoryAdmin.service.UserService;
+import com.SoftwareFactoryAdmin.util.AppMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -91,7 +92,7 @@ public class ProjectManagementController {
 
 
     @RequestMapping(value = "/save-new-project", method = RequestMethod.POST)
-    public ModelAndView saveNewProject(@RequestParam("customerSOOID") String customerSOOID,
+    public ModelAndView saveNewProject(@RequestParam("customerSOID") String customerSOID,
                                        @RequestParam("projectName") String projectName,
                                        @RequestParam("selectStatus") String selectStatus,
                                        @RequestParam("dateStart") String dateStart,
@@ -99,9 +100,10 @@ public class ProjectManagementController {
                                        @RequestParam("description") String description, HttpSession httpSession) {
 
         ModelAndView saveProject;
-
-        User userCustomer = userService.findBySSO(customerSOOID);
+        System.out.printf("===================SOID " +customerSOID);
+        User userCustomer = userService.findBySSO(customerSOID);
         if (userCustomer == null) {
+            System.out.printf("=================== NOT FOUND USER  by SOID");
            return new ModelAndView("redirect:/project-mm/");
         }
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userCustomer.getId());
@@ -121,31 +123,26 @@ public class ProjectManagementController {
             project.setManagerInfo(managerInfo);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            try {
-                Date startDate = formatter.parse(dateStart + ":00");
-                project.setStartDate(startDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (!"".equals(dateStart)) {
+                project.setStartDate(AppMethods.getDateFromString(dateStart));
             }
 
-            try {
-                Date endDate = formatter.parse(dateEnd + ":00");
-                project.setEndDate(endDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (!"".equals(dateEnd)) {
+                project.setStartDate(AppMethods.getDateFromString(dateEnd));
             }
 
             projectService.addNewProject(project);
 
             saveProject = new ModelAndView("redirect:/project-mm/view-project/" + project.getId() + "/","isSuccess" , "true");
         } else {
+            System.out.printf("=================== NOT FOUND CUSTOMER  by SOID");
             saveProject = new ModelAndView("redirect:/project-mm/");
         }
         return saveProject;
     }
 
     @RequestMapping(value = "/update-project", method = RequestMethod.POST)
-    public ModelAndView updateProject(@RequestParam("customerSOOID") String customerSOOID,
+    public ModelAndView updateProject(@RequestParam("customerId") Long customerId,
                                       @RequestParam("idProject") Long idProject,
                                       @RequestParam("projectName") String projectName,
                                       @RequestParam("selectStatus") String selectStatus,
@@ -155,7 +152,7 @@ public class ProjectManagementController {
 
         ModelAndView updateProjectView;
 
-        User userCustomer = userService.findBySSO(customerSOOID);
+        User userCustomer = userService.findById(customerId);
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userCustomer.getId());
 
 
@@ -175,21 +172,11 @@ public class ProjectManagementController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             if (!"".equals(dateStart)) {
-                try {
-                    Date startDate = formatter.parse(dateStart + ":00");
-                    project.setStartDate(startDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                project.setStartDate(AppMethods.getDateFromString(dateStart));
             }
 
             if (!"".equals(dateEnd)) {
-                try {
-                    Date endDate = formatter.parse(dateEnd + ":00");
-                    project.setEndDate(endDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                project.setStartDate(AppMethods.getDateFromString(dateEnd));
             }
 
             projectService.updateProject(project);

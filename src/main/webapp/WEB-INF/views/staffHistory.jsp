@@ -100,6 +100,23 @@
                             </button>
                         </div>
                     </form>
+
+                    <form action="/membership-mm/add-review" method="post">
+                        <div class="form-group">
+
+                            <label class="control-label">Add review</label>
+
+                            <textarea id="editor" name="description" rows="3"></textarea>
+
+                            <input type="hidden" name="id" value="<%out.print(staffInfo.getId());%>">
+                        </div>
+
+                        <div class="form-group text-right">
+                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>
+                                Add review
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="col-md-8">

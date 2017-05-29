@@ -58,20 +58,26 @@
                     <tr>
                         <th width="20">ID</th>
                         <th>SSO ID</th>
+                        <th>Date registration</th>
                         <th>Name</th>
+                        <th>Company</th>
                         <th>E-mail</th>
-                        <th width="120">Company</th>
+                        <th>Phone</th>
+                        <th>Type company</th>
                         <th width="150">Action</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
+                        <th width="20">ID</th>
                         <th>SSO ID</th>
+                        <th>Date registration</th>
                         <th>Name</th>
-                        <th>E-mail</th>
                         <th>Company</th>
-                        <th>Action</th>
+                        <th>E-mail</th>
+                        <th>Phone</th>
+                        <th>Type company</th>
+                        <th width="150">Action</th>
                     </tr>
                 </tfoot>
 
@@ -96,9 +102,13 @@
                         <tr>
                             <td align="center"><%out.print(customerInfo.getId());%></td>
                             <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
+                            <td>Date registration</td>
                             <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getName());%></a></td>
+                            <td><%out.print(customerInfo.getCompany());%></td>
                             <td><a href="mailto:<%out.print(customerInfo.getEmail());%>"><%out.print(customerInfo.getEmail());%></a></td>
-                            <td align="center"><%out.print(customerInfo.getCompany());%></td>
+                            <td><a href=""><%out.print(customerInfo.getPhone());%></a></td>
+                            <td><a href="">Type company</a></td>
+
                             <td align="center">
                                 <a href="<%out.print(editCustomerInfoUrl);%>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
                                 <a href="<%out.print(deleteCustomerInfoUrl);%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>

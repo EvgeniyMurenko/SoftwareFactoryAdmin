@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class StaffInfoServiceImpl implements StaffInfoService {
     @Override
     public void updateStaffInfoWithParameters(Long id, User user, ManagerInfo managerInfo, String password,
                                               String name, String phone, String email, String birthDate,
-                                              int android, int iOs, int java, int php, int javascript, int cSharp,
+                                              int android, int iOs, int iot, int java, int php, int javascript, int cSharp,
                                               int cPlusPlus, int frontend, int design) {
 
         StringBuilder historyChanges = new StringBuilder();
@@ -78,7 +79,8 @@ public class StaffInfoServiceImpl implements StaffInfoService {
             historyChanges.append("email changed from - " + staffInfo.getEmail() + " to  " + email + "<br>");
             staffInfo.setEmail(email);
         }
-        if (!staffInfo.getBirthDate().equals(birthDate)) {
+        SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (!dateFormatShow.format(staffInfo.getBirthDate()).equals(birthDate)) {
             historyChanges.append("birth date changed from - " + staffInfo.getBirthDate() + " to  " + birthDate + "<br>");
             staffInfo.setBirthDate(AppMethods.getDateFromString(birthDate));
         }
@@ -89,6 +91,10 @@ public class StaffInfoServiceImpl implements StaffInfoService {
         if (staffInfo.getiOs() != iOs) {
             historyChanges.append("iOS level changed from - " + staffInfo.getiOs() + " to  " + iOs + "<br>");
             staffInfo.setiOs(iOs);
+        }
+        if (staffInfo.getIot() != iot) {
+            historyChanges.append("IOT level changed from - " + staffInfo.getIot() + " to  " + iot + "<br>");
+            staffInfo.setIot(iot);
         }
         if (staffInfo.getJava() != java) {
             historyChanges.append("java level changed from - " + staffInfo.getJava() + " to  " + java + "<br>");

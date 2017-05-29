@@ -112,6 +112,7 @@ public class MembershipManagementController {
                                   @RequestParam("confirm_password") String confirmPassword,
                                   @RequestParam("android") int android,
                                   @RequestParam("ios") int iOs,
+                                  @RequestParam("iot") int iot,
                                   @RequestParam("java") int java,
                                   @RequestParam("php") int php,
                                   @RequestParam("javascript") int javascript,
@@ -130,8 +131,8 @@ public class MembershipManagementController {
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
 
         staffInfoService.updateStaffInfoWithParameters(id, userStaff, managerInfo, password, name,
-                phone, email, birthDate,  android,
-                iOs, java, php, javascript, cSharp, cPlusPlus, frontend, design);
+                phone, email, birthDate, android,
+                iOs, iot, java, php, javascript, cSharp, cPlusPlus, frontend, design);
 
 
         return new ModelAndView("redirect:/membership-mm/edit/" + userStaff.getId(), "isCreateUpdateSuccess", "true");
@@ -168,12 +169,12 @@ public class MembershipManagementController {
         Long managerId = (Long) httpSession.getAttribute("UserId");
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
 
-          if (rating != 0) {
+        if (rating != 0) {
             Double newRating;
             if (staffInfo.getRating()==0){
                 newRating = (double) rating;
             } else {
-                 newRating = Math.floor((staffInfo.getRating() + rating) / 2 * 100) / 100;
+                newRating = Math.floor((staffInfo.getRating() + rating) / 2 * 100) / 100;
             }
             List<StaffHistory> staffHistories = staffInfo.getStaffHistories();
 
@@ -187,6 +188,29 @@ public class MembershipManagementController {
             return new ModelAndView("redirect:/membership-mm/history/" + id , "isUpdated" , "true");
         }
 
+        return new ModelAndView("redirect:/membership-mm/history/" + id);
+    }
+
+    @RequestMapping(value = "/add-review", method = RequestMethod.POST)
+    public ModelAndView addReview(@RequestParam("id") Long id,
+                                     @RequestParam("description") String description,
+                                     HttpSession httpSession) {
+
+        if (!"".equals(description)) {
+            StaffInfo staffInfo = staffInfoService.getStaffInfoById(id);
+            Long managerId = (Long) httpSession.getAttribute("UserId");
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+
+            List<StaffHistory> staffHistories = staffInfo.getStaffHistories();
+
+            String historyText = "New review: "+description;
+            StaffHistory staffHistory = new StaffHistory(historyText, new Date(), staffInfo, managerInfo.getName(), managerId);
+            staffHistories.add(staffHistory);
+            staffInfo.setStaffHistories(staffHistories);
+
+            staffInfoService.updateStaffInfo(staffInfo);
+            return new ModelAndView("redirect:/membership-mm/history/" + id, "isUpdated", "true");
+        }
         return new ModelAndView("redirect:/membership-mm/history/" + id);
     }
 }

@@ -139,6 +139,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="control-label">IOT level (0-10)</label>
+                                <input type="number" min="0" max="10" name="iot" class="form-control"
+                                       value="<%out.print(staffInfo.getIot());%>"/>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="control-label">Java level (0-10)</label>
                                 <input type="number" min="0" max="10" name="java" class="form-control"
                                        value="<%out.print(staffInfo.getJava());%>"/>

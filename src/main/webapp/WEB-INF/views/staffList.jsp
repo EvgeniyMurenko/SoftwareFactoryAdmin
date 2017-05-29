@@ -62,6 +62,7 @@
                     <th>Rating</th>
                     <th>Android</th>
                     <th>iOS</th>
+                    <th>IOT</th>
                     <th>Java</th>
                     <th>PHP</th>
                     <th>Java script</th>
@@ -79,6 +80,7 @@
                     <th>Rating</th>
                     <th>Android</th>
                     <th>iOS</th>
+                    <th>IOT</th>
                     <th>Java</th>
                     <th>PHP</th>
                     <th>Java script</th>
@@ -101,6 +103,7 @@
                                 <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
                                 <td align="center"><%out.print(staffInfo.getAndroid());%></td>
                                 <td align="center"><%out.print(staffInfo.getiOs());%></td>
+                                <td align="center"><%out.print(staffInfo.getIot());%></td>
                                 <td align="center"><%out.print(staffInfo.getJava());%></td>
                                 <td align="center"><%out.print(staffInfo.getPhp());%></td>
                                 <td align="center"><%out.print(staffInfo.getJavascript());%></td>

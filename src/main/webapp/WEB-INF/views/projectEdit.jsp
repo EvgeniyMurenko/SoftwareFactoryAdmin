@@ -83,20 +83,24 @@
                         <input type="hidden" name="idProject" value="<%if (!isNew)out.print(project.getId());%>">
 
                         <div class="form-group">
-                            <label class="control-label">Id customer</label>
+                            <label class="control-label">SOID customer</label>
                             <%if (!isNew && !"".equals(project.getCustomerInfo().getId())){%>
-                               <input type="text" class="form-control" value="<%out.print(customerUser.getSsoId());%>" disabled/>
-                                <input type="hidden" name="customerSOOID"  value="<%out.print(customerUser.getSsoId());%>">
+                               <input type="text" class="form-control" value="<%out.print(String.format("%04d", project.getCustomerInfo().getId()));%>" disabled/>
+                                <input type="hidden" name="customerId"  value="<%out.print(customerUser.getId());%>">
                             <%} else {%>
-                                <input type="text" id="customerSOOID" name="customerSOOID" class="form-control" placeholder="Write customer id" required/>
+                                <input type="text" id="customerSOID" name="customerSOID" class="form-control" placeholder="Write customer SOID" required/>
                             <%}%>
                         </div>
 
 
                         <div class="form-group">
                             <label class="control-label">Project name</label>
-                            <input type="hidden" name="projectName" value="<%out.print(project.getProjectName());%>">
-                            <input type="text" class="form-control" placeholder="Project name" value="<%out.print(projectName);%>" <%out.print(projectDisabled);%>/>
+                            <%if (!isNew && !"".equals(project.getProjectName())){%>
+                                <input type="hidden" name="projectName" value="<%out.print(project.getProjectName());%>">
+                                <input type="text" class="form-control" placeholder="Project name" value="<%out.print(projectName);%>" <%out.print(projectDisabled);%>/>
+                            <%} else {%>
+                                <input type="text" name="projectName" class="form-control" placeholder="Project name" />
+                            <%}%>
                         </div>
 
                         <div class="form-group">
