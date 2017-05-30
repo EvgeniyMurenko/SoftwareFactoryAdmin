@@ -1,5 +1,3 @@
-
-
 "use strict";
 jQuery(document).ready(function($) {
 
@@ -68,18 +66,6 @@ jQuery(document).ready(function($) {
         }
     });
 
-
-// // при открытии модального окна
-//     $('#myModal').on('show.bs.modal', function (event) {
-//         // получить кнопку, которая его открыло
-//         var button = $(event.relatedTarget)
-//         // извлечь информацию из атрибута data-content
-//         var content = button.data('content')
-//         // вывести эту информацию в элемент, имеющий id="content"
-//         $(this).find('#content').text(content);
-//
-//     })
-
     // datetimepicker
     $('#datetimepicker').datetimepicker({
         format: 'YYYY-MM-DD HH:mm'
@@ -146,7 +132,7 @@ function getCustomer (index){
     $.ajax({
         type: "GET",
         data: "index="+index,
-        url: "http://localhost:8080/customer-mm/show-customer/",
+        url: "http://a.sofac.kr/customer-mm/show-customer/",
         dataType: "json",
         success: function(data) {
             // tableWorkers
