@@ -60,10 +60,10 @@
                     <th width="20">ID</th>
                     <th>SSO ID</th>
                     <th>Date registration</th>
-                    <th>Name</th>
+                    <th>Name director</th>
                     <th>Company</th>
-                    <th>E-mail</th>
-                    <th>Phone</th>
+                    <th>E-mail director</th>
+                    <th>Phone director</th>
                     <th>Type company</th>
                     <th width="150">Action</th>
                 </tr>
@@ -73,10 +73,10 @@
                     <th width="20">ID</th>
                     <th>SSO ID</th>
                     <th>Date registration</th>
-                    <th>Name</th>
+                    <th>Name director</th>
                     <th>Company</th>
-                    <th>E-mail</th>
-                    <th>Phone</th>
+                    <th>E-mail director</th>
+                    <th>Phone director</th>
                     <th>Type company</th>
                     <th width="150">Action</th>
                 </tr>
@@ -101,10 +101,10 @@
                     <td align="center"><%out.print(customerInfo.getId());%></td>
                     <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
                     <td><%out.print(dateFormatShow.format(customerInfo.getRegistrationDate()));%></td>
-                    <td><a href="<%out.print(customerInfoHistory);%>"><%out.print(customerInfo.getName());%></a></td>
+                    <td><a href="<%out.print(customerInfoHistory);%>"><%out.print(customerInfo.getDirectorsName());%></a></td>
                     <td><%out.print(customerInfo.getCompany());%></td>
                     <td><a onclick="getCustomer(<%out.print(customerInfo.getId());%>)"><%out.print(customerInfo.getDirectorsEmail());%></a></td>
-                    <td><a href=""><%out.print(customerInfo.getPhone());%></a></td>
+                    <td><a href=""><%out.print(customerInfo.getDirectorsPhone());%></a></td>
                     <td><a href=""><%out.print(customerInfo.getCompanyType());%></a></td>
 
                     <td align="center">
