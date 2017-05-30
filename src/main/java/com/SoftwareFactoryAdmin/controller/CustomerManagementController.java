@@ -8,12 +8,15 @@ import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.EstimateService;
 import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.UserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -37,7 +40,7 @@ public class CustomerManagementController {
 
         customersList.addObject("customersList", customerInfoList);
 
-        return  customersList;
+        return customersList;
     }
 
 
@@ -90,18 +93,19 @@ public class CustomerManagementController {
 
     @RequestMapping(value = "/save-new-customer", method = RequestMethod.POST)
     public ModelAndView saveNewCustomer(@RequestParam("name") String name,
-                                      @RequestParam("email") String email,
-                                      @RequestParam("phone") String phone,
-                                      @RequestParam("company") String company,
-                                      @RequestParam("site_link") String website,
-                                      @RequestParam("password") String password,
-                                      @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
+                                        @RequestParam("email") String email,
+                                        @RequestParam("phone") String phone,
+                                        @RequestParam("company") String company,
+                                        @RequestParam("site_link") String website,
+                                        @RequestParam("password") String password,
+                                        @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
 
-        if (!password.equals(confirmPassword)) return new ModelAndView("redirect:/customer-mm/add-customer","isPasswordError" ,"true");
+        if (!password.equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");
 
         User customerUser = userService.createCustomerUser(password);
 
-        CustomerInfo customerInfo = new CustomerInfo(customerUser.getId() ,customerUser, name, company, phone, email, website , new HashSet<>() , true);
+        CustomerInfo customerInfo = new CustomerInfo(customerUser.getId(), customerUser, name, company, phone, email, website, new HashSet<>(), true);
         customerInfo.setStandardAccount(true);
 
         customerInfoService.addNewCustomerInfo(customerInfo);
@@ -125,22 +129,23 @@ public class CustomerManagementController {
 
         customerInfoService.updateCustomerInfo(customerInfoCreated);
 
-        return new ModelAndView("redirect:/customer-mm/edit-customer/" + customerInfoCreated.getId() , "isEditCreateSuccess" , "true");
+        return new ModelAndView("redirect:/customer-mm/edit-customer/" + customerInfoCreated.getId(), "isEditCreateSuccess", "true");
     }
 
     @RequestMapping(value = "/update-customer", method = RequestMethod.POST)
     public ModelAndView updateCustomer(@RequestParam("id") Long id,
-                                        @RequestParam("name") String name,
-                                        @RequestParam("email") String email,
-                                        @RequestParam("phone") String phone,
-                                        @RequestParam("company") String company,
-                                        @RequestParam("site_link") String website,
-                                        @RequestParam("password") String password,
-                                        @RequestParam("confirm_password") String confirmPassword,
-                                        @RequestParam("accountType") String accountType) {
+                                       @RequestParam("name") String name,
+                                       @RequestParam("email") String email,
+                                       @RequestParam("phone") String phone,
+                                       @RequestParam("company") String company,
+                                       @RequestParam("site_link") String website,
+                                       @RequestParam("password") String password,
+                                       @RequestParam("confirm_password") String confirmPassword,
+                                       @RequestParam("accountType") String accountType) {
 
 
-        if (!password.equals(confirmPassword)) return new ModelAndView("redirect:/customer-mm/edit-customer/"+id ,"isPasswordError" ,"true");
+        if (!password.equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isPasswordError", "true");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(id);
 
@@ -151,7 +156,7 @@ public class CustomerManagementController {
         customerInfo.setWebsite(website);
         customerInfo.setFullCreated(true);
 
-        if (accountType.equals("standard")){
+        if (accountType.equals("standard")) {
             customerInfo.setStandardAccount(true);
         } else {
             customerInfo.setStandardAccount(false);
@@ -161,14 +166,72 @@ public class CustomerManagementController {
 
         User user = userService.findById(id);
 
-        if (password !=null && confirmPassword !=null && !"".equals(password) && !"".equals(confirmPassword)) {
+        if (password != null && confirmPassword != null && !"".equals(password) && !"".equals(confirmPassword)) {
             System.out.println("set pass" + password);
             user.setPassword(password);
         }
         userService.updateUser(user);
 
-        ModelAndView editCustomer = new ModelAndView("redirect:/customer-mm/edit-customer/" + id , "isEditCreateSuccess" , "true");
+        ModelAndView editCustomer = new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isEditCreateSuccess", "true");
 
         return editCustomer;
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/show-customer", method = RequestMethod.GET)
+    public String returnValues(@RequestParam("index") long index, Model model) {
+
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(index);
+
+        JSONObject myJsonObj = new JSONObject();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Project project : customerInfo.getProjects()) {
+
+            String projectName = "";
+            if (!"".equals(project.getProjectName())) projectName = project.getProjectName();
+            if (projectName.equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                projectName = ProjectEnum.projectNameNormal.getValue();
+            } else if (projectName.equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                projectName = ProjectEnum.projectNameEstimate.getValue();
+            }
+
+            stringBuilder.append("<tr>");
+
+            stringBuilder.append("<td>" + projectName + "</td>");
+            stringBuilder.append("<td>" + changeDateNull(project.getStartDate()) + "</td>");
+            stringBuilder.append("<td>" + changeDateNull(project.getEndDate()) + "</td>");
+            stringBuilder.append("<td>" + changeNull(project.getManagerInfo().getName()) + "</td>");
+            stringBuilder.append("<td>" + changeNull(project.getManagerInfo().getEmail()) + "</td>");
+            stringBuilder.append("<td>" + changeNull(project.getManagerInfo().getPhone()) + "</td>");
+
+            stringBuilder.append("</tr>");
+        }
+
+        myJsonObj.append("stringBuilder", stringBuilder);
+        myJsonObj.append("customerSoid", "All Project :: "+customerInfo.getUser().getSsoId());
+
+
+        return myJsonObj.toString();
+
+    }
+
+    private String changeNull(String value){
+        if (!"".equals(value) && value!=null){
+            return value;
+        }
+        return "-";
+    }
+
+    private String changeDateNull(Date data){
+        SimpleDateFormat dateFormatStartEnd = new SimpleDateFormat("yyyy-MM-dd");
+        String value= "-";
+        if (data == null) {
+            return value;
+        } else {
+            return dateFormatStartEnd.format(data);
+        }
     }
 }

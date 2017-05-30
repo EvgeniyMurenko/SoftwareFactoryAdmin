@@ -1,6 +1,10 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.CustomerInfo" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.Project" %>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="org.json.JSONObject" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -26,6 +30,9 @@
 
 </head>
 <body>
+
+<%ArrayList<CustomerInfo> customerInfoArrayList = (ArrayList<CustomerInfo>) request.getAttribute("customersList");%>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -86,10 +93,11 @@
                 <tbody>
 
                     <%
-                        ArrayList<CustomerInfo> customerInfoArrayList = (ArrayList<CustomerInfo>) request.getAttribute("customersList");
+
 
                         Iterator<CustomerInfo> customerInfoIterator = customerInfoArrayList.iterator();
 
+                        int value = 0;
                         while (customerInfoIterator.hasNext()) {
 
                             CustomerInfo customerInfo = customerInfoIterator.next();
@@ -99,27 +107,31 @@
                                 String deleteCustomerInfoUrl = "/customer-mm/delete-customer/"+customerInfo.getId();
 
                     %>
-                        <tr>
-                            <td align="center"><%out.print(customerInfo.getId());%></td>
-                            <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
-                            <td>Date registration</td>
-                            <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getName());%></a></td>
-                            <td><%out.print(customerInfo.getCompany());%></td>
-                            <td><a href="mailto:<%out.print(customerInfo.getEmail());%>"><%out.print(customerInfo.getEmail());%></a></td>
-                            <td><a href=""><%out.print(customerInfo.getPhone());%></a></td>
-                            <td><a href="">Type company</a></td>
+                                <tr>
+                                    <td align="center"><%out.print(customerInfo.getId());%></td>
+                                    <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
+                                    <td>Date registration</td>
+                                    <td><a href=""><%out.print(customerInfo.getName());%></a></td>
+                                    <td><%out.print(customerInfo.getCompany());%></td>
+                                    <td><a onclick="getCustomer(<%out.print(customerInfo.getId());%>)">info@someserver.com</a></td>
+                                    <td><a href=""><%out.print(customerInfo.getPhone());%></a></td>
+                                    <td><a href="">Type company</a></td>
 
-                            <td align="center">
-                                <a href="<%out.print(editCustomerInfoUrl);%>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
-                                <a href="<%out.print(deleteCustomerInfoUrl);%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
-                            </td>
-                        </tr>
+                                    <td align="center">
+                                        <a href="<%out.print(editCustomerInfoUrl);%>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
+                                        <a href="<%out.print(deleteCustomerInfoUrl);%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
+                                </tr>
+
+                            <%value++;%>
                         <%}%>
+
                     <%}%>
                 </tbody>
                 <!-- #End Items list -->
 
             </table>
+
 
         </section>
         <!-- Content section -->
@@ -129,6 +141,47 @@
 
 </div>
 <!-- #End Wrapper -->
+
+<%--Modal window--%>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4 class="modal-title" id="customerSoid_json"></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Project name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>PM name</th>
+                        <th>PM E-mail</th>
+                        <th>PM Phone</th>
+                    </tr>
+                    </thead>
+
+                    <!-- Items list -->
+                   <tbody id="modalTable">
+
+
+                   </tbody>
+                    <!-- #End Items list -->
+
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" type="button" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--End Modal window--%>
 
 <%@ include file="footerJavaScript.jsp" %>
 

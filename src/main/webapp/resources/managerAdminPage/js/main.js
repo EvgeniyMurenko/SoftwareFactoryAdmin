@@ -1,3 +1,5 @@
+
+
 "use strict";
 jQuery(document).ready(function($) {
 
@@ -66,6 +68,18 @@ jQuery(document).ready(function($) {
         }
     });
 
+
+// // при открытии модального окна
+//     $('#myModal').on('show.bs.modal', function (event) {
+//         // получить кнопку, которая его открыло
+//         var button = $(event.relatedTarget)
+//         // извлечь информацию из атрибута data-content
+//         var content = button.data('content')
+//         // вывести эту информацию в элемент, имеющий id="content"
+//         $(this).find('#content').text(content);
+//
+//     })
+
     // datetimepicker
     $('#datetimepicker').datetimepicker({
         format: 'YYYY-MM-DD HH:mm'
@@ -127,6 +141,32 @@ jQuery(document).ready(function($) {
         });
     });
 });
+
+function getCustomer (index){
+    $.ajax({
+        type: "GET",
+        data: "index="+index,
+        url: "http://localhost:8080/customer-mm/show-customer/",
+        dataType: "json",
+        success: function(data) {
+            // tableWorkers
+            // countPages
+            if(data.customerInfo!=''){
+
+               $('#customerSoid_json').text(data.customerSoid);
+
+                $('#myModal').modal({
+                    //установим модальному окну следующие параметры:
+
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                document.getElementById('modalTable').innerHTML = data.stringBuilder;
+            }
+        },
+    });
+}
+
 
 // CKEDITOR show
 CKEDITOR.replace('editor', {
