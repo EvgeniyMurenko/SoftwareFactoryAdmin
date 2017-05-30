@@ -113,6 +113,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     private String getCustomerId(String id) {
         if (id.length() <= 4) {
             String zero = "";

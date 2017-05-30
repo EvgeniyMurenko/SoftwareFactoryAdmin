@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.controller;
 
 
+import com.SoftwareFactoryAdmin.model.CustomerInfo;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.EstimateService;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -32,22 +36,18 @@ public class IndexController {
     @Autowired
     UserService userService;
 
+
     @Autowired
     UserProfileService userProfileService;
 
 
-
-    @RequestMapping(value = {"/" , "/main"}, method = RequestMethod.GET )
+    @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
     public ModelAndView loginPage() {
-
-
-
 
         if (isCurrentAuthenticationAnonymous()) {
             ModelAndView mainPage = new ModelAndView("index");
             return mainPage;
         } else {
-
             ModelAndView modelAndView = new ModelAndView("redirect:/list/");
             return modelAndView;
         }
@@ -60,10 +60,10 @@ public class IndexController {
 
 
     @RequestMapping(value = "/session_expired", method = RequestMethod.POST)
-    public ModelAndView sessionExpired( ){
+    public ModelAndView sessionExpired() {
         ModelAndView modelAndView = new ModelAndView("redirect:/main");
 
-        modelAndView.addObject("isSessionExpired" , new Boolean(true));
+        modelAndView.addObject("isSessionExpired", new Boolean(true));
 
         return modelAndView;
     }

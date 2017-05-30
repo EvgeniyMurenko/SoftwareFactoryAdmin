@@ -160,10 +160,10 @@ public class MembershipManagementController {
     }
 
 
-    @RequestMapping(value = "/update-rating" , method = RequestMethod.POST)
+    @RequestMapping(value = "/update-rating", method = RequestMethod.POST)
     public ModelAndView updateRating(@RequestParam("id") Long id,
                                      @RequestParam("rating") int rating,
-                                     HttpSession httpSession){
+                                     HttpSession httpSession) {
 
         StaffInfo staffInfo = staffInfoService.getStaffInfoById(id);
         Long managerId = (Long) httpSession.getAttribute("UserId");
@@ -171,7 +171,7 @@ public class MembershipManagementController {
 
         if (rating != 0) {
             Double newRating;
-            if (staffInfo.getRating()==0){
+            if (staffInfo.getRating() == 0) {
                 newRating = (double) rating;
             } else {
                 newRating = Math.floor((staffInfo.getRating() + rating) / 2 * 100) / 100;
@@ -179,13 +179,13 @@ public class MembershipManagementController {
             List<StaffHistory> staffHistories = staffInfo.getStaffHistories();
 
             String historyText = "rating changed from - " + staffInfo.getRating() + " to  " + newRating + "<br>";
-            StaffHistory staffHistory = new StaffHistory(historyText , new Date() , staffInfo , managerInfo.getName(), managerId);
+            StaffHistory staffHistory = new StaffHistory(historyText, new Date(), staffInfo, managerInfo.getName(), managerId);
             staffHistories.add(staffHistory);
             staffInfo.setStaffHistories(staffHistories);
             staffInfo.setRating(newRating);
 
             staffInfoService.updateStaffInfo(staffInfo);
-            return new ModelAndView("redirect:/membership-mm/history/" + id , "isUpdated" , "true");
+            return new ModelAndView("redirect:/membership-mm/history/" + id, "isUpdated", "true");
         }
 
         return new ModelAndView("redirect:/membership-mm/history/" + id);
@@ -193,8 +193,8 @@ public class MembershipManagementController {
 
     @RequestMapping(value = "/add-review", method = RequestMethod.POST)
     public ModelAndView addReview(@RequestParam("id") Long id,
-                                     @RequestParam("description") String description,
-                                     HttpSession httpSession) {
+                                  @RequestParam("description") String description,
+                                  HttpSession httpSession) {
 
         if (!"".equals(description)) {
             StaffInfo staffInfo = staffInfoService.getStaffInfoById(id);
@@ -203,7 +203,7 @@ public class MembershipManagementController {
 
             List<StaffHistory> staffHistories = staffInfo.getStaffHistories();
 
-            String historyText = "New review: "+description;
+            String historyText = "New review: " + description;
             StaffHistory staffHistory = new StaffHistory(historyText, new Date(), staffInfo, managerInfo.getName(), managerId);
             staffHistories.add(staffHistory);
             staffInfo.setStaffHistories(staffHistories);

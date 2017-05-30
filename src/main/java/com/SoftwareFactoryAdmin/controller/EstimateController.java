@@ -88,7 +88,7 @@ public class EstimateController {
         Long customerId = customerInfo.getId();
         User customer = userService.findById(customerId);
 
-        Set<Project> projectSet = customerInfo.getProjects();
+        List<Project> projectSet = customerInfo.getProjects();
         Iterator<Project> projectIterator = projectSet.iterator();
         while (projectIterator.hasNext()) {
             Project project = projectIterator.next();

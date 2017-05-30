@@ -67,7 +67,7 @@ public class StaffInfoServiceImpl implements StaffInfoService {
             historyChanges.append("name changed from - " + staffInfo.getName() + " to  " + name + "<br>");
             staffInfo.setName(name);
         }
-        if (!staffInfo.equals(password)) {
+        if (!user.getPassword().equals(password)) {
             user.setPassword(password);
             staffInfo.setUser(user);
         }

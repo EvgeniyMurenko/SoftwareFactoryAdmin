@@ -3,6 +3,8 @@ package com.SoftwareFactoryAdmin.service;
 
 
 import com.SoftwareFactoryAdmin.model.CustomerInfo;
+import com.SoftwareFactoryAdmin.model.ManagerInfo;
+import com.SoftwareFactoryAdmin.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,4 +23,8 @@ public interface CustomerInfoService {
 
     CustomerInfo getCustomerInfoById(Long id);
 
+    void updateCustomerInfoWithParameters(Long id, User user, ManagerInfo managerInfo, String password,
+                                          String directorsName, String company, String directorsEmail,
+                                          String directorsPhone, String companyType, String address,
+                                          String website, String name, String email, String phone, String accountType);
 }

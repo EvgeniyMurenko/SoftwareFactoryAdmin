@@ -37,7 +37,7 @@ public class CustomerManagementController {
 
         customersList.addObject("customersList", customerInfoList);
 
-        return  customersList;
+        return customersList;
     }
 
 
@@ -90,23 +90,23 @@ public class CustomerManagementController {
 
     @RequestMapping(value = "/save-new-customer", method = RequestMethod.POST)
     public ModelAndView saveNewCustomer(@RequestParam("name") String name,
-                                      @RequestParam("email") String email,
-                                      @RequestParam("phone") String phone,
-                                      @RequestParam("company") String company,
-                                      @RequestParam("site_link") String website,
-                                      @RequestParam("password") String password,
-                                      @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
+                                        @RequestParam("email") String email,
+                                        @RequestParam("phone") String phone,
+                                        @RequestParam("company") String company,
+                                        @RequestParam("site_link") String website,
+                                        @RequestParam("password") String password,
+                                        @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
 
-        if (!password.equals(confirmPassword)) return new ModelAndView("redirect:/customer-mm/add-customer","isPasswordError" ,"true");
+        if (!password.equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");
 
         User customerUser = userService.createCustomerUser(password);
 
-        CustomerInfo customerInfo = new CustomerInfo(customerUser.getId() ,customerUser, name, company, phone, email, website , new HashSet<>() , true);
-        customerInfo.setStandardAccount(true);
-
+        CustomerInfo customerInfo = new CustomerInfo(customerUser.getId(), customerUser, name, company, phone, email, website, true , true ,"","","","","",new Date());
         customerInfoService.addNewCustomerInfo(customerInfo);
 
         CustomerInfo customerInfoCreated = customerInfoService.getCustomerInfoById(customerInfo.getId());
+
 
         Long managerId = (Long) httpSession.getAttribute("UserId");
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
@@ -118,57 +118,82 @@ public class CustomerManagementController {
                 new HashSet<>(), "test", new Date(0), new Date(0), "Default Estimate project", managerInfo);
 
 
-        Set<Project> projectsToAdd = new HashSet<>();
+        ArrayList<Project> projectsToAdd = new ArrayList<>();
         projectsToAdd.add(projectNormal);
         projectsToAdd.add(projectEstimate);
         customerInfoCreated.setProjects(projectsToAdd);
 
         customerInfoService.updateCustomerInfo(customerInfoCreated);
 
-        return new ModelAndView("redirect:/customer-mm/edit-customer/" + customerInfoCreated.getId() , "isEditCreateSuccess" , "true");
+        return new ModelAndView("redirect:/customer-mm/edit-customer/" + customerInfoCreated.getId(), "isEditCreateSuccess", "true");
     }
 
     @RequestMapping(value = "/update-customer", method = RequestMethod.POST)
     public ModelAndView updateCustomer(@RequestParam("id") Long id,
-                                        @RequestParam("name") String name,
-                                        @RequestParam("email") String email,
-                                        @RequestParam("phone") String phone,
-                                        @RequestParam("company") String company,
-                                        @RequestParam("site_link") String website,
-                                        @RequestParam("password") String password,
-                                        @RequestParam("confirm_password") String confirmPassword,
-                                        @RequestParam("accountType") String accountType) {
+                                       @RequestParam("name") String name,
+                                       @RequestParam("email") String email,
+                                       @RequestParam("phone") String phone,
+                                       @RequestParam("company") String company,
+                                       @RequestParam("site_link") String website,
+                                       @RequestParam("password") String password,
+                                       @RequestParam("confirm_password") String confirmPassword,
+                                       @RequestParam("account_type") String accountType,
+                                       @RequestParam("directors_name") String directorsName,
+                                       @RequestParam("directors_email") String directorsEmail,
+                                       @RequestParam("directors_phone") String directorsPhone,
+                                       @RequestParam("company_type") String companyType,
+                                       @RequestParam("address") String address,
+                                       HttpSession httpSession) {
 
 
-        if (!password.equals(confirmPassword)) return new ModelAndView("redirect:/customer-mm/edit-customer/"+id ,"isPasswordError" ,"true");
+        if (!password.equals(confirmPassword) && "".equals(password) && !"".equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isPasswordError", "true");
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        User user = userService.findById(id);
+
+        customerInfoService.updateCustomerInfoWithParameters(id, user, managerInfo, password, directorsName, company, directorsEmail, directorsPhone, companyType, address, website, name, email, phone, accountType);
+
+        return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isEditCreateSuccess", "true");
+    }
+
+    @RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
+    public ModelAndView customerHistory(@PathVariable Long id) {
+
+        ModelAndView customerHistory = new ModelAndView("customerHistory");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(id);
 
-        customerInfo.setName(name);
-        customerInfo.setEmail(email);
-        customerInfo.setPhone(phone);
-        customerInfo.setCompany(company);
-        customerInfo.setWebsite(website);
-        customerInfo.setFullCreated(true);
+        customerHistory.addObject("customerInfo", customerInfo);
 
-        if (accountType.equals("standard")){
-            customerInfo.setStandardAccount(true);
-        } else {
-            customerInfo.setStandardAccount(false);
-        }
-
-        customerInfoService.updateCustomerInfo(customerInfo);
-
-        User user = userService.findById(id);
-
-        if (password !=null && confirmPassword !=null && !"".equals(password) && !"".equals(confirmPassword)) {
-            System.out.println("set pass" + password);
-            user.setPassword(password);
-        }
-        userService.updateUser(user);
-
-        ModelAndView editCustomer = new ModelAndView("redirect:/customer-mm/edit-customer/" + id , "isEditCreateSuccess" , "true");
-
-        return editCustomer;
+        return customerHistory;
     }
+
+    @RequestMapping(value = "/add-review", method = RequestMethod.POST)
+    public ModelAndView addReview(@RequestParam("id") Long id,
+                                  @RequestParam("description") String description,
+                                  HttpSession httpSession) {
+
+        if (!"".equals(description)) {
+
+            CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(id);
+            Long managerId = (Long) httpSession.getAttribute("UserId");
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+
+            List<CustomerHistory> customerHistories = customerInfo.getCustomerHistories();
+
+            String historyText = "New review: " + description;
+            CustomerHistory customerHistory = new CustomerHistory(historyText, new Date(), customerInfo, managerInfo.getName(), managerId);
+            customerHistories.add(customerHistory);
+            customerInfo.setCustomerHistories(customerHistories);
+
+            customerInfoService.updateCustomerInfo(customerInfo);
+            return new ModelAndView("redirect:/customer-mm/history/" + id, "isUpdated", "true");
+
+        }
+
+        return new ModelAndView("redirect:/membership-mm/history/" + id);
+    }
+
 }
