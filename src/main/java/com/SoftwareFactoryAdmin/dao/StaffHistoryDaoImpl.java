@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("staffHistoryDao")
-public class StaffHistoryDaoIml implements StaffHistoryDao {
+public class StaffHistoryDaoImpl implements StaffHistoryDao {
 
     private SessionFactory sessionFactory;
 

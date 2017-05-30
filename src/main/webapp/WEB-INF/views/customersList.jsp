@@ -1,10 +1,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.CustomerInfo" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.SoftwareFactoryAdmin.model.Project" %>
-<%@ page import="com.google.gson.Gson" %>
-<%@ page import="org.json.JSONObject" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -30,9 +27,6 @@
 
 </head>
 <body>
-
-<%ArrayList<CustomerInfo> customerInfoArrayList = (ArrayList<CustomerInfo>) request.getAttribute("customersList");%>
-
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -62,76 +56,68 @@
 
             <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
                 <thead>
-                    <tr>
-                        <th width="20">ID</th>
-                        <th>SSO ID</th>
-                        <th>Date registration</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>E-mail</th>
-                        <th>Phone</th>
-                        <th>Type company</th>
-                        <th width="150">Action</th>
-                    </tr>
+                <tr>
+                    <th width="20">ID</th>
+                    <th>SSO ID</th>
+                    <th>Date registration</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>E-mail</th>
+                    <th>Phone</th>
+                    <th>Type company</th>
+                    <th width="150">Action</th>
+                </tr>
                 </thead>
                 <tfoot>
-                    <tr>
-                        <th width="20">ID</th>
-                        <th>SSO ID</th>
-                        <th>Date registration</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>E-mail</th>
-                        <th>Phone</th>
-                        <th>Type company</th>
-                        <th width="150">Action</th>
-                    </tr>
+                <tr>
+                    <th width="20">ID</th>
+                    <th>SSO ID</th>
+                    <th>Date registration</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>E-mail</th>
+                    <th>Phone</th>
+                    <th>Type company</th>
+                    <th width="150">Action</th>
+                </tr>
                 </tfoot>
 
 
                 <!-- Items list -->
                 <tbody>
 
-                    <%
+                <%
+                    ArrayList<CustomerInfo> customerInfoArrayList = (ArrayList<CustomerInfo>) request.getAttribute("customersList");
+                    SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    Iterator<CustomerInfo> customerInfoIterator = customerInfoArrayList.iterator();
+                    while (customerInfoIterator.hasNext()) {
+                        CustomerInfo customerInfo = customerInfoIterator.next();
+                        if(customerInfo.isFullCreated()){
+                            String editCustomerInfoUrl = "/customer-mm/edit-customer/"+ customerInfo.getId();
+                            String deleteCustomerInfoUrl = "/customer-mm/delete-customer/"+ customerInfo.getId();
+                            String customerInfoHistory = "/customer-mm/history/" + customerInfo.getId();
+                %>
+                <tr>
+                    <td align="center"><%out.print(customerInfo.getId());%></td>
+                    <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
+                    <td><%out.print(dateFormatShow.format(customerInfo.getRegistrationDate()));%></td>
+                    <td><a href="<%out.print(customerInfoHistory);%>"><%out.print(customerInfo.getName());%></a></td>
+                    <td><%out.print(customerInfo.getCompany());%></td>
+                    <td><a onclick="getCustomer(<%out.print(customerInfo.getId());%>)"><%out.print(customerInfo.getDirectorsEmail());%></a></td>
+                    <td><a href=""><%out.print(customerInfo.getPhone());%></a></td>
+                    <td><a href=""><%out.print(customerInfo.getCompanyType());%></a></td>
 
-
-                        Iterator<CustomerInfo> customerInfoIterator = customerInfoArrayList.iterator();
-
-                        int value = 0;
-                        while (customerInfoIterator.hasNext()) {
-
-                            CustomerInfo customerInfo = customerInfoIterator.next();
-                            if(customerInfo.isFullCreated()){
-
-                                String editCustomerInfoUrl = "/customer-mm/edit-customer/"+customerInfo.getId();
-                                String deleteCustomerInfoUrl = "/customer-mm/delete-customer/"+customerInfo.getId();
-
-                    %>
-                                <tr>
-                                    <td align="center"><%out.print(customerInfo.getId());%></td>
-                                    <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
-                                    <td>Date registration</td>
-                                    <td><a href=""><%out.print(customerInfo.getName());%></a></td>
-                                    <td><%out.print(customerInfo.getCompany());%></td>
-                                    <td><a onclick="getCustomer(<%out.print(customerInfo.getId());%>)">info@someserver.com</a></td>
-                                    <td><a href=""><%out.print(customerInfo.getPhone());%></a></td>
-                                    <td><a href="">Type company</a></td>
-
-                                    <td align="center">
-                                        <a href="<%out.print(editCustomerInfoUrl);%>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
-                                        <a href="<%out.print(deleteCustomerInfoUrl);%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
-                                    </td>
-                                </tr>
-
-                            <%value++;%>
-                        <%}%>
-
-                    <%}%>
+                    <td align="center">
+                        <a href="<%out.print(editCustomerInfoUrl);%>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
+                        <a href="<%out.print(deleteCustomerInfoUrl);%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
+                    </td>
+                </tr>
+                <%}%>
+                <%}%>
                 </tbody>
                 <!-- #End Items list -->
 
             </table>
-
 
         </section>
         <!-- Content section -->
@@ -166,10 +152,10 @@
                     </thead>
 
                     <!-- Items list -->
-                   <tbody id="modalTable">
+                    <tbody id="modalTable">
 
 
-                   </tbody>
+                    </tbody>
                     <!-- #End Items list -->
 
                 </table>
