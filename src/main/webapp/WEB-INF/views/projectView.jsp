@@ -57,7 +57,7 @@
 
         <!-- Content section -->
         <section class="container-fluid content">
-            <h3><i class="fa fa-file-text-o"></i>Project code: <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%out.print(String.format("%05d", project.getId()));%> <%out.print(projectName);%></h3>
+            <h3><i class="fa fa-file-text-o"></i>Project code: <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%out.print(String.format("%04d", project.getId()));%> <%out.print(projectName);%></h3>
 
             <div class="mb20">
                 <a href="/project-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
@@ -70,7 +70,6 @@
 
                     <h4 class="mb10">Project information</h4>
                     <section class="estimate-user-info">
-                        <div class="date">Date create: <%out.print(dateFormatShow.format(project.getCreateDate()));%></div>
                         <div class="date">Date start:
                             <%if (project.getStartDate() == null) { out.print("-"); } else { out.print(dateFormatStartEnd.format(project.getStartDate()));}%>
                         </div>

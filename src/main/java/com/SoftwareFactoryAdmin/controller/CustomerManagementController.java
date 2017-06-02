@@ -8,6 +8,7 @@ import com.SoftwareFactoryAdmin.service.CustomerInfoService;
 import com.SoftwareFactoryAdmin.service.EstimateService;
 import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.UserService;
+import com.SoftwareFactoryAdmin.util.AppMethods;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -200,14 +201,21 @@ public class CustomerManagementController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/show-customer", method = RequestMethod.GET)
-    public String returnValues(@RequestParam("index") long index, Model model) {
+    @RequestMapping(value = "/show-customer-project", method = RequestMethod.GET)
+    public String returnValues(@RequestParam("index") long index) {
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(index);
 
         JSONObject myJsonObj = new JSONObject();
 
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilderModalBody = new StringBuilder();
+        StringBuilder stringBuilderModalButton = new StringBuilder();
+        String string = "<a href=\"/project-mm/add-project/"+customerInfo.getId()+"/\"";
+        string+= "class=\"btn btn-success\">Add new project</a>";
+
+        stringBuilderModalButton.append(string);
+        stringBuilderModalButton.append("<button class=\"btn btn-info\" type=\"button\" data-dismiss=\"modal\">Close</button>");
+
 
         for (Project project : customerInfo.getProjects()) {
 
@@ -219,30 +227,24 @@ public class CustomerManagementController {
                 projectName = ProjectEnum.projectNameEstimate.getValue();
             }
 
-            stringBuilder.append("<tr>");
+            stringBuilderModalBody.append("<tr>");
 
-            stringBuilder.append("<td>" + projectName + "</td>");
-            stringBuilder.append("<td>" + changeDateNull(project.getStartDate()) + "</td>");
-            stringBuilder.append("<td>" + changeDateNull(project.getEndDate()) + "</td>");
-            stringBuilder.append("<td>" + changeNull(project.getManagerInfo().getName()) + "</td>");
-            stringBuilder.append("<td>" + changeNull(project.getManagerInfo().getEmail()) + "</td>");
-            stringBuilder.append("<td>" + changeNull(project.getManagerInfo().getPhone()) + "</td>");
+            stringBuilderModalBody.append("<td>" + projectName + "</td>");
+            stringBuilderModalBody.append("<td>" + changeDateNull(project.getStartDate()) + "</td>");
+            stringBuilderModalBody.append("<td>" + changeDateNull(project.getEndDate()) + "</td>");
+            stringBuilderModalBody.append("<td>" + AppMethods.changeNull(project.getManagerInfo().getName()) + "</td>");
+            stringBuilderModalBody.append("<td>" + AppMethods.changeNull(project.getManagerInfo().getEmail()) + "</td>");
+            stringBuilderModalBody.append("<td>" + AppMethods.changeNull(project.getManagerInfo().getPhone()) + "</td>");
 
-            stringBuilder.append("</tr>");
+            stringBuilderModalBody.append("</tr>");
         }
 
-        myJsonObj.append("stringBuilder", stringBuilder);
+        myJsonObj.append("stringBuilder", stringBuilderModalBody);
+        myJsonObj.append("stringBuilderModalButtonAdd", stringBuilderModalButton);
         myJsonObj.append("customerSoid", "All Project :: "+customerInfo.getUser().getSsoId());
 
         return myJsonObj.toString();
 
-    }
-
-    private String changeNull(String value){
-        if (!"".equals(value) && value!=null){
-            return value;
-        }
-        return "-";
     }
 
     private String changeDateNull(Date data){

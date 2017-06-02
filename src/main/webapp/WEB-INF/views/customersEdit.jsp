@@ -57,128 +57,75 @@
                 <a href="/customer-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel</a>
             </div>
 
-            <form action="<%out.print(formAction);%>" method="post">
-                <div class="row">
-                    <div class="col-md-6">
+            <form action="<%out.print(formAction);%>" method="post" class="form-horizontal">
+                <div class="col-md-8">
 
-                        <%if(!isNew){%>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">SSO ID</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="SSO ID" value="<%out.print(customerInfo.getUser().getSsoId());%>" disabled/>
-                                    </div>
-                                </div>
-                            </div>
-                        <%}%>
-
-                        <%String company = ""; if (!isNew && !"".equals(customerInfo.getCompany())) company = customerInfo.getCompany();%>
+                    <%if(!isNew){%>
                         <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Company</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="text" name="company" class="form-control" placeholder="Company" value="<%out.print(company);%>" <%if (isNew) out.print("required");%>/>
-                                </div>
+                            <label class="col-sm-3 control-label">SOID</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="SSO ID" value="<%out.print(customerInfo.getUser().getSsoId());%>" disabled/>
                             </div>
                         </div>
+                    <%}%>
 
-
-                        <%String webSite = ""; if (!isNew && !"".equals(customerInfo.getWebsite())) webSite = customerInfo.getWebsite();%>
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">WEB site</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="text" name="site_link" class="form-control" placeholder="WEB site" value="<%out.print(webSite);%>" <%if (isNew) out.print("required");%>/>
-                                </div>
-                            </div>
+                    <%String company = ""; if (!isNew && !"".equals(customerInfo.getCompany())) company = customerInfo.getCompany();%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Company</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="company" class="form-control" placeholder="Company" value="<%out.print(company);%>" <%if (isNew) out.print("required");%>/>
                         </div>
+                    </div>
 
-                        <%String name = ""; if (!isNew && !"".equals(customerInfo.getName())) name = customerInfo.getName();%>
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Name" value="<%out.print(name);%>" <%if (isNew) out.print("required");%>/>
-                                </div>
-                            </div>
+                    <%String webSite = ""; if (!isNew && !"".equals(customerInfo.getWebsite())) webSite = customerInfo.getWebsite();%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">WEB site</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="site_link" class="form-control" placeholder="WEB site" value="<%out.print(webSite);%>" <%if (isNew) out.print("required");%>/>
                         </div>
+                    </div>
 
-                        <%String email = ""; if (!isNew && !"".equals(customerInfo.getEmail())) email = customerInfo.getEmail();%>
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">E-mail</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="E-mail" value="<%out.print(email);%>" <%if (isNew) out.print("required");%> />
-                                </div>
-                            </div>
+                    <%String name = ""; if (!isNew && !"".equals(customerInfo.getName())) name = customerInfo.getName();%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="<%out.print(name);%>" <%if (isNew) out.print("required");%>/>
                         </div>
+                    </div>
 
-                        <%String phone = ""; if (!isNew && !"".equals(customerInfo.getPhone())) phone = customerInfo.getPhone();%>
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Phone</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="text" name="phone" class="form-control" placeholder="Phone" value="<%out.print(phone);%>"  <%if (isNew) out.print("required");%>/>
-                                </div>
-                            </div>
+                    <%String email = ""; if (!isNew && !"".equals(customerInfo.getEmail())) email = customerInfo.getEmail();%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">E-mail</label>
+                        <div class="col-sm-9">
+                            <input type="email" name="email" class="form-control" placeholder="E-mail" value="<%out.print(email);%>" <%if (isNew) out.print("required");%> />
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">New password</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" <%if(isNew)out.print("required");%>/>
-                                </div>
-                            </div>
+                    <%String phone = ""; if (!isNew && !"".equals(customerInfo.getPhone())) phone = customerInfo.getPhone();%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Phone</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="phone" class="form-control" placeholder="Phone" value="<%out.print(phone);%>"  <%if (isNew) out.print("required");%>/>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Confirm new password</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(isNew)out.print("required");%>/>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">New password</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" <%if(isNew)out.print("required");%>/>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="selectApp">Account type</label>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Confirm password</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(isNew)out.print("required");%>/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Account type</label>
+                        <div class="col-sm-9">
                             <%
                                 String type1 = "temporal";
                                 String type2 = "standard";
@@ -187,91 +134,60 @@
                                     type2 = "temporal";
                                 }
                             %>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <select id="selectApp" name="account_type" class="form-control">
-                                        <option value="<%out.print(type1);%>"><%out.print(type1);%></option>
-                                        <option value="<%out.print(type2);%>"><%out.print(type2);%></option>
-                                    </select>
-                                </div>
+                            <select id="selectApp" name="account_type" class="form-control">
+                                <option value="<%out.print(type1);%>"><%out.print(type1);%></option>
+                                <option value="<%out.print(type2);%>"><%out.print(type2);%></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <%if(!isNew){%>
+
+                        <input type="hidden" name="id"  value="<%out.print(customerInfo.getId());%>">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Directors Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="directors_name" class="form-control" placeholder="Name" value="<%out.print(customerInfo.getDirectorsName());%>"/>
                             </div>
                         </div>
 
-                        <%if(!isNew){%>
-
-                            <input type="hidden" name="id"  value="<%out.print(customerInfo.getId());%>">
-
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Directors Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <input type="text" name="directors_name" class="form-control" placeholder="Name" value="<%out.print(customerInfo.getDirectorsName());%>"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Directors E-mail</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <input type="email" name="directors_email" class="form-control" placeholder="Directors-E-mail" value="<%out.print(customerInfo.getDirectorsEmail());%>"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Directors Phone</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <input type="text" name="directors_phone" class="form-control" placeholder="Phone" value="<%out.print(customerInfo.getDirectorsPhone());%>"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Company Type</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <input type="text" name="company_type" class="form-control" placeholder="Type company" value="<%out.print(customerInfo.getCompanyType());%>"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Address</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <input type="text" name="address" class="form-control" placeholder="Address" value="<%out.print(customerInfo.getAddress());%>"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                        <%}%>
                         <div class="form-group">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-8" align="right">
-                                <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save</button>
+                            <label class="col-sm-3 control-label">Directors E-mail</label>
+                            <div class="col-sm-9">
+                                <input type="email" name="directors_email" class="form-control" placeholder="Directors-E-mail" value="<%out.print(customerInfo.getDirectorsEmail());%>"/>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Directors Phone</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="directors_phone" class="form-control" placeholder="Phone" value="<%out.print(customerInfo.getDirectorsPhone());%>"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Company Type</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="company_type" class="form-control" placeholder="Type company" value="<%out.print(customerInfo.getCompanyType());%>"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="address" class="form-control" placeholder="Address" value="<%out.print(customerInfo.getAddress());%>"/>
+                            </div>
+                        </div>
+
+                    <%}%>
+
+                    <div class="form-group">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8" align="right">
+                            <button type="submit" name="save" class="btn btn-primary">
+                                <i class="fa fa-check pr10"></i>Save
+                            </button>
                         </div>
                     </div>
                 </div>

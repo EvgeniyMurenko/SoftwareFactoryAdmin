@@ -128,11 +128,12 @@ jQuery(document).ready(function($) {
     });
 });
 
-function getCustomer (index){
+function getCustomerProject (index){
     $.ajax({
         type: "GET",
         data: "index="+index,
-        url: "http://a.sofac.kr/customer-mm/show-customer/",
+        url: "http://a.sofac.kr/customer-mm/show-customer-project/",
+        /*url: "http://localhost:8080/customer-mm/show-customer-project/",*/
         dataType: "json",
         success: function(data) {
             // tableWorkers
@@ -142,12 +143,46 @@ function getCustomer (index){
                $('#customerSoid_json').text(data.customerSoid);
 
                 $('#myModal').modal({
-                    //установим модальному окну следующие параметры:
-
                     backdrop: 'static',
                     keyboard: true
                 });
                 document.getElementById('modalTable').innerHTML = data.stringBuilder;
+                document.getElementById('modalButton').innerHTML = data.stringBuilderModalButtonAdd;
+            }
+        },
+    });
+}
+
+function getCustomerInfo (customerId){
+    $.ajax({
+        type: "GET",
+        data: "customerId="+customerId,
+        url: "http://a.sofac.kr/project-mm/show-customer-info/",
+        /*url: "http://localhost:8080/project-mm/show-customer-info/",*/
+        dataType: "json",
+        success: function(data) {
+            // tableWorkers
+            // countPages
+            if(data.customerInfo!=''){
+
+                $('#customerSoid_json').text(data.customerSoid);
+                $('#customerCompany_json').text(data.customerCompany);
+                $('#customerWebsite_json').text(data.customerWebsite);
+                $('#customerName_json').text(data.customerName);
+                $('#customerEmail_json').text(data.customerEmail);
+                $('#customerPhone_json').text(data.customerPhone);
+                $('#customerAccount_json').text(data.customerAccount);
+                $('#customerDirectorsName_json').text(data.customerDirectorsName);
+                $('#customerDirectorsEmail_json').text(data.customerDirectorsEmail);
+                $('#customerDirectorsPhone_json').text(data.customerDirectorsPhone);
+                $('#customerCompanyType_json').text(data.customerCompanyType);
+                $('#customerAddress_json').text(data.customerAddress);
+                $('#myModalInfo').modal({
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                document.getElementById('modalTable').innerHTML = data.stringBuilder;
+                /*document.getElementById('modalButton').innerHTML = data.stringBuilderModalButtonAdd;*/
             }
         },
     });

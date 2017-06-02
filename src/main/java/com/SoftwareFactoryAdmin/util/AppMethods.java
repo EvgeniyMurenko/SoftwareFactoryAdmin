@@ -17,4 +17,11 @@ public class AppMethods {
         }
         return new Date();
     }
+
+    public static String changeNull(String value){
+        if (!"".equals(value) && value!=null){
+            return value;
+        }
+        return "-";
+    }
 }

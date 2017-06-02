@@ -92,19 +92,31 @@
                     Iterator<CustomerInfo> customerInfoIterator = customerInfoArrayList.iterator();
                     while (customerInfoIterator.hasNext()) {
                         CustomerInfo customerInfo = customerInfoIterator.next();
+
                         if(customerInfo.isFullCreated()){
                             String editCustomerInfoUrl = "/customer-mm/edit-customer/"+ customerInfo.getId();
                             String deleteCustomerInfoUrl = "/customer-mm/delete-customer/"+ customerInfo.getId();
                             String customerInfoHistory = "/customer-mm/history/" + customerInfo.getId();
                 %>
+
                 <tr>
                     <td align="center"><%out.print(customerInfo.getId());%></td>
                     <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
                     <td><%out.print(dateFormatShow.format(customerInfo.getRegistrationDate()));%></td>
                     <td><a href="<%out.print(customerInfoHistory);%>"><%out.print(customerInfo.getDirectorsName());%></a></td>
                     <td><%out.print(customerInfo.getCompany());%></td>
-                    <td><a onclick="getCustomer(<%out.print(customerInfo.getId());%>)"><%out.print(customerInfo.getDirectorsEmail());%></a></td>
-                    <td><a href=""><%out.print(customerInfo.getDirectorsPhone());%></a></td>
+
+                    <td align="center">
+                        <a onclick="getCustomerProject(<%out.print(customerInfo.getId());%>)">
+                            <%if (!"".equals(customerInfo.getDirectorsEmail())) {
+                                out.print(customerInfo.getDirectorsEmail());
+                            }else {
+                                out.print("-");
+                            }%>
+                        </a>
+                    </td>
+
+                    <td><%out.print(customerInfo.getDirectorsPhone());%></td>
                     <td><a href=""><%out.print(customerInfo.getCompanyType());%></a></td>
 
                     <td align="center">
@@ -162,7 +174,9 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-info" type="button" data-dismiss="modal">Close</button>
+                <div id="modalButton">
+
+                </div>
             </div>
         </div>
     </div>

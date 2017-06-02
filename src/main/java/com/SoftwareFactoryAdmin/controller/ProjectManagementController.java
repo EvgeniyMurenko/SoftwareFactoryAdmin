@@ -9,17 +9,16 @@ import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.ProjectService;
 import com.SoftwareFactoryAdmin.service.UserService;
 import com.SoftwareFactoryAdmin.util.AppMethods;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 
 
 @Controller
@@ -52,11 +51,16 @@ public class ProjectManagementController {
         return projects;
     }
 
-    @RequestMapping(value = "/add-project", method = RequestMethod.GET)
-    public ModelAndView addProject() {
+    @RequestMapping(value = "/add-project/{customerId}", method = RequestMethod.GET)
+    public ModelAndView addProject(@PathVariable Long customerId) {
+        System.out.println("=============== customer id " + customerId);
+
+        User customerUser = userService.findById(customerId);
 
         ModelAndView addProject = new ModelAndView("projectEdit");
+
         addProject.addObject("isNew", true);
+        addProject.addObject("customerUser", customerUser);
 
         return addProject;
     }
@@ -103,7 +107,6 @@ public class ProjectManagementController {
         System.out.printf("===================SOID " +customerSOID);
         User userCustomer = userService.findBySSO(customerSOID);
         if (userCustomer == null) {
-            System.out.printf("=================== NOT FOUND USER  by SOID");
            return new ModelAndView("redirect:/project-mm/");
         }
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userCustomer.getId());
@@ -125,10 +128,12 @@ public class ProjectManagementController {
 
             if (!"".equals(dateStart)) {
                 project.setStartDate(AppMethods.getDateFromString(dateStart));
+            }else{
+                project.setStartDate(new Date());
             }
 
             if (!"".equals(dateEnd)) {
-                project.setStartDate(AppMethods.getDateFromString(dateEnd));
+                project.setEndDate(AppMethods.getDateFromString(dateEnd));
             }
 
             projectService.addNewProject(project);
@@ -142,7 +147,7 @@ public class ProjectManagementController {
     }
 
     @RequestMapping(value = "/update-project", method = RequestMethod.POST)
-    public ModelAndView updateProject(@RequestParam("customerId") Long customerId,
+    public ModelAndView updateProject(@RequestParam("customerSOID") String customerSOID,
                                       @RequestParam("idProject") Long idProject,
                                       @RequestParam("projectName") String projectName,
                                       @RequestParam("selectStatus") String selectStatus,
@@ -152,7 +157,7 @@ public class ProjectManagementController {
 
         ModelAndView updateProjectView;
 
-        User userCustomer = userService.findById(customerId);
+        User userCustomer = userService.findBySSO(customerSOID);
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(userCustomer.getId());
 
 
@@ -188,6 +193,35 @@ public class ProjectManagementController {
         }
 
         return updateProjectView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/show-customer-info", method = RequestMethod.GET)
+    public String updateProject(@RequestParam("customerId") Long customerId){
+        System.out.println("==============start");
+
+        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerId);
+
+        JSONObject myJsonObj = new JSONObject();
+
+        myJsonObj.append("customerSoid", customerInfo.getUser().getSsoId());
+        myJsonObj.append("customerCompany", AppMethods.changeNull(customerInfo.getCompany()));
+        myJsonObj.append("customerWebsite", AppMethods.changeNull(customerInfo.getWebsite()));
+        myJsonObj.append("customerName", AppMethods.changeNull(customerInfo.getName()));
+        myJsonObj.append("customerEmail", AppMethods.changeNull(customerInfo.getEmail()));
+        myJsonObj.append("customerPhone", AppMethods.changeNull(customerInfo.getPhone()));
+        if (customerInfo.isStandardAccount()){
+            myJsonObj.append("customerAccount", "Standart");
+        }else {
+            myJsonObj.append("customerAccount", "Temporal");
+        }
+        myJsonObj.append("customerDirectorsName", AppMethods.changeNull(customerInfo.getDirectorsName()));
+        myJsonObj.append("customerDirectorsEmail", AppMethods.changeNull(customerInfo.getDirectorsEmail()));
+        myJsonObj.append("customerDirectorsPhone", AppMethods.changeNull(customerInfo.getDirectorsPhone()));
+        myJsonObj.append("customerCompanyType", AppMethods.changeNull(customerInfo.getCompanyType()));
+        myJsonObj.append("customerAddress", AppMethods.changeNull(customerInfo.getAddress()));
+
+        return myJsonObj.toString();
     }
 
 }

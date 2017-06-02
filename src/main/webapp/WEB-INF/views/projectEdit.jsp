@@ -84,12 +84,8 @@
 
                         <div class="form-group">
                             <label class="control-label">SOID customer</label>
-                            <%if (!isNew && !"".equals(project.getCustomerInfo().getId())){%>
-                               <input type="text" class="form-control" value="<%out.print(String.format("%04d", project.getCustomerInfo().getId()));%>" disabled/>
-                                <input type="hidden" name="customerId"  value="<%out.print(customerUser.getId());%>">
-                            <%} else {%>
-                                <input type="text" id="customerSOID" name="customerSOID" class="form-control" placeholder="Write customer SOID" required/>
-                            <%}%>
+                            <input type="text" value="<%out.print(customerUser.getSsoId());%>" class="form-control" disabled/>
+                            <input type="hidden" name="customerSOID" value="<%out.print(customerUser.getSsoId());%>">
                         </div>
 
 
