@@ -54,8 +54,17 @@ public class Project implements Serializable {
     @JoinColumn(name = "user_manager_id")
     private ManagerInfo managerInfo;
 
+    @Column(name = "pm_name")
+    private String pmName;
 
-    public Project(String projectName, Date createDate, String status, CustomerInfo customerInfo, Set<Case> cases, String technologyType, Date startDate, Date endDate, String description, ManagerInfo managerInfo) {
+    @Column(name = "pm__email")
+    private String pmEmail;
+
+    @Column(name = "pm_phone")
+    private String pmPhone;
+
+
+    public Project(String projectName, Date createDate, String status, CustomerInfo customerInfo, Set<Case> cases, String technologyType, Date startDate, Date endDate, String description, ManagerInfo managerInfo, String pmName, String pmEmail, String pmPhone) {
         this.projectName = projectName;
         this.createDate = createDate;
         this.status = status;
@@ -66,6 +75,9 @@ public class Project implements Serializable {
         this.endDate = endDate;
         this.description = description;
         this.managerInfo = managerInfo;
+        this.pmName = pmName;
+        this.pmEmail = pmEmail;
+        this.pmPhone = pmPhone;
     }
 
     public Long getId() {
@@ -154,5 +166,29 @@ public class Project implements Serializable {
 
     public void setManagerInfo(ManagerInfo managerInfo) {
         this.managerInfo = managerInfo;
+    }
+
+    public String getPmName() {
+        return pmName;
+    }
+
+    public void setPmName(String pmName) {
+        this.pmName = pmName;
+    }
+
+    public String getPmEmail() {
+        return pmEmail;
+    }
+
+    public void setPmEmail(String pmEmail) {
+        this.pmEmail = pmEmail;
+    }
+
+    public String getPmPhone() {
+        return pmPhone;
+    }
+
+    public void setPmPhone(String pmPhone) {
+        this.pmPhone = pmPhone;
     }
 }

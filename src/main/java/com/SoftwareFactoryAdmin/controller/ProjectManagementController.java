@@ -96,15 +96,17 @@ public class ProjectManagementController {
 
 
     @RequestMapping(value = "/save-new-project", method = RequestMethod.POST)
-    public ModelAndView saveNewProject(@RequestParam("customerSOID") String customerSOID,
+    public ModelAndView saveNewProject(@RequestParam("customerSoid") String customerSOID,
                                        @RequestParam("projectName") String projectName,
                                        @RequestParam("selectStatus") String selectStatus,
                                        @RequestParam("dateStart") String dateStart,
                                        @RequestParam("dateEnd") String dateEnd,
-                                       @RequestParam("description") String description, HttpSession httpSession) {
+                                       @RequestParam("description") String description, HttpSession httpSession,
+                                       @RequestParam("pmName") String pmName,
+                                       @RequestParam("pmEmail") String pmEmail,
+                                       @RequestParam("pmPhone") String pmPhone) {
 
         ModelAndView saveProject;
-        System.out.printf("===================SOID " +customerSOID);
         User userCustomer = userService.findBySSO(customerSOID);
         if (userCustomer == null) {
            return new ModelAndView("redirect:/project-mm/");
@@ -136,6 +138,24 @@ public class ProjectManagementController {
                 project.setEndDate(AppMethods.getDateFromString(dateEnd));
             }
 
+            if (!"".equals(pmName)){
+                project.setPmName(pmName);
+            }else {
+                project.setPmName("-");
+            }
+
+            if (!"".equals(pmEmail)){
+                project.setPmEmail(pmEmail);
+            }else {
+                project.setPmEmail("-");
+            }
+
+            if (!"".equals(pmPhone)){
+                project.setPmPhone(pmPhone);
+            }else {
+                project.setPmPhone("-");
+            }
+
             projectService.addNewProject(project);
 
             saveProject = new ModelAndView("redirect:/project-mm/view-project/" + project.getId() + "/","isSuccess" , "true");
@@ -153,7 +173,10 @@ public class ProjectManagementController {
                                       @RequestParam("selectStatus") String selectStatus,
                                       @RequestParam("dateStart") String dateStart,
                                       @RequestParam("dateEnd") String dateEnd,
-                                      @RequestParam("description") String description, HttpSession httpSession) {
+                                      @RequestParam("description") String description, HttpSession httpSession,
+                                      @RequestParam("pmName") String pmName,
+                                      @RequestParam("pmEmail") String pmEmail,
+                                      @RequestParam("pmPhone") String pmPhone) {
 
         ModelAndView updateProjectView;
 
@@ -174,15 +197,20 @@ public class ProjectManagementController {
             project.setDescription(description);
             project.setManagerInfo(managerInfo);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
             if (!"".equals(dateStart)) {
                 project.setStartDate(AppMethods.getDateFromString(dateStart));
             }
 
             if (!"".equals(dateEnd)) {
-                project.setStartDate(AppMethods.getDateFromString(dateEnd));
+                project.setEndDate(AppMethods.getDateFromString(dateEnd));
+            } else {
+                project.setEndDate(null);
             }
+
+            project.setPmName(pmName);
+            project.setPmEmail(pmEmail);
+            project.setPmPhone(pmPhone);
+
 
             projectService.updateProject(project);
 

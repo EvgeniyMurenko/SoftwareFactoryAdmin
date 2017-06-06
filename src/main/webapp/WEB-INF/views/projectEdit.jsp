@@ -76,21 +76,24 @@
                 <a href="<%out.print("/project-mm/");%>" class="btn btn-primary">Back</a>
             </div>
 
-            <form action="<%out.print(formAction);%>?${_csrf.parameterName}=${_csrf.token}" method="POST" id="projectEditForm">
-                <div class="row">
-                    <div class="col-md-6">
+            <form class="form-horizontal" action="<%out.print(formAction);%>?${_csrf.parameterName}=${_csrf.token}" method="post" id="projectEditForm">
 
-                        <input type="hidden" name="idProject" value="<%if (!isNew)out.print(project.getId());%>">
+                <div class="col-md-7">
 
-                        <div class="form-group">
-                            <label class="control-label">SOID customer</label>
+                    <input type="hidden" name="idProject" value="<%if (!isNew)out.print(project.getId());%>">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Id customer</label>
+                        <div class="col-sm-9">
                             <input type="text" value="<%out.print(customerUser.getSsoId());%>" class="form-control" disabled/>
                             <input type="hidden" name="customerSOID" value="<%out.print(customerUser.getSsoId());%>">
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <label class="control-label">Project name</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Project name</label>
+                        <div class="col-sm-9">
                             <%if (!isNew && !"".equals(project.getProjectName())){%>
                                 <input type="hidden" name="projectName" value="<%out.print(project.getProjectName());%>">
                                 <input type="text" class="form-control" placeholder="Project name" value="<%out.print(projectName);%>" <%out.print(projectDisabled);%>/>
@@ -98,21 +101,45 @@
                                 <input type="text" name="projectName" class="form-control" placeholder="Project name" />
                             <%}%>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="selectStatus">Select status</label>
-                            <%String open="";%>
-                            <%String start="";%>
-                            <%String considered="";%>
-                            <%String end="";%>
-                            <%String close="";%>
-                            <%if (!isNew && !"".equals(project.getStatus())){%>
-                                <%if (project.getStatus().equals(StatusEnum.OPEN.toString())){open = "selected";}%>
-                                <%if (project.getStatus().equals(StatusEnum.START.toString())){start = "selected";}%>
-                                <%if (project.getStatus().equals(StatusEnum.CONSIDERED.toString())){considered = "selected";}%>
-                                <%if (project.getStatus().equals(StatusEnum.END.toString())){end = "selected";}%>
-                                <%if (project.getStatus().equals(StatusEnum.CLOSE.toString()))close = "selected";%>
-                            <%}%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">PM name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="pmName" class="form-control" value="<%out.print(project.getPmName());%>"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">PM E-mail</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="pmEmail" class="form-control" value="<%out.print(project.getPmEmail());%>"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">PM phone</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="pmPhone" class="form-control" value="<%out.print(project.getPmPhone());%>"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Select status</label>
+                        <%String open="";%>
+                        <%String start="";%>
+                        <%String considered="";%>
+                        <%String end="";%>
+                        <%String close="";%>
+                        <%if (!isNew && !"".equals(project.getStatus())){%>
+                            <%if (project.getStatus().equals(StatusEnum.OPEN.toString())){open = "selected";}%>
+                            <%if (project.getStatus().equals(StatusEnum.START.toString())){start = "selected";}%>
+                            <%if (project.getStatus().equals(StatusEnum.CONSIDERED.toString())){considered = "selected";}%>
+                            <%if (project.getStatus().equals(StatusEnum.END.toString())){end = "selected";}%>
+                            <%if (project.getStatus().equals(StatusEnum.CLOSE.toString()))close = "selected";%>
+                        <%}%>
+                        <div class="col-sm-9">
                             <select id="selectStatus" name="selectStatus" class="form-control">
                                 <option value="OPEN" <%out.print(open);%>>OPEN</option>
                                 <option value="START" <%out.print(start);%>>START</option>
@@ -121,53 +148,55 @@
                                 <option value="CLOSE" <%out.print(close);%>>CLOSE</option>
                             </select>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <!-- Appointment time -->
-                            <%String dateStart = "";%>
-                            <%if (!isNew && project.getStartDate() != null) dateStart = dateFormatShow.format(project.getStartDate());%>
-                            <label for="selectStatus">Start date</label>
-                            <div class="form-group">
-                                <div class="input-group date" id="datetimepicker">
-                                    <input type="text" name="dateStart" class="form-control" value="<%out.print(dateStart);%>"/>
-                                    <span class="input-group-addon">
+                    <div class="form-group">
+                        <!-- Appointment time -->
+                        <%String dateStart = "";%>
+                        <%if (!isNew && project.getStartDate() != null) dateStart = dateFormatShow.format(project.getStartDate());%>
+                        <label class="col-sm-3 control-label">Srart date</label>
+                        <div class="col-sm-9">
+                            <div class='input-group date' id='datetimepicker'>
+                                <input type="text" name="dateStart" class="form-control" value="<%out.print(dateStart);%>"/>
+                                <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                </div>
                             </div>
-                            <!-- #End Appointment time -->
                         </div>
+                        <!-- #End Appointment time -->
+                    </div>
 
-                        <div class="form-group">
-                            <!-- Appointment time -->
-                            <%String dateEnd = "";%>
-                            <%if (!isNew && project.getEndDate() != null) dateEnd = dateFormatShow.format(project.getEndDate());%>
-                            <label for="selectStatus">End date</label>
-                            <div class="form-group">
-                                <div class="input-group date" id="datetimepicker1">
-                                    <input type="text" name="dateEnd" class="form-control" value="<%out.print(dateEnd);%>"/>
-                                    <span class="input-group-addon">
+                    <div class="form-group">
+                        <!-- Appointment time -->
+                        <%String dateEnd = "";%>
+                        <%if (!isNew && project.getEndDate() != null) dateEnd = dateFormatShow.format(project.getEndDate());%>
+                        <label class="col-sm-3 control-label">End date</label>
+                        <div class="col-sm-9">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type="text" name="dateEnd" class="form-control" value="<%out.print(dateEnd);%>"/>
+                                <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                </div>
-                            </div>
-                            <!-- #End Appointment time -->
-                        </div>
-
-                        <!-- Description -->
-                        <div class="form-group">
-                            <label for="selectStatus">Project description</label>
-                            <div class="form-group">
-                                <textarea id="editor" name="description" rows="3">
-                                    <%if (!isNew && !"".equals(project.getDescription())) out.print(project.getDescription());%>
-                                </textarea>
                             </div>
                         </div>
-                        <!-- #End Description -->
+                        <!-- #End Appointment time -->
+                    </div>
 
-                        <div class="form-group text-right">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save</button>
+                    <!-- Case message -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Project description</label>
+                        <div class="col-sm-9">
+                            <textarea id="editor" name="description" rows="3">
+                                <%if (!isNew && !"".equals(project.getDescription())) out.print(project.getDescription());%>
+                            </textarea>
                         </div>
+                    </div>
+                    <!-- #End Case message -->
+
+                    <div class="form-group text-right">
+                        <button type="submit" name="save" class="btn btn-primary">
+                            <i class="fa fa-check pr10"></i>Save
+                        </button>
                     </div>
                 </div>
             </form>

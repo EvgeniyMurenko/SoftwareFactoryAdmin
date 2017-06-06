@@ -140,14 +140,15 @@ function getCustomerProject (index){
             // countPages
             if(data.customerInfo!=''){
 
-               $('#customerSoid_json').text(data.customerSoid);
+               $('#customerSoid_json').text(data.customerSoid_json);
 
                 $('#myModal').modal({
                     backdrop: 'static',
                     keyboard: true
                 });
                 document.getElementById('modalTable').innerHTML = data.stringBuilder;
-                document.getElementById('modalButton').innerHTML = data.stringBuilderModalButtonAdd;
+                document.getElementById('customerSoid').innerHTML = data.customerSoid;
+                /*document.getElementById('modalButton').innerHTML = data.stringBuilderModalButtonAdd;*/
             }
         },
     });

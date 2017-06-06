@@ -167,6 +167,6 @@ p { padding: 5px 0 10px 0; margin: 0; }
 .pagination > .active > span:hover { background-color: #00BFF4; border-color: #03a9f4; }
 /* #End Other */
 
-.form-horizontal .control-label {
-    text-align: left;
+.modal-footer .collapse{
+    margin-top: 15px;
 }
