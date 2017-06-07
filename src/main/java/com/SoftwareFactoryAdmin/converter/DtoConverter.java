@@ -4,7 +4,6 @@ import com.SoftwareFactoryAdmin.dto.*;
 
 import com.SoftwareFactoryAdmin.model.*;
 
-import java.io.File;
 import java.util.*;
 
 
@@ -12,8 +11,6 @@ public class DtoConverter {
 
 
     public static ManagerInfoDTO managerInfoDTOConverter(ManagerInfo managerInfo) {
-
-        /*List<MessageTaskDTO> messageTaskDTOList = messageTaskDTOConverter(staffInfo.getMessageTasks());*/
 
         ArrayList<String> permissions = new ArrayList<>();
 
@@ -26,27 +23,18 @@ public class DtoConverter {
 
         List<CaseDTO> caseDTOList = new ArrayList<>();
 
-        Iterator<Case> caseIterator = caseList.iterator();
-
-        while (caseIterator.hasNext()) {
-            Case aCase = caseIterator.next();
+        for (Case aCase : caseList) {
             caseDTOList.add(new CaseDTO(aCase.getProjectTitle(), aCase.getStatus(), aCase.getCreationDate(), messageDTOSConverter(aCase.getMessages())));
-
         }
 
         return caseDTOList;
-
     }
 
     private static List<MessageDTO> messageDTOSConverter(Set<Message> messageSet) {
 
         List<MessageDTO> messageDTOS = new ArrayList<>();
 
-        Iterator<Message> messageIterator = messageSet.iterator();
-
-        while (messageIterator.hasNext()) {
-
-            Message message = messageIterator.next();
+        for (Message message : messageSet) {
 
             UserProfile userProfile = message.getUser().getUserProfiles().iterator().next();
             if (userProfile.getType().equals("CUSTOMER")) {
@@ -57,7 +45,6 @@ public class DtoConverter {
                 messageDTOS.add(new MessageDTO(message.getMessageTime(), message.getMessageText(), message.getIsRead(), filesUrl));
             }
         }
-
 
         return messageDTOS;
     }
