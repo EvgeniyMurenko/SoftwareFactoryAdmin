@@ -117,9 +117,9 @@ public class CustomerManagementController {
 
         //CREATE #$GENERAL PROJECT FOR CUSTOMER
         Project projectNormal = new Project(ProjectEnum.projectNameNormal.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo,
-                new HashSet<>(), "test", new Date(0), new Date(0), "Default Normal project", managerInfo, "", "", "");
+                new HashSet<>(), "test", new Date(), null, "Default Normal project", managerInfo, "", "", "");
         Project projectEstimate = new Project(ProjectEnum.projectNameEstimate.getDbValue(), new Date(), StatusEnum.OPEN.toString(), customerInfo,
-                new HashSet<>(), "test", new Date(0), new Date(0), "Default Estimate project", managerInfo, "", "", "");
+                new HashSet<>(), "test", new Date(), null, "Default Estimate project", managerInfo, "", "", "");
 
 
         ArrayList<Project> projectsToAdd = new ArrayList<>();

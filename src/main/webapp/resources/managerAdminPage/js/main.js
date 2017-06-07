@@ -148,7 +148,6 @@ function getCustomerProject (index){
                 });
                 document.getElementById('modalTable').innerHTML = data.stringBuilder;
                 document.getElementById('customerSoid').innerHTML = data.customerSoid;
-                /*document.getElementById('modalButton').innerHTML = data.stringBuilderModalButtonAdd;*/
             }
         },
     });
@@ -183,7 +182,6 @@ function getCustomerInfo (customerId){
                     keyboard: true
                 });
                 document.getElementById('modalTable').innerHTML = data.stringBuilder;
-                /*document.getElementById('modalButton').innerHTML = data.stringBuilderModalButtonAdd;*/
             }
         },
     });
