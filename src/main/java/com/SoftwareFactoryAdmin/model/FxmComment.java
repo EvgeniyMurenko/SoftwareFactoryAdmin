@@ -14,10 +14,10 @@ public class FxmComment {
     public FxmComment() {
     }
 
-    public FxmComment(Long userID, Date date, String postText, FxmPost fxmPost) {
-        this.userID = userID;
+    public FxmComment(User user, Date date, String commentText, FxmPost fxmPost) {
+        this.user = user;
         this.date = date;
-        this.postText = postText;
+        this.commentText = commentText;
         this.fxmPost = fxmPost;
     }
 
@@ -28,11 +28,7 @@ public class FxmComment {
     private Long id;
 
 
-    @Id
-    @Column(name = "user_id", nullable = false)
-    private Long userID;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -44,14 +40,12 @@ public class FxmComment {
 
     @Column(name = "comment_text")
     @Type(type = "text")
-    private String postText;
+    private String commentText;
 
 
     @ManyToOne
     @JoinColumn(name = "post_id")
     private FxmPost fxmPost;
-
-
 
     public Long getId() {
         return id;
@@ -77,12 +71,12 @@ public class FxmComment {
         this.date = date;
     }
 
-    public String getPostText() {
-        return postText;
+    public String getCommentText() {
+        return commentText;
     }
 
-    public void setPostText(String postText) {
-        this.postText = postText;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 
     public FxmPost getFxmPost() {
@@ -91,13 +85,5 @@ public class FxmComment {
 
     public void setFxmPost(FxmPost fxmPost) {
         this.fxmPost = fxmPost;
-    }
-
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
     }
 }

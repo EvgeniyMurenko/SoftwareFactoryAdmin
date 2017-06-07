@@ -14,8 +14,8 @@ public class FxmPost {
     public FxmPost() {
     }
 
-    public FxmPost(Long userID, Date date, String postText, List<FxmComment> fxmComments) {
-        this.userID = userID;
+    public FxmPost(User user, Date date, String postText, List<FxmComment> fxmComments) {
+        this.user = user;
         this.date = date;
         this.postText = postText;
         this.fxmComments = fxmComments;
@@ -28,11 +28,7 @@ public class FxmPost {
     private Long id;
 
 
-    @Id
-    @Column(name = "user_id", nullable = false)
-    private Long userID;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -90,11 +86,4 @@ public class FxmPost {
         this.fxmComments = fxmComments;
     }
 
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
-    }
 }
