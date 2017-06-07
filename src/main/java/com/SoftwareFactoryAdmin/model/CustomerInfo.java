@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "s_customer_info")
@@ -38,27 +38,21 @@ public class CustomerInfo implements Serializable {
     @Column(name = "user_id", nullable = false)
     private Long id;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-
     @Column(name = "name")
     private String name;
-
 
     @Column(name = "company")
     private String company;
 
-
     @Column(name = "phone")
     private String phone;
 
-
     @Column(name = "email")
     private String email;
-
 
     @Column(name="web_site")
     private String website;
@@ -67,10 +61,8 @@ public class CustomerInfo implements Serializable {
     @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Project> projects;
 
-
     @Column(name="is_full_created")
     private boolean isFullCreated;
-
 
     @Column(name = "is_standard_account")
     private boolean isStandardAccount;
@@ -233,5 +225,6 @@ public class CustomerInfo implements Serializable {
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
+
 }
 
