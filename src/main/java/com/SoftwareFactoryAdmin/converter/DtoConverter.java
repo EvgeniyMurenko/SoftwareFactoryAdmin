@@ -40,8 +40,6 @@ public class DtoConverter {
             if (userProfile.getType().equals("CUSTOMER")) {
 
                 Set<String> filesUrl = new HashSet<>();
-
-
                 messageDTOS.add(new MessageDTO(message.getMessageTime(), message.getMessageText(), message.getIsRead(), filesUrl));
             }
         }

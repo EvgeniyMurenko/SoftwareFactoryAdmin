@@ -122,8 +122,8 @@
         </section>
         <!-- Content section -->
 
-    </div>
-    <!-- #End Page-content -->
+  </div>
+<!-- #End Page-content -->
 
 </div>
 <!-- #End Wrapper -->
@@ -133,16 +133,16 @@
 <% String isSuccess =  request.getParameter("isSuccess"); %>
 <%String link = "/project-mm/view-project/"+project.getId()+"/";%>
 <% if (isSuccess != null || isSuccess.equals("true")) { %>
-    <script>
-        jQuery(document).ready(function ($) {
-            swal(
-                '정상적으로 접수 되었습니다!',
-                '감사합니다',
-                'success'
-            );
-            history.pushState(null, null, '<%out.print(link);%>');
-        });
-    </script>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            '정상적으로 접수 되었습니다!',
+            '감사합니다',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
 <% } %>
 
 

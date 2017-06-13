@@ -102,6 +102,35 @@ public class SaveFile {
         }
     }
 
+    public String saveFileAndReturnName() {
+
+        if (files.length < 1) return null;
+        if (files[0].isEmpty()) return null;
+
+        pathForSaveFile = MainPathEnum.mainPath + "/general/";
+
+        for (MultipartFile file : this.files) {
+            try {
+                String name = file.getOriginalFilename();
+                String generatedName = generateUUIDname(name);
+                saveFile(generatedName, file);
+                return generatedName;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static void deleteFileByName(String name) {
+
+        String filePath = MainPathEnum.mainPath + "/general/" + name;
+
+        File file = new File(filePath);
+        file.delete();
+
+    }
+
     private void saveFile(String name, MultipartFile file) throws IOException {
 
         byte[] bytes = file.getBytes();

@@ -154,7 +154,7 @@
                         <!-- Appointment time -->
                         <%String dateStart = "";%>
                         <%if (!isNew && project.getStartDate() != null) dateStart = dateFormatShow.format(project.getStartDate());%>
-                        <label class="col-sm-3 control-label">Srart date</label>
+                        <label class="col-sm-3 control-label">Start date</label>
                         <div class="col-sm-9">
                             <div class='input-group date' id='datetimepicker'>
                                 <input type="text" name="dateStart" class="form-control" value="<%out.print(dateStart);%>"/>

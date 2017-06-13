@@ -63,6 +63,12 @@ public class Project implements Serializable {
     @Column(name = "pm_phone")
     private String pmPhone;
 
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<ProjectTask> projectTasks;
+
+    @Column(name = "scenario_uuid_name")
+    private String scenarioUuidName;
+
 
     public Project(String projectName, Date createDate, String status, CustomerInfo customerInfo, Set<Case> cases, String technologyType, Date startDate, Date endDate, String description, ManagerInfo managerInfo, String pmName, String pmEmail, String pmPhone) {
         this.projectName = projectName;
@@ -190,5 +196,21 @@ public class Project implements Serializable {
 
     public void setPmPhone(String pmPhone) {
         this.pmPhone = pmPhone;
+    }
+
+    public String getScenarioUuidName() {
+        return scenarioUuidName;
+    }
+
+    public void setScenarioUuidName(String scenarioUuidName) {
+        this.scenarioUuidName = scenarioUuidName;
+    }
+
+    public Set<ProjectTask> getProjectTasks() {
+        return projectTasks;
+    }
+
+    public void setProjectTasks(Set<ProjectTask> projectTasks) {
+        this.projectTasks = projectTasks;
     }
 }

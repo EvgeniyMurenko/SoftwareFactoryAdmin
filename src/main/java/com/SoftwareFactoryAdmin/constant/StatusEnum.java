@@ -1,8 +1,6 @@
 package com.SoftwareFactoryAdmin.constant;
 
-/**
- * Created by adm on 2/2/2017.
- */
+
 public enum StatusEnum {
-    CONSIDERED,	START, END, OPEN, CLOSE
+    CONSIDERED,	START, END, OPEN, CLOSE ,DONE, IN_WORK, RE_OPEN
 }
