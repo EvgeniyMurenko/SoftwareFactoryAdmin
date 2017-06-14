@@ -53,6 +53,10 @@ public class EstimateController {
         EstimateByDateComparator estimateByDateComparator = new EstimateByDateComparator();
         Collections.sort(estimates, estimateByDateComparator);
 
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        adminCabinetEstimate.addObject("managerInfo", managerInfo);
+
         adminCabinetEstimate.addObject("estimates", estimates);
 
         return adminCabinetEstimate;
@@ -60,12 +64,17 @@ public class EstimateController {
     }
 
     @RequestMapping(value = "/respond/{estimateId}", method = RequestMethod.GET)
-    public ModelAndView getManagerEstimateRespond(@PathVariable Long estimateId) {
+    public ModelAndView getManagerEstimateRespond(@PathVariable Long estimateId,
+                                                  HttpSession httpSession) {
 
         ModelAndView estimateRespond = new ModelAndView("/estimateRespond");
         Estimate estimate = estimateService.getEstimateById(estimateId);
         
         CustomerInfo customerInfo = estimate.getCustomerInfo();
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        estimateRespond.addObject("managerInfo", managerInfo);
 
         estimateRespond.addObject("estimate", estimate);
         estimateRespond.addObject("customerInfo", customerInfo);

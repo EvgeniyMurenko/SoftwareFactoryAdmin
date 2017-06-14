@@ -25,7 +25,7 @@
 
     <title>Project edit :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
@@ -40,18 +40,10 @@
         if(!isNew) formAction = "/project-mm/update-project";
     %>
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
-
-        <%@ include file="topLine.jsp" %>
 
         <!-- Content section -->
         <section class="container-fluid content">
@@ -209,7 +201,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 
 </body>

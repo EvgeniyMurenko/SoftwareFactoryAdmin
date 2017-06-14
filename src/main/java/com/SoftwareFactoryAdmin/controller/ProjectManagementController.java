@@ -39,20 +39,22 @@ public class ProjectManagementController {
     ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase() {
-
+    public ModelAndView getManagerCabinetCase(HttpSession httpSession) {
 
         ModelAndView projects = new ModelAndView("projectsList");
 
         List<Project> projectInfoList = projectService.getAllProjects();
-
         projects.addObject("projectsList", projectInfoList);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        projects.addObject("managerInfo", managerInfo);
 
         return projects;
     }
 
     @RequestMapping(value = "/add-project/{customerId}", method = RequestMethod.GET)
-    public ModelAndView addProject(@PathVariable Long customerId) {
+    public ModelAndView addProject(@PathVariable Long customerId, HttpSession httpSession) {
         System.out.println("=============== customer id " + customerId);
 
         User customerUser = userService.findById(customerId);
@@ -62,11 +64,15 @@ public class ProjectManagementController {
         addProject.addObject("isNew", true);
         addProject.addObject("customerUser", customerUser);
 
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        addProject.addObject("managerInfo", managerInfo);
+
         return addProject;
     }
 
     @RequestMapping(value = "/edit-project/{projectId}", method = RequestMethod.GET)
-    public ModelAndView editProject(@PathVariable Long projectId) {
+    public ModelAndView editProject(@PathVariable Long projectId, HttpSession httpSession) {
 
         ModelAndView editProject = new ModelAndView("projectEdit");
 
@@ -77,18 +83,26 @@ public class ProjectManagementController {
         editProject.addObject("project", project);
         editProject.addObject("customerUser", customerUser);
 
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        editProject.addObject("managerInfo", managerInfo);
+
         return editProject;
 
     }
 
     @RequestMapping(value = "/view-project/{projectId}", method = RequestMethod.GET)
-    public ModelAndView viewProject(@PathVariable Long projectId) {
+    public ModelAndView viewProject(@PathVariable Long projectId, HttpSession httpSession) {
         ModelAndView viewProject = new ModelAndView("projectView");
 
         Project project = projectService.getProjectById(projectId);
-        ManagerInfo managerInfo = project.getManagerInfo();
+        ManagerInfo managerInfoByProject = project.getManagerInfo();
 
         viewProject.addObject("project", project);
+        viewProject.addObject("managerInfoByProject", managerInfoByProject);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
         viewProject.addObject("managerInfo", managerInfo);
 
         return viewProject;

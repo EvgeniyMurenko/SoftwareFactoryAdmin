@@ -16,7 +16,7 @@
 <%@ page session="false" %>
 
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,243 +27,185 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>Cases List :: 소프트웨어팩토리</title>
+    <title>Case: 유지보수 :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
-
+    <%@ include file="styles.jsp" %>
 </head>
 <body>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <%Case aCase = (Case) request.getAttribute("case");%>
+    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Case: <%out.print(aCase.getProjectTitle());%></span>
+        </header>
+        <!-- #End Header -->
 
-        <!-- Content section -->
-        <section class="container-fluid content">
+        <section class="content container-fluid">
 
-            <% Case aCase = (Case) request.getAttribute("case");%>
-            <% ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>
-            <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-
-            <h3><i class="fa fa-pie-chart"></i>Case ID: <%out.print(aCase.getId());%></h3>
-
-            <div class="mb20 pull-left">
-                <a href="/cases/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel write Case</a>
+            <div class="mb20">
+                <a href="/cases/" class="btn btn-default"><i class="fa fa-times-circle pr5"></i> Cancel & Back</a>
             </div>
 
-            <%if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())){%>
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
-                </div>
-            <%} else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())){%>
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openProject"><i class="fa fa-plus-circle pr10"></i>Open Project</button>
-                </div>
-            <%}%>
-            <!-- Information from table -->
-            <table class="table table-striped table-bordered" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th width="20">ID</th>
-                    <th>Case issue</th>
-                    <th width="150">Project</th>
-                    <th width="170">Date</th>
-                    <th width="50">Status</th>
-                    <th width="140">Appointment time</th>
-                    <th width="70">Messages</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td align="center"><%out.print(aCase.getId());%></td>
-                    <td><%out.print(aCase.getProjectTitle());%></td>
-                    <td align="center">
-                        <a href="<%out.print("/project-mm/view-project/"+aCase.getProject().getId()+"/");%>">
-                            <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
-                                out.print(ProjectEnum.projectNameNormal.getValue());
-                            }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
-                                out.print(ProjectEnum.projectNameEstimate.getValue());
-                            } else out.print(aCase.getProject().getProjectName()); %>
-                        </a>
-                    </td>
-                    <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
-                    <td align="center"><i class="fa fa-circle-o"></i></td>
-                    <td align="center"><time class="timeago" datetime="<%out.print(aCase.getMessages().iterator().next().getMessageTime()); %>"></time></td>
-                    <td align="center"><%out.print(aCase.getMessages().size());%></td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- Information from table -->
+            <div class="background-01">
 
-            <div class="border-bottom mb20"></div>
+                <table class="table table-inside" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Case issue</th>
+                        <th>Customer name</th>
+                        <th>Project</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Appointment time</th>
+                        <th>Messages</th>
+                    </tr>
+                    </thead>
 
-            <section class="cases-messages-section">
-                <%ArrayList<Message> messages = new ArrayList<Message>(aCase.getMessages());
-                messages.sort(new MessageByDateComparator());%>
-                <%for (Message message : messages){
-                    Long userId =  new Long(message.getUser().getId());
+                    <tbody>
+                    <tr>
+                        <td align="center"><%out.print(aCase.getId());%></td>
+                        <td><%out.print(aCase.getProjectTitle());%></td>
+                        <td align="center"><%out.print(aCase.getProject().getCustomerInfo().getName());%></td>
+                        <td align="center">
+                            <a href="<%out.print("/project-mm/view-project/"+aCase.getProject().getId()+"/");%>">
+                                <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                    out.print(ProjectEnum.projectNameNormal.getValue());
+                                }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                                    out.print(ProjectEnum.projectNameEstimate.getValue());
+                                } else out.print(aCase.getProject().getProjectName()); %>
+                            </a>
+                        </td>
+                        <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
+                        <td align="center"><%out.print(aCase.getStatus());%></td>
+                        <td align="center"><time class="timeago" datetime="<%out.print(aCase.getMessages().iterator().next().getMessageTime()); %>"></time></td>
+                        <td align="center"><%out.print(aCase.getMessages().size());%></td>
+                    </tr>
+                    </tbody>
 
-                    if(aCase.getProject().getCustomerInfo().getId().equals(userId)) {%>
+                </table>
 
-                        <!-- User case message -->
-                        <div class="user-message">
+                <span class="content-title mt30">Case messages</span>
 
-                            <div class="clearfix border-bottom pb5 mb10">
-                                <div class="name"><%out.print(aCase.getProject().getCustomerInfo().getName());%></div>
-                                <div class="date"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                <div class="mb20">
+
+                    <%ArrayList<Message> messages = new ArrayList<Message>(aCase.getMessages());%>
+                    <%messages.sort(new MessageByDateComparator());%>
+
+                    <%for (Message message : messages){
+                        Long userId =  new Long(message.getUser().getId());
+                        if(aCase.getProject().getCustomerInfo().getId().equals(userId)) {%>
+
+                            <div class="message-left">
+
+                                <div class="clearfix message-header">
+                                    <div class="title"><%out.print(aCase.getProject().getCustomerInfo().getName());%></div>
+                                    <div class="date"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                                </div>
+
+                                <!-- Text message-->
+                                <%out.print(message.getMessageText());%>
+                                <!-- Text message-->
+
+                                <%Set<MessageLink> messageLinks = message.getMessageLinks();
+                                    if (!messageLinks.isEmpty()) {
+                                        for (MessageLink messageLink : messageLinks){
+                                            out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
+                                        }
+                                    }
+                                %>
+
                             </div>
 
-                            <!-- Message body -->
-                            <div class="description">
-                                <% out.print(message.getMessageText());%>
-                                <%  out.print(message.getMessageText());%>
-                                <%  Set<MessageLink> messageLinks = message.getMessageLinks();
-                                    if (!messageLinks.isEmpty()) {
+                        <%}else {%>
 
+                            <div class="message-right">
+
+                                <div class="clearfix message-header">
+                                    <div class="title">Software Factory Team</div>
+                                    <div class="date"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                                </div>
+
+                                <!-- Text message-->
+                                <%out.print(message.getMessageText());%>
+                                <!-- Text message-->
+
+                                <%Set<MessageLink> messageLinks = message.getMessageLinks();
+                                    if (!messageLinks.isEmpty()) {
                                         for (MessageLink messageLink : messageLinks){
-                                            out.print("<p><a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a>");
+                                            out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
                                         }
                                     }
                                 %>
                             </div>
-                            <!-- #End Message body -->
-
-                        </div>
-                        <!-- #End User case message -->
-
-                    <%}else{%>
-                        <!-- Manager case message -->
-                        <div class="manager-message">
-
-                            <div class="clearfix border-bottom pb5 mb10">
-                                <div class="date"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
-                                <%if(managerInfo != null ){%>
-                                    <div class="name"><%out.print(managerInfo.getName());%></div>
-                                <%} else {%>
-                                    <div class="name">SoFac Team</div>
-                                <%}%>
-                            </div>
-
-                            <!-- Message body -->
-                            <div class="description">
-                                <%  out.print(message.getMessageText());%>
-                                <%  Set<MessageLink> messageLinks = message.getMessageLinks();
-                                    if (!messageLinks.isEmpty()) {
-
-                                    for (MessageLink messageLink : messageLinks){
-                                        out.print("<p><a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a>");
-                                    }
-                                } %>
-                            </div>
-                            <!-- #End Message body -->
-
-                        </div>
-                        <!-- #End Manager case message -->
+                        <%}%>
                     <%}%>
-                <%}%>
-            </section>
 
-            <div class="border-bottom mb20"></div>
+                </div>
 
-            <%if (!aCase.getStatus().equals(StatusEnum.CLOSE.toString())){%>
-                <!-- Case answer section -->
-                <form action="/cases/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="POST" enctype="multipart/form-data" >
-                    <div class="row">
-                        <div class="col-md-4">
+                <%if (!aCase.getStatus().equals(StatusEnum.CLOSE.toString())){%>
+                    <span class="content-title mt30">Case answer</span>
 
-                            <!-- Appointment time -->
-                            <h4 class="mb10">Appointment time</h4>
-                            <div class="form-group">
-                                <div class="input-group date" id="datetimepicker">
-                                    <input type="text" name="appointmentTime" class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                    <form action="/cases/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-3">
+
+                                <!-- Appointment time -->
+                                <h4 class="mb10">Appointment time</h4>
+                                <div class="form-group">
+                                    <div class="input-group date" id="datetimepicker">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        <input type="text" name="appointmentTime" class="form-control" />
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- #End Appointment time -->
+                                <!-- #End Appointment time -->
 
-                            <!-- Attach files -->
-                            <h4 class="mb10">Attach files</h4>
-                            <div class="form-group">
-                                <input id="chatUpload" name="file[]" multiple type="file">
-                            </div>
-                            <!-- #End Attach files -->
+                                <!-- Attach files -->
+                                <h4 class="mb10">Attach files</h4>
+                                <div class="form-group">
+                                    <input id="chatUpload" name="file[]" multiple type="file">
+                                </div>
+                                <!-- #End Attach files -->
 
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Message</h4>
+
+                                <textarea class="form-control" name="message" id="editor"></textarea>
+                                <input type="hidden" name="estimateId" value="">
+
+                                <div class="form-group text-right mt30 mb0">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send message</button>
+                                    <a href="/cases/" class="btn btn-default"><i class="fa fa-chevron-left pr5"></i>Back</a>
+                                </div>
+
+                            </div>
                         </div>
-
-                        <!-- Case message -->
-                        <div class="col-md-8">
-                            <h4 class="mb10">Message</h4>
-                            <div class="form-group">
-                                <textarea id="editor" name="message" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <!-- #End Case message -->
-
-                    </div>
-
-                    <div class="form-group text-right mt20">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
-                    </div>
-
-                </form>
-                <!-- Case answer section -->
-            <%}%>
+                    </form>
+                <%}%>
+            </div>
 
         </section>
-        <!-- Content section -->
 
     </div>
-    <!-- #End Page-content -->
+    <!-- #End Page Content -->
 
 </div>
-<!-- #End Wrapper -->
 
-<!-- Open Project -->
-<div id="openProject" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <form action="/cases/<%out.print(aCase.getProject().getId());%>/createNewProject?${_csrf.parameterName}=${_csrf.token}" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Open Project</h3>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label class="control-label" for="project">Project name</label>
-                        <input type="text" id="project" name="project_name" class="form-control" required/>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" name="save" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-</div>
-<!-- #End Open Project -->
-
-<%@ include file="footerJavaScript.jsp" %>
-
-
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

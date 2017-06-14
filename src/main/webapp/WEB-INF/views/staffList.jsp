@@ -22,43 +22,41 @@
 
     <title>Staff List :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
 
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
+
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Staff List</span>
+        </header>
+        <!-- #End Header -->
 
         <!-- Content section -->
         <section class="container-fluid content">
-            <h3><i class="fa fa-users"></i>Staff List</h3>
 
             <div class="mb20">
                 <a href="/membership-mm/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
             </div>
 
 
-            <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <table id="dataTable" class="table" width="100%" cellspacing="0">
                 <thead>
                 <tr>
                     <th width="20">ID</th>
                     <th>Name</th>
-                <%--    <th>Creation Date</th>
-                    <th>Birth Date</th>
-                    <th>E-mail</th>--%>
                     <th>Rating</th>
                     <th>Android</th>
                     <th>iOS</th>
@@ -68,7 +66,7 @@
                     <th>Java script</th>
                     <th>C#</th>
                     <th>С++</th>
-                    <th>Frontend(html+css)</th>
+                    <th>Frontend (html+css)</th>
                     <th>Design</th>
                     <th width="150">Action</th>
                 </tr>
@@ -86,7 +84,7 @@
                     <th>Java script</th>
                     <th>C#</th>
                     <th>С++</th>
-                    <th>Frontend(html+css)</th>
+                    <th>Frontend (html+css)</th>
                     <th>Design</th>
                     <th width="150">Action</th>
                 </tr>
@@ -133,7 +131,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

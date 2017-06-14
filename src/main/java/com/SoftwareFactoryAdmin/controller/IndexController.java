@@ -45,7 +45,7 @@ public class IndexController {
     public ModelAndView loginPage() {
 
         if (isCurrentAuthenticationAnonymous()) {
-            ModelAndView mainPage = new ModelAndView("index");
+            ModelAndView mainPage = new ModelAndView("signin");
             return mainPage;
         } else {
             ModelAndView modelAndView = new ModelAndView("redirect:/list/");

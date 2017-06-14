@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,6 @@ public class User implements Serializable{
 	@Column(name="sso_id", unique=true, nullable=false)
 	private String ssoId;
 
-	@NotEmpty
 	@Column(name="password", nullable=false)
 	private String password;
 

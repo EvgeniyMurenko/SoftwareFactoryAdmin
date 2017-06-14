@@ -24,39 +24,32 @@
 
     <title>Projects list :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+    <%SimpleDateFormat dateFormatStartEnd = new SimpleDateFormat("yyyy-MM-dd");%>
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Projects Management</span>
+        </header>
+        <!-- #End Header -->
 
         <!-- Content section -->
         <section class="container-fluid content">
-            <h3><i class="fa fa-user"></i>Projects</h3>
 
-            <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-            <%SimpleDateFormat dateFormatStartEnd = new SimpleDateFormat("yyyy-MM-dd");%>
-
-            <%--            <div class="mb20">
-                            <a href="/project-mm/add-project" class="btn btn-primary"><i class="fa fa-plus-circle mr10"></i>Add new project</a>
-                        </div>--%>
-
-
-            <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <table id="dataTable" class="table" width="100%" cellspacing="0">
                 <thead>
                 <tr>
                     <th width="20">NO</th>
@@ -67,8 +60,6 @@
                     <th>Project manager</th>
                     <th>Description</th>
                     <th>Customer name</th>
-                    <%--<th>Email</th>
-                    <th>Telephone</th>--%>
                 </tr>
                 </thead>
                 <tfoot>
@@ -81,8 +72,6 @@
                     <th>Project manager</th>
                     <th>Description</th>
                     <th>Customer name</th>
-                    <%-- <th>Email</th>
-                     <th>Telephone</th>--%>
                 </tr>
                 </tfoot>
 
@@ -93,7 +82,7 @@
                 <%for (Project project : projectArrayList) {%>
                     <tr>
                         <td align="center"><%out.print(project.getId());%></td>
-                        <td><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
+                        <td align="center"><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
                             <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%
                             out.print(String.format("%04d", project.getId()));%></a></td>
                         <td align="center">
@@ -139,74 +128,74 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">SSO ID:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">SSO ID:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerSoid_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Company:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Company:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerCompany_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">WEB site:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">WEB site:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerWebsite_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Name:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Name:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerName_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">E-mail:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">E-mail:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerEmail_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Phone:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Phone:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerPhone_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Account type:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Account type:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerAccount_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Directors Name:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Directors Name:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerDirectorsName_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Directors E-mail:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Directors E-mail:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerDirectorsEmail_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Directors Phone:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Directors Phone:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerDirectorsPhone_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Company Type:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Company Type:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerCompanyType_json"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Address:</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">Address:</label>
+                        <div class="col-sm-9">
                             <p class="form-control-static" id="customerAddress_json"></p>
                         </div>
                     </div>
@@ -220,7 +209,7 @@
 </div>
 <%--End Modal window--%>
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

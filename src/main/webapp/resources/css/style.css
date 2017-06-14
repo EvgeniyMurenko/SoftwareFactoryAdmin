@@ -1,0 +1,336 @@
+@charset "utf-8";
+@import "base.css";
+@import "space.css";
+
+/* -------------------- Left information -------------------- */
+.logo {
+    text-align: center;
+    margin: 20px 0 11px 0;
+}
+
+.logo a {
+    font-size: 16pt;
+    line-height: 32px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo a span {
+    color: #31BFC0;
+}
+
+.logo a:hover {
+    text-decoration: none;
+}
+
+.customer {
+    padding: 10px 20px;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    margin-bottom: 10px;
+}
+
+.customer .cust-thumbnail,
+.customer .information {
+    background: none;
+    display: inline-table;
+    border-radius: 0;
+    vertical-align: top;
+}
+
+.customer .cust-thumbnail {
+    margin-right: 10px;
+}
+
+.customer .cust-thumbnail img {
+    width: 40px;
+}
+
+.customer .information {
+    text-align: left;
+}
+
+.customer .information a {
+    color: #fff;
+}
+
+.customer .information div {
+    font-size: 9pt;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.customer .settings {
+    border-top: 1px solid #464c51;
+    padding-top: 5px;
+    text-align: center;
+}
+
+.customer .settings a i {
+    padding-right: 5px;
+}
+
+.customer .settings a {
+    color: #aaa;
+    padding: 0 5px;
+    font-size: 9pt;
+}
+
+.customer .settings a:first-child {
+    border-right: 1px solid #aaa;
+    padding-right: 7px;
+}
+
+.copyright {
+    border-top: 1px solid #666;
+    padding-top: 10px;
+    color: #999;
+    text-align: center;
+    font-size: 9pt;
+    margin-top: 10px;
+}
+
+/* -------------------- #End Left information -------------------- */
+
+/* -------------------- Header -------------------- */
+.header {
+    background: url("../images/opacity-02.png") repeat 0 0;
+    padding: 10px;
+}
+
+.header .btn-toggle {
+    color: #fff;
+    font-size: 16pt;
+}
+
+.header .header-title {
+    display: inline-table;
+    position: relative;
+    font-size: 16pt;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
+    top: 7px;
+    margin-left: 20px;
+}
+
+/* -------------------- #End Header -------------------- */
+
+/* -------------------- Content -------------------- */
+.content {
+    padding: 30px 20px;
+}
+
+.content .content-title {
+    display: block;
+    text-transform: uppercase;
+    color: #31BFC0;
+    font-size: 16pt;
+    line-height: 1;
+    border-bottom: 1px solid #279293;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.background-01 {
+    background: url("../images/opacity-03.png") repeat 0 0;
+    padding: 20px 15px;
+    color: #fff;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
+
+.table th {
+    text-align: center;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+    border-color: #999;
+}
+
+.table-inside {
+    border-bottom: 1px solid #999;
+}
+
+.form-control {
+    border-radius: 0;
+    background: url("../images/opacity-03.png") repeat 0 0;
+    border: 1px solid #000;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #279293;
+}
+
+.pagination > li > a {
+    border-radius: 0 !important;
+    background: url("../images/opacity-03.png") repeat 0 0 !important;
+    border-color: #000 !important;
+}
+
+.pagination > li.active > a {
+    background-color: #31BFC0 !important;
+    border-color: #279293 !important;
+}
+
+.message-left,
+.message-right {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.message-right:last-child {
+    margin-bottom: 0;
+}
+
+.message-left {
+    border: 1px solid #999;
+    margin-right: 50px;
+}
+
+.message-right {
+    border: 1px solid #279293;
+    margin-left: 50px;
+}
+
+.message-right .message-header {
+    border-bottom: 1px solid #279293;
+}
+
+.message-left .message-header {
+    border-bottom: 1px solid #999;
+}
+
+.message-left .message-header,
+.message-right .message-header {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.message-left .message-header .title,
+.message-right .message-header .title {
+    float: left;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.message-left .message-header .date,
+.message-right .message-header .date {
+    float: right;
+    color: #999;
+}
+.message-right .message-header .date,
+.message-right .message-header .title {
+    color: #31BFC0;
+}
+
+/* -------------------- #End Content -------------------- */
+
+/* -------------------- Sign-int -------------------- */
+.sign-in {
+    background: url("../images/opacity-03.png") repeat 0 0;
+    padding: 20px;
+    max-width: 300px;
+    margin: 50px auto 0 auto;
+}
+
+.sign-in-logo {
+    text-align: center;
+    margin: 0 0 20px 0;
+
+}
+
+.sign-in-logo a {
+    font-size: 16pt;
+    line-height: 32px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sign-in-logo a span {
+    color: #31BFC0;
+}
+
+.sign-in-logo a:hover {
+    text-decoration: none;
+}
+
+.sign-in-copyright {
+    display: block;
+    text-align: center;
+    font-size: 9pt;
+    color: #999;
+    margin-top: 20px;
+}
+
+.sign-in .form-control,
+.input-group-addon {
+    border-radius: 0;
+    background: url("../images/opacity-03.png") repeat 0 0;
+    border: 1px solid #000;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.sign-in .form-control:focus {
+    box-shadow: none;
+    border-color: #279293;
+}
+
+.input-group-addon {
+    border-right: 0 !important;
+}
+
+.input-group-addon i {
+    color: #31BFC0;
+    width: 10px;
+}
+
+.sign-in .btn-default {
+    width: 100%;
+}
+
+/* -------------------- #End Sign-in -------------------- */
+
+/* -------------------- Modal window -------------------- */
+.modal {
+    opacity: 0.8;
+    overflow-y: auto;
+}
+.modal-content {
+    border-radius: 0;
+    background: #222 url("../images/opacity.png") repeat 0 0;
+    color: #fff;
+}
+.modal-content .modal-header .close {
+    color: #fff;
+    opacity: 1;
+}
+.modal-content .modal-header,
+.modal-content .modal-footer {
+    border-color: #444;
+}
+
+.modal-content .modal-header h4 {
+    font-size: 12pt;
+    text-transform: uppercase;
+}
+/* -------------------- #End Modal window -------------------- */
+
+
+
+
+
+

@@ -37,35 +37,33 @@
         }%>
     </title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
-
-        <!-- Content section -->
-        <section class="container-fluid content">
-            <h3><i class="fa fa-user"></i>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-list" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">
                 <%if (!isNew) {
                     out.print("Edit notice");
                 }else {
                     out.print("Add new notice");
                 }%>
-            </h3>
+            </span>
+        </header>
+        <!-- #End Header -->
+
+        <!-- Content section -->
+        <section class="container-fluid content">
 
             <div class="mb20">
                 <a href="<c:out value="/notice/"/>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
@@ -91,15 +89,10 @@
 
                         <!-- images -->
                         <% if(!isNew && !notice.getNoticeLinks().isEmpty()){
-
                             Set<NoticeLink> noticeLinks = notice.getNoticeLinks();
-
                             Iterator<NoticeLink> noticeLinkIterator = noticeLinks.iterator();
-
                             while (noticeLinkIterator.hasNext()){
-
                                 NoticeLink noticeLink = noticeLinkIterator.next();
-
                                 String urlPic = noticeLink.getFileLink(); %>
                                 <div class="form-group form-img-thumbnail">
                                     <a data-fancybox="gallery" href="<%out.print(urlPic);%>">
@@ -112,42 +105,14 @@
                                 <%}
                              }
                         %>
-
                         <!-- #End images -->
 
-                       <%-- <!-- videos -->
-                        <% if(!isNew && notice.getFilePath()!= null){
-                            File directory = new File(MainPathEnum.mainPath+"/"+notice.getFilePath()+"/video");
-                            File[] files= directory.listFiles();
-                            for (int i=0; i<files.length; i++){
-                                String urlVideo = GlobalEnum.webRoot+"/show-video/"+notice.getId()+"/"+files[i].getName(); %>
-
-                                 <div class="form-group form-img-thumbnail">
-                                     <video width="400" height="300" controls >
-                                         <source src="<%out.print(urlVideo);%>" >
-                                     </video>
-                                     <a href="<%out.print("/notice/delete-file-from-notice/"+notice.getId()+"/"+i+"/video");%>" class="delete deleteConfirm">
-                                         <i class="fa fa-times"></i>
-                                     </a>
-                                 </div>
-                            <%}
-                        }%>
-                        <!-- #End videos -->--%>
-
-
                         <!-- Attach files -->
+                        <h4 class="mb10">Attach files</h4>
                         <div class="form-group">
-                            <label class="control-label">Attach images</label>
-                            <input id="imageUpload" name="file[]" multiple type="file">
+                            <input id="chatUpload" name="file[]" multiple type="file">
                         </div>
                         <!-- #End Attach files -->
-
-                        <!--
-                        <div class="form-group">
-                            <label class="control-label">Attach videos</label>
-                            <input id="videoUpload" name="video-file[]" multiple permission="file">
-                        </div>
-                        -->
 
                         <div class="form-group">
                             <label class="control-label">Text</label>
@@ -172,7 +137,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

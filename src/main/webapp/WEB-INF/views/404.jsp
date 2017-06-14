@@ -19,7 +19,7 @@
 
     <title>소팩소개 :: Software Factory</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
@@ -45,7 +45,7 @@
 </section>
 <!-- #End 404 -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

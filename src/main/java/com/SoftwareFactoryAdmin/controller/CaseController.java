@@ -53,27 +53,32 @@ public class CaseController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase() {
+    public ModelAndView getManagerCabinetCase(HttpSession httpSession) {
 
         ModelAndView managerAdminCabinetCase = new ModelAndView("casesList");
         List<Case> caseArrayList = caseService.getAllCases();
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        managerAdminCabinetCase.addObject("managerInfo", managerInfo);
+
         managerAdminCabinetCase.addObject("cases", caseArrayList);
 
         return managerAdminCabinetCase;
     }
 
     @RequestMapping(value = "/{caseId}", method = RequestMethod.GET)
-    public ModelAndView getCaseToShow(@PathVariable Long caseId) {
+    public ModelAndView getCaseToShow(@PathVariable Long caseId, HttpSession httpSession) {
         ModelAndView managerAdminCaseRespond = new ModelAndView("caseRespond");
 
         Case aCase = caseService.getCaseById(caseId);
-
         managerAdminCaseRespond.addObject("case", aCase);
 
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(aCase.getUserManagerId());
+       /* ManagerInfo managerInfoByCase = managerInfoService.getManagerInfoById(aCase.getUserManagerId());
+        managerAdminCaseRespond.addObject("managerInfoByCase", managerInfoByCase);*/
 
-        System.out.println("======managerInfo " + managerInfo);
-
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
         managerAdminCaseRespond.addObject("managerInfo", managerInfo);
 
         return managerAdminCaseRespond;

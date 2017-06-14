@@ -1,8 +1,10 @@
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
+import com.SoftwareFactoryAdmin.model.ManagerInfo;
 import com.SoftwareFactoryAdmin.model.Notice;
 import com.SoftwareFactoryAdmin.model.NoticeLink;
+import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.NoticeLinkService;
 import com.SoftwareFactoryAdmin.service.NoticeService;
 import com.SoftwareFactoryAdmin.util.SaveFile;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -25,27 +28,39 @@ public class NoticeController {
     @Autowired
     NoticeService noticeService;
 
+    @Autowired
+    ManagerInfoService managerInfoService;
+
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public ModelAndView noticesList() {
+    public ModelAndView noticesList(HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView("noticesList");
 
         List<Notice> noticeList = noticeService.getAllNotices();
 
         modelAndView.addObject("noticeList", noticeList);
 
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        modelAndView.addObject("managerInfo", managerInfo);
+
         return modelAndView;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView addNewNotice() {
+    public ModelAndView addNewNotice(HttpSession httpSession) {
         ModelAndView noticeEdit = new ModelAndView("noticeEdit");
 
         noticeEdit.addObject("isNew", true);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        noticeEdit.addObject("managerInfo", managerInfo);
+
         return noticeEdit;
     }
 
     @RequestMapping(value = "/{noticeId}/edit", method = RequestMethod.GET)
-    public ModelAndView noticeEdit(@PathVariable int noticeId) {
+    public ModelAndView noticeEdit(@PathVariable int noticeId, HttpSession httpSession) {
         ModelAndView noticeEdit = new ModelAndView("noticeEdit");
 
         Notice notice = noticeService.getNoticeById((long) noticeId);
@@ -53,6 +68,10 @@ public class NoticeController {
 
         noticeEdit.addObject("isNew", false);
         noticeEdit.addObject("notice", notice);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        noticeEdit.addObject("managerInfo", managerInfo);
 
         return noticeEdit;
     }
@@ -63,8 +82,7 @@ public class NoticeController {
                                    @RequestParam("title") String title,
                                    @RequestParam("text") String text,
                                    @RequestParam(value = "active", required = false) boolean isActive,
-                                   @RequestParam("file[]") MultipartFile[] imageFiles
-                                    /*@RequestParam("video-file[]") MultipartFile[] videoFiles*/) {
+                                   @RequestParam("file[]") MultipartFile[] imageFiles) {
 
         Notice notice;
         SaveFile saveFile = new SaveFile(imageFiles);
@@ -93,7 +111,7 @@ public class NoticeController {
     }
 
     @RequestMapping(value = "/noticeDelete/{noticeId}", method = RequestMethod.GET)
-    public ModelAndView staffDelete(@PathVariable Long noticeId) throws IOException {
+    public ModelAndView noticeDelete(@PathVariable Long noticeId) throws IOException {
 
         Notice notice = noticeService.getNoticeById(noticeId);
 
@@ -132,14 +150,5 @@ public class NoticeController {
         return new ModelAndView("redirect:/notice/" + noticeId + "/edit");
     }
 
-
-
-   /* private void saveVideo(MultipartFile[] videoFiles, Notice notice) {
-        String pathToSaveFile = "/notice/" + notice.getId() + "/video";
-        SaveFile saveFile = new SaveFile(pathToSaveFile, videoFiles);
-        if (!videoFiles[0].isEmpty()) {
-            saveFile.saveVideoFile();
-        }
-    }*/
 
 }

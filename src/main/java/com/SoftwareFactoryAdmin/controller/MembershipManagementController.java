@@ -33,7 +33,7 @@ public class MembershipManagementController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView customerList() {
+    public ModelAndView customerList(HttpSession httpSession) {
 
         ModelAndView staffList = new ModelAndView("staffList");
 
@@ -41,19 +41,28 @@ public class MembershipManagementController {
 
         staffList.addObject("staffList", staffInfoList);
 
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        staffList.addObject("managerInfo", managerInfo);
+
         return staffList;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView addNewStaff() {
+    public ModelAndView addNewStaff(HttpSession httpSession) {
         ModelAndView staffEdit = new ModelAndView("staffEdit");
 
         staffEdit.addObject("isNew", true);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        staffEdit.addObject("managerInfo", managerInfo);
+
         return staffEdit;
     }
 
     @RequestMapping(value = "/edit/{staffId}", method = RequestMethod.GET)
-    public ModelAndView managerEdit(@PathVariable Long staffId) {
+    public ModelAndView managerEdit(@PathVariable Long staffId, HttpSession httpSession) {
 
         ModelAndView staffEdit = new ModelAndView("staffEdit");
         User user = userService.findById(staffId);
@@ -62,6 +71,10 @@ public class MembershipManagementController {
         staffEdit.addObject("user", user);
         staffEdit.addObject("staffInfo", staffInfo);
         staffEdit.addObject("isNew", false);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        staffEdit.addObject("managerInfo", managerInfo);
 
         return staffEdit;
     }
@@ -139,11 +152,15 @@ public class MembershipManagementController {
     }
 
     @RequestMapping(value = "/history/{staffId}", method = RequestMethod.GET)
-    public ModelAndView viewHistory(@PathVariable Long staffId) {
+    public ModelAndView viewHistory(@PathVariable Long staffId, HttpSession httpSession) {
         ModelAndView staffHistory = new ModelAndView("staffHistory");
 
         StaffInfo staffInfo = staffInfoService.getStaffInfoById(staffId);
         staffHistory.addObject("staffInfo", staffInfo);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        staffHistory.addObject("managerInfo", managerInfo);
 
         return staffHistory;
     }

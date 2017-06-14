@@ -10,7 +10,7 @@
 <%@ page session="false" %>
 
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,95 +21,96 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>Cases List :: 소프트웨어팩토리</title>
+    <title>Cases :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <%List<Case> caseList =  (List<Case>)request.getAttribute("cases");%>
+    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Cases</span>
+        </header>
+        <!-- #End Header -->
 
-        <!-- Content section -->
-        <section class="container-fluid content">
-            <h3><i class="fa fa-pie-chart"></i>Cases List</h3>
+        <section class="content container-fluid">
+            <div class="background-01">
 
-            <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th width="20">ID</th>
-                    <th>Case issue</th>
-                    <th width="150">Customer name</th>
-                    <th width="150">Project</th>
-                    <th width="170">Date</th>
-                    <th width="50">Status</th>
-                    <th width="140">Appointment time</th>
-                    <th width="70">Messages</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>Case issue</th>
-                    <th>Customer name</th>
-                    <th>Project</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Appointment time</th>
-                    <th>Messages</th>
-                </tr>
-                </tfoot>
-
-                <!-- Items list -->
-                <tbody>
-                <%List<Case> cases =  (List<Case>)request.getAttribute("cases");%>
-                <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-                <%for (Case aCase :cases){%>
+                <table id="dataTable" class="table" width="100%" cellspacing="0">
+                    <thead>
                     <tr>
-                        <td align="center"><%out.print(aCase.getId());%></td>
-                        <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
-                        <td><a href="<%out.print("/customer-mm/edit-customer/"+aCase.getProject().getCustomerInfo().getId());%>"><%out.print(aCase.getProject().getCustomerInfo().getName());%></a></td>
-                        <td align="center">
-                            <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
-                                out.print(ProjectEnum.projectNameNormal.getValue());
-                            }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
-                                out.print(ProjectEnum.projectNameEstimate.getValue());
-                            } else out.print(aCase.getProject().getProjectName()); %>
-                        </td>
-                        <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
-                        <td align="center"><%--<i class="fa fa-circle-o"></i>--%><%out.print(aCase.getStatus().toString());%></td>
-                        <td align="center"><time class="timeago" datetime="<%out.print(aCase.getAppointmentTime());%>"></time></td>
-                        <td align="center"><%out.print(aCase.getMessages().size());%></td>
+                        <th>ID</th>
+                        <th>Case issue</th>
+                        <th>Customer name</th>
+                        <th>Project</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Appointment time</th>
+                        <th>Messages</th>
                     </tr>
-                <%}%>
-                </tbody>
-                <!-- #End Items list -->
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Case issue</th>
+                        <th>Customer name</th>
+                        <th>Project</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Appointment time</th>
+                        <th>Messages</th>
+                    </tr>
+                    </tfoot>
 
-            </table>
+                    <!-- Items list -->
+                    <tbody>
+
+                    <%for (Case aCase :caseList){%>
+                        <tr>
+                            <td align="center"><%out.print(aCase.getId());%></td>
+                            <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
+                            <td align="center"><a href="<%out.print("/customer-mm/edit-customer/"+aCase.getProject().getCustomerInfo().getId());%>"><%out.print(aCase.getProject().getCustomerInfo().getName());%></a></td>
+                            <td align="center">
+                                <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                    out.print(ProjectEnum.projectNameNormal.getValue());
+                                }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                                    out.print(ProjectEnum.projectNameEstimate.getValue());
+                                } else out.print(aCase.getProject().getProjectName()); %>
+                            </td>
+                            <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
+                            <td align="center"><%out.print(aCase.getStatus().toString());%></td>
+                            <td align="center"><time class="timeago" datetime="<%out.print(aCase.getAppointmentTime());%>"></time></td>
+                            <td align="center"><%out.print(aCase.getMessages().size());%></td>
+                        </tr>
+                    <%}%>
+
+                    </tbody>
+                    <!-- #End Items list -->
+
+                </table>
+            </div>
 
         </section>
-        <!-- Content section -->
 
     </div>
-    <!-- #End Page-content -->
+    <!-- #End Page Content -->
 
 </div>
-<!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

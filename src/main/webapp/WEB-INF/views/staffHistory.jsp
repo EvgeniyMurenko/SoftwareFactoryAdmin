@@ -25,43 +25,40 @@
 
     <title>Staff History List :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <%StaffInfo staffInfo = (StaffInfo) request.getAttribute("staffInfo");%>
+    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+    <%List<StaffHistory> staffHistories = staffInfo.getStaffHistories();%>
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <section id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix"><%out.print(staffInfo.getName() + " :: History");%></span>
+        </header>
+        <!-- #End Header -->
 
-            <%StaffInfo staffInfo = (StaffInfo) request.getAttribute("staffInfo");%>
-            <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-            <%List<StaffHistory> staffHistories = staffInfo.getStaffHistories();%>
+
         <!-- Content section -->
         <section class="container-fluid content">
-            <h3><i class="fa fa-tasks"></i>
-                <%out.print(staffInfo.getName() + " :: History");%>
-            </h3>
 
             <div class="mb20">
-                <a href="/membership-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back to staff
-                    list</a>
+                <a href="/membership-mm/" class="btn btn-primary"><i class="fa fa-users pr10"></i>Back to staff list</a>
             </div>
 
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <h4 class="mb10">Staff information</h4>
                     <section class="estimate-user-info">
                         <div class="name">Name: <%out.print(staffInfo.getName());%></div>
@@ -119,25 +116,24 @@
                     </form>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <section class="cases-messages-section">
                         <br>
 
 
-                        <%  Collections.reverse(staffHistories);
-                            for (StaffHistory staffHistory : staffHistories) {%>
-                        <div class="manager-message">
-                            <div class="clearfix border-bottom pb5 mb10">
-                                <div class="name"><%
-                                    out.print(staffHistory.getManagerName() + " ID - " + staffHistory.getManagerId());%></div>
-                                <div class="date"><% out.print(dateFormatShow.format(staffHistory.getDate())); %></div>
-                            </div>
-                            <!-- Message body -->
-                            <div class="description">
+                        <%Collections.reverse(staffHistories);%>
+                        <%for (StaffHistory staffHistory : staffHistories) {%>
+
+                            <div class="message-right">
+
+                                <div class="clearfix message-header">
+                                    <div class="title"><%out.print(staffHistory.getManagerName() + " ID - " + staffHistory.getManagerId());%></div>
+                                    <div class="date"><%out.print(dateFormatShow.format(staffHistory.getDate()));%></div>
+                                </div>
+
                                 <% out.print(staffHistory.getText());%>
+
                             </div>
-                            <!-- #End Message body -->
-                        </div>
 
                         <%}%>
                     </section>
@@ -148,7 +144,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 <%
     String isUpdated = request.getParameter("isUpdated");
@@ -169,36 +165,3 @@
 
 </body>
 </html>
-
-<%--              </section>
-
-                  <div class="border-bottom mb20"></div>
-                  <%String formAction = "/staff/addTaskToStaff/"+staffInfo.getUser();%>
-                  <form action="<%out.print(formAction);%>?${_csrf.parameterName}=${_csrf.token}" method="post">
-
-                      <h4 class="mb10">Task text</h4>
-
-                      <div class="form-group">
-                          <label class="control-label">Title</label>
-                          <input type="text" name="title" class="form-control" placeholder="Title" />
-                      </div>
-
-                      <div class="form-group">
-                          <textarea name="task" class="form-control" placeholder="Text task" rows="3"></textarea>
-                      </div>
-
-                      <div class="form-group text-right mt20">
-                          <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send
-                              task
-                          </button>
-                      </div>
-
-                  </form>
-
-              </div>
-
-          </div>
-
-
-      </section>--%>
-<!-- Content section -->

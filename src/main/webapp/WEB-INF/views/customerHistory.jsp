@@ -25,7 +25,7 @@
 
     <title>Customer History List :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
@@ -34,6 +34,9 @@
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
+        <%CustomerInfo customerInfo = (CustomerInfo) request.getAttribute("customerInfo");%>
+        <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+        <%List<CustomerHistory> customerHistories = customerInfo.getCustomerHistories();%>
 
         <%@ include file="leftCategoriesMenu.jsp" %>
 
@@ -43,11 +46,6 @@
     <!-- Page Content -->
     <section id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
-
-            <%CustomerInfo customerInfo = (CustomerInfo) request.getAttribute("customerInfo");%>
-            <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-            <%List<CustomerHistory> customerHistories = customerInfo.getCustomerHistories();%>
         <!-- Content section -->
         <section class="container-fluid content">
             <h3><i class="fa fa-tasks"></i>
@@ -98,22 +96,15 @@
                     <section class="cases-messages-section">
                         <br>
 
-                        <%  Collections.reverse(customerHistories);
-                            for (CustomerHistory customerHistory : customerHistories) {
-                        %>
-                        <div class="manager-message">
-                            <div class="clearfix border-bottom pb5 mb10">
-                                <div class="name"><%
-                                    out.print(customerHistory.getManagerName() + " ID - " + customerHistory.getManagerId());%></div>
-                                <div class="date"><% out.print(dateFormatShow.format(customerHistory.getDate())); %></div>
-                            </div>
-                            <!-- Message body -->
-                            <div class="description">
+                        <% Collections.reverse(customerHistories);%>
+                        <%for (CustomerHistory customerHistory : customerHistories) {%>
+                            <div class="message-right">
+                                <div class="clearfix message-header">
+                                    <div class="title"><%out.print(customerHistory.getManagerName() + " ID - " + customerHistory.getManagerId());%></div>
+                                    <div class="date"><%out.print(dateFormatShow.format(customerHistory.getDate()));%></div>
+                                </div>
                                 <% out.print(customerHistory.getText());%>
                             </div>
-                            <!-- #End Message body -->
-                        </div>
-
                         <%}%>
                     </section>
                 </div>
@@ -123,7 +114,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 <%
     String isUpdated = request.getParameter("isUpdated");

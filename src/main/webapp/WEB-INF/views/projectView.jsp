@@ -22,117 +22,95 @@
 
     <title>Project :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <%Project project = (Project) request.getAttribute("project");%>
+    <%User customerUser = (User) request.getAttribute("customerUser");%>
+    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+    <%ManagerInfo managerInfoByProject = (ManagerInfo) request.getAttribute("managerInfoByProject");%>
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Project: <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%out.print(String.format("%04d", project.getId()));%> </span>
+        </header>
+        <!-- #End Header -->
 
-        <%Project project = (Project) request.getAttribute("project");%>
-        <%ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>
-        <%SimpleDateFormat dateFormatStartEnd = new SimpleDateFormat("yyyy-MM-dd");%>
-        <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-
-        <%String projectName = ""; if (!"".equals(project.getProjectName())) projectName = project.getProjectName();%>
-        <% if (projectName.equals(ProjectEnum.projectNameNormal.getDbValue())) {
-            projectName = ProjectEnum.projectNameNormal.getValue();
-        }else if (projectName.equals(ProjectEnum.projectNameEstimate.getDbValue())) {
-            projectName = ProjectEnum.projectNameEstimate.getValue();
-        }%>
-
-
-        <!-- Content section -->
-        <section class="container-fluid content">
-            <h3><i class="fa fa-file-text-o"></i>Project code: <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%out.print(String.format("%04d", project.getId()));%> <%out.print(projectName);%></h3>
+        <section class="content container-fluid">
 
             <div class="mb20">
                 <a href="/project-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
                 <a href="<%out.print("/project-mm/edit-project/"+project.getId()+"/");%>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil pr10"></i>Edit</a>
             </div>
 
-            <div class="row">
-                <!-- Customer info -->
-                <div class="col-md-3">
+            <div class="background-01">
 
-                    <h4 class="mb10">Project information</h4>
-                    <section class="estimate-user-info">
-                        <div class="date">Date start:
-                            <%if (project.getStartDate() == null) { out.print("-"); } else { out.print(dateFormatStartEnd.format(project.getStartDate()));}%>
-                        </div>
-                        <div class="date">Date end:
-                            <%if (project.getEndDate() == null) { out.print("-"); } else { out.print(dateFormatStartEnd.format(project.getEndDate()));}%>
-                        </div>
-                        <div class="manager">Manager: <%out.print(managerInfo.getName());%></div>
-                    </section>
+                <span class="content-title mt30">DESCRIPTION</span>
 
-                    <h4 class="mb10" style="margin-top: 10px;!important;">Customer information</h4>
-                    <section class="estimate-user-info">
-                        <div class="name">Name: <a href=""><%out.print(project.getCustomerInfo().getName());%></a></div>
-                        <div class="email">E-mail: <a href="mailto:<%out.print(project.getCustomerInfo().getEmail());%>"><%out.print(project.getCustomerInfo().getEmail());%></a></div>
-                        <div class="phone">Phone: <%out.print(project.getCustomerInfo().getPhone());%></div>
-                    </section>
-
+                <div class="mb20">
+                    <%out.print(project.getDescription());%>
                 </div>
-                <!-- End Customer info -->
 
-                <!-- Project body -->
-                <div class="col-md-9">
+                <span class="content-title mt30">Project information</span>
 
-
-                    <h4 class="mb10" style="margin-left: 15px;!important;">Description</h4>
-                    <div class="col-md-12" style="margin-bottom: 10px;!important;">
-                        <section class="estimate-user-info">
-                            <div class="description">
-                                <%out.print(project.getDescription());%>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div>
+                            <h4>About Project</h4>
+                            <div>Date start:
+                                <%if (project.getStartDate() == null) { out.print("-"); } else { out.print(dateFormatShow.format(project.getStartDate()));}%>
                             </div>
-
-                        </section>
-                    </div>
-
-                    <%for (Case aCase : project.getCases()) {%>
-                        <div class="col-md-12" style="margin-bottom: 10px; !important;">
-                            <section class="estimate-user-info">
-                                <div class="title"><%out.print(aCase.getProjectTitle());%></div>
-                                <div class="date">Data creation: <%out.print(dateFormatStartEnd.format(aCase.getCreationDate()));%></div>
-                                <div class="status">Status: <%out.print(aCase.getStatus());%></div>
-                                <div class="info" align="right"><a href="<%out.print("/cases/" + aCase.getId()+"/");%>">Read</a></div>
-                            </section>
+                            <div>Date end:
+                                <%if (project.getEndDate() == null) { out.print("-"); } else { out.print(dateFormatShow.format(project.getEndDate()));}%>
+                            </div>
+                            <div>Manager:  <%out.print(managerInfoByProject.getName());%></div>
                         </div>
-                    <%}%>
 
+                        <div class="mt20">
+                            <h4>CUSTOMER INFORMATION</h4>
+                            <div>Name: <%out.print(project.getCustomerInfo().getName());%></div>
+                            <div>E-mail: <a href="mailto:<%out.print(project.getCustomerInfo().getEmail());%>"><%out.print(project.getCustomerInfo().getEmail());%></a></div>
+                            <div>Phone: <%out.print(project.getCustomerInfo().getPhone());%></div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9">
+                        <%if (project.getCases().size()>0){%>
+                            <%for (Case aCase : project.getCases()) {%>
+                                <div class="col-md-10 mb10">
+                                    <section class="estimate-user-info">
+                                        <div class="title"><%out.print(aCase.getProjectTitle());%></div>
+                                        <div class="date">Data creation: <%out.print(dateFormatShow.format(aCase.getCreationDate()));%></div>
+                                        <div class="status">Status: <%out.print(aCase.getStatus());%></div>
+                                        <div class="info" align="right"><a href="<%out.print("/cases/" + aCase.getId()+"/");%>">Read</a></div>
+                                    </section>
+                                    <span class="content-title mt30"></span>
+                                </div>
+                            <%}%>
+                        <%}%>
+                    </div>
                 </div>
-                <!-- #End Project body -->
-
             </div>
-
         </section>
-        <!-- Content section -->
-
     </div>
-    <!-- #End Page-content -->
-
+    <!-- #End Page Content -->
 </div>
-<!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 <% String isSuccess =  request.getParameter("isSuccess"); %>
 <%String link = "/project-mm/view-project/"+project.getId()+"/";%>
-<% if (isSuccess != null || isSuccess.equals("true")) { %>
+<% if (isSuccess != null && isSuccess.equals("true")) { %>
     <script>
         jQuery(document).ready(function ($) {
             swal(

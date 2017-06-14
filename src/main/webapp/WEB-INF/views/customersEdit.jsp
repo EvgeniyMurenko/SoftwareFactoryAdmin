@@ -20,7 +20,7 @@
 
     <title>Customer edit :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
@@ -44,14 +44,17 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+        <!-- Header -->
+        <header class="header line">
+            <%String headTitle = "Create new customer"; %>
+            <%if (!isNew) headTitle = customerInfo.getName(); %>
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix"><%out.print(headTitle);%></span>
+        </header>
+        <!-- #End Header -->
 
         <!-- Content section -->
         <section class="container-fluid content">
-            <%String headTitle = "Create new customer"; %>
-            <%if (!isNew) headTitle = customerInfo.getName(); %>
-
-            <h3><i class="fa fa-user"></i><%out.print(headTitle);%></h3>
 
             <div class="mb20">
                 <a href="/customer-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel</a>
@@ -201,7 +204,8 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
+
 <% String isPasswordError = request.getParameter("isPasswordError");
 System.out.print(isPasswordError);%>
 <% if (isPasswordError != null && isPasswordError.equals("true")) { %>

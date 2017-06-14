@@ -10,8 +10,8 @@ public class EstimateByDateComparator implements Comparator<Estimate> {
 
     @Override
     public int compare(Estimate estimate1, Estimate estimate2) {
-        Date messageDate1 = estimate1.getDateRequest();
-        Date messageDate2 = estimate2.getDateRequest();
-        return -messageDate1.compareTo(messageDate2);
+        Date date1 = estimate1.getDateRequest();
+        Date date2 = estimate2.getDateRequest();
+        return -date1.compareTo(date2);
     }
 }

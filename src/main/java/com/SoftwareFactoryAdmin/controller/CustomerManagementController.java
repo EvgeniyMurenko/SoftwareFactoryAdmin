@@ -33,11 +33,15 @@ public class CustomerManagementController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView customerList() {
+    public ModelAndView customerList(HttpSession httpSession) {
 
         ModelAndView customersList = new ModelAndView("customersList");
 
         List<CustomerInfo> customerInfoList = customerInfoService.getAllCustomerInfos();
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        customersList.addObject("managerInfo", managerInfo);
 
         customersList.addObject("customersList", customerInfoList);
 
@@ -46,9 +50,13 @@ public class CustomerManagementController {
 
 
     @RequestMapping(value = "/add-customer", method = RequestMethod.GET)
-    public ModelAndView addNotice() {
+    public ModelAndView addNotice(HttpSession httpSession) {
 
         ModelAndView addCustomer = new ModelAndView("customersEdit");
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        addCustomer.addObject("managerInfo", managerInfo);
 
         addCustomer.addObject("isNew", true);
 
@@ -57,7 +65,7 @@ public class CustomerManagementController {
 
 
     @RequestMapping(value = "/edit-customer/{customerId}", method = RequestMethod.GET)
-    public ModelAndView editCustomer(@PathVariable Long customerId) {
+    public ModelAndView editCustomer(@PathVariable Long customerId, HttpSession httpSession) {
 
         ModelAndView editCustomer = new ModelAndView("customersEdit");
 
@@ -65,6 +73,10 @@ public class CustomerManagementController {
 
         editCustomer.addObject("isNew", false);
         editCustomer.addObject("customerInfo", customerInfo);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        editCustomer.addObject("managerInfo", managerInfo);
 
         return editCustomer;
 
@@ -163,13 +175,16 @@ public class CustomerManagementController {
     }
 
     @RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
-    public ModelAndView customerHistory(@PathVariable Long id) {
+    public ModelAndView customerHistory(@PathVariable Long id, HttpSession httpSession) {
 
         ModelAndView customerHistory = new ModelAndView("customerHistory");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(id);
-
         customerHistory.addObject("customerInfo", customerInfo);
+
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+        customerHistory.addObject("managerInfo", managerInfo);
 
         return customerHistory;
     }

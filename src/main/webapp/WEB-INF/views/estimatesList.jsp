@@ -9,7 +9,7 @@
 <%@ page session="false" %>
 
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,83 +20,78 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>Estimates List :: 소프트웨어팩토리</title>
+    <title>Estimates :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
-
+    <%@ include file="styles.jsp" %>
 </head>
 <body>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
-
         <%List<Estimate> estimateList =  (List<Estimate>)request.getAttribute("estimates");%>
         <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
-        <!-- Content section -->
-        <section class="container-fluid content">
-            <h3><i class="fa fa-file-text-o"></i>Estimates List</h3>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Estimates</span>
+        </header>
+        <!-- #End Header -->
 
-            <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>Estimate ID</th>
-                    <th width="170">Date</th>
-                    <th width="120">Price request</th>
-                    <th width="120">Question request</th>
-                    <th width="50">Status</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>Estimate ID</th>
-                    <th>Date</th>
-                    <th>Price request</th>
-                    <th>Question request</th>
-                    <th>Status</th>
-                </tr>
-                </tfoot>
+        <section class="content container-fluid">
+            <div class="background-01">
 
-                <!-- Items list -->
-                <tbody>
-                <%for (Estimate estimate : estimateList){%>
-
+                <table id="dataTable" class="table" width="100%" cellspacing="0">
+                    <thead>
                     <tr>
+                        <th>Estimate ID</th>
+                        <th>Date</th>
+                        <th>Price request</th>
+                        <th>Question request</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Estimate ID</th>
+                        <th>Date</th>
+                        <th>Price request</th>
+                        <th>Question request</th>
+                        <th>Status</th>
+                    </tr>
+                    </tfoot>
 
-                        <td><a href="<%out.print("/estimate/respond/" + estimate.getId()+"/");%>"><% out.print(estimate.getEstimateGeneratedId());%></a></td>
+                    <!-- Items list -->
+                    <tbody>
+                    <%for (Estimate estimate : estimateList){%>
+                    <tr>
+                        <td><a href="<%out.print("/estimate/respond/" + estimate.getId()+"/");%>"><%out.print(estimate.getEstimateGeneratedId());%></a></td>
                         <td align="center"><%out.print(dateFormatShow.format(estimate.getDateRequest()));%></td>
                         <td align="center"><i class="<%if (estimate.isPriceRequest())out.print("fa fa-check-square"); else out.print("fa fa-square-o");%>"></i></td>
                         <td align="center"><i class="<%if (estimate.isQuestionRequest())out.print("fa fa-check-square"); else out.print("fa fa-square-o");%>"></i></td>
                         <td align="center"><i class="<%if (estimate.isRespond())out.print("fa fa-check-square"); else out.print("fa fa-square-o");%>"></i></td>
                     </tr>
-                <%}%>
-                </tbody>
-                <!-- #End Items list -->
+                    <%}%>
+                    </tbody>
+                    <!-- #End Items list -->
 
-            </table>
+                </table>
+            </div>
 
         </section>
-        <!-- Content section -->
 
     </div>
-    <!-- #End Page-content -->
+    <!-- #End Page Content -->
 
 </div>
-<!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

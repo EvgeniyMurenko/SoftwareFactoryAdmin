@@ -12,7 +12,7 @@
 
     <title>Managers permissions :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
@@ -29,8 +29,6 @@
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
-
-        <%@ include file="topLine.jsp" %>
 
         <!-- Content section -->
         <section class="container-fluid content">
@@ -145,7 +143,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

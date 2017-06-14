@@ -79,10 +79,10 @@ public class AppController {
 
         if (userProfile.getType().equals("MANAGER")) {
             System.out.println("LOGIN AS MANAGER");
-            modelAndView.setViewName("redirect:/estimate/");
+            modelAndView.setViewName("redirect:/dashboard/");
         } else if (userProfile.getType().equals("ADMIN")) {
             System.out.println("LOGIN AS ADMIN");
-            modelAndView.setViewName("redirect:/estimate/");
+            modelAndView.setViewName("redirect:/dashboard/");
         }
 
         System.out.println(currentUser.getId());
@@ -130,8 +130,9 @@ public class AppController {
      * This method handles logout requests.
      * Toggle the handlers if you are RememberMe functionality is useless in your app.
      */
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("TEST");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             //new SecurityContextLogoutHandler().logout(request, response, auth);
