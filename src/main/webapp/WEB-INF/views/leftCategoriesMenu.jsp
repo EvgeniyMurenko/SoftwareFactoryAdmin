@@ -23,7 +23,13 @@
 
             <div class="cust-thumbnail"><a href="javascript:void(0);"><img src="http://placehold.it/150x150" class="img-circle" alt=""></a></div>
             <div class="information">
-                <a href="javascript:void(0);"><%out.print(managerInfo.getName());%></a>
+                <a href="javascript:void(0);">
+                    <%if (managerInfo != null){
+                        out.print(managerInfo.getName());
+                    }else {
+                        out.print("NULL");
+                    }%>
+                </a>
             </div>
             <div class="settings">
                 <a href="javascript:void(0);"><i class="fa fa-cogs"></i> Settings</a>

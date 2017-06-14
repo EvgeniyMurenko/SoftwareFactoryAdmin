@@ -22,7 +22,7 @@
 
     <title>Project Task start :: 소프트웨어팩토리</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
@@ -31,17 +31,15 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+
         <%@ include file="leftCategoriesMenu.jsp" %>
-    </div>
-    <!-- #End Sidebar -->
+
 
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
+
 
 
 
@@ -111,7 +109,7 @@
 </div>
 <!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<%@ include file="javascript.jsp" %>
 
 </body>
 </html>

@@ -29,36 +29,51 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <%@ include file="leftCategoriesMenu.jsp" %>
+    <%Project project = (Project) request.getAttribute("project");%>
+    <%String startNewTaskLink = "/project-wf/start-new-task/"+project.getId();%>
+    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
+    <%String projectScenarioUuidName = project.getScenarioUuidName();%>
 
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Project Tasks</span>
+        </header>
+        <!-- #End Header -->
 
-        <!-- Content section -->
+        <section class="content container-fluid">
 
-        <%
-            Project project = (Project) request.getAttribute("project");
-            String startNewTaskLink = "/project-wf/start-new-task/"+project.getId();
-            SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            String projectScenarioUuidName = project.getScenarioUuidName();
-        %>
+            <div class="mb10">
+                <a href="" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
+                <a data-toggle="modal" data-target="#modalAddProjectTask" class="btn btn-primary"><i class="glyphicon glyphicon-pencil pr10"></i>Add new task</a>
+            </div>
 
-        <div class="row">
+            <div class="col-sm-12">
 
-            <div class="col-md-8">
+                <div class="background-01 mt30">
 
-                <section class="container-fluid content">
-                    <h3><i class="fa fa-user"></i>Project Tasks</h3>
+                    <span class="content-title mt30">DESCRIPTION</span>
+
+                    <div class="mb10">
+                        <%out.print(project.getDescription());%>
+                    </div>
+                </div>
+            </div>
 
 
-                    <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <div class="col-sm-8 mt10">
+                <div class="background-01">
+                    <table id="dataTable" class="table" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th width="20">ID</th>
+                            <th>ID</th>
                             <th>Title</th>
-                            <th>Start date</th>
+                            <th>Start Date</th>
                             <th>End date</th>
                             <th>Status</th>
                         </tr>
@@ -67,90 +82,152 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Start date</th>
+                            <th>Start Date</th>
                             <th>End date</th>
                             <th>Status</th>
                         </tr>
                         </tfoot>
 
-
-                        <!-- Items list -->
                         <tbody>
-                            <%
-                                Set <ProjectTask> projectTasks  =  project.getProjectTasks();
-                                for (ProjectTask projectTask : projectTasks) {%>
-                                    <tr>
-                                        <td align="center"><%out.print(projectTask.getId());%></td>
-                                        <td><%out.print(projectTask.getTitle());%></td>
-                                        <td><%out.print(dateFormatShow.format(projectTask.getStartDate()));%></td>
-                                        <td><%out.print(dateFormatShow.format(projectTask.getEndDate()));%></td>
-                                        <td><%out.print(projectTask.getStatus());%></td>
-                                    </tr>
+                        <%if (project.getProjectTasks().size()> 0){%>
+                            <%for (ProjectTask projectTask : project.getProjectTasks()){%>
+                                <!-- Items list -->
+                                <tr>
+                                    <td align="center"><%out.print(projectTask.getId());%></td>
+                                    <td align="center"><%out.print(projectTask.getTitle());%></td>
+                                    <td align="center"><%out.print(dateFormatShow.format(projectTask.getStartDate()));%></td>
+                                    <td align="center"><%out.print(dateFormatShow.format(projectTask.getEndDate()));%></td>
+                                    <td align="center"><%out.print(projectTask.getStatus());%></td>
+                                </tr>
                             <%}%>
-                        </tbody>
-                        <!-- #End Items list -->
-
+                        <%}%>
                     </table>
-
-                </section>
-                <!-- Content section -->
+                </div>
             </div>
 
+            <div class="col-sm-4 mt10">
 
-            <div class="col-md-4">
-                <section class="container-fluid content">
+                <form action="/project-wf/upload-scenario" method="post" enctype="multipart/form-data">
 
-                    <br><br><br>
+                    <input type="hidden" name="project_id" value="<%out.print(project.getId());%>">
 
-                    <div class="mb20">
-                        <a href="/project-mm/" class="btn btn-primary"><i class="fa fa-align-left mr10"></i>Back to
-                            projects</a>
-                        <a href="<%out.print(startNewTaskLink);%>" class="btn btn-primary"><i class="fa fa-plus-circle mr10"></i>Add
-                            new task</a>
-                    </div>
+                    <div class="background-01">
+                        <div class="mb10">
+                            <%if (projectScenarioUuidName == null) {
+                                out.print("<h4>Project scenario don't exist, please upload</h4>");
+                            } else {%>
+                                <h4>Project scenario:</h4>
+                                <a href="/get-file/general/<%out.print(projectScenarioUuidName);%>"> scenario link </a>
+                            <%}%>
 
-                    <section class="estimate-user-info">
-                        <div class="scenario-link"><%if (projectScenarioUuidName == null) out.print(" Project scenario don't exist, please upload"); else { out.print(" Project scenario  -  ");%><a href="/get-file/general/<%out.print(projectScenarioUuidName);%>"> scenario link </a><%}%></div>
-                    </section>
-
-                    <br>
-
-                    <form action="/project-wf/upload-scenario" method="post" enctype="multipart/form-data">
-
-                        <input type="hidden" name="project_id" value="<%out.print(project.getId());%>">
-
+                        </div>
+                        <br>
                         <!-- Attach files -->
-                        <h4 class="mb10">Attach scenario</h4>
+                        <h4 class="mb10">Attach files</h4>
                         <div class="form-group">
-                            <input id="chatUpload" name="file[]"  type="file" required>
+                            <input id="chatUpload" name="file[]" multiple type="file">
                         </div>
                         <!-- #End Attach files -->
 
-                        <div class="form-group text-right mt20">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Upload
-                                Scenario
-                            </button>
+                        <div class="form-group text-right mt30 mb0">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Upload scenario</button>
                         </div>
-                    </form>
-                </section>
+
+                    </div>
+
+                </form>
+
             </div>
 
-        </div>
+        </section>
 
 
     </div>
-    <!-- #End Page-content -->
+    <!-- #End Page Content -->
 
 </div>
-<!-- #End Wrapper -->
 
-<%@ include file="footerJavaScript.jsp" %>
+<!-- Add project task modal -->
+<div class="modal fade" id="modalAddProjectTask">
+    <div class="modal-dialog modal-lg">
 
-<%
-    String isScenarioUpload = request.getParameter("isScenarioUpload");
-    if (isScenarioUpload != null) {
-        String link = "/project-wf/" + project.getId();
-%>
+        <form class="form-horizontal" action="/project-wf/start-task/" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" name="project_id" value="<%out.print(project.getId());%>">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">
+                        <i class="fa fa-close"></i>
+                    </button>
+                    <h4 class="modal-title">Add task</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">TASK TITLE</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="title" class="form-control" placeholder="TASK TITLE" value=""/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">SHORT DESCRIPTION</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="short_description" class="form-control" placeholder="SHORT DESCRIPTION" value=""/>
+                        </div>
+                    </div>
+
+                    <!-- FULL TASK DESCRIPTION -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">FULL TASK DESCRIPTION</label>
+                        <div class="col-sm-9">
+                            <textarea id="editor" name="full_description" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <!-- #End FULL TASK DESCRIPTION -->
+
+                    <div class="form-group">
+                        <!-- Appointment time -->
+                        <label class="col-sm-3 control-label">End date</label>
+                        <div class="col-sm-9">
+                            <div class='input-group date' id='datetimepicker'>
+                                <input type='text' name="end_date" class="form-control" value=""/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- #End Appointment time -->
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Attach files -->
+                        <label class="col-sm-3 control-label">Attach File</label>
+                        <div class="col-sm-9">
+                            <input id="uploadFile" name="file[]" multiple type="file">
+                        </div>
+                        <!-- #End Attach files -->
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr5"></i> Add</button>
+                    <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times-circle pr5"></i> Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- #End Add project task modal -->
+
+<%@ include file="javascript.jsp" %>
+
+<%--<%String isScenarioUpload = request.getParameter("isScenarioUpload");%>
+<%if (isScenarioUpload != null) {%>
+    <%String link = "/project-wf/" + project.getId();%>
     <script>
         jQuery(document).ready(function ($) {
             swal(
@@ -161,7 +238,7 @@
             history.pushState(null, null, '<%out.print(link);%>');
         });
     </script>
-<%}%>
+<%}%>--%>
 
 </body>
 </html>

@@ -48,67 +48,70 @@
 
         <!-- Content section -->
         <section class="container-fluid content">
+            <div class="background-01">
 
-            <table id="dataTable" class="table" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th width="20">NO</th>
-                    <th>Project Code</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Status</th>
-                    <th>Project manager</th>
-                    <th>Description</th>
-                    <th>Customer name</th>
-                    <th>WorkFlow</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>NO</th>
-                    <th>Project Code</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Status</th>
-                    <th>Project manager</th>
-                    <th>Description</th>
-                    <th>Customer name</th>
-                    <th>WorkFlow</th>
-                </tr>
-                </tfoot>
-
-
-                <!-- Items list -->
-                <tbody>
-                <%ArrayList<Project> projectArrayList = (ArrayList<Project>) request.getAttribute("projectsList");%>
-                <%for (Project project : projectArrayList) {%>
+                <table id="dataTable" class="table" width="100%" cellspacing="0">
+                    <thead>
                     <tr>
-                        <td align="center"><%out.print(project.getId());%></td>
-                        <td align="center"><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
-                            <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%
-                            out.print(String.format("%04d", project.getId()));%></a></td>
-                        <td align="center">
-                            <%if (project.getStartDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getStartDate()));}%>
-                        </td>
-                        <td align="center">
-                            <%if (project.getEndDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getEndDate()));}%>
-                        </td>
-                        <td align="center"><%out.print(project.getStatus());%></td>
-                        <td><%out.print(project.getManagerInfo().getName());%></td>
-                        <td><%out.print(project.getDescription());%></td>
-                        <td>
-                            <a onclick="getCustomerInfo(<%out.print(project.getCustomerInfo().getId());%>)">
-                                <%out.print(project.getCustomerInfo().getName());%>
-                            </a>
-                        </td>
-                        <td align="center"><a href="<%out.print("/project-wf/"+project.getId());%>"> X </a></td>
+                        <th width="20">NO</th>
+                        <th>Project Code</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Status</th>
+                        <th>Project manager</th>
+                        <th>Description</th>
+                        <th>Customer name</th>
+                        <th>WorkFlow</th>
                     </tr>
-                <%}%>
-                </tbody>
-                <!-- #End Items list -->
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>NO</th>
+                        <th>Project Code</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Status</th>
+                        <th>Project manager</th>
+                        <th>Description</th>
+                        <th>Customer name</th>
+                        <th>WorkFlow</th>
+                    </tr>
+                    </tfoot>
 
-            </table>
 
+                    <!-- Items list -->
+                    <tbody>
+                    <%ArrayList<Project> projectArrayList = (ArrayList<Project>) request.getAttribute("projectsList");%>
+                    <%for (Project project : projectArrayList) {%>
+                        <tr>
+                            <td align="center"><%out.print(project.getId());%></td>
+                            <td align="center"><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
+                                <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%
+                                out.print(String.format("%04d", project.getId()));%></a></td>
+                            <td align="center">
+                                <%if (project.getStartDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getStartDate()));}%>
+                            </td>
+                            <td align="center">
+                                <%if (project.getEndDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getEndDate()));}%>
+                            </td>
+                            <td align="center"><%out.print(project.getStatus());%></td>
+                            <td><%out.print(project.getManagerInfo().getName());%></td>
+                            <td><%out.print(project.getDescription());%></td>
+                            <td>
+                                <a onclick="getCustomerInfo(<%out.print(project.getCustomerInfo().getId());%>)">
+                                    <%out.print(project.getCustomerInfo().getName());%>
+                                </a>
+                            </td>
+                            <td align="center"><a href="<%out.print("/project-wf/"+project.getId());%>">
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a></td>
+                        </tr>
+                    <%}%>
+                    </tbody>
+                    <!-- #End Items list -->
+
+                </table>
+            </div>
         </section>
         <!-- Content section -->
 
