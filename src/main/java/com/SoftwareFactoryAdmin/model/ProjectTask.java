@@ -70,7 +70,7 @@ public class ProjectTask implements Serializable {
 
 
 
-    @NotEmpty
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "s_project_task_staff_info",
             joinColumns = { @JoinColumn(name = "project_task_id") },

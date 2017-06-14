@@ -165,7 +165,6 @@
     border-radius: 0;
     background: url("../images/opacity-03.png") repeat 0 0;
     border: 1px solid #000;
-    text-transform: uppercase;
     color: #fff;
 }
 
@@ -281,7 +280,6 @@
     background: url("../images/opacity-03.png") repeat 0 0;
     border: 1px solid #000;
     color: #fff;
-    text-transform: uppercase;
 }
 
 .sign-in .form-control:focus {

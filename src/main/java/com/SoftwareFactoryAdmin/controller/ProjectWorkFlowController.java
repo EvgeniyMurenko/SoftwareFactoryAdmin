@@ -1,10 +1,7 @@
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.constant.StatusEnum;
-import com.SoftwareFactoryAdmin.model.ManagerInfo;
-import com.SoftwareFactoryAdmin.model.Project;
-import com.SoftwareFactoryAdmin.model.ProjectTask;
-import com.SoftwareFactoryAdmin.model.TaskMessage;
+import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
 import com.SoftwareFactoryAdmin.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/project-wf")
@@ -49,12 +48,12 @@ public class ProjectWorkFlowController {
 
 
     @RequestMapping(value = "/upload-scenario", method = RequestMethod.POST)
-    public ModelAndView uploadScenario (@RequestParam("project_id") Long projectID,
-                                        @RequestParam("file[]") MultipartFile[] scenario) {
+    public ModelAndView uploadScenario(@RequestParam("project_id") Long projectID,
+                                       @RequestParam("file[]") MultipartFile[] scenario) {
 
         Project project = projectService.getProjectById(projectID);
 
-        if (project.getScenarioUuidName() != null){
+        if (project.getScenarioUuidName() != null) {
             SaveFile.deleteFileByName(project.getScenarioUuidName());
         }
 
@@ -62,7 +61,7 @@ public class ProjectWorkFlowController {
 
         String scenarioUuidName = saveFile.saveFileAndReturnName();
 
-        if (scenarioUuidName != null){
+        if (scenarioUuidName != null) {
 
             project.setScenarioUuidName(scenarioUuidName);
             projectService.updateProject(project);
@@ -70,7 +69,7 @@ public class ProjectWorkFlowController {
         }
 
 
-        return new ModelAndView("redirect:/project-wf/"+project.getId() ,"isScenarioUpload", "true");
+        return new ModelAndView("redirect:/project-wf/" + project.getId(), "isScenarioUpload", "true");
 
     }
 
@@ -88,13 +87,13 @@ public class ProjectWorkFlowController {
     }
 
     @RequestMapping(value = "/start-task", method = RequestMethod.POST)
-    public ModelAndView startTask (@RequestParam ("project_id") Long projectID,
-                                   @RequestParam("title") String title,
-                                   @RequestParam("short_description") String shortDescription,
-                                   @RequestParam("full_description") String fullDescription,
-                                   @RequestParam("end_date") String endDate,
-                                   @RequestParam("file[]") MultipartFile[] files,
-                                   HttpSession httpSession){
+    public ModelAndView startTask(@RequestParam("project_id") Long projectID,
+                                  @RequestParam("title") String title,
+                                  @RequestParam("short_description") String shortDescription,
+                                  @RequestParam("full_description") String fullDescription,
+                                  @RequestParam("end_date") String endDate,
+                                  @RequestParam("file[]") MultipartFile[] files,
+                                  HttpSession httpSession) {
 
         Project project = projectService.getProjectById(projectID);
         Long managerID = (Long) httpSession.getAttribute("UserId");
@@ -104,35 +103,69 @@ public class ProjectWorkFlowController {
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date endDateFormat = simpleDateFormat.parse(endDate+ ":00");
+            Date endDateFormat = simpleDateFormat.parse(endDate + ":00");
 
-            ProjectTask projectTask = new ProjectTask(project ,title ,shortDescription , StatusEnum.OPEN.toString(), new Date(),
-                                            endDateFormat, null, new ArrayList<>(),new HashSet<>() , null);
+            ProjectTask projectTask = new ProjectTask(project, title, shortDescription, StatusEnum.OPEN.toString(), new Date(),
+                    endDateFormat, null, new ArrayList<TaskMessage>(), new HashSet<StaffInfo>(), null);
 
-
-
-
-            TaskMessage taskMessage = new TaskMessage(projectTask, managerInfo.getUser() , fullDescription, new Date() , managerInfo.getName(), new ArrayList<>());
+            projectTaskService.addNewProjectTask(projectTask);
 
 
+            TaskMessage taskMessage = new TaskMessage(projectTask, managerInfo.getUser(), fullDescription, new Date(), managerInfo.getName(), new ArrayList<>());
+
+            taskMessageService.addNewTaskMessage(taskMessage);
 
             saveFile.saveToTaskMessageFiles(taskMessage);
 
-            List<TaskMessage> taskMessages = projectTask.getTaskMessages();
-            taskMessages.add(taskMessage);
+            taskMessageService.updateTaskMessage(taskMessage);
 
-            projectTask.setTaskMessages(taskMessages);
-
-
-            projectTaskService.addNewProjectTask(projectTask);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
-        return new ModelAndView("redirect:/project-wf/"+projectID, "isTaskStarted", "true");
+        return new ModelAndView("redirect:/project-wf/" + projectID, "isTaskStarted", "true");
     }
 
 
+    @RequestMapping(value = "/select-staff-to-task/{id}", method = RequestMethod.GET)
+    public ModelAndView selectStaffToTask(@PathVariable(value = "id") Long id) {
+
+        ModelAndView selectStaffToTask = new ModelAndView("selectStaffToTask");
+
+        ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
+
+        selectStaffToTask.addObject("projectTask", projectTask);
+
+        return selectStaffToTask;
+    }
+
+
+    @RequestMapping(value = "/approve-staff-to-task/{id}", method = RequestMethod.GET)
+    public ModelAndView selectStaffToTask(@PathVariable(value = "project_task_id") Long projectTaskID,
+                                          @PathVariable(value = "staff_id") Long staffID) {
+
+        ProjectTask projectTask = projectTaskService.getProjectTaskById(projectTaskID);
+
+        projectTask.setStatus(StatusEnum.IN_WORK.toString());
+        projectTask.setWorkingStaffID(staffID);
+
+        projectTaskService.updateProjectTask(projectTask);
+
+        return new ModelAndView("redirect:/project-wf/" + projectTask.getProject().getId());
+    }
+
+
+    @RequestMapping(value = "/task-management/{id}", method = RequestMethod.GET)
+    public ModelAndView taskManagement(@PathVariable(value = "id") Long id) {
+
+        ModelAndView taskManagement = new ModelAndView("taskManagement");
+
+        ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
+
+        taskManagement.addObject("projectTask", projectTask);
+
+        return taskManagement;
+    }
 }
