@@ -17,19 +17,18 @@ public class ProjectTask implements Serializable {
     public ProjectTask() {
     }
 
-    public ProjectTask(Project project, String title, String shortDescription, String status, Date startDate, Date endDate, List<TaskMessage> taskMessages, Set<StaffInfo> staffInfos, Long workingStaffID) {
+    public ProjectTask(Project project, String title, String shortDescription, String status, Date startDate, Date endDate, Date reopenDate, List<TaskMessage> taskMessages, Set<StaffInfo> staffInfos, Long workingStaffID) {
         this.project = project;
         this.title = title;
         this.shortDescription = shortDescription;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.reopenDate = reopenDate;
         this.taskMessages = taskMessages;
         this.staffInfos = staffInfos;
         this.workingStaffID = workingStaffID;
     }
-
-
 
     @Id
     @GeneratedValue(generator = "increment2")
@@ -60,6 +59,10 @@ public class ProjectTask implements Serializable {
 
     @Column(name = "end_date")
     private Date endDate;
+
+
+    @Column(name = "reopen_date")
+    private Date reopenDate;
 
 
     @OneToMany(mappedBy = "projectTask", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -149,6 +152,14 @@ public class ProjectTask implements Serializable {
 
     public void setTaskMessages(List<TaskMessage> taskMessages) {
         this.taskMessages = taskMessages;
+    }
+
+    public Date getReopenDate() {
+        return reopenDate;
+    }
+
+    public void setReopenDate(Date reopenDate) {
+        this.reopenDate = reopenDate;
     }
 
     public Set<StaffInfo> getStaffInfos() {

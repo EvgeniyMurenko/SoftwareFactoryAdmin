@@ -46,7 +46,7 @@
 
 
         <%Project project = (Project) request.getAttribute("project");%>
-        <%String formAction = "/project-wf/start-new-task/";%>
+        <%String formAction = "/project-wf/start-task/";%>
 
 
 
@@ -59,30 +59,30 @@
                 <a href="<%out.print("/project-wf/"+project.getId());%>" class="btn btn-primary">Back</a>
             </div>
 
-            <form class="form-horizontal" action="<%out.print(formAction);%>" method="post" id="projectEditForm">
+            <form class="form-horizontal" action="<%out.print(formAction);%>" method="post"  enctype="multipart/form-data">
 
                 <div class="col-md-7">
 
-                    <input type="hidden" name="idProject" value="<%out.print(project.getId());%>">
+                    <input type="hidden" name="project_id" value="<%out.print(project.getId());%>">
 
 
                     <h4 class="mb10 mt20">Task title</h4>
-                    <input type="text" name="title" value="" class="form-control" placeholder="Task title"/>
+                    <input type="text" name="title"  class="form-control" placeholder="Task title" required/>
 
 
                     <h4 class="mb10 mt20">Short Description</h4>
-                    <textarea class="form-control" name="message" id="description_editor"></textarea>
+                    <textarea class="form-control" name="short_description" id="description_editor" required></textarea>
 
 
                     <h4 class="mb10 mt20">Full Task Description</h4>
-                    <textarea class="form-control" name="message" id="editor"></textarea>
+                    <textarea class="form-control" name="full_description" id="editor" required></textarea>
 
 
                     <!-- Appointment time -->
                     <h4 class="mb10 mt20">End Task Date</h4>
 
                     <div class='input-group date' id='datetimepicker'>
-                        <input type="text" name="end_date" class="form-control" value=""/>
+                        <input type="text" name="end_date" class="form-control" required/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>

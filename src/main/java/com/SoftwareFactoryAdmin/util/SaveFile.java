@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -79,23 +80,24 @@ public class SaveFile {
         }
     }
 
-    public void saveEstimateFilesToEstimate(Estimate estimate) {
+    public void saveToTaskMessageFiles(TaskMessage taskMessage) {
 
         if (files.length < 1) return;
         if (files[0].isEmpty()) return;
 
-        pathForSaveFile = MainPathEnum.mainPath + "/estimate/";
+        pathForSaveFile = MainPathEnum.mainPath + "/task-message/";
 
-        Set<EstimateLink> estimateLinks = estimate.getEstimateLinks();
+        List<TaskMessageLink> messageLinks = taskMessage.getTaskMessageLinks();
+
 
         for (MultipartFile file : this.files) {
             try {
                 String name = file.getOriginalFilename();
                 String generatedName = generateUUIDname(name);
-                String link = GlobalEnum.webRoot + "/get-file/estimate/" + generatedName;
+                String link = GlobalEnum.webRoot + "/get-file/task-message/" + generatedName;
                 saveFile(generatedName, file);
-                EstimateLink estimateLink = new EstimateLink(estimate, link, name, generatedName);
-                estimateLinks.add(estimateLink);
+                TaskMessageLink taskMessageLink = new TaskMessageLink(taskMessage, link, name, generatedName);
+                messageLinks.add(taskMessageLink);
             } catch (IOException e) {
                 e.printStackTrace();
             }
