@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@Transactional
 @Service("projectService")
 public class ProjectServiceImpl implements ProjectService {
 
@@ -20,31 +20,26 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    @Transactional
     public void addNewProject(Project project) {
         projectDao.create(project);
     }
 
     @Override
-    @Transactional
     public void updateProject(Project project) {
         projectDao.update(project);
     }
 
     @Override
-    @Transactional
     public void deleteProject(Project project) {
         projectDao.delete(project);
     }
 
     @Override
-    @Transactional(readOnly=true)
     public List<Project> getAllProjects() {
         return projectDao.findAll();
     }
 
     @Override
-    @Transactional
     public Project getProjectById(Long id) {
         return projectDao.read(id);
     }
