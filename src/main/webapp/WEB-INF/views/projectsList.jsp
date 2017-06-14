@@ -60,6 +60,7 @@
                     <th>Project manager</th>
                     <th>Description</th>
                     <th>Customer name</th>
+                    <th>WorkFlow</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -72,6 +73,7 @@
                     <th>Project manager</th>
                     <th>Description</th>
                     <th>Customer name</th>
+                    <th>WorkFlow</th>
                 </tr>
                 </tfoot>
 
@@ -99,6 +101,7 @@
                                 <%out.print(project.getCustomerInfo().getName());%>
                             </a>
                         </td>
+                        <td align="center"><a href="<%out.print("/project-wf/"+project.getId());%>"> X </a></td>
                     </tr>
                 <%}%>
                 </tbody>

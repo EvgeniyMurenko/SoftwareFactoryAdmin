@@ -30,7 +30,6 @@
 <div id="wrapper">
 
     <%Project project = (Project) request.getAttribute("project");%>
-    <%User customerUser = (User) request.getAttribute("customerUser");%>
     <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
     <%ManagerInfo managerInfoByProject = (ManagerInfo) request.getAttribute("managerInfoByProject");%>
 
