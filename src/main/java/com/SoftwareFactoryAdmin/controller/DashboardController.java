@@ -41,11 +41,7 @@ public class DashboardController {
     ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView dashboardView( HttpSession httpSession) {
-
-        Long managerId = (Long) httpSession.getAttribute("UserId");
-
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+    public ModelAndView dashboardView() {
 
         ModelAndView dashboardView = new ModelAndView("dashboard");
 
@@ -57,7 +53,6 @@ public class DashboardController {
 
         dashboardView.addObject("estimateList", estimateList);
         dashboardView.addObject("caseList", caseList);
-        dashboardView.addObject("managerInfo", managerInfo);
 
         return dashboardView;
     }

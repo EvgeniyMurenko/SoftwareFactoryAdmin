@@ -22,23 +22,19 @@
 
     <title>Project workflow</title>
 
-    <%@ include file="headerStyles.jsp" %>
+    <%@ include file="styles.jsp" %>
 
 </head>
 <body>
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <%@ include file="leftCategoriesMenu.jsp" %>
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
+
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%@ include file="topLine.jsp" %>
 
         <!-- Content section -->
 

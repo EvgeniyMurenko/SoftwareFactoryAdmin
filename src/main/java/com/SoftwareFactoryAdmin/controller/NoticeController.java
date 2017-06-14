@@ -32,35 +32,27 @@ public class NoticeController {
     ManagerInfoService managerInfoService;
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public ModelAndView noticesList(HttpSession httpSession) {
+    public ModelAndView noticesList() {
         ModelAndView modelAndView = new ModelAndView("noticesList");
 
         List<Notice> noticeList = noticeService.getAllNotices();
 
         modelAndView.addObject("noticeList", noticeList);
 
-        Long managerId = (Long) httpSession.getAttribute("UserId");
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
-        modelAndView.addObject("managerInfo", managerInfo);
-
         return modelAndView;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView addNewNotice(HttpSession httpSession) {
+    public ModelAndView addNewNotice() {
         ModelAndView noticeEdit = new ModelAndView("noticeEdit");
 
         noticeEdit.addObject("isNew", true);
-
-        Long managerId = (Long) httpSession.getAttribute("UserId");
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
-        noticeEdit.addObject("managerInfo", managerInfo);
 
         return noticeEdit;
     }
 
     @RequestMapping(value = "/{noticeId}/edit", method = RequestMethod.GET)
-    public ModelAndView noticeEdit(@PathVariable int noticeId, HttpSession httpSession) {
+    public ModelAndView noticeEdit(@PathVariable int noticeId) {
         ModelAndView noticeEdit = new ModelAndView("noticeEdit");
 
         Notice notice = noticeService.getNoticeById((long) noticeId);
@@ -68,10 +60,6 @@ public class NoticeController {
 
         noticeEdit.addObject("isNew", false);
         noticeEdit.addObject("notice", notice);
-
-        Long managerId = (Long) httpSession.getAttribute("UserId");
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
-        noticeEdit.addObject("managerInfo", managerInfo);
 
         return noticeEdit;
     }

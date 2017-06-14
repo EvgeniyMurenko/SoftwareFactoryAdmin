@@ -12,13 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
+import com.SoftwareFactoryAdmin.model.ManagerInfo;
 import com.SoftwareFactoryAdmin.model.Message;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.model.UserProfile;
-import com.SoftwareFactoryAdmin.service.CustomerInfoService;
-import com.SoftwareFactoryAdmin.service.MessageService;
-import com.SoftwareFactoryAdmin.service.UserProfileService;
-import com.SoftwareFactoryAdmin.service.UserService;
+import com.SoftwareFactoryAdmin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -53,6 +51,9 @@ public class AppController {
     @Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
 
+    @Autowired
+    ManagerInfoService managerInfoService;
+
 
 
     /**
@@ -61,9 +62,10 @@ public class AppController {
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public ModelAndView listUsers(HttpSession session) {
 
-
-
         User currentUser = userService.findBySSO(getPrincipal());
+
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(currentUser.getId());
+        session.setAttribute("managerInfo", managerInfo);
 
 
         Set profiles = currentUser.getUserProfiles();
@@ -85,8 +87,9 @@ public class AppController {
             modelAndView.setViewName("redirect:/dashboard/");
         }
 
-        System.out.println(currentUser.getId());
-        System.out.println(userProfile.getType());
+        System.out.println("currentUser.getId() ======"+currentUser.getId());
+        System.out.println("userProfile.getType() ======="+userProfile.getType());
+
 
         session.setAttribute("UserId", currentUser.getId());
         session.setAttribute("UserRole", userProfile.getType());

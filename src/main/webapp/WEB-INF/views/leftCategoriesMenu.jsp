@@ -10,7 +10,7 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
 
-    <%ManagerInfo managerInfo =  (ManagerInfo)request.getAttribute("managerInfo");%>
+    <%ManagerInfo managerInfo =  (ManagerInfo)request.getSession().getAttribute("managerInfo");%>
 
     <aside class="sidebar-nav">
 

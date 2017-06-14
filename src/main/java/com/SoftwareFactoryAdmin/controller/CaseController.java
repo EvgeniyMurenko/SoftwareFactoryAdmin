@@ -53,14 +53,10 @@ public class CaseController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase(HttpSession httpSession) {
+    public ModelAndView getManagerCabinetCase() {
 
         ModelAndView managerAdminCabinetCase = new ModelAndView("casesList");
         List<Case> caseArrayList = caseService.getAllCases();
-
-        Long managerId = (Long) httpSession.getAttribute("UserId");
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
-        managerAdminCabinetCase.addObject("managerInfo", managerInfo);
 
         managerAdminCabinetCase.addObject("cases", caseArrayList);
 
@@ -68,7 +64,7 @@ public class CaseController {
     }
 
     @RequestMapping(value = "/{caseId}", method = RequestMethod.GET)
-    public ModelAndView getCaseToShow(@PathVariable Long caseId, HttpSession httpSession) {
+    public ModelAndView getCaseToShow(@PathVariable Long caseId) {
         ModelAndView managerAdminCaseRespond = new ModelAndView("caseRespond");
 
         Case aCase = caseService.getCaseById(caseId);
@@ -76,10 +72,6 @@ public class CaseController {
 
        /* ManagerInfo managerInfoByCase = managerInfoService.getManagerInfoById(aCase.getUserManagerId());
         managerAdminCaseRespond.addObject("managerInfoByCase", managerInfoByCase);*/
-
-        Long managerId = (Long) httpSession.getAttribute("UserId");
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
-        managerAdminCaseRespond.addObject("managerInfo", managerInfo);
 
         return managerAdminCaseRespond;
     }
