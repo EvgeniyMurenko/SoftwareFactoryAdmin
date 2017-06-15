@@ -17,7 +17,7 @@ public class ProjectTask implements Serializable {
     public ProjectTask() {
     }
 
-    public ProjectTask(Project project, String title, String shortDescription, String status, Date startDate, Date endDate, Date reopenDate, List<TaskMessage> taskMessages, Set<StaffInfo> staffInfos, Long workingStaffID) {
+    public ProjectTask(Project project, String title, String shortDescription, String status, Date startDate, Date endDate, Date reopenDate, Set<TaskMessage> taskMessages, Set<StaffInfo> staffInfos, Long workingStaffID) {
         this.project = project;
         this.title = title;
         this.shortDescription = shortDescription;
@@ -66,7 +66,7 @@ public class ProjectTask implements Serializable {
 
 
     @OneToMany(mappedBy = "projectTask", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<TaskMessage> taskMessages;
+    private Set<TaskMessage> taskMessages;
 
 
 
@@ -146,11 +146,11 @@ public class ProjectTask implements Serializable {
         this.endDate = endDate;
     }
 
-    public List<TaskMessage> getTaskMessages() {
+    public Set<TaskMessage> getTaskMessages() {
         return taskMessages;
     }
 
-    public void setTaskMessages(List<TaskMessage> taskMessages) {
+    public void setTaskMessages(Set<TaskMessage> taskMessages) {
         this.taskMessages = taskMessages;
     }
 

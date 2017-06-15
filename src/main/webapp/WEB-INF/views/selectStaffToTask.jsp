@@ -114,7 +114,7 @@
                     <td align="center"><%out.print(staffInfo.getFrontend());%></td>
                     <td align="center"><%out.print(staffInfo.getDesign());%></td>
                     <td align="center">
-                        <a href="<%out.print("/project-wf/approve/" + staffInfo.getId());%>" data-toggle="tooltip" title="Approve"><i class="fa fa-share"></i>
+                        <a href="<%out.print("/project-wf/approve-staff-to-task/" + projectTask.getId() +"/" + staffInfo.getId());%>" data-toggle="tooltip" title="Approve"><i class="fa fa-share"></i>
                             Approve</a>&nbsp; |&nbsp;
                     </td>
                 </tr>

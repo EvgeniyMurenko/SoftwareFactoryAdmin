@@ -100,17 +100,16 @@ public class ProjectWorkFlowController {
                                   HttpSession httpSession) {
 
         Project project = projectService.getProjectById(projectID);
-        Long managerID = (Long) httpSession.getAttribute("UserId");
         SaveFile saveFile = new SaveFile(files);
 
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerID);
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date endDateFormat = simpleDateFormat.parse(endDate + ":00");
 
             ProjectTask projectTask = new ProjectTask(project, title, shortDescription, StatusEnum.OPEN.toString(), new Date(),
-                    endDateFormat, null, new ArrayList<TaskMessage>(), new HashSet<StaffInfo>(), null);
+                    endDateFormat, null, new HashSet<TaskMessage>(), new HashSet<StaffInfo>(), null);
 
             projectTaskService.addNewProjectTask(projectTask);
 
@@ -146,7 +145,7 @@ public class ProjectWorkFlowController {
     }
 
 
-    @RequestMapping(value = "/approve-staff-to-task/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/approve-staff-to-task/{project_task_id}/{staff_id}", method = RequestMethod.GET)
     public ModelAndView selectStaffToTask(@PathVariable(value = "project_task_id") Long projectTaskID,
                                           @PathVariable(value = "staff_id") Long staffID,
                                           HttpSession httpSession) {
@@ -174,14 +173,14 @@ public class ProjectWorkFlowController {
         staffInfoService.updateStaffInfo(staffInfo);
 
 
-        return new ModelAndView("redirect:/task-management/" + projectTask.getId());
+        return new ModelAndView("redirect:/project-wf/task-management/" + projectTask.getId());
     }
 
 
     @RequestMapping(value = "/task-management/{id}", method = RequestMethod.GET)
     public ModelAndView taskManagement(@PathVariable(value = "id") Long id) {
 
-        ModelAndView taskManagement = new ModelAndView("taskManagement");
+        ModelAndView taskManagement = new ModelAndView("projectTaskManagement");
 
         ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
 
@@ -189,4 +188,28 @@ public class ProjectWorkFlowController {
 
         return taskManagement;
     }
+
+    @RequestMapping(value = "/project-wf/write-task-message" ,method = RequestMethod.POST)
+    public ModelAndView writeMessage(@RequestParam("id") Long id,
+                                     @RequestParam("text") String text ,
+                                     @RequestParam("file[]") MultipartFile[] multipartFile,
+                                     HttpSession httpSession){
+
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
+
+        ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
+
+        TaskMessage taskMessage = new TaskMessage(projectTask, managerInfo.getUser(), text, new Date(), managerInfo.getName(), new ArrayList<>());
+
+        taskMessageService.addNewTaskMessage(taskMessage);
+
+        SaveFile saveFile = new SaveFile(multipartFile);
+        saveFile.saveToTaskMessageFiles(taskMessage);
+
+        taskMessageService.updateTaskMessage(taskMessage);
+
+        return new ModelAndView("redirect:/project-wf/task-management/" + id);
+    }
+
+
 }
