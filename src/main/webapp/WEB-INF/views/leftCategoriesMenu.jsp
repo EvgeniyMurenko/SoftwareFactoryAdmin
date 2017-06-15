@@ -27,12 +27,12 @@
                     <%if (managerInfo != null){
                         out.print(managerInfo.getName());
                     }else {
-                        out.print("NULL");
+                        response.sendRedirect("/");
                     }%>
                 </a>
             </div>
             <div class="settings">
-                <a href="javascript:void(0);"><i class="fa fa-cogs"></i> Settings</a>
+                <a href="/settings/"><i class="fa fa-cogs"></i> Settings</a>
                 <a href="<c:url value="/logout" />"><i class="fa fa-sign-out"></i> Log Out</a>
             </div>
 

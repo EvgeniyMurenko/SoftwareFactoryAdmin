@@ -50,7 +50,7 @@ public class ManagerInfo implements Serializable {
     @Column(name = "birthday")
     private Date birthday;
 
-    @NotEmpty
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "s_manager_info_permission",
             joinColumns = {@JoinColumn(name = "user_id")},

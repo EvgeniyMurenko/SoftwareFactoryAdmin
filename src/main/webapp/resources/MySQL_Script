@@ -1,243 +1,320 @@
-CREATE TABLE `s_messages` (
-	`message_id` INT NOT NULL AUTO_INCREMENT,
-	`case_id` INT NOT NULL,
-	`user_id` INT NOT NULL,
-	`message_time` DATETIME NOT NULL,
-	`message_text` TEXT NOT NULL,
-    `is_read` VARCHAR(255) NOT NULL,
-    `path` VARCHAR(255),
-	PRIMARY KEY (`message_id`)
-);
-
-CREATE TABLE `s_projects` (
-	`project_id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	`user_customer_id` INT NOT NULL,
-	`date_create` DATETIME NOT NULL,
-	`status` VARCHAR(255) NOT NULL,
-	`technology_type` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`project_id`)
-);
-
-CREATE TABLE `s_cases` (
-	`project_id` INT NOT NULL,
-	`case_id` INT NOT NULL AUTO_INCREMENT,
-	`user_manager_id` INT NOT NULL,
-	`title` TEXT NOT NULL,
-	`status` VARCHAR(255) NOT NULL,
-	`date_create` DATETIME NOT NULL,
-	`language` VARCHAR(5) NOT NULL,
-	`emergency` TINYINT(1) NOT NULL,
-	`appointment_time` DATETIME DEFAULT NULL,
-	PRIMARY KEY (`case_id`)
-);
-
-CREATE TABLE `s_manager_info` (
-	`user_id` INT NOT NULL,
-	`name` VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE `s_customer_info` (
-	`user_id` INT NOT NULL,
-	`name` VARCHAR(255) NOT NULL,
-	`company` VARCHAR(255) NOT NULL,
-	`phone` VARCHAR(255) NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`web_site` VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE `s_estimates` (
-	`estimate_id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`estimate_request` TEXT NOT NULL,
-	`date_request` DATETIME NOT NULL,
-	`phone` VARCHAR(20) NOT NULL,
-	`is_respond` TINYINT(1) NOT NULL,
-	`is_price_request` TINYINT(1) NOT NULL,
-	`is_question_request` TINYINT(1) NOT NULL,
-	`path` VARCHAR(255),
-	`estimate_generated_id` VARCHAR(50) DEFAULT NULL,
-	`customer_info_id` INT DEFAULT NULL,
-	PRIMARY KEY (`estimate_id`)
-);
+CREATE SCHEMA `sofac` DEFAULT CHARACTER SET utf8;
+USE `sofac`;
 
 CREATE TABLE `app_user` (
-	id BIGINT NOT NULL AUTO_INCREMENT,
-	sso_id VARCHAR(255) NOT NULL,
-	password VARCHAR(255) NOT NULL,
-	is_full_created TINYINT(1) NOT NULL,
-	PRIMARY KEY (id),
-    UNIQUE (sso_id)
-);
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `sso_id` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `is_delete` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `sso_id` (`sso_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `user_profile` (
-	id BIGINT NOT NULL AUTO_INCREMENT,
-	permission VARCHAR(255) NOT NULL,
-	PRIMARY KEY (id),
-    UNIQUE (permission)
-);
+INSERT INTO `app_user`
+VALUES (1,'0001','$2a$10$p2ECzr0qM5q.ETKhoO17Yun7ySKkfQB4kO95otrOL0H1zAnySVR7q', 0),
+(2,'0002','$2a$10$vA1Sz7eGpUn8oyB3Ulr.OOyp2UFBmVwDJUc/bpNe2Hd.CTYPx45Uq', 0),
+(3,'manager1@mail.com','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0),
+(4,'admin@mail.com','123', 0),
+(5,'kass','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0),
+(6,'devid','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0),
+(7,'mr_jeka','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 1),
+(8,'sasha','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0),
+(9,'maxx','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0),
+(10,'maxfree','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0),
+(11,'0011','$2a$10$4fnexIcyZtK3jFnm7VcRM.Wj2837/sLLpB3e.jL/iqaIC5ijk7TE2', 0);
 
 CREATE TABLE `app_user_user_profile` (
-    user_id BIGINT NOT NULL,
-    user_profile_id BIGINT NOT NULL,
-    PRIMARY KEY (user_id, user_profile_id)
-);
+  `user_id` bigint(20) NOT NULL,
+  `user_profile_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`user_id`,`user_profile_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `app_user_user_profile`
+VALUES (1,1),
+(2,1),
+(3,3),
+(4,3),
+(5,3),
+(6,3),
+(7,3),
+(8,3),
+(9,3),
+(10,3),
+(11,4);
 
 CREATE TABLE `persistent_logins` (
-    username VARCHAR(64) NOT NULL,
-    series VARCHAR(64) NOT NULL,
-    token VARCHAR(64) NOT NULL,
-    last_used TIMESTAMP NOT NULL,
-    PRIMARY KEY (series)
-);
+  `username` varchar(64) NOT NULL,
+  `series` varchar(64) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`series`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `s_staff_info` (
-	`user_id` INT NOT NULL,
-	`name` VARCHAR(255) NOT NULL,
-	`phone` VARCHAR(255) NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`birthday` DATE NOT NULL
-);
+CREATE TABLE `s_cases` (
+  `project_id` int(11) NOT NULL,
+  `case_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_manager_id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `language` varchar(5) NOT NULL,
+  `emergency` tinyint(1) NOT NULL,
+  `appointment_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`case_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+INSERT INTO `s_cases`
+VALUES (3,7,0,'유지보수','OPEN','2017-04-13 10:13:13','KO',0,'2017-04-21 00:01:00');
+
+CREATE TABLE `s_customer_info` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `web_site` varchar(255) NOT NULL,
+  `is_full_created` tinyint(1) NOT NULL,
+  `is_standard_account` tinyint(1) NOT NULL,
+  `directors_name` varchar(255) NOT NULL,
+  `directors_email` varchar(255) NOT NULL,
+  `directors_phone` varchar(255) NOT NULL,
+  `company_type` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `registration_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `s_customer_info`
+VALUES (1, 'ComeOnBaby', 'ComeOnBaby', '(111) 1111-1111', 'agaya505@naver.com', 'comeonbaby.com', 1, 0, '', '', '', '', '', '2017-03-23 18:50:54'),
+(2,'홍길동','','(010) 5118-5879','kiasssim@naver.com','', 1, 0, '', '', '', '', '', '2017-03-27 11:43:18');
+
+CREATE TABLE `s_customer_history` (
+  `id` int(11) NOT NULL,
+  `customer_info_id` int(11) NOT NULL,
+  `text` text NOT NULL,
+  `date` datetime NOT NULL,
+  `manager_name` varchar(255) NOT NULL,
+  `manager_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `s_estimate_link` (
+  `id` int(11) NOT NULL,
+  `estimate_id` int(11) DEFAULT NULL,
+  `file_link` text,
+  `file_name` text,
+  `file_uuid_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `s_estimates` (
+  `estimate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `estimate_request` text NOT NULL,
+  `date_request` datetime NOT NULL,
+  `phone` text NOT NULL,
+  `is_respond` tinyint(1) NOT NULL,
+  `is_price_request` tinyint(1) NOT NULL,
+  `is_question_request` tinyint(1) NOT NULL,
+  `estimate_generated_id` text,
+  `customer_info_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`estimate_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+INSERT INTO `s_estimates`
+VALUES (1,'ComeOnBaby','comeonbabyapp@gmail.com','Please create app','2017-03-23 18:50:54','(111) 1111-1111',0,0,0,'1703230001',1),
+(2,'홍길동','kiasssim@naver.com','딧.....\r\n\r\n이런거 하고 싶어..\r\n\r\n얼마니','2017-03-27 11:43:18','(010) 5118-5879',0,1,0,'1703270002',2);
 
 CREATE TABLE `s_google_cloud_keys` (
-  `google_cloud_keys_id` INT NOT NULL AUTO_INCREMENT,
-  `staff_info_id` INT NOT NULL,
-  `key` VARCHAR(255) NOT NULL,
+  `google_cloud_keys_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `cloud_key` varchar(255) NOT NULL,
   PRIMARY KEY (`google_cloud_keys_id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `s_message_task` (
-  `message_task_id` INT NOT NULL AUTO_INCREMENT,
-  `staff_info_id` INT NOT NULL,
-  `title` VARCHAR(45) NOT NULL,
-  `message_text` TEXT NOT NULL,
-  `date` DATETIME NOT NULL,
-  `app_user_id` INT NOT NULL,
-  `is_approve` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`message_task_id`)
-);
+INSERT INTO `s_google_cloud_keys`
+VALUES ('1', '3', 'fKEyoctZv-g:APA91bEDIIzapvPr1dpvdahn92vb0YcfBVfVXVjuz6lB5SSvtQx51F30A2iJj1sLte1NARlmAJKBw15ZAw7Mw5BSEOSm5k1sUOvVY-A-3i0iU7uRa-kU4M6I4dxk6hP7_HXOOYAEMr-5');
+
+CREATE TABLE `s_manager_info` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `birthday` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `s_manager_info`
+VALUES (3,'test manager',NULL,NULL,NULL),
+(4,'Admin manager',NULL,NULL,NULL),
+(5,'kass',NULL,NULL,NULL),
+(6,'devid',NULL,NULL,NULL),
+(7,'evgeniy',NULL,NULL,NULL),
+(8,'sasha',NULL,NULL,NULL),
+(9,'maxim',NULL,NULL,NULL),
+(10,'maxim',NULL,NULL,NULL);
+
+CREATE TABLE `s_manager_info_permission` (
+  `user_id` bigint(20) NOT NULL,
+  `permission_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`user_id`,`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `s_message_link` (
+  `id` int(11) NOT NULL,
+  `message_id` int(11) DEFAULT NULL,
+  `file_link` text,
+  `file_name` text,
+  `file_uuid_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `s_messages` (
+  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `case_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message_time` datetime NOT NULL,
+  `message_text` text NOT NULL,
+  `is_read` varchar(255) NOT NULL,
+  PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+
+INSERT INTO `s_messages` VALUES
+(10,7,1,'2017-04-13 10:13:13','<p>안녕하세요</p>','NOTREAD'),
+(14,7,3,'2017-04-21 05:43:20','<p>Hello!<br />We have completed the work on the bugs.<br />Updated the application in the Play Market and updated&nbsp;the&nbsp;site.<br />Check, please.</p><p>Best regards, SoFAC Team</p>','NOTREAD'),
+(15,7,3,'2017-04-21 06:04:54','<p>Also, you asked about the appropriate size of the picture. The appropriate size for different devices is <strong>640 x 1130 pixels</strong>. An example of this picture, we can see under this link&nbsp;<a href=\"http://89.223.27.239:8080/guide/edit-fertilization/1\">http://89.223.27.239:8080/guide/edit-fertilizataion/1</a></p><p>Best regards, SoFAC Team</p>','NOTREAD'),
+(17,7,3,'2017-04-28 22:40:11','Good afternoon!<br><br>We want to inform you that we changed the server. Now, to enter the admin panel, use this address: <a href=\"http://34.253.54.136/\" target=\"_blank\">34.253.54.136</a><br>All the data was transferred from the previous server to this one.<br><br>Best regards, SoFAC Team','NOTREAD');
+
+CREATE TABLE `s_notice_link` (
+  `id` int(11) NOT NULL,
+  `notice_id` int(11) NOT NULL,
+  `file_link` text,
+  `file_name` text,
+  `file_uuid_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `s_notices` (
-	`notices_id` INT NOT NULL,
-	`title` VARCHAR(255) NOT NULL,
-	`notices_text` text NOT NULL,
-	`data_create` datetime NOT NULL,
-	`isActiv` tinyint(1) NOT NULL,
-	`path` VARCHAR(255),
-	PRIMARY KEY (`notices_id`)
-);
+  `notices_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `notices_text` text NOT NULL,
+  `data_create` datetime NOT NULL,
+  `isActiv` tinyint(1) NOT NULL,
+  PRIMARY KEY (`notices_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user_profile`(permission)
-VALUES ('CUSTOMER');
+INSERT INTO `s_notices`
+VALUES (1,'이 페이지는 아직도 작업 중입니다.','<p>여러가지 작업과 동시에 진행하다 보니 좀 느려지고 있습니다.</p><p>부분적인 오타도 있습니다.</p><p>깔끔히 정리 되지 않은 곳도 있습니다.</p><p>&nbsp;</p><p>그 외에 마무리 해야 할 부분이 있으며 차근 차근 정리되고&nbsp;</p><p>있습니다......</p><p>&nbsp;</p>','2017-04-06 05:34:12',1),
+(2,'드론 소프트웨어를 만드는 스탭을 소개 드립니다.','<p>소팩의 Staff들은&nbsp;결집력이 뛰어 납니다.</p><p>그들은 일을 즐기고 리더들과 협업하기를 좋아합니다.</p><p>이 친구는 샤샤 입니다. &nbsp;&nbsp;</p><p>현재 드론 소프트웨어를 맞고 있으며 장난감 드론을</p><p>리모컨 없이 소프트웨어만드로 패턴 비행도 만들고</p><p>스마트폰으로 리모턴도 만들어서 자랑하고 있는 중 입니다.</p><p><iframe width=\"274\" height=\"223\" src=\"https://www.youtube.com/embed/hq4CrtFFaho\" frameborder=\"0\"></iframe></p><p><iframe width=\"274\" height=\"195\" src=\"https://www.youtube.com/embed/sapoDuPOGW0\" frameborder=\"0\"></iframe></p>','2017-04-14 23:21:33',1),
+(3,'CASE 사용 방법 (소팩과 대화 하는 방법)','<p>소팩의 개발 대행 서비스를 가장 저렴하게 이용하는 방법은 CASE를 잘 활용하는 것입니다.</p><p>CASE는 어떤 상황이 벌어지면 고객이 먼저 하나의 주제를 만든는 것을 말합니다.</p><p>예를 들어 &quot;로그인 기능 보안 문제&quot; 라는 타이틀을 만들었으면 고객과 소팩 사이에 이 주제에 대해서 모든 것이 정리 될 때 까지 질문과 결과를 주고 받을 수 있습니다.</p><p>그리고 고객님이 만족한 결과를 얻었을 때 이 CASE를 닫을 수 있습니다.</p><p>&nbsp;</p><p>&nbsp;</p><p>CASE에 로그인 하기 위해선...</p><p>고객 ID가 필요 합니다.</p><p>고객 ID는 견적및 문의를 통하여 요청하시면 됩니다.</p><p>그러면 고객님께서는 답변 E-MAIL을 받게 되는데 이 때 고객님이 지속적인 대화를 원하실 경우 고객 ID 발급 URL을 누르시면 간단한 추가 정보 입력후 고객 번호와 임시패스워드를 발급해 드립니다.</p><p>그 고객번호를 통하여 지속적으로 소팩과 대화 하실 수 있습니다.</p><p>감사합니다.</p><p>&nbsp;</p>','2017-04-14 21:51:35',1);
 
-INSERT INTO `user_profile`(permission)
-VALUES ('ADMIN');
+CREATE TABLE `s_permission` (
+  `id` int(11) NOT NULL,
+  `permission` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permission_UNIQUE` (`permission`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user_profile`(permission)
-VALUES ('MANAGER');
+CREATE TABLE `s_projects` (
+  `project_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `user_customer_id` int(11) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `technology_type` varchar(255) DEFAULT NULL,
+	`date_start` datetime DEFAULT NULL,
+    `date_end` datetime DEFAULT NULL,
+    `description` text DEFAULT NULL,
+    `user_manager_id` int(11) default NULL,
+    `pm_name` varchar(255) NOT NULL,
+    `pm__email` varchar(255) NOT NULL,
+    `pm_phone` varchar(255) NOT NULL,
+    `scenario_uuid_name` text default NULL,
+  PRIMARY KEY (`project_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
-INSERT INTO `user_profile`(permission)
-VALUES ('STAFF');
+INSERT INTO `s_projects`
+VALUES (1,'#$GENERAL',1,'2017-03-23 18:51:00','OPEN','test', null, null, 'Default Normal project', 3, 'sasha ivanov', 'email@mail.com', '+38 093 909 10 62', null),
+(2,'#$ESTIMATE',1,'2017-03-23 18:51:00','OPEN','test', null, null, 'Default Estimate project', 3, 'sasha ivanov', 'email@mail.com', '+38 093 909 10 62', null),
+(3,'ComeOnBaby',1,'2017-03-23 13:00:00','OPEN','Android', null, null, 'Please create app', 3, 'sasha ivanov', 'email@mail.com', '+38 093 909 10 62', null),
+(4,'#$ESTIMATE',2,'2017-03-27 11:43:23','OPEN','test', null, null, 'Default Estimate project', 3, 'sasha ivanov', 'email@mail.com', '+38 093 909 10 62', null),
+(5,'#$GENERAL',2,'2017-03-27 11:43:23','OPEN','test', null, null, 'Default Normal project', 3, 'sasha ivanov', 'email@mail.com', '+38 093 909 10 62', null);
 
-INSERT INTO `app_user`(sso_id, password, is_full_created)
-VALUES ('admin@mail.com',123, 0);
 
-INSERT INTO `app_user`(sso_id, password, is_full_created)
-VALUES ('manager1@mail.com',123, 0);
+CREATE TABLE `user_profile` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO `app_user`(sso_id, password, is_full_created)
-VALUES ('manager2@mail.com',123, 0);
+INSERT INTO `user_profile` VALUES (2,'ADMIN'),(1,'CUSTOMER'),(3,'MANAGER'),(4,'STAFF');
 
-INSERT INTO `app_user`(sso_id, password, is_full_created)
-VALUES ('customer1@mail.com',123, 0);
+CREATE TABLE `s_staff_history` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `staff_info_id` INT(11) NOT NULL,
+  `text` TEXT NOT NULL,
+  `date` datetime NOT NULL,
+  `manager_name` TEXT NOT NULL,
+  `manager_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO `app_user`(sso_id, password, is_full_created)
-VALUES ('customer2@mail.com',123, 0);
+INSERT INTO `s_staff_history`
+VALUES (1, 11, 'Staff was created', '2017-05-24 17:16:06', 'sasha', 8);
 
-INSERT INTO `app_user`(sso_id, password, is_full_created)
-VALUES ('customer3@mail.com',123, 0);
+CREATE TABLE `s_staff_info` (
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` TEXT NOT NULL,
+  `phone` TEXT NOT NULL,
+  `email` TEXT NOT NULL,
+  `birth_date` datetime NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `rating` double NOT NULL,
+  `android` int(5) NOT NULL,
+  `ios` int(5) NOT NULL,
+  `IOT` int(5) NOT NULL,
+  `java` int(5) NOT NULL,
+  `php` int(5) NOT NULL,
+  `javascript` int(5) NOT NULL,
+  `c_sharp` int(5) NOT NULL,
+  `c_plus_plus` int(5) NOT NULL,
+  `frontend` int(5) NOT NULL,
+  `design` int(5) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
-  value(4,1);
+INSERT INTO `s_staff_info`
+VALUES (11, 'Alex',	'+8 099 999 99 99',	'bfa@mail.com',	'2000-01-04 17:12:00',	'2017-05-24 17:16:06', 3, 0, 0, 0, 0, 0, 5,	0, 0, 0, 0);
 
-  INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
-	value(5,1);
+CREATE TABLE `s_project_task` (
+  `id` INT NOT NULL,
+  `project_id` INT NULL,
+  `title` TEXT NULL,
+  `short_description` TEXT NULL,
+  `status` VARCHAR(45) NULL,
+  `start_date` DATETIME NULL,
+  `end_date` DATETIME NULL,
+  `working_staff_id` INT NULL,
+  `reopen_date` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`));
 
-   INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
-  value(6,1);
+  CREATE TABLE `s_project_task_staff_info` (
+  `project_task_id` INT NOT NULL,
+  `staff_info_id` INT NOT NULL,
+  PRIMARY KEY (`project_task_id`, `staff_info_id`));
 
-    INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
-  value(2,3);
+  CREATE TABLE `s_task_message` (
+  `id` INT NOT NULL,
+  `project_task_id` INT NULL,
+  `user_id` INT NULL,
+  `message_text` TEXT NULL,
+  `date` DATETIME NULL,
+  `sender_name` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
 
-  INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
-  value(3,1);
-
-  INSERT INTO `app_user_user_profile` (user_id, user_profile_id)
-    value(1,2);
-
-INSERT INTO `s_customer_info`(user_id, name, company, phone, email, web_site)
-VALUES (4, 'sasha','customer1','111 111 11 11','email1@mail.com', 'xxx1.com');
-
-INSERT INTO `s_customer_info`(user_id, name, company, phone, email, web_site)
-VALUES (5, 'maxim','customer2','111 111 11 11','email2@mail.com', 'xxx2.com');
-
-INSERT INTO `s_customer_info`(user_id, name, company, phone, email, web_site)
-VALUES (5, 'oksana','customer3','111 111 11 11','email3@mail.com', 'xxx3.com');
-
-INSERT INTO `s_manager_info`(user_id, name)
-VALUES (2, 'petya');
-
-INSERT INTO `s_manager_info`(user_id, name)
-VALUES (3, 'masha');
-
-INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
-VALUES ('AMMATA', 4,'2017-01-20 13:00:00', 1, 'JAVA');
-
-INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
-VALUES ('ComonBaby', 4,'2017-01-25 13:00:00', 1, 'C++');
-
-INSERT INTO `s_projects`(name, user_customer_id, date_create, status, technology_type)
-VALUES ('DRONE', 5,'2017-01-27 13:00:00', 1, 'JS');
-
-INSERT INTO s_projects(name, user_customer_id, date_create, status, technology_type)
-VALUES ('#$GENERAL', 6,'2017-01-27 13:00:00', 1, 'IOS');
-
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency, appointment_time)
-VALUES (1, 2, 'database1', 2, '2017-01-23 13:00:00', 'kr', 0, '2017-01-24 13:00:00');
-
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status,date_create, language, emergency, appointment_time)
-VALUES (1, 2, 'database2', 1, '2017-01-24 13:00:00', 'kr', 0, '2017-01-25 13:00:00');
-
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency, appointment_time)
-VALUES (1, 2, 'database3', 1, '2017-01-25 13:00:00', 'kr', 0, '2017-01-26 13:00:00');
-
-INSERT INTO `s_cases`(project_id, user_manager_id, title, status, date_create, language, emergency, appointment_time)
-VALUES (2, 3, 'database1', 1, '2017-01-26 13:00:00', 'kr', 0, '2017-01-27 13:00:00');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (1, 4, '2017-01-25 13:00:00','hello, i need.....', 'READ');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (1, 2, '2017-01-25 13:00:00','hello. ok, we try do it.','READ');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (1, 4, '2017-01-25 13:00:00','thanks','READ');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (2, 4, '2017-01-25 13:00:00','text.....','NOTREAD');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (2, 3, '2017-01-25 13:00:00','yayayaya','READ');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (3, 5, '2017-01-25 13:00:00','hello, i need.....','NOTREAD');
-
-INSERT INTO `s_messages`(case_id, user_id, message_time, message_text, is_read)
-VALUES (4, 5, '2017-02-15 13:00:00','hello, i need.....','NOTREAD');
-
-INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request , estimate_generated_id, customer_info_id)
-VALUES ('Ammata', 'mr_jeka@bk.ru', 'text of first request', '2017-01-25 13:00:00', '+38 000 00 00', false, false, false, "0001", 4);
-
-INSERT INTO `s_estimates`(name, email, estimate_request, date_request, phone, is_respond, is_price_request, is_question_request, estimate_generated_id, customer_info_id)
-VALUES ('CamonBaby', 'z.murenko@gmail.com', 'text of second request', '2017-01-25 13:00:00', '+38 111 111 11', false, false, false, "0002", 4);
+  CREATE TABLE `s_task_message_link` (
+  `id` INT NOT NULL,
+  `task_message_id` INT NULL,
+  `file_link` TEXT NULL,
+  `file_name` TEXT NULL,
+  `file_uuid_name` TEXT NULL,
+  PRIMARY KEY (`id`));
