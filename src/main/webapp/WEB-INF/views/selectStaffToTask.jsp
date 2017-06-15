@@ -49,10 +49,10 @@
         <section class="container-fluid content">
 
             <%ProjectTask projectTask = (ProjectTask) request.getAttribute("projectTask");%>
-
+            <%String linkBack = "/project-wf/" + projectTask.getProject().getId();%>
 
             <div class="mb20">
-                <a href="/membership-mm/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
+                <a href="<%out.print(linkBack);%>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
             </div>
 
 
@@ -114,7 +114,7 @@
                     <td align="center"><%out.print(staffInfo.getFrontend());%></td>
                     <td align="center"><%out.print(staffInfo.getDesign());%></td>
                     <td align="center">
-                        <a href="<%out.print("/project-wf/approve/" + staffInfo.getId());%>" data-toggle="tooltip" title="Edit"><i class="fa fa-share"></i>
+                        <a href="<%out.print("/project-wf/approve/" + staffInfo.getId());%>" data-toggle="tooltip" title="Approve"><i class="fa fa-share"></i>
                             Approve</a>&nbsp; |&nbsp;
                     </td>
                 </tr>

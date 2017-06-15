@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping("/project-wf")
@@ -33,6 +34,9 @@ public class ProjectWorkFlowController {
 
     @Autowired
     TaskMessageService taskMessageService;
+
+    @Autowired
+    StaffInfoService staffInfoService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView showWorkFlow(@PathVariable(value = "id") Long id) {
@@ -144,8 +148,12 @@ public class ProjectWorkFlowController {
 
     @RequestMapping(value = "/approve-staff-to-task/{id}", method = RequestMethod.GET)
     public ModelAndView selectStaffToTask(@PathVariable(value = "project_task_id") Long projectTaskID,
-                                          @PathVariable(value = "staff_id") Long staffID) {
+                                          @PathVariable(value = "staff_id") Long staffID,
+                                          HttpSession httpSession) {
 
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
+
+        // change status of project and set staff info
         ProjectTask projectTask = projectTaskService.getProjectTaskById(projectTaskID);
 
         projectTask.setStatus(StatusEnum.IN_WORK.toString());
@@ -153,7 +161,20 @@ public class ProjectWorkFlowController {
 
         projectTaskService.updateProjectTask(projectTask);
 
-        return new ModelAndView("redirect:/project-wf/" + projectTask.getProject().getId());
+        // add new staff history to staff info
+        StaffInfo staffInfo = staffInfoService.getStaffInfoById(staffID);
+
+        String staffHistoryText = "Was approved on task № " + projectTask.getId() + " , project № " + projectTask.getProject().getId();
+        StaffHistory staffHistory = new StaffHistory(staffHistoryText, new Date(), staffInfo, managerInfo.getName(), managerInfo.getId());
+
+        List<StaffHistory> staffHistories =  staffInfo.getStaffHistories();
+        staffHistories.add(staffHistory);
+        staffInfo.setStaffHistories(staffHistories);
+
+        staffInfoService.updateStaffInfo(staffInfo);
+
+
+        return new ModelAndView("redirect:/task-management/" + projectTask.getId());
     }
 
 

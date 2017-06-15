@@ -2,6 +2,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Set" %>
+<%@ page import="com.SoftwareFactoryAdmin.constant.StatusEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -48,7 +49,7 @@
         <section class="content container-fluid">
 
             <div class="mb10">
-                <a href="" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
+                <a href="/project-mm/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
                 <a data-toggle="modal" data-target="#modalAddProjectTask" class="btn btn-primary"><i class="glyphicon glyphicon-pencil pr10"></i>Add new task</a>
             </div>
 
@@ -88,18 +89,21 @@
                         </tfoot>
 
                         <tbody>
-                        <%if (project.getProjectTasks().size()> 0){%>
-                            <%for (ProjectTask projectTask : project.getProjectTasks()){%>
-                                <!-- Items list -->
-                                <tr>
-                                    <td align="center"><%out.print(projectTask.getId());%></td>
-                                    <td align="center"><%out.print(projectTask.getTitle());%></td>
-                                    <td align="center"><%out.print(dateFormatShow.format(projectTask.getStartDate()));%></td>
-                                    <td align="center"><%out.print(dateFormatShow.format(projectTask.getEndDate()));%></td>
-                                    <td align="center"><%out.print(projectTask.getStatus());%></td>
-                                </tr>
+                            <%if (project.getProjectTasks().size()> 0){%>
+                            <%for (ProjectTask projectTask : project.getProjectTasks()){
+                                   String projectTaskLink = "/project-wf/select-staff-to-task/" + projectTask.getId();
+                                   if (projectTask.getStatus().equals(StatusEnum.IN_WORK.toString())) projectTaskLink = "/project-wf/task-management/" +projectTask.getId();
+                            %>
+                        <!-- Items list -->
+                        <tr>
+                            <td align="center"><%out.print(projectTask.getId());%></td>
+                            <td align="center"><a href="<%out.print(projectTaskLink);%>"><%out.print(projectTask.getTitle());%></a></td>
+                            <td align="center"><%out.print(dateFormatShow.format(projectTask.getStartDate()));%></td>
+                            <td align="center"><%out.print(dateFormatShow.format(projectTask.getEndDate()));%></td>
+                            <td align="center"><%out.print(projectTask.getStatus());%></td>
+                        </tr>
                             <%}%>
-                        <%}%>
+                            <%}%>
                     </table>
                 </div>
             </div>
@@ -115,8 +119,8 @@
                             <%if (projectScenarioUuidName == null) {
                                 out.print("<h4>Project scenario don't exist, please upload</h4>");
                             } else {%>
-                                <h4>Project scenario:</h4>
-                                <a href="/get-file/general/<%out.print(projectScenarioUuidName);%>"> scenario link </a>
+                            <h4>Project scenario:</h4>
+                            <a href="/get-file/general/<%out.print(projectScenarioUuidName);%>"> scenario link </a>
                             <%}%>
 
                         </div>
@@ -226,18 +230,17 @@
 
 <%String isScenarioUpload = request.getParameter("isScenarioUpload");%>
 <%if (isScenarioUpload != null) {%>
-    <%String link = "/project-wf/" + project.getId();%>
-    <script>
-        jQuery(document).ready(function ($) {
-            swal(
-                'Success!',
-                'Scenario Upload',
-                'success'
-            );
-            history.pushState(null, null, '<%out.print(link);%>');
-        });
-    </script>
+<%String link = "/project-wf/" + project.getId();%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            'Scenario Upload',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
 <%}%>
-
 </body>
 </html>
