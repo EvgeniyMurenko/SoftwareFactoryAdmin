@@ -23,6 +23,9 @@ public class User implements Serializable{
 	@Column(name="password", nullable=false)
 	private String password;
 
+	@Column(name = "is_delete", nullable=false)
+	private boolean isDelete;
+
 	@NotEmpty
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "app_user_user_profile",
@@ -71,6 +74,14 @@ public class User implements Serializable{
 
 	public void setGoogleCloudKeys(Set<GoogleCloudKey> googleCloudKeys) {
 		this.googleCloudKeys = googleCloudKeys;
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean delete) {
+		isDelete = delete;
 	}
 
 	@Override

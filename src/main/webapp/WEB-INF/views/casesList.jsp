@@ -77,24 +77,27 @@
 
                     <!-- Items list -->
                     <tbody>
-
-                    <%for (Case aCase :caseList){%>
-                        <tr>
-                            <td align="center"><%out.print(aCase.getId());%></td>
-                            <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
-                            <td align="center"><a href="<%out.print("/customer-mm/edit-customer/"+aCase.getProject().getCustomerInfo().getId());%>"><%out.print(aCase.getProject().getCustomerInfo().getName());%></a></td>
-                            <td align="center">
-                                <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
-                                    out.print(ProjectEnum.projectNameNormal.getValue());
-                                }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
-                                    out.print(ProjectEnum.projectNameEstimate.getValue());
-                                } else out.print(aCase.getProject().getProjectName()); %>
-                            </td>
-                            <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
-                            <td align="center"><%out.print(aCase.getStatus().toString());%></td>
-                            <td align="center"><time class="timeago" datetime="<%out.print(aCase.getAppointmentTime());%>"></time></td>
-                            <td align="center"><%out.print(aCase.getMessages().size());%></td>
-                        </tr>
+                    <%if (caseList.size()>0){%>
+                        <%for (Case aCase :caseList){%>
+                            <%if (!aCase.getProject().getCustomerInfo().getUser().isDelete()){%>
+                                <tr>
+                                    <td align="center"><%out.print(aCase.getId());%></td>
+                                    <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
+                                    <td align="center"><a href="<%out.print("/customer-mm/edit-customer/"+aCase.getProject().getCustomerInfo().getId());%>"><%out.print(aCase.getProject().getCustomerInfo().getName());%></a></td>
+                                    <td align="center">
+                                        <% if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameNormal.getDbValue())) {
+                                            out.print(ProjectEnum.projectNameNormal.getValue());
+                                        }else if (aCase.getProject().getProjectName().equals(ProjectEnum.projectNameEstimate.getDbValue())) {
+                                            out.print(ProjectEnum.projectNameEstimate.getValue());
+                                        } else out.print(aCase.getProject().getProjectName()); %>
+                                    </td>
+                                    <td align="center"><%out.print(dateFormatShow.format(aCase.getCreationDate()));%></td>
+                                    <td align="center"><%out.print(aCase.getStatus().toString());%></td>
+                                    <td align="center"><time class="timeago" datetime="<%out.print(aCase.getAppointmentTime());%>"></time></td>
+                                    <td align="center"><%out.print(aCase.getMessages().size());%></td>
+                                </tr>
+                            <%}%>
+                        <%}%>
                     <%}%>
 
                     </tbody>

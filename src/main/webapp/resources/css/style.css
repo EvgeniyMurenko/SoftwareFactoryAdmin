@@ -327,6 +327,11 @@
 }
 /* -------------------- #End Modal window -------------------- */
 
+.scrollable{
+    height: 500px !important;
+    overflow-y: auto;
+}
+
 
 
 

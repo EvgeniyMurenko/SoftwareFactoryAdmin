@@ -153,9 +153,9 @@ public class MembershipManagementController {
     @RequestMapping(value = "/staffDelete/{staffId}", method = RequestMethod.GET)
     public ModelAndView staffDelete(@PathVariable Long staffId) {
 
-        StaffInfo staffInfo = staffInfoService.getStaffInfoById(staffId);
-        userService.deleteUserById(staffId);
-        staffInfoService.deleteStaffInfo(staffInfo);
+        User customerUser = userService.findById(staffId);
+        customerUser.setDelete(true);
+        userService.updateUser(customerUser);
 
         return new ModelAndView("redirect:/membership-mm/");
     }

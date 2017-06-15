@@ -72,16 +72,9 @@ public class CustomerManagementController {
 
     @RequestMapping(value = "/delete-customer/{customerId}", method = RequestMethod.GET)
     public ModelAndView deleteCustomer(@PathVariable Long customerId) {
-
-        Estimate estimate = estimateService.findEstimateByCustomerInfoId(customerId);
-        estimate.setCustomerInfo(null);
-        estimateService.updateEstimate(estimate);
-
-        CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerId);
-        customerInfoService.deleteCustomerInfo(customerInfo);
-
-        userService.deleteUserById(customerId);
-
+        User customerUser = userService.findById(customerId);
+        customerUser.setDelete(true);
+        userService.updateUser(customerUser);
         return new ModelAndView("redirect:/customer-mm/");
     }
 

@@ -84,7 +84,7 @@
                     <tbody>
 
                     <%for (CustomerInfo customerInfo: customerInfoArrayList){%>
-                        <%if (customerInfo.isFullCreated()) {%>
+                        <%if (customerInfo.isFullCreated() && !customerInfo.getUser().isDelete()) {%>
                             <%String editCustomerInfoUrl = "/customer-mm/edit-customer/" + customerInfo.getId();%>
                             <%String deleteCustomerInfoUrl = "/customer-mm/delete-customer/" + customerInfo.getId();%>
                             <%String customerInfoHistory = "/customer-mm/history/" + customerInfo.getId();%>
@@ -126,9 +126,9 @@
                                 </td>
 
                                 <td align="center">
-                                    <a href="/customer-mm/edit-customer/1" data-toggle="tooltip" title="Edit"><i
+                                    <a href="/customer-mm/edit-customer/<%out.print(customerInfo.getId());%>" data-toggle="tooltip" title="Edit"><i
                                             class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
-                                    <a href="/customer-mm/delete-customer/1" data-toggle="tooltip" title="Delete"
+                                    <a href="/customer-mm/delete-customer/<%out.print(customerInfo.getId());%>" data-toggle="tooltip" title="Delete"
                                        class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
                                 </td>
                             </tr>

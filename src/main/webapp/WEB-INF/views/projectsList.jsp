@@ -82,30 +82,34 @@
                     <!-- Items list -->
                     <tbody>
                     <%ArrayList<Project> projectArrayList = (ArrayList<Project>) request.getAttribute("projectsList");%>
-                    <%for (Project project : projectArrayList) {%>
-                        <tr>
-                            <td align="center"><%out.print(project.getId());%></td>
-                            <td align="center"><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
-                                <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%
-                                out.print(String.format("%04d", project.getId()));%></a></td>
-                            <td align="center">
-                                <%if (project.getStartDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getStartDate()));}%>
-                            </td>
-                            <td align="center">
-                                <%if (project.getEndDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getEndDate()));}%>
-                            </td>
-                            <td align="center"><%out.print(project.getStatus());%></td>
-                            <td><%out.print(project.getManagerInfo().getName());%></td>
-                            <td><%out.print(project.getDescription());%></td>
-                            <td>
-                                <a onclick="getCustomerInfo(<%out.print(project.getCustomerInfo().getId());%>)">
-                                    <%out.print(project.getCustomerInfo().getName());%>
-                                </a>
-                            </td>
-                            <td align="center"><a href="<%out.print("/project-wf/"+project.getId());%>">
-                                <i class="fa fa-external-link" aria-hidden="true"></i>
-                            </a></td>
-                        </tr>
+                    <%if (projectArrayList.size()>0){%>
+                        <%for (Project project : projectArrayList) {%>
+                            <%if (!project.getCustomerInfo().getUser().isDelete()){%>
+                                <tr>
+                                    <td align="center"><%out.print(project.getId());%></td>
+                                    <td align="center"><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
+                                        <%out.print(String.format("%04d", project.getCustomerInfo().getId()) + "-");%><%
+                                        out.print(String.format("%04d", project.getId()));%></a></td>
+                                    <td align="center">
+                                        <%if (project.getStartDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getStartDate()));}%>
+                                    </td>
+                                    <td align="center">
+                                        <%if (project.getEndDate() == null) {out.print("-");} else {out.print(dateFormatStartEnd.format(project.getEndDate()));}%>
+                                    </td>
+                                    <td align="center"><%out.print(project.getStatus());%></td>
+                                    <td><%out.print(project.getManagerInfo().getName());%></td>
+                                    <td><%out.print(project.getDescription());%></td>
+                                    <td>
+                                        <a onclick="getCustomerInfo(<%out.print(project.getCustomerInfo().getId());%>)">
+                                            <%out.print(project.getCustomerInfo().getName());%>
+                                        </a>
+                                    </td>
+                                    <td align="center"><a href="<%out.print("/project-wf/"+project.getId());%>">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a></td>
+                                </tr>
+                            <%}%>
+                        <%}%>
                     <%}%>
                     </tbody>
                     <!-- #End Items list -->
