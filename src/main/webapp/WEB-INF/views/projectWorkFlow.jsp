@@ -30,7 +30,6 @@
 <div id="wrapper">
 
     <%Project project = (Project) request.getAttribute("project");%>
-    <%String startNewTaskLink = "/project-wf/start-new-task/"+project.getId();%>
     <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
     <%String projectScenarioUuidName = project.getScenarioUuidName();%>
 
@@ -225,7 +224,7 @@
 
 <%@ include file="javascript.jsp" %>
 
-<%--<%String isScenarioUpload = request.getParameter("isScenarioUpload");%>
+<%String isScenarioUpload = request.getParameter("isScenarioUpload");%>
 <%if (isScenarioUpload != null) {%>
     <%String link = "/project-wf/" + project.getId();%>
     <script>
@@ -238,7 +237,7 @@
             history.pushState(null, null, '<%out.print(link);%>');
         });
     </script>
-<%}%>--%>
+<%}%>
 
 </body>
 </html>
