@@ -30,10 +30,7 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-
-
     <%@ include file="leftCategoriesMenu.jsp" %>
-
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
@@ -47,83 +44,83 @@
 
         <!-- Content section -->
         <section class="container-fluid content">
+            <div class="background-01">
 
-            <%ProjectTask projectTask = (ProjectTask) request.getAttribute("projectTask");%>
-            <%String linkBack = "/project-wf/" + projectTask.getProject().getId();%>
+                <%ProjectTask projectTask = (ProjectTask) request.getAttribute("projectTask");%>
+                <%String linkBack = "/project-wf/" + projectTask.getProject().getId();%>
 
-            <div class="mb20">
-                <a href="<%out.print(linkBack);%>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
+                <div class="mb20">
+                    <a href="<%out.print(linkBack);%>" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Back</a>
+                </div>
+
+
+                <table id="dataTable" class="table" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th width="20">ID</th>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Android</th>
+                        <th>iOS</th>
+                        <th>IOT</th>
+                        <th>Java</th>
+                        <th>PHP</th>
+                        <th>Java script</th>
+                        <th>C#</th>
+                        <th>С++</th>
+                        <th>Frontend (html+css)</th>
+                        <th>Design</th>
+                        <th width="150">Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th width="20">ID</th>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Android</th>
+                        <th>iOS</th>
+                        <th>IOT</th>
+                        <th>Java</th>
+                        <th>PHP</th>
+                        <th>Java script</th>
+                        <th>C#</th>
+                        <th>С++</th>
+                        <th>Frontend (html+css)</th>
+                        <th>Design</th>
+                        <th width="150">Action</th>
+                    </tr>
+                    </tfoot>
+
+                    <!-- Items list -->
+                    <tbody>
+                    <% Set <StaffInfo> staffInfoList =  projectTask.getStaffInfos();%>
+                    <% for (StaffInfo staffInfo : staffInfoList){%>
+                        <tr>
+                            <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
+                            <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
+                            <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
+                            <td align="center"><%out.print(staffInfo.getAndroid());%></td>
+                            <td align="center"><%out.print(staffInfo.getiOs());%></td>
+                            <td align="center"><%out.print(staffInfo.getIot());%></td>
+                            <td align="center"><%out.print(staffInfo.getJava());%></td>
+                            <td align="center"><%out.print(staffInfo.getPhp());%></td>
+                            <td align="center"><%out.print(staffInfo.getJavascript());%></td>
+                            <td align="center"><%out.print(staffInfo.getcSharp());%></td>
+                            <td align="center"><%out.print(staffInfo.getcPlusPlus());%></td>
+                            <td align="center"><%out.print(staffInfo.getFrontend());%></td>
+                            <td align="center"><%out.print(staffInfo.getDesign());%></td>
+                            <td align="center">
+                                <a href="<%out.print("/project-wf/approve-staff-to-task/" + projectTask.getId() +"/" + staffInfo.getId());%>" data-toggle="tooltip" title="Approve"><i class="fa fa-share"></i>
+                                    Approve</a>&nbsp; |&nbsp;
+                            </td>
+                        </tr>
+                    <%}%>
+                    </tbody>
+                    <!-- #End Items list -->
+
+                </table>
             </div>
-
-
-            <table id="dataTable" class="table" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th width="20">ID</th>
-                    <th>Name</th>
-                    <th>Rating</th>
-                    <th>Android</th>
-                    <th>iOS</th>
-                    <th>IOT</th>
-                    <th>Java</th>
-                    <th>PHP</th>
-                    <th>Java script</th>
-                    <th>C#</th>
-                    <th>С++</th>
-                    <th>Frontend (html+css)</th>
-                    <th>Design</th>
-                    <th width="150">Action</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th width="20">ID</th>
-                    <th>Name</th>
-                    <th>Rating</th>
-                    <th>Android</th>
-                    <th>iOS</th>
-                    <th>IOT</th>
-                    <th>Java</th>
-                    <th>PHP</th>
-                    <th>Java script</th>
-                    <th>C#</th>
-                    <th>С++</th>
-                    <th>Frontend (html+css)</th>
-                    <th>Design</th>
-                    <th width="150">Action</th>
-                </tr>
-                </tfoot>
-
-                <!-- Items list -->
-                <tbody>
-                <% Set <StaffInfo> staffInfoList =  projectTask.getStaffInfos();%>
-                <% for (StaffInfo staffInfo : staffInfoList){%>
-
-                <tr>
-                    <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
-                    <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
-                    <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
-                    <td align="center"><%out.print(staffInfo.getAndroid());%></td>
-                    <td align="center"><%out.print(staffInfo.getiOs());%></td>
-                    <td align="center"><%out.print(staffInfo.getIot());%></td>
-                    <td align="center"><%out.print(staffInfo.getJava());%></td>
-                    <td align="center"><%out.print(staffInfo.getPhp());%></td>
-                    <td align="center"><%out.print(staffInfo.getJavascript());%></td>
-                    <td align="center"><%out.print(staffInfo.getcSharp());%></td>
-                    <td align="center"><%out.print(staffInfo.getcPlusPlus());%></td>
-                    <td align="center"><%out.print(staffInfo.getFrontend());%></td>
-                    <td align="center"><%out.print(staffInfo.getDesign());%></td>
-                    <td align="center">
-                        <a href="<%out.print("/project-wf/approve-staff-to-task/" + projectTask.getId() +"/" + staffInfo.getId());%>" data-toggle="tooltip" title="Approve"><i class="fa fa-share"></i>
-                            Approve</a>&nbsp; |&nbsp;
-                    </td>
-                </tr>
-                <%}%>
-                </tbody>
-                <!-- #End Items list -->
-
-            </table>
-
         </section>
         <!-- Content section -->
 

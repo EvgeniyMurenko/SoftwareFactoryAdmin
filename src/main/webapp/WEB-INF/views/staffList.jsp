@@ -46,86 +46,87 @@
 
         <!-- Content section -->
         <section class="container-fluid content">
+            <div class="background-01">
 
-            <div class="mb20">
-                <a href="/membership-mm/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
-            </div>
+                <div class="mb20">
+                    <a href="/membership-mm/create" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Staff</a>
+                </div>
 
 
-            <table id="dataTable" class="table" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th width="20">ID</th>
-                    <th>Name</th>
-                    <th>Rating</th>
-                    <th>Android</th>
-                    <th>iOS</th>
-                    <th>IOT</th>
-                    <th>Java</th>
-                    <th>PHP</th>
-                    <th>Java script</th>
-                    <th>C#</th>
-                    <th>С++</th>
-                    <th>Frontend (html+css)</th>
-                    <th>Design</th>
-                    <th width="150">Action</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th width="20">ID</th>
-                    <th>Name</th>
-                    <th>Rating</th>
-                    <th>Android</th>
-                    <th>iOS</th>
-                    <th>IOT</th>
-                    <th>Java</th>
-                    <th>PHP</th>
-                    <th>Java script</th>
-                    <th>C#</th>
-                    <th>С++</th>
-                    <th>Frontend (html+css)</th>
-                    <th>Design</th>
-                    <th width="150">Action</th>
-                </tr>
-                </tfoot>
+                <table id="dataTable" class="table" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th width="20">ID</th>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Android</th>
+                        <th>iOS</th>
+                        <th>IOT</th>
+                        <th>Java</th>
+                        <th>PHP</th>
+                        <th>Java script</th>
+                        <th>C#</th>
+                        <th>С++</th>
+                        <th>Frontend (html+css)</th>
+                        <th>Design</th>
+                        <th width="150">Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th width="20">ID</th>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Android</th>
+                        <th>iOS</th>
+                        <th>IOT</th>
+                        <th>Java</th>
+                        <th>PHP</th>
+                        <th>Java script</th>
+                        <th>C#</th>
+                        <th>С++</th>
+                        <th>Frontend (html+css)</th>
+                        <th>Design</th>
+                        <th width="150">Action</th>
+                    </tr>
+                    </tfoot>
 
-                <!-- Items list -->
-                <tbody>
+                    <!-- Items list -->
+                    <tbody>
 
-                <%List <StaffInfo> staffInfoList =  (List<StaffInfo>)request.getAttribute("staffList");%>
-                <%if (staffInfoList.size()>0){%>
-                    <%for (StaffInfo staffInfo : staffInfoList){%>
-                        <%if (!staffInfo.getUser().isDelete()){%>
-                            <tr>
-                                <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
-                                <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
-                                <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
-                                <td align="center"><%out.print(staffInfo.getAndroid());%></td>
-                                <td align="center"><%out.print(staffInfo.getiOs());%></td>
-                                <td align="center"><%out.print(staffInfo.getIot());%></td>
-                                <td align="center"><%out.print(staffInfo.getJava());%></td>
-                                <td align="center"><%out.print(staffInfo.getPhp());%></td>
-                                <td align="center"><%out.print(staffInfo.getJavascript());%></td>
-                                <td align="center"><%out.print(staffInfo.getcSharp());%></td>
-                                <td align="center"><%out.print(staffInfo.getcPlusPlus());%></td>
-                                <td align="center"><%out.print(staffInfo.getFrontend());%></td>
-                                <td align="center"><%out.print(staffInfo.getDesign());%></td>
-                                <td align="center">
-                                    <a href="<%out.print("/membership-mm/edit/" + staffInfo.getId());%>" data-toggle="tooltip" title="Edit"><i class="fa fa-tasks"></i>
-                                        Edit</a>&nbsp; |&nbsp;
-                                    <a href="<%out.print("/membership-mm/staffDelete/" + staffInfo.getId());%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
-                                            class="fa fa-trash"></i> Delete</a>
-                                </td>
-                            </tr>
+                    <%List <StaffInfo> staffInfoList =  (List<StaffInfo>)request.getAttribute("staffList");%>
+                    <%if (staffInfoList.size()>0){%>
+                        <%for (StaffInfo staffInfo : staffInfoList){%>
+                            <%if (!staffInfo.getUser().isDelete()){%>
+                                <tr>
+                                    <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
+                                    <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
+                                    <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
+                                    <td align="center"><%out.print(staffInfo.getAndroid());%></td>
+                                    <td align="center"><%out.print(staffInfo.getiOs());%></td>
+                                    <td align="center"><%out.print(staffInfo.getIot());%></td>
+                                    <td align="center"><%out.print(staffInfo.getJava());%></td>
+                                    <td align="center"><%out.print(staffInfo.getPhp());%></td>
+                                    <td align="center"><%out.print(staffInfo.getJavascript());%></td>
+                                    <td align="center"><%out.print(staffInfo.getcSharp());%></td>
+                                    <td align="center"><%out.print(staffInfo.getcPlusPlus());%></td>
+                                    <td align="center"><%out.print(staffInfo.getFrontend());%></td>
+                                    <td align="center"><%out.print(staffInfo.getDesign());%></td>
+                                    <td align="center">
+                                        <a href="<%out.print("/membership-mm/edit/" + staffInfo.getId());%>" data-toggle="tooltip" title="Edit"><i class="fa fa-tasks"></i>
+                                            Edit</a>&nbsp; |&nbsp;
+                                        <a href="<%out.print("/membership-mm/staffDelete/" + staffInfo.getId());%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
+                                                class="fa fa-trash"></i> Delete</a>
+                                    </td>
+                                </tr>
+                            <%}%>
                         <%}%>
                     <%}%>
-                <%}%>
-                </tbody>
-                <!-- #End Items list -->
+                    </tbody>
+                    <!-- #End Items list -->
 
-            </table>
-
+                </table>
+            </div>
         </section>
         <!-- Content section -->
 

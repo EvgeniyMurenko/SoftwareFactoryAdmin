@@ -86,12 +86,11 @@
                     <%for (CustomerInfo customerInfo: customerInfoArrayList){%>
                         <%if (customerInfo.isFullCreated() && !customerInfo.getUser().isDelete()) {%>
                             <%String editCustomerInfoUrl = "/customer-mm/edit-customer/" + customerInfo.getId();%>
-                            <%String deleteCustomerInfoUrl = "/customer-mm/delete-customer/" + customerInfo.getId();%>
                             <%String customerInfoHistory = "/customer-mm/history/" + customerInfo.getId();%>
                             <!-- Items list -->
                             <tr>
                                 <td align="center"><%out.print(customerInfo.getId());%></td>
-                                <td><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
+                                <td align="center"><a href="<%out.print(editCustomerInfoUrl);%>"><%out.print(customerInfo.getUser().getSsoId());%></a></td>
                                 <td align="center"><%out.print(dateFormatShow.format(customerInfo.getRegistrationDate()));%></td>
                                 <td align="center"><a href="<%out.print(customerInfoHistory);%>">
                                     <%if (!"".equals(customerInfo.getDirectorsName())) {
