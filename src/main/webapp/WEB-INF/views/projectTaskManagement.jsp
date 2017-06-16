@@ -101,7 +101,7 @@
 
             <div class="col-sm-5 mt10" style="padding-left: 0px; !important;">
 
-                <form class="form-horizontal" action="/project-wf/write-task-message" method="post">
+                <form class="form-horizontal" action="/project-wf/write-task-message" method="post" enctype="multipart/form-data">
                     <div class="background-01">
                         <h4>Write message</h4>
 
@@ -109,7 +109,7 @@
                         <!-- FULL TASK DESCRIPTION -->
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <textarea id="editor" name="text" rows="3"></textarea>
+                                <textarea id="editor" name="text" rows="3" required></textarea>
                             </div>
                         </div>
                         <!-- #End FULL TASK DESCRIPTION -->
