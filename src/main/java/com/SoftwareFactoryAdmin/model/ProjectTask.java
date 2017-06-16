@@ -30,6 +30,8 @@ public class ProjectTask implements Serializable {
         this.workingStaffID = workingStaffID;
     }
 
+
+
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")

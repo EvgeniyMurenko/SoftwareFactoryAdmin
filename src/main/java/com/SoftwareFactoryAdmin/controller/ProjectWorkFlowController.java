@@ -163,7 +163,7 @@ public class ProjectWorkFlowController {
         // add new staff history to staff info
         StaffInfo staffInfo = staffInfoService.getStaffInfoById(staffID);
 
-        String staffHistoryText = "Was approved on task № " + projectTask.getId() + " , project № " + projectTask.getProject().getId();
+        String staffHistoryText = "Was approved on task # " + projectTask.getId() + " , project # " + projectTask.getProject().getId();
         StaffHistory staffHistory = new StaffHistory(staffHistoryText, new Date(), staffInfo, managerInfo.getName(), managerInfo.getId());
 
         List<StaffHistory> staffHistories =  staffInfo.getStaffHistories();
@@ -189,7 +189,7 @@ public class ProjectWorkFlowController {
         return taskManagement;
     }
 
-    @RequestMapping(value = "/project-wf/write-task-message" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/write-task-message" ,method = RequestMethod.POST)
     public ModelAndView writeMessage(@RequestParam("id") Long id,
                                      @RequestParam("text") String text ,
                                      @RequestParam("file[]") MultipartFile[] multipartFile,
