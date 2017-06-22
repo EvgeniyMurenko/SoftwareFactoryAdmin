@@ -22,6 +22,7 @@ public class TaskMessage {
         this.taskMessageLinks = taskMessageLinks;
     }
 
+
     @Id
     @GeneratedValue(generator = "increment2")
     @GenericGenerator(name = "increment2", strategy = "increment")
