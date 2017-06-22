@@ -6,6 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TaskMessageByDateComparator" %>
 <%@ page import="java.util.Collections" %>
+<%@ page import="com.SoftwareFactoryAdmin.constant.StatusEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -53,8 +54,10 @@
         <section class="content container-fluid">
 
             <div class="mb10">
-                <a href="<%out.print("/project-wf/reopen-task/" + projectTask.getId());%>" class="btn btn-primary"><i class="fa fa-folder-open" aria-hidden="true"></i> Reopen task</a>
-                <a href="<%out.print("/project-wf/done-task/" + projectTask.getId());%>" class="btn btn-primary"><i class="fa fa-check-square-o" aria-hidden="true"></i> Done task</a>
+                <%if (!projectTask.getStatus().equals(StatusEnum.DONE.toString())) { %>
+                    <a href="<%out.print("/project-wf/reopen-task/" + projectTask.getId());%>" class="btn btn-primary"><i class="fa fa-folder-open" aria-hidden="true"></i> Reopen task</a>
+                    <a href="<%out.print("/project-wf/done-task/" + projectTask.getId());%>" class="btn btn-primary"><i class="fa fa-check-square-o" aria-hidden="true"></i> Done task</a>
+                <%} else out.print("Task Done");%>
             </div>
 
 
@@ -98,7 +101,7 @@
                     </div>
                 </div>
             </div>
-
+        <%if (!projectTask.getStatus().equals(StatusEnum.DONE.toString())) { %>
             <div class="col-sm-5 mt10" style="padding-left: 0px; !important;">
 
                 <form class="form-horizontal" action="/project-wf/write-task-message" method="post" enctype="multipart/form-data">
@@ -135,7 +138,7 @@
                 </form>
 
             </div>
-
+        <%}%>
         </section>
 
 
@@ -146,5 +149,19 @@
 
 <%@ include file="javascript.jsp" %>
 
+<%String isScenarioUpload = request.getParameter("isDone");%>
+<%if (isScenarioUpload != null) {%>
+<%String link = "/project-wf/task-management/" + projectTask.getId();%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            'Project task is done.',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}%>
 </body>
 </html>

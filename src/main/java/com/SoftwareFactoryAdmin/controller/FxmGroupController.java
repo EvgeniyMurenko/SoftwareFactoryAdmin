@@ -7,16 +7,16 @@ import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
 import com.SoftwareFactoryAdmin.dto.base.ServerResponse;
 import com.SoftwareFactoryAdmin.model.FxmComment;
 import com.SoftwareFactoryAdmin.model.FxmPost;
+import com.SoftwareFactoryAdmin.model.GoogleCloudKey;
 import com.SoftwareFactoryAdmin.model.User;
-import com.SoftwareFactoryAdmin.service.FxmCommentService;
-import com.SoftwareFactoryAdmin.service.FxmPostService;
-import com.SoftwareFactoryAdmin.service.UserService;
+import com.SoftwareFactoryAdmin.service.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -38,6 +38,25 @@ public class FxmGroupController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PushNotificationService pushNotificationService;
+
+    @Autowired
+    GoogleCloudKeyService googleCloudKeyService;
+
+
+    @RequestMapping(value = "/test-on" ,method = RequestMethod.GET)
+    public ModelAndView test (){
+
+        List<String> keys = googleCloudKeyService.findAllManagersKeys();
+
+        for(String key : keys){
+            System.out.println(key);
+        }
+
+        return new ModelAndView("404");
+    }
 
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
@@ -99,6 +118,8 @@ public class FxmGroupController {
             fxmPostService.addNewFxmPost(fxmPost);
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
+
+
 
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 

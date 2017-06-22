@@ -20,4 +20,6 @@ public interface GoogleCloudKeyService {
 
     List<String> findAllKeysByStaff(Long staffInfo);
 
+    List<String> findAllManagersKeys();
+
 }

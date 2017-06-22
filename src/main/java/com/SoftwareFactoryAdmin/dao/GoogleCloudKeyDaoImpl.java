@@ -17,8 +17,8 @@ public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public void setSessionFactory(SessionFactory sf) {
-        this.sessionFactory = sf;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -66,6 +66,15 @@ public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKey googleCloudKeys where googleCloudKeys.staffInfo.id = :staffInfo");
         query.setParameter("staffInfo", staffInfo);
+        return query.list();
+    }
+
+
+    @Override
+    public List<String> findAllManagersKeys() {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKey googleCloudKeys inner join googleCloudKeys.user.userProfiles up where up.type like :type");
+        query.setParameter("type", "%MANAGER");
         return query.list();
     }
 

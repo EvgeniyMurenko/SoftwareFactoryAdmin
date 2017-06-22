@@ -156,6 +156,7 @@ public class ProjectWorkFlowController {
         ProjectTask projectTask = projectTaskService.getProjectTaskById(projectTaskID);
 
         projectTask.setStatus(StatusEnum.IN_WORK.toString());
+        projectTask.setStaffInfos(null);
         projectTask.setWorkingStaffID(staffID);
 
         projectTaskService.updateProjectTask(projectTask);
@@ -211,5 +212,44 @@ public class ProjectWorkFlowController {
         return new ModelAndView("redirect:/project-wf/task-management/" + id);
     }
 
+    @RequestMapping(value = "/reopen-task/{id}" , method = RequestMethod.GET)
+    public ModelAndView reopenTask (@PathVariable("id") Long id,
+                                    HttpSession httpSession){
 
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
+        ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
+        Long staffWorkerID = projectTask.getWorkingStaffID();
+
+        projectTask.setStatus(StatusEnum.RE_OPEN.toString());
+        projectTask.setWorkingStaffID(null);
+
+        projectTaskService.updateProjectTask(projectTask);
+
+        // write new staff history notice
+        StaffInfo staffInfo = staffInfoService.getStaffInfoById(staffWorkerID);
+
+        List<StaffHistory> staffHistories =staffInfo.getStaffHistories();
+
+        String staffHistoryText = "Failed task - " +projectTask.getId() + " - " + projectTask.getTitle();
+
+        staffHistories.add(new StaffHistory(staffHistoryText ,new Date() ,staffInfo ,managerInfo.getName(),managerInfo.getId()));
+
+        staffInfo.setStaffHistories(staffHistories);
+
+        staffInfoService.updateStaffInfo(staffInfo);
+
+        return new ModelAndView("redirect:/project-wf/select-staff-to-task/" + projectTask.getId() ,"isReopen" , "true");
+    }
+
+    @RequestMapping(value = "/done-task/{id}" , method = RequestMethod.GET)
+    public ModelAndView doneTask (@PathVariable("id") Long id) {
+
+        ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
+
+        projectTask.setStatus(StatusEnum.DONE.toString());
+
+        projectTaskService.updateProjectTask(projectTask);
+
+        return new ModelAndView("redirect:/project-wf/task-management/"+id , "isDone" , "true");
+    }
 }

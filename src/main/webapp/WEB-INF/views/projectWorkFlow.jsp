@@ -92,7 +92,7 @@
                             <%if (project.getProjectTasks().size()> 0){%>
                             <%for (ProjectTask projectTask : project.getProjectTasks()){
                                    String projectTaskLink = "/project-wf/select-staff-to-task/" + projectTask.getId();
-                                   if (projectTask.getStatus().equals(StatusEnum.IN_WORK.toString())) projectTaskLink = "/project-wf/task-management/" +projectTask.getId();
+                                   if (projectTask.getStatus().equals(StatusEnum.IN_WORK.toString()) || projectTask.getStatus().equals(StatusEnum.DONE.toString())) projectTaskLink = "/project-wf/task-management/" +projectTask.getId();
                             %>
                         <!-- Items list -->
                         <tr>

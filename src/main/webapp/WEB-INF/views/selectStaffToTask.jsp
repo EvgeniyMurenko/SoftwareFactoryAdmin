@@ -132,6 +132,20 @@
 
 <%@ include file="javascript.jsp" %>
 
+<%String isScenarioUpload = request.getParameter("isReopen");%>
+<%if (isScenarioUpload != null) {%>
+<%String link = "/project-wf/select-staff-to-task/" + projectTask.getId();%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            'Project task is reopen.',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}%>
 </body>
 </html>
 
