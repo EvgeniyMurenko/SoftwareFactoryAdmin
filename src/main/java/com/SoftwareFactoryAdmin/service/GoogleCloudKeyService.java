@@ -18,8 +18,10 @@ public interface GoogleCloudKeyService {
 
     List<String> getAllStringKeys();
 
-    List<String> findAllKeysByStaff(Long staffInfo);
+    List<String> findAllKeysByUser(Long userID);
 
     List<String> findAllManagersKeys();
+
+    List<String> findAllStaffKeys();
 
 }

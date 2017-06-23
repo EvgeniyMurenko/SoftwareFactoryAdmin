@@ -63,6 +63,8 @@ public class FxmGroupController {
     @RequestMapping(value = "/group-exchange", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
     public String groupExchange(@RequestBody String request) throws IOException {
 
+
+
         System.out.println(request);
 
         //  get server request type
@@ -119,7 +121,8 @@ public class FxmGroupController {
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
-
+            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostText(), "New group post!");
 
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 
@@ -137,6 +140,9 @@ public class FxmGroupController {
             fxmCommentService.addFxmComment(fxmComment);
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
+
+            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "New group comment!");
 
         } else if (requestType.equals(DELETE_POST_REQUEST.toString())) {
 
