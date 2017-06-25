@@ -14,8 +14,9 @@ public class FxmComment {
     public FxmComment() {
     }
 
-    public FxmComment(User user, Date date, String commentText, FxmPost fxmPost) {
+    public FxmComment(User user, String userName, Date date, String commentText, FxmPost fxmPost) {
         this.user = user;
+        this.userName = userName;
         this.date = date;
         this.commentText = commentText;
         this.fxmPost = fxmPost;
@@ -31,6 +32,10 @@ public class FxmComment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    @Column(name = "user_name")
+    private String userName;
 
 
     @Column(name = "date", columnDefinition = "DATETIME")
@@ -85,5 +90,13 @@ public class FxmComment {
 
     public void setFxmPost(FxmPost fxmPost) {
         this.fxmPost = fxmPost;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -6,9 +6,10 @@ import java.util.List;
 
 public class PostDTO {
 
-    public PostDTO(Long id, Long userID, Date date, String postText) {
+    public PostDTO(Long id, Long userID, String userName, Date date, String postText) {
         this.id = id;
         this.userID = userID;
+        this.userName = userName;
         this.date = date;
         this.postText = postText;
     }
@@ -16,6 +17,8 @@ public class PostDTO {
     private Long id;
 
     private Long userID;
+
+    private String userName;
 
     private Date date;
 
@@ -54,4 +57,11 @@ public class PostDTO {
         this.postText = postText;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

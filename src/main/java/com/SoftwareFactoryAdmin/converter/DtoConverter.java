@@ -49,12 +49,12 @@ public class DtoConverter {
 
 
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
-        return new PostDTO(fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getDate(), fxmPost.getPostText());
+        return new PostDTO(fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostText());
     }
 
 
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {
-        return new CommentDTO(fxmComment.getId(), fxmComment.getUser().getId(), fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
+        return new CommentDTO(fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
     }
 
 

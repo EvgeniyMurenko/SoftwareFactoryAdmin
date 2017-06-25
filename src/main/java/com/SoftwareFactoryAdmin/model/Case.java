@@ -1,6 +1,8 @@
 package com.SoftwareFactoryAdmin.model;
 
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ public class Case implements Serializable {
 
     public Case() {
     }
+
+
 
     @ManyToOne
     @JoinColumn(name = "project_id")

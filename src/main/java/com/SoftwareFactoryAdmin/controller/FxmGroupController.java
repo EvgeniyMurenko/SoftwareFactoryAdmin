@@ -5,10 +5,7 @@ import com.SoftwareFactoryAdmin.dto.CommentDTO;
 import com.SoftwareFactoryAdmin.dto.PostDTO;
 import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
 import com.SoftwareFactoryAdmin.dto.base.ServerResponse;
-import com.SoftwareFactoryAdmin.model.FxmComment;
-import com.SoftwareFactoryAdmin.model.FxmPost;
-import com.SoftwareFactoryAdmin.model.GoogleCloudKey;
-import com.SoftwareFactoryAdmin.model.User;
+import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,18 +42,10 @@ public class FxmGroupController {
     @Autowired
     GoogleCloudKeyService googleCloudKeyService;
 
+    @Autowired
+    ManagerInfoService managerInfoService;
 
-    @RequestMapping(value = "/test-on" ,method = RequestMethod.GET)
-    public ModelAndView test (){
 
-        List<String> keys = googleCloudKeyService.findAllManagersKeys();
-
-        for(String key : keys){
-            System.out.println(key);
-        }
-
-        return new ModelAndView("404");
-    }
 
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
@@ -109,17 +98,19 @@ public class FxmGroupController {
 
             Type postDTOType = new TypeToken<ServerRequest<PostDTO>>() {
             }.getType();
+
             ServerRequest<PostDTO> writePostRequest = new Gson().fromJson(request, postDTOType);
 
             PostDTO postDTO = (PostDTO) writePostRequest.getDataTransferObject();
 
-            User user = userService.findById(postDTO.getUserID());
+            ManagerInfo managerInfo= managerInfoService.getManagerInfoById(postDTO.getUserID());
 
-            FxmPost fxmPost = new FxmPost(user, new Date() , postDTO.getPostText(),new ArrayList<>());
+            FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(),  new Date() , postDTO.getPostText(),new ArrayList<>());
 
             fxmPostService.addNewFxmPost(fxmPost);
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
+
 
          /*   List<String> keys = googleCloudKeyService.findAllManagersKeys();
             pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostText(), "New group post!");
@@ -133,9 +124,10 @@ public class FxmGroupController {
             CommentDTO commentDTO = (CommentDTO) writeCommentRequest.getDataTransferObject();
 
             FxmPost fxmPost = fxmPostService.getFxmPostById(commentDTO.getPostID());
-            User user = userService.findById(commentDTO.getUserID());
 
-            FxmComment fxmComment = new FxmComment(user , new Date() , commentDTO.getCommentText(), fxmPost);
+            ManagerInfo managerInfo= managerInfoService.getManagerInfoById(commentDTO.getUserID());
+
+            FxmComment fxmComment = new FxmComment(managerInfo.getUser(), managerInfo.getName(), new Date() , commentDTO.getCommentText(), fxmPost);
 
             fxmCommentService.addFxmComment(fxmComment);
 
@@ -205,8 +197,24 @@ public class FxmGroupController {
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
         }
 
-
-        return new Gson().toJson(serverResponse);
+        String gsonResponse = new Gson().toJson(serverResponse);
+        System.out.println("return " + gsonResponse);
+        return gsonResponse;
     }
 }
 
+
+
+/*
+    @RequestMapping(value = "/test-on" ,method = RequestMethod.GET)
+    public ModelAndView test (){
+
+        List<String> keys = googleCloudKeyService.findAllManagersKeys();
+
+        for(String key : keys){
+            System.out.println(key);
+        }
+
+        return new ModelAndView("404");
+    }
+*/

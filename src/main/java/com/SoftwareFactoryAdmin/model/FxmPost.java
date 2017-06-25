@@ -14,8 +14,9 @@ public class FxmPost {
     public FxmPost() {
     }
 
-    public FxmPost(User user, Date date, String postText, List<FxmComment> fxmComments) {
+    public FxmPost(User user, String userName, Date date, String postText, List<FxmComment> fxmComments) {
         this.user = user;
+        this.userName = userName;
         this.date = date;
         this.postText = postText;
         this.fxmComments = fxmComments;
@@ -32,6 +33,11 @@ public class FxmPost {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+    @Column(name = "user_name")
+    private String userName;
+
+
     @Column(name = "date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -44,6 +50,7 @@ public class FxmPost {
 
     @OneToMany(mappedBy = "fxmPost", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FxmComment> fxmComments;
+
 
 
     public Long getId() {
@@ -86,4 +93,11 @@ public class FxmPost {
         this.fxmComments = fxmComments;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }
