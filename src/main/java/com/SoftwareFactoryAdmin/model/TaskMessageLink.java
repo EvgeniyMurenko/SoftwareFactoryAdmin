@@ -3,10 +3,11 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "s_task_message_link")
-public class TaskMessageLink {
+public class TaskMessageLink  implements Serializable {
 
     public TaskMessageLink(){}
 

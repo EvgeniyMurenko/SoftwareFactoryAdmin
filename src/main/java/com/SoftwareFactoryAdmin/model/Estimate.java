@@ -72,11 +72,11 @@ public class Estimate implements Serializable {
     private String estimateGeneratedId;
 
 
-    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "estimate", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private Set<EstimateLink> estimateLinks;
 
 
-    @OneToOne/*(cascade = CascadeType.ALL, fetch = FetchType.EAGER)*/
+    @OneToOne
     @JoinColumn(name = "customer_info_id")
     CustomerInfo customerInfo;
 

@@ -4,12 +4,13 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "s_task_message")
-public class TaskMessage {
+public class TaskMessage  implements Serializable {
 
     public TaskMessage(){}
 

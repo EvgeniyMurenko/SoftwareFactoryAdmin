@@ -51,14 +51,14 @@ public class ManagerInfo implements Serializable {
     private Date birthday;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "s_manager_info_permission",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "permission_id")})
     private Set<ManagerInfoPermission> managerInfoPermissions = new HashSet<ManagerInfoPermission>();
 
 
-    @OneToMany(mappedBy = "managerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "managerInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Project> projects;
 
     public User getUser() {

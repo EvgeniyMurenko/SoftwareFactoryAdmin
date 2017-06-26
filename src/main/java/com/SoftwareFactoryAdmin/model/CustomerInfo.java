@@ -57,8 +57,8 @@ public class CustomerInfo implements Serializable {
     @Column(name="web_site")
     private String website;
 
-    @Fetch(value = FetchMode.SUBSELECT)
-    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private List<Project> projects;
 
     @Column(name="is_full_created")
@@ -85,8 +85,8 @@ public class CustomerInfo implements Serializable {
     @Column(name = "registration_date")
     private Date registrationDate;
 
-    @Fetch(value = FetchMode.SUBSELECT)
-    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "customerInfo", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private List<CustomerHistory> customerHistories;
 
 

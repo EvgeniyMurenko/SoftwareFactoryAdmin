@@ -3,13 +3,15 @@ package com.SoftwareFactoryAdmin.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "s_staff_history")
-public class StaffHistory {
+public class StaffHistory implements Serializable {
 
-    public StaffHistory (){}
+    public StaffHistory() {
+    }
 
     public StaffHistory(String text, Date date, StaffInfo staffInfo, String managerName, Long managerId) {
         this.text = text;

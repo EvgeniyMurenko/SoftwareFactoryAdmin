@@ -4,12 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "s_fxm_post")
-public class FxmPost {
+public class FxmPost  implements Serializable {
 
     public FxmPost() {
     }

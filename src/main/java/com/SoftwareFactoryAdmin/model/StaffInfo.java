@@ -95,7 +95,7 @@ public class StaffInfo implements Serializable {
     private int design;
 
 
-    @OneToMany(mappedBy = "staffInfo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "staffInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<StaffHistory> staffHistories;
 
 

@@ -4,12 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "s_fxm_comment")
-public class FxmComment {
+public class FxmComment implements Serializable {
 
     public FxmComment() {
     }
