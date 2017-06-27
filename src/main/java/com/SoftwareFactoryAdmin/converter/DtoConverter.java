@@ -49,7 +49,7 @@ public class DtoConverter {
 
 
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
-        return new PostDTO(fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostText());
+        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostText());
     }
 
 

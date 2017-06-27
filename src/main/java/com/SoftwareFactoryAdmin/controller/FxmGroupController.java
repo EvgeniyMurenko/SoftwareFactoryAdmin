@@ -203,17 +203,3 @@ public class FxmGroupController {
 }
 
 
-
-/*
-    @RequestMapping(value = "/test-on" ,method = RequestMethod.GET)
-    public ModelAndView test (){
-
-        List<String> keys = googleCloudKeyService.findAllManagersKeys();
-
-        for(String key : keys){
-            System.out.println(key);
-        }
-
-        return new ModelAndView("404");
-    }
-*/
