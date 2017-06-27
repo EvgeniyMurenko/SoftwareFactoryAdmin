@@ -13,13 +13,13 @@ public class PushNotificationService {
      * keys is the id which android app will give to server (one time)
      **/
 
-    public boolean pushNotificationToGCM(List<String> keys, String message , String title){
+    public boolean pushNotificationToGCM(List<String> keys, String message , String title , String type){
 
         final String GCM_API_KEY = "AAAA6kxQc60:APA91bHuM7g4FlPb7jxjoB-Fj3frfpgSzZ962WZWjy7MOxKNYdqW2zYQM0ST_c9HNC1-zpknSzoQVMyvTjvz82x2bD71PEs4mUmHiQn140TzSjNzBmInN3BVMUdby1dlRIYovnkxnSJ6";
         final int retries = 3;
         Sender sender = new Sender(GCM_API_KEY);
 
-        Message msg = new Message.Builder().collapseKey("gcm_message").delayWhileIdle(true).addData("message",message).addData("title" , title).build();
+        Message msg = new Message.Builder().collapseKey("gcm_message").delayWhileIdle(true).addData("message",message).addData("title" , title).addData("type" , type).build();
 
         try {
 

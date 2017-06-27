@@ -1,5 +1,6 @@
 package com.SoftwareFactoryAdmin.controller;
 
+import com.SoftwareFactoryAdmin.constant.AppRequestEnum;
 import com.SoftwareFactoryAdmin.converter.DtoConverter;
 import com.SoftwareFactoryAdmin.dto.CommentDTO;
 import com.SoftwareFactoryAdmin.dto.PostDTO;
@@ -46,12 +47,10 @@ public class FxmGroupController {
     ManagerInfoService managerInfoService;
 
 
-
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/group-exchange", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
     public String groupExchange(@RequestBody String request) throws IOException {
-
 
 
         System.out.println(request);
@@ -103,18 +102,18 @@ public class FxmGroupController {
 
             PostDTO postDTO = (PostDTO) writePostRequest.getDataTransferObject();
 
-            ManagerInfo managerInfo= managerInfoService.getManagerInfoById(postDTO.getUserID());
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(postDTO.getUserID());
 
-            FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(),  new Date() , postDTO.getPostText(),new ArrayList<>());
+            FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postDTO.getPostText(), new ArrayList<>());
 
             fxmPostService.addNewFxmPost(fxmPost);
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
 
-         /*   List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostText(), "New group post!");
-*/
+            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostText(), "FXM Group post!" ,AppRequestEnum.GROUP_PUSH_TYPE.toString());
+
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 
             Type commentDTOType = new TypeToken<ServerRequest<CommentDTO>>() {
@@ -125,16 +124,16 @@ public class FxmGroupController {
 
             FxmPost fxmPost = fxmPostService.getFxmPostById(commentDTO.getPostID());
 
-            ManagerInfo managerInfo= managerInfoService.getManagerInfoById(commentDTO.getUserID());
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(commentDTO.getUserID());
 
-            FxmComment fxmComment = new FxmComment(managerInfo.getUser(), managerInfo.getName(), new Date() , commentDTO.getCommentText(), fxmPost);
+            FxmComment fxmComment = new FxmComment(managerInfo.getUser(), managerInfo.getName(), new Date(), commentDTO.getCommentText(), fxmPost);
 
             fxmCommentService.addFxmComment(fxmComment);
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
-          /*  List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "New group comment!");*/
+            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(DELETE_POST_REQUEST.toString())) {
 

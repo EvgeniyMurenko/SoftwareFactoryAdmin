@@ -2,6 +2,8 @@ package com.SoftwareFactoryAdmin.model;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,8 +40,8 @@ public class CustomerInfo implements Serializable {
     @Column(name = "user_id", nullable = false)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY, optional=false)
+    @JoinColumn(name = "user_id" )
     private User user;
 
     @Column(name = "name")

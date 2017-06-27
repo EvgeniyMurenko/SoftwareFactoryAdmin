@@ -2,6 +2,8 @@ package com.SoftwareFactoryAdmin.model;
 
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -76,7 +78,8 @@ public class Estimate implements Serializable {
     private Set<EstimateLink> estimateLinks;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_info_id")
     CustomerInfo customerInfo;
 

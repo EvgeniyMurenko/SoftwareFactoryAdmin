@@ -28,13 +28,13 @@ public class User implements Serializable {
     private boolean isDelete;
 
     @NotEmpty
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "app_user_user_profile",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_profile_id")})
     private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<GoogleCloudKey> googleCloudKeys;
 
     public Long getId() {
