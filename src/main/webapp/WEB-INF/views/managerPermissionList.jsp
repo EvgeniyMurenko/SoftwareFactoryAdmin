@@ -1,3 +1,13 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.SoftwareFactoryAdmin.util.AppMethods" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,98 +20,121 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <title>Managers permissions :: 소프트웨어팩토리</title>
+    <title>Permissions :: 소프트웨어팩토리</title>
 
     <%@ include file="styles.jsp" %>
 
 </head>
 <body>
+
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
 
-        <%@ include file="leftCategoriesMenu.jsp" %>
-
-    </div>
-    <!-- #End Sidebar -->
+    <%@ include file="leftCategoriesMenu.jsp" %>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <!-- Content section -->
-        <section class="container-fluid content">
-            <h3><i class="fa fa-user"></i>Permissions</h3>
+        <!-- Header -->
+        <header class="header line">
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-lock" aria-hidden="true"></i></a>
+            <span class="header-title clearfix">Permissions</span>
+        </header>
+        <!-- #End Header -->
 
-            <table id="dataTable" class="table" width="100%" cellspacing="0">
-                <thead>
+        <%List<ManagerInfo> managerInfoList = (List<ManagerInfo>) request.getAttribute("managersList");%>
+
+        <section class="content container-fluid">
+            <div class="background-01">
+
+                <table id="dataTable" class="table" width="100%" cellspacing="0">
+                    <thead>
                     <tr>
-                        <th width="20">ID</th>
-                        <th width="200">Manager</th>
-                        <th>Permissions</th>
+                        <th>Manager name</th>
+                        <th>Estimate</th>
+                        <th>Case</th>
+                        <th>Customer</th>
+                        <th>Project</th>
+                        <th>Staff</th>
+                        <th>Notice</th>
+                        <th>Permission</th>
+                        <th>Translate</th>
+                        <th width="150">Action</th>
                     </tr>
-                </thead>
-                <tfoot>
+                    </thead>
+                    <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Manager</th>
-                        <th>Permissions</th>
+                        <th>Manager name</th>
+                        <th>Estimate</th>
+                        <th>Case</th>
+                        <th>Customer</th>
+                        <th>Project</th>
+                        <th>Staff</th>
+                        <th>Notice</th>
+                        <th>Permission</th>
+                        <th>Translate</th>
+                        <th width="150">Action</th>
                     </tr>
-                </tfoot>
+                    </tfoot>
 
-                <!-- Items list -->
-                <tbody>
-                    <tr>
+                    <tbody>
 
-                        <td align="center">1</td>
-                        <td><a href="customersEdit.php">Tiger Nixon</a></td>
+                    <!-- Items list -->
+                    <%
+                        for (ManagerInfo managerInfo : managerInfoList){
+                            Permission permission = managerInfo.getManagerInfoPermissions();
 
-                        <!-- Permissions list -->
-                        <td>
-                            <form action="" method="post">
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_1" type="checkbox" checked/>
-                                    <label for="permission_1">Estimate</label>
-                                </div>
+                            if (!permission.getSuperAdminPermission() && !managerInfo.getId().equals(currentManagerInfo.getId())){
+                    %>
 
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_2" type="checkbox"/>
-                                    <label for="permission_2">Cases</label>
-                                </div>
+                            <tr>
+                                <form action="/permission/change-permission" method="post">
+                                    <input type="hidden" name="id" value="<%out.print(managerInfo.getId());%>">
+                                    <td align="center"><%out.print(managerInfo.getName());%></td>
+                                    <td align="center"><input type="checkbox" name="estimate_permission" <%out.print(AppMethods.isChecked(permission.getEstimatePermission()));%>></td>
+                                    <td align="center"><input type="checkbox" name="case_permission" <%out.print(AppMethods.isChecked(permission.getCasePermission()));%>></td>
+                                    <td align="center"><input type="checkbox" name="customer_permission" <%out.print(AppMethods.isChecked(permission.getCustomerPermission()));%>></td>
+                                    <td align="center"><input type="checkbox" name="projects_permission" <%out.print(AppMethods.isChecked(permission.getProjectsPermission()));%>></td>
+                                    <td align="center"><input type="checkbox" name="staff_permission" <%out.print(AppMethods.isChecked(permission.getStaffPermission()));%>></td>
+                                    <td align="center"><input type="checkbox" name="notice_permission" <%out.print(AppMethods.isChecked(permission.getNoticePermission()));%>></td>
+                                    <td align="center"><input type="checkbox" name="permission_mm" <%out.print(AppMethods.isChecked(permission.getPermissionManagement()));%>></td>
+                                    <td align="center"><input type="checkbox" name="translate_permission" <%out.print(AppMethods.isChecked(permission.getTranslatePermission()));%>></td>
+                                    <td align="center">
+                                        <button class="ghost-button" type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                     </td>
+                                 </form>
+                            </tr>
+                        <%}%>
+                    <%}%>
 
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_3" type="checkbox" checked/>
-                                    <label for="permission_3">Customers</label>
-                                </div>
 
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_4" type="checkbox"/>
-                                    <label for="permission_4">Staff</label>
-                                </div>
-
-                                <div class="pull-right clearfix"><button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check pr10"></i>Save</button></div>
-                            </form>
-                        </td>
-                        <!-- #End Permissions list -->
-
-                    </tr>
-
-                </tbody>
-                <!-- #End Items list -->
-
-            </table>
-
+                </table>
+            </div>
         </section>
-        <!-- Content section -->
+
+
 
     </div>
-    <!-- #End Page-content -->
+    <!-- #End Page Content -->
 
 </div>
-<!-- #End Wrapper -->
 
 <%@ include file="javascript.jsp" %>
 
+<%String isSuccess = request.getParameter("isSuccess");%>
+<%if (isSuccess != null) {%>
+<%String link = "/permission/change-permission";%>
+<script>
+    jQuery(document).ready(function ($) {
+        swal(
+            'Success!',
+            'Permission changed.',
+            'success'
+        );
+        history.pushState(null, null, '<%out.print(link);%>');
+    });
+</script>
+<%}%>
 </body>
 </html>

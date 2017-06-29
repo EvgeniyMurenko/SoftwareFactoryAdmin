@@ -10,8 +10,8 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
 
-    <%ManagerInfo managerInfo =  (ManagerInfo)request.getSession().getAttribute("managerInfo");%>
-    <%Permission permission = (Permission) request.getSession().getAttribute("managerPermission");%>
+    <%ManagerInfo currentManagerInfo =  (ManagerInfo)request.getSession().getAttribute("managerInfo");%>
+    <%Permission currentPermission = (Permission) request.getSession().getAttribute("managerPermission");%>
 
     <aside class="sidebar-nav">
 
@@ -25,8 +25,8 @@
             <div class="cust-thumbnail"><a href="javascript:void(0);"><img src="http://placehold.it/150x150" class="img-circle" alt=""></a></div>
             <div class="information">
                 <a href="javascript:void(0);">
-                    <%if (managerInfo != null){
-                        out.print(managerInfo.getName());
+                    <%if (currentManagerInfo != null){
+                        out.print(currentManagerInfo.getName());
                     }else {
                         response.sendRedirect("/");
                     }%>
@@ -45,20 +45,20 @@
         <%if (session != null){ %>
         <!-- Left categories -->
             <ul>
-                <%if(permission.getEstimatePermission()) {%>
+                <%if(currentPermission.getEstimatePermission()) {%>
                     <li><a href="/estimate/"><i class="fa fa-file-text" aria-hidden="true"></i> Estimates</a></li>
-                <%} if (permission.getCasePermission()) {%>
+                <%} if (currentPermission.getCasePermission()) {%>
                     <li><a href="/cases/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
-                <%} if (permission.getCustomerPermission()) {%>
+                <%} if (currentPermission.getCustomerPermission()) {%>
                     <li><a href="/customer-mm/"><i class="fa fa-user" aria-hidden="true"></i> Customers</a></li>
-                <%} if (permission.getProjectsPermission()) {%>
+                <%} if (currentPermission.getProjectsPermission()) {%>
                     <li><a href="/project-mm/"><i class="fa fa-archive" aria-hidden="true"></i> Projects Management</a></li>
-                <%} if (permission.getStaffPermission()) {%>
+                <%} if (currentPermission.getStaffPermission()) {%>
                     <li><a href="/membership-mm/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
-                <%} if (permission.getNoticePermission()) {%>
+                <%} if (currentPermission.getNoticePermission()) {%>
                     <li><a href="/notice/"><i class="fa fa-list" aria-hidden="true"></i> Notices</a></li>
-                <%} if (permission.getPermissionManagement()) {%>
-                    <li><a href="/permission/"><i class="fa fa-id-card" aria-hidden="true"></i> Permissions</a> </li>
+                <%} if (currentPermission.getPermissionManagement()) {%>
+                    <li><a href="/permission/"><i class="fa fa-lock" aria-hidden="true"></i> Permissions</a> </li>
                 <%}%>
             </ul>
             <!-- #End Left categories -->

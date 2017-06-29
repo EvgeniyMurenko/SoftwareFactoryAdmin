@@ -2,6 +2,7 @@
 @import "base.css";
 @import "space.css";
 
+
 /* -------------------- Left information -------------------- */
 .logo {
     text-align: center;
@@ -334,6 +335,11 @@
 
 
 
-
+.ghost-button{
+    border: medium none;
+    background-image: none;
+    background-color: transparent;
+    color: #31BFC0;
+}
 
 

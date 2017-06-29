@@ -24,4 +24,9 @@ public class AppMethods {
         }
         return "-";
     }
+
+    public static String isChecked(Boolean value){
+        if (value) return "checked";
+        else return "";
+    }
 }
