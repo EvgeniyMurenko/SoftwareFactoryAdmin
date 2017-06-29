@@ -15,7 +15,7 @@ public class ManagerInfo implements Serializable {
     public ManagerInfo() {
     }
 
-    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Set<ManagerInfoPermission> managerInfoPermissions) {
+    public ManagerInfo(Long id, User user, String name, String phone, String email, Date birthday, Permission managerInfoPermissions, Set<Project> projects) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -23,6 +23,7 @@ public class ManagerInfo implements Serializable {
         this.email = email;
         this.birthday = birthday;
         this.managerInfoPermissions = managerInfoPermissions;
+        this.projects = projects;
     }
 
     @Id
@@ -51,11 +52,8 @@ public class ManagerInfo implements Serializable {
     private Date birthday;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "s_manager_info_permission",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "permission_id")})
-    private Set<ManagerInfoPermission> managerInfoPermissions = new HashSet<ManagerInfoPermission>();
+    @OneToOne(fetch = FetchType.LAZY , mappedBy="managerInfo", cascade = CascadeType.ALL)
+    private Permission managerInfoPermissions;
 
 
     @OneToMany(mappedBy = "managerInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -93,11 +91,11 @@ public class ManagerInfo implements Serializable {
         this.birthday = birthday;
     }
 
-    public Set<ManagerInfoPermission> getManagerInfoPermissions() {
+    public Permission getManagerInfoPermissions() {
         return managerInfoPermissions;
     }
 
-    public void setManagerInfoPermissions(Set<ManagerInfoPermission> managerInfoPermissions) {
+    public void setManagerInfoPermissions(Permission managerInfoPermissions) {
         this.managerInfoPermissions = managerInfoPermissions;
     }
 

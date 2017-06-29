@@ -34,13 +34,12 @@
         <section class="container-fluid content">
             <h3><i class="fa fa-user"></i>Permissions</h3>
 
-            <table id="dataTable" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <table id="dataTable" class="table" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th width="20">ID</th>
                         <th width="200">Manager</th>
                         <th>Permissions</th>
-                        <th width="150">Action</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -48,7 +47,6 @@
                         <th>ID</th>
                         <th>Manager</th>
                         <th>Permissions</th>
-                        <th>Action</th>
                     </tr>
                 </tfoot>
 
@@ -87,48 +85,8 @@
                         </td>
                         <!-- #End Permissions list -->
 
-                        <td align="center">
-                            <a href="customersEdit.php" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
-                            <a href="javascript:void(0);" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
                     </tr>
-                    <tr>
-                        <td align="center">2</td>
-                        <td><a href="customersEdit.php">Susan Smith</a></td>
 
-                        <!-- Permissions list -->
-                        <td>
-                            <form action="" method="post">
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_1" type="checkbox" checked/>
-                                    <label for="permission_1">Estimate</label>
-                                </div>
-
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_2" type="checkbox" checked/>
-                                    <label for="permission_2">Cases</label>
-                                </div>
-
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_3" type="checkbox"/>
-                                    <label for="permission_3">Customers</label>
-                                </div>
-
-                                <div class="checkbox checkbox-inline pl5">
-                                    <input id="permission_4" type="checkbox" checked/>
-                                    <label for="permission_4">Staff</label>
-                                </div>
-
-                                <div class="pull-right clearfix"><button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check pr10"></i>Save</button></div>
-                            </form>
-                        </td>
-                        <!-- #End Permissions list -->
-
-                        <td align="center">
-                            <a href="customersEdit.php" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i> Edit</a>&nbsp; |&nbsp;
-                            <a href="javascript:void(0);" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
-                    </tr>
                 </tbody>
                 <!-- #End Items list -->
 

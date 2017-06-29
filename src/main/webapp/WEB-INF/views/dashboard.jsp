@@ -62,7 +62,7 @@
                 </div>
 
             </div>
-
+            <%if (permission.getCasePermission()){%>
             <div class="row">
 
                 <div class="col-md-6 mb20">
@@ -107,6 +107,7 @@
                     <!-- #End Last estimates -->
 
                 </div>
+                <% } if (permission.getEstimatePermission()){%>
                 <div class="col-md-6">
 
                     <!-- Last cases -->
@@ -156,7 +157,7 @@
                     <!-- #End Last cases -->
 
                 </div>
-
+                <%}%>
             </div>
 
         </section>

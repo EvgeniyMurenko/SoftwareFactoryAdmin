@@ -66,7 +66,7 @@ public class AppController {
 
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(currentUser.getId());
         session.setAttribute("managerInfo", managerInfo);
-
+        session.setAttribute("managerPermission" , managerInfo.getManagerInfoPermissions());
 
         Set profiles = currentUser.getUserProfiles();
 
@@ -93,6 +93,7 @@ public class AppController {
 
         session.setAttribute("UserId", currentUser.getId());
         session.setAttribute("UserRole", userProfile.getType());
+
 
         return modelAndView;
     }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Transactional
 @Service("managerInfoService")
 public class ManagerInfoServiceImpl implements ManagerInfoService {
 
@@ -20,34 +21,34 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
     }
 
     @Override
-    @Transactional
     public void addNewManagerInfo(ManagerInfo managerInfo) {
         managerInfoDao.create(managerInfo);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<ManagerInfo> getAllManagerInfos() {
         return managerInfoDao.findAll();
     }
 
     @Override
-    @Transactional
     public ManagerInfo getManagerInfoById(Long id) {
-        ManagerInfo managerInfo = managerInfoDao.read(id);
-        return managerInfo;
+        return managerInfoDao.read(id);
     }
 
     @Override
-    @Transactional
     public void updateManagerInfo(ManagerInfo managerInfo) {
         managerInfoDao.update(managerInfo);
     }
 
     @Override
-    @Transactional
     public void deleteManagerInfo(ManagerInfo managerInfo) {
         managerInfoDao.delete(managerInfo);
+    }
+
+
+    @Override
+    public List<ManagerInfo> getAllWithPermission() {
+        return managerInfoDao.findAllWithPermissions();
     }
 
 

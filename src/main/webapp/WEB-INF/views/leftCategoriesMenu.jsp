@@ -1,4 +1,5 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.ManagerInfo" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.Permission" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -10,6 +11,7 @@
 <div id="sidebar-wrapper">
 
     <%ManagerInfo managerInfo =  (ManagerInfo)request.getSession().getAttribute("managerInfo");%>
+    <%Permission permission = (Permission) request.getSession().getAttribute("managerPermission");%>
 
     <aside class="sidebar-nav">
 
@@ -43,15 +45,21 @@
         <%if (session != null){ %>
         <!-- Left categories -->
             <ul>
-                <li><a href="/estimate/"><i class="fa fa-file-text" aria-hidden="true"></i> Estimates</a></li>
-                <li><a href="/cases/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
-                <li><a href="/customer-mm/"><i class="fa fa-user" aria-hidden="true"></i> Customers</a></li>
-                <li><a href="/project-mm/"><i class="fa fa-archive" aria-hidden="true"></i> Projects Management</a></li>
-                <li><a href="/membership-mm/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
-                <%if (managerInfo!= null && managerInfo.getId()==4) {%>
+                <%if(permission.getEstimatePermission()) {%>
+                    <li><a href="/estimate/"><i class="fa fa-file-text" aria-hidden="true"></i> Estimates</a></li>
+                <%} if (permission.getCasePermission()) {%>
+                    <li><a href="/cases/"><i class="fa fa-pie-chart" aria-hidden="true"></i> Cases</a></li>
+                <%} if (permission.getCustomerPermission()) {%>
+                    <li><a href="/customer-mm/"><i class="fa fa-user" aria-hidden="true"></i> Customers</a></li>
+                <%} if (permission.getProjectsPermission()) {%>
+                    <li><a href="/project-mm/"><i class="fa fa-archive" aria-hidden="true"></i> Projects Management</a></li>
+                <%} if (permission.getStaffPermission()) {%>
+                    <li><a href="/membership-mm/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
+                <%} if (permission.getNoticePermission()) {%>
                     <li><a href="/notice/"><i class="fa fa-list" aria-hidden="true"></i> Notices</a></li>
+                <%} if (permission.getPermissionManagement()) {%>
+                    <li><a href="/permission/"><i class="fa fa-id-card" aria-hidden="true"></i> Permissions</a> </li>
                 <%}%>
-                <%--<li><a href=""><i class="fa fa-lock" aria-hidden="true"></i> Permissions</a></li>--%>
             </ul>
             <!-- #End Left categories -->
         <%}else{

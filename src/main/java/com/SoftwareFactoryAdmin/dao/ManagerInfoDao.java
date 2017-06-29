@@ -16,4 +16,6 @@ public interface ManagerInfoDao {
     void delete(ManagerInfo managerInfo);
 
     List<ManagerInfo> findAll();
+
+    List<ManagerInfo> findAllWithPermissions();
 }
