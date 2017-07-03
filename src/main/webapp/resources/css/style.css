@@ -2,7 +2,6 @@
 @import "base.css";
 @import "space.css";
 
-
 /* -------------------- Left information -------------------- */
 .logo {
     text-align: center;
@@ -139,6 +138,12 @@
     color: #fff;
 }
 
+.background-02 {
+    background: url("../images/opacity-03.png") repeat 0 0;
+    padding: 10px 10px;
+    color: #f2f2f2;
+}
+
 .table {
     margin-bottom: 0 !important;
 }
@@ -166,6 +171,7 @@
     border-radius: 0;
     background: url("../images/opacity-03.png") repeat 0 0;
     border: 1px solid #000;
+    text-transform: uppercase;
     color: #fff;
 }
 
@@ -191,6 +197,11 @@
     margin-bottom: 20px;
 }
 
+.message-centre {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .message-right:last-child {
     margin-bottom: 0;
 }
@@ -203,6 +214,11 @@
 .message-right {
     border: 1px solid #279293;
     margin-left: 50px;
+    margin-right: 10px;
+}
+
+.message-centre {
+    border: 1px solid #31BFC0;
 }
 
 .message-right .message-header {
@@ -231,6 +247,7 @@
     float: right;
     color: #999;
 }
+
 .message-right .message-header .date,
 .message-right .message-header .title {
     color: #31BFC0;
@@ -281,6 +298,7 @@
     background: url("../images/opacity-03.png") repeat 0 0;
     border: 1px solid #000;
     color: #fff;
+    text-transform: uppercase;
 }
 
 .sign-in .form-control:focus {
@@ -306,17 +324,19 @@
 /* -------------------- Modal window -------------------- */
 .modal {
     opacity: 0.8;
-    overflow-y: auto;
 }
+
 .modal-content {
     border-radius: 0;
     background: #222 url("../images/opacity.png") repeat 0 0;
     color: #fff;
 }
+
 .modal-content .modal-header .close {
     color: #fff;
     opacity: 1;
 }
+
 .modal-content .modal-header,
 .modal-content .modal-footer {
     border-color: #444;
@@ -326,14 +346,12 @@
     font-size: 12pt;
     text-transform: uppercase;
 }
-/* -------------------- #End Modal window -------------------- */
 
-.scrollable{
+/* -------------------- #End Modal window -------------------- */
+.scrollable {
     height: 500px !important;
     overflow-y: auto;
 }
-
-
 
 .ghost-button{
     border: medium none;
@@ -342,4 +360,96 @@
     color: #31BFC0;
 }
 
+/*--------------------my style----------------------*/
 
+textarea {
+    resize: none;
+    overflow-y: hidden;
+}
+
+.data-color {
+    color: #279293;
+}
+
+.data-comment {
+    color: #FFFFFF;
+}
+
+.line {
+    padding: 10px 10px;
+    color: white;
+    border-bottom: 1px solid #31BFC0;
+    display: block;
+    text-transform: uppercase;
+
+    font-size: 16pt;
+    line-height: 1;
+
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.row .data-comment {
+    text-align: center;
+    size: 15px;
+}
+
+.tab-content {
+    background-color: #303136;
+    color: #fff;
+    padding: 5px
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #31BFC0;
+}
+
+.nav-tabs > li > a {
+    border: medium none;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color: #fefefe;
+}
+
+.nav-tabs > li.active > a {
+    color: #000000;
+    background-color: #c1c1c1;
+}
+
+.scrollable {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+.horizontal-line {
+    border-left: 2px solid #ccc; /* Параметры линии */
+    margin-left: 20px; /* Отступ слева */
+    padding-left: 10px; /* Расстояние от линии до текста */
+}
+
+#text {
+    display: none;
+}
+
+.ghost-button {
+    border: medium none;
+    background-image: none;
+    background-color: transparent;
+    color: #31BFC0;
+}
+
+.text-hide {
+    display:none;
+    text-align:justify;
+}
+
+.text-show {
+    color: chocolate;
+}

@@ -161,6 +161,23 @@ function getCustomerInfo(customerId) {
     });
 }
 
+function getTranslate(commentId) {
+    $.ajax({
+        type: "GET",
+        data: "commentId=" + commentId,
+        /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
+        url: "http://localhost:8080/group/get-translate/",
+        dataType: "json",
+        success: function (data) {
+
+            if (data.translateComment != '') {
+                $('.linkToHide').remove();
+                document.getElementById('translateText').innerHTML = data.translateComment;
+            }
+        }
+    });
+}
+
 // CKEDITOR show
 CKEDITOR.replace('editor', {
     toolbar: 'Basic',
