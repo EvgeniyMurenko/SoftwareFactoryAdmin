@@ -39,7 +39,7 @@ public class ProjectTask implements Serializable {
     private Long id;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -67,13 +67,13 @@ public class ProjectTask implements Serializable {
     private Date reopenDate;
 
 
-    @OneToMany(mappedBy = "projectTask", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "projectTask", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TaskMessage> taskMessages;
 
 
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "s_project_task_staff_info",
             joinColumns = { @JoinColumn(name = "project_task_id") },
             inverseJoinColumns = { @JoinColumn(name = "staff_info_id") })

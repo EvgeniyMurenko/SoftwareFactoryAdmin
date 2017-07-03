@@ -20,10 +20,10 @@ import java.util.Date;
 public class SettingsController {
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {

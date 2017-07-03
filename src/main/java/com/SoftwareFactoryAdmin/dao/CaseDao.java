@@ -22,4 +22,8 @@ public interface CaseDao {
 
     List<Case> findCasesHundredLimit();
 
+    List<Case> findAllWhereUserIsNotDelete();
+
+    List<Case> findLimitThreeCase ();
+
 }

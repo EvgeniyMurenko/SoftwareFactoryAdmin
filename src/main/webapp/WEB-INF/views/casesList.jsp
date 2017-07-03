@@ -79,7 +79,7 @@
                     <tbody>
                     <%if (caseList.size()>0){%>
                         <%for (Case aCase :caseList){%>
-                            <%if (!aCase.getProject().getCustomerInfo().getUser().isDelete()){%>
+
                                 <tr>
                                     <td align="center"><%out.print(aCase.getId());%></td>
                                     <td><a href="<%out.print("/cases/" + aCase.getId()+"/");%>"><%out.print(aCase.getProjectTitle());%></a></td>
@@ -96,7 +96,7 @@
                                     <td align="center"><time class="timeago" datetime="<%out.print(aCase.getAppointmentTime());%>"></time></td>
                                     <td align="center"><%out.print(aCase.getMessages().size());%></td>
                                 </tr>
-                            <%}%>
+
                         <%}%>
                     <%}%>
 

@@ -19,4 +19,7 @@ public interface EstimateService {
 
     Estimate findEstimateByCustomerInfoId(Long id);
 
+    List<Estimate> findAllWhereUserIsNotDelete();
+
+
 }

@@ -18,8 +18,8 @@ public class EstimateDaoImpl implements EstimateDao {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public void setSessionFactory(SessionFactory sf) {
-        this.sessionFactory = sf;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -32,7 +32,9 @@ public class EstimateDaoImpl implements EstimateDao {
     @Override
     public Estimate read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct estimate from Estimate estimate left join fetch estimate.estimateLinks where estimate.id = :id");
+        Query query = session.createQuery("select distinct estimate from Estimate estimate " +
+                                            "left join fetch estimate.estimateLinks " +
+                                            "where estimate.id = :id");
         query.setParameter("id", id);
         return (Estimate) query.uniqueResult();
     }
@@ -63,5 +65,12 @@ public class EstimateDaoImpl implements EstimateDao {
         query.setParameter("id", id);
         return (Estimate) query.uniqueResult();
 
+    }
+
+    @Override
+    public List<Estimate> findAllWhereUserIsNotDelete() {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select estimate from Estimate estimate where estimate.customerInfo.user.isDelete =:state").setBoolean("state", Boolean.FALSE);
+        return query.list();
     }
 }

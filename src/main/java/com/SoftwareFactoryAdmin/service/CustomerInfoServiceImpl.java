@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
+@Transactional
 @Service("customerInfoService")
 public class CustomerInfoServiceImpl implements CustomerInfoService {
 
@@ -28,38 +28,32 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
 
     @Override
-    @Transactional
     public void addNewCustomerInfo(CustomerInfo customerInfo) {
         customerInfoDao.create(customerInfo);
     }
 
     @Override
-    @Transactional
     public void updateCustomerInfo(CustomerInfo customerInfo) {
         customerInfoDao.update(customerInfo);
     }
 
     @Override
-    @Transactional
     public void deleteCustomerInfo(CustomerInfo customerInfo) {
         customerInfoDao.delete(customerInfo);
     }
 
     @Override
-    @Transactional
     public List<CustomerInfo> getAllCustomerInfos() {
         return customerInfoDao.findAll();
     }
 
     @Override
-    @Transactional
     public CustomerInfo getCustomerInfoById(Long id) {
         CustomerInfo customerInfo = customerInfoDao.read(id);
         return customerInfo;
     }
 
     @Override
-    @Transactional
     public void updateCustomerInfoWithParameters(Long id, User user, ManagerInfo managerInfo, String password,
                                               String directorsName, String company, String directorsEmail,
                                               String directorsPhone, String companyType, String address,
@@ -126,5 +120,9 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         customerInfoDao.update(customerInfo);
     }
 
+    @Override
+    public List<CustomerInfo> findAllWhereUserIsNotDelete(){
+        return customerInfoDao.findAllWhereUserIsNotDelete();
+    }
 }
 

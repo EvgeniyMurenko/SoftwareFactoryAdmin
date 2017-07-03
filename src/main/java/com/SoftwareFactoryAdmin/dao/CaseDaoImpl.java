@@ -18,8 +18,8 @@ public class CaseDaoImpl implements CaseDao {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public void setSessionFactory(SessionFactory sf) {
-        this.sessionFactory = sf;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
 
@@ -33,7 +33,16 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public Case read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct aCase from Case aCase left join fetch aCase.messages message left join fetch message.messageLinks where aCase.id = :id");
+        Query query = session.createQuery("select distinct aCase from Case aCase " +
+                                            "left join fetch aCase.project pr " +
+                                            "left join fetch pr.managerInfo mi " +
+                                            "left join fetch mi.managerInfoPermissions " +
+                                            "left join fetch mi.user " +
+                                            "left join fetch pr.customerInfo ci " +
+                                            "left join fetch ci.user " +
+                                            "left join fetch aCase.messages message " +
+                                            "left join fetch message.messageLinks " +
+                                            "where aCase.id = :id");
         query.setParameter("id", id);
         return (Case) query.uniqueResult();
     }
@@ -54,7 +63,7 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public List<Case> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct aCase from Case aCase left join fetch aCase.messages");
+        Query query = session.createQuery(" from Case");
         return query.list();
     }
 
@@ -77,10 +86,36 @@ public class CaseDaoImpl implements CaseDao {
     @Override
     public List<Case> findCasesHundredLimit() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct aCase from Case aCase  order by aCase.creationDate desc ");
-
+        Query query = session.createQuery("select distinct aCase from Case aCase " +
+                                            "order by aCase.creationDate desc ");
         query.setMaxResults(100);
         return query.list();
+    }
+
+
+    @Override
+    public List<Case> findAllWhereUserIsNotDelete() {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct aCase from Case aCase " +
+                                            "left join fetch aCase.project p " +
+                                            "left join fetch aCase.messages " +
+                                            "left join fetch p.customerInfo ci " +
+                                            "left  join  fetch  ci.user u " +
+                                            "where u.isDelete =:state").setBoolean("state", Boolean.FALSE);
+        return query.list();
+
+    }
+
+    @Override
+    public List<Case> findLimitThreeCase (){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct aCase from Case aCase " +
+                                            "left join fetch aCase.messages " +
+                                            "left join fetch aCase.project "+
+                                            "order by date(aCase.creationDate) desc ");
+        query.setMaxResults(3);
+        return query.list();
+
     }
 
 }

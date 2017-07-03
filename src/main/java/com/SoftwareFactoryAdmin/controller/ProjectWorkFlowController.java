@@ -24,28 +24,23 @@ import java.util.List;
 public class ProjectWorkFlowController {
 
     @Autowired
-    ProjectService projectService;
+    private ProjectService projectService;
 
     @Autowired
-    ProjectTaskService projectTaskService;
+    private ProjectTaskService projectTaskService;
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private TaskMessageService taskMessageService;
 
     @Autowired
-    TaskMessageService taskMessageService;
-
-    @Autowired
-    StaffInfoService staffInfoService;
+    private StaffInfoService staffInfoService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView showWorkFlow(@PathVariable(value = "id") Long id) {
 
         ModelAndView projectsWorkFlow = new ModelAndView("projectWorkFlow");
 
-        Project project = projectService.getProjectById(id);
-
-        projectsWorkFlow.addObject("project", project);
+        projectsWorkFlow.addObject("project", projectService.getProjectById(id));
 
         return projectsWorkFlow;
     }
@@ -82,9 +77,7 @@ public class ProjectWorkFlowController {
 
         ModelAndView startNewTask = new ModelAndView("projectTaskStart");
 
-        Project project = projectService.getProjectById(id);
-
-        startNewTask.addObject("project", project);
+        startNewTask.addObject("project", projectService.getProjectById(id));
 
         return startNewTask;
 
@@ -137,9 +130,7 @@ public class ProjectWorkFlowController {
 
         ModelAndView selectStaffToTask = new ModelAndView("selectStaffToTask");
 
-        ProjectTask projectTask = projectTaskService.getProjectTaskById(id);
-
-        selectStaffToTask.addObject("projectTask", projectTask);
+        selectStaffToTask.addObject("projectTask", projectTaskService.getProjectTaskById(id));
 
         return selectStaffToTask;
     }

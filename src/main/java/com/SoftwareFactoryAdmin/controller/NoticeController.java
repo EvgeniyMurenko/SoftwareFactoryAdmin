@@ -26,10 +26,8 @@ import java.util.*;
 public class NoticeController {
 
     @Autowired
-    NoticeService noticeService;
+    private NoticeService noticeService;
 
-    @Autowired
-    ManagerInfoService managerInfoService;
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView noticesList() {

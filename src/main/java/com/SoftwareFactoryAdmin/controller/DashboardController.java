@@ -29,16 +29,11 @@ import java.util.List;
 public class DashboardController {
 
     @Autowired
-    EstimateService estimateService;
+    private EstimateService estimateService;
 
     @Autowired
-    CaseService caseService;
+    private CaseService caseService;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView dashboardView() {
@@ -46,7 +41,7 @@ public class DashboardController {
         ModelAndView dashboardView = new ModelAndView("dashboard");
 
         List<Estimate> estimateList = estimateService.getAllEstimates();
-        List<Case> caseList = caseService.getAllCases();
+        List<Case> caseList = caseService.findLimitThreeCase();
 
         Collections.sort(estimateList, new EstimateByDateComparator());
         Collections.sort(caseList, new CaseByDateComporator());

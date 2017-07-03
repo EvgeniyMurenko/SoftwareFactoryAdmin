@@ -17,4 +17,6 @@ public interface CustomerInfoDao {
 
     List<CustomerInfo> findAll();
 
+    List<CustomerInfo> findAllWhereUserIsNotDelete();
+
 }

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PermissionController {
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView permissionList() {

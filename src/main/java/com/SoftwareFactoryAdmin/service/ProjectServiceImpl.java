@@ -43,4 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
     public Project getProjectById(Long id) {
         return projectDao.read(id);
     }
+
+    @Override
+    public List<Project> findAllWhereUserIsNotDelete() {return projectDao.findAllWhereUserIsNotDelete();}
 }

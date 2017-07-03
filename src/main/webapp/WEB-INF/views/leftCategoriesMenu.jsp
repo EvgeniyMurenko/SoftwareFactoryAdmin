@@ -16,7 +16,8 @@
     <aside class="sidebar-nav">
 
         <!-- Logo -->
-        <div class="logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
+
+        <div class="logo"><a href="/dashboard/">소프트웨어<span>팩토리</span></a></div>
         <!-- #End Logo -->
 
         <!-- Customer -->

@@ -84,7 +84,7 @@
                     <tbody>
 
                     <%for (CustomerInfo customerInfo: customerInfoArrayList){%>
-                        <%if (customerInfo.isFullCreated() && !customerInfo.getUser().isDelete()) {%>
+
                             <%String editCustomerInfoUrl = "/customer-mm/edit-customer/" + customerInfo.getId();%>
                             <%String customerInfoHistory = "/customer-mm/history/" + customerInfo.getId();%>
                             <!-- Items list -->
@@ -132,7 +132,7 @@
                                 </td>
                             </tr>
                         <%}%>
-                    <%}%>
+
                 </table>
             </div>
         </section>

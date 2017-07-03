@@ -37,22 +37,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class AppController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserProfileService userProfileService;
+    private UserProfileService userProfileService;
 
     @Autowired
-    MessageSource messageSource;
+    private PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
     @Autowired
-    PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
-
-    @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;
-
-    @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
 
 

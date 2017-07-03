@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProjectDao {
 
-    public Long create(Project project);
+    Long create(Project project);
 
     Project read(Long id);
 
@@ -16,5 +16,7 @@ public interface ProjectDao {
     void delete(Project project);
 
     List<Project> findAll();
+
+    List<Project> findAllWhereUserIsNotDelete();
 
 }

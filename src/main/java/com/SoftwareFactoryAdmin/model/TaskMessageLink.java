@@ -24,7 +24,7 @@ public class TaskMessageLink  implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_message_id")
     private TaskMessage taskMessage;
 

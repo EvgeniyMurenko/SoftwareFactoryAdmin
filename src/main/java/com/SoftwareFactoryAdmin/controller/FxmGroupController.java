@@ -29,22 +29,19 @@ import static com.SoftwareFactoryAdmin.constant.AppRequestEnum.*;
 public class FxmGroupController {
 
     @Autowired
-    FxmPostService fxmPostService;
+    private FxmPostService fxmPostService;
 
     @Autowired
-    FxmCommentService fxmCommentService;
+    private FxmCommentService fxmCommentService;
 
     @Autowired
-    UserService userService;
+    private PushNotificationService pushNotificationService;
 
     @Autowired
-    PushNotificationService pushNotificationService;
+    private GoogleCloudKeyService googleCloudKeyService;
 
     @Autowired
-    GoogleCloudKeyService googleCloudKeyService;
-
-    @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
 
     @ResponseBody

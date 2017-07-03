@@ -18,4 +18,6 @@ public interface  EstimateDao {
 
     Estimate findEstimateByCustomerInfoId(Long id);
 
+    List<Estimate> findAllWhereUserIsNotDelete();
+
 }

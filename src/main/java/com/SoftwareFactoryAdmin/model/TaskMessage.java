@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.model;
 
 
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -31,12 +32,12 @@ public class TaskMessage  implements Serializable {
     private Long id;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_task_id")
     private ProjectTask projectTask;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -53,7 +54,7 @@ public class TaskMessage  implements Serializable {
     private String senderName;
 
 
-    @OneToMany(mappedBy = "taskMessage", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "taskMessage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TaskMessageLink> taskMessageLinks;
 
     public Long getId() {

@@ -18,7 +18,7 @@ import java.util.List;
 public class ManagerManagementController {
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView customerList() {

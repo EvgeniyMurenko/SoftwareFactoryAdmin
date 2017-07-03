@@ -20,26 +20,20 @@ import java.util.*;
 public class MembershipManagementController {
 
     @Autowired
-    StaffInfoService staffInfoService;
+    private StaffInfoService staffInfoService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ManagerInfoService managerInfoService;
-
-    @Autowired
-    StaffHistoryService staffHistoryService;
-
+    private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView customerList() {
 
         ModelAndView staffList = new ModelAndView("staffList");
 
-        List<StaffInfo> staffInfoList = staffInfoService.getAllStaffInfos();
-
-        staffList.addObject("staffList", staffInfoList);
+        staffList.addObject("staffList", staffInfoService.findAllWhereStaffIsNotDelete());
 
         return staffList;
     }

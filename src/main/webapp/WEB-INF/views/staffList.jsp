@@ -97,7 +97,7 @@
                     <%List <StaffInfo> staffInfoList =  (List<StaffInfo>)request.getAttribute("staffList");%>
                     <%if (staffInfoList.size()>0){%>
                         <%for (StaffInfo staffInfo : staffInfoList){%>
-                            <%if (!staffInfo.getUser().isDelete()){%>
+
                                 <tr>
                                     <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
                                     <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
@@ -121,7 +121,7 @@
                                 </tr>
                             <%}%>
                         <%}%>
-                    <%}%>
+
                     </tbody>
                     <!-- #End Items list -->
 

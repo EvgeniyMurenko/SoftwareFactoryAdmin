@@ -31,22 +31,20 @@ import static com.SoftwareFactoryAdmin.constant.AppRequestEnum.*;
 public class FxmApplicationController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
     @Autowired
-    GoogleCloudKeyService googleCloudKeyService;
+    private GoogleCloudKeyService googleCloudKeyService;
 
    /* @Autowired
     MessageTaskService messageTaskService;*/
 
     @Autowired
-    CaseService caseService;
+    private CaseService caseService;
 
-    @Autowired
-    UserDetailsService userDetailsService;
 
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)

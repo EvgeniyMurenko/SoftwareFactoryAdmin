@@ -69,7 +69,6 @@
 
                             ArrayList<TaskMessage> taskMessages = new ArrayList<>(projectTask.getTaskMessages());
                             Collections.sort(taskMessages , new TaskMessageByDateComparator());
-
                             SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
                         %>

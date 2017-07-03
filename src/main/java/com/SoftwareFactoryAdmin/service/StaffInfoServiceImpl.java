@@ -131,5 +131,8 @@ public class StaffInfoServiceImpl implements StaffInfoService {
         staffInfoDao.update(staffInfo);
     }
 
+    public List<StaffInfo> findAllWhereStaffIsNotDelete(){
+        return staffInfoDao.findAllWhereStaffIsNotDelete();
+    }
 }
 

@@ -59,7 +59,9 @@ public class ManagerInfoDaoImpl implements ManagerInfoDao {
     @Override
     public List<ManagerInfo> findAllWithPermissions(){
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct managerInfo from ManagerInfo managerInfo left outer join managerInfo.managerInfoPermissions");
+        Query query = session.createQuery("select distinct managerInfo from ManagerInfo managerInfo " +
+                "left join fetch managerInfo.user " +
+                "left join fetch managerInfo.managerInfoPermissions");
         return query.list();
     }
 }

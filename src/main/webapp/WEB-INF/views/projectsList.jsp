@@ -84,7 +84,7 @@
                     <%ArrayList<Project> projectArrayList = (ArrayList<Project>) request.getAttribute("projectsList");%>
                     <%if (projectArrayList.size()>0){%>
                         <%for (Project project : projectArrayList) {%>
-                            <%if (!project.getCustomerInfo().getUser().isDelete()){%>
+
                                 <tr>
                                     <td align="center"><%out.print(project.getId());%></td>
                                     <td align="center"><a href="<%out.print("/project-mm/view-project/"+project.getId()+"/");%>">
@@ -110,7 +110,7 @@
                                 </tr>
                             <%}%>
                         <%}%>
-                    <%}%>
+
                     </tbody>
                     <!-- #End Items list -->
 

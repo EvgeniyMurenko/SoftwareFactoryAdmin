@@ -17,4 +17,6 @@ public interface ProjectService {
 
     Project getProjectById(Long id);
 
+    List<Project> findAllWhereUserIsNotDelete();
+
 }

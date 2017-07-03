@@ -17,4 +17,5 @@ public interface StaffInfoDao {
 
     List<StaffInfo> findAll();
 
+    List<StaffInfo> findAllWhereStaffIsNotDelete();
 }

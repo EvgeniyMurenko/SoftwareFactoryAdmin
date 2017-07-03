@@ -1,14 +1,9 @@
 package com.SoftwareFactoryAdmin.dao;
 
 import com.SoftwareFactoryAdmin.model.CustomerInfo;
-import com.SoftwareFactoryAdmin.model.User;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +16,8 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public void setSessionFactory(SessionFactory sf) {
-        this.sessionFactory = sf;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
 
@@ -35,10 +30,6 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
 
     @Override
     public CustomerInfo read(Long id) {
-  /*      Criteria criteria = sessionFactory.getCurrentSession().createCriteria(CustomerInfo.class);
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        criteria.add(Restrictions.eq("id", id));
-        CustomerInfo customerInfo = (CustomerInfo)criteria.uniqueResult();*/
         Session session = sessionFactory.getCurrentSession();
         CustomerInfo customerInfo = (CustomerInfo) session.get(CustomerInfo.class, id);
         return customerInfo;
@@ -60,6 +51,13 @@ public class CustomerInfoDaoImpl implements CustomerInfoDao {
     public List<CustomerInfo> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Query query =  session.createQuery("from CustomerInfo");
+        return query.list();
+    }
+
+    @Override
+    public List<CustomerInfo> findAllWhereUserIsNotDelete(){
+        Session session = sessionFactory.getCurrentSession();
+        Query query =  session.createQuery("select distinct customerInfo from CustomerInfo customerInfo left join fetch customerInfo.user  u where u.isDelete =:state").setBoolean("state", Boolean.FALSE);
         return query.list();
     }
 }

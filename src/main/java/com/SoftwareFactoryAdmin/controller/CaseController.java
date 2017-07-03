@@ -25,38 +25,26 @@ import java.util.Set;
 public class CaseController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private MessageService messageService;
 
     @Autowired
-    MessageService messageService;
+    private CaseService caseService;
 
     @Autowired
-    CaseService caseService;
+    private ProjectService projectService;
 
     @Autowired
-    ProjectService projectService;
-
-    @Autowired
-    MailService mailService;
-
-    @Autowired
-    PushNotificationService pushNotificationService;
-
-    @Autowired
-    GoogleCloudKeyService googleCloudKeyService;
-
-    @Autowired
-    NoticeLinkService noticeLinkService;
+    private MailService mailService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {
 
         ModelAndView managerAdminCabinetCase = new ModelAndView("casesList");
-        List<Case> caseArrayList = caseService.getAllCases();
+        List<Case> caseArrayList = caseService.findAllWhereUserIsNotDelete();
 
         managerAdminCabinetCase.addObject("cases", caseArrayList);
 
@@ -69,9 +57,6 @@ public class CaseController {
 
         Case aCase = caseService.getCaseById(caseId);
         managerAdminCaseRespond.addObject("case", aCase);
-
-       /* ManagerInfo managerInfoByCase = managerInfoService.getManagerInfoById(aCase.getUserManagerId());
-        managerAdminCaseRespond.addObject("managerInfoByCase", managerInfoByCase);*/
 
         return managerAdminCaseRespond;
     }
@@ -123,14 +108,6 @@ public class CaseController {
 
         String registrationLink = "www.sofac.kr";
         mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message, customer, registrationLink);
-
-/*        List<StaffInfo> staffInfoList = staffInfoService.getAllStaffInfo();
-        for (StaffInfo staffInfo : staffInfoList){
-            List<String> keys = new ArrayList<>(googleCloudKeyService.findAllKeysByStaff(staffInfo.getId()));
-            if (keys.size()>0){
-                notificationService.pushNotificationToGCM(keys, message.getMessageText(),aCase.getProjectTitle());
-            }
-        }*/
 
         return new ModelAndView("redirect:/cases/" + id);
     }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@Transactional
 @Service("estimateService")
 public class EstimateServiceImpl implements EstimateService {
 
@@ -20,38 +20,37 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     @Override
-    @Transactional
     public void addNewEstimate(Estimate estimate) {
         estimateDao.create(estimate);
     }
 
     @Override
-    @Transactional
     public void updateEstimate(Estimate estimate) {
         estimateDao.update(estimate);
     }
 
     @Override
-    @Transactional
     public void deleteEstimate(Estimate estimate) {
         estimateDao.delete(estimate);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Estimate> getAllEstimates() {
         return estimateDao.findAll();
     }
 
     @Override
-    @Transactional
     public Estimate getEstimateById(long estimateId) {
         return estimateDao.read(estimateId);
     }
 
     @Override
-    @Transactional
     public Estimate findEstimateByCustomerInfoId(Long id) {
         return estimateDao.findEstimateByCustomerInfoId(id);
+    }
+
+    @Override
+    public List<Estimate> findAllWhereUserIsNotDelete(){
+        return estimateDao.findAllWhereUserIsNotDelete();
     }
 }

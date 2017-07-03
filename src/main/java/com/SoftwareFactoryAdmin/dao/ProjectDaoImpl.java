@@ -34,8 +34,12 @@ public class ProjectDaoImpl implements ProjectDao {
     @Override
     public Project read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Project project = (Project) session.get(Project.class, id);
-        return project;
+        Query query = session.createQuery("select distinct project from Project project " +
+                "left join fetch project.projectTasks " +
+                "left join fetch project.customerInfo " +
+                "where project.id = :id");
+        query.setParameter("id", id);
+        return (Project) query.uniqueResult();
     }
 
     @Override
@@ -55,5 +59,18 @@ public class ProjectDaoImpl implements ProjectDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Project");
         return query.list();
+    }
+
+    @Override
+    public List<Project> findAllWhereUserIsNotDelete(){
+        Session session = sessionFactory.getCurrentSession();
+        Query query =  session.createQuery("select distinct project from Project project " +
+                                            "left join fetch  project.managerInfo mi " +
+                                            "left join fetch mi.managerInfoPermissions " +
+                                            "left join fetch project.customerInfo ci " +
+                                            "left join fetch ci.user u " +
+                                            "where project.customerInfo.user.isDelete =:state").setBoolean("state", Boolean.FALSE);
+        return query.list();
+
     }
 }

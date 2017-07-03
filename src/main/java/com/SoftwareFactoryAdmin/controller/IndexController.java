@@ -27,18 +27,7 @@ public class IndexController {
 
 
     @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;
-
-    @Autowired
-    EstimateService estimateService;
-
-
-    @Autowired
-    UserService userService;
-
-
-    @Autowired
-    UserProfileService userProfileService;
+    private AuthenticationTrustResolver authenticationTrustResolver;
 
 
     @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)

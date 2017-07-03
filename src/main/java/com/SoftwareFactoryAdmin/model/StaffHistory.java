@@ -36,7 +36,7 @@ public class StaffHistory implements Serializable {
     private Date date;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "staff_info_id")
     private StaffInfo staffInfo;
 

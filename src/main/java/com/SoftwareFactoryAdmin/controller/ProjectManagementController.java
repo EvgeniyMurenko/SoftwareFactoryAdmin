@@ -27,31 +27,29 @@ import java.util.List;
 public class ProjectManagementController {
 
     @Autowired
-    ProjectService projectService;
+    private ProjectService projectService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    CustomerInfoService customerInfoService;
+    private CustomerInfoService customerInfoService;
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {
 
         ModelAndView projects = new ModelAndView("projectsList");
 
-        List<Project> projectInfoList = projectService.getAllProjects();
-        projects.addObject("projectsList", projectInfoList);
+        projects.addObject("projectsList", projectService.findAllWhereUserIsNotDelete());
 
         return projects;
     }
 
     @RequestMapping(value = "/add-project/{customerId}", method = RequestMethod.GET)
     public ModelAndView addProject(@PathVariable Long customerId) {
-        System.out.println("=============== customer id " + customerId);
 
         User customerUser = userService.findById(customerId);
 
@@ -224,7 +222,6 @@ public class ProjectManagementController {
     @ResponseBody
     @RequestMapping(value = "/show-customer-info", method = RequestMethod.GET)
     public String updateProject(@RequestParam("customerId") Long customerId){
-        System.out.println("==============start");
 
         CustomerInfo customerInfo = customerInfoService.getCustomerInfoById(customerId);
 

@@ -26,10 +26,7 @@ import java.util.*;
 public class CustomerManagementController {
 
     @Autowired
-    CustomerInfoService customerInfoService;
-
-    @Autowired
-    EstimateService estimateService;
+    private CustomerInfoService customerInfoService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -37,9 +34,7 @@ public class CustomerManagementController {
 
         ModelAndView customersList = new ModelAndView("customersList");
 
-        List<CustomerInfo> customerInfoList = customerInfoService.getAllCustomerInfos();
-
-        customersList.addObject("customersList", customerInfoList);
+        customersList.addObject("customersList", customerInfoService.findAllWhereUserIsNotDelete());
 
         return customersList;
     }

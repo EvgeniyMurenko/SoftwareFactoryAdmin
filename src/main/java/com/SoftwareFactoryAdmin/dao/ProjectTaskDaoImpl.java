@@ -30,8 +30,16 @@ public class ProjectTaskDaoImpl implements ProjectTaskDao {
     @Override
     public ProjectTask read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        ProjectTask projectTask = (ProjectTask) session.get(ProjectTask.class, id);
-        return projectTask;
+        Query query = session.createQuery("select distinct projectTask from ProjectTask projectTask " +
+                "left join fetch projectTask.project " +
+                "left join fetch projectTask.taskMessages m " +
+                "left join fetch  m.user u " +
+                "left join fetch u.userProfiles " +
+                "left join fetch m.taskMessageLinks " +
+                "left join fetch projectTask.staffInfos si " +
+                "where projectTask.id = :id");
+        query.setParameter("id", id);
+        return (ProjectTask) query.uniqueResult();
     }
 
     @Override

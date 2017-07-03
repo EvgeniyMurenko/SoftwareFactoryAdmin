@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Transactional
 @Service("caseService")
 public class CaseServiceImpl implements CaseService {
 
@@ -21,54 +21,54 @@ public class CaseServiceImpl implements CaseService {
     }
 
     @Override
-    @Transactional
     public void addNewCase(Case aCase) {
         caseDao.create(aCase);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Case> getAllCases() {
         return caseDao.findAll();
     }
 
     @Override
-    @Transactional
     public Case getCaseById(Long id) {
-        Case aCase = caseDao.read(id);
-        return aCase;
+        return caseDao.read(id);
     }
 
     @Override
-    @Transactional
     public List<Case> findByField(String title, String projectName) {
         ArrayList<Case> cases = new ArrayList<>();
-        if (!title.equals("")){
+        if (!title.equals("")) {
             cases.addAll(caseDao.findByTitle(title));
         }
         if (!projectName.equals("")) {
             cases.addAll(caseDao.findByProjectName(projectName));
         }
-        return cases ;
+        return cases;
     }
 
     @Override
-    @Transactional
     public void updateCase(Case aCase) {
         caseDao.update(aCase);
     }
 
     @Override
-    @Transactional
     public void deleteCase(Case aCase) {
         caseDao.delete(aCase);
     }
 
     @Override
-    @Transactional
-    public List<Case> getCasesHundredLimit(){
+    public List<Case> getCasesHundredLimit() {
         return caseDao.findCasesHundredLimit();
     }
 
+    @Override
+    public List<Case> findAllWhereUserIsNotDelete() {
+        return caseDao.findAllWhereUserIsNotDelete();
+    }
 
+    @Override
+    public List<Case> findLimitThreeCase() {
+        return caseDao.findLimitThreeCase();
+    }
 }

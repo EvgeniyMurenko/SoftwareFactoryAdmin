@@ -52,4 +52,14 @@ public class StaffInfoDaoImpl implements StaffInfoDao {
         Query query = session.createQuery("from StaffInfo");
         return query.list();
     }
+
+    @Override
+    public List<StaffInfo> findAllWhereStaffIsNotDelete(){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct staff from StaffInfo staff " +
+                "left  join  fetch  staff.user u " +
+                "where u.isDelete =:state").setBoolean("state", Boolean.FALSE);
+        return query.list();
+
+    }
 }

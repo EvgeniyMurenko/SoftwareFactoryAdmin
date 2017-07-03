@@ -22,36 +22,29 @@ import java.util.*;
 public class EstimateController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    EstimateService estimateService;
+    private EstimateService estimateService;
 
     @Autowired
-    ManagerInfoService managerInfoService;
+    private MessageService messageService;
 
     @Autowired
-    MessageService messageService;
+    private ProjectService projectService;
 
     @Autowired
-    ProjectService projectService;
+    private MailService mailService;
 
     @Autowired
-    MailService mailService;
-
-    @Autowired
-    CaseService caseService;
+    private CaseService caseService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetEstimate() {
 
         ModelAndView adminCabinetEstimate = new ModelAndView("/estimatesList");
-        List<Estimate> estimates = estimateService.getAllEstimates();
-
-        // SORT BY DATE
-        EstimateByDateComparator estimateByDateComparator = new EstimateByDateComparator();
-        Collections.sort(estimates, estimateByDateComparator);
+        List<Estimate> estimates = estimateService.findAllWhereUserIsNotDelete();
 
         adminCabinetEstimate.addObject("estimates", estimates);
 

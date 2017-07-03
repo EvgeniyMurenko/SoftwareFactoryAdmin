@@ -27,4 +27,6 @@ public interface CustomerInfoService {
                                           String directorsName, String company, String directorsEmail,
                                           String directorsPhone, String companyType, String address,
                                           String website, String name, String email, String phone, String accountType);
+
+    List<CustomerInfo> findAllWhereUserIsNotDelete();
 }
