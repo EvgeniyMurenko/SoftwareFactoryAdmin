@@ -3,7 +3,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.model.*" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="com.SoftwareFactoryAdmin.util.FxmPostFile" %>
-<%@ page import="com.SoftwareFactoryAdmin.constant.MainPathEnum" %>
+<%@ page import="com.SoftwareFactoryAdmin.constant.GlobalEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -38,7 +38,6 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-        <%List<FxmPost> postList = (List<FxmPost>) request.getAttribute("postList");%>
         <%List<FxmPostFile> fxmPostFileList = (List<FxmPostFile>) request.getAttribute("fxmPostFileList");%>
         <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
@@ -115,7 +114,7 @@
                                                             <div class="col-sm-12 mt10 mb10">
                                                                 <%for (String fileName : fxmPostFile.getFileList()){%>
                                                                     <div class="btn-my-link">
-                                                                        <a href="<%out.print(MainPathEnum.mainPath + "/post/"+fileName);%>"><i class="fa fa-paperclip" aria-hidden="true"></i>
+                                                                        <a href="<%out.print("/get-file/post/"+fileName);%>" target='_blank'> <i class="fa fa-paperclip" aria-hidden="true"></i>
                                                                             Attach file</a>
                                                                     </div>
                                                                 <%}%>
@@ -127,48 +126,37 @@
                                                         <div class="gallery">
                                                             <div class="row">
                                                                 <div class="col-md-12 gallery-position">
-                                                                    <a href="file/2.jpg" data-fancybox="gallery">
-                                                                        <img src="file/2.jpg" class="img-responsive">
+                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" data-fancybox="gallery">
+                                                                        <img src="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" class="img-responsive">
                                                                     </a>
 
-                                                                    <span class="gallery-count">+7</span>
+                                                                    <span class="gallery-count"><%out.print("+"+fxmPostFile.getImageList().size());%></span>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div style="display: none !important; visibility: hidden !important;">
-                                                            <a href="file/6.jpg" data-fancybox="gallery">
-                                                                <img src="file/6.jpg" class="img-responsive">
-                                                            </a>
-
-                                                            <a href="file/2.jpg" data-fancybox="gallery">
-                                                                <img src="file/2.jpg" class="img-responsive">
-                                                            </a>
-
-                                                            <a href="file/3.jpg" data-fancybox="gallery">
-                                                                <img src="file/3.jpg" class="img-responsive">
-                                                            </a>
-
-                                                            <a href="file/4.jpg" data-fancybox="gallery">
-                                                                <img src="file/4.jpg" class="img-responsive">
-                                                            </a>
-
-                                                            <a href="file/5.jpg" data-fancybox="gallery">
-                                                                <img src="file/5.jpg" class="img-responsive">
-                                                            </a>
+                                                            <%if (fxmPostFile.getImageList().size()>1){%>
+                                                                <%for (int i = 1; i < fxmPostFile.getImageList().size(); i++){%>
+                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="gallery">
+                                                                        <img src="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" class="img-responsive">
+                                                                    </a>
+                                                                <%}%>
+                                                            <%}%>
                                                         </div>
-
                                                     <%}%>
 
-
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <video class="image-div" controls>
-                                                                <source src="file/test.mp4">
-                                                            </video>
+                                                    <%if (fxmPostFile.getVideoList().size()>0){%>
+                                                        <div class="row">
+                                                            <%for (String fileName : fxmPostFile.getVideoList()){%>
+                                                                <div class="col-sm-12">
+                                                                    <video class="image-div" controls>
+                                                                        <source src="<%out.print("/get-file/post/"+fileName);%>">
+                                                                    </video>
+                                                                </div>
+                                                            <%}%>
                                                         </div>
-                                                    </div>
-
+                                                    <%}%>
 
                                                 </div>
 
@@ -180,103 +168,33 @@
                                     <span class="line"></span>
 
                                     <div class="row data-comment" align="centre">
-                                        <i class="fa fa-commenting" aria-hidden="true"></i> Comments: 4
+                                        <i class="fa fa-commenting" aria-hidden="true"></i> Comments: <%out.print(fxmPostFile.getFxmPost().getFxmComments().size());%>
                                     </div>
 
                                     <!-- View comments-->
 
-                                    <div class="row mt10">
-                                        <div class="col-sm-12">
-                                            <div class="background-02">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                            <span class="content">
-                                                                <a href="">Kass</a>
-                                                            </span>
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                        톨막심도 알고 있습니다.<br>
-                                                        빅막심도 알고 있습니다.<br>
-                                                        올가도 정확히 들었습니다.<br>
-                                                        나는 웹사이트에 올라 오기를 원한다고... <br><br/>
-
-                                                        <a href="#" id="showHideContent">Показать/Скрыть</a>
-
-                                                        <div id="content" style="display:none;">Содержание, которое скрыто
-                                                            по-умолчанию. Покажется/скроется при клике на одну и ту же ссылку.
-                                                        </div>
-
-
-                                                        <div class="data-color" align="right">27.06.2017 22:22</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt10">
-                                        <div class="col-sm-12">
-                                            <div class="background-02">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <span class="content">
-                                                            <a href="">Kass</a>
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        톨막심도 알고 있습니다.<br>
-                                                        빅막심도 알고 있습니다.<br>
-                                                        올가도 정확히 들었습니다.<br>
-                                                        나는 웹사이트에 올라 오기를 원한다고... <br>
-                                                    </div>
-                                                    <div class="col-sm-1" align="right">
-                                                        <i class="fa fa-exchange" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="data-color" align="right">27.06.2017 22:22</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt10">
-                                        <div class="col-sm-12">
-                                            <div class="background-02">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                            <span class="content">
-                                                                <a href="">바다 </a>
-                                                            </span>
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                        У меня есть вопрос ... в пятницу я попросил Ольгу загрузить SFCAFE
-                                                        веб-сайт на первую страницу. <br>
-                                                        Я хочу знать почему ее там нет. <br>
-
-                                                        <div class="data-color" align="right">27.06.2017 22:22</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt10">
-                                        <div class="col-sm-12">
-                                            <div class="background-02">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
+                                    <%if (fxmPostFile.getFxmPost().getFxmComments().size()>0){%>
+                                        <%for (FxmComment comment :fxmPostFile.getFxmPost().getFxmComments()){%>
+                                            <div class="row mt10">
+                                                <div class="col-sm-12">
+                                                    <div class="background-02">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
                                                                 <span class="content">
-                                                                    <a href="">바다 </a>
+                                                                    <a href=""><%out.print(comment.getUserName());%></a>
                                                                 </span>
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                        Эта работа должна быть начата на этой неделе.<br>
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <%out.print(comment.getCommentText());%>
 
-                                                        <div class="data-color" align="right">27.06.2017 22:22</div>
+                                                                <div class="data-color" align="right"><%out.print(dateFormatShow.format(comment.getDate()));%></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        <%}%>
+                                    <%}%>
 
                                     <!-- END View comment-->
 
@@ -298,12 +216,8 @@
                                         </div>
                                     </div>
                                     <!-- END Create new commnet-->
-
                                 </div>
-
                             </div>
-                            <!-- END View post-->
-
                         </div>
                     </div>
                     <!-- END View post-->

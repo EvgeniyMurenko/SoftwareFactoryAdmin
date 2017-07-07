@@ -1,5 +1,6 @@
 package com.SoftwareFactoryAdmin.controller;
 
+import com.SoftwareFactoryAdmin.comparator.FxmPostByDateComporator;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.FxmPostService;
@@ -43,6 +44,8 @@ public class GroupController {
 
         List<FxmPost> postList = fxmPostService.getAllFxmPosts();
 
+        Collections.sort(postList, new FxmPostByDateComporator());
+
         List<FxmPostFile> fxmPostFileList = new ArrayList<>();
 
         for (FxmPost fxmPost: postList){
@@ -50,7 +53,6 @@ public class GroupController {
             fxmPostFileList.add(fxmPostFile);
         }
 
-        getShowGroup.addObject("postList", postList);
         getShowGroup.addObject("fxmPostFileList", fxmPostFileList);
         return getShowGroup;
     }
