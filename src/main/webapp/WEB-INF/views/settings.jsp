@@ -27,7 +27,7 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <%--<%ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>--%>
+
     <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
     <%@ include file="leftCategoriesMenu.jsp" %>
@@ -49,7 +49,7 @@
 
                     <div class="form-group">
                         <%String name = "";%>
-                        <%if (managerInfo.getName()!= null) name = managerInfo.getName();%>
+                        <%if (currentManagerInfo.getName()!= null) name = currentManagerInfo.getName();%>
                         <label class="col-sm-3 control-label">Name</label>
                         <div class="col-sm-9">
                             <input type="text" name="name" class="form-control" value="<%out.print(name);%>" required/>
@@ -58,7 +58,7 @@
 
                     <div class="form-group">
                         <%String phone = "";%>
-                        <%if (managerInfo.getPhone()!=null) phone = managerInfo.getPhone();%>
+                        <%if (currentManagerInfo.getPhone()!=null) phone = currentManagerInfo.getPhone();%>
                         <label class="col-sm-3 control-label">Phone</label>
                         <div class="col-sm-9">
                             <input type="text" name="phone" class="form-control" value="<%out.print(phone);%>"/>
@@ -67,7 +67,7 @@
 
                     <div class="form-group">
                         <%String email = "";%>
-                        <%if (managerInfo.getEmail()!= null) email = managerInfo.getEmail();%>
+                        <%if (currentManagerInfo.getEmail()!= null) email = currentManagerInfo.getEmail();%>
                         <label class="col-sm-3 control-label">E-mail</label>
                         <div class="col-sm-9">
                             <input type="email" name="email" class="form-control" value="<%out.print(email);%>" required/>
@@ -76,7 +76,7 @@
 
                     <div class="form-group">
                         <%String birthday = "";%>
-                        <%if (managerInfo.getBirthday() != null) birthday = dateFormatShow.format(managerInfo.getBirthday());%>
+                        <%if (currentManagerInfo.getBirthday() != null) birthday = dateFormatShow.format(currentManagerInfo.getBirthday());%>
                         <!-- Appointment time -->
                         <label class="col-sm-3 control-label">Birthday</label>
                         <div class="col-sm-9">

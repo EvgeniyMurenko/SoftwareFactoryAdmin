@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Locale;
 
 
 @Controller
@@ -25,6 +26,8 @@ public class SettingsController {
     @Autowired
     private UserService userService;
 
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getManagerCabinetCase() {
 
@@ -33,9 +36,9 @@ public class SettingsController {
         return settingsView;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/saveSettings", method = RequestMethod.POST)
-    public @ResponseBody
-    ModelAndView infoSettings(HttpSession httpSession,
+    public ModelAndView infoSettings(HttpSession httpSession,
                               @RequestParam("name") String name,
                               @RequestParam("phone") String phone,
                               @RequestParam("email") String email,
