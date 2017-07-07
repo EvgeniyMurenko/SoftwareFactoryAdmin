@@ -161,7 +161,7 @@ function getCustomerInfo(customerId) {
     });
 }
 
-function getTranslate(commentId) {
+function getTranslateComment(commentId) {
     $.ajax({
         type: "GET",
         data: "commentId=" + commentId,
@@ -172,14 +172,46 @@ function getTranslate(commentId) {
 
             if (data.translateComment != '') {
                 $('.linkToHide').remove();
-                document.getElementById('translateText').innerHTML = data.translateComment;
+                document.getElementById('textToTranslate').innerHTML = data.translateComment;
             }
         }
     });
 }
 
+
+function getPostTextToTranslate(postId) {
+    $.ajax({
+        type: "GET",
+        data: "postId=" + postId,
+        /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
+        url: "http://localhost:8080/group/get-post-text/",
+        dataType: "json",
+        success: function (data) {
+
+            if (data.textToTranslate != '') {
+
+
+                $('#translatePost').modal({
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                document.getElementById('textToTranslate').innerHTML = data.textToTranslate;
+                document.getElementById('postId').innerHTML = data.postId_json;
+            }
+        }
+    });
+
+}
+
 // CKEDITOR show
 CKEDITOR.replace('editor', {
+    toolbar: 'Basic',
+    width: '100%',
+    height: '250'
+});
+
+// CKEDITOR show
+CKEDITOR.replace('textEdit', {
     toolbar: 'Basic',
     width: '100%',
     height: '250'

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import static com.SoftwareFactoryAdmin.constant.AppRequestEnum.*;
@@ -101,7 +102,7 @@ public class FxmGroupController {
 
             ManagerInfo managerInfo = managerInfoService.getManagerInfoById(postDTO.getUserID());
 
-            FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postDTO.getPostText(), new ArrayList<>());
+            FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postDTO.getPostTextOriginal(), postDTO.getPostTextRu(), postDTO.getPostTextEn(), postDTO.getPostTextKo(), null, null, null, new ArrayList<>());
 
             fxmPostService.addNewFxmPost(fxmPost);
 
@@ -109,7 +110,7 @@ public class FxmGroupController {
 
 
             List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostText(), "FXM Group post!" ,AppRequestEnum.GROUP_PUSH_TYPE.toString());
+            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!" ,AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 
@@ -170,7 +171,10 @@ public class FxmGroupController {
 
             FxmPost fxmPost = fxmPostService.getFxmPostById(postDTO.getId());
 
-            fxmPost.setPostText(postDTO.getPostText());
+            fxmPost.setPostTextOriginal(postDTO.getPostTextOriginal());
+            fxmPost.setPostTextRu(postDTO.getPostTextRu());
+            fxmPost.setPostTextEn(postDTO.getPostTextEn());
+            fxmPost.setPostTextKo(postDTO.getPostTextKo());
 
             fxmPostService.updateFxmPost(fxmPost);
 

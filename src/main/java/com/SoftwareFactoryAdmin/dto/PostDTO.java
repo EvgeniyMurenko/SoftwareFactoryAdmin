@@ -6,13 +6,16 @@ import java.util.List;
 
 public class PostDTO {
 
-    public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postText) {
+    public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo) {
         this.id = id;
         this.serverID = serverID;
         this.userID = userID;
         this.userName = userName;
         this.date = date;
-        this.postText = postText;
+        this.postTextOriginal = postTextOriginal;
+        this.postTextRu = postTextRu;
+        this.postTextEn = postTextEn;
+        this.postTextKo = postTextKo;
     }
 
     private Long id;
@@ -25,7 +28,10 @@ public class PostDTO {
 
     private Date date;
 
-    private String postText;
+    private String postTextOriginal;
+    private String postTextRu;
+    private String postTextEn;
+    private String postTextKo;
 
 
     public Long getId() {
@@ -52,12 +58,36 @@ public class PostDTO {
         this.date = date;
     }
 
-    public String getPostText() {
-        return postText;
+    public String getPostTextOriginal() {
+        return postTextOriginal;
     }
 
-    public void setPostText(String postText) {
-        this.postText = postText;
+    public void setPostTextOriginal(String postTextOriginal) {
+        this.postTextOriginal = postTextOriginal;
+    }
+
+    public String getPostTextRu() {
+        return postTextRu;
+    }
+
+    public void setPostTextRu(String postTextRu) {
+        this.postTextRu = postTextRu;
+    }
+
+    public String getPostTextEn() {
+        return postTextEn;
+    }
+
+    public void setPostTextEn(String postTextEn) {
+        this.postTextEn = postTextEn;
+    }
+
+    public String getPostTextKo() {
+        return postTextKo;
+    }
+
+    public void setPostTextKo(String postTextKo) {
+        this.postTextKo = postTextKo;
     }
 
     public String getUserName() {

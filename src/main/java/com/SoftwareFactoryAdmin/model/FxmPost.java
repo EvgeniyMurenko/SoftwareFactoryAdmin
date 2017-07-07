@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "s_fxm_post")
@@ -15,11 +16,17 @@ public class FxmPost  implements Serializable {
     public FxmPost() {
     }
 
-    public FxmPost(User user, String userName, Date date, String postText, List<FxmComment> fxmComments) {
+    public FxmPost(User user, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo, String linksFile, String linksImage, String linksVideo, List<FxmComment> fxmComments) {
         this.user = user;
         this.userName = userName;
         this.date = date;
-        this.postText = postText;
+        this.postTextOriginal = postTextOriginal;
+        this.postTextRu = postTextRu;
+        this.postTextEn = postTextEn;
+        this.postTextKo = postTextKo;
+        this.linksFile = linksFile;
+        this.linksImage = linksImage;
+        this.linksVideo = linksVideo;
         this.fxmComments = fxmComments;
     }
 
@@ -44,15 +51,37 @@ public class FxmPost  implements Serializable {
     private Date date;
 
 
-    @Column(name = "post_text")
+    @Column(name = "post_text_original")
     @Type(type = "text")
-    private String postText;
+    private String postTextOriginal;
+
+    @Column(name = "post_text_ru")
+    @Type(type = "text")
+    private String postTextRu;
+
+    @Column(name = "post_text_en")
+    @Type(type = "text")
+    private String postTextEn;
+
+    @Column(name = "post_text_ko")
+    @Type(type = "text")
+    private String postTextKo;
+
+    @Column(name = "links_file")
+    @Type(type = "text")
+    private String linksFile;
+
+    @Column(name = "links_image")
+    @Type(type = "text")
+    private String linksImage;
+
+    @Column(name = "links_video")
+    @Type(type = "text")
+    private String linksVideo;
 
 
     @OneToMany(mappedBy = "fxmPost", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FxmComment> fxmComments;
-
-
 
     public Long getId() {
         return id;
@@ -78,12 +107,36 @@ public class FxmPost  implements Serializable {
         this.date = date;
     }
 
-    public String getPostText() {
-        return postText;
+    public String getPostTextOriginal() {
+        return postTextOriginal;
     }
 
-    public void setPostText(String postText) {
-        this.postText = postText;
+    public void setPostTextOriginal(String postTextOriginal) {
+        this.postTextOriginal = postTextOriginal;
+    }
+
+    public String getPostTextRu() {
+        return postTextRu;
+    }
+
+    public void setPostTextRu(String postTextRu) {
+        this.postTextRu = postTextRu;
+    }
+
+    public String getPostTextEn() {
+        return postTextEn;
+    }
+
+    public void setPostTextEn(String postTextEn) {
+        this.postTextEn = postTextEn;
+    }
+
+    public String getPostTextKo() {
+        return postTextKo;
+    }
+
+    public void setPostTextKo(String postTextKo) {
+        this.postTextKo = postTextKo;
     }
 
     public List<FxmComment> getFxmComments() {
@@ -100,5 +153,29 @@ public class FxmPost  implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getLinksFile() {
+        return linksFile;
+    }
+
+    public void setLinksFile(String linksFile) {
+        this.linksFile = linksFile;
+    }
+
+    public String getLinksImage() {
+        return linksImage;
+    }
+
+    public void setLinksImage(String linksImage) {
+        this.linksImage = linksImage;
+    }
+
+    public String getLinksVideo() {
+        return linksVideo;
+    }
+
+    public void setLinksVideo(String linksVideo) {
+        this.linksVideo = linksVideo;
     }
 }

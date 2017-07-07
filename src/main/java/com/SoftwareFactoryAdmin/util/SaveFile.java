@@ -10,6 +10,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,9 @@ public class SaveFile {
 
     private String pathForSaveFile;
     private MultipartFile[] files;
+
+    private List<String> imageExpansion = Arrays.asList("img", "png", "jpg", "bmp");
+    private List<String> videoExpansion = Arrays.asList("mp4");
 
 
     public SaveFile(MultipartFile[] files) {
@@ -133,6 +137,42 @@ public class SaveFile {
 
     }
 
+    public void savePostFilesToPost(FxmPost fxmPost) {
+
+        if (files.length < 1) return;
+        if (files[0].isEmpty()) return;
+
+
+        pathForSaveFile = MainPathEnum.mainPath + "/post/";
+
+        if (!this.files[0].isEmpty()) {
+            String images = "";
+            String videos = "";
+            String files = "";
+
+            for (MultipartFile file : this.files) {
+                String name = file.getOriginalFilename();
+                String generatedName = generateUUIDname(name);
+
+                if (this.imageExpansion.indexOf(getFileExtension(file)) > -1) {
+                    images += generatedName+";#";
+                } else if (this.videoExpansion.indexOf(getFileExtension(file)) > -1) {
+                    videos += generatedName+";#";
+                } else {
+                    files += generatedName+";#";
+                }
+                try {
+                    saveFile(generatedName, file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            fxmPost.setLinksImage(images);
+            fxmPost.setLinksVideo(videos);
+            fxmPost.setLinksFile(files);
+        }
+    }
+
     private void saveFile(String name, MultipartFile file) throws IOException {
 
         byte[] bytes = file.getBytes();
@@ -166,26 +206,17 @@ public class SaveFile {
 
     }
 
+    private static String getFileExtension(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        } else {
+            return "";
+        }
+    }
+
 
 }
 
-    /*    public void saveVideoFile() {
 
-
-        String[] extensions = {".mp4", ".avi"};
-
-        for (int i = 0; i < this.files.length; i++) {
-
-            MultipartFile file = this.files[i];
-            String name = file.getOriginalFilename();
-            String fileExtension = name.substring(name.lastIndexOf('.'), name.length());
-
-            for (String extension : extensions) {
-                if (extension.equals(fileExtension)) {
-                    saveFile(name, file);
-                    System.out.println(name);
-                }
-            }
-        }
-    }*/
 
