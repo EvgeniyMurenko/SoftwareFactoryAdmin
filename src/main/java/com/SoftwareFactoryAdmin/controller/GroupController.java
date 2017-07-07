@@ -3,11 +3,13 @@ package com.SoftwareFactoryAdmin.controller;
 import com.SoftwareFactoryAdmin.comparator.FxmPostByDateComporator;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
+import com.SoftwareFactoryAdmin.service.FxmCommentService;
 import com.SoftwareFactoryAdmin.service.FxmPostService;
 import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.UserService;
 
 
+import com.SoftwareFactoryAdmin.util.AppMethods;
 import com.SoftwareFactoryAdmin.util.FxmPostFile;
 import com.SoftwareFactoryAdmin.util.SaveFile;
 import org.json.JSONObject;
@@ -36,6 +38,9 @@ public class GroupController {
     @Autowired
     FxmPostService fxmPostService;
 
+    @Autowired
+    FxmCommentService fxmCommentService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getShowGroup() {
@@ -63,11 +68,16 @@ public class GroupController {
     public String getTranslateComment(@RequestParam("commentId") Long id) throws Exception {
         JSONObject myJsonObj = new JSONObject();
 
+        FxmComment comment = fxmCommentService.getFxmCommentById(id);
+
+        String translateComment = AppMethods.translate(comment.getCommentText(), "en");
+
+        System.out.println("========================== "+translateComment);
+
         StringBuilder stringBuilderTranslate = new StringBuilder();
 
         stringBuilderTranslate.append("<div class=\"horizontal-line text-translate mt10\" >");
-        stringBuilderTranslate.append(" У меня есть вопрос ... в пятницу я попросил Ольгу загрузить SFCAFE веб-сайт на первую страницу. <br>");
-        stringBuilderTranslate.append("Я хочу знать почему ее там нет. <br>");
+        stringBuilderTranslate.append(translateComment);
         stringBuilderTranslate.append("</div>");
 
         myJsonObj.append("translateComment", stringBuilderTranslate);
@@ -84,34 +94,7 @@ public class GroupController {
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
 
         List<FxmComment> commentList = new ArrayList<>();
-
         FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, commentList);
-
-
-        /*for (MultipartFile file : files) {
-            System.out.println("==========Расширение файла: " + getFileExtension(file));
-        }
-
-        List <MultipartFile> multipartFiles = Arrays.asList(files);
-        List<String> image = Arrays.asList("img", "png", "jpg", "bmp");
-
-        String imageLink = "";
-
-        for (MultipartFile file : multipartFiles){
-            for (String val : image){
-                if (getFileExtension(file).equals(val)){
-                    imageLink += file.getOriginalFilename()+";#";
-                }
-            }
-        }
-        System.out.println("============="+imageLink);
-
-        String[] pathArr = imageLink.split(";#");
-        List<String> pathList = Arrays.asList(pathArr);
-
-        pathList.forEach((String path) -> System.out.println("======="+path));*/
-
-
 
         fxmPostService.addNewFxmPost(fxmPost);
 
@@ -119,7 +102,6 @@ public class GroupController {
         SaveFile saveFile = new SaveFile(files);
         saveFile.savePostFilesToPost(fxmPost);
         fxmPostService.updateFxmPost(fxmPost);
-
 
         return new ModelAndView("redirect:/group/");
     }

@@ -187,6 +187,13 @@
                                                             <div class="col-sm-10">
                                                                 <%out.print(comment.getCommentText());%>
 
+                                                                <div id="<%out.print("commentToTranslate"+comment.getId());%>">
+
+                                                                </div>
+                                                                <div class="<%out.print("linkToHide"+comment.getId());%>">
+                                                                    <a onclick="getTranslateComment(<%out.print(comment.getId());%>)">Translate</a>
+                                                                </div>
+
                                                                 <div class="data-color" align="right"><%out.print(dateFormatShow.format(comment.getDate()));%></div>
                                                             </div>
                                                         </div>
@@ -202,16 +209,18 @@
                                     <div class="row mt10">
                                         <div class="col-sm-12">
                                             <div class="background-02">
-                                                <div class="row">
-                                                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-6">
-                                                        <input name="comment" class="form-control"/>
+                                                <form action="/group/add-new-comment/<%out.print(fxmPostFile.getFxmPost().getId());%>/" method="post">
+                                                    <div class="row">
+                                                        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-6">
+                                                            <input name="comment" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" align="right">
+                                                            <button type="submit" name="save" class="btn btn-primary">
+                                                                <i class="fa fa-commenting" aria-hidden="true"></i> Add
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" align="right">
-                                                        <button type="submit" name="save" class="btn btn-primary">
-                                                            <i class="fa fa-commenting" aria-hidden="true"></i> Add
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

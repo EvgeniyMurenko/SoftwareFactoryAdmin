@@ -108,7 +108,8 @@ function getCustomerProject(index) {
         type: "GET",
         data: "index=" + index,
         /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
-        url: "http://localhost:8080/customer-mm/show-customer-project/",
+        /*url: "http://localhost:8080/customer-mm/show-customer-project/",*/
+        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
         dataType: "json",
         success: function (data) {
             if (data.customerInfo != '') {
@@ -132,7 +133,8 @@ function getCustomerInfo(customerId) {
         type: "GET",
         data: "customerId=" + customerId,
         /*url: "http://a.sofac.kr/project-mm/show-customer-info/",*/
-        url: "http://localhost:8080/project-mm/show-customer-info/",
+        /*url: "http://localhost:8080/project-mm/show-customer-info/",*/
+        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
         dataType: "json",
         success: function (data) {
             // tableWorkers
@@ -166,13 +168,14 @@ function getTranslateComment(commentId) {
         type: "GET",
         data: "commentId=" + commentId,
         /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
-        url: "http://localhost:8080/group/get-translate/",
+        /*url: "http://localhost:8080/group/get-translate/",*/
+        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
         dataType: "json",
         success: function (data) {
 
             if (data.translateComment != '') {
-                $('.linkToHide').remove();
-                document.getElementById('textToTranslate').innerHTML = data.translateComment;
+                $('.linkToHide'+commentId).remove();
+                document.getElementById('commentToTranslate'+commentId).innerHTML = data.translateComment;
             }
         }
     });
@@ -184,7 +187,8 @@ function getPostTextToTranslate(postId) {
         type: "GET",
         data: "postId=" + postId,
         /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
-        url: "http://localhost:8080/group/get-post-text/",
+        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
+        /*url: "http://localhost:8080/group/get-post-text/",*/
         dataType: "json",
         success: function (data) {
 
