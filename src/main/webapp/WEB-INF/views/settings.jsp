@@ -27,7 +27,7 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <%--<%ManagerInfo managerInfo = (ManagerInfo) request.getAttribute("managerInfo");%>--%>
+
     <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
     <%@ include file="leftCategoriesMenu.jsp" %>

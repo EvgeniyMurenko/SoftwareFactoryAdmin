@@ -168,6 +168,11 @@
             <version>RELEASE</version>
         </dependency>
 
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-translate</artifactId>
+			<version>0.20.1-beta</version>
+		</dependency>
 
     </dependencies>
 

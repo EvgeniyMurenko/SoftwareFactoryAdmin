@@ -138,6 +138,7 @@ public class FxmApplicationController {
         }
 
         String response = new Gson().toJson(serverResponse);
+        System.out.print(response);
         return response;
 
     }
