@@ -24,8 +24,10 @@ public enum AppRequestEnum {
 
     //Push message type
     ESTIMATE_CASE_PUSH_TYPE("ESTIMATE_CASE_PUSH_TYPE"),
-    GROUP_PUSH_TYPE("GROUP_PUSH_TYPE");
+    GROUP_PUSH_TYPE("GROUP_PUSH_TYPE"),
 
+    //load file request
+    ATTACH_LOAD_FXM_POST_FILES("ATTACH_LOAD_FXM_POST_FILES");
 
 
     private String value;

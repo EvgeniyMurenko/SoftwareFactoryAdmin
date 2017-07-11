@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "s_fxm_post")
-public class FxmPost  implements Serializable {
+public class FxmPost implements Serializable {
 
     public FxmPost() {
     }

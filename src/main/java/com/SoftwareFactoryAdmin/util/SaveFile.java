@@ -145,31 +145,37 @@ public class SaveFile {
 
         pathForSaveFile = MainPathEnum.mainPath + "/post/";
 
+
         if (!this.files[0].isEmpty()) {
             String images = "";
             String videos = "";
             String files = "";
 
             for (MultipartFile file : this.files) {
+
                 String name = file.getOriginalFilename();
+
                 String generatedName = generateUUIDname(name);
 
                 if (this.imageExpansion.indexOf(getFileExtension(file)) > -1) {
-                    images += generatedName+";#";
+                    images += generatedName + ";#";
                 } else if (this.videoExpansion.indexOf(getFileExtension(file)) > -1) {
-                    videos += generatedName+";#";
+                    videos += generatedName + ";#";
                 } else {
-                    files += generatedName+";#";
+                    files += generatedName + ";#";
                 }
+
                 try {
                     saveFile(generatedName, file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
             fxmPost.setLinksImage(images);
             fxmPost.setLinksVideo(videos);
             fxmPost.setLinksFile(files);
+
         }
     }
 
@@ -199,7 +205,6 @@ public class SaveFile {
 
 
     private String generateUUIDname(String originalFileName) {
-
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String generatedUUIDname = (java.util.UUID.randomUUID() + fileExtension);
         return generatedUUIDname;
