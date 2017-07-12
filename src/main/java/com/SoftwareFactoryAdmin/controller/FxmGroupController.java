@@ -145,7 +145,7 @@ public class FxmGroupController {
 
             fxmPostService.deleteFxmPost(fxmPost);
 
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost);
 
         } else if (requestType.equals(DELETE_COMMENT_REQUEST.toString())) {
 
@@ -162,15 +162,11 @@ public class FxmGroupController {
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
         } else if (requestType.equals(UPDATE_POST_REQUEST.toString())) {
-
             Type postType = new TypeToken<ServerRequest<PostDTO>>() {
             }.getType();
-            ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
-
+             ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
             PostDTO postDTO = (PostDTO) updatePostRequest.getDataTransferObject();
-
-            FxmPost fxmPost = fxmPostService.getFxmPostById(postDTO.getId());
-
+            FxmPost fxmPost = fxmPostService.getFxmPostById(postDTO.getServerID());
             fxmPost.setPostTextOriginal(postDTO.getPostTextOriginal());
             fxmPost.setPostTextRu(postDTO.getPostTextRu());
             fxmPost.setPostTextEn(postDTO.getPostTextEn());

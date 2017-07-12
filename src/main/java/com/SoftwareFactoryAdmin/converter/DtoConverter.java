@@ -47,14 +47,12 @@ public class DtoConverter {
         return messageDTOS;
     }
 
-
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
         return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo());
     }
 
-
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {
-        return new CommentDTO(fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
+        return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
     }
 
 
