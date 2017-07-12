@@ -27,8 +27,8 @@ public enum AppRequestEnum {
     GROUP_PUSH_TYPE("GROUP_PUSH_TYPE"),
 
     //load file request
-    ATTACH_LOAD_FXM_POST_FILES("ATTACH_LOAD_FXM_POST_FILES");
-
+    ATTACH_LOAD_FXM_POST_FILES("ATTACH_LOAD_FXM_POST_FILES"),
+    ATTACH_LOAD_USER_AVATAR("ATTACH_LOAD_USER_AVATAR");
 
     private String value;
 

@@ -3,7 +3,9 @@ package com.SoftwareFactoryAdmin.controller;
 import com.SoftwareFactoryAdmin.constant.AppRequestEnum;
 import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
 import com.SoftwareFactoryAdmin.model.FxmPost;
+import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.service.FxmPostService;
+import com.SoftwareFactoryAdmin.service.UserService;
 import com.SoftwareFactoryAdmin.util.SaveFile;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,9 +26,11 @@ import java.util.Map;
 public class FxmFileExchangeController {
 
 
-
     @Autowired
     private FxmPostService fxmPostService;
+
+    @Autowired
+    private UserService userService;
 
 
     @ResponseBody
@@ -65,12 +69,32 @@ public class FxmFileExchangeController {
 
             fxmPostService.updateFxmPost(fxmPost);
 
+        } else if (AppRequestEnum.ATTACH_LOAD_USER_AVATAR.toString().equals(requestType)) {
+
+            Type userIdType = new TypeToken<ServerRequest<Long>>() {
+            }.getType();
+
+            ServerRequest<Long> attachLoadUserAvatar = new Gson().fromJson(request, userIdType);
+
+            Long userID = (Long) attachLoadUserAvatar.getDataTransferObject();
+
+            Map<String, MultipartFile> map = multipartHttpServletRequest.getFileMap();
+
+            MultipartFile[] multipartFiles = map.values().toArray(new MultipartFile[map.values().size()]);
+
+            SaveFile saveFile = new SaveFile(multipartFiles);
+
+            User user = userService.findById(userID);
+
+            saveFile.saveAvatarToUser(user);
+
+            userService.updateUser(user);
+
         }
 
 
         return AppRequestEnum.REQUEST_SUCCESS.toString();
     }
-
 
 
 }

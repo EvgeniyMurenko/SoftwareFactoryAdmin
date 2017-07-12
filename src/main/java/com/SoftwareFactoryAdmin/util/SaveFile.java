@@ -179,6 +179,41 @@ public class SaveFile {
         }
     }
 
+    public void saveAvatarToUser(User user) {
+
+        if (files.length < 1) return;
+        if (files[0].isEmpty()) return;
+
+        pathForSaveFile = MainPathEnum.mainPath + "/avatar/";
+
+        if (!this.files[0].isEmpty()) {
+
+
+            for (MultipartFile file : this.files) {
+
+                String name = file.getOriginalFilename();
+
+                String generatedName = generateUUIDname(name);
+
+                try {
+                    String oldAvatarImage = user.getAvatarImage();
+                    if (!"".equals(oldAvatarImage) && oldAvatarImage != null) {
+                        File oldAvatar = new File(pathForSaveFile + oldAvatarImage);
+                        oldAvatar.delete();
+                    }
+
+                    saveFile(generatedName, file);
+                    user.setAvatarImage(generatedName);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
+    }
+
     private void saveFile(String name, MultipartFile file) throws IOException {
 
         byte[] bytes = file.getBytes();
