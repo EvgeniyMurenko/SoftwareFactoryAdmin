@@ -3,6 +3,7 @@ package com.SoftwareFactoryAdmin.converter;
 import com.SoftwareFactoryAdmin.dto.*;
 
 import com.SoftwareFactoryAdmin.model.*;
+import com.google.gson.Gson;
 
 import java.util.*;
 
@@ -12,9 +13,11 @@ public class DtoConverter {
 
     public static ManagerInfoDTO managerInfoDTOConverter(ManagerInfo managerInfo) {
 
-        ArrayList<String> permissions = new ArrayList<>();
+        Permission permission = managerInfo.getManagerInfoPermissions();
 
-        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), permissions);
+        ;
+
+        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), new PermissionDTO(permission.getSuperAdminPermission(), permission.getEstimatePermission(), permission.getCasePermission(), permission.getCustomerPermission(), permission.getProjectsPermission(), permission.getStaffPermission(), permission.getNoticePermission(), permission.getPermissionManagement(), permission.getTranslatePermission()));
 
         return managerInfoDTO;
     }
