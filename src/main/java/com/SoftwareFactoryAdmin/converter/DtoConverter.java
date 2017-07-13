@@ -14,7 +14,7 @@ public class DtoConverter {
 
         ArrayList<String> permissions = new ArrayList<>();
 
-        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), permissions);
+        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), permissions);
 
         return managerInfoDTO;
     }

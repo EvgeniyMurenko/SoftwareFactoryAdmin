@@ -179,6 +179,22 @@ public class SaveFile {
         }
     }
 
+    public static void deleteAvatarFromUser(User user) {
+
+
+        String filePath = MainPathEnum.mainPath + "/avatar/" + user.getAvatarImage();
+
+        try {
+            File oldAvatar = new File(filePath);
+            oldAvatar.delete();
+            user.setAvatarImage("");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public void saveAvatarToUser(User user) {
 
         if (files.length < 1) return;

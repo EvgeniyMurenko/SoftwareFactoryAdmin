@@ -147,6 +147,8 @@ public class AppController {
                         @PathVariable String type,
                         @PathVariable String filename) throws IOException {
 
+        System.out.print("type  - "  + type + "  file name - " + filename);
+
         String EXTERNAL_FILE_PATH = MainPathEnum.mainPath + "/" + type + "/" + filename;
 
         File file = new File(EXTERNAL_FILE_PATH);

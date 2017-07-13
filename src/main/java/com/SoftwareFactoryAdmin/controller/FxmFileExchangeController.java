@@ -2,6 +2,7 @@ package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.constant.AppRequestEnum;
 import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
+import com.SoftwareFactoryAdmin.dto.base.ServerResponse;
 import com.SoftwareFactoryAdmin.model.FxmPost;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.service.FxmPostService;
@@ -36,8 +37,8 @@ public class FxmFileExchangeController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/file-exchange", method = RequestMethod.POST, consumes = {"multipart/form-data"}, produces = {"application/json"})
-    public String fileExchange(MultipartHttpServletRequest multipartHttpServletRequest,
-                               @RequestPart("serverRequest") String request) throws IOException, ServletException {
+    public ServerResponse fileExchange(MultipartHttpServletRequest multipartHttpServletRequest,
+                                       @RequestPart("serverRequest") String request) throws IOException, ServletException {
 
 
         System.out.println(request);
@@ -69,6 +70,8 @@ public class FxmFileExchangeController {
 
             fxmPostService.updateFxmPost(fxmPost);
 
+            return new ServerResponse(AppRequestEnum.REQUEST_SUCCESS.toString(), null);
+
         } else if (AppRequestEnum.ATTACH_LOAD_USER_AVATAR.toString().equals(requestType)) {
 
             Type userIdType = new TypeToken<ServerRequest<Long>>() {
@@ -90,10 +93,13 @@ public class FxmFileExchangeController {
 
             userService.updateUser(user);
 
+            System.out.println(user.getAvatarImage());
+
+            return new ServerResponse(AppRequestEnum.REQUEST_SUCCESS.toString(), user.getAvatarImage());
         }
 
 
-        return AppRequestEnum.REQUEST_SUCCESS.toString();
+        return new ServerResponse(AppRequestEnum.REQUEST_FAIL.toString(), null);
     }
 
 

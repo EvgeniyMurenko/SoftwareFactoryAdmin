@@ -8,12 +8,13 @@ public class ManagerInfoDTO {
 
     public ManagerInfoDTO(){}
 
-    public ManagerInfoDTO(Long id, String name, String phone, String email, Date birthday, List<String> permissions) {
+    public ManagerInfoDTO(Long id, String name, String phone, String email, Date birthday, String avatarImage, List<String> permissions) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
+        this.avatarImage = avatarImage;
         this.permissions = permissions;
     }
 
@@ -27,7 +28,7 @@ public class ManagerInfoDTO {
 
     private Date birthday;
 
-   /* private List<MessageTaskDTO> messageTaskDTOS;*/
+    private String avatarImage;
 
     private List<String> permissions;
 
@@ -71,14 +72,14 @@ public class ManagerInfoDTO {
         this.birthday = birthday;
     }
 
-    /*public List<MessageTaskDTO> getMessageTaskDTOS() {
-        return messageTaskDTOS;
+    public String getAvatarImage() {
+        return avatarImage;
     }
 
-    public void setMessageTaskDTOS(List<MessageTaskDTO> messageTaskDTOS) {
-        this.messageTaskDTOS = messageTaskDTOS;
+    public void setAvatarImage(String avatarImage) {
+        this.avatarImage = avatarImage;
     }
-*/
+
     public Long getId() {
         return id;
     }
