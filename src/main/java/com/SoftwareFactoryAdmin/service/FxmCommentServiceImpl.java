@@ -2,6 +2,7 @@ package com.SoftwareFactoryAdmin.service;
 
 import com.SoftwareFactoryAdmin.dao.FxmCommentDao;
 import com.SoftwareFactoryAdmin.model.FxmComment;
+import com.SoftwareFactoryAdmin.model.FxmPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,11 @@ public class FxmCommentServiceImpl implements FxmCommentService {
     @Override
     public void deleteFxmComment(FxmComment fxmComment) {
         fxmCommentDao.delete(fxmComment);
+    }
+
+    @Override
+    public void deleteAllCommentByPost(FxmPost fxmPost) {
+        fxmCommentDao.deleteAllCommentByPost(fxmPost);
     }
 
     @Override

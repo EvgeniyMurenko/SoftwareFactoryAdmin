@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.dao;
 
 import com.SoftwareFactoryAdmin.model.FxmComment;
+import com.SoftwareFactoryAdmin.model.FxmPost;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,6 +44,14 @@ public class FxmCommentDaoImpl implements FxmCommentDao {
     public void delete(FxmComment fxmComment) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(fxmComment);
+    }
+
+    @Override
+    public void deleteAllCommentByPost(FxmPost fxmPost) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete FxmComment fxmComment where fxmComment.fxmPost.id = :fxmPostId");
+        query.setParameter("fxmPostId", fxmPost.getId());
+        query.executeUpdate();
     }
 
     @Override

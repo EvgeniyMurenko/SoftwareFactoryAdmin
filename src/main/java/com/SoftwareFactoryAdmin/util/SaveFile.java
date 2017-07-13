@@ -142,13 +142,22 @@ public class SaveFile {
         if (files.length < 1) return;
         if (files[0].isEmpty()) return;
 
-
         pathForSaveFile = MainPathEnum.mainPath + "/post/";
 
         if (!this.files[0].isEmpty()) {
             String images = "";
             String videos = "";
             String files = "";
+
+            if (fxmPost.getLinksImage()!= null && !"".equals(fxmPost.getLinksImage())){
+                images += fxmPost.getLinksImage();
+            }
+            if (fxmPost.getLinksVideo()!= null && !"".equals(fxmPost.getLinksVideo())){
+                videos += fxmPost.getLinksVideo();
+            }
+            if (fxmPost.getLinksFile()!= null && !"".equals(fxmPost.getLinksFile())){
+                files += fxmPost.getLinksFile();
+            }
 
             for (MultipartFile file : this.files) {
                 String name = file.getOriginalFilename();
@@ -167,9 +176,14 @@ public class SaveFile {
                     e.printStackTrace();
                 }
             }
+
             fxmPost.setLinksImage(images);
             fxmPost.setLinksVideo(videos);
             fxmPost.setLinksFile(files);
+
+            System.out.println("======images "+images);
+            System.out.println("======videos "+videos);
+            System.out.println("======files "+files);
         }
     }
 

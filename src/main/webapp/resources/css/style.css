@@ -460,7 +460,7 @@ textarea {
     color: chocolate;
 }
 
-.add_comment {
+.add-post {
     display:block;
     font-size: 50px;
     position:fixed;
@@ -505,4 +505,37 @@ textarea {
     height: 50px;
     bottom: 10px;
     right: 25px;
+}
+
+.dropdown-menu {
+    background-color: #3B4047;!important;
+    border: 1px solid #31BFC0;
+    border-radius: 0px;
+    color: #FFFFFF;
+}
+
+.dropdown-menu > li > a {
+    color: #FFFFFF;
+}
+
+.dropdown-menu > li > a:focus {
+    background-color: #303136 !important;
+    border: medium none;
+    color: #fff;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #4d4e53 !important;
+    border: medium none;
+    color: #fff;!important;
+}
+
+.small-thumbnail {
+    position: relative;
+}
+
+.small-thumbnail-delete {
+    position: absolute;
+    top: 5px;
+    right: 10px;
 }

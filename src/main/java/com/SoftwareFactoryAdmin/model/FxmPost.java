@@ -80,7 +80,7 @@ public class FxmPost  implements Serializable {
     private String linksVideo;
 
 
-    @OneToMany(mappedBy = "fxmPost", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fxmPost", fetch = FetchType.LAZY)
     private List<FxmComment> fxmComments;
 
     public Long getId() {

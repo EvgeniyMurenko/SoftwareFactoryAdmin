@@ -1,7 +1,6 @@
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.comparator.FxmPostByDateComporator;
-import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.FxmCommentService;
 import com.SoftwareFactoryAdmin.service.FxmPostService;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.*;
 
 
@@ -53,7 +51,7 @@ public class GroupController {
 
         List<FxmPostFile> fxmPostFileList = new ArrayList<>();
 
-        for (FxmPost fxmPost: postList){
+        for (FxmPost fxmPost : postList) {
             FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
             fxmPostFileList.add(fxmPostFile);
         }
@@ -64,7 +62,7 @@ public class GroupController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/get-translate", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-translate-comment", method = RequestMethod.GET)
     public String getTranslateComment(@RequestParam("commentId") Long id) throws Exception {
         JSONObject myJsonObj = new JSONObject();
 
@@ -72,7 +70,7 @@ public class GroupController {
 
         String translateComment = AppMethods.translate(comment.getCommentText(), "en");
 
-        System.out.println("========================== "+translateComment);
+        System.out.println("========================== " + translateComment);
 
         StringBuilder stringBuilderTranslate = new StringBuilder();
 
@@ -85,22 +83,45 @@ public class GroupController {
         return myJsonObj.toString();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/add-new-post", method = RequestMethod.GET)
+    public String addNewPost() throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        StringBuilder stringBuilderAdd = new StringBuilder();
+
+        stringBuilderAdd.append("<input type=\"hidden\" name=\"postId\" value=\"0\">");
+
+        myJsonObj.append("stringBuilderAdd", stringBuilderAdd);
+
+        return myJsonObj.toString();
+    }
+
 
     @RequestMapping(value = "/save-post", method = RequestMethod.POST)
-    public ModelAndView saveNewPost(HttpSession httpSession, @RequestParam("postText") String postText,
+    public ModelAndView saveNewPost(HttpSession httpSession, @RequestParam("postId") Long postId,
+                                    @RequestParam("postText") String postText,
                                     @RequestParam("file[]") MultipartFile[] files) {
+        FxmPost fxmPost;
+        if (postId > 0) {
+            fxmPost = fxmPostService.getFxmPostById(postId);
+            fxmPost.setPostTextOriginal(postText);
 
-        Long userId = (Long) httpSession.getAttribute("UserId");
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
+        } else {
+            Long userId = (Long) httpSession.getAttribute("UserId");
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
 
-        List<FxmComment> commentList = new ArrayList<>();
-        FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, commentList);
+            List<FxmComment> commentList = new ArrayList<>();
+            fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, commentList);
 
-        fxmPostService.addNewFxmPost(fxmPost);
+            fxmPostService.addNewFxmPost(fxmPost);
+        }
 
+        System.out.println("=================== file size " + files.length);
         //SAVE FILE
         SaveFile saveFile = new SaveFile(files);
         saveFile.savePostFilesToPost(fxmPost);
+
         fxmPostService.updateFxmPost(fxmPost);
 
         return new ModelAndView("redirect:/group/");
@@ -112,14 +133,26 @@ public class GroupController {
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
 
         FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
-        List<FxmComment> commentList = fxmPost.getFxmComments();
+
 
         FxmComment fxmComment = new FxmComment(managerInfo.getUser(), managerInfo.getName(), new Date(), comment, fxmPost);
 
-        commentList.add(fxmComment);
+        fxmCommentService.addFxmComment(fxmComment);
 
-        fxmPostService.updateFxmPost(fxmPost);
 
+        return new ModelAndView("redirect:/group/");
+    }
+
+    @RequestMapping(value = "/delete-post/{postId}")
+    public ModelAndView deletePost(HttpSession httpSession, @PathVariable Long postId) {
+        System.out.println("================ delete post " + postId);
+
+        FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
+        fxmCommentService.deleteAllCommentByPost(fxmPost);
+
+        FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+        fxmPostFile.deleteAllFileFromPost();
+        fxmPostService.deleteFxmPost(fxmPost);
 
         return new ModelAndView("redirect:/group/");
     }
@@ -140,6 +173,70 @@ public class GroupController {
         myJsonObj.append("postId_json", stringBuilderTranslate);
 
         return myJsonObj.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get-post-edit", method = RequestMethod.GET)
+    public String getPostToEdit(@RequestParam("postId") Long postId) throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
+
+        StringBuilder stringBuilderPostId = new StringBuilder();
+        stringBuilderPostId.append("<input type=\"hidden\" name=\"postId\" value=\"" + postId + "\">");
+
+        StringBuilder stringBuilderFileAttach = new StringBuilder();
+        FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+
+        stringBuilderFileAttach.append(addFileInstring(fxmPostFile.getImageList(), postId, "image"));
+        stringBuilderFileAttach.append(addFileInstring(fxmPostFile.getVideoList(), postId, "video"));
+        stringBuilderFileAttach.append(addFileInstring(fxmPostFile.getFileList(), postId, "file"));
+
+        myJsonObj.append("stringBuilderPostId", stringBuilderPostId);
+        myJsonObj.append("stringBuilderFileAttach", stringBuilderFileAttach);
+        myJsonObj.append("postTextOriginal", fxmPost.getPostTextOriginal());
+
+        return myJsonObj.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete-file", method = RequestMethod.GET)
+    public String deleteFileFromPost(@RequestParam("fileNmae") String fileNmae, @RequestParam("postId") Long postId) throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
+
+        FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+        fxmPostFile.deleteFile(fileNmae);
+
+        fxmPostService.updateFxmPost(fxmPost);
+
+        myJsonObj.append("postId", postId);
+
+        return myJsonObj.toString();
+    }
+
+    private StringBuilder addFileInstring(List<String> listFile, Long postId, String type) {
+        StringBuilder stringBuilderFileAttach = new StringBuilder();
+        if (listFile.size() > 0) {
+            for (String fileName : listFile) {
+                stringBuilderFileAttach.append("<div class=\"col-sm-2\">");
+                stringBuilderFileAttach.append("<div class=\"small-thumbnail mb20\">");
+                if (type.equals("image")){
+                    stringBuilderFileAttach.append("<img class=\"img-responsive\" src=\"/get-file/post/" + fileName + "\" alt=\"\">");
+                } else if(type.equals("video")){
+                    stringBuilderFileAttach.append(" <a href=\"/get-file/post/" + fileName + "\" target=\"_blank\"><img class=\"img-responsive\" src=\"../../resources/images/video.png\" alt=\"\"></a>");
+                } else {
+                    stringBuilderFileAttach.append(" <a href=\"/get-file/post/" + fileName + "\" target=\"_blank\"><img class=\"img-responsive\" src=\"../../resources/images/file.png\" alt=\"\"></a>");
+                }
+
+                stringBuilderFileAttach.append("<a onclick=\"deleteFile('"+fileName+"', "+postId+")\" class=\"small-thumbnail-delete\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></a>");
+                stringBuilderFileAttach.append("</div>");
+                stringBuilderFileAttach.append("</div>");
+            }
+        }
+        return stringBuilderFileAttach;
+
     }
 
     @RequestMapping(value = "/save-post-translate", method = RequestMethod.POST)
@@ -179,16 +276,6 @@ public class GroupController {
         }
 
         return new ModelAndView("redirect:/group/");
-    }
-
-    private static String getFileExtension(MultipartFile file) {
-        String fileName = file.getOriginalFilename();
-        // если в имени файла есть точка и она не является первым символом в названии файла
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            // то вырезаем все знаки после последней точки в названии файла, то есть ХХХХХ.txt -> txt
-            return fileName.substring(fileName.lastIndexOf(".")+1);
-            // в противном случае возвращаем заглушку, то есть расширение не найдено
-        else return "";
     }
 
 }

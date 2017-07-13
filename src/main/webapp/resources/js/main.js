@@ -1,4 +1,7 @@
-"use strict";
+/*globalPath = "http://52.57.116.160:8080";*/
+/*globalPath = "http://a.sofac.kr";*/
+globalPath = "http://localhost:8080";
+
 jQuery(document).ready(function ($) {
 
     // Back to top
@@ -107,9 +110,7 @@ function getCustomerProject(index) {
     $.ajax({
         type: "GET",
         data: "index=" + index,
-        /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
-        /*url: "http://localhost:8080/customer-mm/show-customer-project/",*/
-        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
+        url: globalPath+"/customer-mm/show-customer-project/",
         dataType: "json",
         success: function (data) {
             if (data.customerInfo != '') {
@@ -132,9 +133,7 @@ function getCustomerInfo(customerId) {
     $.ajax({
         type: "GET",
         data: "customerId=" + customerId,
-        /*url: "http://a.sofac.kr/project-mm/show-customer-info/",*/
-        /*url: "http://localhost:8080/project-mm/show-customer-info/",*/
-        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
+        url: globalPath+"/project-mm/show-customer-info/",
         dataType: "json",
         success: function (data) {
             // tableWorkers
@@ -167,12 +166,9 @@ function getTranslateComment(commentId) {
     $.ajax({
         type: "GET",
         data: "commentId=" + commentId,
-        /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
-        /*url: "http://localhost:8080/group/get-translate/",*/
-        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
+        url: globalPath+"/group/get-translate-comment/",
         dataType: "json",
         success: function (data) {
-
             if (data.translateComment != '') {
                 $('.linkToHide'+commentId).remove();
                 document.getElementById('commentToTranslate'+commentId).innerHTML = data.translateComment;
@@ -186,15 +182,10 @@ function getPostTextToTranslate(postId) {
     $.ajax({
         type: "GET",
         data: "postId=" + postId,
-        /*url: "http://a.sofac.kr/customer-mm/show-customer-project/",*/
-        url: "http://52.57.116.160:8080/customer-mm/show-customer-project/",
-        /*url: "http://localhost:8080/group/get-post-text/",*/
+        url: globalPath+"/group/get-post-text/",
         dataType: "json",
         success: function (data) {
-
             if (data.textToTranslate != '') {
-
-
                 $('#translatePost').modal({
                     backdrop: 'static',
                     keyboard: true
@@ -204,8 +195,66 @@ function getPostTextToTranslate(postId) {
             }
         }
     });
-
 }
+
+function getPostEdit(postId) {
+    $.ajax({
+        type: "GET",
+        data: "postId=" + postId,
+        url: globalPath+"/group/get-post-edit/",
+        dataType: "json",
+        success: function (data) {
+            if (data.stringBuilderPostId != '') {
+                $('#addPost').modal({
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                CKEDITOR.instances.textEdit.setData(''+data.postTextOriginal);
+                document.getElementById('fileAttach').innerHTML = data.stringBuilderFileAttach;
+                document.getElementById('postIdToEdit').innerHTML = data.stringBuilderPostId;
+            }
+        }
+    });
+}
+
+function deleteFile(fileNmae, postId) {
+    $.ajax({
+        type: "GET",
+        data:{"fileNmae": fileNmae, "postId":postId},
+        url: globalPath+"/group/delete-file/",
+        dataType: "json",
+        success: function (data) {
+            if (data.postId != '') {
+                /*$('#addPost').modal({
+                 backdrop: 'static',
+                 keyboard: true
+                 });
+                 document.getElementById('postIdToEdit').innerHTML = data.stringBuilderAdd;*/
+                getPostEdit(postId);
+            }
+        }
+    });
+}
+
+function addNewPost() {
+    $.ajax({
+        type: "GET",
+        data: "postId=" + postId,
+        url: globalPath+"/group/add-new-post/",
+        dataType: "json",
+        success: function (data) {
+            if (data.stringBuilderAdd != '') {
+                $('#addPost').modal({
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                document.getElementById('postIdToEdit').innerHTML = data.stringBuilderAdd;
+            }
+        }
+    });
+}
+
+
 
 // CKEDITOR show
 CKEDITOR.replace('editor', {
@@ -220,3 +269,4 @@ CKEDITOR.replace('textEdit', {
     width: '100%',
     height: '250'
 });
+

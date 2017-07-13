@@ -1,9 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.*" %>
-<%@ page import="java.util.Set" %>
 <%@ page import="com.SoftwareFactoryAdmin.util.FxmPostFile" %>
-<%@ page import="com.SoftwareFactoryAdmin.constant.GlobalEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -64,19 +62,30 @@
                                 <div class="message-centre">
                                     <div class="background-02">
                                         <div class="row">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-12">
+                                                <div class="col-xs-2 col-sm-2">
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9">
+                                                    <div class="row mb10"><a href=""><%out.print(fxmPostFile.getFxmPost().getUserName());%></a></div>
+                                                    <div class="row data-color"><%out.print(dateFormatShow.format(fxmPostFile.getFxmPost().getDate()));%></div>
+                                                </div>
+                                                <div class="col-xs-2 col-sm-1" align="right">
+                                                    <%if(currentPermission.getTranslatePermission() || currentPermission.getSuperAdminPermission() || fxmPostFile.getFxmPost().getUser().getId() == currentManagerInfo.getUser().getId()){%>
+                                                        <a data-toggle="dropdown">
+                                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-right">
+                                                            <%if (currentPermission.getTranslatePermission()) {%>
+                                                                <li><a onclick="getPostTextToTranslate(<%out.print(fxmPostFile.getFxmPost().getId());%>)">Translate</a></li>
+                                                            <%}%>
+                                                            <%if (fxmPostFile.getFxmPost().getUser().getId() == currentManagerInfo.getUser().getId() || currentPermission.getSuperAdminPermission()) {%>
+                                                                <li><a onclick="getPostEdit(<%out.print(fxmPostFile.getFxmPost().getId());%>)">Edit</a></li>
+                                                                <li><a href="/group/delete-post/<%out.print(fxmPostFile.getFxmPost().getId());%>/" data-toggle="tooltip" title="Delete" class="deleteConfirm">Delete</a></li>
+                                                            <%}%>
+                                                        </ul>
+                                                    <%}%>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-9">
-                                                <div class="row mb10"><a href=""><%out.print(fxmPostFile.getFxmPost().getUserName());%></a></div>
-                                                <div class="row data-color"><%out.print(dateFormatShow.format(fxmPostFile.getFxmPost().getDate()));%></div>
-                                            </div>
-                                            <%--Translate modal--%>
-                                            <div class="col-sm-1">
-                                                <a onclick="getPostTextToTranslate(<%out.print(fxmPostFile.getFxmPost().getId());%>)">
-                                                    <i class="fa fa-exchange" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <%--End Translate--%>
                                         </div>
                                     </div>
 
@@ -233,8 +242,8 @@
                 <%}%>
             <%}%>
 
-            <div class="add_comment">
-                <a data-target="#addPost" data-toggle="modal"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+            <div class="add-post">
+                <a onclick="addNewPost()"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
             </div>
 
 
@@ -333,6 +342,10 @@
 
         <form class="form-horizontal" action="/group/save-post/" method="post" enctype="multipart/form-data">
 
+            <div id="postIdToEdit">
+
+            </div>
+
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" type="button" data-dismiss="modal">
@@ -359,6 +372,11 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+
+                            <div id="fileAttach"></div>
+
+                        </div>
 
                         <div class="form-group">
                             <!-- Attach files -->
