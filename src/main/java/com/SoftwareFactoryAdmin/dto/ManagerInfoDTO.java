@@ -8,16 +8,20 @@ public class ManagerInfoDTO {
 
     public ManagerInfoDTO(){}
 
-    public ManagerInfoDTO(Long id, String name, String phone, String email, Date birthday, List<String> permissions) {
+    public ManagerInfoDTO(Long id, String name, String phone, String email, Date birthday,String avatarImage, PermissionDTO permissions) {
         this.id = id;
+        this.idServer = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
+        this.avatarImage = avatarImage;
         this.permissions = permissions;
     }
 
     private Long id;
+
+    private Long idServer;
 
     private String name;
 
@@ -27,15 +31,15 @@ public class ManagerInfoDTO {
 
     private Date birthday;
 
-   /* private List<MessageTaskDTO> messageTaskDTOS;*/
+    private String avatarImage;
 
-    private List<String> permissions;
+    private PermissionDTO permissions;
 
-    public List<String> getPermissions() {
+    public PermissionDTO getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<String> permissions) {
+    public void setPermissions(PermissionDTO permissions) {
         this.permissions = permissions;
     }
 
@@ -71,19 +75,40 @@ public class ManagerInfoDTO {
         this.birthday = birthday;
     }
 
-    /*public List<MessageTaskDTO> getMessageTaskDTOS() {
-        return messageTaskDTOS;
+    public String getAvatarImage() {
+        return avatarImage;
     }
 
-    public void setMessageTaskDTOS(List<MessageTaskDTO> messageTaskDTOS) {
-        this.messageTaskDTOS = messageTaskDTOS;
+    public void setAvatarImage(String avatarImage) {
+        this.avatarImage = avatarImage;
     }
-*/
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
+    }
+
+    @Override
+    public String toString() {
+        return "ManagerInfoDTO{" +
+                "id=" + id +
+                ", idServer=" + idServer +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", permissions=" + permissions +
+                '}';
     }
 }

@@ -5,8 +5,9 @@ import java.util.Date;
 
 public class CommentDTO {
 
-    public CommentDTO(Long id, Long userID, String userName, Date date, String commentText, Long postID) {
+    public CommentDTO(Long id, Long serverID, Long userID, String userName, Date date, String commentText, Long postID) {
         this.id = id;
+        this.serverID = serverID;
         this.userID = userID;
         this.userName = userName;
         this.date = date;
@@ -15,6 +16,8 @@ public class CommentDTO {
     }
 
     private Long id;
+
+    private Long serverID;
 
     private Long userID;
 
@@ -72,5 +75,13 @@ public class CommentDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getServerID() {
+        return serverID;
+    }
+
+    public void setServerID(Long serverID) {
+        this.serverID = serverID;
     }
 }

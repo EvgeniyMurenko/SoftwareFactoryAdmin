@@ -52,9 +52,7 @@ public class UserServiceImpl implements UserService {
                 entity.setPassword(passwordEncoder.encode(user.getPassword()));
             }
             entity.setDelete(user.isDelete());
-            //entity.setFirstName(user.getFirstName());
-            //entity.setLastName(user.getLastName());
-            //entity.setEmail(user.getEmail());
+            entity.setAvatarImage(user.getAvatarImage());
             entity.setUserProfiles(user.getUserProfiles());
         }
     }

@@ -6,6 +6,9 @@ import java.util.List;
 
 public class PostDTO {
 
+    public PostDTO() {
+    }
+
     public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo) {
         this.id = id;
         this.serverID = serverID;
@@ -29,9 +32,13 @@ public class PostDTO {
     private Date date;
 
     private String postTextOriginal;
+
     private String postTextRu;
+
     private String postTextEn;
+
     private String postTextKo;
+
 
 
     public Long getId() {
@@ -105,4 +112,6 @@ public class PostDTO {
     public void setServerID(Long serverID) {
         this.serverID = serverID;
     }
+
+
 }

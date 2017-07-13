@@ -164,26 +164,75 @@ public class SaveFile {
                 String generatedName = generateUUIDname(name);
 
                 if (this.imageExpansion.indexOf(getFileExtension(file)) > -1) {
-                    images += generatedName+";#";
+                    images += generatedName + ";#";
                 } else if (this.videoExpansion.indexOf(getFileExtension(file)) > -1) {
-                    videos += generatedName+";#";
+                    videos += generatedName + ";#";
                 } else {
-                    files += generatedName+";#";
+                    files += generatedName + ";#";
                 }
+
                 try {
                     saveFile(generatedName, file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
 
+            }
             fxmPost.setLinksImage(images);
             fxmPost.setLinksVideo(videos);
             fxmPost.setLinksFile(files);
 
-            System.out.println("======images "+images);
-            System.out.println("======videos "+videos);
-            System.out.println("======files "+files);
+        }
+    }
+
+    public static void deleteAvatarFromUser(User user) {
+
+
+        String filePath = MainPathEnum.mainPath + "/avatar/" + user.getAvatarImage();
+
+        try {
+            File oldAvatar = new File(filePath);
+            oldAvatar.delete();
+            user.setAvatarImage("");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void saveAvatarToUser(User user) {
+
+        if (files.length < 1) return;
+        if (files[0].isEmpty()) return;
+
+        pathForSaveFile = MainPathEnum.mainPath + "/avatar/";
+
+        if (!this.files[0].isEmpty()) {
+
+
+            for (MultipartFile file : this.files) {
+
+                String name = file.getOriginalFilename();
+
+                String generatedName = generateUUIDname(name);
+
+                try {
+                    String oldAvatarImage = user.getAvatarImage();
+                    if (!"".equals(oldAvatarImage) && oldAvatarImage != null) {
+                        File oldAvatar = new File(pathForSaveFile + oldAvatarImage);
+                        oldAvatar.delete();
+                    }
+
+                    saveFile(generatedName, file);
+                    user.setAvatarImage(generatedName);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
         }
     }
 
@@ -213,7 +262,6 @@ public class SaveFile {
 
 
     private String generateUUIDname(String originalFileName) {
-
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String generatedUUIDname = (java.util.UUID.randomUUID() + fileExtension);
         return generatedUUIDname;

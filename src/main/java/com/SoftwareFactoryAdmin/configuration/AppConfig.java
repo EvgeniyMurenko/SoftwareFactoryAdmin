@@ -40,7 +40,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
 
-
     /**
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
      */

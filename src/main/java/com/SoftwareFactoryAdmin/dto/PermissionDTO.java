@@ -1,22 +1,17 @@
-package com.SoftwareFactoryAdmin.model;
+package com.SoftwareFactoryAdmin.dto;
+
+import com.SoftwareFactoryAdmin.model.ManagerInfo;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+public class PermissionDTO implements Serializable {
 
 
-
-@Entity
-@Table(name = "s_permission")
-public class Permission implements Serializable {
+    public PermissionDTO(){}
 
 
-    public Permission (){}
-
-
-    public Permission(Long id, ManagerInfo managerInfo, Boolean superAdminPermission, Boolean estimatePermission, Boolean casePermission, Boolean customerPermission, Boolean projectsPermission, Boolean staffPermission, Boolean noticePermission, Boolean permissionManagement, Boolean translatePermission) {
-        this.id = id;
-        this.managerInfo = managerInfo;
+    public PermissionDTO(Boolean superAdminPermission, Boolean estimatePermission, Boolean casePermission, Boolean customerPermission, Boolean projectsPermission, Boolean staffPermission, Boolean noticePermission, Boolean permissionManagement, Boolean translatePermission) {
         this.superAdminPermission = superAdminPermission;
         this.estimatePermission = estimatePermission;
         this.casePermission = casePermission;
@@ -28,74 +23,23 @@ public class Permission implements Serializable {
         this.translatePermission = translatePermission;
     }
 
-    @Id
-    @Column(name = "manager_id", nullable = false)
-    private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
-    private ManagerInfo managerInfo;
-
-
-    @Column(name = "super_admin_permission")
     private Boolean superAdminPermission;
 
-
-    @Column(name = "estimate_permission")
     private Boolean estimatePermission;
 
-
-    @Column(name = "case_permission")
     private Boolean casePermission;
 
-
-    @Column(name = "customer_permission")
     private Boolean customerPermission;
 
-
-    @Column(name = "projects_permission")
     private Boolean projectsPermission;
 
-
-    @Column(name = "staff_permission")
     private Boolean staffPermission;
 
-
-    @Column(name = "notice_permission")
     private Boolean noticePermission;
 
-
-    @Column(name = "permission_management")
     private Boolean permissionManagement;
 
-
-    @Column(name = "translate_permission")
     private Boolean translatePermission;
-
-    @Override
-    public String toString() {
-        return "Permission{" +
-                "id=" + id +
-                ", managerInfo=" + managerInfo +
-                ", superAdminPermission=" + superAdminPermission +
-                ", estimatePermission=" + estimatePermission +
-                ", casePermission=" + casePermission +
-                ", customerPermission=" + customerPermission +
-                ", projectsPermission=" + projectsPermission +
-                ", staffPermission=" + staffPermission +
-                ", noticePermission=" + noticePermission +
-                ", permissionManagement=" + permissionManagement +
-                ", translatePermission=" + translatePermission +
-                '}';
-    }
-
-    public ManagerInfo getManagerInfo() {
-        return managerInfo;
-    }
-
-    public void setManagerInfo(ManagerInfo managerInfo) {
-        this.managerInfo = managerInfo;
-    }
 
     public Boolean getSuperAdminPermission() {
         return superAdminPermission;
@@ -169,11 +113,5 @@ public class Permission implements Serializable {
         this.translatePermission = translatePermission;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

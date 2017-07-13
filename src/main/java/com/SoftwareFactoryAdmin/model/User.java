@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -26,6 +27,12 @@ public class User implements Serializable {
 
     @Column(name = "is_delete", nullable = false)
     private boolean isDelete;
+
+
+    @Column(name = "avatar_image", nullable = false)
+    private String avatarImage;
+
+
 
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
@@ -83,6 +90,14 @@ public class User implements Serializable {
 
     public void setDelete(boolean delete) {
         isDelete = delete;
+    }
+
+    public String getAvatarImage() {
+        return avatarImage;
+    }
+
+    public void setAvatarImage(String avatarImage) {
+        this.avatarImage = avatarImage;
     }
 
     @Override

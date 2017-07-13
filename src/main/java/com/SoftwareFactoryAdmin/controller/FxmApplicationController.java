@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jnlp.PersistenceService;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -44,7 +45,6 @@ public class FxmApplicationController {
 
     @Autowired
     private CaseService caseService;
-
 
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
@@ -89,7 +89,9 @@ public class FxmApplicationController {
 
                     }
 
+
                     ManagerInfoDTO managerInfoDTO = DtoConverter.managerInfoDTOConverter(managerInfo);
+
 
                     serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), managerInfoDTO);
 

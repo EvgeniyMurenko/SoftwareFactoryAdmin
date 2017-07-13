@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jnlp.PersistenceService;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class FxmGroupController {
 
     @Autowired
     private ManagerInfoService managerInfoService;
+
+
 
 
     @ResponseBody
@@ -145,7 +148,7 @@ public class FxmGroupController {
 
             fxmPostService.deleteFxmPost(fxmPost);
 
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost);
 
         } else if (requestType.equals(DELETE_COMMENT_REQUEST.toString())) {
 
@@ -165,15 +168,19 @@ public class FxmGroupController {
 
             Type postType = new TypeToken<ServerRequest<PostDTO>>() {
             }.getType();
-            ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
+
+             ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
 
             PostDTO postDTO = (PostDTO) updatePostRequest.getDataTransferObject();
 
-            FxmPost fxmPost = fxmPostService.getFxmPostById(postDTO.getId());
+            FxmPost fxmPost = fxmPostService.getFxmPostById(postDTO.getServerID());
 
             fxmPost.setPostTextOriginal(postDTO.getPostTextOriginal());
+
             fxmPost.setPostTextRu(postDTO.getPostTextRu());
+
             fxmPost.setPostTextEn(postDTO.getPostTextEn());
+
             fxmPost.setPostTextKo(postDTO.getPostTextKo());
 
             fxmPostService.updateFxmPost(fxmPost);
@@ -182,13 +189,13 @@ public class FxmGroupController {
 
         } else if (requestType.equals(UPDATE_COMMENT_REQUEST.toString())) {
 
-            Type commentType = new TypeToken<ServerRequest<CommentDTO>>() {
-            }.getType();
+            Type commentType = new TypeToken<ServerRequest<CommentDTO>>() {}.getType();
+
             ServerRequest<CommentDTO> updateCommentRequest = new Gson().fromJson(request, commentType);
 
             CommentDTO commentDTO = (CommentDTO) updateCommentRequest.getDataTransferObject();
 
-            FxmComment fxmComment = fxmCommentService.getFxmCommentById(commentDTO.getId());
+            FxmComment fxmComment = fxmCommentService.getFxmCommentById(commentDTO.getServerID());
 
             fxmComment.setCommentText(commentDTO.getCommentText());
 

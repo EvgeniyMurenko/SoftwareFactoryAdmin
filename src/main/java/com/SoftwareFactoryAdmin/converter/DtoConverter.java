@@ -3,6 +3,7 @@ package com.SoftwareFactoryAdmin.converter;
 import com.SoftwareFactoryAdmin.dto.*;
 
 import com.SoftwareFactoryAdmin.model.*;
+import com.google.gson.Gson;
 
 import java.util.*;
 
@@ -12,9 +13,11 @@ public class DtoConverter {
 
     public static ManagerInfoDTO managerInfoDTOConverter(ManagerInfo managerInfo) {
 
-        ArrayList<String> permissions = new ArrayList<>();
+        Permission permission = managerInfo.getManagerInfoPermissions();
 
-        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), permissions);
+        ;
+
+        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), new PermissionDTO(permission.getSuperAdminPermission(), permission.getEstimatePermission(), permission.getCasePermission(), permission.getCustomerPermission(), permission.getProjectsPermission(), permission.getStaffPermission(), permission.getNoticePermission(), permission.getPermissionManagement(), permission.getTranslatePermission()));
 
         return managerInfoDTO;
     }
@@ -47,14 +50,12 @@ public class DtoConverter {
         return messageDTOS;
     }
 
-
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
         return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo());
     }
 
-
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {
-        return new CommentDTO(fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
+        return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
     }
 
 
