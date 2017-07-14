@@ -148,7 +148,7 @@ public class FxmGroupController {
 
             fxmPostService.deleteFxmPost(fxmPost);
 
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost);
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
         } else if (requestType.equals(DELETE_COMMENT_REQUEST.toString())) {
 
