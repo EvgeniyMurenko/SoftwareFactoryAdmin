@@ -9,7 +9,7 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo) {
+    public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo ,String linksFile , String linksVideo , String linksImage ,String postUserAvatarImage) {
         this.id = id;
         this.serverID = serverID;
         this.userID = userID;
@@ -19,6 +19,10 @@ public class PostDTO {
         this.postTextRu = postTextRu;
         this.postTextEn = postTextEn;
         this.postTextKo = postTextKo;
+        this.linksFile = linksFile;
+        this.linksVideo = linksVideo;
+        this.linksImage = linksImage;
+        this.postUserAvatarImage = postUserAvatarImage;
     }
 
     private Long id;
@@ -38,6 +42,14 @@ public class PostDTO {
     private String postTextEn;
 
     private String postTextKo;
+
+    private String linksFile;
+
+    private String linksImage;
+
+    private String linksVideo;
+
+    private String postUserAvatarImage;
 
 
 
@@ -113,5 +125,35 @@ public class PostDTO {
         this.serverID = serverID;
     }
 
+    public String getLinksFile() {
+        return linksFile;
+    }
 
+    public void setLinksFile(String linksFile) {
+        this.linksFile = linksFile;
+    }
+
+    public String getLinksImage() {
+        return linksImage;
+    }
+
+    public void setLinksImage(String linksImage) {
+        this.linksImage = linksImage;
+    }
+
+    public String getLinksVideo() {
+        return linksVideo;
+    }
+
+    public void setLinksVideo(String linksVideo) {
+        this.linksVideo = linksVideo;
+    }
+
+    public String getPostUserAvatarImage() {
+        return postUserAvatarImage;
+    }
+
+    public void setPostUserAvatarImage(String postUserAvatarImage) {
+        this.postUserAvatarImage = postUserAvatarImage;
+    }
 }
