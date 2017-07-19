@@ -8,6 +8,7 @@ import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
 import com.SoftwareFactoryAdmin.dto.base.ServerResponse;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
+import com.SoftwareFactoryAdmin.util.FxmPostFile;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,6 +183,10 @@ public class FxmGroupController {
             fxmPost.setPostTextEn(postDTO.getPostTextEn());
 
             fxmPost.setPostTextKo(postDTO.getPostTextKo());
+
+            FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+
+            fxmPostFile.compareFilesFromDtoAndMakeChanges(postDTO);
 
             fxmPostService.updateFxmPost(fxmPost);
 
