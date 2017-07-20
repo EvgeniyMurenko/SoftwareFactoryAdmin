@@ -66,9 +66,9 @@ public class FxmPostFile {
             deleteFileByName(dtoVideoName);
         }
 
-        postDTO.setLinksFile(savePath(dtoFiles));
-        postDTO.setLinksImage(savePath(dtoImages));
-        postDTO.setLinksVideo(savePath(dtoVideos));
+        fxmPost.setLinksFile(savePath(dtoFiles));
+        fxmPost.setLinksImage(savePath(dtoImages));
+        fxmPost.setLinksVideo(savePath(dtoVideos));
 
     }
 
@@ -131,7 +131,7 @@ public class FxmPostFile {
     private List<String> parserPathFile(String path) {
         if (path != null && !"".equals(path)) {
             String[] pathArr = path.split(";#");
-            List<String> pathList = Arrays.asList(pathArr);
+            List<String> pathList = new ArrayList(Arrays.asList(pathArr));
             return pathList;
         }
         return new ArrayList<>();
