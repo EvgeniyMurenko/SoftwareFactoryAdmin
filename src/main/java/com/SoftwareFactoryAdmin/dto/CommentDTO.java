@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class CommentDTO {
 
-    public CommentDTO(Long id, Long serverID, Long userID, String userName, Date date, String commentText, Long postID) {
+    public CommentDTO(Long id, Long serverID, Long userID, String userName, Date date, String commentText, Long postID, String commentUserAvatarImage) {
         this.id = id;
         this.serverID = serverID;
         this.userID = userID;
@@ -13,6 +13,7 @@ public class CommentDTO {
         this.date = date;
         this.commentText = commentText;
         this.postID = postID;
+        this.commentUserAvatarImage = commentUserAvatarImage;
     }
 
     private Long id;
@@ -28,6 +29,8 @@ public class CommentDTO {
     private String commentText;
 
     private Long postID;
+
+    private String commentUserAvatarImage;
 
     public Long getId() {
         return id;
@@ -83,5 +86,13 @@ public class CommentDTO {
 
     public void setServerID(Long serverID) {
         this.serverID = serverID;
+    }
+
+    public String getCommentUserAvatarImage() {
+        return commentUserAvatarImage;
+    }
+
+    public void setCommentUserAvatarImage(String commentUserAvatarImage) {
+        this.commentUserAvatarImage = commentUserAvatarImage;
     }
 }

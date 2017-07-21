@@ -54,7 +54,7 @@ public class DtoConverter {
     }
 
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {
-        return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
+        return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId(), fxmComment.getUser().getAvatarImage());
     }
 
 
