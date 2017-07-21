@@ -7,6 +7,7 @@ import com.SoftwareFactoryAdmin.model.FxmPost;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -47,24 +48,9 @@ public class FxmPostFile {
         List<String> dtoImages = parserPathFile(postDTO.getLinksImage());
         List<String> dtoVideos = parserPathFile(postDTO.getLinksVideo());
 
-        for (String dtoFileName : dtoFiles) {
-            for (String file : fileList) {
-                if (dtoFileName.equals(file)) break;
-            }
-            deleteFileByName(dtoFileName);
-        }
-        for (String dtoImageName : dtoImages) {
-            for (String file : fileList) {
-                if (dtoImageName.equals(file)) break;
-            }
-            deleteFileByName(dtoImageName);
-        }
-        for (String dtoVideoName : dtoVideos) {
-            for (String file : fileList) {
-                if (dtoVideoName.equals(file)) break;
-            }
-            deleteFileByName(dtoVideoName);
-        }
+        compareFilesAndDelete(dtoFiles , fileList);
+        compareFilesAndDelete(dtoImages , imageList);
+        compareFilesAndDelete(dtoVideos , videoList);
 
         fxmPost.setLinksFile(savePath(dtoFiles));
         fxmPost.setLinksImage(savePath(dtoImages));
@@ -118,6 +104,18 @@ public class FxmPostFile {
         }
     }
 
+    private void compareFilesAndDelete(List<String> dtoFiles , List<String> postFiles){
+        for (String dtoFileName : dtoFiles) {
+            Iterator<String> fileListIterator = postFiles.listIterator();
+            while (fileListIterator.hasNext()) {
+                if (dtoFileName.equals(fileListIterator.next())) fileListIterator.remove();
+            }
+        }
+        for (String file : postFiles){
+            deleteFileByName(file);
+        }
+    }
+
     private String savePath(List<String> fileList) {
         String newFilePath = "";
         for (String strinfPath : fileList) {
@@ -138,10 +136,13 @@ public class FxmPostFile {
     }
 
     private void deleteFileByName(String fileName) {
-        String filePath = MainPathEnum.mainPath + "/post/" + fileName;
-        File file = new File(filePath);
-        if (file.exists()) {
+        System.out.println("DELETE " + fileName);
+        try {
+            String filePath = MainPathEnum.mainPath + "/post/" + fileName;
+            File file = new File(filePath);
             file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

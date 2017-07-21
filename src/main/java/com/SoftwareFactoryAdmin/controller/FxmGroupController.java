@@ -47,8 +47,6 @@ public class FxmGroupController {
     private ManagerInfoService managerInfoService;
 
 
-
-
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/group-exchange", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
@@ -114,7 +112,7 @@ public class FxmGroupController {
 
 
             List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!" ,AppRequestEnum.GROUP_PUSH_TYPE.toString());
+            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 
@@ -135,7 +133,7 @@ public class FxmGroupController {
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
             List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
+            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(DELETE_POST_REQUEST.toString())) {
 
@@ -170,7 +168,7 @@ public class FxmGroupController {
             Type postType = new TypeToken<ServerRequest<PostDTO>>() {
             }.getType();
 
-             ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
+            ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
 
             PostDTO postDTO = (PostDTO) updatePostRequest.getDataTransferObject();
 
@@ -194,7 +192,8 @@ public class FxmGroupController {
 
         } else if (requestType.equals(UPDATE_COMMENT_REQUEST.toString())) {
 
-            Type commentType = new TypeToken<ServerRequest<CommentDTO>>() {}.getType();
+            Type commentType = new TypeToken<ServerRequest<CommentDTO>>() {
+            }.getType();
 
             ServerRequest<CommentDTO> updateCommentRequest = new Gson().fromJson(request, commentType);
 
