@@ -108,8 +108,7 @@ public class FxmGroupController {
 
             fxmPostService.addNewFxmPost(fxmPost);
 
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
-
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost.getId());
 
             List<String> keys = googleCloudKeyService.findAllManagersKeys();
             pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
@@ -144,6 +143,10 @@ public class FxmGroupController {
             Long postID = (Long) deletePostRequest.getDataTransferObject();
 
             FxmPost fxmPost = fxmPostService.getFxmPostById(postID);
+
+            FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+
+            fxmPostFile.deleteAllFileFromPost();
 
             fxmPostService.deleteFxmPost(fxmPost);
 
