@@ -2,7 +2,8 @@ package com.SoftwareFactoryAdmin.constant;
 
 
 public enum MainPathEnum {
-    mainPath("opt/tomcat/webapps/softwarefactoryadmin");
+    mainPath("opt/tomcat/webapps/softwarefactoryadmin"),
+    videoThumbnailsFilesPath("opt/tomcat/webapps/softwarefactoryadmin/thumbnails/");
 
     private String value;
 

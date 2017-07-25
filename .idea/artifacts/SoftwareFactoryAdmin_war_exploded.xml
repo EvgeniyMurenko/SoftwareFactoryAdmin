@@ -84,6 +84,22 @@
           <element id="library" level="project" name="Maven: com.google.http-client:google-http-client-jackson:1.21.0" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.11" />
           <element id="library" level="project" name="Maven: com.google.apis:google-api-services-translate:v2-rev47-1.22.0" />
+          <element id="library" level="project" name="Maven: org.bytedeco:javacv:0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco:javacpp:0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:opencv:2.4.9-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:ffmpeg:2.2.1-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:flycapture:1.7.17-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:libdc1394:2.2.2-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:libfreenect:0.4-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:videoinput:0.200-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:artoolkitplus:2.3.0-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:opencv:windows-x86_64:2.4.9-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:ffmpeg:windows-x86_64:2.2.1-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:flycapture:windows-x86_64:1.7.17-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:libdc1394:windows-x86_64:2.2.2-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:libfreenect:windows-x86_64:0.4-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:videoinput:windows-x86_64:0.200-0.8" />
+          <element id="library" level="project" name="Maven: org.bytedeco.javacpp-presets:artoolkitplus:windows-x86_64:2.3.0-0.8" />
         </element>
       </element>
       <element id="directory" name="META-INF">
