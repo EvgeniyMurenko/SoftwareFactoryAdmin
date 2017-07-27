@@ -367,7 +367,8 @@ textarea {
 }
 
 .data-color {
-    color: #279293;
+    color: #888;
+    font-size: 9pt;
 }
 
 .data-comment {
@@ -438,7 +439,9 @@ textarea {
     border-left: 2px solid #ccc; /* Параметры линии */
     margin-left: 20px; /* Отступ слева */
     padding-left: 10px; /* Расстояние от линии до текста */
+    display: block;
 }
+
 
 #text {
     display: none;
@@ -458,6 +461,14 @@ textarea {
 
 .text-show {
     color: chocolate;
+}
+
+.add_comment {
+    display:block;
+    font-size: 50px;
+    position:fixed;
+    right: 40px;
+    bottom: 20px;
 }
 
 .add-post {
@@ -491,6 +502,7 @@ textarea {
 }
 .gallery-position {
     position: relative;
+    width: 100%;
 }
 .gallery-count {
     background: rgba(0, 0, 0, 0.5);
@@ -510,8 +522,8 @@ textarea {
 .dropdown-menu {
     background-color: #3B4047;!important;
     border: 1px solid #31BFC0;
-    border-radius: 0px;
     color: #FFFFFF;
+    border-radius: 0px;
 }
 
 .dropdown-menu > li > a {
@@ -538,4 +550,50 @@ textarea {
     position: absolute;
     top: 5px;
     right: 10px;
+}
+
+
+.comment-user-info .user-thumbnail,
+.comment-user-info .user-name {
+    display: inline-block;
+    vertical-align: middle;
+}
+.comment-user-info .user-name {
+    margin-left: 10px;
+    font-size: 11pt;
+}
+
+.comment-user-info .user-thumbnail img {
+    max-width: 30px;
+}
+
+.comment-menu-settings {
+    display: inline-block;
+    padding: 4px 5px 4px 25px;
+}
+
+.comment-edit {
+    position: relative;
+}
+.comment-edit .btn-primary {
+    position: absolute;
+    right: 37px;
+    bottom: 0;
+
+}
+.comment-edit .btn-danger {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-radius: 0px;
+
+}
+.comment-edit .form-control {
+    padding-right: 110px;
+}
+
+.small-thumbnail-delete-avatar {
+    position: absolute;
+    top: 5px;
+    left: 10px;
 }

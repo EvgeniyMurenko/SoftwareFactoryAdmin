@@ -39,7 +39,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         registry.viewResolver(viewResolver);
     }
 
-
     /**
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
      */

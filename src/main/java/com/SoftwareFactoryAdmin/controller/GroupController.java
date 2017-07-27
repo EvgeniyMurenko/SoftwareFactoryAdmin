@@ -1,11 +1,9 @@
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.comparator.FxmPostByDateComporator;
+import com.SoftwareFactoryAdmin.constant.AppRequestEnum;
 import com.SoftwareFactoryAdmin.model.*;
-import com.SoftwareFactoryAdmin.service.FxmCommentService;
-import com.SoftwareFactoryAdmin.service.FxmPostService;
-import com.SoftwareFactoryAdmin.service.ManagerInfoService;
-import com.SoftwareFactoryAdmin.service.UserService;
+import com.SoftwareFactoryAdmin.service.*;
 
 
 import com.SoftwareFactoryAdmin.util.AppMethods;
@@ -39,6 +37,12 @@ public class GroupController {
     @Autowired
     FxmCommentService fxmCommentService;
 
+    @Autowired
+    private PushNotificationService pushNotificationService;
+
+    @Autowired
+    private GoogleCloudKeyService googleCloudKeyService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getShowGroup() {
@@ -46,9 +50,7 @@ public class GroupController {
         ModelAndView getShowGroup = new ModelAndView("group");
 
         List<FxmPost> postList = fxmPostService.getAllFxmPosts();
-
         Collections.sort(postList, new FxmPostByDateComporator());
-
         List<FxmPostFile> fxmPostFileList = new ArrayList<>();
 
         for (FxmPost fxmPost : postList) {
@@ -70,11 +72,9 @@ public class GroupController {
 
         String translateComment = AppMethods.translate(comment.getCommentText(), "en");
 
-        System.out.println("========================== " + translateComment);
-
         StringBuilder stringBuilderTranslate = new StringBuilder();
 
-        stringBuilderTranslate.append("<div class=\"horizontal-line text-translate mt10\" >");
+        stringBuilderTranslate.append("<div class=\"horizontal-line mb10 mt10\" >");
         stringBuilderTranslate.append(translateComment);
         stringBuilderTranslate.append("</div>");
 
@@ -115,9 +115,12 @@ public class GroupController {
             fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, commentList);
 
             fxmPostService.addNewFxmPost(fxmPost);
+
+            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            pushNotificationService.pushNotificationToGCM(keys, fxmPost.getPostTextOriginal(), "FXM Group post!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
+
         }
 
-        System.out.println("=================== file size " + files.length);
         //SAVE FILE
         SaveFile saveFile = new SaveFile(files);
         saveFile.savePostFilesToPost(fxmPost);
@@ -139,13 +142,14 @@ public class GroupController {
 
         fxmCommentService.addFxmComment(fxmComment);
 
+        List<String> keys = googleCloudKeyService.findAllManagersKeys();
+        pushNotificationService.pushNotificationToGCM(keys, fxmComment.getCommentText(), "FXM Group comment!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         return new ModelAndView("redirect:/group/");
     }
 
     @RequestMapping(value = "/delete-post/{postId}")
     public ModelAndView deletePost(HttpSession httpSession, @PathVariable Long postId) {
-        System.out.println("================ delete post " + postId);
 
         FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
         fxmCommentService.deleteAllCommentByPost(fxmPost);
@@ -216,6 +220,28 @@ public class GroupController {
         return myJsonObj.toString();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/delete-comment", method = RequestMethod.GET)
+    public String deleteComment(@RequestParam("commentId") Long commentId) throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        FxmComment fxmComment = fxmCommentService.getFxmCommentById(commentId);
+
+        FxmPost fxmPost = fxmComment.getFxmPost();
+
+        StringBuilder stringBuilderCountComments = new StringBuilder();
+
+
+        if (fxmComment != null){
+            fxmCommentService.deleteFxmComment(fxmComment);
+            stringBuilderCountComments.append("<div class=\"row data-comment\" align=\"centre\" id=\"oldCountComments-"+fxmPost.getId()+"\">");
+            stringBuilderCountComments.append("<i class=\"fa fa-commenting\" aria-hidden=\"true\"></i> Comments: "+fxmPost.getFxmComments().size()+1+" ");
+            stringBuilderCountComments.append("</div>");
+        }
+        myJsonObj.append("countComments", stringBuilderCountComments);
+        return myJsonObj.toString();
+    }
+
     private StringBuilder addFileInstring(List<String> listFile, Long postId, String type) {
         StringBuilder stringBuilderFileAttach = new StringBuilder();
         if (listFile.size() > 0) {
@@ -248,27 +274,15 @@ public class GroupController {
         FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
         if (fxmPost != null) {
             switch (selectFrom) {
-                case "ru":
-                    fxmPost.setPostTextRu(fxmPost.getPostTextOriginal());
-                    break;
-                case "en":
-                    fxmPost.setPostTextEn(fxmPost.getPostTextOriginal());
-                    break;
-                case "ko":
-                    fxmPost.setPostTextKo(fxmPost.getPostTextOriginal());
-                    break;
+                case "ru": fxmPost.setPostTextRu(fxmPost.getPostTextOriginal()); break;
+                case "en": fxmPost.setPostTextEn(fxmPost.getPostTextOriginal()); break;
+                case "ko": fxmPost.setPostTextKo(fxmPost.getPostTextOriginal()); break;
             }
 
             switch (selectTo) {
-                case "ru":
-                    fxmPost.setPostTextRu(translateText);
-                    break;
-                case "en":
-                    fxmPost.setPostTextRu(translateText);
-                    break;
-                case "ko":
-                    fxmPost.setPostTextRu(translateText);
-                    break;
+                case "ru": fxmPost.setPostTextRu(translateText); break;
+                case "en": fxmPost.setPostTextEn(translateText); break;
+                case "ko": fxmPost.setPostTextKo(translateText); break;
             }
 
             fxmPostService.updateFxmPost(fxmPost);
@@ -276,6 +290,40 @@ public class GroupController {
         }
 
         return new ModelAndView("redirect:/group/");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get-comment-text-to-edit", method = RequestMethod.GET)
+    public String getCommentTextToEdit(@RequestParam("commentId") Long commentId) throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        FxmComment fxmComment = fxmCommentService.getFxmCommentById(commentId);
+
+        StringBuilder stringBuilderTextComment = new StringBuilder();
+
+        stringBuilderTextComment.append("<input class=\"form-control\" type=\"text\" id=\"newCommentText"+commentId+"\" value=\""+fxmComment.getCommentText()+"\">");
+
+        myJsonObj.append("stringBuilderTextComment",stringBuilderTextComment);
+
+        return myJsonObj.toString();
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/update-comment", method = RequestMethod.GET)
+    public String saveNewCommentText(@RequestParam("commentId") Long commentId,
+                                     @RequestParam("newTextComment") String newTextComment) throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        FxmComment fxmComment = fxmCommentService.getFxmCommentById(commentId);
+        fxmComment.setCommentText(newTextComment);
+        fxmCommentService.updateFxmComment(fxmComment);
+
+        myJsonObj.append("succes", "succes");
+
+        return myJsonObj.toString();
+
     }
 
 }

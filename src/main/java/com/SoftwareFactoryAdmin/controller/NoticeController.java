@@ -30,7 +30,11 @@ public class NoticeController {
 
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public ModelAndView noticesList() {
+    public ModelAndView noticesList(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
         ModelAndView modelAndView = new ModelAndView("noticesList");
 
         List<Notice> noticeList = noticeService.getAllNotices();

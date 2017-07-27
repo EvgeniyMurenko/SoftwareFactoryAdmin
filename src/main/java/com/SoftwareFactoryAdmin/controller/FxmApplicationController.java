@@ -18,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jnlp.PersistenceService;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;

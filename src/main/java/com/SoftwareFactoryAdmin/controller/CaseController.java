@@ -4,7 +4,9 @@ package com.SoftwareFactoryAdmin.controller;
 import com.SoftwareFactoryAdmin.constant.MessageEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
+import com.SoftwareFactoryAdmin.util.AppMethods;
 import com.SoftwareFactoryAdmin.util.SaveFile;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +43,11 @@ public class CaseController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase() {
+    public ModelAndView getManagerCabinetCase(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView managerAdminCabinetCase = new ModelAndView("casesList");
         List<Case> caseArrayList = caseService.findAllWhereUserIsNotDelete();
@@ -137,5 +143,36 @@ public class CaseController {
 
 
         return managerAdminCaseRespond;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get-messate-to-translate", method = RequestMethod.GET)
+    public String getTranslateComment(@RequestParam("messageId") Long messageId) throws Exception {
+        JSONObject myJsonObj = new JSONObject();
+
+        Message message = messageService.getMessageById(messageId);
+
+
+        StringBuilder stringBuilderMessageId = new StringBuilder();
+        stringBuilderMessageId.append("<input type=\"hidden\" name=\"messageId\" value=\""+message.getId()+"\">");
+
+        myJsonObj.append("stringBuilderMessageId", stringBuilderMessageId);
+        myJsonObj.append("textToTranslate", message.getMessageText());
+
+        return myJsonObj.toString();
+    }
+
+    @RequestMapping(value = "/save-message-translate", method = RequestMethod.POST)
+    public ModelAndView savePostTranslate(@RequestParam("messageId") Long messageId,
+                                          @RequestParam("translateText") String translateText) {
+
+        Message message = messageService.getMessageById(messageId);
+
+        if (translateText != null && !"".equals(translateText)) {
+            message.setMessageTranslateText(translateText);
+            messageService.updateMessage(message);
+        }
+
+        return new ModelAndView("redirect:/cases/"+message.getaCase().getId()+"/");
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/permission")
 @SessionAttributes("roles")
@@ -20,7 +22,11 @@ public class PermissionController {
     private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView permissionList() {
+    public ModelAndView permissionList(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView modelAndView = new ModelAndView("managerPermissionList");
 

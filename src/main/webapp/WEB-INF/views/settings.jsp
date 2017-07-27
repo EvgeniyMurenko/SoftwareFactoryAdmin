@@ -44,8 +44,27 @@
 
         <section class="content container-fluid">
 
-            <form class="form-horizontal" action="/settings/saveSettings/" method="post">
+            <form class="form-horizontal" action="/settings/saveSettings/" method="post" enctype="multipart/form-data">
                 <div class="col-md-8">
+
+                    <%if (currentManagerInfo.getUser().getAvatarImage()!= null && !"".equals(currentManagerInfo.getUser().getAvatarImage())){%>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <div class="small-thumbnail mb20">
+                                    <img class="img-responsive text-right" src="<%out.print("/get-file/avatar/"+currentManagerInfo.getUser().getAvatarImage());%>" alt="">
+                                    <a href="<c:url value="/settings/delete-avatar/" />" class="small-thumbnail-delete-avatar"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    <%}%>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Avatar</label>
+                        <div class="col-sm-9">
+                            <input id="avatarUpload" name="file[]" multiple type="file">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <%String name = "";%>
@@ -70,7 +89,7 @@
                         <%if (currentManagerInfo.getEmail()!= null) email = currentManagerInfo.getEmail();%>
                         <label class="col-sm-3 control-label">E-mail</label>
                         <div class="col-sm-9">
-                            <input type="email" name="email" class="form-control" value="<%out.print(email);%>" required/>
+                            <input type="email" name="email" class="form-control" value="<%out.print(email);%>" />
                         </div>
                     </div>
 

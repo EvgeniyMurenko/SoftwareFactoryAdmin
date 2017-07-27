@@ -3,6 +3,7 @@ package com.SoftwareFactoryAdmin.controller;
 import java.io.*;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -58,10 +59,6 @@ public class AppController {
 
         User currentUser = userService.findBySSO(getPrincipal());
 
-        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(currentUser.getId());
-        session.setAttribute("managerInfo", managerInfo);
-        session.setAttribute("managerPermission" , managerInfo.getManagerInfoPermissions());
-
         Set profiles = currentUser.getUserProfiles();
 
         UserProfile userProfile = null;
@@ -74,11 +71,16 @@ public class AppController {
         ModelAndView modelAndView = new ModelAndView("redirect:/main/");
 
         if (userProfile.getType().equals("MANAGER")) {
+            ManagerInfo managerInfo = managerInfoService.getManagerInfoById(currentUser.getId());
+            session.setAttribute("managerInfo", managerInfo);
+            session.setAttribute("managerPermission" , managerInfo.getManagerInfoPermissions());
             System.out.println("LOGIN AS MANAGER");
             modelAndView.setViewName("redirect:/dashboard/");
-        } else if (userProfile.getType().equals("ADMIN")) {
-            System.out.println("LOGIN AS ADMIN");
-            modelAndView.setViewName("redirect:/dashboard/");
+        }
+
+        String currentPath = (String) session.getAttribute("currentPath");
+        if (currentPath != null && !"".equals(currentPath)){
+            modelAndView.setViewName("redirect:"+currentPath);
         }
 
         System.out.println("currentUser.getId() ======"+currentUser.getId());
@@ -118,7 +120,7 @@ public class AppController {
     /**
      * This method handles Access-Denied redirect.
      */
-    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+    @RequestMapping(value = "/access-denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("loggedinuser", getPrincipal());
         return "accessDenied";
@@ -130,13 +132,14 @@ public class AppController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("TEST");
+        System.out.println("===============TEST");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             //new SecurityContextLogoutHandler().logout(request, response, auth);
             persistentTokenBasedRememberMeServices.logout(request, response, auth);
             SecurityContextHolder.getContext().setAuthentication(null);
         }
+        //request.
         request.getSession().invalidate();
         return "redirect:/main?logout";
     }

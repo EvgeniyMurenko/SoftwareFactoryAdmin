@@ -1,15 +1,11 @@
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.comparator.CaseByDateComporator;
-import com.SoftwareFactoryAdmin.comparator.CaseByStatusAndDateComparator;
 import com.SoftwareFactoryAdmin.comparator.EstimateByDateComparator;
 import com.SoftwareFactoryAdmin.model.Case;
 import com.SoftwareFactoryAdmin.model.Estimate;
-import com.SoftwareFactoryAdmin.model.ManagerInfo;
 import com.SoftwareFactoryAdmin.service.CaseService;
 import com.SoftwareFactoryAdmin.service.EstimateService;
-import com.SoftwareFactoryAdmin.service.ManagerInfoService;
-import com.SoftwareFactoryAdmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +31,11 @@ public class DashboardController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView dashboardView() {
+    public ModelAndView dashboardView(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView dashboardView = new ModelAndView("dashboard");
 

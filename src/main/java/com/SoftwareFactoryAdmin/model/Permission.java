@@ -1,6 +1,8 @@
 package com.SoftwareFactoryAdmin.model;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 import java.io.Serializable;
 
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "s_permission")
-public class Permission implements Serializable {
+public class Permission implements Serializable, HttpSessionBindingListener {
 
 
     public Permission (){}
@@ -175,5 +177,17 @@ public class Permission implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public void valueBound(HttpSessionBindingEvent httpSessionBindingEvent) {
+        Permission permission = (Permission)httpSessionBindingEvent.getValue();
+        System.out.println("=========New user bound in session with name: "+permission.getId());
+    }
+
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent httpSessionBindingEvent) {
+        Permission permission = (Permission)httpSessionBindingEvent.getValue();
+        System.out.println("=========User with name: " + permission.getId() + " removed from session");
     }
 }

@@ -10,8 +10,16 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
 
+    <%--<%if (null == request.getSession().getAttribute("managerInfo")) response.sendRedirect("/main");%>--%>
+
+
     <%ManagerInfo currentManagerInfo =  (ManagerInfo)request.getSession().getAttribute("managerInfo");%>
-    <%Permission currentPermission = (Permission) request.getSession().getAttribute("managerPermission");%>
+    <%if (currentManagerInfo == null) {
+        String currentPath = (String) request.getAttribute("javax.servlet.forward.request_uri");
+        request.getSession().setAttribute("currentPath", currentPath);
+        %><c:redirect url="/"/><%
+    }%>
+    <%Permission currentPermission =  (Permission) request.getSession().getAttribute("managerPermission");%>
 
     <aside class="sidebar-nav">
 
@@ -23,13 +31,15 @@
         <!-- Customer -->
         <div class="customer">
 
-            <div class="cust-thumbnail"><a href="javascript:void(0);"><img src="http://placehold.it/150x150" class="img-circle" alt=""></a></div>
+
+
+            <div class="cust-thumbnail"><a href="javascript:void(0);"><img src="<%out.print("/get-file/avatar/"+currentManagerInfo.getUser().getAvatarImage());%>" class="img-circle" alt=""></a></div>
             <div class="information">
                 <a href="javascript:void(0);">
                     <%if (currentManagerInfo != null){
                         out.print(currentManagerInfo.getName());
                     }else {
-                        response.sendRedirect("/");
+                        response.sendRedirect("/list");
                     }%>
                 </a>
             </div>

@@ -47,14 +47,14 @@
         <!-- Header -->
         <header class="header line">
             <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
-            <span class="header-title clearfix">Case: <%out.print(aCase.getProjectTitle());%></span>
+            <span class="header-title clearfix">Case: 유지보수</span>
         </header>
         <!-- #End Header -->
 
         <section class="content container-fluid">
 
             <div class="mb20">
-                <a href="/cases/" class="btn btn-default"><i class="fa fa-times-circle pr5"></i> Cancel & Back</a>
+                <a href="cases.html" class="btn btn-default"><i class="fa fa-times-circle pr5"></i> Cancel & Back</a>
             </div>
 
             <div class="background-01">
@@ -103,60 +103,100 @@
                     <%ArrayList<Message> messages = new ArrayList<Message>(aCase.getMessages());%>
                     <%messages.sort(new MessageByDateComparator());%>
 
-                    <%for (Message message : messages){
-                        Long userId =  new Long(message.getUser().getId());
-                        if(aCase.getProject().getCustomerInfo().getId().equals(userId)) {%>
-
+                    <%for (Message message : messages){%>
+                        <%Long userId =  new Long(message.getUser().getId());%>
+                        <%if(aCase.getProject().getCustomerInfo().getId().equals(userId)) {%>
                             <div class="message-left">
+                                <div class="row">
+                                    <div class="clearfix message-header">
+                                        <div class="col-xs-10 col-sm-6 title"><%out.print(aCase.getProject().getCustomerInfo().getName());%></div>
+                                        <div class="col-xs-10 col-sm-5" align="right"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                                        <div class="col-xs-2 col-sm-1" align="right">
+                                            <a onclick="translateCaseMessage(<%out.print(message.getId());%>)">
+                                                <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <%if (message.getMessageTranslateText()!= null && !"".equals(message.getMessageTranslateText())){%>
+                                        <div class="col-md-6 col-sm-12">
 
-                                <div class="clearfix message-header">
-                                    <div class="title"><%out.print(aCase.getProject().getCustomerInfo().getName());%></div>
-                                    <div class="date"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                                            <%out.print(message.getMessageText());%>
+                                            <%Set<MessageLink> messageLinks = message.getMessageLinks();
+                                                if (!messageLinks.isEmpty()) {
+                                                    for (MessageLink messageLink : messageLinks){
+                                                        out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
+                                                    }
+                                                }
+                                            %>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="horizontal-line">
+                                                <%out.print(message.getMessageTranslateText());%>
+                                            </div>
+                                        </div>
+                                    <%}else {%>
+                                        <div class="col-md-12 col-sm-12">
+                                            <%out.print(message.getMessageText());%>
+                                            <%Set<MessageLink> messageLinks = message.getMessageLinks();
+                                                if (!messageLinks.isEmpty()) {
+                                                    for (MessageLink messageLink : messageLinks){
+                                                        out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
+                                                    }
+                                                }
+                                            %>
+                                        </div>
+                                    <%}%>
                                 </div>
-
-                                <!-- Text message-->
-                                <%out.print(message.getMessageText());%>
-                                <!-- Text message-->
-
-                                <%Set<MessageLink> messageLinks = message.getMessageLinks();
-                                    if (!messageLinks.isEmpty()) {
-                                        for (MessageLink messageLink : messageLinks){
-                                            out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
-                                        }
-                                    }
-                                %>
-
                             </div>
-
                         <%}else {%>
-
                             <div class="message-right">
+                                <div class="row">
+                                    <div class="clearfix message-header">
+                                        <div class="col-xs-10 col-sm-6 title">Software Factory Team</div>
+                                        <div class="col-xs-10 col-sm-5" align="right"><%out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                                        <div class="col-xs-2 col-sm-1" align="right">
+                                            <a onclick="translateCaseMessage(<%out.print(message.getId());%>)">
+                                                <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
 
-                                <div class="clearfix message-header">
-                                    <div class="title">Software Factory Team</div>
-                                    <div class="date"><% out.print(dateFormatShow.format(message.getMessageTime())); %></div>
+                                    <%if (message.getMessageTranslateText()!= null && !"".equals(message.getMessageTranslateText())){%>
+                                        <div class="col-md-6 col-sm-12">
+                                            <%out.print(message.getMessageText());%>
+                                            <%Set<MessageLink> messageLinks = message.getMessageLinks();
+                                                if (!messageLinks.isEmpty()) {
+                                                    for (MessageLink messageLink : messageLinks){
+                                                        out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
+                                                    }
+                                                }
+                                            %>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="horizontal-line">
+                                                <%out.print(message.getMessageTranslateText());%>
+                                            </div>
+                                        </div>
+                                    <%} else {%>
+                                        <div class="col-md-12 col-sm-12">
+                                            <%out.print(message.getMessageText());%>
+                                            <%Set<MessageLink> messageLinks = message.getMessageLinks();
+                                                if (!messageLinks.isEmpty()) {
+                                                    for (MessageLink messageLink : messageLinks){
+                                                        out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
+                                                    }
+                                                }
+                                            %>
+                                        </div>
+                                    <%}%>
                                 </div>
-
-                                <!-- Text message-->
-                                <%out.print(message.getMessageText());%>
-                                <!-- Text message-->
-
-                                <%Set<MessageLink> messageLinks = message.getMessageLinks();
-                                    if (!messageLinks.isEmpty()) {
-                                        for (MessageLink messageLink : messageLinks){
-                                            out.print("<a href="+ messageLink.getFileLink() +" target='_blank'>"+messageLink.getFileName()+"</a><br>");
-                                        }
-                                    }
-                                %>
                             </div>
                         <%}%>
                     <%}%>
-
                 </div>
 
                 <%if (!aCase.getStatus().equals(StatusEnum.CLOSE.toString())){%>
                     <span class="content-title mt30">Case answer</span>
-
                     <form action="/cases/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-3">
@@ -165,9 +205,9 @@
                                 <h4 class="mb10">Appointment time</h4>
                                 <div class="form-group">
                                     <div class="input-group date" id="datetimepicker">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
                                         <input type="text" name="appointmentTime" class="form-control" />
                                     </div>
                                 </div>
@@ -196,6 +236,7 @@
                         </div>
                     </form>
                 <%}%>
+
             </div>
 
         </section>
@@ -204,6 +245,62 @@
     <!-- #End Page Content -->
 
 </div>
+
+<!-- Add translate modal -->
+<div class="modal fade" id="translateMessage">
+    <div class="modal-dialog modal-lg">
+        <form class="form-horizontal" action="/cases/save-message-translate/" method="post" >
+
+            <div id="messageId"></div>
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">
+                        <i class="fa fa-close"></i>
+                    </button>
+                    <h4 class="modal-title"><i class="fa fa-pencil" aria-hidden="true"></i> Translate text</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label class="control-label">Original text</label>
+                            <div class="scrollable">
+                                <div class="message-centre">
+                                    <div id="messageTextToTranslate">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class=control-label">Translate</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea id="textEdit" name="translateText"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="save" class="btn btn-primary">
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+                    </button>
+                    <button class="btn btn-default" type="button" data-dismiss="modal">
+                        <i class="fa fa-times-circle pr5"></i> Close
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End Add translate modal -->
 
 <%@ include file="javascript.jsp" %>
 

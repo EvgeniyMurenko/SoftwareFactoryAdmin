@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
     $('[data-toggle="tooltip"]').tooltip();
 
     // timeago
-    $("time.timeago").timeago();
+    $(".timeago").timeago();
 
     // datetimepicker
     $('#datetimepicker').datetimepicker({
@@ -62,6 +62,9 @@ jQuery(document).ready(function ($) {
     // Case upload file
     $("#chatUpload").fileinput();
     $("#uploadFile").fileinput();
+    $("#avatarUpload").fileinput({
+        maxFileCount: 1
+    });
 
     // Delete confirm
     function sebSweetConfirm(originLink) {
@@ -172,6 +175,7 @@ function getTranslateComment(commentId) {
             if (data.translateComment != '') {
                 $('.linkToHide'+commentId).remove();
                 document.getElementById('commentToTranslate'+commentId).innerHTML = data.translateComment;
+                document.getElementById('linkToHide'+commentId).style.display='none';
             }
         }
     });
@@ -249,6 +253,85 @@ function addNewPost() {
                     keyboard: true
                 });
                 document.getElementById('postIdToEdit').innerHTML = data.stringBuilderAdd;
+            }
+        }
+    });
+}
+
+function deleteComment(commentId, postId) {
+    $.ajax({
+        type: "GET",
+        data:{"commentId": commentId, "postId":postId},
+        url: globalPath+"/group/delete-comment/",
+        dataType: "json",
+        success: function (data) {
+            if (data.countComments != '') {
+                document.getElementById('commetn-'+commentId).style.display='none';
+                /*document.getElementById('oldCountComments-'+postId).style.display='none';
+
+                document.getElementById('countComments').innerHTML = data.countComments;*/
+            }
+        }
+    });
+}
+function getTextCommentEdit(commentId) {
+    $.ajax({
+        type: "GET",
+        data: "commentId=" + commentId,
+        url: globalPath+"/group/get-comment-text-to-edit/",
+        dataType: "json",
+        success: function (data) {
+            if (data.stringBuilderTextComment != '') {
+                document.getElementById('commentText'+commentId).style.display='none';
+                document.getElementById('editComment'+commentId).style.display='block';
+                document.getElementById('translateComment'+commentId).style.display='none';
+
+                document.getElementById('textToEdit'+commentId).innerHTML = data.stringBuilderTextComment;
+            }
+        }
+    });
+}
+
+
+function clouseEditComment(commentId) {
+    document.getElementById('commentText'+commentId).style.display='block';
+    document.getElementById('translateComment'+commentId).style.display='block';
+    document.getElementById('editComment'+commentId).style.display='none';
+
+}
+
+function updateComment(commentId) {
+    var newTextComment = $('#newCommentText'+commentId).val();
+    $.ajax({
+        type: "GET",
+        data:{"commentId": commentId, "newTextComment":newTextComment},
+        url: globalPath+"/group/update-comment/",
+        dataType: "json",
+        success: function (data) {
+            if (data.succes != '') {
+                document.getElementById('commentText'+commentId).style.display='block';
+                document.getElementById('translateComment'+commentId).style.display='block';
+                document.getElementById('editComment'+commentId).style.display='none';
+                document.getElementById('commentText'+commentId).innerHTML = newTextComment;
+            }
+        }
+    });
+}
+
+function translateCaseMessage(messageId) {
+    $.ajax({
+        type: "GET",
+        data: "messageId=" + messageId,
+        url: globalPath+"/cases/get-messate-to-translate/",
+        dataType: "json",
+        success: function (data) {
+            if (data.textToTranslate != '') {
+                $('#translateMessage').modal({
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                document.getElementById('messageTextToTranslate').innerHTML = data.textToTranslate;
+                document.getElementById('messageId').innerHTML = data.stringBuilderMessageId;
             }
         }
     });

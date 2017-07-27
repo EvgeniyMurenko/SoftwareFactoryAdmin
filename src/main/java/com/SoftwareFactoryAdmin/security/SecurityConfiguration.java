@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,14 +39,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers( "/list")
+		http.authorizeRequests()
+				.antMatchers( "/", "/list")
 				.access("hasRole('MANAGER') or hasRole('ADMIN')")
 				.antMatchers("/estimate*//**", "/cases*//**", "/customer-mm*//**", "/staff-mm*//**", "/project-mm*//**", "/notice*//**").access("hasRole('ADMIN') or hasRole('MANAGER')")
 				.and().formLogin().loginPage("/main")
 				.loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()
 				.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
-				.tokenValiditySeconds(86400).and().exceptionHandling().accessDeniedPage("/Access_Denied").and().csrf().disable();
-
+				.tokenValiditySeconds(86400).and().exceptionHandling().accessDeniedPage("/access-denied").and().csrf().disable();
 	}
 
 	@Bean

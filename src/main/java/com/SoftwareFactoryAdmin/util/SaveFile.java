@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -142,7 +141,9 @@ public class SaveFile {
         if (files.length < 1) return;
         if (files[0].isEmpty()) return;
 
+
         pathForSaveFile = MainPathEnum.mainPath + "/post/";
+
 
         if (!this.files[0].isEmpty()) {
             String images = "";
@@ -160,7 +161,9 @@ public class SaveFile {
             }
 
             for (MultipartFile file : this.files) {
+
                 String name = file.getOriginalFilename();
+
                 String generatedName = generateUUIDname(name);
 
                 if (this.imageExpansion.indexOf(getFileExtension(file)) > -1) {
@@ -186,7 +189,6 @@ public class SaveFile {
     }
 
     public static void deleteAvatarFromUser(User user) {
-
 
         String filePath = MainPathEnum.mainPath + "/avatar/" + user.getAvatarImage();
 

@@ -39,7 +39,11 @@ public class ProjectManagementController {
     private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase() {
+    public ModelAndView getManagerCabinetCase(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView projects = new ModelAndView("projectsList");
 

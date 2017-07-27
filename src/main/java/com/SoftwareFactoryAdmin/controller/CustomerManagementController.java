@@ -30,7 +30,11 @@ public class CustomerManagementController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView customerList() {
+    public ModelAndView customerList(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView customersList = new ModelAndView("customersList");
 

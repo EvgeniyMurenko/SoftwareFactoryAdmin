@@ -5,9 +5,11 @@ import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.service.ManagerInfoService;
 import com.SoftwareFactoryAdmin.service.UserService;
 import com.SoftwareFactoryAdmin.util.AppMethods;
+import com.SoftwareFactoryAdmin.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +31,11 @@ public class SettingsController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetCase() {
+    public ModelAndView getManagerSettings(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView settingsView = new ModelAndView("settings");
 
@@ -38,13 +44,14 @@ public class SettingsController {
 
     @ResponseBody
     @RequestMapping(value = "/saveSettings", method = RequestMethod.POST)
-    public ModelAndView infoSettings(HttpSession httpSession,
+    public ModelAndView saveSettings(HttpSession httpSession,
                               @RequestParam("name") String name,
                               @RequestParam("phone") String phone,
                               @RequestParam("email") String email,
                               @RequestParam("birthday") String birthday,
                               @RequestParam("newPassword") String newPassword,
-                              @RequestParam("confirmNewPassword") String confirmNewPassword) {
+                              @RequestParam("confirmNewPassword") String confirmNewPassword,
+                              @RequestParam("file[]") MultipartFile[] avatarImage) {
 
         Long managerId = (Long) httpSession.getAttribute("UserId");
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
@@ -60,12 +67,37 @@ public class SettingsController {
         managerInfo.setEmail(email);
         Date birthdayManager = AppMethods.getDateFromString(birthday);
         managerInfo.setBirthday(birthdayManager);
-
         managerInfoService.updateManagerInfo(managerInfo);
+
+        User user = managerInfo.getUser();
+        //SAVE FILE
+        SaveFile saveFile = new SaveFile(avatarImage);
+        saveFile.saveAvatarToUser(user);
+        userService.updateUser(user);
+
 
         httpSession.setAttribute("managerInfo", managerInfo);
 
         return new ModelAndView("redirect:/settings/");
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/delete-avatar", method = RequestMethod.GET)
+    public ModelAndView saveSettings(HttpSession httpSession){
+        Long managerId = (Long) httpSession.getAttribute("UserId");
+
+        ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);
+
+        System.out.println("=============================/delete-avatar");
+
+        User user = managerInfo.getUser();
+        //SAVE FILE
+        SaveFile.deleteAvatarFromUser(user);
+        userService.updateUser(user);
+
+        httpSession.setAttribute("managerInfo", managerInfo);
+
+        return new ModelAndView("redirect:/settings/");
+    }
 }

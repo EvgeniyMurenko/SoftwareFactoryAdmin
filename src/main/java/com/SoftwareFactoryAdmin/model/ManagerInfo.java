@@ -1,8 +1,12 @@
 package com.SoftwareFactoryAdmin.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -10,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "s_manager_info")
-public class ManagerInfo implements Serializable {
+public class ManagerInfo extends HandlerInterceptorAdapter implements Serializable, HttpSessionBindingListener {
 
     public ManagerInfo() {
     }
@@ -121,5 +125,26 @@ public class ManagerInfo implements Serializable {
 
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+    @Override
+    public void valueBound(HttpSessionBindingEvent httpSessionBindingEvent) {
+        ManagerInfo managerInfo = (ManagerInfo)httpSessionBindingEvent.getValue();
+        System.out.println("=========New user bound in session with name: "+managerInfo.getName());
+    }
+
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent httpSessionBindingEvent) {
+        ManagerInfo managerInfo = (ManagerInfo)httpSessionBindingEvent.getValue();
+        System.out.println("=========User with name: " + managerInfo.getName() + " removed from session");
+    }
+
+    public static boolean isUserLogged() {
+        try {
+            return !SecurityContextHolder.getContext().getAuthentication()
+                    .getName().equals("anonymousUser");
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -9,6 +9,19 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RequestMapping("/error")
 public class AdviceExceptionController {
 
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleAll(Exception ex){
+        ModelAndView exceptionView;
+        if (NoHandlerFoundException.class.isInstance(ex)){
+            exceptionView =new  ModelAndView("redirect:/error/404");
+        } else {
+            exceptionView = new ModelAndView("404");
+            exceptionView.addObject("number" , ex);
+            exceptionView.addObject("error" ,ex.getMessage());
+        }
+        return exceptionView;
+    }
+
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handle(Exception ex) {
         return "redirect:/error/404";

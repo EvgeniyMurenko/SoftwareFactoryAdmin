@@ -17,13 +17,14 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, Set<MessageLink> messageLinks) {
+    public Message(Case aCase, User user, Date messageTime, String messageText, String isRead, Set<MessageLink> messageLinks, String messageTranslateText) {
         this.aCase = aCase;
         this.user = user;
         this.messageTime = messageTime;
         this.messageText = messageText;
         this.isRead = isRead;
         this.messageLinks = messageLinks;
+        this.messageTranslateText = messageTranslateText;
     }
 
     @Id
@@ -47,6 +48,10 @@ public class Message implements Serializable {
     @Column(name = "message_text")
     @Type(type = "text")
     private String messageText;
+
+    @Column(name = "message_translate_text")
+    @Type(type = "text")
+    private String messageTranslateText;
 
     @Column(name = "is_read")
     private String isRead;
@@ -109,5 +114,13 @@ public class Message implements Serializable {
 
     public void setMessageLinks(Set<MessageLink> messageLinks) {
         this.messageLinks = messageLinks;
+    }
+
+    public String getMessageTranslateText() {
+        return messageTranslateText;
+    }
+
+    public void setMessageTranslateText(String messageTranslateText) {
+        this.messageTranslateText = messageTranslateText;
     }
 }

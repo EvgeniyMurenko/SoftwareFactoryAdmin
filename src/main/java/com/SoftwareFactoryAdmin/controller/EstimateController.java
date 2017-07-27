@@ -41,7 +41,11 @@ public class EstimateController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getManagerCabinetEstimate() {
+    public ModelAndView getManagerCabinetEstimate(HttpSession session) {
+
+        if (session.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }
 
         ModelAndView adminCabinetEstimate = new ModelAndView("/estimatesList");
         List<Estimate> estimates = estimateService.findAllWhereUserIsNotDelete();

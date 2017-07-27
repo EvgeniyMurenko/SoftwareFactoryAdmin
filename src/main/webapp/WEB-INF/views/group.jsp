@@ -1,7 +1,10 @@
-<%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.*" %>
 <%@ page import="com.SoftwareFactoryAdmin.util.FxmPostFile" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.TimeZone" %>
+<%@ page import="java.sql.Time" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -63,16 +66,17 @@
                                     <div class="background-02">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="col-xs-2 col-sm-2">
+                                                <div class="col-xs-2 col-sm-1">
+                                                    <a class="user-thumbnail"><img src="/get-file/avatar/<%out.print(fxmPostFile.getFxmPost().getUser().getAvatarImage());%>" class="img-responsive img-circle"/></a>
                                                 </div>
-                                                <div class="col-xs-8 col-sm-9">
+                                                <div class="col-xs-8 col-sm-10">
                                                     <div class="row mb10"><a href=""><%out.print(fxmPostFile.getFxmPost().getUserName());%></a></div>
                                                     <div class="row data-color"><%out.print(dateFormatShow.format(fxmPostFile.getFxmPost().getDate()));%></div>
                                                 </div>
                                                 <div class="col-xs-2 col-sm-1" align="right">
                                                     <%if(currentPermission.getTranslatePermission() || currentPermission.getSuperAdminPermission() || fxmPostFile.getFxmPost().getUser().getId() == currentManagerInfo.getUser().getId()){%>
                                                         <a data-toggle="dropdown">
-                                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-right">
                                                             <%if (currentPermission.getTranslatePermission()) {%>
@@ -97,9 +101,9 @@
                                                     <div class="tabs">
                                                         <ul class="nav nav-tabs">
                                                             <li class="active"><a href="<%out.print("#tab-1-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">Original langue</a></li>
-                                                            <%if (fxmPostFile.getFxmPost().getPostTextEn()!= null){%><li><a href="<%out.print("#tab-2-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">English language</a></li><%}%>
-                                                            <%if (fxmPostFile.getFxmPost().getPostTextRu()!= null){%><li><a href="<%out.print("#tab-3-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">Russian language</a></li><%}%>
-                                                            <%if (fxmPostFile.getFxmPost().getPostTextKo()!= null){%><li><a href="<%out.print("#tab-4-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">Korean language</a></li><%}%>
+                                                            <%if (fxmPostFile.getFxmPost().getPostTextEn()!= null && !"".equals(fxmPostFile.getFxmPost().getPostTextEn())){%><li><a href="<%out.print("#tab-2-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">English language</a></li><%}%>
+                                                            <%if (fxmPostFile.getFxmPost().getPostTextRu()!= null && !"".equals(fxmPostFile.getFxmPost().getPostTextRu())){%><li><a href="<%out.print("#tab-3-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">Russian language</a></li><%}%>
+                                                            <%if (fxmPostFile.getFxmPost().getPostTextKo()!= null && !"".equals(fxmPostFile.getFxmPost().getPostTextKo())){%><li><a href="<%out.print("#tab-4-"+fxmPostFile.getFxmPost().getId());%>" data-toggle="tab">Korean language</a></li><%}%>
                                                         </ul>
                                                         <br>
                                                         <div class="tab-content">
@@ -135,11 +139,12 @@
                                                         <div class="gallery">
                                                             <div class="row">
                                                                 <div class="col-md-12 gallery-position">
-                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" data-fancybox="gallery">
+                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>">
                                                                         <img src="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" class="img-responsive">
                                                                     </a>
-
-                                                                    <span class="gallery-count"><%out.print("+"+fxmPostFile.getImageList().size());%></span>
+                                                                    <%if (fxmPostFile.getImageList().size()>1){%>
+                                                                        <span class="gallery-count"><%out.print("+"+fxmPostFile.getImageList().size());%></span>
+                                                                    <%}%>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -147,7 +152,7 @@
                                                         <div style="display: none !important; visibility: hidden !important;">
                                                             <%if (fxmPostFile.getImageList().size()>1){%>
                                                                 <%for (int i = 1; i < fxmPostFile.getImageList().size(); i++){%>
-                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="gallery">
+                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>">
                                                                         <img src="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" class="img-responsive">
                                                                     </a>
                                                                 <%}%>
@@ -176,42 +181,88 @@
 
                                     <span class="line"></span>
 
-                                    <div class="row data-comment" align="centre">
+                                    <div id="countComments-<%out.print(fxmPostFile.getFxmPost().getId());%>"></div>
+                                    <div class="row data-comment" align="centre" id="oldCountComments-<%out.print(fxmPostFile.getFxmPost().getId());%>">
                                         <i class="fa fa-commenting" aria-hidden="true"></i> Comments: <%out.print(fxmPostFile.getFxmPost().getFxmComments().size());%>
                                     </div>
 
                                     <!-- View comments-->
-
                                     <%if (fxmPostFile.getFxmPost().getFxmComments().size()>0){%>
                                         <%for (FxmComment comment :fxmPostFile.getFxmPost().getFxmComments()){%>
-                                            <div class="row mt10">
+                                            <div class="row mt10" id="commetn-<%out.print(comment.getId());%>">
                                                 <div class="col-sm-12">
                                                     <div class="background-02">
+
                                                         <div class="row">
-                                                            <div class="col-sm-2">
-                                                                <span class="content">
-                                                                    <a href=""><%out.print(comment.getUserName());%></a>
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-sm-10">
-                                                                <%out.print(comment.getCommentText());%>
+                                                            <div class="col-md-6 col-sm-6 col-xs-6">
 
-                                                                <div id="<%out.print("commentToTranslate"+comment.getId());%>">
-
+                                                                <!-- Customer small info -->
+                                                                <div class="comment-user-info clearfix">
+                                                                    <a class="user-thumbnail"><img src="/get-file/avatar/<%out.print(comment.getUser().getAvatarImage());%>" class="img-responsive img-circle"/></a>
+                                                                    <a href="javascript:void(0);" class="user-name"><%out.print(comment.getUserName());%></a>
                                                                 </div>
-                                                                <div class="<%out.print("linkToHide"+comment.getId());%>">
-                                                                    <a onclick="getTranslateComment(<%out.print(comment.getId());%>)">Translate</a>
+                                                                <!-- #End Customer small info -->
+
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+
+                                                                <!-- Commnet menu settings -->
+                                                                <%if (comment.getUser().getId() == currentManagerInfo.getUser().getId() || currentPermission.getSuperAdminPermission()){%>
+                                                                    <a data-toggle="dropdown" class="comment-menu-settings"><i class="fa fa-ellipsis-v " aria-hidden="true"></i></a>
+
+                                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                                        <%if (comment.getUser().getId() == currentManagerInfo.getUser().getId()){%>
+                                                                            <li><a onclick="getTextCommentEdit(<%out.print(comment.getId());%>)">Edit</a></li>
+                                                                        <%}%>
+                                                                        <%if (comment.getUser().getId() == currentManagerInfo.getUser().getId() || currentPermission.getSuperAdminPermission()){%>
+                                                                            <li><a onclick="deleteComment(<%out.print(comment.getId()+", "+fxmPostFile.getFxmPost().getId());%>)">Delete</a></li>
+                                                                        <%}%>
+                                                                    </ul>
+                                                                <%}%>
+                                                                <!-- #End Commnet menu settings -->
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+
+                                                                <!-- Comment -->
+                                                                <div id="<%out.print("commentText"+comment.getId());%>" class="mt10 mb10">
+                                                                    <%out.print(comment.getCommentText());%>
+                                                                    <div id="<%out.print("commentToTranslate"+comment.getId());%>"></div>
                                                                 </div>
 
-                                                                <div class="data-color" align="right"><%out.print(dateFormatShow.format(comment.getDate()));%></div>
+                                                                <%TimeZone timeZone = TimeZone.getDefault();
+                                                                Long time = comment.getDate().getTime();
+                                                                time-= timeZone.getRawOffset();
+                                                                Date date = new Date(time);%>
+                                                                <div class="data-color" id="<%out.print("translateComment"+comment.getId());%>">
+                                                                    <span class="timeago mr10 mt10" title='<%out.print(dateFormatShow.format(date)+"Z");%>'></span>
+                                                                    <div id="<%out.print("linkToHide"+comment.getId());%>">
+                                                                        <a onclick="getTranslateComment(<%out.print(comment.getId());%>)">Translate</a>
+                                                                    </div>
+                                                                </div>
+
+                                                                <%--Comment Edit--%>
+                                                                <div id="<%out.print("editComment"+comment.getId());%>" class="mt10 mb10" style="display: none;">
+                                                                    <div class="comment-edit">
+                                                                        <div id="<%out.print("textToEdit"+comment.getId());%>"></div>
+
+                                                                        <a onclick="updateComment(<%out.print(comment.getId());%>)" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                                        <a onclick="clouseEditComment(<%out.print(comment.getId());%>)" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                                <%--End Comment Edit--%>
+
                                                             </div>
+                                                            <!-- #End Comment -->
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         <%}%>
                                     <%}%>
-
                                     <!-- END View comment-->
 
                                     <!-- Create new commnet-->
