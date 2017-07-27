@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,9 @@ import com.SoftwareFactoryAdmin.model.Message;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.model.UserProfile;
 import com.SoftwareFactoryAdmin.service.*;
+import com.SoftwareFactoryAdmin.util.SaveFile;
+import org.bytedeco.javacv.FFmpegFrameGrabber;
+import org.bytedeco.javacv.FrameGrabber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -82,8 +86,8 @@ public class AppController {
             modelAndView.setViewName("redirect:"+currentPath);
         }
 
-        System.out.println("currentUser.getId() ======"+currentUser.getId());
-        System.out.println("userProfile.getType() ======="+userProfile.getType());
+        System.out.println("currentUser.getId() ======" + currentUser.getId());
+        System.out.println("userProfile.getType() =======" + userProfile.getType());
 
 
         session.setAttribute("UserId", currentUser.getId());
