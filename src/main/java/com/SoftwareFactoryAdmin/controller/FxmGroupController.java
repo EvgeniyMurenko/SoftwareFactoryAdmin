@@ -8,6 +8,7 @@ import com.SoftwareFactoryAdmin.dto.base.ServerRequest;
 import com.SoftwareFactoryAdmin.dto.base.ServerResponse;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
+import com.SoftwareFactoryAdmin.util.FxmPostFile;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,6 @@ public class FxmGroupController {
 
     @Autowired
     private ManagerInfoService managerInfoService;
-
-
 
 
     @ResponseBody
@@ -108,11 +107,10 @@ public class FxmGroupController {
 
             fxmPostService.addNewFxmPost(fxmPost);
 
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
-
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost.getId());
 
             List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!" ,AppRequestEnum.GROUP_PUSH_TYPE.toString());
+            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 
@@ -133,7 +131,7 @@ public class FxmGroupController {
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
             List<String> keys = googleCloudKeyService.findAllManagersKeys();
-            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
+            pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(DELETE_POST_REQUEST.toString())) {
 
@@ -145,9 +143,13 @@ public class FxmGroupController {
 
             FxmPost fxmPost = fxmPostService.getFxmPostById(postID);
 
+            FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+
+            fxmPostFile.deleteAllFileFromPost();
+
             fxmPostService.deleteFxmPost(fxmPost);
 
-            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost);
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
         } else if (requestType.equals(DELETE_COMMENT_REQUEST.toString())) {
 
@@ -168,7 +170,7 @@ public class FxmGroupController {
             Type postType = new TypeToken<ServerRequest<PostDTO>>() {
             }.getType();
 
-             ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
+            ServerRequest<PostDTO> updatePostRequest = new Gson().fromJson(request, postType);
 
             PostDTO postDTO = (PostDTO) updatePostRequest.getDataTransferObject();
 
@@ -182,13 +184,18 @@ public class FxmGroupController {
 
             fxmPost.setPostTextKo(postDTO.getPostTextKo());
 
+            FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
+
+            fxmPostFile.compareFilesFromDtoAndMakeChanges(postDTO);
+
             fxmPostService.updateFxmPost(fxmPost);
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
         } else if (requestType.equals(UPDATE_COMMENT_REQUEST.toString())) {
 
-            Type commentType = new TypeToken<ServerRequest<CommentDTO>>() {}.getType();
+            Type commentType = new TypeToken<ServerRequest<CommentDTO>>() {
+            }.getType();
 
             ServerRequest<CommentDTO> updateCommentRequest = new Gson().fromJson(request, commentType);
 

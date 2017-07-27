@@ -15,8 +15,6 @@ public class DtoConverter {
 
         Permission permission = managerInfo.getManagerInfoPermissions();
 
-        ;
-
         ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), new PermissionDTO(permission.getSuperAdminPermission(), permission.getEstimatePermission(), permission.getCasePermission(), permission.getCustomerPermission(), permission.getProjectsPermission(), permission.getStaffPermission(), permission.getNoticePermission(), permission.getPermissionManagement(), permission.getTranslatePermission()));
 
         return managerInfoDTO;
@@ -50,12 +48,13 @@ public class DtoConverter {
         return messageDTOS;
     }
 
+
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
-        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo());
+        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo() ,fxmPost.getLinksFile(), fxmPost.getLinksVideo() , fxmPost.getLinksImage() ,fxmPost.getUser().getAvatarImage());
     }
 
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {
-        return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId());
+        return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId(), fxmComment.getUser().getAvatarImage());
     }
 
 

@@ -3,9 +3,12 @@ package com.SoftwareFactoryAdmin.util;
 import com.SoftwareFactoryAdmin.constant.GlobalEnum;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
+import org.bytedeco.javacv.FFmpegFrameGrabber;
+import org.bytedeco.javacv.FrameGrabber;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.imageio.ImageIO;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -150,13 +153,13 @@ public class SaveFile {
             String videos = "";
             String files = "";
 
-            if (fxmPost.getLinksImage()!= null && !"".equals(fxmPost.getLinksImage())){
+            if (fxmPost.getLinksImage() != null && !"".equals(fxmPost.getLinksImage())) {
                 images += fxmPost.getLinksImage();
             }
-            if (fxmPost.getLinksVideo()!= null && !"".equals(fxmPost.getLinksVideo())){
+            if (fxmPost.getLinksVideo() != null && !"".equals(fxmPost.getLinksVideo())) {
                 videos += fxmPost.getLinksVideo();
             }
-            if (fxmPost.getLinksFile()!= null && !"".equals(fxmPost.getLinksFile())){
+            if (fxmPost.getLinksFile() != null && !"".equals(fxmPost.getLinksFile())) {
                 files += fxmPost.getLinksFile();
             }
 
@@ -176,6 +179,9 @@ public class SaveFile {
 
                 try {
                     saveFile(generatedName, file);
+                    if (this.videoExpansion.indexOf(getFileExtension(file)) > -1){
+                        saveVideoThumbnail(generatedName);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -279,6 +285,42 @@ public class SaveFile {
         }
     }
 
+    private File saveVideoThumbnail(String fileName) {
+
+        File fileDirectory = new File(MainPathEnum.videoThumbnailsFilesPath.toString());
+        fileDirectory.setReadable(true, false);
+        fileDirectory.setExecutable(true, false);
+        fileDirectory.setWritable(true, false);
+        if (!fileDirectory.exists()) {
+            fileDirectory.mkdirs();
+        }
+        // Create the file on server
+        File serverFile = new File(MainPathEnum.videoThumbnailsFilesPath.toString()  + fileName + ".png");
+
+        serverFile.setReadable(true, false);
+        serverFile.setExecutable(true, false);
+        serverFile.setWritable(true, false);
+
+
+        String fileExtension = "";
+
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            fileExtension =  fileName.substring(fileName.lastIndexOf(".") + 1);
+        }
+
+        FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(MainPathEnum.mainPath + "/post/" + fileName);
+        fFmpegFrameGrabber.setFormat(fileExtension);
+        try {
+            fFmpegFrameGrabber.start();
+            ImageIO.write(fFmpegFrameGrabber.grab().getBufferedImage(), "png", serverFile);
+            fFmpegFrameGrabber.stop();
+        } catch (FrameGrabber.Exception | IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return serverFile;
+    }
 
 }
 
