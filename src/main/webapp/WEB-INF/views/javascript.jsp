@@ -34,7 +34,11 @@
 <!-- Ckeditor -->
 <script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 
+<!-- select2 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <!-- Base -->
 <script type="text/javascript" src="/resources/js/main.js"></script>
+
 
 

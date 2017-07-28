@@ -6,7 +6,10 @@ import com.SoftwareFactoryAdmin.model.ManagerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service("managerInfoService")
@@ -51,5 +54,21 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
         return managerInfoDao.findAllWithPermissions();
     }
 
+    @Override
+    public Set<ManagerInfo> findMultiplyManagerInfoById(List<String> ids) {
+        List<Long> longIds = new ArrayList<>();
+        for (String id : ids) {
+            longIds.add(Long.valueOf(id));
+        }
+        List<ManagerInfo> managerInfos = managerInfoDao.findMultiManagerInfoById(longIds);
+
+        return managerInfos.stream().collect(Collectors.toSet());
+
+    }
+
+    @Override
+    public List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id){
+        return managerInfoDao.getAllManagerInfosExceptOneManager(id);
+    }
 
 }

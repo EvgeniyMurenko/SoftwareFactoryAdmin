@@ -87,6 +87,7 @@ public class UserServiceImpl implements UserService {
     private User createUser(String type , int typeId, String password){
 
         User user = new User();
+        user.setAvatarImage("");
         user.setSsoId(UUID.randomUUID().toString());
         user.setPassword(UUID.randomUUID().toString());
         user.setGoogleCloudKeys(new HashSet<>());

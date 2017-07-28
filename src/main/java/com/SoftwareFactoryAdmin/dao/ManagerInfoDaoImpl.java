@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.OneToMany;
 import java.util.List;
 
 
@@ -62,6 +63,20 @@ public class ManagerInfoDaoImpl implements ManagerInfoDao {
         Query query = session.createQuery("select distinct managerInfo from ManagerInfo managerInfo " +
                 "left join fetch managerInfo.user " +
                 "left join fetch managerInfo.managerInfoPermissions");
+        return query.list();
+    }
+
+    @Override
+    public List<ManagerInfo> findMultiManagerInfoById(List<Long> ids){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from ManagerInfo mi where mi.id in (:ids)").setParameterList("ids", ids);
+        return query.list();
+    }
+
+    @Override
+    public List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from ManagerInfo mi where mi.id != :id").setParameter("id", id);
         return query.list();
     }
 }

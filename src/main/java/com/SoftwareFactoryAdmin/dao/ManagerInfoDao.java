@@ -18,4 +18,8 @@ public interface ManagerInfoDao {
     List<ManagerInfo> findAll();
 
     List<ManagerInfo> findAllWithPermissions();
+
+    List<ManagerInfo> findMultiManagerInfoById(List<Long> ids);
+
+    List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id);
 }

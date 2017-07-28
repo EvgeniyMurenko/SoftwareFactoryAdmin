@@ -4,6 +4,8 @@ globalPath = "http://localhost:8080";
 
 jQuery(document).ready(function ($) {
 
+    $(".js-example-basic-multiple").select2();
+
     // Back to top
     var offset = 300,
         offset_opacity = 1200,

@@ -28,6 +28,12 @@
 <link href="/resources/css/style.css" rel="stylesheet"/>
 <link href="/resources/css/responsive.css" rel="stylesheet"/>
 
+<%--Select 2--%>
+<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap/select2.css"/>
+<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap/select2-bootstrap.min.css"/>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
 <!--[if lt IE 9]>
 <script src="/resources/js/other/html5shiv.js"></script>
 <script src="/resources/js/other/respond.min.js"></script>
