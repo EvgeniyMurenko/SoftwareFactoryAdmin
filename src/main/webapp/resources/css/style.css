@@ -196,6 +196,31 @@
     margin-bottom: 20px;
 }
 
+/*.message-right-color{
+    border-right: 10px solid !important;
+}*/
+.message-right-red{
+    border-right: 10px solid red !important; /*border-color: green;*/
+}
+.message-right-green{
+    border-right: 10px solid green !important;
+}
+.message-right-orange{
+    border-right: 10px solid orange !important;
+}
+.message-right-grey{
+    border-right: 10px solid grey !important;
+}
+
+
+.buttons-container{
+    display:block;
+}
+.inline-buttons{
+    display:inline-block;
+}
+
+
 .message-centre {
     padding: 10px;
     margin-bottom: 10px;
@@ -596,4 +621,10 @@ textarea {
     position: absolute;
     top: 5px;
     left: 10px;
+}
+
+.select2-container--default .select2-selection--multiple{
+    background-color: #3b444a!important;
+    border-radius: 0px!important;
+    border: solid 1px #000000 !important;
 }

@@ -24,4 +24,5 @@ public interface GoogleCloudKeyService {
 
     List<String> findAllStaffKeys();
 
+    List<String> findAllKeysByUserIds(List<Long> ids);
 }

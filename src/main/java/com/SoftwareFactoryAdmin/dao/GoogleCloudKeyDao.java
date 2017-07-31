@@ -23,4 +23,7 @@ public interface GoogleCloudKeyDao {
 
     List<String> findAllKeysByUserType(String userType);
 
+    List<String> findAllKeysByUserIds(List<Long> ids);
+
+
 }

@@ -1,8 +1,12 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="com.SoftwareFactoryAdmin.model.StaffHistory" %>
 <%@ page import="java.util.Collections" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.*" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskMessagesByDateComparator" %>
+<%@ page import="com.SoftwareFactoryAdmin.constant.StatusEnum" %>
+<%@ page import="com.sun.xml.internal.ws.api.message.Packet" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -32,9 +36,12 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <%ManagerInfo  = (ManagerInfo) request.getAttribute("staffInfo");%>
+    <%TossTask tossTask  = (TossTask) request.getAttribute("tossTask");%>
     <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-    <%List<StaffHistory> staffHistories = staffInfo.getStaffHistories();%>
+    <%Set<TossTaskMessage> tossTaskMessages = tossTask.getTossTaskMessages();%>
+    <%List <TossTaskMessage> taskMessages = new ArrayList<>(tossTaskMessages);%>
+    <%taskMessages.sort(new TossTaskMessagesByDateComparator());%>
+    <%List <ManagerInfo> managerInfos = new ArrayList<>(tossTask.getManagerInfoEngaged());%>
 
     <%@ include file="leftCategoriesMenu.jsp" %>
 
@@ -44,73 +51,65 @@
         <!-- Header -->
         <header class="header line">
             <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
-            <span class="header-title clearfix"><%out.print(staffInfo.getName() + " :: History");%></span>
+            <span class="header-title clearfix"><%out.print(tossTask.getTitle());%></span>
         </header>
         <!-- #End Header -->
-
 
         <!-- Content section -->
         <section class="container-fluid content">
 
             <div class="mb20">
-                <a href="/membership-mm/" class="btn btn-primary"><i class="fa fa-users pr10"></i>Back to staff list</a>
+                <a href="/toss/" class="btn btn-primary"><i class="fa fa-users pr10"></i>Back to toss list</a>
             </div>
 
             <div class="row">
 
                 <div class="col-md-5">
-                    <h4 class="mb10">Staff information</h4>
+                    <h4 class="mb10">Toss Information : </h4>
                     <section class="estimate-user-info">
-                   <%--     <div class="name">Name: <%out.print(staffInfo.getName());%></div>
-                        <div class="email">E-mail: <a
-                                href="<%out.print(staffInfo.getEmail());%>"><%out.print(staffInfo.getEmail());%></a>
+                        <div class="name">Manager opened : <%out.print(tossTask.getManagerInfoOpened().getName());%></div>
+                        <div class="persons">Persons :
+                            <%
+                                for (int i = 0; i < managerInfos.size(); i++){
+                                    out.print(managerInfos.get(i).getName());
+                                    if(i != managerInfos.size()-1) out.print(" , ");
+                                }
+                            %>
                         </div>
-                        <div class="phone">Phone: <a
-                                href="<%out.print(staffInfo.getPhone());%>"><%out.print(staffInfo.getPhone());%></a>
-                        </div>
-                        <div class="name">Birth
-                            date: <% out.print(dateFormatShow.format(staffInfo.getBirthDate())); %></div>--%>
+                        <%
+                            String endDate = "Now!";
+                            if (!tossTask.isNow()) endDate = dateFormatShow.format(tossTask.getEndDate());
+                        %>
+                        <div class="end_date">END DATE : <%out.print(endDate);%></div>
                     </section>
 
                     <br>
 
-                    <input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>"
-                           class="rating-loading">
-                    <form action="/membership-mm/update-rating" method="post">
+
+                    <form action="/toss/answer-message" method="post">
+
+                        <input type="hidden" name="id" value="<%out.print(tossTask.getId());%>">
+
                         <div class="form-group">
-                            <label class="control-label">Rating (0-5)</label>
-                            <select name="rating" class="form-control" id="project">
-                                <option value="0">Update rating</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <label class="control-label">Status </label>
+                            <select name="status" class="form-control" id="status">
+                                <option value="PROCESSING"> Processing </option>
+                                <option value="PAUSE"> Pause </option>
+                                <option value="FINISH"> Finish </option>
                             </select>
                         </div>
 
-                        <input type="hidden" name="id" value="<%out.print(staffInfo.getId());%>">
-
-                        <div class="form-group text-right">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Update
-                                rating
-                            </button>
-                        </div>
-                    </form>
-
-                    <form action="/membership-mm/add-review" method="post">
                         <div class="form-group">
 
-                            <label class="control-label">Add review</label>
+                            <label class="control-label">Answer </label>
+                            <textarea id="editor" name="answer" rows="3"  ></textarea>
 
-                            <textarea id="editor" name="description" rows="3"></textarea>
-
-                            <input type="hidden" name="id" value="<%out.print(staffInfo.getId());%>">
                         </div>
+
 
                         <div class="form-group text-right">
                             <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>
-                                Add review
+                                Send Toss Answer
                             </button>
                         </div>
                     </form>
@@ -121,49 +120,74 @@
                         <br>
 
 
-                        <%Collections.reverse(staffHistories);%>
-                        <%for (StaffHistory staffHistory : staffHistories) {%>
+                        <%
 
-                        <div class="message-right">
+                            for (TossTaskMessage tossTaskMessage : taskMessages) {
+
+                                String status = "message-right-grey";  //status FINISH
+
+                                if(tossTaskMessage.getStatus().equals(StatusEnum.PROCESSING.toString())){
+                                    status = "message-right-green";
+                                } else if (tossTaskMessage.getStatus().equals(StatusEnum.PAUSE.toString())) {
+                                    status = "message-right-orange";
+                                }
+                        %>
+
+                        <div class="message-right <%out.print(status);%>">
 
                             <div class="clearfix message-header">
-                                <div class="title"><%out.print(staffHistory.getManagerName() + " ID - " + staffHistory.getManagerId());%></div>
-                                <div class="date"><%out.print(dateFormatShow.format(staffHistory.getDate()));%></div>
+                                <div class="title"><%out.print(tossTaskMessage.getManagerInfo().getName() + " ID - " + tossTaskMessage.getManagerInfo().getId());%></div>
+                                <div class="date"><%out.print(dateFormatShow.format(tossTaskMessage.getDate()));%></div>
                             </div>
 
-                            <% out.print(staffHistory.getText());%>
+                            <% out.print(tossTaskMessage.getText());%>
 
                         </div>
 
                         <%}%>
+
+                        <%--Toss task message--%>
+
+                        <div class="message-right message-right-red">
+
+                            <div class="clearfix message-header">
+                                <div class="title"><%out.print(tossTask.getManagerInfoOpened().getName() + " ID - " + tossTask.getManagerInfoOpened().getId());%></div>
+                                <div class="date"><%out.print(dateFormatShow.format(tossTask.getDate()));%></div>
+                            </div>
+
+                            <% out.print(tossTask.getText());%>
+
+                        </div>
+
+
                     </section>
                 </div>
             </div>
         </section>
         <!-- #End Page-content -->
+
 </div>
 <!-- #End Wrapper -->
 
 <%@ include file="javascript.jsp" %>
 
-<%--
 <%
-    String isUpdated = request.getParameter("isUpdated");
-    if (isUpdated != null) {
-        String link = "/membership-mm/history/" + staffInfo.getId();
+    String isNewTask = request.getParameter("isNewAnswer");
+    if (isNewTask != null) {
+        String link = "/toss/toss-conversation/" + tossTask.getId();
 %>
 <script>
     jQuery(document).ready(function ($) {
         swal(
             'Success!',
-            'Update',
+            'New Answer',
             'success'
         );
         history.pushState(null, null, '<%out.print(link);%>');
     });
 </script>
 <%}%>
---%>
+
 
 </body>
 </html>

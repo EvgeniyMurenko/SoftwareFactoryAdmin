@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
 <%@ page import="jdk.nashorn.internal.ir.RuntimeNode" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -54,10 +56,10 @@
         <section class="container-fluid content">
 
             <div class="mb20">
-                <a href="/to-do/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel</a>
+                <a href="/toss/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel</a>
             </div>
 
-            <form action="/to-do/open" method="post" class="form-horizontal">
+            <form action="/toss/open" method="post" class="form-horizontal">
                 <div class="col-md-8">
 
                     <div class="form-group">
@@ -68,11 +70,36 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">End Date</label>
+                        <div class="col-sm-7">
+                            <div class="input-group date" id="datetimepicker">
+                                <%
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    String date = dateFormat.format(new Date());
+                                %>
+                                <input type="text" name="end_date" id="end_date" class="form-control"
+                                       value="<%out.print(date);%>" />
+                                <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <label class="col-sm-2 control-label">
+                            Now &emsp; &emsp;
+                            <input type="checkbox" id="is_now_checkbox" name="is_now_checkbox" onclick="select_now()">
+                        </label>
+
+
+                    </div>
+
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Persons</label>
                         <div class="col-sm-9">
-                            <select class="js-example-basic-multiple " name="persons" multiple="multiple" required style="width:100%">
+                            <select class="js-example-basic-multiple " name="persons" multiple="multiple" required
+                                    style="width:100%">
                                 <%for (ManagerInfo managerInfo : managerInfos) {%>
                                 <option value="<%out.print(managerInfo.getId());%>"><%
                                     out.print(managerInfo.getName());%></option>
@@ -96,7 +123,6 @@
                 </div>
             </form>
 
-            &lt;%&ndash;  </div>&ndash;%&gt;
 
         </section>
 
@@ -107,6 +133,17 @@
 <!-- #End Wrapper -->
 
 <%@ include file="javascript.jsp" %>
+<script>
+    function select_now() {
 
+        var isNowCheckbox = document.querySelector('input[id="is_now_checkbox"]');
+
+        if (isNowCheckbox.checked) {
+            $('#end_date').attr('readonly', true);
+        } else {
+            $('#end_date').attr('readonly', false);
+        }
+    }
+</script>
 </body>
 </html>

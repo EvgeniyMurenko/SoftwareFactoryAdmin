@@ -1,5 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.TossTask" %>
+<%@ page import="com.SoftwareFactoryAdmin.util.AppMethods" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -30,7 +33,6 @@
 <div id="wrapper">
 
 
-
     <%@ include file="leftCategoriesMenu.jsp" %>
 
 
@@ -39,7 +41,8 @@
 
         <!-- Header -->
         <header class="header line">
-            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars"
+                                                                                     aria-hidden="true"></i></a>
             <span class="header-title clearfix">Toss Do List</span>
         </header>
         <!-- #End Header -->
@@ -48,27 +51,48 @@
         <section class="container-fluid content">
             <div class="background-01">
 
-                <div class="mb20">
-                    <a href="/toss/open-task" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Create Toss Task</a>
+
+                <div class="mb20 inline-buttons">
+                    <a href="/toss/open-task" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Create Toss
+                        Task</a>
                 </div>
+
+                <div class="buttons-container">
+
+                    <div class="mb20 inline-buttons">
+                        <a href="/toss/select/new-request" class="btn btn-primary"><i class="fa fa-warning pr10"></i>New request</a>
+                    </div>
+                    <div class="mb20 inline-buttons" >
+                        <a href="/toss/select/processing" class="btn btn-primary"><i class="fa fa-play pr10"></i>Processing</a>
+                    </div>
+                    <div class="mb20 inline-buttons" >
+                        <a href="/toss/select/pause" class="btn btn-primary"><i class="fa fa-pause pr10"></i>Pause</a>
+                    </div>
+                    <div class="mb20 inline-buttons" >
+                        <a href="/toss/select/finish" class="btn btn-primary"><i class="fa fa-stop pr10"></i>Finish</a>
+                    </div>
+                </div>
+
 
 
                 <table id="dataTable" class="table" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th width="20">ID</th>
-                        <th>Title</th>
-                        <th>Date</th>
                         <th>Manager Opened</th>
+                        <th>Title</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Status</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th width="20">ID</th>
-                        <th>Title</th>
-                        <th>Date</th>
+                        <th>ID</th>
                         <th>Manager Opened</th>
+                        <th>Title</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Status</th>
                     </tr>
                     </tfoot>
@@ -76,34 +100,28 @@
                     <!-- Items list -->
                     <tbody>
 
-                  <%--  <%List <StaffInfo> staffInfoList =  (List<StaffInfo>)request.getAttribute("staffList");%>
-                    <%if (staffInfoList.size()>0){%>
-                    <%for (StaffInfo staffInfo : staffInfoList){%>--%>
+                    <%
+                        SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        List<TossTask> tossList = (List<TossTask>) request.getAttribute("tossTasks");
+                    %>
+
+                    <%
+                        for (TossTask tossTask : tossList) {
+                            String endDate = "Now!";
+                            if (!tossTask.isNow()) endDate = dateFormatShow.format(tossTask.getEndDate());
+
+                    %>
 
                     <tr>
-                 <%--       <td align="center"><%out.print(staffInfo.getUser().getId());%></td>
-                        <td align="center"><a href="<%out.print("/membership-mm/history/" + staffInfo.getId());%>"> <%out.print(staffInfo.getName());%> </a></td>
-                        <td align="center"><input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>" class="rating-loading"></td>
-                        <td align="center"><%out.print(staffInfo.getAndroid());%></td>
-                        <td align="center"><%out.print(staffInfo.getiOs());%></td>
-                        <td align="center"><%out.print(staffInfo.getIot());%></td>
-                        <td align="center"><%out.print(staffInfo.getJava());%></td>
-                        <td align="center"><%out.print(staffInfo.getPhp());%></td>
-                        <td align="center"><%out.print(staffInfo.getJavascript());%></td>
-                        <td align="center"><%out.print(staffInfo.getcSharp());%></td>
-                        <td align="center"><%out.print(staffInfo.getcPlusPlus());%></td>
-                        <td align="center"><%out.print(staffInfo.getFrontend());%></td>
-                        <td align="center"><%out.print(staffInfo.getDesign());%></td>
-                        <td align="center">
-                            <a href="<%out.print("/membership-mm/edit/" + staffInfo.getId());%>" data-toggle="tooltip" title="Edit"><i class="fa fa-tasks"></i>
-                                Edit</a>&nbsp; |&nbsp;
-                            <a href="<%out.print("/membership-mm/staffDelete/" + staffInfo.getId());%>" data-toggle="tooltip" title="Delete" class="deleteConfirm"><i
-                                    class="fa fa-trash"></i> Delete</a>
-                        </td>--%>
+                        <td align="center"><%out.print(tossTask.getId());%></td>
+                        <td align="center"><%out.print(tossTask.getManagerInfoOpened().getName());%></td>
+                        <td align="center"><a href="<%out.print("/toss/toss-conversation/" + tossTask.getId());%>"><%
+                            out.print(AppMethods.trimString(tossTask.getTitle(), 15));%></a></td>
+                        <td align="center"><%out.print(dateFormatShow.format(tossTask.getDate()));%></td>
+                        <td align="center"><%out.print(endDate);%></td>
+                        <td align="center"><%out.print(tossTask.getStatus().toLowerCase());%></td>
                     </tr>
-                   <%-- <%}%>
-                    <%}%>--%>
-
+                    <%}%>
                     </tbody>
                     <!-- #End Items list -->
 

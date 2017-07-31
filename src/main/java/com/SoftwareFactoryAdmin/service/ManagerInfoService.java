@@ -23,4 +23,5 @@ public interface ManagerInfoService {
     Set<ManagerInfo> findMultiplyManagerInfoById(List<String> ids);
 
     List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id);
+
 }

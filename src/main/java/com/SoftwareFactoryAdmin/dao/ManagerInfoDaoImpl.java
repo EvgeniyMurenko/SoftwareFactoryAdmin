@@ -79,5 +79,6 @@ public class ManagerInfoDaoImpl implements ManagerInfoDao {
         Query query = session.createQuery("from ManagerInfo mi where mi.id != :id").setParameter("id", id);
         return query.list();
     }
+
 }
 

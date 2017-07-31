@@ -66,4 +66,9 @@ public class GoogleCloudKeyServiceImpl implements GoogleCloudKeyService {
         return googleCloudKeyDao.findAllKeysByUserType("STAFF");
     }
 
+    @Override
+    public List<String> findAllKeysByUserIds(List<Long> ids) {
+        return googleCloudKeyDao.findAllKeysByUserIds(ids);
+    }
+
 }
