@@ -597,3 +597,9 @@ textarea {
     top: 5px;
     left: 10px;
 }
+
+.select2-container--default .select2-selection--multiple{
+    background-color: #3b444a!important;
+    border-radius: 0px!important;
+    border: solid 1px #000000 !important;
+}

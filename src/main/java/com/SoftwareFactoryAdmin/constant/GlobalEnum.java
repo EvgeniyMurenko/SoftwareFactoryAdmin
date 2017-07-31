@@ -2,8 +2,8 @@ package com.SoftwareFactoryAdmin.constant;
 
 
 public enum  GlobalEnum {
-/*    webRoot ("http://a.sofac.kr"),*/
-    webRoot ("http://localhost:8080"),
+    webRoot ("http://a.sofac.kr"),
+/*    webRoot ("http://localhost:8080"),*/
 /*    webRoot("http://52.57.116.160:8080"),*/
     googleApiKey("AIzaSyDZJmgv9fvQnQkc5vvCx8bPFcUqSYDVhnM");
 

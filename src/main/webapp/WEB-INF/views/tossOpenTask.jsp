@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Persons</label>
                         <div class="col-sm-9">
-                            <select class="js-example-basic-multiple " name="persons" multiple="multiple" required style="width:100%">
+                            <select class="js-example-basic-multiple " name="persons" multiple="multiple" required style="width:100%;">
                                 <%for (ManagerInfo managerInfo : managerInfos) {%>
                                 <option value="<%out.print(managerInfo.getId());%>"><%
                                     out.print(managerInfo.getName());%></option>
