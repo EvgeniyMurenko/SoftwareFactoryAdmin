@@ -91,5 +91,4 @@ public class Notice implements Serializable {
         isActiv = activ;
     }
 
-
 }

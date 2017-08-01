@@ -78,4 +78,12 @@ public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
         return query.list();
     }
 
+    @Override
+    public List<String> findAllManagerWithOutOne(Long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct googleCloudKeys.key from GoogleCloudKey googleCloudKeys where googleCloudKeys.user.id != :userID");
+        query.setParameter("userID", userID);
+        return query.list();
+    }
+
 }

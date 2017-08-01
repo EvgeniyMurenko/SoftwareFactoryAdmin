@@ -24,4 +24,6 @@ public interface GoogleCloudKeyService {
 
     List<String> findAllStaffKeys();
 
+    List<String> findAllManagerWithOutOne(Long idManager);
+
 }

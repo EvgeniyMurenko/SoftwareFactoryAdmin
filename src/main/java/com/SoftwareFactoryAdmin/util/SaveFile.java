@@ -25,7 +25,7 @@ public class SaveFile {
     private String pathForSaveFile;
     private MultipartFile[] files;
 
-    private List<String> imageExpansion = Arrays.asList("img", "png", "jpg", "bmp");
+    private List<String> imageExpansion = Arrays.asList("img", "png", "jpg", "bmp", "jpeg");
     private List<String> videoExpansion = Arrays.asList("mp4");
 
 

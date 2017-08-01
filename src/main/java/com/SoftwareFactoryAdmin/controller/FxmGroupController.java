@@ -109,7 +109,7 @@ public class FxmGroupController {
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost.getId());
 
-            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
             pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
@@ -130,7 +130,7 @@ public class FxmGroupController {
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
-            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
             pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(DELETE_POST_REQUEST.toString())) {

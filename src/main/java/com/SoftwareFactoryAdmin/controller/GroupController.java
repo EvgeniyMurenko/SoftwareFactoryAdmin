@@ -116,7 +116,7 @@ public class GroupController {
 
             fxmPostService.addNewFxmPost(fxmPost);
 
-            List<String> keys = googleCloudKeyService.findAllManagersKeys();
+            List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
             pushNotificationService.pushNotificationToGCM(keys, fxmPost.getPostTextOriginal(), "FXM Group post!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         }
@@ -142,7 +142,7 @@ public class GroupController {
 
         fxmCommentService.addFxmComment(fxmComment);
 
-        List<String> keys = googleCloudKeyService.findAllManagersKeys();
+        List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
         pushNotificationService.pushNotificationToGCM(keys, fxmComment.getCommentText(), "FXM Group comment!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         return new ModelAndView("redirect:/group/");
