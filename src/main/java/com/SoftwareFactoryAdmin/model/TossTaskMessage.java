@@ -12,12 +12,11 @@ public class TossTaskMessage {
     public TossTaskMessage() {
     }
 
-    public TossTaskMessage(ManagerInfo managerInfo, TossTask tossTask, String text, Date date, String status) {
+    public TossTaskMessage(ManagerInfo managerInfo, TossTask tossTask, String text, Date date) {
         this.managerInfo = managerInfo;
         this.tossTask = tossTask;
         this.text = text;
         this.date = date;
-        this.status = status;
     }
 
     @Id
@@ -39,9 +38,6 @@ public class TossTaskMessage {
 
     @Column(name = "date")
     private Date date;
-
-    @Column(name = "status")
-    private String status;
 
     public Long getId() {
         return id;
@@ -81,14 +77,6 @@ public class TossTaskMessage {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
 

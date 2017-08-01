@@ -27,6 +27,7 @@ public class TossTaskDaoImpl implements TossTaskDao {
         return id;
     }
 
+
     @Override
     public TossTask read(Long id) {
         Session session = sessionFactory.getCurrentSession();
@@ -53,18 +54,4 @@ public class TossTaskDaoImpl implements TossTaskDao {
         return query.list();
     }
 
-    @Override
-    public List<TossTask> findTossTasksBelongToManager(Long id) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct tossTask " +
-                                            "from TossTask tossTask " +
-                                            "join tossTask.managerInfoEngaged mie " +
-                                            "where tossTask.managerInfoOpened.id =:id " +
-                                            "or mie.id =:id ")
-                                            .setParameter("id" , id);
-        return query.list();
-    }
-
-
 }
-

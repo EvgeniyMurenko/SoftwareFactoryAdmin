@@ -1,9 +1,10 @@
 package com.SoftwareFactoryAdmin.controller;
 
-import com.SoftwareFactoryAdmin.model.ManagerInfo;
-import com.SoftwareFactoryAdmin.model.TossTask;
-import com.SoftwareFactoryAdmin.service.ManagerInfoService;
-import com.SoftwareFactoryAdmin.service.TossTaskService;
+import com.SoftwareFactoryAdmin.constant.AppRequestEnum;
+import com.SoftwareFactoryAdmin.constant.StatusEnum;
+import com.SoftwareFactoryAdmin.model.*;
+import com.SoftwareFactoryAdmin.service.*;
+import com.SoftwareFactoryAdmin.util.AppMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,71 +19,226 @@ import java.util.*;
 public class TossController {
 
     @Autowired
-    private TossTaskService tossTaskService;
+    private TossService tossService;
 
     @Autowired
     private ManagerInfoService managerInfoService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView toDoList(HttpSession httpSession) {
+    @Autowired
+    private TossTaskService tossTaskService;
 
-        ModelAndView toDoList = new ModelAndView("tossList");
+    @Autowired
+    private GoogleCloudKeyService googleCloudKeyService;
+
+    @Autowired
+    private PushNotificationService pushNotificationService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView tossList(HttpSession httpSession) {
+
+        System.out.println("TEST");
+
+        ModelAndView tossList = new ModelAndView("tossList");
 
         ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
 
-        List<TossTask> tossTasks = tossTaskService.findAllTossTasksBelongToManager(managerInfo.getId());
+        List<Toss> tosses = tossService.findAllTossBelongToManager(managerInfo.getId());
 
-        return toDoList;
+        tossList.addObject("toss", tosses);
+
+        return tossList;
+    }
+
+
+    @RequestMapping(value = "/select/{status}", method = RequestMethod.GET)
+    public ModelAndView tossSelect(@PathVariable String status,
+                                   HttpSession httpSession) {
+
+        ModelAndView tossList = new ModelAndView("tossList");
+
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
+
+        List<Toss> tosses = new ArrayList<>();
+
+        if (status.equals("new-request")) {
+            tosses = tossService.findAllTossBelongToManagerByStatus(managerInfo.getId(), StatusEnum.NEW_REQUEST.toString());
+        } else if (status.equals("processing")) {
+            tosses = tossService.findAllTossBelongToManagerByStatus(managerInfo.getId(), StatusEnum.PROCESSING.toString());
+        } else if (status.equals("pause")) {
+            tosses = tossService.findAllTossBelongToManagerByStatus(managerInfo.getId(), StatusEnum.PAUSE.toString());
+        } else if (status.equals("finish")) {
+            tosses = tossService.findAllTossBelongToManagerByStatus(managerInfo.getId(), StatusEnum.FINISH.toString());
+        }
+
+        tossList.addObject("toss", tosses);
+
+        return tossList;
     }
 
 
     @RequestMapping(value = "/open-task", method = RequestMethod.GET)
-    public ModelAndView toDoOpenTask(HttpSession httpSession) {
+    public ModelAndView tossOpenTask(HttpSession httpSession) {
 
-        ModelAndView toDoOpen = new ModelAndView("tossOpenTask");
+        ModelAndView tossOpen = new ModelAndView("tossOpenTask");
 
         ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
 
         List<ManagerInfo> managerInfos = managerInfoService.getAllManagerInfosExceptOneManager(managerInfo.getId());
 
+        tossOpen.addObject("managerInfos", managerInfos);
 
-        toDoOpen.addObject("managerInfos", managerInfos);
-
-
-        return toDoOpen;
+        return tossOpen;
 
     }
 
     @RequestMapping(value = "/open", method = RequestMethod.POST)
-    public ModelAndView toDoOpen(@RequestParam("title") String title,
+    public ModelAndView tossOpen(@RequestParam("title") String title,
                                  @RequestParam("text") String text,
+                                 @RequestParam(value = "is_now_checkbox", defaultValue = "false") Boolean isNow,
+                                 @RequestParam("end_date") String endDate,
                                  @RequestParam("persons") ArrayList<String> persons,
                                  HttpSession httpSession) {
+
 
         ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
 
         Set<ManagerInfo> recipientPersons = managerInfoService.findMultiplyManagerInfoById(persons);
+        String managers = getManagerEngagedAsString(recipientPersons);
 
-        /*TossTask toDoTask = new TossTask(managerInfo, null ,false, recipientPersons , StatusEnum.NEW_REQUEST.toString() , title , text , new Date() , new HashSet<>());
+        Date endTossDate = new Date();
+        if (!isNow) endTossDate = AppMethods.getDateFromString(endDate);
 
-        tossTaskService.addNewToDoTask(toDoTask);*/
 
-        return new ModelAndView("redirect:/to-do/");
+
+        Toss toss = new Toss(managerInfo.getName(), recipientPersons, new HashSet<>(), StatusEnum.NEW_REQUEST.toString(), title, new Date(), endTossDate, isNow);
+
+        tossService.addNewToss(toss);
+
+        TossTask tossTask = new TossTask(managerInfo, managers, toss, StatusEnum.NEW_REQUEST.toString(), text, new Date(), new HashSet<>());
+
+        Set<TossTask> tossTasks = toss.getTossTasks();
+
+        tossTasks.add(tossTask);
+
+        toss.setTossTasks(tossTasks);
+
+        tossService.updateToss(toss);
+
+        sendTossPush(toss, "Toss : " + title, text);
+
+
+        return new ModelAndView("redirect:/toss/toss-conversation/" + toss.getId(),"isNewAnswer", "true" );
     }
 
-    @RequestMapping(value = "/to-do-conversation/{id}", method = RequestMethod.POST)
-    public ModelAndView toDoConversation(@PathVariable Long id,
+    @RequestMapping(value = "/toss-conversation/{id}", method = RequestMethod.GET)
+    public ModelAndView tossConversation(@PathVariable Long id,
                                          HttpSession httpSession) {
 
-        ModelAndView toDoConversation = new ModelAndView("tossConversation");
+        ManagerInfo user = (ManagerInfo) httpSession.getAttribute("managerInfo");
 
-        TossTask tossTask = tossTaskService.getTossTaskById(id);
+        ModelAndView tossConversation = new ModelAndView("tossConversation");
 
-        toDoConversation.addObject(tossTask);
+        Toss toss = tossService.getTossById(id);
 
-        return toDoConversation;
+        Set<ManagerInfo> managerInfos = toss.getManagerInfoEngaged();
+
+        List<Long> ids = new ArrayList<>();
+        for (ManagerInfo managerInfo : managerInfos){
+            ids.add(managerInfo.getId());
+        }
+        ids.add(user.getId());
+
+        List<ManagerInfo> managerInfosToSelect = managerInfoService.getAllManagerInfofExceptManagers(ids);
+
+        tossConversation.addObject("toss", toss);
+        tossConversation.addObject("managers" , managerInfosToSelect);
+
+
+        return tossConversation;
     }
 
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public ModelAndView tossOpen(@RequestParam("toss_task_id") Long tossTaskId,
+                                 @RequestParam("toss_id") Long tossId,
+                                 @RequestParam("comment") String comment,
+                                 HttpSession httpSession) {
+
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
+
+        TossTask tossTask = tossTaskService.getTossTaskById(tossTaskId);
+
+        Set<TossTaskMessage> tossTaskMessages = tossTask.getTossTaskMessages();
+
+        tossTaskMessages.add(new TossTaskMessage(managerInfo, tossTask, comment, new Date()));
+
+        tossTaskService.updateTossTask(tossTask);
+
+        sendTossPush(tossTask.getToss(), "Toss comment : " + tossTask.getToss().getTitle(), comment);
+
+        return new ModelAndView("redirect:/toss/toss-conversation/" + tossId, "isNewAnswer", "true");
+    }
+
+    @RequestMapping(value = "/send-another-toss", method = RequestMethod.POST)
+    public ModelAndView tossAnswerMessage(@RequestParam("id") Long id,
+                                          @RequestParam("status") String status,
+                                          @RequestParam("persons") ArrayList<String> persons,
+                                          @RequestParam("answer") String answer,
+                                          HttpSession httpSession) {
+
+        ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
+
+        Toss toss = tossService.getTossById(id);
+
+        toss.setStatus(status);
+
+        Set<ManagerInfo> recipientPersons = managerInfoService.findMultiplyManagerInfoById(persons);
+
+        String managers = getManagerEngagedAsString(recipientPersons);
+
+        TossTask tossTask = new TossTask(managerInfo, managers ,toss, status, answer, new Date(), new HashSet<>());
+
+        Set<TossTask> tossTasks = toss.getTossTasks();
+
+        tossTasks.add(tossTask);
+
+        toss.setTossTasks(tossTasks);
+
+        tossService.updateToss(toss);
+
+        sendTossPush(toss, "Toss : " + toss.getTitle(), answer);
+
+        return new ModelAndView("redirect:/toss/toss-conversation/" + id, "isNewAnswer", "true");
+    }
+
+    private void sendTossPush(Toss toss, String title, String messageText) {
+
+        Set<ManagerInfo> managerInfos = toss.getManagerInfoEngaged();
+
+        List<Long> managersID = new ArrayList<>();
+        for (ManagerInfo manager : managerInfos) {
+            managersID.add(manager.getId());
+        }
+        /*managersID.add(toss.getManagerInfoOpened().getId());*/
+
+        List<String> googleCloudKeys = googleCloudKeyService.findAllKeysByUserIds(managersID);
+
+        pushNotificationService.pushNotificationToGCM(googleCloudKeys, messageText, title, AppRequestEnum.TOSS_PUSH_TYPE.toString());
+
+
+    }
+
+    private String getManagerEngagedAsString ( Set<ManagerInfo> recipientPersons){
+
+        StringBuilder personsStringBuilder = new StringBuilder();
+
+        Iterator<ManagerInfo> managerInfoIterator = recipientPersons.iterator();
+
+        while (managerInfoIterator.hasNext()) {
+            personsStringBuilder.append(managerInfoIterator.next().getName());
+            if (managerInfoIterator.hasNext()) personsStringBuilder.append(" , ");
+        }
+        return personsStringBuilder.toString();
+
+    }
 
 }
-

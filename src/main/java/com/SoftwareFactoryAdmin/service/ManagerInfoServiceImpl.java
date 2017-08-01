@@ -67,8 +67,13 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
     }
 
     @Override
-    public List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id){
+    public List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id) {
         return managerInfoDao.getAllManagerInfosExceptOneManager(id);
+    }
+
+    @Override
+    public List<ManagerInfo> getAllManagerInfofExceptManagers(List<Long> ids) {
+        return managerInfoDao.getAllManagerInfofExceptManagers(ids);
     }
 
 }

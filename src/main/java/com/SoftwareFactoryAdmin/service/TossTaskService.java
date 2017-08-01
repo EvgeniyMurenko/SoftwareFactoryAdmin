@@ -1,10 +1,9 @@
-
 package com.SoftwareFactoryAdmin.service;
+
 
 import com.SoftwareFactoryAdmin.model.TossTask;
 
 import java.util.List;
-
 
 public interface TossTaskService {
 
@@ -18,7 +17,4 @@ public interface TossTaskService {
 
     TossTask getTossTaskById(Long id);
 
-    List<TossTask> findAllTossTasksBelongToManager(Long id);
-
 }
-

@@ -14,15 +14,13 @@ public class TossTask {
     public TossTask() {
     }
 
-    public TossTask(ManagerInfo managerInfoOpened, Set<ManagerInfo> managerInfoEngaged, String status, String title, String text, Date date, Date endDate, boolean isNow, Set<TossTaskMessage> tossTaskMessages) {
+    public TossTask(ManagerInfo managerInfoOpened, String managersEngaged, Toss toss, String status, String text, Date date, Set<TossTaskMessage> tossTaskMessages) {
         this.managerInfoOpened = managerInfoOpened;
-        this.managerInfoEngaged = managerInfoEngaged;
+        this.managersEngaged = managersEngaged;
+        this.toss = toss;
         this.status = status;
-        this.title = title;
         this.text = text;
         this.date = date;
-        this.endDate = endDate;
-        this.isNow = isNow;
         this.tossTaskMessages = tossTaskMessages;
     }
 
@@ -32,36 +30,25 @@ public class TossTask {
     @Column(name = "id")
     private Long id;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_manager_id_opened")
     private ManagerInfo managerInfoOpened;
 
+    @Column(name = "managers_engaged")
+    private String managersEngaged;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "toss_task_manager_info",
-            joinColumns = {@JoinColumn(name = "toss_task_id")},
-            inverseJoinColumns = {@JoinColumn(name = "manager_info_id")})
-    private Set<ManagerInfo> managerInfoEngaged = new HashSet<ManagerInfo>();
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "toss_id")
+    private Toss toss;
 
     @Column(name = "status")
     private String status;
-
-    @Column(name = "title")
-    private String title;
 
     @Column(name = "text")
     private String text;
 
     @Column(name = "date")
     private Date date;
-
-    @Column(name = "end_date")
-    private Date endDate;
-
-    @Column(name = "is_now")
-    private boolean isNow;
 
     @OneToMany(mappedBy = "tossTask", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TossTaskMessage> tossTaskMessages;
@@ -79,15 +66,23 @@ public class TossTask {
     }
 
     public void setManagerInfoOpened(ManagerInfo managerInfoOpened) {
-        managerInfoOpened = managerInfoOpened;
+        this.managerInfoOpened = managerInfoOpened;
     }
 
-    public Set<ManagerInfo> getManagerInfoEngaged() {
-        return managerInfoEngaged;
+    public String getManagersEngaged() {
+        return managersEngaged;
     }
 
-    public void setManagerInfoEngaged(Set<ManagerInfo> managerInfoEngaged) {
-        this.managerInfoEngaged = managerInfoEngaged;
+    public void setManagersEngaged(String managersEngaged) {
+        this.managersEngaged = managersEngaged;
+    }
+
+    public Toss getToss() {
+        return toss;
+    }
+
+    public void setToss(Toss toss) {
+        this.toss = toss;
     }
 
     public String getStatus() {
@@ -96,14 +91,6 @@ public class TossTask {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getText() {
@@ -120,22 +107,6 @@ public class TossTask {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public boolean isNow() {
-        return isNow;
-    }
-
-    public void setNow(boolean now) {
-        isNow = now;
     }
 
     public Set<TossTaskMessage> getTossTaskMessages() {

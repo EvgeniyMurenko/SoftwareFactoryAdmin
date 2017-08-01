@@ -1,6 +1,5 @@
 package com.SoftwareFactoryAdmin.service;
 
-
 import com.SoftwareFactoryAdmin.dao.TossTaskDao;
 import com.SoftwareFactoryAdmin.model.TossTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +45,6 @@ public class TossTaskServiceImpl implements TossTaskService {
         return tossTaskDao.read(id);
     }
 
-    @Override
-    public List<TossTask> findAllTossTasksBelongToManager(Long id) {
-        return tossTaskDao.findTossTasksBelongToManager(id);
-    }
 
 }
 

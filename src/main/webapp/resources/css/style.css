@@ -196,6 +196,31 @@
     margin-bottom: 20px;
 }
 
+/*.message-right-color{
+    border-right: 10px solid !important;
+}*/
+.message-right-red{
+    border-right: 10px solid red !important; /*border-color: green;*/
+}
+.message-right-green{
+    border-right: 10px solid green !important;
+}
+.message-right-orange{
+    border-right: 10px solid orange !important;
+}
+.message-right-grey{
+    border-right: 10px solid grey !important;
+}
+
+
+.buttons-container{
+    display:block;
+}
+.inline-buttons{
+    display:inline-block;
+}
+
+
 .message-centre {
     padding: 10px;
     margin-bottom: 10px;
@@ -252,6 +277,29 @@
     color: #31BFC0;
 }
 
+.message-right .message-header-comment {
+    border-bottom: 0;
+    padding-bottom: 2px;
+    !important;
+}
+
+
+.message-right-toss{
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-bottom: 2px;
+    !important;
+}
+
+
+.message-right-comment{
+    padding: 5px;
+    margin-top: 0;
+    margin-left: 100px;
+    margin-right: 10px;
+    margin-bottom: 0;
+    !important;
+}
 /* -------------------- #End Content -------------------- */
 
 /* -------------------- Sign-int -------------------- */

@@ -4,6 +4,8 @@ import com.google.android.gcm.server.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,7 +21,13 @@ public class PushNotificationService {
         final int retries = 3;
         Sender sender = new Sender(GCM_API_KEY);
 
-        Message msg = new Message.Builder().collapseKey("gcm_message").delayWhileIdle(true).addData("message",message).addData("title" , title).addData("type" , type).build();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateString = dateFormat.format(new Date());
+
+        Message msg = new Message.Builder().collapseKey("gcm_message").delayWhileIdle(true).addData("message",message).addData("date", dateString).addData("title" , title).addData("type" , type).build();
+
+
 
         try {
 
