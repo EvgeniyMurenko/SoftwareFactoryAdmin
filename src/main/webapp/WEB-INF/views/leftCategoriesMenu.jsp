@@ -72,7 +72,7 @@
                     <li><a href="/permission/"><i class="fa fa-lock" aria-hidden="true"></i> Permissions</a> </li>
                 <%}%>
                     <li><a href="/group/"><i class="fa fa-envelope-o" aria-hidden="true"></i></i> Group</a></li>
-                    <li><a href="/toss/"><i class="fa fa-book" aria-hidden="true"></i> Toss</a></li>
+                    <li><a href="/toss/"><i class="fa fa-rocket" aria-hidden="true"></i> Toss</a></li>
             </ul>
             <!-- #End Left categories -->
         <%}else{

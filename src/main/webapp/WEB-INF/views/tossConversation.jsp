@@ -7,6 +7,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskMessagesByDateComparator" %>
 <%@ page import="com.SoftwareFactoryAdmin.constant.StatusEnum" %>
 <%@ page import="com.sun.xml.internal.ws.api.message.Packet" %>
+<%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskByDateComparator" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -36,12 +37,20 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
-    <%TossTask tossTask  = (TossTask) request.getAttribute("tossTask");%>
-    <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
-    <%Set<TossTaskMessage> tossTaskMessages = tossTask.getTossTaskMessages();%>
-    <%List <TossTaskMessage> taskMessages = new ArrayList<>(tossTaskMessages);%>
-    <%taskMessages.sort(new TossTaskMessagesByDateComparator());%>
-    <%List <ManagerInfo> managerInfos = new ArrayList<>(tossTask.getManagerInfoEngaged());%>
+    <%
+        Toss toss  = (Toss) request.getAttribute("toss");
+        List<ManagerInfo> managerInfos = (List<ManagerInfo>) request.getAttribute("managers");
+
+        SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        List <TossTask> tossTasks = new ArrayList<>(toss.getTossTasks());
+
+        TossTaskMessagesByDateComparator tossTaskMessagesByDateComparator = new TossTaskMessagesByDateComparator();
+        TossTaskByDateComparator tossTaskByDateComparator = new TossTaskByDateComparator();
+
+        tossTasks.sort(tossTaskByDateComparator);
+
+        List <ManagerInfo> managersEngaged = new ArrayList<>(toss.getManagerInfoEngaged());
+    %>
 
     <%@ include file="leftCategoriesMenu.jsp" %>
 
@@ -51,7 +60,7 @@
         <!-- Header -->
         <header class="header line">
             <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
-            <span class="header-title clearfix"><%out.print(tossTask.getTitle());%></span>
+            <span class="header-title clearfix"><%out.print(toss.getTitle());%></span>
         </header>
         <!-- #End Header -->
 
@@ -59,7 +68,7 @@
         <section class="container-fluid content">
 
             <div class="mb20">
-                <a href="/toss/" class="btn btn-primary"><i class="fa fa-users pr10"></i>Back to toss list</a>
+                <a href="/toss/" class="btn btn-primary"><i class="fa fa-rocket pr10"></i>Back to toss list</a>
             </div>
 
             <div class="row">
@@ -67,18 +76,18 @@
                 <div class="col-md-5">
                     <h4 class="mb10">Toss Information : </h4>
                     <section class="estimate-user-info">
-                        <div class="name">Manager opened : <%out.print(tossTask.getManagerInfoOpened().getName());%></div>
+                        <div class="name">Manager opened : <%out.print(toss.getManagerOpenedName());%></div>
                         <div class="persons">Persons :
                             <%
-                                for (int i = 0; i < managerInfos.size(); i++){
-                                    out.print(managerInfos.get(i).getName());
-                                    if(i != managerInfos.size()-1) out.print(" , ");
+                                for (int i = 0; i < managersEngaged.size(); i++){
+                                    out.print(managersEngaged.get(i).getName());
+                                    if(i != managersEngaged.size()-1) out.print(" , ");
                                 }
                             %>
                         </div>
                         <%
                             String endDate = "Now!";
-                            if (!tossTask.isNow()) endDate = dateFormatShow.format(tossTask.getEndDate());
+                            if (!toss.isNow()) endDate = dateFormatShow.format(toss.getEndDate());
                         %>
                         <div class="end_date">END DATE : <%out.print(endDate);%></div>
                     </section>
@@ -86,9 +95,9 @@
                     <br>
 
 
-                    <form action="/toss/answer-message" method="post">
+                    <form action="/toss/send-another-toss" method="post">
 
-                        <input type="hidden" name="id" value="<%out.print(tossTask.getId());%>">
+                        <input type="hidden" name="id" value="<%out.print(toss.getId());%>">
 
                         <div class="form-group">
                             <label class="control-label">Status </label>
@@ -97,6 +106,17 @@
                                 <option value="PAUSE"> Pause </option>
                                 <option value="FINISH"> Finish </option>
                             </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Persons </label>
+                                <select class="js-example-basic-multiple " name="persons" multiple="multiple" required
+                                        style="width:100%;">
+                                    <%for (ManagerInfo managerInfo : managerInfos) {%>
+                                    <option value="<%out.print(managerInfo.getId());%>"><%
+                                        out.print(managerInfo.getName());%></option>
+                                    <%}%>
+                                </select>
                         </div>
 
                         <div class="form-group">
@@ -122,33 +142,22 @@
 
                         <%
 
-                            for (TossTaskMessage tossTaskMessage : taskMessages) {
+                            for (TossTask tossTask : tossTasks) {
+
+                                ArrayList<TossTaskMessage> tossTaskMessages = new ArrayList<>(tossTask.getTossTaskMessages());
+
+                                tossTaskMessages.sort(tossTaskMessagesByDateComparator);
 
                                 String status = "message-right-grey";  //status FINISH
 
-                                if(tossTaskMessage.getStatus().equals(StatusEnum.PROCESSING.toString())){
+                                if(tossTask.getStatus().equals(StatusEnum.PROCESSING.toString())){
                                     status = "message-right-green";
-                                } else if (tossTaskMessage.getStatus().equals(StatusEnum.PAUSE.toString())) {
+                                } else if (tossTask.getStatus().equals(StatusEnum.PAUSE.toString())) {
                                     status = "message-right-orange";
                                 }
                         %>
 
-                        <div class="message-right <%out.print(status);%>">
-
-                            <div class="clearfix message-header">
-                                <div class="title"><%out.print(tossTaskMessage.getManagerInfo().getName() + " ID - " + tossTaskMessage.getManagerInfo().getId());%></div>
-                                <div class="date"><%out.print(dateFormatShow.format(tossTaskMessage.getDate()));%></div>
-                            </div>
-
-                            <% out.print(tossTaskMessage.getText());%>
-
-                        </div>
-
-                        <%}%>
-
-                        <%--Toss task message--%>
-
-                        <div class="message-right message-right-red">
+                        <div class="message-right message-right-toss <%out.print(status);%>">
 
                             <div class="clearfix message-header">
                                 <div class="title"><%out.print(tossTask.getManagerInfoOpened().getName() + " ID - " + tossTask.getManagerInfoOpened().getId());%></div>
@@ -157,8 +166,29 @@
 
                             <% out.print(tossTask.getText());%>
 
+                            <div class="clearfix message-header"></div>
+                            <div style="text-align: right"><a data-toggle="modal" data-target="#modalComment"  onclick="setTossTaskId(<%out.print(tossTask.getId());%>)">Leave comment</a></div>
                         </div>
 
+
+
+                        <%for(TossTaskMessage tossTaskMessage : tossTaskMessages){%>
+                            <%--comment--%>
+                            <div class="message-right message-right-comment <%out.print(status);%>">
+
+                                <div class="clearfix message-header message-header-comment">
+                                    <div class="title"><%out.print(tossTaskMessage.getManagerInfo().getName() + " ID - " + tossTaskMessage.getManagerInfo().getId());%></div>
+                                    <div class="date">
+                                        <span class="timeago mr10 mt10" title='<%out.print(dateFormatShow.format(tossTaskMessage.getDate())+"Z");%>'></span>
+                                    </div>
+                                </div>
+
+                                <% out.print(tossTaskMessage.getText());%>
+
+                            </div>
+                            <%--comment--%>
+                            <%}%>
+                        <%}%>
 
                     </section>
                 </div>
@@ -166,28 +196,76 @@
         </section>
         <!-- #End Page-content -->
 
+        <!-- leave comment task modal -->
+        <div class="modal fade" id="modalComment">
+            <div class="modal-dialog modal-lg">
+
+                <form class="form-horizontal" action="/toss/comment" method="post" >
+
+                    <input type="hidden" id="toss_task_id" name="toss_task_id" value="">
+                    <input type="hidden" name="toss_id" value="<%out.print(toss.getId());%>">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button class="close" type="button" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </button>
+                            <h4 class="modal-title">Leave comment</h4>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <!-- comment -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Comment </label>
+                                <div class="col-sm-9">
+                                    <textarea id="textEdit" name="comment" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <!-- comment -->
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr5"></i> Leave Comment</button>
+                            <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times-circle pr5"></i> Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- #End Add project task modal -->
+
+
+
 </div>
 <!-- #End Wrapper -->
 
 <%@ include file="javascript.jsp" %>
-
+<script>
 <%
     String isNewTask = request.getParameter("isNewAnswer");
     if (isNewTask != null) {
-        String link = "/toss/toss-conversation/" + tossTask.getId();
+        String link = "/toss/toss-conversation/" + toss.getId();
 %>
-<script>
+
     jQuery(document).ready(function ($) {
         swal(
             'Success!',
-            'New Answer',
+            'Toss',
             'success'
         );
         history.pushState(null, null, '<%out.print(link);%>');
     });
-</script>
+
 <%}%>
 
+function setTossTaskId(tossId) {
+    document.getElementById("toss_task_id").value = tossId;
+}
+
+</script>
 
 </body>
 </html>

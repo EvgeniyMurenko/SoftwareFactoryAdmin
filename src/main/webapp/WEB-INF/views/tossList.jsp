@@ -1,8 +1,11 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.SoftwareFactoryAdmin.model.StaffInfo" %>
-<%@ page import="com.SoftwareFactoryAdmin.model.TossTask" %>
 <%@ page import="com.SoftwareFactoryAdmin.util.AppMethods" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="com.SoftwareFactoryAdmin.model.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.SoftwareFactoryAdmin.comparator.TaskMessageByDateComparator" %>
+<%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskMessagesByDateComparator" %>
+<%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskByDateComparator" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -43,7 +46,7 @@
         <header class="header line">
             <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars"
                                                                                      aria-hidden="true"></i></a>
-            <span class="header-title clearfix">Toss Do List</span>
+            <span class="header-title clearfix">Toss List</span>
         </header>
         <!-- #End Header -->
 
@@ -53,8 +56,7 @@
 
 
                 <div class="mb20 inline-buttons">
-                    <a href="/toss/open-task" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Create Toss
-                        Task</a>
+                    <a href="/toss/open-task" class="btn btn-primary"><i class="fa fa-rocket pr10"></i>Create Toss </a>
                 </div>
 
                 <div class="buttons-container">
@@ -79,21 +81,21 @@
                     <thead>
                     <tr>
                         <th width="20">ID</th>
-                        <th>Manager Opened</th>
-                        <th>Title</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>From </th>
+                        <th>Now </th>
                         <th>Status</th>
+                        <th>Title </th>
+                        <th>End date </th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Manager Opened</th>
-                        <th>Title</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>From </th>
+                        <th>Now </th>
                         <th>Status</th>
+                        <th>Title </th>
+                        <th>End date </th>
                     </tr>
                     </tfoot>
 
@@ -102,24 +104,24 @@
 
                     <%
                         SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                        List<TossTask> tossList = (List<TossTask>) request.getAttribute("tossTasks");
-                    %>
+                        List<Toss> tosses = (List<Toss>) request.getAttribute("toss");
 
-                    <%
-                        for (TossTask tossTask : tossList) {
+                        TossTaskByDateComparator tossTaskByDateComparator = new TossTaskByDateComparator();
+                        for (Toss toss : tosses) {
                             String endDate = "Now!";
-                            if (!tossTask.isNow()) endDate = dateFormatShow.format(tossTask.getEndDate());
+                            if (!toss.isNow()) endDate = dateFormatShow.format(toss.getEndDate());
 
+                                ArrayList<TossTask> tasks = new ArrayList<>(toss.getTossTasks());
+                                tasks.sort(tossTaskByDateComparator);
                     %>
 
                     <tr>
-                        <td align="center"><%out.print(tossTask.getId());%></td>
-                        <td align="center"><%out.print(tossTask.getManagerInfoOpened().getName());%></td>
-                        <td align="center"><a href="<%out.print("/toss/toss-conversation/" + tossTask.getId());%>"><%
-                            out.print(AppMethods.trimString(tossTask.getTitle(), 15));%></a></td>
-                        <td align="center"><%out.print(dateFormatShow.format(tossTask.getDate()));%></td>
+                        <td align="center"><%out.print(toss.getId());%></td>
+                        <td align="center"><%out.print(toss.getManagerOpenedName());%></td>
+                        <td align="center"><%out.print(tasks.get(0).getManagersEngaged());%></td>
+                        <td align="center"><%out.print(toss.getStatus().toLowerCase());%></td>
+                        <td align="center"><a href="<%out.print("/toss/toss-conversation/" + toss.getId());%>"><%out.print(AppMethods.trimString(toss.getTitle(), 15));%></a></td>
                         <td align="center"><%out.print(endDate);%></td>
-                        <td align="center"><%out.print(tossTask.getStatus().toLowerCase());%></td>
                     </tr>
                     <%}%>
                     </tbody>

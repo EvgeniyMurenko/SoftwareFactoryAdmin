@@ -23,5 +23,5 @@ public interface ManagerInfoDao {
 
     List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id);
 
-
+    List<ManagerInfo> getAllManagerInfofExceptManagers(List<Long> ids);
 }

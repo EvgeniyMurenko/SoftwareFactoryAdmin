@@ -80,5 +80,12 @@ public class ManagerInfoDaoImpl implements ManagerInfoDao {
         return query.list();
     }
 
+    @Override
+    public List<ManagerInfo> getAllManagerInfofExceptManagers(List<Long> ids) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct mi from ManagerInfo mi where mi.id not in (:ids)").setParameterList("ids", ids);
+        return query.list();
+    }
+
 }
 

@@ -3,10 +3,12 @@ package com.SoftwareFactoryAdmin.util;
 import com.SoftwareFactoryAdmin.constant.GlobalEnum;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
+import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.FrameGrabber;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import java.io.BufferedOutputStream;
@@ -179,9 +181,9 @@ public class SaveFile {
 
                 try {
                     saveFile(generatedName, file);
-                    if (this.videoExpansion.indexOf(getFileExtension(file)) > -1){
+                   /* if (this.videoExpansion.indexOf(getFileExtension(file)) > -1){
                         saveVideoThumbnail(generatedName);
-                    }
+                    }*/
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -307,12 +309,17 @@ public class SaveFile {
         if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
             fileExtension =  fileName.substring(fileName.lastIndexOf(".") + 1);
         }
+        String fullFileNamePath = MainPathEnum.mainPath + "/post/" + fileName;
+        opencv_core.IplImage iplImage;
+        FFmpegFrameGrabber fFmpegFrameGrabber;
 
-        FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(MainPathEnum.mainPath + "/post/" + fileName);
+        fFmpegFrameGrabber = new FFmpegFrameGrabber(fullFileNamePath);
         fFmpegFrameGrabber.setFormat(fileExtension);
         try {
             fFmpegFrameGrabber.start();
-            ImageIO.write(fFmpegFrameGrabber.grab().getBufferedImage(), "png", serverFile);
+            iplImage = fFmpegFrameGrabber.grab();
+            BufferedImage  bufferedImage = iplImage.getBufferedImage();
+            ImageIO.write(bufferedImage, "png", serverFile);
             fFmpegFrameGrabber.stop();
         } catch (FrameGrabber.Exception | IOException e) {
             e.printStackTrace();

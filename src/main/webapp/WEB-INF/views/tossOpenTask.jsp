@@ -79,7 +79,7 @@
                                     String date = dateFormat.format(new Date());
                                 %>
                                 <input type="text" name="end_date" id="end_date" class="form-control"
-                                       value="<%out.print(date);%>" />
+                                       value="<%out.print(date);%>"/>
                                 <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -99,7 +99,7 @@
                         <label class="col-sm-3 control-label">Persons</label>
                         <div class="col-sm-9">
                             <select class="js-example-basic-multiple " name="persons" multiple="multiple" required
-                                    style="width:100%">
+                                    style="width:100%;">
                                 <%for (ManagerInfo managerInfo : managerInfos) {%>
                                 <option value="<%out.print(managerInfo.getId());%>"><%
                                     out.print(managerInfo.getName());%></option>
@@ -122,14 +122,12 @@
                     </div>
                 </div>
             </form>
-
-
         </section>
-
     </div>
-    <!-- #End Page-content -->
-
 </div>
+<!-- #End Page-content -->
+
+
 <!-- #End Wrapper -->
 
 <%@ include file="javascript.jsp" %>

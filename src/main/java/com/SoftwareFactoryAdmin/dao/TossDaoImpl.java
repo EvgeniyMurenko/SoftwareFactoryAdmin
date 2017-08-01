@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("tossTaskDao")
+@Repository("tossDao")
 public class TossDaoImpl implements TossDao {
 
     private SessionFactory sessionFactory;
@@ -33,14 +33,15 @@ public class TossDaoImpl implements TossDao {
     @Override
     public Toss read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct tossTask " +
-                                            "from TossTask tossTask " +
-                                            "left join fetch tossTask.managerInfoOpened " +
-                "left join fetch tossTask.managerInfoEngaged " +
-                "left join fetch tossTask.tossTaskMessages tm " +
-                "left join fetch tm.managerInfo " +
-                "where tossTask.id =:id ")
-                .setParameter("id" , id);
+        Query query = session.createQuery("select distinct toss " +
+                                            "from Toss toss " +
+                                            "left join fetch toss.managerInfoEngaged mie " +
+                                            "left join fetch toss.tossTasks tt " +
+                                            "left join fetch tt.managerInfoOpened " +
+                                            "left join fetch tt.tossTaskMessages tm " +
+                                            "left join fetch tm.managerInfo " +
+                                            "where toss.id =:id ")
+                                            .setParameter("id" , id);
         return (Toss) query.uniqueResult();
     }
 
@@ -69,7 +70,7 @@ public class TossDaoImpl implements TossDao {
         Query query = session.createQuery("select distinct toss " +
                                             "from Toss toss " +
                                             "left join fetch toss.tossTasks tt " +
-                                            "join tt.managerInfoEngaged mie " +
+                                            "left join fetch toss.managerInfoEngaged mie " +
                                             "where tt.managerInfoOpened.id =:id " +
                                             "or mie.id =:id ")
                                             .setParameter("id" , id);
@@ -80,12 +81,12 @@ public class TossDaoImpl implements TossDao {
     public List<Toss> findTossBelongToManagerByStatus(Long id, String status) {
 
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct tossTask " +
-                                            "from TossTask tossTask " +
-                                            "left join fetch tossTask.managerInfoOpened " +
-                                            "join tossTask.managerInfoEngaged mie " +
-                                            "where tossTask.status like :tossStatus " +
-                                            "and tossTask.managerInfoOpened.id =:id " +
+        Query query = session.createQuery("select distinct toss " +
+                                            "from Toss toss " +
+                                            "left join fetch toss.tossTasks tt " +
+                                            "join toss.managerInfoEngaged mie " +
+                                            "where toss.status like :tossStatus " +
+                                            "and tt.managerInfoOpened.id =:id " +
                                             "or mie.id =:id " )
                                             .setParameter("id" , id)
                                             .setParameter("tossStatus" , "%"+status+"%");

@@ -24,4 +24,5 @@ public interface ManagerInfoService {
 
     List<ManagerInfo> getAllManagerInfosExceptOneManager(Long id);
 
+    List<ManagerInfo> getAllManagerInfofExceptManagers(List<Long> ids);
 }
