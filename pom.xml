@@ -176,12 +176,7 @@
 			<version>0.20.1-beta</version>
 		</dependency>
 
-		<!--video thumbnail -->
-		<dependency>
-			<groupId>org.bytedeco</groupId>
-			<artifactId>javacv</artifactId>
-			<version>0.8</version>
-		</dependency>
+
 
 		<!--video thumbnail -->
 		<dependency>
@@ -192,6 +187,12 @@
 
     </dependencies>
 
+	<repositories>
+		<repository>
+			<id>dcm4che repository</id>
+			<url>http://www.dcm4che.org/maven2/</url>
+		</repository>
+	</repositories>
 
 
 	<build>

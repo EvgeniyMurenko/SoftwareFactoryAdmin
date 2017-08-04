@@ -3,14 +3,7 @@ package com.SoftwareFactoryAdmin.util;
 import com.SoftwareFactoryAdmin.constant.GlobalEnum;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacv.FFmpegFrameGrabber;
-import org.bytedeco.javacv.FrameGrabber;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
