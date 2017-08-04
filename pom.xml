@@ -16,6 +16,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+
+
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -174,14 +176,10 @@
 			<version>0.20.1-beta</version>
 		</dependency>
 
-		<!--video thumbnail -->
-		<dependency>
-			<groupId>org.bytedeco</groupId>
-			<artifactId>javacv</artifactId>
-			<version>0.8</version>
-		</dependency>
 
     </dependencies>
+
+
 
 	<build>
 		<pluginManagement>

@@ -161,12 +161,12 @@
 
                             <div class="clearfix message-header">
                                 <div class="title"><%out.print(tossTask.getManagerInfoOpened().getName() + " ID - " + tossTask.getManagerInfoOpened().getId());%></div>
-                                <div class="date"><%out.print(dateFormatShow.format(tossTask.getDate()));%></div>
+                                <div class="date"> <span class="timeago mr10 mt10" title='<%out.print(dateFormatShow.format(tossTask.getDate())+"Z");%>'></span></div>
                             </div>
 
                             <% out.print(tossTask.getText());%>
 
-                            <div class="clearfix message-header"></div>
+
                             <div style="text-align: right"><a data-toggle="modal" data-target="#modalComment"  onclick="setTossTaskId(<%out.print(tossTask.getId());%>)">Leave comment</a></div>
                         </div>
 
