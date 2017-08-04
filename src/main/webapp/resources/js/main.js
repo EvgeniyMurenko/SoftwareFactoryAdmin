@@ -27,11 +27,6 @@ jQuery(document).ready(function ($) {
         );
     });
 
-    CKEDITOR.editor.on( 'required', function( evt ) {
-        alert( 'Article content is required.' );
-        evt.cancel();
-    } );
-
     $('#rating').rating({displayOnly: true, step: 0.5, size: "xs", min: 0, max: 5, stars: 5});
 
     // Left menu block toggle

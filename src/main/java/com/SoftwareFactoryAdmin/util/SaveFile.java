@@ -181,9 +181,9 @@ public class SaveFile {
 
                 try {
                     saveFile(generatedName, file);
-                   /* if (this.videoExpansion.indexOf(getFileExtension(file)) > -1){
+                    if (this.videoExpansion.indexOf(getFileExtension(file)) > -1){
                         saveVideoThumbnail(generatedName);
-                    }*/
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -297,36 +297,24 @@ public class SaveFile {
             fileDirectory.mkdirs();
         }
         // Create the file on server
-        File serverFile = new File(MainPathEnum.videoThumbnailsFilesPath.toString()  + fileName + ".png");
+        String thumbnailFilePath = MainPathEnum.videoThumbnailsFilesPath.toString()  + fileName + ".png";
+        File thumbnailFile = new File(thumbnailFilePath);
 
-        serverFile.setReadable(true, false);
-        serverFile.setExecutable(true, false);
-        serverFile.setWritable(true, false);
+        thumbnailFile.setReadable(true, false);
+        thumbnailFile.setExecutable(true, false);
+        thumbnailFile.setWritable(true, false);
 
-
-        String fileExtension = "";
-
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
-            fileExtension =  fileName.substring(fileName.lastIndexOf(".") + 1);
-        }
         String fullFileNamePath = MainPathEnum.mainPath + "/post/" + fileName;
-        opencv_core.IplImage iplImage;
-        FFmpegFrameGrabber fFmpegFrameGrabber;
 
-        fFmpegFrameGrabber = new FFmpegFrameGrabber(fullFileNamePath);
-        fFmpegFrameGrabber.setFormat(fileExtension);
         try {
-            fFmpegFrameGrabber.start();
-            iplImage = fFmpegFrameGrabber.grab();
-            BufferedImage  bufferedImage = iplImage.getBufferedImage();
-            ImageIO.write(bufferedImage, "png", serverFile);
-            fFmpegFrameGrabber.stop();
-        } catch (FrameGrabber.Exception | IOException e) {
+            DecodeAndCaptureFrames decodeAndCaptureFrames = new DecodeAndCaptureFrames(fullFileNamePath, thumbnailFilePath);
+            decodeAndCaptureFrames.start();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        return serverFile;
+        return thumbnailFile;
     }
 
 }

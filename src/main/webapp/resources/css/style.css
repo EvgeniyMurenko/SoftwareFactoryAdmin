@@ -196,21 +196,6 @@
     margin-bottom: 20px;
 }
 
-/*.message-right-color{
-    border-right: 10px solid !important;
-}*/
-.message-right-red{
-    border-right: 10px solid red !important; /*border-color: green;*/
-}
-.message-right-green{
-    border-right: 10px solid green !important;
-}
-.message-right-orange{
-    border-right: 10px solid orange !important;
-}
-.message-right-grey{
-    border-right: 10px solid grey !important;
-}
 
 
 .buttons-container{
@@ -277,12 +262,28 @@
     color: #31BFC0;
 }
 
-.message-right .message-header-comment {
+/*Toss*/
+
+.message-right-red{
+    border-right: 10px solid red !important; /*border-color: green;*/
+}
+.message-right-green{
+    border-right: 10px solid green !important;
+}
+.message-right-orange{
+    border-right: 10px solid orange !important;
+}
+.message-right-grey{
+    border-right: 10px solid grey !important;
+}
+
+.message-header-comment {
+
+    padding-top: 4px;
     border-bottom: 0;
     padding-bottom: 2px;
     !important;
 }
-
 
 .message-right-toss{
     margin-top: 10px;
@@ -291,13 +292,18 @@
     !important;
 }
 
-
 .message-right-comment{
     padding: 5px;
     margin-top: 0;
     margin-left: 100px;
     margin-right: 10px;
     margin-bottom: 0;
+    !important;
+}
+
+.message-header-toss{
+    margin-top: 2px;
+    margin-bottom: 2px;
     !important;
 }
 /* -------------------- #End Content -------------------- */

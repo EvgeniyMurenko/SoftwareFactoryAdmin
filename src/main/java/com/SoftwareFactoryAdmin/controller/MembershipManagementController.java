@@ -35,6 +35,8 @@ public class MembershipManagementController {
             return new ModelAndView("redirect:/main/");
         }
 
+
+
         ModelAndView staffList = new ModelAndView("staffList");
 
         staffList.addObject("staffList", staffInfoService.findAllWhereStaffIsNotDelete());
