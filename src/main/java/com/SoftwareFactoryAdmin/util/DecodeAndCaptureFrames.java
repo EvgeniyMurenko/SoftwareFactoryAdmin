@@ -10,7 +10,6 @@ import com.xuggle.mediatool.IMediaReader;
 import com.xuggle.mediatool.MediaListenerAdapter;
 import com.xuggle.mediatool.ToolFactory;
 import com.xuggle.mediatool.event.IVideoPictureEvent;
-import com.xuggle.xuggler.Global;
 
 
 public class DecodeAndCaptureFrames extends MediaListenerAdapter {
@@ -23,18 +22,18 @@ public class DecodeAndCaptureFrames extends MediaListenerAdapter {
     /**
      * Construct a DecodeAndCaptureFrames which reads and captures
      * frames from a video file.
-     *
      */
 
-    public DecodeAndCaptureFrames(String videoFile, String saveFile) throws Exception {
-        // create a media reader for processing video
+    public DecodeAndCaptureFrames(String videoFile, String saveFile) {
+
         this.videoFile = videoFile;
         this.saveFile = saveFile;
         this.e = null;
 
     }
 
-    public void start() throws Exception{
+    public void start() throws Exception {
+        // create a media reader for processing video
         IMediaReader reader = ToolFactory.makeReader(videoFile);
 
         // stipulate that we want BufferedImages created in BGR 24bit color space
