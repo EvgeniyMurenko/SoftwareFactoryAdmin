@@ -18,12 +18,8 @@ import com.SoftwareFactoryAdmin.model.Message;
 import com.SoftwareFactoryAdmin.model.User;
 import com.SoftwareFactoryAdmin.model.UserProfile;
 import com.SoftwareFactoryAdmin.service.*;
-import com.SoftwareFactoryAdmin.util.SaveFile;
-import org.bytedeco.javacv.FFmpegFrameGrabber;
-import org.bytedeco.javacv.FrameGrabber;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
