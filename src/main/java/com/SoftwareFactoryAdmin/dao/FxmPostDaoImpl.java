@@ -29,8 +29,12 @@ public class FxmPostDaoImpl implements FxmPostDao {
     @Override
     public FxmPost read(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        FxmPost fxmPost = (FxmPost) session.get(FxmPost.class, id);
-        return fxmPost;
+        Query query = session.createQuery("select distinct fxmPost from FxmPost fxmPost " +
+                "left join fetch fxmPost.user " +
+                "left join fetch fxmPost.fxmComments where id = :id").setParameter("id", id);
+
+        return (FxmPost) query.uniqueResult();
+
     }
 
     @Override
@@ -48,7 +52,9 @@ public class FxmPostDaoImpl implements FxmPostDao {
     @Override
     public List<FxmPost> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from FxmPost");
+        Query query = session.createQuery("select distinct fxmPost from FxmPost fxmPost " +
+                "left join fetch fxmPost.user " +
+                "left join fetch fxmPost.fxmComments ");
         return query.list();
     }
 }
