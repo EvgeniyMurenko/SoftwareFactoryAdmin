@@ -26,4 +26,6 @@ public interface UserService {
 
 	User createStaffUser(String password);
 
+	User createManagerUser(String password);
+
 }

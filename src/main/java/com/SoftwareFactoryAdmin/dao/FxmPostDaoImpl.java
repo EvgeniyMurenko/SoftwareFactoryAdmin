@@ -30,9 +30,8 @@ public class FxmPostDaoImpl implements FxmPostDao {
     public FxmPost read(Long id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select distinct fxmPost from FxmPost fxmPost " +
-                "left join fetch fxmPost.user " +
-                "left join fetch fxmPost.fxmComments where id = :id").setParameter("id", id);
-
+                                            "left join fetch fxmPost.user " +
+                                            "left join fetch fxmPost.fxmComments where fxmPost.id = :id").setParameter("id", id);
         return (FxmPost) query.uniqueResult();
 
     }
@@ -53,8 +52,8 @@ public class FxmPostDaoImpl implements FxmPostDao {
     public List<FxmPost> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select distinct fxmPost from FxmPost fxmPost " +
-                "left join fetch fxmPost.user " +
-                "left join fetch fxmPost.fxmComments ");
+                                            "left join fetch fxmPost.user " +
+                                            "left join fetch fxmPost.fxmComments ");
         return query.list();
     }
 }

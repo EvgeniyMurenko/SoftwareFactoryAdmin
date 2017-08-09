@@ -57,7 +57,7 @@ public class FxmApplicationController {
         String requestType = serverRequest.getRequestType();
 
         // default server response ( FAIL_REQUEST )
-        ServerResponse serverResponse = new ServerResponse(REQUEST_FAIL.getValue() , null);
+        ServerResponse serverResponse = new ServerResponse(REQUEST_FAIL.getValue(), null);
 
         if (requestType.equals(AUTHORIZATION_REQUEST.toString())) {
 
@@ -71,11 +71,12 @@ public class FxmApplicationController {
             User managerUser = userService.findBySSO(authorizationDTO.getSsoId());
 
             if (managerUser != null) {
-                ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerUser.getId());
 
-                BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-                if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,managerUser.getPassword())) {
+             /*   BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+                if (bCryptPasswordEncoder.matches(authorizationDTO.getPassword() ,managerUser.getPassword())) {*/
+
+                if (managerUser.getPassword().equals(authorizationDTO.getPassword())) {
 
                     List<GoogleCloudKey> googleCloudKeyList = new ArrayList<>(managerUser.getGoogleCloudKeys());
 
@@ -87,6 +88,9 @@ public class FxmApplicationController {
                         googleCloudKeyService.addGoogleCloudKey(googleCloudKey);
 
                     }
+
+
+                    ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerUser.getId());
 
 
                     ManagerInfoDTO managerInfoDTO = DtoConverter.managerInfoDTOConverter(managerInfo);

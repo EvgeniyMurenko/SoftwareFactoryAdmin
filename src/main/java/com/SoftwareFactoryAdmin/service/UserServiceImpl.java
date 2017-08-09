@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+       /* user.setPassword(passwordEncoder.encode(user.getPassword()));*/
         dao.save(user);
     }
 
@@ -49,7 +49,8 @@ public class UserServiceImpl implements UserService {
         if (entity != null) {
             entity.setSsoId(user.getSsoId());
             if (!user.getPassword().equals(entity.getPassword())) {
-                entity.setPassword(passwordEncoder.encode(user.getPassword()));
+                /*entity.setPassword(passwordEncoder.encode(user.getPassword()));*/
+                entity.setPassword(user.getPassword());
             }
             entity.setDelete(user.isDelete());
             entity.setAvatarImage(user.getAvatarImage());
@@ -77,14 +78,18 @@ public class UserServiceImpl implements UserService {
     }
 
     public User createCustomerUser(String phone) {
-        return createUser("CUSTOMER" ,1, phone);
+        return createUser("CUSTOMER", 1, phone);
     }
 
     public User createStaffUser(String phone) {
-        return createUser("STAFF" , 4, phone);
+        return createUser("STAFF", 4, phone);
     }
 
-    private User createUser(String type , int typeId, String password){
+    public User createManagerUser(String password) {
+        return createUser("MANAGER", 3, password);
+    }
+
+    private User createUser(String type, int typeId, String password) {
 
         User user = new User();
         user.setAvatarImage("");
@@ -111,7 +116,6 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
-
 
 
     private String getCustomerId(String id) {
