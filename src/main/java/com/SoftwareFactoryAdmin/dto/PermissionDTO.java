@@ -10,8 +10,7 @@ public class PermissionDTO implements Serializable {
 
     public PermissionDTO(){}
 
-
-    public PermissionDTO(Boolean superAdminPermission, Boolean estimatePermission, Boolean casePermission, Boolean customerPermission, Boolean projectsPermission, Boolean staffPermission, Boolean noticePermission, Boolean permissionManagement, Boolean translatePermission) {
+    public PermissionDTO(Boolean superAdminPermission, Boolean estimatePermission, Boolean casePermission, Boolean customerPermission, Boolean projectsPermission, Boolean staffPermission, Boolean noticePermission, Boolean permissionManagement, Boolean translatePermission, Boolean isLeaderGroup, Boolean isMemberGroup, Boolean isStaffGroup) {
         this.superAdminPermission = superAdminPermission;
         this.estimatePermission = estimatePermission;
         this.casePermission = casePermission;
@@ -21,6 +20,9 @@ public class PermissionDTO implements Serializable {
         this.noticePermission = noticePermission;
         this.permissionManagement = permissionManagement;
         this.translatePermission = translatePermission;
+        this.isLeaderGroup = isLeaderGroup;
+        this.isMemberGroup = isMemberGroup;
+        this.isStaffGroup = isStaffGroup;
     }
 
     private Boolean superAdminPermission;
@@ -40,6 +42,12 @@ public class PermissionDTO implements Serializable {
     private Boolean permissionManagement;
 
     private Boolean translatePermission;
+
+    private Boolean isLeaderGroup;
+
+    private Boolean isMemberGroup;
+
+    private Boolean isStaffGroup;
 
     public Boolean getSuperAdminPermission() {
         return superAdminPermission;

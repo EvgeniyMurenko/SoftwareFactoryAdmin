@@ -14,6 +14,6 @@ public interface FxmPostDao {
 
     void delete(FxmPost fxmPost);
 
-    List<FxmPost> findAll();
+    List<FxmPost> findAll(String member, String leader, String staff);
 
 }

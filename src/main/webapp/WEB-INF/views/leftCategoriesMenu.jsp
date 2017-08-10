@@ -68,8 +68,16 @@
                     <li><a href="/membership-mm/"><i class="fa fa-users" aria-hidden="true"></i> Staff</a></li>
                 <%} if (currentPermission.getNoticePermission()) {%>
                     <li><a href="/notice/"><i class="fa fa-list" aria-hidden="true"></i> Notices</a></li>
-                <%} if (currentPermission.getPermissionManagement()) {%>
-                    <li><a href="/permission/"><i class="fa fa-lock" aria-hidden="true"></i> Permissions</a> </li>
+                <%} if (currentPermission.getSuperAdminPermission()) {%>
+                    <li><a onclick="hidetxt('divhide'); return false;" href="#" rel="nofollow"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                        <div class="text-hide" id="divhide">
+                            <div class="background-02">
+                                <ul class="dropdown ml15">
+                                    <li><a href="/permission/"><i class="fa fa-lock" aria-hidden="true"></i> Manager Permission</a></li>
+                                    <li><a href="#"><i class="fa fa-mobile" aria-hidden="true"></i></i>Aplication Permission</a></li>
+                                </ul>
+                            </div>
+                        </div>
                 <%}%>
                     <li><a href="/group/"><i class="fa fa-envelope-o" aria-hidden="true"></i></i> Group</a></li>
                     <li><a href="/toss/"><i class="fa fa-rocket" aria-hidden="true"></i> Toss</a></li>

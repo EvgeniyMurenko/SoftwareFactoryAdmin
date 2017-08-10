@@ -167,7 +167,7 @@ public class EstimateController {
                     registrationLink = registrationLink + customerInfo.getUser().getId() + "/" + generateEstimateId(estimate.getDateRequest(), estimate.getId()) + "/" + estimate.getId();
                 }
 
-                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager, customer, registrationLink);
+                mailService.sendEmailAfterEstimateRespond(customerInfo.getEmail(), messageFromManager, customer, registrationLink, customerInfo.isFullCreated());
             }
         }
 

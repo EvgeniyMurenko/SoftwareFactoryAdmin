@@ -2,6 +2,7 @@ package com.SoftwareFactoryAdmin.service;
 
 
 import com.SoftwareFactoryAdmin.model.FxmPost;
+import com.SoftwareFactoryAdmin.model.Permission;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface FxmPostService {
 
     void deleteFxmPost(FxmPost fxmPost);
 
-    List<FxmPost> getAllFxmPosts();
+    List<FxmPost> getAllFxmPosts(Permission permission);
 
     FxmPost getFxmPostById(Long id);
 

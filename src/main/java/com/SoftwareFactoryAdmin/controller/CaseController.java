@@ -113,7 +113,7 @@ public class CaseController {
         caseService.updateCase(aCase);
 
         String registrationLink = "www.sofac.kr";
-        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message, customer, registrationLink);
+        mailService.sendEmailAfterEstimateRespond(aCase.getProject().getCustomerInfo().getEmail(), message, customer, registrationLink, aCase.getProject().getCustomerInfo().isFullCreated());
 
         return new ModelAndView("redirect:/cases/" + id);
     }

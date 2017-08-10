@@ -15,7 +15,7 @@ public class DtoConverter {
 
         Permission permission = managerInfo.getManagerInfoPermissions();
 
-        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), new PermissionDTO(permission.getSuperAdminPermission(), permission.getEstimatePermission(), permission.getCasePermission(), permission.getCustomerPermission(), permission.getProjectsPermission(), permission.getStaffPermission(), permission.getNoticePermission(), permission.getPermissionManagement(), permission.getTranslatePermission()));
+        ManagerInfoDTO managerInfoDTO = new ManagerInfoDTO(managerInfo.getId(), managerInfo.getName(), managerInfo.getPhone(), managerInfo.getEmail(), managerInfo.getBirthday(), managerInfo.getUser().getAvatarImage(), new PermissionDTO(permission.getSuperAdminPermission(), permission.getEstimatePermission(), permission.getCasePermission(), permission.getCustomerPermission(), permission.getProjectsPermission(), permission.getStaffPermission(), permission.getNoticePermission(), permission.getPermissionManagement(), permission.getTranslatePermission(), permission.getLeaderGroup(), permission.getMemberGroup(), permission.getStaffGroup()));
 
         return managerInfoDTO;
     }
@@ -50,7 +50,7 @@ public class DtoConverter {
 
 
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
-        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo() ,fxmPost.getLinksFile(), fxmPost.getLinksVideo() , fxmPost.getLinksImage() ,fxmPost.getUser().getAvatarImage());
+        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo() ,fxmPost.getLinksFile(), fxmPost.getLinksVideo() , fxmPost.getLinksImage() ,fxmPost.getUser().getAvatarImage(), fxmPost.getGroupType());
     }
 
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {

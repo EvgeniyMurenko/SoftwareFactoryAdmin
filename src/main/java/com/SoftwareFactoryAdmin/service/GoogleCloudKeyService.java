@@ -26,5 +26,6 @@ public interface GoogleCloudKeyService {
 
     List<String> findAllKeysByUserIds(List<Long> ids);
     List<String> findAllManagerWithOutOne(Long idManager);
+    List<String> findAllKeysByFilter(String filter, Long userId);
 
 }

@@ -411,7 +411,11 @@
                         <h4>Show to</h4>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input class="form-control" type="text" id="inputField">
+                                <select class="form-control" name="writeTo" >
+                                    <%if (currentPermission.getLeaderGroup())%><option value="leader">Leader</option>
+                                    <%if (currentPermission.getStaffGroup())%><option value="staff">Staff</option>
+                                    <%if (currentPermission.getMemberGroup())%><option value="member">Member</option>
+                                </select>
                             </div>
                         </div>
 

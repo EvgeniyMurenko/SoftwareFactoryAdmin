@@ -45,11 +45,13 @@ public class GroupController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getShowGroup() {
+    public ModelAndView getShowGroup(HttpSession session) {
 
         ModelAndView getShowGroup = new ModelAndView("group");
 
-        List<FxmPost> postList = fxmPostService.getAllFxmPosts();
+        ManagerInfo managerInfo = (ManagerInfo) session.getAttribute("managerInfo");
+
+        List<FxmPost> postList = fxmPostService.getAllFxmPosts(managerInfo.getManagerInfoPermissions());
         Collections.sort(postList, new FxmPostByDateComporator());
         List<FxmPostFile> fxmPostFileList = new ArrayList<>();
 
@@ -100,8 +102,10 @@ public class GroupController {
 
     @RequestMapping(value = "/save-post", method = RequestMethod.POST)
     public ModelAndView saveNewPost(HttpSession httpSession, @RequestParam("postId") Long postId,
+                                    @RequestParam("writeTo") String writeTo,
                                     @RequestParam("postText") String postText,
                                     @RequestParam("file[]") MultipartFile[] files) {
+
         FxmPost fxmPost;
         if (postId > 0) {
             fxmPost = fxmPostService.getFxmPostById(postId);
@@ -112,13 +116,18 @@ public class GroupController {
             ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
 
             List<FxmComment> commentList = new ArrayList<>();
-            fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, commentList);
+            fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, writeTo, commentList);
 
             fxmPostService.addNewFxmPost(fxmPost);
 
-            List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
+            List<String> keys = googleCloudKeyService.findAllKeysByFilter(writeTo, userId);
             pushNotificationService.pushNotificationToGCM(keys, fxmPost.getPostTextOriginal(), "FXM Group post!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
+            System.out.println("==================SSSSSSSSSSSS======================= " +keys.size());
+            for (String string : keys){
+                System.out.println(string);
+            }
+            System.out.println("=========================================");
         }
 
         //SAVE FILE
@@ -136,7 +145,6 @@ public class GroupController {
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
 
         FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
-
 
         FxmComment fxmComment = new FxmComment(managerInfo.getUser(), managerInfo.getName(), new Date(), comment, fxmPost);
 

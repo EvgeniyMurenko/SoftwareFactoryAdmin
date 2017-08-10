@@ -6,6 +6,6 @@ import com.SoftwareFactoryAdmin.model.User;
 
 public interface MailService {
 
-    void sendEmailAfterEstimateRespond(String recipientMail , Message message, User customerUser, String registrationLink);
+    void sendEmailAfterEstimateRespond(String recipientMail , Message message, User customerUser, String registrationLink, Boolean isFullCreated);
 
 }

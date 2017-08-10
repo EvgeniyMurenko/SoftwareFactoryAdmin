@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "s_fxm_post")
@@ -16,7 +15,7 @@ public class FxmPost implements Serializable {
     public FxmPost() {
     }
 
-    public FxmPost(User user, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo, String linksFile, String linksImage, String linksVideo, List<FxmComment> fxmComments) {
+    public FxmPost(User user, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo, String linksFile, String linksImage, String linksVideo, String groupType, List<FxmComment> fxmComments) {
         this.user = user;
         this.userName = userName;
         this.date = date;
@@ -27,6 +26,7 @@ public class FxmPost implements Serializable {
         this.linksFile = linksFile;
         this.linksImage = linksImage;
         this.linksVideo = linksVideo;
+        this.groupType = groupType;
         this.fxmComments = fxmComments;
     }
 
@@ -79,6 +79,8 @@ public class FxmPost implements Serializable {
     @Type(type = "text")
     private String linksVideo;
 
+    @Column(name = "show_to")
+    private String groupType;
 
     @OneToMany(mappedBy = "fxmPost", fetch = FetchType.LAZY)
     private List<FxmComment> fxmComments;
@@ -177,5 +179,13 @@ public class FxmPost implements Serializable {
 
     public void setLinksVideo(String linksVideo) {
         this.linksVideo = linksVideo;
+    }
+
+    public String getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(String groupType) {
+        this.groupType = groupType;
     }
 }

@@ -15,8 +15,7 @@ public class Permission implements Serializable, HttpSessionBindingListener {
 
     public Permission (){}
 
-
-    public Permission(Long id, ManagerInfo managerInfo, Boolean superAdminPermission, Boolean estimatePermission, Boolean casePermission, Boolean customerPermission, Boolean projectsPermission, Boolean staffPermission, Boolean noticePermission, Boolean permissionManagement, Boolean translatePermission) {
+    public Permission(Long id, ManagerInfo managerInfo, Boolean superAdminPermission, Boolean estimatePermission, Boolean casePermission, Boolean customerPermission, Boolean projectsPermission, Boolean staffPermission, Boolean noticePermission, Boolean permissionManagement, Boolean translatePermission, Boolean isLeaderGroup, Boolean isMemberGroup, Boolean isStaffGroup) {
         this.id = id;
         this.managerInfo = managerInfo;
         this.superAdminPermission = superAdminPermission;
@@ -28,6 +27,9 @@ public class Permission implements Serializable, HttpSessionBindingListener {
         this.noticePermission = noticePermission;
         this.permissionManagement = permissionManagement;
         this.translatePermission = translatePermission;
+        this.isLeaderGroup = isLeaderGroup;
+        this.isMemberGroup = isMemberGroup;
+        this.isStaffGroup = isStaffGroup;
     }
 
     @Id
@@ -74,6 +76,15 @@ public class Permission implements Serializable, HttpSessionBindingListener {
     @Column(name = "translate_permission")
     private Boolean translatePermission;
 
+    @Column(name = "leader_gropup")
+    private Boolean isLeaderGroup;
+
+    @Column(name = "member_group")
+    private Boolean isMemberGroup;
+
+    @Column(name = "staff_group")
+    private Boolean isStaffGroup;
+
     @Override
     public String toString() {
         return "Permission{" +
@@ -88,6 +99,9 @@ public class Permission implements Serializable, HttpSessionBindingListener {
                 ", noticePermission=" + noticePermission +
                 ", permissionManagement=" + permissionManagement +
                 ", translatePermission=" + translatePermission +
+                ", isLeaderGroup=" + isLeaderGroup +
+                ", isMemberGroup=" + isMemberGroup +
+                ", isStaffGroup=" + isStaffGroup +
                 '}';
     }
 
@@ -177,6 +191,30 @@ public class Permission implements Serializable, HttpSessionBindingListener {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getLeaderGroup() {
+        return isLeaderGroup;
+    }
+
+    public void setLeaderGroup(Boolean leaderGroup) {
+        isLeaderGroup = leaderGroup;
+    }
+
+    public Boolean getMemberGroup() {
+        return isMemberGroup;
+    }
+
+    public void setMemberGroup(Boolean memberGroup) {
+        isMemberGroup = memberGroup;
+    }
+
+    public Boolean getStaffGroup() {
+        return isStaffGroup;
+    }
+
+    public void setStaffGroup(Boolean staffGroup) {
+        isStaffGroup = staffGroup;
     }
 
     @Override

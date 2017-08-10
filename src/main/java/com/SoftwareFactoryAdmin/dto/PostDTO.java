@@ -9,7 +9,7 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo ,String linksFile , String linksVideo , String linksImage ,String postUserAvatarImage) {
+    public PostDTO(Long id, Long serverID, Long userID, String userName, Date date, String postTextOriginal, String postTextRu, String postTextEn, String postTextKo, String linksFile, String linksImage, String linksVideo, String postUserAvatarImage, String groupType) {
         this.id = id;
         this.serverID = serverID;
         this.userID = userID;
@@ -20,9 +20,10 @@ public class PostDTO {
         this.postTextEn = postTextEn;
         this.postTextKo = postTextKo;
         this.linksFile = linksFile;
-        this.linksVideo = linksVideo;
         this.linksImage = linksImage;
+        this.linksVideo = linksVideo;
         this.postUserAvatarImage = postUserAvatarImage;
+        this.groupType = groupType;
     }
 
     private Long id;
@@ -50,6 +51,8 @@ public class PostDTO {
     private String linksVideo;
 
     private String postUserAvatarImage;
+
+    private String groupType;
 
 
 
@@ -155,5 +158,13 @@ public class PostDTO {
 
     public void setPostUserAvatarImage(String postUserAvatarImage) {
         this.postUserAvatarImage = postUserAvatarImage;
+    }
+
+    public String getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(String groupType) {
+        this.groupType = groupType;
     }
 }

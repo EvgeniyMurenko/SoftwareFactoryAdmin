@@ -94,4 +94,16 @@ public class GoogleCloudKeyDaoImpl implements GoogleCloudKeyDao {
         return query.list();
     }
 
+    @Override
+    public List<String> findAllKeysByFilter(String filter, Long userId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct gcmkeys.key  from ManagerInfo managerInfo " +
+                "join  managerInfo.user.googleCloudKeys gcmkeys " +
+                filter +
+                "and  managerInfo.id != :userId");
+        query.setParameter("isTrue", true);
+        query.setParameter("userId", userId);
+        return query.list();
+    }
+
 }

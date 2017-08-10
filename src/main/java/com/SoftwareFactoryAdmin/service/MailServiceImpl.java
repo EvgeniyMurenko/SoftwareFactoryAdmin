@@ -26,7 +26,7 @@ public class MailServiceImpl implements MailService {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일HH시mm분에 고객님께서 문의하신 내용에 대해서 답변드립니다.");
 
 
-   public void sendEmailAfterEstimateRespond(String recipientMail , com.SoftwareFactoryAdmin.model.Message message, User customerUser, String registrationLink){
+   public void sendEmailAfterEstimateRespond(String recipientMail , com.SoftwareFactoryAdmin.model.Message message, User customerUser, String registrationLink, Boolean isFullCreated){
 
        String textFooterNotFoolCreation = "<tr>\t\t\t\t\t\t \n" +
                "\t\t\t\t\t\t<td style=\"padding: 30px 0px 0px; text-align: left; color: rgb(51, 51, 51); line-height: 18px; font-family: Lucida Grande, Helvetica, Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; font-smooth: always;\">\n" +
@@ -101,7 +101,7 @@ public class MailServiceImpl implements MailService {
                "\t\t\t\t\t\t</td>\t\t\t\t\t\t \n" +
                "\t\t\t\t\t</tr>";
        String footerText;
-       if(message.getaCase().getProject().getCustomerInfo().isFullCreated()){
+       if(isFullCreated){
            footerText = textFooterFoolCreation;
        }else {
            footerText = textFooterNotFoolCreation;

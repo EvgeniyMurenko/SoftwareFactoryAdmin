@@ -179,6 +179,11 @@
     border-color: #279293;
 }
 
+.form-control option{
+    background-color: #000000;!important;
+    color: #fff;!important;
+}
+
 .pagination > li > a {
     border-radius: 0 !important;
     background: url("../images/opacity-03.png") repeat 0 0 !important;

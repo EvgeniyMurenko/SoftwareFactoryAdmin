@@ -28,4 +28,6 @@ public interface GoogleCloudKeyDao {
 
     List<String> findAllManagerWithOutOne(Long userID);
 
+    List<String> findAllKeysByFilter(String filter, Long userID);
+
 }

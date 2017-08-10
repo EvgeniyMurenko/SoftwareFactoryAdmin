@@ -55,7 +55,6 @@ public class GoogleCloudKeyServiceImpl implements GoogleCloudKeyService {
         return googleCloudKeyDao.findAllKeysByUser(userID);
     }
 
-
     @Override
     public List<String> findAllManagersKeys() {
         return googleCloudKeyDao.findAllKeysByUserType("MANAGER");
@@ -74,6 +73,17 @@ public class GoogleCloudKeyServiceImpl implements GoogleCloudKeyService {
     @Override
     public List<String> findAllManagerWithOutOne(Long idManager) {
         return googleCloudKeyDao.findAllManagerWithOutOne(idManager);
+    }
+
+    @Override
+    public List<String> findAllKeysByFilter(String filter, Long userId) {
+        switch (filter){
+            case "staff": System.out.println("=========staff============"); filter = "where managerInfo.managerInfoPermissions.isStaffGroup = :isTrue ";break;
+            case "member": System.out.println("============member========="); filter = "where managerInfo.managerInfoPermissions.isMemberGroup = :isTrue ";break;
+            case "leader": System.out.println("===========leader=========="); filter = "where managerInfo.managerInfoPermissions.isLeaderGroup = :isTrue ";break;
+        }
+        System.out.println("==============filter============ " + filter);
+        return googleCloudKeyDao.findAllKeysByFilter(filter, userId);
     }
 
 }
