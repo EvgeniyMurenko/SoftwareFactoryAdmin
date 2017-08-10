@@ -43,10 +43,16 @@
         </header>
         <!-- #End Header -->
 
+
+
         <%List<ManagerInfo> managerInfoList = (List<ManagerInfo>) request.getAttribute("managersList");%>
 
         <section class="content container-fluid">
             <div class="background-01">
+
+                <div class="mb20">
+                    <a href="/permission/create-manager" class="btn btn-primary"><i class="fa fa-plus-circle pr10"></i>Add new Manager</a>
+                </div>
 
                 <table id="dataTable" class="table" width="100%" cellspacing="0">
                     <thead>
@@ -91,7 +97,7 @@
                             <tr>
                                 <form action="/permission/change-permission" method="post">
                                     <input type="hidden" name="id" value="<%out.print(managerInfo.getId());%>">
-                                    <td align="center"><%out.print(managerInfo.getName());%></td>
+                                    <td align="center"><a href="<%out.print("/permission/edit-manager/" + managerInfo.getId());%>"><%out.print(managerInfo.getName());%></a></td>
                                     <td align="center"><input type="checkbox" name="estimate_permission" <%out.print(AppMethods.isChecked(permission.getEstimatePermission()));%>></td>
                                     <td align="center"><input type="checkbox" name="case_permission" <%out.print(AppMethods.isChecked(permission.getCasePermission()));%>></td>
                                     <td align="center"><input type="checkbox" name="customer_permission" <%out.print(AppMethods.isChecked(permission.getCustomerPermission()));%>></td>

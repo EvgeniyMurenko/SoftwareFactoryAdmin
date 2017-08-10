@@ -125,7 +125,7 @@ public class MembershipManagementController {
 
 
         if (!password.equals(confirmPassword))
-            return new ModelAndView("redirect:/membership-mm/create", "isPasswordError", "true");
+            return new ModelAndView("redirect:/membership-mm/edit/"+id, "isPasswordError", "true");
 
         User userStaff = userService.findById(id);
         Long managerId = (Long) httpSession.getAttribute("UserId");
