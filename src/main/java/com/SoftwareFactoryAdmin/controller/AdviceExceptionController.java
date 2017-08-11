@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -19,25 +20,27 @@ public class AdviceExceptionController {
     MailService mailService;
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleAll(Exception ex){
+    public ModelAndView handleAll(Exception ex) {
 
-        System.out.println("error");
 
-        StringWriter sw = new StringWriter();
-        ex.printStackTrace(new PrintWriter(sw));
-        String exceptionAsString = sw.toString();
+        System.out.println("=================================================== error ");
+        if (!FileNotFoundException.class.isInstance(ex)) {
 
-        mailService.sendBugExceptionToEmail(exceptionAsString);
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            mailService.sendBugExceptionToEmail(exceptionAsString);
 
+        }
 
 
         ModelAndView exceptionView;
-        if (NoHandlerFoundException.class.isInstance(ex)){
-            exceptionView =new  ModelAndView("redirect:/error/404");
+        if (NoHandlerFoundException.class.isInstance(ex)) {
+            exceptionView = new ModelAndView("redirect:/error/404");
         } else {
             exceptionView = new ModelAndView("404");
-            exceptionView.addObject("number" , ex);
-            exceptionView.addObject("error" ,ex.getMessage());
+            exceptionView.addObject("number", ex);
+            exceptionView.addObject("error", ex.getMessage());
         }
         return exceptionView;
     }
