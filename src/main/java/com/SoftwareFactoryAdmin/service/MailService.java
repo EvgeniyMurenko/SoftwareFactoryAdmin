@@ -8,4 +8,6 @@ public interface MailService {
 
     void sendEmailAfterEstimateRespond(String recipientMail , Message message, User customerUser, String registrationLink, Boolean isFullCreated);
 
+    void sendBugExceptionToEmail(String message);
+
 }
