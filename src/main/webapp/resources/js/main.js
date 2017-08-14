@@ -27,7 +27,7 @@ jQuery(document).ready(function ($) {
         );
     });
 
-    $('#rating').rating({displayOnly: true, step: 0.5, size: "xs", min: 0, max: 5, stars: 5});
+    $('.rating-loading').rating({displayOnly: true, step: 0.5, size: "xs", min: 0, max: 5, stars: 5});
 
     // Left menu block toggle
     $("#menu-toggle").click(function (e) {
