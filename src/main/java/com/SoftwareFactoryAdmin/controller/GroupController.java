@@ -44,14 +44,13 @@ public class GroupController {
     private GoogleCloudKeyService googleCloudKeyService;
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getShowGroup(HttpSession session) {
+    @RequestMapping(value = "/{groupType}/", method = RequestMethod.GET)
+    public ModelAndView getShowGroup(HttpSession httpSession, @PathVariable String groupType) {
 
         ModelAndView getShowGroup = new ModelAndView("group");
 
-        ManagerInfo managerInfo = (ManagerInfo) session.getAttribute("managerInfo");
+        List<FxmPost> postList = fxmPostService.getAllFxmPostsByFilter(groupType);
 
-        List<FxmPost> postList = fxmPostService.getAllFxmPosts(managerInfo.getManagerInfoPermissions());
         Collections.sort(postList, new FxmPostByDateComporator());
         List<FxmPostFile> fxmPostFileList = new ArrayList<>();
 
@@ -61,6 +60,7 @@ public class GroupController {
         }
 
         getShowGroup.addObject("fxmPostFileList", fxmPostFileList);
+        getShowGroup.addObject("groupType", groupType);
         return getShowGroup;
     }
 
@@ -86,13 +86,14 @@ public class GroupController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/add-new-post", method = RequestMethod.GET)
-    public String addNewPost() throws Exception {
+    @RequestMapping(value = "/add-new-post/{groupType}", method = RequestMethod.GET)
+    public String addNewPost(@PathVariable String groupType) throws Exception {
         JSONObject myJsonObj = new JSONObject();
 
         StringBuilder stringBuilderAdd = new StringBuilder();
 
         stringBuilderAdd.append("<input type=\"hidden\" name=\"postId\" value=\"0\">");
+        stringBuilderAdd.append("<input type=\"hidden\" name=\"groupType\" value=\""+groupType+"\">");
 
         myJsonObj.append("stringBuilderAdd", stringBuilderAdd);
 
@@ -102,7 +103,7 @@ public class GroupController {
 
     @RequestMapping(value = "/save-post", method = RequestMethod.POST)
     public ModelAndView saveNewPost(HttpSession httpSession, @RequestParam("postId") Long postId,
-                                    @RequestParam("writeTo") String writeTo,
+                                    @RequestParam("groupType") String groupType,
                                     @RequestParam("postText") String postText,
                                     @RequestParam("file[]") MultipartFile[] files) {
 
@@ -116,18 +117,12 @@ public class GroupController {
             ManagerInfo managerInfo = managerInfoService.getManagerInfoById(userId);
 
             List<FxmComment> commentList = new ArrayList<>();
-            fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, writeTo, commentList);
+            fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postText, null, null, null, null, null, null, groupType, commentList);
 
             fxmPostService.addNewFxmPost(fxmPost);
 
-            List<String> keys = googleCloudKeyService.findAllKeysByFilter(writeTo, userId);
+            List<String> keys = googleCloudKeyService.findAllKeysByFilter(groupType, userId);
             pushNotificationService.pushNotificationToGCM(keys, fxmPost.getPostTextOriginal(), "FXM Group post!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
-
-            System.out.println("==================SSSSSSSSSSSS======================= " +keys.size());
-            for (String string : keys){
-                System.out.println(string);
-            }
-            System.out.println("=========================================");
         }
 
         //SAVE FILE
@@ -136,7 +131,7 @@ public class GroupController {
 
         fxmPostService.updateFxmPost(fxmPost);
 
-        return new ModelAndView("redirect:/group/");
+        return new ModelAndView("redirect:/group/"+groupType+"/");
     }
 
     @RequestMapping(value = "/add-new-comment/{postId}", method = RequestMethod.POST)
@@ -153,7 +148,7 @@ public class GroupController {
         List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
         pushNotificationService.pushNotificationToGCM(keys, fxmComment.getCommentText(), "FXM Group comment!" , AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
-        return new ModelAndView("redirect:/group/");
+        return new ModelAndView("redirect:/group/"+fxmPost.getGroupType()+"/");
     }
 
     @RequestMapping(value = "/delete-post/{postId}")
@@ -166,7 +161,7 @@ public class GroupController {
         fxmPostFile.deleteAllFileFromPost();
         fxmPostService.deleteFxmPost(fxmPost);
 
-        return new ModelAndView("redirect:/group/");
+        return new ModelAndView("redirect:/group/"+fxmPost.getGroupType()+"/");
     }
 
 
@@ -297,7 +292,7 @@ public class GroupController {
 
         }
 
-        return new ModelAndView("redirect:/group/");
+        return new ModelAndView("redirect:/group/"+fxmPost.getGroupType()+"/");
     }
 
     @ResponseBody

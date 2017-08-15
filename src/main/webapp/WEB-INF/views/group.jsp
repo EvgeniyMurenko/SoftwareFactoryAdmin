@@ -40,12 +40,13 @@
     <div id="page-content-wrapper">
 
         <%List<FxmPostFile> fxmPostFileList = (List<FxmPostFile>) request.getAttribute("fxmPostFileList");%>
+        <%String groupType = (String) request.getAttribute("groupType");%>
         <%SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
         <!-- Header -->
         <header class="header line">
-            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-            <span class="header-title clearfix">Group</span>
+            <a href="javascript:void(0);" class="btn btn-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <span class="header-title clearfix"><%out.print(groupType+" Group");%></span>
         </header>
         <!-- #End Header -->
 
@@ -294,7 +295,7 @@
             <%}%>
 
             <div class="add-post">
-                <a onclick="addNewPost()"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                <a onclick="addNewPost('<%out.print(groupType);%>')"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
             </div>
 
 
@@ -408,16 +409,16 @@
 
                     <!--Create post-->
                     <div class="background-01">
-                        <h4>Show to</h4>
+                       <%-- <h4>Show to</h4>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <select class="form-control" name="writeTo" >
+                                <select class="form-control" name="groupType" >
                                     <%if (currentPermission.getLeaderGroup())%><option value="leader">Leader</option>
                                     <%if (currentPermission.getStaffGroup())%><option value="staff">Staff</option>
                                     <%if (currentPermission.getMemberGroup())%><option value="member">Member</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>--%>
 
                         <h4>Write message</h4>
 

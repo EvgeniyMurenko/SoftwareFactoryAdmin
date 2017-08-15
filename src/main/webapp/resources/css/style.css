@@ -356,7 +356,7 @@
     background: url("../images/opacity-03.png") repeat 0 0;
     border: 1px solid #000;
     color: #fff;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 .sign-in .form-control:focus {

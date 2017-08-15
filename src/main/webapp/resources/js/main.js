@@ -242,11 +242,11 @@ function deleteFile(fileNmae, postId) {
     });
 }
 
-function addNewPost() {
+function addNewPost(groupType) {
     $.ajax({
         type: "GET",
         data: "postId=" + postId,
-        url: globalPath+"/group/add-new-post/",
+        url: globalPath+"/group/add-new-post/"+groupType+"/",
         dataType: "json",
         success: function (data) {
             if (data.stringBuilderAdd != '') {

@@ -105,7 +105,7 @@ public class PermissionController {
 
         managerInfoService.addNewManagerInfo(managerInfo);
 
-        Permission permission = new Permission(managerInfo.getId(), managerInfo, false, false, false, false, false, false, false, false, false);
+        Permission permission = new Permission(managerInfo.getId(), managerInfo, false, false, false, false, false, false, false, false, false, false, false, false);
 
         managerInfo.setManagerInfoPermissions(permission);
 

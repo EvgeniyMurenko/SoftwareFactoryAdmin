@@ -69,16 +69,17 @@ public class FxmGroupController {
 
         if (requestType.equals(LOAD_ALL_POSTS_REQUEST.toString())) {
 
-            Type authorizationType = new TypeToken<ServerRequest<ManagerInfoDTO>>() {
+            Type authorizationType = new TypeToken<ServerRequest<String>>() {
             }.getType();
 
-            ServerRequest<ManagerInfoDTO> authorizationServerRequest = new Gson().fromJson(request, authorizationType);
+            ServerRequest<String> authorizationServerRequest = new Gson().fromJson(request, authorizationType);
 
-            ManagerInfoDTO managerInfoDTO = (ManagerInfoDTO) authorizationServerRequest.getDataTransferObject();
+            String filter = (String) authorizationServerRequest.getDataTransferObject();
+            System.out.println("==============filter================= "+ filter);
 
-            ManagerInfo managerUser = managerInfoService.getManagerInfoById(managerInfoDTO.getIdServer());
+            //ManagerInfo managerUser = managerInfoService.getManagerInfoById(managerInfoDTO.getIdServer());
 
-            List<FxmPost> fxmPosts = fxmPostService.getAllFxmPosts(managerUser.getManagerInfoPermissions());
+            List<FxmPost> fxmPosts = fxmPostService.getAllFxmPostsByFilter(filter);
             List<PostDTO> postDTOS = new ArrayList<>();
 
             for (FxmPost fxmPost : fxmPosts) {
@@ -107,27 +108,25 @@ public class FxmGroupController {
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), commentDTOS);
 
         } else if (requestType.equals(WRITE_POST_REQUEST.toString())) {
-            System.out.println("===============1==================");
             Type postDTOType = new TypeToken<ServerRequest<PostDTO>>() {
             }.getType();
-            System.out.println("===============2==================");
+
             ServerRequest<PostDTO> writePostRequest = new Gson().fromJson(request, postDTOType);
-            System.out.println("===============3==================");
+
             PostDTO postDTO = (PostDTO) writePostRequest.getDataTransferObject();
-            System.out.println("===============4==================");
+
             ManagerInfo managerInfo = managerInfoService.getManagerInfoById(postDTO.getUserID());
-            System.out.println("===============5==================");
+
             FxmPost fxmPost = new FxmPost(managerInfo.getUser(), managerInfo.getName(), new Date(), postDTO.getPostTextOriginal(), postDTO.getPostTextRu(), postDTO.getPostTextEn(), postDTO.getPostTextKo(), null, null, null, postDTO.getGroupType(), new ArrayList<>());
-            System.out.println("===============6==================");
+
             fxmPostService.addNewFxmPost(fxmPost);
-            System.out.println("===============7==================");
+
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), fxmPost.getId());
-            System.out.println("===============8==================");
+
             List<String> keys = googleCloudKeyService.findAllKeysByFilter(postDTO.getGroupType(), postDTO.getUserID());
-            System.out.println("===============pushNotificationService==================");
-            if (keys.size()>0) {
-                pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
-            }
+
+            pushNotificationService.pushNotificationToGCM(keys, postDTO.getPostTextOriginal(), "FXM Group post!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
+
         } else if (requestType.equals(WRITE_COMMENT_REQUEST.toString())) {
 
             Type commentDTOType = new TypeToken<ServerRequest<CommentDTO>>() {
@@ -146,7 +145,7 @@ public class FxmGroupController {
 
             serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
 
-            List<String> keys = googleCloudKeyService.findAllManagerWithOutOne(managerInfo.getId());
+            List<String> keys = googleCloudKeyService.findAllKeysByFilter(fxmPost.getGroupType(), fxmPost.getUser().getId());
             pushNotificationService.pushNotificationToGCM(keys, commentDTO.getCommentText(), "FXM Group comment!", AppRequestEnum.GROUP_PUSH_TYPE.toString());
 
         } else if (requestType.equals(DELETE_POST_REQUEST.toString())) {
@@ -227,9 +226,9 @@ public class FxmGroupController {
         }
 
         String gsonResponse = new Gson().toJson(serverResponse);
-        System.out.println("===============9==================");
+
         System.out.println("return " + gsonResponse);
-        System.out.println("===============10==================");
+
         return gsonResponse;
     }
 }

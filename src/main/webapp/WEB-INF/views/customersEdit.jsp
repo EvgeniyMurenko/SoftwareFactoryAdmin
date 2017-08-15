@@ -112,19 +112,21 @@
                         </div>
                     </div>
 
+                    <%String password = ""; if (!isNew && !"".equals(customerInfo.getUser().getPassword())) password = customerInfo.getUser().getPassword();%>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">New password</label>
+                        <label class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" name="password" id="new_password" class="form-control" placeholder="New password" <%if(isNew)out.print("required");%>/>
+                            <input type="text" name="password" id="new_password" class="form-control" placeholder="New password" value="<%out.print(password);%>" <%if(isNew)out.print("required");%>/>
+                            <%--<a href="/">Send password in email</a>--%>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label class="col-sm-3 control-label">Confirm password</label>
                         <div class="col-sm-9">
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm new password" <%if(isNew)out.print("required");%>/>
                         </div>
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Account type</label>

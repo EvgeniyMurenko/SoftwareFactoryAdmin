@@ -9,7 +9,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RequestMapping("/error")
 public class AdviceExceptionController {
 
-    /*@ExceptionHandler(Exception.class)
+/*    @ExceptionHandler(Exception.class)
     public ModelAndView handleAll(Exception ex){
         ModelAndView exceptionView;
         if (NoHandlerFoundException.class.isInstance(ex)){

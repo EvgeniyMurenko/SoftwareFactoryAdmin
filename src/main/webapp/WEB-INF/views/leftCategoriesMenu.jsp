@@ -79,8 +79,11 @@
                             </div>
                         </div>
                 <%}%>
-                    <li><a href="/group/"><i class="fa fa-envelope-o" aria-hidden="true"></i></i> Group</a></li>
-                    <li><a href="/toss/"><i class="fa fa-rocket" aria-hidden="true"></i> Toss</a></li>
+                <%if (currentPermission.getLeaderGroup())%><li><a href="/group/leader/"><i class="fa fa-star" aria-hidden="true"></i></i> Leader Group</a></li>
+                <%if (currentPermission.getMemberGroup())%><li><a href="/group/member/"><i class="fa fa-envelope-o" aria-hidden="true"></i></i> Member Group</a></li>
+                <%if (currentPermission.getStaffGroup())%><li><a href="/group/staff/"><i class="fa fa-child" aria-hidden="true"></i></i> Staff Group</a></li>
+
+                <li><a href="/toss/"><i class="fa fa-rocket" aria-hidden="true"></i> Toss</a></li>
             </ul>
             <!-- #End Left categories -->
         <%}else{

@@ -16,4 +16,6 @@ public interface FxmPostDao {
 
     List<FxmPost> findAll(String member, String leader, String staff);
 
+    List<FxmPost> findAllByFilter(String filter);
+
 }

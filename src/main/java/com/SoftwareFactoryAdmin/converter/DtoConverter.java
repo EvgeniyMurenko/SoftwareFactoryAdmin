@@ -50,7 +50,7 @@ public class DtoConverter {
 
 
     public static PostDTO postDTOConvert(FxmPost fxmPost) {
-        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo() ,fxmPost.getLinksFile(), fxmPost.getLinksVideo() , fxmPost.getLinksImage() ,fxmPost.getUser().getAvatarImage(), fxmPost.getGroupType());
+        return new PostDTO(fxmPost.getId(), fxmPost.getId(), fxmPost.getUser().getId(), fxmPost.getUserName(), fxmPost.getDate(), fxmPost.getPostTextOriginal(), fxmPost.getPostTextRu(),fxmPost.getPostTextEn(),fxmPost.getPostTextKo() ,fxmPost.getLinksFile(),  fxmPost.getLinksImage() ,fxmPost.getLinksVideo()  ,fxmPost.getUser().getAvatarImage(), fxmPost.getGroupType());
     }
 
     public static CommentDTO commentDTOConvert(FxmComment fxmComment) {

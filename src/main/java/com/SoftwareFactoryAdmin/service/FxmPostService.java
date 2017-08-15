@@ -16,6 +16,8 @@ public interface FxmPostService {
 
     List<FxmPost> getAllFxmPosts(Permission permission);
 
+    List<FxmPost> getAllFxmPostsByFilter(String filter);
+
     FxmPost getFxmPostById(Long id);
 
 }

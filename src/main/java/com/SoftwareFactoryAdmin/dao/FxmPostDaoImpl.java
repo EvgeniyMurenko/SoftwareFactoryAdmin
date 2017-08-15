@@ -54,4 +54,12 @@ public class FxmPostDaoImpl implements FxmPostDao {
                 .setParameter("member", member).setParameter("leader", leader).setParameter("staff", staff);
         return query.list();
     }
+
+    @Override
+    public List<FxmPost> findAllByFilter(String filter) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct fxmPost from FxmPost fxmPost "+ "left join fetch fxmPost.user "+"left join fetch fxmPost.fxmComments "+" where fxmPost.groupType = :filter")
+                .setParameter("filter", filter);
+        return query.list();
+    }
 }

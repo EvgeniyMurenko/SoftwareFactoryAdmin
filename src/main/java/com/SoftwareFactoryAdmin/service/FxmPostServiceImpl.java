@@ -50,6 +50,11 @@ public class FxmPostServiceImpl implements FxmPostService {
     }
 
     @Override
+    public List<FxmPost> getAllFxmPostsByFilter(String filter) {
+        return fxmPostDao.findAllByFilter(filter);
+    }
+
+    @Override
     public FxmPost getFxmPostById(Long id) {
         return fxmPostDao.read(id);
     }
