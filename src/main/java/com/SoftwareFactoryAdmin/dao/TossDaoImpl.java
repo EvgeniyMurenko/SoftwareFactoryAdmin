@@ -39,6 +39,7 @@ public class TossDaoImpl implements TossDao {
                                             "left join fetch toss.tossTasks tt " +
                                             "left join fetch tt.managerInfoOpened " +
                                             "left join fetch tt.tossTaskMessages tm " +
+                                            "left join fetch tt.tossTaskLinks " +
                                             "left join fetch tm.managerInfo " +
                                             "where toss.id =:id ")
                                             .setParameter("id" , id);

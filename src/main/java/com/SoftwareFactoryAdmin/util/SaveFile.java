@@ -4,10 +4,12 @@ import com.SoftwareFactoryAdmin.constant.GlobalEnum;
 import com.SoftwareFactoryAdmin.constant.MainPathEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -105,6 +107,30 @@ public class SaveFile {
         }
     }
 
+
+    public void saveToTossTaskFiles(TossTask tossTask) {
+
+        if (files.length < 1) return;
+        if (files[0].isEmpty()) return;
+
+        pathForSaveFile = MainPathEnum.mainPath + "/toss/";
+
+        Set<TossTaskLink> tossTaskLinks = tossTask.getTossTaskLinks();
+
+        for (MultipartFile file : this.files) {
+            try {
+                String name = file.getOriginalFilename();
+                String generatedName = generateUUIDname(name);
+                String link = GlobalEnum.webRoot + "/get-file/toss/" + generatedName;
+                saveFile(generatedName, file);
+                TossTaskLink tossTaskLink = new TossTaskLink(tossTask, link, name, generatedName);
+                tossTaskLinks.add(tossTaskLink);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public String saveFileAndReturnName() {
 
         if (files.length < 1) return null;
@@ -174,7 +200,7 @@ public class SaveFile {
 
                 try {
                     saveFile(generatedName, file);
-                    if (this.videoExpansion.indexOf(getFileExtension(file)) > -1){
+                    if (this.videoExpansion.indexOf(getFileExtension(file)) > -1) {
                         saveVideoThumbnail(generatedName);
                     }
                 } catch (IOException e) {
@@ -290,7 +316,7 @@ public class SaveFile {
             fileDirectory.mkdirs();
         }
         // Create the file on server
-        String thumbnailFilePath = MainPathEnum.videoThumbnailsFilesPath.toString()  + fileName + ".png";
+        String thumbnailFilePath = MainPathEnum.videoThumbnailsFilesPath.toString() + fileName + ".png";
         File thumbnailFile = new File(thumbnailFilePath);
 
         thumbnailFile.setReadable(true, false);
