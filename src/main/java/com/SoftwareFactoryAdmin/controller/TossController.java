@@ -5,9 +5,11 @@ import com.SoftwareFactoryAdmin.constant.StatusEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
 import com.SoftwareFactoryAdmin.util.AppMethods;
+import com.SoftwareFactoryAdmin.util.SaveFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -97,6 +99,7 @@ public class TossController {
                                  @RequestParam(value = "is_now_checkbox", defaultValue = "false") Boolean isNow,
                                  @RequestParam("end_date") String endDate,
                                  @RequestParam("persons") ArrayList<String> persons,
+                                 @RequestParam("file[]") MultipartFile [] multipartFiles,
                                  HttpSession httpSession) {
 
 
@@ -108,13 +111,11 @@ public class TossController {
         Date endTossDate = new Date();
         if (!isNow) endTossDate = AppMethods.getDateFromString(endDate);
 
-
-
         Toss toss = new Toss(managerInfo.getName(), recipientPersons, new HashSet<>(), StatusEnum.NEW_REQUEST.toString(), title, new Date(), endTossDate, isNow);
 
         tossService.addNewToss(toss);
 
-        TossTask tossTask = new TossTask(managerInfo, managers, toss, StatusEnum.NEW_REQUEST.toString(), text, new Date(), new HashSet<>());
+        TossTask tossTask = new TossTask(managerInfo, managers, toss, StatusEnum.NEW_REQUEST.toString(), text, new Date(), new HashSet<>(),new HashSet<>());
 
         Set<TossTask> tossTasks = toss.getTossTasks();
 
@@ -124,8 +125,12 @@ public class TossController {
 
         tossService.updateToss(toss);
 
-        sendTossPush(toss, "Toss : " + title, text);
+        SaveFile saveFile = new SaveFile(multipartFiles);
+        saveFile.saveToTossTaskFiles(tossTask);
 
+        tossTaskService.updateTossTask(tossTask);
+
+        sendTossPush(toss, "Toss : " + title, text);
 
         return new ModelAndView("redirect:/toss/toss-conversation/" + toss.getId(),"isNewAnswer", "true" );
     }
@@ -183,6 +188,7 @@ public class TossController {
                                           @RequestParam("status") String status,
                                           @RequestParam("persons") ArrayList<String> persons,
                                           @RequestParam("answer") String answer,
+                                          @RequestParam("file[]") MultipartFile [] multipartFiles,
                                           HttpSession httpSession) {
 
         ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
@@ -195,7 +201,10 @@ public class TossController {
 
         String managers = getManagerEngagedAsString(recipientPersons);
 
-        TossTask tossTask = new TossTask(managerInfo, managers ,toss, status, answer, new Date(), new HashSet<>());
+        TossTask tossTask = new TossTask(managerInfo, managers ,toss, status, answer, new Date(),new HashSet<>(), new HashSet<>());
+
+        SaveFile saveFile = new SaveFile(multipartFiles);
+        saveFile.saveToTossTaskFiles(tossTask);
 
         Set<TossTask> tossTasks = toss.getTossTasks();
 
@@ -208,6 +217,7 @@ public class TossController {
         sendTossPush(toss, "Toss : " + toss.getTitle(), answer);
 
         return new ModelAndView("redirect:/toss/toss-conversation/" + id, "isNewAnswer", "true");
+
     }
 
     private void sendTossPush(Toss toss, String title, String messageText) {

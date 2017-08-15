@@ -14,7 +14,7 @@ public class TossTask {
     public TossTask() {
     }
 
-    public TossTask(ManagerInfo managerInfoOpened, String managersEngaged, Toss toss, String status, String text, Date date, Set<TossTaskMessage> tossTaskMessages) {
+    public TossTask(ManagerInfo managerInfoOpened, String managersEngaged, Toss toss, String status, String text, Date date, Set<TossTaskMessage> tossTaskMessages, Set<TossTaskLink> tossTaskLinks) {
         this.managerInfoOpened = managerInfoOpened;
         this.managersEngaged = managersEngaged;
         this.toss = toss;
@@ -22,6 +22,7 @@ public class TossTask {
         this.text = text;
         this.date = date;
         this.tossTaskMessages = tossTaskMessages;
+        this.tossTaskLinks = tossTaskLinks;
     }
 
     @Id
@@ -52,6 +53,9 @@ public class TossTask {
 
     @OneToMany(mappedBy = "tossTask", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TossTaskMessage> tossTaskMessages;
+
+    @OneToMany(mappedBy = "tossTask", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<TossTaskLink> tossTaskLinks;
 
     public Long getId() {
         return id;
@@ -115,5 +119,13 @@ public class TossTask {
 
     public void setTossTaskMessages(Set<TossTaskMessage> tossTaskMessages) {
         this.tossTaskMessages = tossTaskMessages;
+    }
+
+    public Set<TossTaskLink> getTossTaskLinks() {
+        return tossTaskLinks;
+    }
+
+    public void setTossTaskLinks(Set<TossTaskLink> tossTaskLinks) {
+        this.tossTaskLinks = tossTaskLinks;
     }
 }

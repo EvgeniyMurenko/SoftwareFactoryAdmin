@@ -59,7 +59,7 @@
                 <a href="/toss/" class="btn btn-primary"><i class="fa fa-times-circle pr10"></i>Cancel</a>
             </div>
 
-            <form action="/toss/open" method="post" class="form-horizontal">
+            <form action="/toss/open" method="post" class="form-horizontal"  enctype="multipart/form-data">
                 <div class="col-md-8">
 
                     <div class="form-group">
@@ -108,6 +108,12 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Attach Files</label>
+                        <div class="col-sm-9">
+                            <input id="chatUpload" name="file[]" multiple type="file">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Toss Text</label>

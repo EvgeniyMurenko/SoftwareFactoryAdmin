@@ -95,7 +95,7 @@
                     <br>
 
 
-                    <form action="/toss/send-another-toss" method="post">
+                    <form action="/toss/send-another-toss" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" name="id" value="<%out.print(toss.getId());%>">
 
@@ -117,6 +117,11 @@
                                         out.print(managerInfo.getName());%></option>
                                     <%}%>
                                 </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Attach Files </label>
+                            <input id="chatUpload" name="file[]" multiple type="file">
                         </div>
 
                         <div class="form-group">
@@ -146,6 +151,8 @@
 
                                 ArrayList<TossTaskMessage> tossTaskMessages = new ArrayList<>(tossTask.getTossTaskMessages());
 
+                                ArrayList<TossTaskLink> tossTaskLinks = new ArrayList<>(tossTask.getTossTaskLinks());
+
                                 tossTaskMessages.sort(tossTaskMessagesByDateComparator);
 
                                 String status = "message-right-grey";  //status FINISH
@@ -164,7 +171,15 @@
                                 <div class="date"> <span class="timeago mr10 mt10" title='<%out.print(dateFormatShow.format(tossTask.getDate())+"Z");%>'></span></div>
                             </div>
 
-                            <% out.print(tossTask.getText());%>
+                            <% out.print(tossTask.getText() + "<br>");%>
+
+                            <%
+                                if (!tossTaskLinks.isEmpty()) {
+                                    for (TossTaskLink tossTaskLink :tossTaskLinks){
+                                        out.print("<a href="+ tossTaskLink.getFileLink() +" target='_blank'>"+tossTaskLink.getFileName()+"</a><br>");
+                                    }
+                                }
+                            %>
 
 
                             <div style="text-align: right"><a data-toggle="modal" data-target="#modalComment"  onclick="setTossTaskId(<%out.print(tossTask.getId());%>)">Leave comment</a></div>

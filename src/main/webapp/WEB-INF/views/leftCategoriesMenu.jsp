@@ -10,15 +10,9 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
 
-    <%--<%if (null == request.getSession().getAttribute("managerInfo")) response.sendRedirect("/main");%>--%>
-
 
     <%ManagerInfo currentManagerInfo =  (ManagerInfo)request.getSession().getAttribute("managerInfo");%>
-    <%if (currentManagerInfo == null) {
-        String currentPath = (String) request.getAttribute("javax.servlet.forward.request_uri");
-        request.getSession().setAttribute("currentPath", currentPath);
-        %><c:redirect url="/"/><%
-    }%>
+
     <%Permission currentPermission =  (Permission) request.getSession().getAttribute("managerPermission");%>
 
     <aside class="sidebar-nav">
