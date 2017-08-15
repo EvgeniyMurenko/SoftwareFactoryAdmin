@@ -662,3 +662,11 @@ textarea {
     border-radius: 0px!important;
     border: solid 1px #000000 !important;
 }
+
+.form-horizontal .control-label{
+    text-align: left;!important;
+}
+
+.form-horizontal .form-group{
+    margin-left: 0px;!important;
+}

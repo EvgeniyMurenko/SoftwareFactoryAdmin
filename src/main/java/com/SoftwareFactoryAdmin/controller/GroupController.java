@@ -191,6 +191,7 @@ public class GroupController {
 
         StringBuilder stringBuilderPostId = new StringBuilder();
         stringBuilderPostId.append("<input type=\"hidden\" name=\"postId\" value=\"" + postId + "\">");
+        stringBuilderPostId.append("<input type=\"hidden\" name=\"groupType\" value=\""+fxmPost.getGroupType()+"\">");
 
         StringBuilder stringBuilderFileAttach = new StringBuilder();
         FxmPostFile fxmPostFile = new FxmPostFile(fxmPost);
@@ -270,18 +271,11 @@ public class GroupController {
 
     @RequestMapping(value = "/save-post-translate", method = RequestMethod.POST)
     public ModelAndView savePostTranslate(@RequestParam("postId") Long postId,
-                                          @RequestParam("selectFrom") String selectFrom,
                                           @RequestParam("selectTo") String selectTo,
                                           @RequestParam("translateText") String translateText) {
 
         FxmPost fxmPost = fxmPostService.getFxmPostById(postId);
         if (fxmPost != null) {
-            switch (selectFrom) {
-                case "ru": fxmPost.setPostTextRu(fxmPost.getPostTextOriginal()); break;
-                case "en": fxmPost.setPostTextEn(fxmPost.getPostTextOriginal()); break;
-                case "ko": fxmPost.setPostTextKo(fxmPost.getPostTextOriginal()); break;
-            }
-
             switch (selectTo) {
                 case "ru": fxmPost.setPostTextRu(translateText); break;
                 case "en": fxmPost.setPostTextEn(translateText); break;

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RequestMapping("/error")
 public class AdviceExceptionController {
 
-/*    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     public ModelAndView handleAll(Exception ex){
         ModelAndView exceptionView;
         if (NoHandlerFoundException.class.isInstance(ex)){
@@ -30,6 +30,6 @@ public class AdviceExceptionController {
     @RequestMapping(value = {"/404"}, method = RequestMethod.GET)
     public ModelAndView NotFoundPage() {
         return new ModelAndView("404");
-    }*/
+    }
 }
 

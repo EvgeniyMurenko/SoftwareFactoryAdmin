@@ -323,64 +323,58 @@
                     <h4 class="modal-title"><i class="fa fa-pencil" aria-hidden="true"></i> Translate text</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
 
-                    <div class="col-sm-5">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">From: </label>
-                            <div class="col-sm-9">
-                                <select id="from" name="selectFrom" class="form-control">
-                                    <option value="en">English</option>
-                                    <option value="ko">Korean</option>
-                                    <option value="ru">Russian</option>
-                                </select>
-                            </div>
-                        </div>
+                        <div class="col-sm-5">
+                            <%--<div class="form-group">
+                                <label class="col-sm-3 control-label">From: </label>
+                                <div class="col-sm-9">
+                                    <select id="from" name="selectFrom" class="form-control">
+                                        <option value="en">English</option>
+                                        <option value="ko">Korean</option>
+                                        <option value="ru">Russian</option>
+                                    </select>
+                                </div>
+                            </div>--%>
 
-                        <div class="form-group">
-                            <label class="control-label">Original text</label>
-                            <div class="message-centre">
+                            <div class="form-group">
+                                <label class=control-label">Original text</label>
                                 <div class="scrollable">
-                                    <div id="textToTranslate">
+                                    <div class="message-centre" id="textToTranslate">
 
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <label class="col-sm-5 col-md-3 control-label" >Translate to: </label>
+                                <div class="col-sm-5">
+                                    <select id="to" name="selectTo" class="form-control">
+                                        <option value="en">English</option>
+                                        <option value="ko">Korean</option>
+                                        <option value="ru">Russian</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label class=control-label">Translate</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <textarea id="editor" name="translateText"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="col-sm-7">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">To: </label>
-                            <div class="col-sm-9">
-                                <select id="to" name="selectTo" class="form-control">
-                                    <option value="en">English</option>
-                                    <option value="ko">Korean</option>
-                                    <option value="ru">Russian</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <label class=control-label">Translate</label>
-                            </div>
-                            <div class="col-sm-12">
-                                <textarea id="editor" name="translateText"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-floppy-o"
-                                                                                 aria-hidden="true"></i> Save
-                    </button>
-                    <button class="btn btn-default" type="button" data-dismiss="modal"><i
-                            class="fa fa-times-circle pr5"></i> Close
-                    </button>
-
+                    <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                    <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times-circle pr5"></i> Close</button>
                 </div>
             </div>
         </form>
