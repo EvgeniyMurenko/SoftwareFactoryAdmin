@@ -67,10 +67,12 @@ public class CaseController {
         return managerAdminCaseRespond;
     }
 
-    @RequestMapping(value = "/{id}/print_answer", method = RequestMethod.POST)
-    public ModelAndView casePrintMessageAnswer(@PathVariable Long id, @RequestParam("message") String messageText,
+    @RequestMapping(value = "/print-answer", method = RequestMethod.POST)
+    public ModelAndView casePrintMessageAnswer(@RequestParam("id") Long id, @RequestParam("message") String messageText,
                                                @RequestParam("appointmentTime") String appointmentTime,
                                                @RequestParam("file[]") MultipartFile[] files, HttpSession httpSession) {
+
+        System.out.println("IDDD"  + id);
 
         // GET
         Case aCase = caseService.getCaseById(id);

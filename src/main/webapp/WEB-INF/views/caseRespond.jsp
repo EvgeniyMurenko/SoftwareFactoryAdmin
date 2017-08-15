@@ -54,7 +54,7 @@
         <section class="content container-fluid">
 
             <div class="mb20">
-                <a href="cases.html" class="btn btn-default"><i class="fa fa-times-circle pr5"></i> Cancel & Back</a>
+                <a href="/cases/" class="btn btn-default"><i class="fa fa-times-circle pr5"></i> Cancel & Back</a>
             </div>
 
             <div class="background-01">
@@ -197,9 +197,11 @@
 
                 <%if (!aCase.getStatus().equals(StatusEnum.CLOSE.toString())){%>
                     <span class="content-title mt30">Case answer</span>
-                    <form action="/cases/<% out.print(Long.toString(aCase.getId())); %>/print_answer?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+                    <form action="/cases/print-answer" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-3">
+
+                                <input type="hidden" name="id" value="<%out.print(aCase.getId());%>">
 
                                 <!-- Appointment time -->
                                 <h4 class="mb10">Appointment time</h4>
