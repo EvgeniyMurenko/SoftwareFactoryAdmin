@@ -128,7 +128,7 @@
                                 <!-- #End Attach files -->
 
                                 <div class="form-group text-right mt30 mb0">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
+                                    <button type="submit" class="btn btn-primary btn-submit"><i class="fa fa-paper-plane-o pr10"></i>Send answer</button>
                                     <a href="<c:out value="/estimate/"/>" class="btn btn-default"><i class="fa fa-chevron-left pr5"></i>Back</a>
                                 </div>
 

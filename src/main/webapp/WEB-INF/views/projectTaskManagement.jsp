@@ -127,7 +127,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-12" align="right">
-                                <button type="submit" name="save" class="btn btn-primary right"><i
+                                <button type="submit" name="save" class="btn btn-primary right btn-submit"><i
                                         class="fa fa-envelope-o" aria-hidden="true"></i> Send
                                 </button>
                             </div>

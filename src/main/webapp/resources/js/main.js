@@ -1,8 +1,15 @@
 /*globalPath = "http://52.57.116.160:8080";*/
-globalPath = "http://a.sofac.kr";
-/*globalPath = "http://localhost:8080";*/
+/*globalPath = "http://a.sofac.kr";*/
+globalPath = "http://localhost:8080";
 
 jQuery(document).ready(function ($) {
+
+
+    $('.btn-submit').click(function() {
+        var $submitButton =  $( ".btn-submit" );
+        $submitButton.prop("disabled", true);
+        $submitButton.text("Please wait...");
+    });
 
     $(".js-example-basic-multiple").select2();
 
@@ -362,4 +369,5 @@ CKEDITOR.replace('textEdit', {
     width: '100%',
     height: '250'
 });
+
 

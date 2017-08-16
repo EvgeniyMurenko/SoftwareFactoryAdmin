@@ -190,7 +190,7 @@
                     <div class="form-group">
                         <div class="col-md-4"></div>
                         <div class="col-md-8" align="right">
-                            <button type="submit" name="save" class="btn btn-primary">
+                            <button type="submit" name="save" class="btn btn-primary btn-submit">
                                 <i class="fa fa-check pr10"></i>Save
                             </button>
                         </div>

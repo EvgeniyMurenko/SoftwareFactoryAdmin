@@ -133,7 +133,7 @@
 
 
                         <div class="form-group text-right">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>
+                            <button type="submit" name="save" class="btn btn-primary btn-submit"><i class="fa fa-check pr10"></i>
                                 Send Toss Answer
                             </button>
                         </div>
@@ -243,7 +243,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr5"></i> Leave Comment</button>
+                            <button type="submit" name="save" class="btn btn-primary btn-submit"><i class="fa fa-check pr5"></i> Leave Comment</button>
                             <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times-circle pr5"></i> Close</button>
                         </div>
                     </div>

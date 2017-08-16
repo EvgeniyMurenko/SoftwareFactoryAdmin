@@ -93,7 +93,7 @@
                     <input id="chatUpload" name="file[]" multiple type="file">
                     <!-- #End Attach files -->
 
-                    <button type="submit" name="save" class="btn btn-primary">
+                    <button type="submit" name="save" class="btn btn-primary btn-submit">
                         <i class="fa fa-check pr10"></i>Start Task
                     </button>
 

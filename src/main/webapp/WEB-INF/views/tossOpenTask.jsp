@@ -123,7 +123,7 @@
                     </div>
 
                     <div class="form-group text-right ">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send Toss
+                        <button type="submit" class="btn btn-primary btn-submit"><i class="fa fa-paper-plane-o pr10"></i>Send Toss
                         </button>
                     </div>
                 </div>
