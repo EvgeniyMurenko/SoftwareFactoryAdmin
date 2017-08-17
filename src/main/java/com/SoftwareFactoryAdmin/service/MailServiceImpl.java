@@ -284,7 +284,7 @@ public class MailServiceImpl implements MailService {
                     mimeMessage.setFrom(new InternetAddress(serverEmail, "SoFAC"));
                     mimeMessage.setRecipient(Message.RecipientType.TO,
                             new InternetAddress("sofac.bug.finder@gmail.com"));
-                    mimeMessage.setSubject("a.sofac.kr part", "utf-8");
+                    mimeMessage.setSubject("MANAGER part", "utf-8");
                     mimeMessage.setText(message);
 
                 }

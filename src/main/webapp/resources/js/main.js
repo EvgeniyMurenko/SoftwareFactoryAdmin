@@ -6,10 +6,19 @@ jQuery(document).ready(function ($) {
 
 
     $('.btn-submit').click(function() {
-        var $submitButton =  $( ".btn-submit" );
-        $submitButton.prop("disabled", true);
-        $submitButton.text("Please wait...");
+
+        var form = $(this).parents('form:first');
+
+        form.submit(function () {
+            var $submitButton =  $( ".btn-submit" );
+
+            $submitButton.prop("disabled", true);
+            $submitButton.text("Please wait...");
+        });
+
     });
+
+
 
     $(".js-example-basic-multiple").select2();
 

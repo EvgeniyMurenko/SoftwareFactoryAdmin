@@ -6,6 +6,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TaskMessageByDateComparator" %>
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskMessagesByDateComparator" %>
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskByDateComparator" %>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -106,11 +107,23 @@
                         SimpleDateFormat dateFormatShow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         List<Toss> tosses = (List<Toss>) request.getAttribute("toss");
 
+                        Date currentDate = new Date();
+
                         TossTaskByDateComparator tossTaskByDateComparator = new TossTaskByDateComparator();
                         for (Toss toss : tosses) {
                             String endDate = "Now!";
-                            if (!toss.isNow()) endDate = dateFormatShow.format(toss.getEndDate());
 
+                            boolean isPastDate = false;
+                            if (!toss.isNow()) {
+
+                                Date tossEndDate = toss.getEndDate();
+
+                                endDate = dateFormatShow.format(tossEndDate);
+
+
+                                if (currentDate.after(tossEndDate)) isPastDate = true;
+
+                            }
                                 ArrayList<TossTask> tasks = new ArrayList<>(toss.getTossTasks());
                                 tasks.sort(tossTaskByDateComparator);
                     %>
@@ -121,7 +134,16 @@
                         <td align="center"><%out.print(tasks.get(0).getManagersEngaged());%></td>
                         <td align="center"><%out.print(toss.getStatus().toLowerCase());%></td>
                         <td align="center"><a href="<%out.print("/toss/toss-conversation/" + toss.getId());%>"><%out.print(AppMethods.trimString(toss.getTitle(), 15));%></a></td>
-                        <td align="center"><%out.print(endDate);%></td>
+                        <td align="center">
+                                <div class="inline-buttons">
+                                    <%out.print(endDate);%>
+                                </div>
+
+                                <% if (isPastDate) {%>
+                                    <div class="square inline-buttons"></div>
+                                <%}%>
+                            </div>
+                        </td>
                     </tr>
                     <%}%>
                     </tbody>
