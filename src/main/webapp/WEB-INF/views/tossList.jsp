@@ -7,6 +7,7 @@
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskMessagesByDateComparator" %>
 <%@ page import="com.SoftwareFactoryAdmin.comparator.TossTaskByDateComparator" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="com.SoftwareFactoryAdmin.constant.StatusEnum" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -121,7 +122,7 @@
                                 endDate = dateFormatShow.format(tossEndDate);
 
 
-                                if (currentDate.after(tossEndDate)) isPastDate = true;
+                                if (currentDate.after(tossEndDate) && !StatusEnum.FINISH.toString().equals(toss.getStatus())) isPastDate = true;
 
                             }
                                 ArrayList<TossTask> tasks = new ArrayList<>(toss.getTossTasks());

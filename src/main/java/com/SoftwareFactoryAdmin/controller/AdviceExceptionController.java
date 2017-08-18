@@ -1,4 +1,3 @@
-/*
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.service.MailService;
@@ -56,4 +55,4 @@ public class AdviceExceptionController {
         return new ModelAndView("404");
     }
 }
-*/
+
