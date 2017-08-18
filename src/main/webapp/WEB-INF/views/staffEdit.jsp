@@ -243,7 +243,7 @@
 <%
     String isCreateUpdateSuccess =  request.getParameter("isCreateUpdateSuccess");
     String isPasswordError =  request.getParameter("isPasswordError");
-    System.out.print("eroro?"+isPasswordError);
+
     if(isPasswordError != null){
         String link = "/membership-mm/create"; if(!isNew) link = "/membership-mm/edit/" + staffInfo.getId();
 %>

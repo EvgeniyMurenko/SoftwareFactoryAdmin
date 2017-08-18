@@ -28,6 +28,11 @@ public class CustomerManagementController {
     @Autowired
     private CustomerInfoService customerInfoService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView customerList(HttpSession session) {
@@ -77,11 +82,6 @@ public class CustomerManagementController {
         return new ModelAndView("redirect:/customer-mm/");
     }
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/save-new-customer", method = RequestMethod.POST)
     public ModelAndView saveNewCustomer(@RequestParam("name") String name,
@@ -90,10 +90,10 @@ public class CustomerManagementController {
                                         @RequestParam("company") String company,
                                         @RequestParam("site_link") String website,
                                         @RequestParam("password") String password,
-                                        @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
+                                        HttpSession httpSession) {
 
-        if (!password.equals(confirmPassword))
-            return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");
+/*        if (!password.equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");*/
 
         User customerUser = userService.createCustomerUser(password);
 
@@ -131,7 +131,6 @@ public class CustomerManagementController {
                                        @RequestParam("company") String company,
                                        @RequestParam("site_link") String website,
                                        @RequestParam("password") String password,
-                                       @RequestParam("confirm_password") String confirmPassword,
                                        @RequestParam("account_type") String accountType,
                                        @RequestParam("directors_name") String directorsName,
                                        @RequestParam("directors_email") String directorsEmail,
@@ -141,8 +140,8 @@ public class CustomerManagementController {
                                        HttpSession httpSession) {
 
 
-        if (!password.equals(confirmPassword) && "".equals(password) && !"".equals(confirmPassword))
-            return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isPasswordError", "true");
+       /* if (!password.equals(confirmPassword) && "".equals(password) && !"".equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isPasswordError", "true");*/
 
         Long managerId = (Long) httpSession.getAttribute("UserId");
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);

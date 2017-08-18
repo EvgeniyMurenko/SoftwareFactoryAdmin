@@ -223,7 +223,10 @@ System.out.print(isPasswordError);%>
 <% } %>
 
 <% String isEditCreateSuccess = request.getParameter("isEditCreateSuccess"); %>
-<% if (isEditCreateSuccess != null && isEditCreateSuccess.equals("true")) { %>
+<%
+    if (isEditCreateSuccess != null && isEditCreateSuccess.equals("true")) {
+        String link = "/customer-mm/edit-customer/" + customerInfo.getId();
+%>
 <script>
     jQuery(document).ready(function ($) {
         swal(
@@ -231,6 +234,7 @@ System.out.print(isPasswordError);%>
             'Customer edit/create success',
             'success'
         );
+        history.pushState(null, null, '<%out.print(link);%>');
     });
 </script>
 <% } %>

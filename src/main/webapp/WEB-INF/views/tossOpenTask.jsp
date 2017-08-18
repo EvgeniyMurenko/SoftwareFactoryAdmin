@@ -113,6 +113,7 @@
                         <div class="col-sm-9">
                             <input id="chatUpload" name="file[]" multiple type="file">
                         </div>
+
                     </div>
 
                     <div class="form-group">
