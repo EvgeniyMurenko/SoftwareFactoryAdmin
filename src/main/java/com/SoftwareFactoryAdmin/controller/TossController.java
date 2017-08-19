@@ -212,6 +212,12 @@ public class TossController {
 
         toss.setTossTasks(tossTasks);
 
+        Set<ManagerInfo> managerInfos = toss.getManagerInfoEngaged();
+
+        managerInfos.addAll(recipientPersons);
+
+        toss.setManagerInfoEngaged(managerInfos);
+
         tossService.updateToss(toss);
 
         sendTossPush(toss, "Toss : " + toss.getTitle(), answer);
