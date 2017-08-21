@@ -133,7 +133,7 @@
                         <!-- #End Attach files -->
 
                         <div class="form-group text-right mt30 mb0">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Upload scenario</button>
+                            <button type="submit" class="btn btn-primary btn-submit"><i class="fa fa-paper-plane-o pr10"></i>Upload scenario</button>
                         </div>
 
                     </div>

@@ -28,8 +28,8 @@
 
     <div class="sign-in-logo"><a href="/">소프트웨어<span>팩토리</span></a></div>
 
-    <c:url var="loginUrl" value="/login"/>
-    <form class="form-signin" action="${loginUrl}" method="post">
+
+    <form class="form-signin" action="/login" method="post">
 
         <div class="form-group">
             <div class="input-group">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="form-group mb0 text-center">
-            <button class="btn btn-default" type="submit">Login</button>
+            <button class="btn btn-default btn-submit" type="submit">Login</button>
         </div>
 
     </form>

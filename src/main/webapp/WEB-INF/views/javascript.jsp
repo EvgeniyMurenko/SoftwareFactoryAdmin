@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/resources/js/jquery/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/jquery.sweet-alert.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery/promise.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/jquery.timeago.js"></script>
 
 <!-- Bootstrap -->

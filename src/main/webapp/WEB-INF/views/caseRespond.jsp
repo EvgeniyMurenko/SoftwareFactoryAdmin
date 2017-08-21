@@ -230,7 +230,7 @@
                                 <input type="hidden" name="estimateId" value="">
 
                                 <div class="form-group text-right mt30 mb0">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o pr10"></i>Send message</button>
+                                    <button type="submit" class="btn btn-primary btn-submit"><i class="fa fa-paper-plane-o pr10"></i>Send message</button>
                                     <a href="/cases/" class="btn btn-default"><i class="fa fa-chevron-left pr5"></i>Back</a>
                                 </div>
 

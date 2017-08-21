@@ -682,3 +682,8 @@ textarea {
     vertical-align: middle !important;
     font-size: 60px;
 }
+.square {
+    width: 10px;
+    height: 10px;
+    background: red;
+}

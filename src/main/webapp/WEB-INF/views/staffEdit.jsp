@@ -223,7 +223,7 @@
                     <div class="form-group">
                         <div class="col-md-3"></div>
                         <div class="col-md-9" align="right">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Save
+                            <button type="submit" name="save" class="btn btn-primary btn-submit"><i class="fa fa-check pr10"></i>Save
                             </button>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
 <%
     String isCreateUpdateSuccess =  request.getParameter("isCreateUpdateSuccess");
     String isPasswordError =  request.getParameter("isPasswordError");
-    System.out.print("eroro?"+isPasswordError);
+
     if(isPasswordError != null){
         String link = "/membership-mm/create"; if(!isNew) link = "/membership-mm/edit/" + staffInfo.getId();
 %>

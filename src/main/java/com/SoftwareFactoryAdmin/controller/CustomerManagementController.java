@@ -28,6 +28,11 @@ public class CustomerManagementController {
     @Autowired
     private CustomerInfoService customerInfoService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ManagerInfoService managerInfoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView customerList(HttpSession session) {
@@ -77,19 +82,14 @@ public class CustomerManagementController {
         return new ModelAndView("redirect:/customer-mm/");
     }
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    ManagerInfoService managerInfoService;
-
     @RequestMapping(value = "/save-new-customer", method = RequestMethod.POST)
     public ModelAndView saveNewCustomer(@RequestParam("name") String name,
                                         @RequestParam("email") String email,
                                         @RequestParam("phone") String phone,
                                         @RequestParam("company") String company,
                                         @RequestParam("site_link") String website,
-                                        @RequestParam("password") String password, HttpSession httpSession) {
+                                        @RequestParam("password") String password,
+                                        HttpSession httpSession) {
 
 /*        if (!password.equals(confirmPassword))
             return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");*/
@@ -140,8 +140,8 @@ public class CustomerManagementController {
                                        HttpSession httpSession) {
 
 
-        if (!password.equals(confirmPassword) && "".equals(password) && !"".equals(confirmPassword))
-            return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isPasswordError", "true");
+       /* if (!password.equals(confirmPassword) && "".equals(password) && !"".equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/edit-customer/" + id, "isPasswordError", "true");*/
 
         Long managerId = (Long) httpSession.getAttribute("UserId");
         ManagerInfo managerInfo = managerInfoService.getManagerInfoById(managerId);

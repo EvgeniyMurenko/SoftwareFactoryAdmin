@@ -38,8 +38,6 @@ public class TossController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView tossList(HttpSession httpSession) {
 
-        System.out.println("TEST");
-
         ModelAndView tossList = new ModelAndView("tossList");
 
         ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
@@ -211,6 +209,12 @@ public class TossController {
         tossTasks.add(tossTask);
 
         toss.setTossTasks(tossTasks);
+
+        Set<ManagerInfo> managerInfos = toss.getManagerInfoEngaged();
+
+        managerInfos.addAll(recipientPersons);
+
+        toss.setManagerInfoEngaged(managerInfos);
 
         tossService.updateToss(toss);
 

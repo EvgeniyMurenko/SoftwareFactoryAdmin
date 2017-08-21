@@ -29,7 +29,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 
     @Autowired
-    RoleToUserProfileConverter roleToUserProfileConverter;
+    private RoleToUserProfileConverter roleToUserProfileConverter;
 
     /**
      * Configure ViewResolvers to deliver preferred views.

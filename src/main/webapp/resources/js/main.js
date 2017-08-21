@@ -4,6 +4,22 @@ globalPath = "http://localhost:8080";
 
 jQuery(document).ready(function ($) {
 
+
+    $('.btn-submit').click(function() {
+
+        var form = $(this).parents('form:first');
+
+        form.submit(function () {
+            var $submitButton =  $( ".btn-submit" );
+
+            $submitButton.prop("disabled", true);
+            $submitButton.text("Please wait...");
+        });
+
+    });
+
+
+
     $(".js-example-basic-multiple").select2();
 
     // Back to top
@@ -362,4 +378,5 @@ CKEDITOR.replace('textEdit', {
     width: '100%',
     height: '250'
 });
+
 

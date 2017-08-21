@@ -58,7 +58,9 @@ public class AppController {
 
         User currentUser = userService.findBySSO(getPrincipal());
 
+
         Set profiles = currentUser.getUserProfiles();
+
 
         UserProfile userProfile = null;
         Iterator iterator = profiles.iterator();
@@ -66,14 +68,17 @@ public class AppController {
             userProfile = (UserProfile) iterator.next();
         }
 
+        System.out.println("userProfile.getType() =======" + userProfile.getType());
 
         ModelAndView modelAndView = new ModelAndView("redirect:/main/");
 
         if (userProfile.getType().equals("MANAGER")) {
+
             ManagerInfo managerInfo = managerInfoService.getManagerInfoById(currentUser.getId());
             session.setAttribute("managerInfo", managerInfo);
             session.setAttribute("managerPermission" , managerInfo.getManagerInfoPermissions());
             System.out.println("LOGIN AS MANAGER");
+
             modelAndView.setViewName("redirect:/dashboard/");
         }
 
@@ -131,7 +136,9 @@ public class AppController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+
         System.out.println("TEST");
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             //new SecurityContextLogoutHandler().logout(request, response, auth);

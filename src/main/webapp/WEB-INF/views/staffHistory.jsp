@@ -76,7 +76,7 @@
 
                     <input id="rating" name="input" value="<%out.print(staffInfo.getRating());%>"
                            class="rating-loading">
-                    <form action="/membership-mm/update-rating" method="post">
+                    <form action="/membership-mm/update-rating" method="post" onsubmit="return checkForm(this);">
                         <div class="form-group">
                             <label class="control-label">Rating (0-5)</label>
                             <select name="rating" class="form-control" id="project">
@@ -92,7 +92,7 @@
                         <input type="hidden" name="id" value="<%out.print(staffInfo.getId());%>">
 
                         <div class="form-group text-right">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>Update
+                            <button type="submit" name="save" class="btn btn-primary btn-submit"><i class="fa fa-check pr10"></i>Update
                                 rating
                             </button>
                         </div>
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="form-group text-right">
-                            <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check pr10"></i>
+                            <button type="submit" name="save"  class="btn btn-primary btn-submit"><i class="fa fa-check pr10"></i>
                                 Add review
                             </button>
                         </div>
