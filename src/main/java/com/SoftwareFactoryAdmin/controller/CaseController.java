@@ -125,7 +125,7 @@ public class CaseController {
                                                   @RequestParam("project_name") String projectName) {
         ModelAndView managerAdminCaseRespond = new ModelAndView("redirect:/cases/");
 
-        Project projectEstimate = projectService.getProjectById(projectId);
+ /*       Project projectEstimate = projectService.getProjectById(projectId);
 
         Project newProject = projectEstimate;
         newProject.setProjectName(projectName);
@@ -141,7 +141,7 @@ public class CaseController {
         }
 
         newProject.setCases(caseSet);
-        projectService.updateProject(newProject);
+        projectService.updateProject(newProject);*/
 
 
         return managerAdminCaseRespond;
