@@ -86,7 +86,7 @@
                         <div class="col-sm-9">
                             <div class="input-group date" id="datetimepicker">
                                 <%String date = "";
-                                    if (!isNew) {
+                                    if (!isNew && managerInfo.getBirthday()!= null && !"".equals(managerInfo.getBirthday())) {
                                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                                         date = dateFormat.format(managerInfo.getBirthday());
                                     }

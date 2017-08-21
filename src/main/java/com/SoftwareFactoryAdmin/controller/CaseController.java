@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.controller;
 
 
+import com.SoftwareFactoryAdmin.comparator.CaseByDateComporator;
 import com.SoftwareFactoryAdmin.constant.MessageEnum;
 import com.SoftwareFactoryAdmin.model.*;
 import com.SoftwareFactoryAdmin.service.*;
@@ -16,10 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cases")
@@ -51,6 +49,15 @@ public class CaseController {
 
         ModelAndView managerAdminCabinetCase = new ModelAndView("casesList");
         List<Case> caseArrayList = caseService.findAllWhereUserIsNotDelete();
+
+
+        System.out.println("========================================");
+        System.out.println(caseArrayList);
+        System.out.println("========================================");
+
+        Collections.sort(caseArrayList, new CaseByDateComporator());
+        System.out.println(caseArrayList);
+        System.out.println("========================================");
 
         managerAdminCabinetCase.addObject("cases", caseArrayList);
 

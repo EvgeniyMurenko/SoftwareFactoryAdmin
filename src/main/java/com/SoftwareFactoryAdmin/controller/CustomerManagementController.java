@@ -89,11 +89,10 @@ public class CustomerManagementController {
                                         @RequestParam("phone") String phone,
                                         @RequestParam("company") String company,
                                         @RequestParam("site_link") String website,
-                                        @RequestParam("password") String password,
-                                        @RequestParam("confirm_password") String confirmPassword, HttpSession httpSession) {
+                                        @RequestParam("password") String password, HttpSession httpSession) {
 
-        if (!password.equals(confirmPassword))
-            return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");
+/*        if (!password.equals(confirmPassword))
+            return new ModelAndView("redirect:/customer-mm/add-customer", "isPasswordError", "true");*/
 
         User customerUser = userService.createCustomerUser(password);
 
