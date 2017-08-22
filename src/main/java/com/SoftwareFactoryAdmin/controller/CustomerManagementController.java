@@ -82,7 +82,6 @@ public class CustomerManagementController {
         return new ModelAndView("redirect:/customer-mm/");
     }
 
-
     @RequestMapping(value = "/save-new-customer", method = RequestMethod.POST)
     public ModelAndView saveNewCustomer(@RequestParam("name") String name,
                                         @RequestParam("email") String email,
@@ -131,6 +130,7 @@ public class CustomerManagementController {
                                        @RequestParam("company") String company,
                                        @RequestParam("site_link") String website,
                                        @RequestParam("password") String password,
+                                       @RequestParam("confirm_password") String confirmPassword,
                                        @RequestParam("account_type") String accountType,
                                        @RequestParam("directors_name") String directorsName,
                                        @RequestParam("directors_email") String directorsEmail,

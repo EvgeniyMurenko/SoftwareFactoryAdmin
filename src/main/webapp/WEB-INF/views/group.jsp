@@ -137,28 +137,53 @@
                                                     <%}%>
 
                                                     <%if (fxmPostFile.getImageList().size()>0){%>
-                                                        <div class="gallery">
-                                                            <div class="row">
-                                                                <div class="col-md-12 gallery-position">
-                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>">
-                                                                        <img src="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(0));%>" class="img-responsive">
-                                                                    </a>
-                                                                    <%if (fxmPostFile.getImageList().size()>1){%>
-                                                                        <span class="gallery-count"><%out.print("+"+fxmPostFile.getImageList().size());%></span>
+                                                        <%--Start image show--%>
+                                                        <div class="row mt20">
+                                                            <div class="thumb">
+                                                                <%if (fxmPostFile.getImageList().size()==1){%>
+                                                                    <%for (int i = 0; i < fxmPostFile.getImageList().size(); i++){%>
+                                                                        <div class="col-sm-12 mb20">
+                                                                            <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>" style="background: url('<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>') no-repeat 50% 50%;"></a>
+                                                                        </div>
                                                                     <%}%>
-                                                                </div>
+                                                                <%} else if (fxmPostFile.getImageList().size()==2){%>
+                                                                    <%for (int i = 0; i < fxmPostFile.getImageList().size(); i++){%>
+                                                                        <div class="col-sm-6 mb20">
+                                                                            <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>" style="background: url('<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>') no-repeat 50% 50%;"></a>
+                                                                        </div>
+                                                                    <%}%>
+                                                                <%} else if (fxmPostFile.getImageList().size()>6){%>
+                                                                    <%for (int i = 0; i < fxmPostFile.getImageList().size(); i++){%>
+                                                                        <%if (i <5){%>
+                                                                            <div class="col-sm-4 mb20">
+                                                                                <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>" style="background: url('<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>') no-repeat 50% 50%;"></a>
+                                                                            </div>
+                                                                        <%}else if (i==5){%>
+                                                                            <div class="col-sm-4 mb20">
+                                                                                <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>" class="last-image" style="background: url('<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>') no-repeat 50% 50%;">
+                                                                                    <span class="gallery-count"><%out.print(fxmPostFile.getImageList().size()+"+");%></span>
+                                                                                </a>
+                                                                            </div>
+                                                                        <%}else {%>
+                                                                            <div style="display: none">
+                                                                                <div class="col-sm-4 mb20">
+                                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>" style="background: url('<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>') no-repeat 50% 50%;"></a>
+                                                                                </div>
+                                                                            </div>
+                                                                        <%}%>
+
+                                                                    <%}%>
+
+                                                                <%}else{%>
+                                                                    <%for (int i = 0; i < fxmPostFile.getImageList().size(); i++){%>
+                                                                        <div class="col-sm-4 mb20">
+                                                                            <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>" style="background: url('<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>') no-repeat 50% 50%;"></a>
+                                                                        </div>
+                                                                    <%}%>
+                                                                <%}%>
                                                             </div>
                                                         </div>
-
-                                                        <div style="display: none !important; visibility: hidden !important;">
-                                                            <%if (fxmPostFile.getImageList().size()>1){%>
-                                                                <%for (int i = 1; i < fxmPostFile.getImageList().size(); i++){%>
-                                                                    <a href="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" data-fancybox="<%out.print("gallery-"+fxmPostFile.getFxmPost().getId());%>">
-                                                                        <img src="<%out.print("/get-file/post/"+fxmPostFile.getImageList().get(i));%>" class="img-responsive">
-                                                                    </a>
-                                                                <%}%>
-                                                            <%}%>
-                                                        </div>
+                                                        <%--END image show--%>
                                                     <%}%>
 
                                                     <%if (fxmPostFile.getVideoList().size()>0){%>

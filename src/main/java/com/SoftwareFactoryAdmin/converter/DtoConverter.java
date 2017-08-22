@@ -57,5 +57,7 @@ public class DtoConverter {
         return new CommentDTO(fxmComment.getId() , fxmComment.getId(), fxmComment.getUser().getId(),  fxmComment.getUserName(),fxmComment.getDate(), fxmComment.getCommentText(), fxmComment.getFxmPost().getId(), fxmComment.getUser().getAvatarImage());
     }
 
-
+    public static AppVersionDTO appVersionDTO(AppVersion appVersion) {
+        return new AppVersionDTO(appVersion.getId(), appVersion.getId(), appVersion.getTitle(), appVersion.getDescription(), appVersion.getDate(), appVersion.getImportant(), appVersion.getVersionName(), appVersion.getVersionCode());
+    }
 }

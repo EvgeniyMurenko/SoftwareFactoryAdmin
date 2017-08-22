@@ -98,10 +98,10 @@ public class CaseDaoImpl implements CaseDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select distinct aCase from Case aCase " +
                                             "left join fetch aCase.project p " +
-                                            "left join fetch aCase.messages " +
+                                            "left join fetch aCase.messages ms " +
                                             "left join fetch p.customerInfo ci " +
                                             "left  join  fetch  ci.user u " +
-                                            "where u.isDelete =:state").setBoolean("state", Boolean.FALSE);
+                                            "where u.isDelete =:state ").setBoolean("state", Boolean.FALSE);
         return query.list();
 
     }

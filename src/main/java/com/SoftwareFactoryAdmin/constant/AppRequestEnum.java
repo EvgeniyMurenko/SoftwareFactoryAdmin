@@ -35,7 +35,11 @@ public enum AppRequestEnum {
 
     //load file request
     ATTACH_LOAD_FXM_POST_FILES("ATTACH_LOAD_FXM_POST_FILES"),
-    ATTACH_LOAD_USER_AVATAR("ATTACH_LOAD_USER_AVATAR");
+    ATTACH_LOAD_USER_AVATAR("ATTACH_LOAD_USER_AVATAR"),
+
+    //version
+    CHECK_VERSION("CHECK_VERSION"),
+    GET_ALL_VERSIONS("GET_ALL_VERSIONS");
 
     private String value;
 

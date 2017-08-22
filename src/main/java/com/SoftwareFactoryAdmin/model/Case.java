@@ -146,4 +146,11 @@ public class Case implements Serializable {
         this.appointmentTime = appointmentTime;
     }
 
+    @Override
+    public String toString() {
+        return "Case{" +
+                "id=" + id +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

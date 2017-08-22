@@ -1,6 +1,7 @@
 package com.SoftwareFactoryAdmin.controller;
 
 import com.SoftwareFactoryAdmin.converter.DtoConverter;
+import com.SoftwareFactoryAdmin.dto.AppVersionDTO;
 import com.SoftwareFactoryAdmin.dto.AuthorizationDTO;
 import com.SoftwareFactoryAdmin.dto.CaseDTO;
 import com.SoftwareFactoryAdmin.dto.ManagerInfoDTO;
@@ -39,8 +40,8 @@ public class FxmApplicationController {
     @Autowired
     private GoogleCloudKeyService googleCloudKeyService;
 
-   /* @Autowired
-    MessageTaskService messageTaskService;*/
+    @Autowired
+    private AppVersionService appVersionService;
 
     @Autowired
     private CaseService caseService;
@@ -117,21 +118,42 @@ public class FxmApplicationController {
             }
 
         }
-      /*  else if (requestType.equals(SET_READ_MESSAGE_TASK_REQUEST.toString())) {
-            Type setReadMessageTaskType = new TypeToken<ServerRequest<Long>>() {
+        else if (requestType.equals(CHECK_VERSION.toString())) {
+            Type authorizationType = new TypeToken<ServerRequest<String>>() {
             }.getType();
-            ServerRequest<Long> setReadMessageTaskServerRequest = new Gson().fromJson(request, setReadMessageTaskType);
 
-            Long messageTaskId = (Long) setReadMessageTaskServerRequest.getDataTransferObject();
+            System.out.println("===============CHECK_VERSION====================");
 
-            if (messageTaskId != null) {
-                MessageTask messageTask = messageTaskService.getMessageTask(messageTaskId);
-                messageTask.setApprove(true);
-                messageTaskService.updateMessageTask(messageTask);
-                serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), null);
+            ServerRequest<String> authorizationServerRequest = new Gson().fromJson(request, authorizationType);
+
+            List<AppVersion> appVersionList = appVersionService.getAllAppVersion();
+            AppVersion appVersion = appVersionList.get(appVersionList.size()-1);
+
+            AppVersionDTO appVersionDTO = DtoConverter.appVersionDTO(appVersion);
+
+
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), appVersionDTO);
+        }
+        else if (requestType.equals(GET_ALL_VERSIONS.toString())) {
+           /* Type authorizationType = new TypeToken<ServerRequest<String>>() {
+            }.getType();*/
+
+            System.out.println("===============GET ALL VERSION====================");
+
+            /*ServerRequest<String> authorizationServerRequest = new Gson().fromJson(request, authorizationType);
+            String filter = (String) authorizationServerRequest.getDataTransferObject();
+
+            System.out.println("===================filter============ " + filter);*/
+
+            List<AppVersion> appVersionList = appVersionService.getAllAppVersion();
+            List<AppVersionDTO> appVersionDTOList = new ArrayList<>();
+
+            for (AppVersion appVersion : appVersionList){
+                appVersionDTOList.add(DtoConverter.appVersionDTO(appVersion));
             }
 
-        }*/
+            serverResponse = new ServerResponse(REQUEST_SUCCESS.getValue(), appVersionDTOList);
+        }
         else if (requestType.equals(LOAD_ALL_CASES_REQUEST.toString())) {
 
             List<Case> cases = caseService.getCasesHundredLimit();

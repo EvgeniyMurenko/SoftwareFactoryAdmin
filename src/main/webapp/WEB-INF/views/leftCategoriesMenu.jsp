@@ -25,9 +25,11 @@
         <!-- Customer -->
         <div class="customer">
 
-
-
-            <div class="cust-thumbnail"><a href="javascript:void(0);"><img src="<%out.print("/get-file/avatar/"+currentManagerInfo.getUser().getAvatarImage());%>" class="img-circle" alt=""></a></div>
+            <div class="cust-thumbnail">
+                <a href="javascript:void(0);">
+                    <img src="<%out.print("/get-file/avatar/"+currentManagerInfo.getUser().getAvatarImage());%>" class="img-circle" alt="">
+                </a>
+            </div>
             <div class="information">
                 <a href="javascript:void(0);">
                     <%if (currentManagerInfo != null){
@@ -63,12 +65,12 @@
                 <%} if (currentPermission.getNoticePermission()) {%>
                     <li><a href="/notice/"><i class="fa fa-list" aria-hidden="true"></i> Notices</a></li>
                 <%} if (currentPermission.getSuperAdminPermission()) {%>
-                    <li><a onclick="hidetxt('divhide'); return false;" href="#" rel="nofollow"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                        <div class="text-hide" id="divhide">
+                    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapse"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                        <div id="collapse" class="panel-collapse collapse">
                             <div class="background-02">
                                 <ul class="dropdown ml15">
                                     <li><a href="/permission/"><i class="fa fa-lock" aria-hidden="true"></i> Manager Permission</a></li>
-                                    <li><a href="#"><i class="fa fa-mobile" aria-hidden="true"></i></i>Aplication Permission</a></li>
+                                    <li><a href="/app-version/"><i class="fa fa-mobile" aria-hidden="true"></i></i>Aplication Permission</a></li>
                                 </ul>
                             </div>
                         </div>
