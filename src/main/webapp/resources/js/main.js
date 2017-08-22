@@ -1,6 +1,6 @@
 /*globalPath = "http://52.57.116.160:8080";*/
-globalPath = "http://a.sofac.kr";
-/*globalPath = "http://localhost:8080";*/
+/*globalPath = "http://a.sofac.kr";*/
+globalPath = "http://localhost:8080";
 
 jQuery(document).ready(function ($) {
 

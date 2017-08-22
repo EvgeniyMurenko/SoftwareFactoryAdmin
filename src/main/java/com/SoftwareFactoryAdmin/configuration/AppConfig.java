@@ -1,7 +1,7 @@
 package com.SoftwareFactoryAdmin.configuration;
 
 import com.SoftwareFactoryAdmin.interceptor.SessionCheckerInterceptor;
-import com.SoftwareFactoryAdmin.interceptor.UserInterceptor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -114,10 +114,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
    */
 
-    @Override
+   @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionCheckerInterceptor());
-        registry.addInterceptor(new UserInterceptor());
+
     }
 
 

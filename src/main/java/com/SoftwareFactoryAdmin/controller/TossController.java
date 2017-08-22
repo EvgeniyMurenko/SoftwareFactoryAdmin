@@ -38,6 +38,10 @@ public class TossController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView tossList(HttpSession httpSession) {
 
+      /*  if (httpSession.getAttribute("managerInfo") == null){
+            return new ModelAndView("redirect:/main/");
+        }*/
+
         ModelAndView tossList = new ModelAndView("tossList");
 
         ManagerInfo managerInfo = (ManagerInfo) httpSession.getAttribute("managerInfo");
